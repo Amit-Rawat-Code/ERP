@@ -1,0 +1,27 @@
+﻿
+<div class="input-box chk-validate" ng-init="GetReferenceList();">
+    <div class="toggle-ddl" id="openReferenceList" ng-init="ToogleDDL('openReferenceList','openReferenceList')">
+
+        <button class="btn btn-primary select-btn ng-binding" 
+                data-ng-click="openReferenceList=!openReferenceList" 
+                ng-bind="GetCount(ReferenceList,'Select Reference List')">
+        Select InstallmentList</button>
+
+        <button class="btn btn-primary dropdown-toggle select-btn-sub" 
+                data-ng-click="openReferenceList=!openReferenceList">
+            <span class="fa fa-chevron-down"></span>
+        </button>
+        <div ng-show="openReferenceList" class="ddlMultiple ng-hide">
+            <div ng-click="ddlCheckAll('ReferenceList')">
+                Check All
+                <span class="btn-counts-right ng-binding">Total Count: {{ReferenceList.length}}</span>
+            </div>
+            <div ng-click="ddlUnCheckAll('ReferenceList')">Uncheck All</div>
+            <hr style="margin:0px !important">
+            <div ng-repeat="rl in ReferenceList" >
+                <input type="checkbox" ng-model="rl.chk" value="rl.ReferenceOf" >
+                {{rl.ReferenceOf}}
+            </div>            
+        </div>
+    </div>
+</div>        

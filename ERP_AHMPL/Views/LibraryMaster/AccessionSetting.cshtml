@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "AccessionSetting";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/AccessionSettingLibController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Accession Setting</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Library</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Accession Setting</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Prefix<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtPrefix", "", new { @class = "form-control clear validate", @placeholder = "", @ng_model = "Prefix" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Start Number<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtStartNumber", "", new { @class = "form-control clear validate numbersOnly", @placeholder = "", @ng_model = "StartNumber" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Counter Length<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlCounterLength" class="select2 form-control validate" ng-model="CounterLength">
+                                                    <option value="">Select Counter Length</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlActive")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+

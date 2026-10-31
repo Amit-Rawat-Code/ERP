@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewBag.Title = "Print Vouchers";
+    ViewBag.TitleList = "Print Vouchers";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+
+<script src="~/Scripts/myjslib/PrintVouchersController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Print Vouchers</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Accountancy</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Print Vouchers</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="section-toggle">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Voucher Type<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlVouchers")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">From Date<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("txtFromDate")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">To Date<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("txtToDate")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">From Voucher No.<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtFromNo", "", new { @class = "form-control clear", MaxLength = "6", @placeholder = "", @ng_model = "FromNo"})
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">To Voucher No.<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtToNo", "", new { @class = "form-control clear", MaxLength = "6", @placeholder = "", @ng_model = "ToNo" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgtp-20 ">
+                                                @Html.Partial("ActionSearch")
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" ng-cloak>
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    <table class="print-br-set" ng-if="ForPrinting.length>0"  id="printDiv">
+                                           <tr ng-repeat="FP in ForPrinting" add-page-break-check-hp>
+                                               <td >
+                                                   <input type="hidden" ng-model="FP.PTransID">
+                                                       <div  class="voucher-layout"  ng-cloak ng-init="GetReportHeaderUsingCategory('General Report');">
+                                                           <div class="voucherbox" id="VoucherID{{$index + 1}}">
+                                                               <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                                                               <table class="table table-sp table-sp2">
+                                                                   <tbody>
+                                                                       <tr>
+                                                                           <td class="sp-header2-s" colspan="4">
+                                                                               <h3>{{FP.VoucherType}}</h3>
+                                                                           </td>
+                                                                       </tr>
+                                                                       <tr>
+                                                                           <td class="sp-common-t" colspan="2" style="border-right:none;">
+                                                                               <b>Voucher No. &nbsp;</b>{{FP.VoucherNo}}
+                                                                           </td>
+                                                                           <td class="sp-common-t date" colspan="2" style="border-left:0;">
+                                                                               <b>Date:</b> {{FP.VDate}}
+                                                                           </td>
+                                                                       </tr>
+                                                                       <tr>
+                                                                           <td colspan="4">
+
+                                                                               <table class="table table-sp table-sp2">
+                                                                                   <tbody>
+                                                                                       <tr>
+                                                                                           <td class="sp-common-t bb" colspan="2"><b>Particular</b></td>
+                                                                                           <td class="sp-common-t bb dr"><b>Dr.</b></td>
+                                                                                           <td class="sp-common-t bb cr"><b>Cr.</b></td>
+                                                                                       </tr>
+                                                                                       <tr ng-repeat="dd in VoucherDetailData | filter:FP.PTransID">
+                                                                                           <td class="sp-common-t" colspan="2"><b><span ng-bind="dd.debit"></span> </b><span ng-bind="dd.Particular"></span></td>
+                                                                                           <td class="sp-common-t dr"><span ng-bind="dd.DrAmt==0?'-':dd.DrAmt"></span></td>
+                                                                                           <td class="sp-common-t cr"><span ng-bind="dd.CrAmt==0?'-':dd.CrAmt"></span></td>
+                                                                                       </tr>
+                                                                                       <tr>
+                                                                                           <td class="sp-common-t" colspan="2"><b>Total </b></td>
+                                                                                           <td class="sp-common-t dr"><b><span ng-bind="totalDrAmt==0?'-':totalDrAmt"></span></b></td>
+                                                                                           <td class="sp-common-t cr"><b><span ng-bind="totalCrAmt==0?'-':totalCrAmt"></span></b></td>
+                                                                                       </tr>
+                                                                                       <tr>
+                                                                                           <td class="sp-common-t " colspan="4"><b>In Words </b><span ng-bind="InWords"></span></td>
+                                                                                       </tr>
+                                                                                       <tr>
+                                                                                           <td class="sp-common-t " colspan="4"><b>Narration </b><span ng-bind="VNarr"></span></td>
+                                                                                       </tr>
+
+                                                                                       <tr ng-if="CNCD==0? false:true">
+                                                                                           <td class="sp-common-t bb" colspan="4"><b>Chq. No. </b><span ng-bind="ChqNo"></span> <b>&nbsp;Chq. Date: </b><span ng-bind="ChqDate"></span></td>
+                                                                                       </tr>
+                                                                                   </tbody>
+
+                                                                               </table>
+                                                                           </td>
+                                                                       </tr>
+                                                                   </tbody>
+                                                               </table>
+
+                                                               <div class="printed-on">
+                                                                   <div class="box-left">
+                                                                       <b>Checked By:</b>
+                                                                       <p>&nbsp;</p>
+                                                                   </div>
+                                                                   <div class="box-right">
+                                                                       <b>Prepared By:</b>
+                                                                       <p>&nbsp;</p>
+                                                                   </div>
+                                                               </div>
+
+                                                           </div>
+                                                    </div>
+                                                  
+                                               </td>
+                                           </tr>
+                                    </table>
+
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

@@ -1,0 +1,7 @@
+﻿<select id="ddlCategory" class="select2 form-control" ng-model="Category" ng-init="GetCategories()">
+    <option value="">Select Category</option>
+    <option ng-repeat="category in Categories" value="{{category.CategoryName}}">{{category.CategoryName}}</option>
+</select>
+
+
+

@@ -1,0 +1,6 @@
+﻿<select id="ddlTeacher" class="select2 form-control validate" ng-model="TeacherCode" ng-init="TeacherCode=id.EmployeeCode">
+    <option value="">Select Employee</option>
+    <option ng-repeat="teacher in Teachers|filter:{ SubjectId: id.SubjectId }" value="{{teacher.EmployeeCode}}" ng-disabled="!teacher.IsActive">
+        {{teacher.EmployeeName}}
+    </option>
+</select>

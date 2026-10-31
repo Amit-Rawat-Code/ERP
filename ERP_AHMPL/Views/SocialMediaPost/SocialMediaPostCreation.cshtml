@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "SocialMediaPostCreation";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+
+}
+
+
+<script src="~/scripts/myjslib/SocialMediaPostController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Social Media Post Creation</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Communication</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Name Of Post</label>
+                                            <div class="input-box">
+                                                <input type="text" class="form-control validate" id="txtPostName" name="txtPostName" alt="txtPostName" ng-model="PostName" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Description</label>
+                                            <div class="input-box">
+                                                <input type="text" class="form-control validate" id="txtdescription" name="txtdescription" alt="txtdescription" ng-model="Description" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Date Of Creation</label>
+                                            <div class="input-box">
+                                                <input class="form-control validate" id="txtDateOfCreation" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="DateOfCreation" type="date" value="" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15 ">
+                                            <label class="control-label">Date Of Activation</label>
+                                            <div class="input-box">
+                                                <input class="form-control validate" id="txtDateOfActivation" min="{{startDate}}" max="{{endDate}}" name="txtDateOfActivation" ng-model="DateOfActivation" type="date" value="1" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15 ">
+                                            <label class="control-label">Date Of De-Activation</label>
+                                            <div class="input-box">
+                                                <input class="form-control validate" id="txtDateOfDeativation" min="{{startDate}}" max="{{endDate}}" name="txtDateOfDeativation" ng-model="DateOfDeActivation" type="date" value="2" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15 ">
+                                            <label class="content-title">Image Upload<span class="red-i">*</span></label>
+                                            <div class="input-box file-i">
+                                                <img class="img-fix" id="imgfileInput" src="~/Content/noimage.png" ng-model="imgfileInput" ng-src="{{imgfileInput}}" alt="" width="150" height="150" ng-click="OpenFileUpload()">
+                                                <input onchange="angular.element(document).scope().fuImageChange(this)" upload-files type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" ng-model="fileInput" multiple />
+
+                                                <div class="text-box-msg-r">
+                                                    <input type="hidden" id="AlbumIcon" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="table-responsive">
+                                                <table id="example2" class="table table-striped table-bordered compact2 text-centered" ng-init="GetSocialMediaData()" ng-Show="SocialMediaPost.length>0">
+                                                    @* ng-if="SubMenuesList.length>0" *@
+                                                    <!-- <thead ng-init="GetBranchSides()">-->
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr No.</th>
+                                                            <th>
+                                                                <div class=" checkbox-success text-center">
+                                                                    <label class="">Platfrom</label>
+                                                                    @*<input type="checkbox" class="toggle-vis" ng-model="$parent.chkSelectAll" ng-change="CheckAll(chkSelectAll)" checked="">*@
+                                                                </div>
+                                                            </th>
+                                                            <th>Link</th>
+                                                            <th>Action</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="smp in SocialMediaPost">
+                                                            <td ng-model="smp.Srno">{{smp.Srno}}</td>
+                                                            <td style="float: left;display:none" ng-model="smp.EnquiryCode">{{smp.EnquiryCode}}</td>
+                                                            <td>
+                                                                <input type="checkbox" ng-model="smp.IsActive" ng-change="GenerateLink(smp)" checked="">
+                                                                <label class="" id="lblPlatform"> &nbsp; &nbsp;{{smp.Enquiry}}</label>
+                                                            </td>
+                                                            <td ng-model="smp.Url" ng-init="{{smp.Url=smp.Links+'id='+smp.TransId+'&Sr='+smp.Rowno+'&Code='+smp.EnquirySourceCode}}">
+                                                                <label ng-model="smp.Links" class="" style="width:1000px; Overflow-x:auto;">
+                                                                    {{smp.Url}}
+                                                                </label>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-dark" ng-click="CopyText(smp)" id="btnCopy">
+                                                                    <span class="glyphicon glyphicon-copy"></span> &nbsp; &nbsp; Copy Text
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

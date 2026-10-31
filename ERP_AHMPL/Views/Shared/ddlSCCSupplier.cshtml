@@ -1,0 +1,5 @@
+﻿
+<select id="ddlSupplier" class="select2 form-control" ng-model="$parent.SupplierCode" ng-init="BindSCCSupplier();" ng-change="getSuplierDetail(SupplierCode)">
+    <option value="">Select</option>
+    <option ng-repeat="supplier in SupplierList" value="{{supplier.Code}}">{{supplier.Name}}</option>
+</select>

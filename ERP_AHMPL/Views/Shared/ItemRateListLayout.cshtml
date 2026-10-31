@@ -1,0 +1,88 @@
+﻿<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" id="printDiv" ng-init="GetReportHeaderUsingCategory('General Report');PrintItemlist();">
+    <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+    <table class="print-br-set">
+        <tr>
+            <td style="text-align:center;"><strong><span style="font-size: 18px !important;line-height: normal; color:#000;" ng-bind="ReportTitle"></span></strong></td>
+        </tr>
+        <tr>
+            <td>
+                <div id="Box" class="expense-box">
+                    <div class="table-item-fw" ng-repeat="IDL in ItemData">
+                        <input type="hidden" ng-model="IDL.ItemCode">
+                        <table class="table table-expense-s1 h-one-t-r no-td-lc-bold mgbt-0">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Short Code</th>
+                                    <th>Item Group</th>
+                                    <th>Item Category</th>
+                                    <th>Item Type</th>
+                                    <th>Base Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="normal-td">{{IDL.ItemCode}}</td>
+                                    <td class="normal-td">{{IDL.Item}}</td>
+                                    <td class="normal-td">{{IDL.ShortCode}}</td>
+                                    <td class="normal-td">{{IDL.ItemGroup}}</td>
+                                    <td class="normal-td">{{IDL.ItemCategory}}</td>
+                                    <td class="normal-td">{{IDL.ItemType}}</td>
+                                    <td class="normal-td">{{IDL.BaseUnit}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table ng-if="ItemRateData.length>0" class="table table-expense-s1 no-td-lc-bold h-one-t-r">
+                            <thead>
+                                <tr>
+                                    <th>Sale Rate</th>
+                                    <th>Min Sale Rate</th>
+                                    <th>MRP Rate</th>
+                                    <th>Unit Name</th>
+                                    <th>Stock Rate</th>
+                                    <th>Purchase Rate</th>
+                                    <th ng-if="ApplicationCodeIsAllowed=='1'">Application</th>
+                                    <th ng-if="BatchNoIsAllowed=='1'">Batch No.</th>
+                                    <th ng-if="ColorIsAllowed=='1'">Color</th>
+                                    <th ng-if="ExpDateIsAllowed=='1'">Expiry Date</th>
+                                    <th ng-if="ItemMakeIsAllowed=='1'">Make</th>
+                                    <th ng-if="MfgDateIsAllowed=='1'">Mfg Date</th>
+                                    <th ng-if="ModelCodeIsAllowed=='1'">Model</th>
+                                    <th ng-if="PackingIsAllowed=='1'">Packing</th>
+                                    <th ng-if="ProdCodeIsAllowed=='1'">Product</th>
+                                    <th ng-if="SizeIsAllowed=='1'">Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="IRDL in ItemRateData | filter:IDL.ItemCode">
+                                    <td>{{IRDL.SaleRate}}</td>
+                                    <td>{{IRDL.MinSaleRate}}</td>
+                                    <td>{{IRDL.MRPRate}}</td>
+                                    <td>{{IRDL.UnitName}}</td>
+                                    <td>{{IRDL.StockRate}}</td>
+                                    <td>{{IRDL.PurchaseRate}}</td>
+                                    <td ng-if="ApplicationCodeIsAllowed=='1'">{{IRDL.Application}}</td>
+                                    <td ng-if="BatchNoIsAllowed=='1'">{{IRDL.BatchNo}}</td>
+                                    <td ng-if="ColorIsAllowed=='1'">{{IRDL.Color}}</td>
+                                    <td ng-if="ExpDateIsAllowed=='1'">{{IRDL.ExpDate}}</td>
+                                    <td ng-if="ItemMakeIsAllowed=='1'">{{IRDL.ItemMake}}</td>
+                                    <td ng-if="MfgDateIsAllowed=='1'">{{IRDL.MfgDate}}</td>
+                                    <td ng-if="ModelCodeIsAllowed=='1'">{{IRDL.Model}}</td>
+                                    <td ng-if="PackingIsAllowed=='1'">{{IRDL.Packing}}</td>
+                                    <td ng-if="ProdCodeIsAllowed=='1'">{{IRDL.ProdCode}}</td>
+                                    <td ng-if="SizeIsAllowed=='1'">{{IRDL.Size}}</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </td>
+        </tr>
+
+    </table>
+</div>
+

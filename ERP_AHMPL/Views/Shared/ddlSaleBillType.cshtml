@@ -1,0 +1,6 @@
+﻿
+<select id="ddlSaleBillType" class="select2 form-control validate" ng-disabled="salebilltypedisable" ng-model="SaleBillTypeCode" ng-init="BindSaleBillType();" ng-change="getVoucherNoForSaleBill(SaleBillTypeCode);bindsalefromInvoiceMaster(SaleBillTypeCode);ddlSaleBillType_change();">
+    <option value="">Select</option>
+    <option ng-repeat="salebilltype in SaleBillTypeList" value="{{salebilltype.VoucherType}}">{{salebilltype.Description}}</option>
+</select>
+

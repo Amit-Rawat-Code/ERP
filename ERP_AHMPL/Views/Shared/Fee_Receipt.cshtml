@@ -1,0 +1,197 @@
+﻿<div id="ExportDiv" style="display:none;">
+    <style>
+        table.fee-receipt-table {
+            width: 100%;
+        }
+
+        table.fee-receipt-table-row {
+            width: 100%;
+        }
+
+            table.fee-receipt-table-row td, table.fee-receipt-table-row th {
+                padding: 5px;
+            }
+
+            table.fee-receipt-table-row.table-boder {
+                text-align: center;
+                border-collapse: collapse;
+            }
+
+                table.fee-receipt-table-row.table-boder th, table.fee-receipt-table-row.table-boder td {
+                    border: 1px solid #000;
+                    width: 50%;
+                }
+
+            table.fee-receipt-table-row th {
+                background: #000;
+                color: #fff;
+                font-weight: 400;
+            }
+    </style>
+
+    <div id="SetPageMargin">
+        <div class="me-col-12" ng-init="GetReportHeaderUsingCategory('General Report')">
+            <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+        </div>
+        @*<div class="me-col-12 dt-print-view">
+            <h1>@ViewBag.Title</h1>
+        </div>*@
+        @*<div id="FilterTitle">
+            <span class="filter" ng-model="$parent.FilterMsg" ng-bind-html="trustAsHtml(FilterMsg)"></span>
+        </div>*@
+        <table class="fee-receipt-table">
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="fee-receipt-table-row">
+                            <tbody>
+                                <tr>
+                                    <td style="text-transform: uppercase; text-align: center;">
+                                        <span style="display: table;border-bottom: 2px solid #000;margin: 0 auto;padding: 0px 30px;border-top: 2px solid #000;">{{PrintHeadingValue}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="fee-receipt-table-row">
+                            <tbody>
+                                <tr>
+                                    <td style="text-transform: uppercase; text-align: left;">
+                                        <span>Receipt No : </span><span><strong>{{RcptNo}}</strong></span>
+                                    </td>
+                                    <td style="text-transform: uppercase; text-align: right;">
+                                        <span>Date : </span><span><strong>{{FeeDepositDate | date : 'dd-MMM-yyyy'}}</strong></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="fee-receipt-table-row">
+                            <tbody>
+                                <tr>
+                                    <td style="text-transform: uppercase; text-align: left;">
+                                        <span>Ref No : </span><span><strong>{{BillNo}}</strong></span>
+                                    </td>
+                                    <td style="text-transform: uppercase; text-align: right;">
+                                        <span>Class : </span><span><strong>{{ClassName}}</strong></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="fee-receipt-table-row">
+                            <tbody>
+                                <tr>
+                                    <td style="text-transform: uppercase; text-align: left;">
+                                        <span>Name : </span><span><strong>{{StudentName}}</strong></span>
+                                    </td>
+                                    <td style="text-transform: uppercase; text-align: right;">
+                                        <span>Payment Mode : </span><span><strong>{{FeeMode}}</strong></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="fee-receipt-table-row">
+                            <tbody>
+                                <tr>
+                                    <td style="text-transform: uppercase; text-align: left;">
+                                        <span>Father's Name : </span><span><strong>{{ParentName}}</strong></span>
+                                    </td>
+                                    <td style="text-transform: uppercase; text-align: right;">
+                                        <span>Fee Type : </span><span><strong>{{FeeType}}</strong></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="fee-receipt-table-row">
+                            <tbody>
+                                <tr>
+                                    <td style="text-transform: uppercase; text-align: left;">
+                                        <span>Adm No : </span><span><strong>{{AdmissionNo}}</strong></span>
+                                    </td>
+                                    <td style="text-transform: uppercase; text-align: right;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="fee-receipt-table-row table-boder">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Particular
+
+                                    </th>
+                                    <th>
+                                        Amount
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-transform: uppercase;">
+                                        Recived Againts Academic Fees.
+                                    </td>
+                                    <td style="text-transform: uppercase;">
+                                        {{FeeAmount}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="fee-receipt-table-row ">
+                            <tbody>
+                                <tr>
+                                    <td style="text-transform: uppercase; text-align: left;">
+                                        Amount(In Words) : <span>{{AmountInWords}}</span> ONLY/-
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="fee-receipt-table-row ">
+                            <tbody>
+                                <tr>
+                                    <td style="text-transform: uppercase; text-align: left;">
+                                        <div style="float: right;">
+                                            <span style="display: block;"><img style="height: 70px; object-fit: contain;" src="https://static.cdn.wisestamp.com/wp-content/uploads/2020/08/Oprah-Winfrey-Signature-1.png" alt="sign"></span>
+                                            <span>Auth Signature</span>
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

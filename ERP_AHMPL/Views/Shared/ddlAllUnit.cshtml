@@ -1,0 +1,6 @@
+﻿
+<select id="ddlAllUnit" name="ddlAllUnit" class="select2 form-control clear" ng-model="TargetUnitId"
+        ng-init="GetAllUnit();">
+    <option value="">Select Unit</option>
+    <option ng-repeat="GetAllUnit in GetAllUnits" value="{{GetAllUnit.Code}}">{{GetAllUnit.UnitName}}</option>
+</select>

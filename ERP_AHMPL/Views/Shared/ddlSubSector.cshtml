@@ -1,0 +1,4 @@
+﻿<select id="ddlSubSector" class="select2 form-control validate" ng-model="SubSectorsModel" ng-init="BindSubSector();">
+    <option value="">Select</option>
+    <option ng-repeat="subsectorlist in SubSectorList" value="{{subsectorlist.Code}}">{{subsectorlist.SubSectorName}}</option>
+</select>

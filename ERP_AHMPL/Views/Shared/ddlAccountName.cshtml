@@ -1,0 +1,8 @@
+﻿<select id="ddlACCode" class="select2 form-control validate" ng-model="LedgerModel" ng-init="BindGeneralLedgers();" >
+    <option value="">Select</option>
+    <option ng-repeat="GeneralLedger in GeneralLedgersList" value="{{GeneralLedger.SubCode}}">{{GeneralLedger.LedgerName}}</option>
+</select>
+
+
+
+

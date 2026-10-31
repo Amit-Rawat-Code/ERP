@@ -1,0 +1,38 @@
+﻿
+
+    <div class="datatable-responsive table-responsive">
+        <table id="tblLeaveDetails" class="table compact compact2 table-hover table-striped table-bordered nowrap mgbt-xs-0 text-center " ng-model="LeaveDetail" >
+            <thead>
+                
+                <tr>
+                    @*<th class="sr-no-w ">Sr. No.</th>*@
+                    <th>Leave Type</th>
+                    <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Alloted Leaves">AL</span></th>
+                    <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Eligibility Leaves">EL</span></th>
+                    <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Leave Taken">LT</span></th>
+                    <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Balance">B</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="id in LeaveDetails" repeat-done>
+                    <td class="text-left">
+                        <input type="hidden" id="Employeecode" value="{{id.Employeecode}}" />
+                        {{id.LeaveType}} ({{id.TotalLeaves}})
+                    </td>
+                    <td>{{id.AllotedLeaves}}</td>
+                    <td>{{id.EL}}</td>
+                    <td>{{id.LeaveTaken}}</td>
+                    <td>{{id.ElBalance}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td>{{Sumoflist('LeaveDetails','AllotedLeaves')}}</td>
+                    <td>{{Sumoflist('LeaveDetails','EL')}}</td>
+                    <td>{{Sumoflist('LeaveDetails','LeaveTaken')}}</td>
+                    <td>{{Sumoflist('LeaveDetails','ElBalance')}}</td>
+                </tr>
+            </tfoot>
+        </table>
+        </div>

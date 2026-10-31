@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "admissions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="website-main-content" ng-init="GetAdmissions();" ng-cloak>
+        <section class="page-banner-breadcrumbs admissions">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <span class="page-name">AllenKids Swaroopnagar</span><span class="seprator">></span><span class="page-name">{{AdmissionPageData[0].UnitTitle}}</span>
+
+                </div>
+            </div>
+        </section>
+        <section class="admission-banner"></section>
+        <section class="page-section why-choose-allen-kids admission-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="play-group-icon-title">
+                            <div class="icon">
+                                <img height="{{(AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].HeadingImageHeight}}" src="" ng-src="{{(AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeadingImgPath}}" alt="pay-icon" ng-if="HideShow((AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeadingImgPath)">
+                            </div>
+                            <h3 class="play-title">
+                                {{(AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeading}}
+                            </h3>
+                        </div>
+                        <div class="discription-section" ng-bind-html="trustAsHtml((AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContent)">
+
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="play-group-icon-title">
+                            <div class="icon"><img src="../../content/images/admissions/admissionicon.png" alt="pay-icon"></div>
+                            <h3 class="play-title">
+                                Admission Enquiry
+                            </h3>
+                        </div>
+                        <div class="contact-form">
+                            <form>
+                                <div class="form-group">
+                                    <label for="email">Enquiry For Session:</label>
+                                    <select id="ddlSession" autocomplete='address-level2' class="form-control"
+                                            ng-model="ddlSession" ng-init="GetSession()">
+                                        <option value="">Select Session</option>
+                                        <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Choose Class:</label>
+                                    <select class="form-control" id="Class" name="Class" ng-model="Class" required>
+                                        <option value="">Choose your class</option>
+                                        <option>PG</option>
+                                        <option>Nursery</option>
+                                        <option>Prep</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Father/Mother/Guardian Name:</label>
+                                    <input type="text" class="form-control" placeholder="Enter Your Guardian Name" id="Name" name="Name" ng-model="Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Enter Contact:</label>
+                                    <input type="number" id="Contact" name="Contact" required ng-model="Contact" class="form-control" onKeyPress="if(this.value.length==10) return false;">
+                                </div>
+                                <div class="form-group">
+                                    <label>Your email:</label>
+                                    <input type="email" class="form-control" placeholder="Enter Your Email" ng-model="Email" required>
+                                </div>
+                                <button type="button" class="btn btn-default" ng-click="SaveRecord()" name="saveButton" ng-model="Save" ng-init="Save='Save'">Submit</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="discription-section">
+                            <div class="play-group-icon-title addmission-title-fix">
+                                <div class="icon"><img src="" ng-src="{{(AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCBL'})[0].BodyContentHeadingImgPath}}" alt="pay-icon" ng-if="HideShow((AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCBL'})[0].BodyContentHeadingImgPath)"></div>
+                                <h3 class="play-title">
+                                    {{(AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCBL'})[0].BodyContentHeading}}
+                                </h3>
+                            </div>
+                            <div class="discription-section" ng-bind-html="trustAsHtml((AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCBL'})[0].BodyContent)">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+

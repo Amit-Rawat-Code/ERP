@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Student Attendance Datewise";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/scripts/myjslib/StudentAttandanceDateWiseReportController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Attendance</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="section-toggle">
+                                    <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                        <div class="col-md-4 col-sm-2 col-xs-4 mgbt-xs-15">
+                                            <label class="control-label">Attendance<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <div class="radio radio-primary radio-box">
+                                                    <input type="radio" ng-model="filter" value="0" ng-init="filter='0'" class="ng-valid ng-not-empty ng-dirty ng-touched">
+                                                    <label for="All">All</label>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-box">
+                                                <div class="radio radio-primary radio-box">
+                                                    <input type="radio" ng-model="filter" value="1" class="ng-valid ng-not-empty ng-dirty ng-touched">
+                                                    <label for="Present">Present</label>
+                                                </div>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                            <div class="input-box">
+                                                <div class="radio radio-primary radio-box">
+                                                    <input type="radio" ng-model="filter" value="2" class="ng-valid ng-not-empty ng-dirty ng-touched">
+                                                    <label for="Absent">Absent</label>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Select Class</label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlClass")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Select Section</label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSection")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student</label>
+                                            <div class="input-box">
+                                                @Html.Partial("TblStudentListcsb")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Admission No.</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAdmissionNo", "", new { @class = "form-control clear", @placeholder = "", @autocomplete = "name", @ng_model = "AdmissionNo" })
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Institute RollNo.</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtInstituteRollNo", "", new { @class = "form-control clear", @placeholder = "", @autocomplete = "name", @ng_model = "InstituteRollNo" })
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">From Date</label>
+                                            <div class="input-box">
+                                                <input class="form-control" id="txtFromDate" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="FromDate" type="date" value="" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">To Date</label>
+                                            <div class="input-box">
+                                                <input class="form-control" id="txtToDate" max="{{endDate}}" min="{{startDate}}" name="txtToDate" ng-model="ToDate" type="date" value="" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <button type="button" value="Search" class="btn2 btn-common btn-3 btn-3d pe-7s-search"
+                                                    ng-model="Search" ng-click="SearchRecord()">
+                                                <span class="triangle-box" title="Search"></span>
+                                                <span>Search </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41">
+                                <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                    <div class="arrow-2">
+                                        <i class="fa fa-angle-down"></i>
+                                    </div>
+                                    <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    @Html.Partial("GeneralReportGrid")
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgtp-xs-10">
+                                        <table id="example2" class="table table-striped table-bordered compact layout-fixed" style="width:50%;margin-left: 25%;" ng-if="AbbrGroupWiseCountList.length>0">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:100px;text-align:center">S.No.</th>
+                                                    <th style="text-align:center">Abbr Type</th>
+                                                    <th style="text-align:right">Count</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="agwcl in AbbrGroupWiseCountList">
+                                                    <td style="text-align:center" ng-bind="$index+1"></td>
+                                                    <td style="text-align:center">{{agwcl.AbbrType}}</td>
+                                                    <td style="text-align:right">{{agwcl.Count}}</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td></td>
+                                                    <td style="text-align:center">Total</td>
+                                                    <td style="text-align:right">{{AbbrGroupWiseCountList.sum('Count')}}</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    $('#ddlClass').removeClass('validate');
+    $('#ddlSection').removeClass('validate');
+</script>

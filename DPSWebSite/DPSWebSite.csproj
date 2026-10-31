@@ -1,0 +1,473 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\ERP_AHMPL\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\ERP_AHMPL\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{96DDF937-6078-4CF1-A9D1-A59691B4C20A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DPSWebSite</RootNamespace>
+    <AssemblyName>DPSWebSite</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44336</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BAL">
+      <HintPath>..\BAL\bin\Debug\BAL.dll</HintPath>
+    </Reference>
+    <Reference Include="DAL">
+      <HintPath>..\DAL\bin\Debug\DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ERP_AHMPL\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\..\ERP_AHMPL\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\..\ERP_AHMPL\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\..\ERP_AHMPL\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\..\ERP_AHMPL\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\ERP_AHMPL\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\..\ERP_AHMPL\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\ERP_AHMPL\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\..\ERP_AHMPL\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\css\animate.min.css" />
+    <Content Include="content\css\bootstrap.min.css" />
+    <Content Include="content\css\bootstrap1.min.css" />
+    <Content Include="content\css\flexslider.css" />
+    <Content Include="content\css\font-awesome.css" />
+    <Content Include="content\css\font-awesome1.css" />
+    <Content Include="content\css\foundation.css" />
+    <Content Include="content\css\gallery\lightgallery.css" />
+    <Content Include="content\css\lightgallery.css" />
+    <Content Include="content\css\owl.carousel.min.css" />
+    <Content Include="content\css\responsive.css" />
+    <Content Include="content\css\responsive1.css" />
+    <Content Include="content\css\style.css" />
+    <Content Include="content\css\style1.css" />
+    <Content Include="content\css\style2.css" />
+    <Content Include="content\font\fontawesome-webfont.svg" />
+    <Content Include="content\images\admissions\admissionicon.png" />
+    <Content Include="content\images\admissions\Class-activities-2-1.png" />
+    <Content Include="content\images\admissions\imp-doc.png" />
+    <Content Include="content\images\campustuour\search-icon2.png" />
+    <Content Include="content\images\event\event1.png" />
+    <Content Include="content\images\event\event2.png" />
+    <Content Include="content\images\event\event3.png" />
+    <Content Include="content\images\event\event4.png" />
+    <Content Include="content\images\event\event5.png" />
+    <Content Include="content\images\event\event6.png" />
+    <Content Include="content\images\event\event7.jpg" />
+    <Content Include="content\images\extra-co-curricular-activities\IMG-20201214-WA0228-300x200.jpg" />
+    <Content Include="content\images\extra-co-curricular-activities\IMG-20201214-WA0232-300x200.jpg" />
+    <Content Include="content\images\extra-co-curricular-activities\IMG-20201214-WA0233-300x200.jpg" />
+    <Content Include="content\images\extra-co-curricular-activities\IMG-20201214-WA0234-300x200.jpg" />
+    <Content Include="content\images\extra-co-curricular-activities\IMG-20201214-WA0235-300x200.jpg" />
+    <Content Include="content\images\extra-co-curricular-activities\IMG-20201214-WA0236-300x200.jpg" />
+    <Content Include="content\images\extra-co-curricular-activities\IMG-20201214-WA0237-300x200.jpg" />
+    <Content Include="content\images\extra-co-curricular-activities\IMG-20201214-WA0242-300x200.jpg" />
+    <Content Include="content\images\from-chairmans-desk\MAmin_jpg-768x674-1.png" />
+    <Content Include="content\images\from-principal-desk\IMG_2711-1-scaled.jpg" />
+    <Content Include="content\images\gallery\act-dance.png" />
+    <Content Include="content\images\gallery\Annual-day.png" />
+    <Content Include="content\images\gallery\childrens-dance.png" />
+    <Content Include="content\images\gallery\Childrens-painting.png" />
+    <Content Include="content\images\gallery\childrens-play.png" />
+    <Content Include="content\images\gallery\childrens.png" />
+    <Content Include="content\images\gallery\Dance-performance.png" />
+    <Content Include="content\images\gallery\dance.png" />
+    <Content Include="content\images\gallery\kids-play.png" />
+    <Content Include="content\images\gallery\kids.png" />
+    <Content Include="content\images\gallery\Performance.png" />
+    <Content Include="content\images\gallery\Play.png" />
+    <Content Include="content\images\gallery\qawwali.png" />
+    <Content Include="content\images\gallery\search-icon.png" />
+    <Content Include="content\images\gallery\students-dance-performance.png" />
+    <Content Include="content\images\gallery\students-performance.png" />
+    <Content Include="content\images\header-curved.png" />
+    <Content Include="content\images\homepage\admissionopen.png" />
+    <Content Include="content\images\homepage\banner\2.jpg" />
+    <Content Include="content\images\homepage\banner\3.jpg" />
+    <Content Include="content\images\homepage\banner\Class-activities-2-1.jpg" />
+    <Content Include="content\images\homepage\banner\Class-activities-2.jpg" />
+    <Content Include="content\images\homepage\banner\Class-activities-3.jpg" />
+    <Content Include="content\images\homepage\banner\lucknow.jpg" />
+    <Content Include="content\images\homepage\banner\Mothers-Day-1.jpg" />
+    <Content Include="content\images\homepage\banner\Tecno-Savy.jpg" />
+    <Content Include="content\images\homepage\bulletin\1.png" />
+    <Content Include="content\images\homepage\bulletin\2.png" />
+    <Content Include="content\images\homepage\bulletin\3.png" />
+    <Content Include="content\images\homepage\bulletin\4.png" />
+    <Content Include="content\images\homepage\bulletin\5.png" />
+    <Content Include="content\images\homepage\bulletin\6.png" />
+    <Content Include="content\images\homepage\bulletin\7.png" />
+    <Content Include="content\images\homepage\classes\advspt-350x190.jpg" />
+    <Content Include="content\images\homepage\classes\Clay-Modeling-350x190.jpg" />
+    <Content Include="content\images\homepage\classes\Collage-Making-350x190.jpg" />
+    <Content Include="content\images\homepage\classes\maxresdefault-350x190.jpg" />
+    <Content Include="content\images\homepage\classes\Mothers-Day-350x190.jpg" />
+    <Content Include="content\images\homepage\classes\nature-walk-350x190.jpg" />
+    <Content Include="content\images\homepage\classes\Say-no-to-polybags-1-scaled-350x190.jpg" />
+    <Content Include="content\images\homepage\classes\skating-350x190.jpg" />
+    <Content Include="content\images\homepage\classes\Stage-presentation-2-scaled-350x190.jpg" />
+    <Content Include="content\images\homepage\classes\yoga-350x190.png" />
+    <Content Include="content\images\homepage\college-group\allen-kids-bareilly.png" />
+    <Content Include="content\images\homepage\college-group\Allenhouse-Institute-of-Technology.png" />
+    <Content Include="content\images\homepage\college-group\allenhouse-khalasiline.png" />
+    <Content Include="content\images\homepage\college-group\Allen_Kids_demo-lightbox.jpg" />
+    <Content Include="content\images\homepage\college-group\Allen_Kids_kakadeo.png" />
+    <Content Include="content\images\homepage\college-group\eldeco.png" />
+    <Content Include="content\images\homepage\college-group\indira-nagar.png" />
+    <Content Include="content\images\homepage\college-group\jhansi1.png" />
+    <Content Include="content\images\homepage\college-group\light-box\Allenhouse Colleges.jfif" />
+    <Content Include="content\images\homepage\college-group\light-box\_0000_Allenhouse Ghaziabad.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0001_Allenhouse Panki.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0002_Delhi Public School Jankipuram.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0003_Delhi Public School Unnao.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0004_Allen kids Bareilly.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0005_Allenhouse Vrindavan.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0006_Delhi Public School Eldeco.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0007_Allenhouse Public School Jhansi.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0008_Allen Kids Swaroop Nagar.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0009_Delhi Public School Sahranpur.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0010_Delhi Public School Indira nagar.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0011_Allenhouse Rooma.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0012_Allenhouse Khalasi Line.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0013_Allen Kids Kakadeo.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0014_Delhi Public School Bareilly.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0015_Delhi Public School Kalyanpur.jpg" />
+    <Content Include="content\images\homepage\college-group\light-box\_0016_Delhi Public School Gomti Nagar.jpg" />
+    <Content Include="content\images\homepage\college-group\pankislider1.png" />
+    <Content Include="content\images\homepage\college-group\Rooma.png" />
+    <Content Include="content\images\homepage\college-group\Vasundhra.png" />
+    <Content Include="content\images\homepage\college-group\Vrindavan.png" />
+    <Content Include="content\images\homepage\core-values\Excellence.jpg" />
+    <Content Include="content\images\homepage\core-values\Individuality.jpg" />
+    <Content Include="content\images\homepage\core-values\Innovation.jpg" />
+    <Content Include="content\images\homepage\core-values\integrity.jpeg" />
+    <Content Include="content\images\homepage\event-section\Mothers-Day.jpg" />
+    <Content Include="content\images\homepage\event\product_bg.png" />
+    <Content Include="content\images\homepage\footer\gallery\act-dance.png" />
+    <Content Include="content\images\homepage\footer\gallery\Annual-day.png" />
+    <Content Include="content\images\homepage\footer\gallery\Dance-performance.png" />
+    <Content Include="content\images\homepage\footer\gallery\dance.png" />
+    <Content Include="content\images\homepage\footer\gallery\kids.png" />
+    <Content Include="content\images\homepage\footer\gallery\Performance.png" />
+    <Content Include="content\images\homepage\footer\logo_kids.png" />
+    <Content Include="content\images\homepage\logo_kids.png" />
+    <Content Include="content\images\homepage\programs\bg1.png" />
+    <Content Include="content\images\homepage\programs\bg2.png" />
+    <Content Include="content\images\homepage\programs\program1.png" />
+    <Content Include="content\images\homepage\programs\program2.png" />
+    <Content Include="content\images\homepage\programs\program3.png" />
+    <Content Include="content\images\homepage\programs\program4.png" />
+    <Content Include="content\images\homepage\testimonial\background.png" />
+    <Content Include="content\images\homepage\testimonial\default.svg" />
+    <Content Include="content\images\homepage\testimonial\profile-pic1.jpg" />
+    <Content Include="content\images\homepage\testimonial\profile-pic2.jpg" />
+    <Content Include="content\images\homepage\testimonial\profile-pic3.png" />
+    <Content Include="content\images\homepage\testimonial\profile-pic4.png" />
+    <Content Include="content\images\homepage\testimonial\profile-pic5.png" />
+    <Content Include="content\images\homepage\why-choose\Cognitive-1536x1023-min.jpg" />
+    <Content Include="content\images\homepage\why-choose\development-skill-2-1536x2048-min-2.jpg" />
+    <Content Include="content\images\homepage\why-choose\Motor-Skill-min.jpg" />
+    <Content Include="content\images\homepage\why-choose\Peer-Interaction-1536x709-min.jpg" />
+    <Content Include="content\images\homepage\why-choose\why-choose-main.jpg" />
+    <Content Include="content\images\homepage\winning-laurels\background-frame.png" />
+    <Content Include="content\images\homepage\winning-laurels\Pakhi-Newatia.png" />
+    <Content Include="content\images\homepage\winning-laurels\Remo-de-Talentos-winners.png" />
+    <Content Include="content\images\homepage\winning-laurels\Suhasini-1.png" />
+    <Content Include="content\images\homepage\winning-laurels\Suhasini-Nanhe-Kavi-2020-Winner-2048x1488.png" />
+    <Content Include="content\images\homepage\winning-laurels\Suhasini-Panorama.png" />
+    <Content Include="content\images\legacy\bg111.jpg" />
+    <Content Include="content\images\legacy\IMG_0364-scaled-1.jpg" />
+    <Content Include="content\images\legacy\IMG_0364-scaled-1.png" />
+    <Content Include="content\images\loader\loader.gif" />
+    <Content Include="content\images\nursery\Motor-Skill-1-720x460.jpg" />
+    <Content Include="content\images\our-approach\IMG_0363-scaled-1.png" />
+    <Content Include="content\images\our-mission\IMG_0363-scaled-1.png" />
+    <Content Include="content\images\our-mission\mis.jpg" />
+    <Content Include="content\images\playgroup-1\IMG_0344-scaled-825x460.jpg" />
+    <Content Include="content\images\playgroup-1\playgroup-1-icon.png" />
+    <Content Include="content\images\playgroup-2\IMG_0329-scaled-825x460.jpg" />
+    <Content Include="content\images\Preparatory\Class-activities-2-2-825x460.jpg" />
+    <Content Include="content\images\Sources\Computer1.jpg" />
+    <Content Include="content\images\Sources\Computer2.jpg" />
+    <Content Include="content\images\Sources\Computer3.jpg" />
+    <Content Include="content\images\Sources\Computer4.jpg" />
+    <Content Include="content\images\Sources\Transport1.jpg" />
+    <Content Include="content\images\Sources\Transport2.jpg" />
+    <Content Include="content\images\Sources\Transport3.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\bottom-slider\adven1-300x199.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\bottom-slider\adven2-300x199.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\bottom-slider\adven3-300x199.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\bottom-slider\adven4-300x199.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\bottom-slider\adven5-300x199.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\bottom-slider\adven6-300x200.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\bottom-slider\adven7-300x200.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\bottom-slider\adven8-300x200.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\top-banner\yoga1.jpg" />
+    <Content Include="content\images\sports-and-performing-arts\top-banner\yoga2.jpg-395x300.png" />
+    <Content Include="content\images\sports-and-performing-arts\top-banner\yoga3.png" />
+    <Content Include="content\images\sports-and-performing-arts\top-banner\yoga4.png" />
+    <Content Include="content\images\why-choose-allen-kids\kids.png" />
+    <Content Include="content\images\why-choose-allen-kids\Tecno-Savy-e1610451223917.jpg" />
+    <Content Include="content\js--bkp\bootstrap.min.js" />
+    <Content Include="content\js--bkp\custom.js" />
+    <Content Include="content\js--bkp\custom6.js" />
+    <Content Include="content\js--bkp\foundation.min.js" />
+    <Content Include="content\js--bkp\gallery\jquery.mousewheel.min.js" />
+    <Content Include="content\js--bkp\gallery\lightgallery-all.min.js" />
+    <Content Include="content\js--bkp\gallery\picturefill.min.js" />
+    <Content Include="content\js--bkp\jquery.bootstrap.newsbox.js" />
+    <Content Include="content\js--bkp\jquery.min.js" />
+    <Content Include="content\js\bootstrap.min.js" />
+    <Content Include="content\js\custom.js" />
+    <Content Include="content\js\custom1.js" />
+    <Content Include="content\js\custom2.js" />
+    <Content Include="content\js\custom3.js" />
+    <Content Include="content\js\custom4.js" />
+    <Content Include="content\js\custom5.js" />
+    <Content Include="content\js\custom6.js" />
+    <Content Include="content\js\gallery\jquery.mousewheel.min.js" />
+    <Content Include="content\js\gallery\lightgallery-all.min.js" />
+    <Content Include="content\js\gallery\picturefill.min.js" />
+    <Content Include="content\js\jquery.bootstrap.newsbox.js" />
+    <Content Include="content\js\jquery.min.js" />
+    <Content Include="content\js\jquery.mousewheel.min.js" />
+    <Content Include="content\js\lightbox.min.css" />
+    <Content Include="content\js\lightgallery-all.min.js" />
+    <Content Include="content\js\owl.carousel.min.js" />
+    <Content Include="content\js\picturefill.min.js" />
+    <Content Include="content\js\slick.js" />
+    <Content Include="content\js\ui-bootstrap-tpls.js" />
+    <Content Include="content\video\ALLEN-KIDS-30-SEC-KANPUR.mp4" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-filter.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\controller.js" />
+    <Content Include="Scripts\service.js" />
+    <Content Include="Script\controller.js" />
+    <Content Include="Script\LayoutController.js" />
+    <Content Include="Script\PageController.js" />
+    <Content Include="Views\web.config" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\font\fontawesome-webfont.eot" />
+    <Content Include="content\font\fontawesome-webfont.ttf" />
+    <Content Include="content\font\fontawesome-webfont.woff" />
+    <Content Include="content\font\FontAwesome.otf" />
+    <Content Include="content\font\gallery-icon\lg %281%29.eot" />
+    <Content Include="content\font\gallery-icon\lg.eot" />
+    <Content Include="content\font\gallery-icon\lg.ttf" />
+    <Content Include="content\font\gallery-icon\lg.woff" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout1.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Site\AboutUs.cshtml" />
+    <Content Include="Views\Site\AdmissionProcess.cshtml" />
+    <Content Include="Views\Site\AccordianLayout.cshtml" />
+    <Content Include="Views\Site\admissionsFeesStructure.cshtml" />
+    <Content Include="Views\Site\CenterContentWithBottomSlider.cshtml" />
+    <Content Include="Views\Site\contactus.cshtml" />
+    <Content Include="Views\Site\events.cshtml" />
+    <Content Include="Views\Site\extraCoCurricularActivities.cshtml" />
+    <Content Include="Views\Site\fromchairmansdesk.cshtml" />
+    <Content Include="Views\Site\fromheadmistressdesk.cshtml" />
+    <Content Include="Views\Site\gallery.cshtml" />
+    <Content Include="Views\Site\Home.cshtml" />
+    <Content Include="Views\Site\Home.cshtml--bkp" />
+    <Content Include="Views\Site\Home1.cshtml" />
+    <Content Include="Views\Site\ImageContentPage.cshtml" />
+    <Content Include="Views\Site\Layout1.cshtml" />
+    <Content Include="Views\Site\Layout2.cshtml" />
+    <Content Include="Views\Site\Layout3.cshtml" />
+    <Content Include="Views\Site\Layout4.cshtml" />
+    <Content Include="Views\Site\Layout5.cshtml" />
+    <Content Include="Views\Site\Layout6.cshtml" />
+    <Content Include="Views\Site\Layout7.cshtml" />
+    <Content Include="Views\Site\legacy.cshtml" />
+    <Content Include="Views\Site\MediaGallery.cshtml" />
+    <Content Include="Views\Site\mission.cshtml" />
+    <Content Include="Views\Site\nursery.cshtml" />
+    <Content Include="Views\Site\ourapproach.cshtml" />
+    <Content Include="Views\Site\Page.cshtml" />
+    <Content Include="Views\Site\playgroup1.cshtml" />
+    <Content Include="Views\Site\playgroup2.cshtml" />
+    <Content Include="Views\Site\Preparatory.cshtml" />
+    <Content Include="Views\Site\SearchProcess.cshtml" />
+    <Content Include="Views\Site\SportsAndPerformingArts.cshtml" />
+    <Content Include="Views\Site\testimonials.cshtml" />
+    <Content Include="Views\Site\TopRightSliderWithBottomSlider.cshtml" />
+    <Content Include="Views\Site\WhyChooseAllenKids.cshtml" />
+    <Content Include="Views\Site\DocumentAndInformation.cshtml" />
+    <Content Include="Views\Site\Layout8.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Site\ContactUsNew.cshtml" />
+    <Content Include="Uploads\Site\Career\Pdf\1c4c202112312333710.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\1f722021123131816308.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\28c5202112312334617.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\2fae2021123123330837.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\41ff2021123131347827.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\5a772021123123337319.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\5cf72021123124252377.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\7b7d2021123123712125.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\7bb92021123131311622.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\95d8202112313158526.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\b1562021123131322910.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\c3bb202112313102532.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\d7ce2021123124224939.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\d81b2021123123859799.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\da1b2021123123414349.pdf" />
+    <Content Include="Uploads\Site\Career\Pdf\dcd32021123123543195.pdf" />
+    <Content Include="Views\Site\AdmissionEnquiry.cshtml" />
+    <Content Include="Views\Shared\ddlCity.cshtml" />
+    <Content Include="Views\Shared\ddlCountry.cshtml" />
+    <Content Include="Views\Shared\ddlState.cshtml" />
+    <Content Include="Views\Site\PhotoGalleryContent.cshtml" />
+    <Content Include="Views\Site\PhotoGallary.cshtml" />
+    <Content Include="Views\Site\VideoGallery.cshtml" />
+    <Content Include="Views\Site\PhotoCollectionPage.cshtml" />
+    <Content Include="Views\Site\VideoPage.cshtml" />
+    <Content Include="Views\Site\LayoutBanner.cshtml" />
+    <Content Include="Views\Site\BannerDetailLayout.cshtml" />
+    <Content Include="Views\Site\NccHome.cshtml" />
+    <Content Include="Views\Site\Layout9.cshtml" />
+    <Content Include="Views\Site\LayoutZoomSlider.cshtml" />
+    <Content Include="Views\Site\ViewBook.cshtml" />
+    <Content Include="Views\Site\MediaLayout.cshtml" />
+    <Content Include="Views\Site\PreviewImage.cshtml" />
+    <Content Include="Views\Site\Layout10.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51908</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:44337/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\ERP_AHMPL\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\ERP_AHMPL\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

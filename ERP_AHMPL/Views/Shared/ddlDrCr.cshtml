@@ -1,0 +1,5 @@
+﻿@Html.DropDownList("ddlDrCr", new List<SelectListItem>{
+    new SelectListItem{Text="Dr", Value="D"},
+    new SelectListItem{Text="Cr", Value="C"}
+},
+    new { @class = "select2 form-control", @ng_model = "DrCr",@ng_init= "DrCr='D'" })

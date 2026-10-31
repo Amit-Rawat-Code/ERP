@@ -1,0 +1,331 @@
+﻿@{
+    ViewBag.Title = "TicketDashBoardLevel1";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/TicketDashboardLavel1Controller.js?Ver=@ViewBag.Version"></script>
+<style>
+    .section-title-filter {
+        padding: 10px 0px;
+        display: table;
+    }
+    .dataTables_scrollBody {
+        overflow: scroll !important;
+        height: 400px;
+    }
+    .panel-body {
+        padding: 10px 15px;
+        padding-top: 10px;
+        padding-right: 15px;
+        padding-bottom: 10px;
+        padding-left: 15px;
+        background: #fff;
+    }
+</style>
+<style>
+    .modal-body {
+        position: inherit;
+        padding: 20px;
+        font-size: medium;
+        margin-left: 20px;
+    }
+</style>
+
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Level 1</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>DashBoard</span></li>
+                <li class="active"><span>Ticket DashBoard Level-1</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="br-pagebody">
+        <div class="panel-wrapper ">
+            <div class="panel-body">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section-title-filter">
+                    <div class="pull-left section-title">
+                        <h3> List of All Open Tickets</h3>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example1" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>SchoolCode</th>
+                                    <th>Ticket No.</th>
+                                    <th>Ticket Date</th>
+                                    <th>Ticket Time</th>
+                                    <th>User Name</th>
+                                    <th>User Contact No.</th>
+                                    <th>Module Name</th>
+                                    <th>Page Type</th>
+                                    <th>Page Name</th>
+                                    <th>Attachment</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="obj1 in AllRaiseTicket_1 " enquiry-form-list>
+                                    <td ng-bind="$index+1" align="center"></td>
+                                    <td>{{obj1.DisplayCode}}</td>
+                                    <td>{{obj1.PVNo}}</td>
+                                    <td>{{obj1.VDate}}</td>
+                                    <td>{{obj1.VTime}}</td>
+                                    <td>{{obj1.ProfileName}}</td>
+                                    <td>{{obj1.MobileNo}}</td>
+                                    <td>{{obj1.ModuleName}}</td>
+                                    <td>{{obj1.MenuName}}</td>
+                                    <td>{{obj1.SubMenuName}}</td>
+                                    <td ng-click="GetRaiseTicket_Attachments(obj1.TransID)"><a href="#" style="color:blue" data-toggle="modal" data-target="#showAttachment" ng-show="obj1.TotalAttachment>0">{{obj1.TotalAttachment}} Attachment</a></td>
+                                    <td>{{obj1.TicketStatusName}}</td>
+                                    <td><input type="button" class="btn btn-default" value="View" ng-click="RedirectTransID(obj1.TransID)" @*ng-disabled="{{obj1.Status}}==4"*@ /></td>
+                                </tr>
+                                <tr ng-if="AllRaiseTicket_1.length==0"><td colspan="13" class="text-center">No Record Found</td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="S.No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Name of School/College" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket Time" /></td>
+                                    <td><input type="text" class="form-control" placeholder="User Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="User Contact No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Module Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Page Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Page Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Attachment" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section-title-filter">
+                    <div class="pull-left section-title">
+                        <h3> List of All Reopen Tickets</h3>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example4" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>SchoolCode</th>
+                                    <th>Ticket No.</th>
+                                    <th>Ticket Date</th>
+                                    <th>Ticket Time</th>
+                                    <th>User Name</th>
+                                    <th>User Contact No.</th>
+                                    <th>Module Name</th>
+                                    <th>Page Type</th>
+                                    <th>Page Name</th>
+                                    <th>Attachment</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="obj5 in AllRaiseTicket_5" total-due-followup-list>
+                                    <td ng-bind="$index+1" align="center"></td>
+                                    <td>{{obj5.DisplayCode}}</td>
+                                    <td>{{obj5.PVNo}}</td>
+                                    <td>{{obj5.VDate}}</td>
+                                    <td>{{obj5.VTime}}</td>
+                                    <td>{{obj5.ProfileName}}</td>
+                                    <td>{{obj5.MobileNo}}</td>
+                                    <td>{{obj5.ModuleName}}</td>
+                                    <td>{{obj5.MenuName}}</td>
+                                    <td>{{obj5.SubMenuName}}</td>
+                                    <td ng-click="GetRaiseTicket_Attachments(obj5.TransID)"><a href="#" style="color:blue" data-toggle="modal" data-target="#showAttachment" ng-show="obj5.TotalAttachment>0">{{obj5.TotalAttachment}} Attachment</a></td>
+                                    <td>{{obj5.TicketStatusName}}</td>
+                                    <td><input type="button" class="btn btn-default" value="View" ng-click="RedirectTransID(obj5.TransID)" @*ng-disabled="{{obj5.Status}}==4"*@ /></td>
+                                </tr>
+                                <tr ng-if="AllRaiseTicket_5.length==0"><td colspan="13" class="text-center">No Record Found</td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="S.No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Name of School/College" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket Time" /></td>
+                                    <td><input type="text" class="form-control" placeholder="User Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="User Contact No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Module Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Page Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Page Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Attachment" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section-title-filter">
+                    <div class="pull-left section-title">
+                        <h3> List of All Transfered & Resolved Tickets</h3>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>SchoolCode</th>
+                                    <th>Ticket No.</th>
+                                    <th>Ticket Date</th>
+                                    <th>Ticket Time</th>
+                                    <th>User Name</th>
+                                    <th>User Contact No.</th>
+                                    <th>Module Name</th>
+                                    <th>Page Type</th>
+                                    <th>Page Name</th>
+                                    <th>Attachment</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="obj3 in AllRaiseTicket_3" enquiry-Follow-Ups-List>
+                                    <td ng-bind="$index+1" align="center"></td>
+                                    <td>{{obj3.DisplayCode}}</td>
+                                    <td>{{obj3.PVNo}}</td>
+                                    <td>{{obj3.VDate}}</td>
+                                    <td>{{obj3.VTime}}</td>
+                                    <td>{{obj3.ProfileName}}</td>
+                                    <td>{{obj3.MobileNo}}</td>
+                                    <td>{{obj3.ModuleName}}</td>
+                                    <td>{{obj3.MenuName}}</td>
+                                    <td>{{obj3.SubMenuName}}</td>
+                                    <td ng-click="GetRaiseTicket_Attachments(obj3.TransID)"><a href="#" style="color:blue" data-toggle="modal" data-target="#showAttachment" ng-show="obj3.TotalAttachment>0">{{obj3.TotalAttachment}} Attachment</a></td>
+                                    <td>{{obj3.TicketStatusName}}</td>
+                                    <td><input type="button" class="btn btn-default" value="View" ng-click="RedirectTransID(obj3.TransID)" /></td>
+                                </tr>
+                                <tr ng-if="AllRaiseTicket_3.length==0"><td colspan="13" class="text-center">No Record Found</td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="S.No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Name of School/College" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket Time" /></td>
+                                    <td><input type="text" class="form-control" placeholder="User Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="User Contact No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Module Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Page Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Page Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Attachment" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section-title-filter">
+                    <div class="pull-left section-title">
+                        <h3> List of All Closed Tickets</h3>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example3" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>SchoolCode</th>
+                                    <th>Ticket No.</th>
+                                    <th>Ticket Date</th>
+                                    <th>Ticket Time</th>
+                                    <th>User Name</th>
+                                    <th>User Contact No.</th>
+                                    <th>Module Name</th>
+                                    <th>Page Type</th>
+                                    <th>Page Name</th>
+                                    <th>Attachment</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="obj4 in AllRaiseTicket_4 " enquiry-today-follow-ups-list>
+                                    <td ng-bind="$index+1" align="center"></td>
+                                    <td>{{obj4.DisplayCode}}</td>
+                                    <td>{{obj4.PVNo}}</td>
+                                    <td>{{obj4.VDate}}</td>
+                                    <td>{{obj4.VTime}}</td>
+                                    <td>{{obj4.ProfileName}}</td>
+                                    <td>{{obj4.MobileNo}}</td>
+                                    <td>{{obj4.ModuleName}}</td>
+                                    <td>{{obj4.MenuName}}</td>
+                                    <td>{{obj4.SubMenuName}}</td>
+                                    <td ng-click="GetRaiseTicket_Attachments(obj4.TransID)"><a href="#" style="color:blue" data-toggle="modal" data-target="#showAttachment" ng-show="obj4.TotalAttachment>0">{{obj4.TotalAttachment}} Attachment</a></td>
+                                    <td>{{obj4.TicketStatusName}}</td>
+                                    <td><input type="button" class="btn btn-default" value="View" ng-click="RedirectTransID(obj4.TransID)" @*ng-disabled="{{obj4.Status}}==4"*@ /></td>
+                                </tr>
+                                <tr ng-if="AllRaiseTicket_4.length==0"><td colspan="13" class="text-center">No Record Found</td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="S.No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Name of School/College" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ticket Time" /></td>
+                                    <td><input type="text" class="form-control" placeholder="User Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="User Contact No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Module Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Page Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Page Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Attachment" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="showAttachment" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Attachment List</h4>
+            </div>
+            <div class="modal-body">              
+                <ul style="list-style-type:square" data-ng-repeat="ob1 in RaiseTicket_Attachment">
+                    <li><a href="{{ob1.FilePath}}" style="color:blue" download>{{ob1.FileName}}</a></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

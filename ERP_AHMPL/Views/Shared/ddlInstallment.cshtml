@@ -1,0 +1,4 @@
+﻿<select id="ddlInstallment" class="select2 form-control clear validate" ng-model="InstallmentCode" ng-init="GetInstallments();" ng-change="ddlInstallment_Change()">
+    <option value="">Select Installment</option>
+    <option ng-repeat="il in InstallmentList" value="{{il.Code}}" ng-disabled="!il.IsActive">{{il.InstallmentName}}</option>
+</select>

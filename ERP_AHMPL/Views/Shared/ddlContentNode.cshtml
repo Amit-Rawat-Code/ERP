@@ -1,0 +1,9 @@
+﻿<select id="ddlContentNode" class="select2 form-control validate" ng-model="ContentNodes.ContentNodeId"  ng-change="LoadNodeKeysToBody();">
+    <option value="">Select Content Node</option>
+    <option ng-repeat="ContentsNode in ContentsNodes" value="{{ContentsNode.ContentNodeId}}">{{ContentsNode.ContentNode}}</option>
+</select>
+
+
+
+
+

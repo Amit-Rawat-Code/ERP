@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewBag.Title = "General Trial Balance";
+    ViewBag.TitleList = "General Trial Balance";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+ 
+<script src="~/Scripts/myjslib/GeneralTrialController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">General Trial Balance</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Accountancy</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>General Trial Balance</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+
+                                <div class="collapse in">
+                                    <form id="user-form">
+                                        <div id="hdngetstu" style="display:none" ></div>
+                                        <div class="section-toggle">
+                                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-padding ">
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">From Date</label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("txtFromDate")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">To Date</label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("txtToDate")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                   
+                                                    <fieldset class="fieldset">
+                                                        <legend class="legend">Opening Mode</legend>
+                                                        <div class="input-box">
+                                                            <div class="radio radio-primary radio-box">
+                                                                <input type="radio" ng-model="OpeningMode" ng-checked='true' value="1">
+                                                                <label>With Opening</label>
+                                                            </div>
+                                                            <div class="radio radio-primary radio-box">
+                                                                <input type="radio" ng-model="OpeningMode" value="2">
+                                                                <label>Only Opening</label>
+                                                            </div>
+                                                            <div class="radio radio-primary radio-box">
+                                                                <input type="radio" ng-model="OpeningMode" value="3">
+                                                                <label> Without Opening</label>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>       
+</div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                   
+                                                    <fieldset class="fieldset">
+                                                        <legend class="legend">View Type</legend>
+                                                        <div class="input-box">
+                                                            <div class="radio radio-primary radio-box">
+                                                                <input type="radio" ng-model="TransMode" value="1" ng-checked="true" ng-change="BindGroupAccount()" ng-init="BindGroupAccount()">
+                                                                <label>Group</label>
+                                                            </div>
+                                                            <div class="radio radio-primary radio-box">
+                                                                <input type="radio" ng-model="TransMode" value="2" ng-change="BindLedgerAccount()">
+                                                                <label>Ledger Account</label>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>     
+</div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-padding">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="input-box">
+                                                        <div class="checkbox checkbox-primary check-box">
+                                                            <input type="checkbox" ng-model="ChkAll" ng-click="SelectDeselect()">
+                                                            <label>Select All</label>
+                                                        </div>
+                                                        <div class="text-box-msg-r2">
+                                                            <label ng-model="AllField"> {{AllField}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-box" style="width:100%; background:#484848; position:relative; float:left; color:#fff;">
+                                                        <div class="checkbox checkbox-primary check-box">
+                                                          {{Account}}     
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12" ng-show="chkGroupAccount" ng-model="chkGroupAccount" style="position:relative;">
+                                                    <div class="slimScrollDiv-height2" id="slimScrollDiv-height2">
+                                                        <div class="streamline message-nicescroll-bar" style="position:relative;">
+                                                           
+                                                            <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                            
+                                                                <tbody>
+                                                                    <tr ng-repeat="XL in RecGroupAccount">
+                                                                        <td class="srno">
+                                                                            <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                                                                <input ng-change="changeGroupAccount()" type="checkbox" ng-model="chk[$index]" ng-init="chk[$index]==true" />
+                                                                                <label for=""> </label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="float: left;display:none ">{{XL.GroupCode}}</td>
+                                                                        <td> {{XL.GroupName}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12" ng-show="chkLedgerAccount" ng-model="chkLedgerAccount">
+                                                    <div class="slimScrollDiv-height2" id="slimScrollDiv-height2">
+                                                        <div class="streamline message-nicescroll-bar">
+                                                            <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                              
+                                                                <tbody>
+                                                                    <tr ng-repeat="XXL in RecLedgerAccount">
+                                                                        <td class="srno">
+                                                                            <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                                                                <input ng-change="changeLedgerAccount()" type="checkbox" ng-model="chk[$index]" ng-init="chk[$index]==true" />
+                                                                                <label for=""> </label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="float: left;display:none ">{{XXL.SubCode}}</td>
+                                                                        <td> {{XXL.LedgerName}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                                <div class="col-md-12 col-sm-12 col-xs-12  ">
+                                                    @Html.Partial("ActionSearch")
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    @Html.Partial("GeneralReportGrid")
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

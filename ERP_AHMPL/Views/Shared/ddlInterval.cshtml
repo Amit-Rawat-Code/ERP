@@ -1,0 +1,4 @@
+﻿<select id="ddlInterval" class="select2 form-control validate" ng-init="ddlInterval()" ng-model="Interval">
+    @*<option value="">Select Interval</option>*@
+    <option ng-repeat="interval in Intervals" value="{{interval.Interval}}">{{interval.IntervalText}}</option>
+</select>

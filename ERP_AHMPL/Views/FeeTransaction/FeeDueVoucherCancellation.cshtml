@@ -1,0 +1,376 @@
+﻿
+@{
+    ViewBag.Title = "Fee Due Voucher Cancellation";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/FeeDueVoucherCancellationController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Fee Due Voucher Cancellation</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fee</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Fee Due Voucher Cancellation</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+
+
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Installment<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlInstallment")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Due On<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtDueOn", "", new
+                                                {
+                                                    @class = "form-control clear validate",
+                                                    @type = "date",
+                                                    @placeholder = "",
+                                                    @ng_model = "DueOn"
+                                                })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Class<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlMultiClass")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student Status<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlActiveParital", new List<SelectListItem>
+                                                    {
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Active", Value="1"},
+                                                    new SelectListItem{Text="Inactive", Value="0"},
+                                                    new SelectListItem{Text="Parital", Value="2"}
+                                                    },
+                                                    new { @class = "select2 form-control validate", @ng_model = "ddlActiveParital", @ng_init = "ddlActiveParital='1'", @ng_change = "ddlActiveParital_Change()" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label"><span class="vd_red"></span></label>
+                                            <div class="input-box" style="font-size:18px">
+                                                Total No. of Students:
+                                                <label class="control-label" ng-model="TotalNoofStudents">{{TotalNoofStudents}}</label>
+                                                <br />
+                                                No. of Students Posted:
+                                                <a href="#" data-toggle="modal" data-target="#PostedStudentModal" ng-model="NoofStudentsPosted"
+                                                   ng-click="GetPostedStudentsList();">{{NoofStudentsPosted}}</a>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                        <style>
+                                           /* .table-scroll thead,
+                                            .table-scroll thead th,
+                                            .table-scroll tfoot td {
+                                                position: -webkit-sticky;
+                                                position: sticky;
+                                                bottom: 0;
+                                                background: #484848;
+                                                color: #fff !important;
+                                                z-index: 4;
+                                                padding: 7px 6px !important;
+                                                font-weight: 400 !important;
+                                            }*/
+                                            .table-scroll thead,
+                                            .table-scroll thead th {
+                                                position: -webkit-sticky;
+                                                position: sticky;
+                                                top: 0;
+                                                background: #fff;
+                                                color: #000 !important;
+                                                z-index: 4;
+                                                padding: 4px 6px !important;
+                                                font-weight: 400 !important;
+                                            }
+                                            .table-scroll tfoot td {
+                                                position: -webkit-sticky;
+                                                position: sticky;
+                                                bottom: 0;
+                                                background: #fff;
+                                                color: #000 !important;
+                                                z-index: 4;
+                                                padding: 4px 6px !important;
+                                                font-weight: 400 !important;
+                                            }
+                                        </style>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            <h3 style="text-decoration: underline;">Please Select Students to Delete Posted Due Voucher:</h3>
+                                            <div id="divExample2" class="table-scroll">
+                                                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Class</th>
+                                                            <th>Admission No.</th>
+                                                            <th>Student Name</th>
+                                                            <th>Father Name</th>
+                                                            <th class="text-right">Dr</th>
+                                                            <th class="text-right">Cr</th>
+                                                            <th></th>
+                                                            <th><input type="checkbox" ng-model="ChkAll" ng-init="ChkAll=false" ng-change="CheckUnCheckAll(ChkAll)" /></th>
+
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="sl in PostedStudentsList">
+                                                            <td>{{$index+1}}.</td>
+                                                            <td>{{sl.ClassName}}</td>
+                                                            <td>{{sl.AdmissionNo}}</td>
+                                                            <td>{{sl.StudentName}}</td>
+                                                            <td>{{sl.FatherName}}</td>
+                                                            <td class="text-right">{{sl.TotalDrAmt}}</td>
+                                                            <td class="text-right">{{sl.TotalCrAmt}}</td>
+                                                            <td><a href="#" data-toggle="modal" data-target="#StudentDueLedgerModal" ng-click="GetStudentDueLedger(sl.StudentCode)">View</a></td>
+                                                            <td><input type="checkbox" ng-model="sl.Chk" ng-init="sl.Chk=false" ng-change="CheckUnCheck()" /></td>
+                                                        </tr>
+                                                        <tr ng-if="PostedStudentsList.length==0">
+                                                            <td colspan="9" class="text-center">
+                                                                No Record(s) found.
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td class="text-right" style="font-weight:bold !important">Total</td>
+                                                            <td class="text-right" style="font-weight:bold !important"> {{Sumoflist('PostedStudentsList','TotalDrAmt')}}</td>
+                                                            <td class="text-right" style="font-weight:bold !important">{{Sumoflist('PostedStudentsList','TotalCrAmt')}}</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tfoot>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionSave")
+                                            @*<a href="#" class="btn-me btn-primary hvr-float-shadow pull-right" data-toggle="modal" data-target="#myModal"
+            ng-click="GetNotStudentsPostedList();">Click Here to check not posted list</a>*@
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @*@Html.Partial("SearchAngularJs")*@
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+@*<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Student List</h4>
+            </div>
+            <div class="modal-body">
+                <div style="height:400px;overflow-y:scroll;overflow-x:hidden">
+                    <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>S.No.</th>
+                                <th style="text-align:start">Class</th>
+                                <th>Admission <br />No.</th>
+                                <th>Student <br />Name</th>
+                                <th>Father <br />Name</th>
+                                <th>Fee <br />Amount</th>
+                                <th>Concession <br />Amount</th>
+                                <th><input type="checkbox" ng-model="ChkAll" ng-init="ChkAll=true" ng-change="CheckUnCheckAll(ChkAll)" /></th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="sl in StudentsList">
+                                <td>{{$index+1}}.</td>
+                                <td>{{sl.ClassName}}</td>
+                                <td>{{sl.AdmissionNo}}</td>
+                                <td>{{sl.StudentName}}</td>
+                                <td>{{sl.FatherName}}</td>
+                                <td>{{sl.Dr}}</td>
+                                <td>{{sl.Cr}}</td>
+                                <td><input type="checkbox" ng-model="sl.Chk" ng-init="sl.Chk=true" ng-change="CheckUnCheck()" /></td>
+                            </tr>
+                            <tr ng-if="StudentsList.length==0">
+                                <td colspan="7" class="text-center">
+                                    No Record(s) found.
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+@*<div class="modal fade" id="PostedStudentModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Posted Students List</h4>
+            </div>
+            <div class="modal-body">
+                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Class</th>
+                            <th>Admission No.</th>
+                            <th>Student Name</th>
+                            <th>Father Name</th>
+                            <th class="text-right">Dr</th>
+                            <th class="text-right">Cr</th>
+                            <th></th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="sl in PostedStudentsList">
+                            <td>{{$index+1}}.</td>
+                            <td>{{sl.ClassName}}</td>
+                            <td>{{sl.AdmissionNo}}</td>
+                            <td>{{sl.StudentName}}</td>
+                            <td>{{sl.FatherName}}</td>
+                            <td class="text-right">{{sl.TotalDrAmt}}</td>
+                            <td class="text-right">{{sl.TotalCrAmt}}</td>
+                            <td><a href="#" data-toggle="modal" data-target="#StudentDueLedgerModal" ng-click="GetStudentDueLedger(sl.StudentCode)">View</a></td>
+                        </tr>
+                        <tr ng-if="PostedStudentsList.length==0">
+                            <td colspan="9" class="text-center">
+                                No Record(s) found.
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-center">Total</td>
+                            <td class="text-right"> {{Sumoflist('PostedStudentsList','TotalDrAmt')}}</td>
+                            <td class="text-right">{{Sumoflist('PostedStudentsList','TotalCrAmt')}}</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+<div class="modal fade" id="StudentDueLedgerModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Student's Due Ledger</h4>
+            </div>
+            <div class="modal-body">
+                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Particulars</th>
+                            <th class="text-right">Dr</th>
+                            <th class="text-right">Cr</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="sl in StudentDueLedger">
+                            <td>{{$index+1}}.</td>
+                            <td>{{sl.Particulars}}</td>
+                            <td class="text-right">{{sl.DrAmt}}</td>
+                            <td class="text-right">{{sl.CrAmt}}</td>
+                        </tr>
+                        <tr ng-if="StudentDueLedger.length==0">
+                            <td colspan="4" class="text-center">
+                                No Record(s) found.
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td class="text-center">Total</td>
+                            <td class="text-right"> {{Sumoflist('StudentDueLedger','DrAmt')}}</td>
+                            <td class="text-right">{{Sumoflist('StudentDueLedger','CrAmt')}}</td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#ddlActiveParital').removeClass('validate');
+</script>
+
+
+
+

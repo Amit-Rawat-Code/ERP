@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "ImageContentPage";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div ng-init="GetAboutUs();" ng-cloak>
+    @*<div ng-repeat="PageData in ImageContentPageData">*@
+    @*<section class="page-banner-breadcrumbs">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <span class="page-name">AllenKids Swaroopnagar</span><span class="seprator">></span><span class="page-name">{{ImageContentPageData[0].UnitTitle}}</span>
+                    <h3 class="title-of-page">
+                        {{ImageContentPageData[0].UnitTitle}}
+                    </h3>
+                </div>
+            </div>
+        </section>*@
+    <section class="page-section why-choose-allen-kids Playgroup-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="play-group-icon-title">
+                        <div class="icon">
+                            <img height="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].HeadingImageHeight}}" src="" ng-src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeadingImgPath}}" alt="pay-icon" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeadingImgPath)">
+                        </div>
+                        <div class="master-hdr">
+                            <h3 class="section-title">
+                                {{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeading}}
+                            </h3>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-sm-6"> 
+
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContent)">
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="photo-section">
+                        <img style="width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageWidth}};object-fit:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageObjectFit}};border-radius:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageBorderRadius}};border-width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageBorder}};border-style: solid;border-color:#6b6c6d;" height="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageHeight}}" src="" ng-src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImgPath}}" alt="pay-icon" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImgPath)">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBL'})[0].BodyContent)">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+

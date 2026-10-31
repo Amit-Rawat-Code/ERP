@@ -1,0 +1,8 @@
+﻿<select id="ddlContentType" class="select2 form-control validate" ng-init="GetContentTypes();" ng-model="ContentTypes.ContentTypeId" ng-change="GetContentNodes(ContentTypes.ContentTypeId); MailMessageToggle();">
+    <option value="">Select Content Type</option>
+    <option ng-repeat="ContentsType in ContentsTypes" value="{{ContentsType.ContentTypeId}}">{{ContentsType.ContentType}}</option>
+</select>
+
+
+
+

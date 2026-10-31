@@ -1,0 +1,40 @@
+﻿
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+    <div class="collapse" id="CollapseSearchTableList">
+        <div class="table-heading-box">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                @Html.Partial("_printingTool1")
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="{{DocSize}} {{DocOrientation}}">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" id="ExportDiv">
+                        <div id="SetPageMargin">
+                            <div class="me-col-12" ng-init="GetReportHeaderUsingCategory('General Report')">
+                                <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                            </div>
+                            <div class="me-col-12 dt-print-view">
+                                <h1>@ViewBag.Title</h1>
+                            </div>
+                           
+
+                                <div id="rptname" ng-model="rptname"><strong>{{rptname}}</strong></div>
+                                <div id="UpdatePanel">
+                                </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

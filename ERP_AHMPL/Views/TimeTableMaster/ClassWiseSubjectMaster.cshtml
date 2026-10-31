@@ -1,0 +1,353 @@
+﻿
+@{
+    ViewBag.Title = "Class Wise Subject Master";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/ClassWiseSubjectMasterController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Class Wise Subject Master</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Enquiry</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Class Wise Subject Master</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-9 col-xs-12 col-lg-9 mgbt-xs-15">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-md-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Class<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("ddlClass")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Is Active<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("ddlActive")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-12 col-xs-12 mgbt-xs-15">
+                                                    <div  class="table-responsive" style="overflow-y: hidden;">
+                                                        <table id="example2" class="table table-striped table-bordered compact" style="width:100%" >
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S.No.</th>
+                                                                <th>Subject Group</th>
+                                                                <th>Subject</th>
+                                                                <th>Type</th>
+                                                                <th>No. of periods in week</th>
+                                                                <th>Is Exam</th>
+                                                                <th>All</th>
+                                                                <th class="text-center">Monday</th>
+                                                                <th class="text-center">Tuesday</th>
+                                                                <th class="text-center">Wednesday</th>
+                                                                <th class="text-center">Thursday</th>
+                                                                <th class="text-center">Friday</th>
+                                                                <th class="text-center">Saturday</th>
+                                                                <th class="text-center">Sunday</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>                                                        
+                                                            <tr ng-repeat="obj in SubjectList">
+                                                                <td ng-bind="obj.Srno=($index+1)"></td>
+                                                                <td>{{obj.SubjectGroupName}}</td>
+                                                                <td>{{obj.SubjectName}}</td>
+
+                                                                <td>
+                                                                    <select id="ddlRequired" class="select2 form-control clear width-200" ng-model="obj.Type"  ng-change="Reset(obj)" style="width: 135px;"> @*ng-disabled="disableForEdit"*@
+                                                                        <option value="0">Not Defined</option>
+                                                                        <option value="1">Required</option>
+                                                                        <option value="2">Optional</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>   
+                                                                <input ng-model="obj.PeriodInWeek" class="form-control clear" ng-keypress="filterValue($event)" maxlength="3" ng-disabled="obj.Type=='0'" />
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                                                        <input type="checkbox" ng-model="obj.IsExam" ng-disabled="obj.Type=='0'"/>
+                                                                        <label for=""> </label>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="table-check-box">
+                                                                    @*   <div class="checkbox checkbox-primary check-box table-check">
+                                                                    *@
+
+                                                                    @Html.CheckBox("chkWS", false, new
+                                                               {
+                                                                   @class = "form-control",
+                                                                   @ng_model = "obj.chkWS",
+                                                                   @ng_change = "fnChkWS(obj)",
+                                                                    @ng_disabled = "obj.Type=='0'"
+                                                               })
+                                                                    <label for=""></label>
+                                                                    @*
+            </div>*@
+
+                                                                </td>
+                                                                <td class="table-check-box">
+                                                                    @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                    *@
+                                                                    @Html.CheckBox("chkMonday", false, new
+                                                               {
+                                                                   @class = "form-control validate",
+                                                                   @ng_model = "obj.Monday",
+                                                                   @ng_checked = "obj.Monday",
+                                                                   @ng_disabled = "obj.Type=='0'",
+                                                                   @ng_change = "checkAll(obj)"
+                                                               })
+                                                                    <label for=""></label>
+                                                                    @*
+            </div>*@
+
+                                                                </td>
+                                                                <td class="table-check-box">
+                                                                    @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                    *@
+                                                                    @Html.CheckBox("chkTuesday", false, new
+                                                               {
+                                                                   @class = "form-control validate",
+                                                                   @ng_model = "obj.Tuesday",
+                                                                   @ng_checked = "obj.Tuesday",
+                                                                   @ng_disabled = "obj.Type=='0'",
+                                                                   @ng_change = "checkAll(obj)"
+                                                               })
+                                                                    <label for=""></label>
+                                                                    @*
+            </div>*@
+                                                                </td>
+                                                                <td class="table-check-box">
+                                                                    @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                    *@
+                                                                    @Html.CheckBox("chkWednesday", false, new
+                                                               {
+                                                                   @class = "form-control validate",
+                                                                   @ng_model = "obj.Wednesday",
+                                                                   @ng_checked = "obj.Wednesday",
+                                                                   @ng_disabled = "obj.Type=='0'",
+                                                                   @ng_change = "checkAll(obj)"
+
+                                                               })
+                                                                    <label for=""></label>
+                                                                    @*
+            </div>*@
+
+                                                                </td>
+                                                                <td class="table-check-box">
+                                                                    @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                    *@
+                                                                    @Html.CheckBox("chkThursday", false, new
+                                                               {
+                                                                   @class = "form-control validate",
+                                                                   @ng_model = "obj.Thursday",
+                                                                   @ng_checked = "obj.Thursday",
+                                                                   @ng_disabled = "obj.Type=='0'",
+                                                                   @ng_change = "checkAll(obj)"
+                                                               })
+                                                                    <label for=""></label>
+                                                                    @*
+            </div>*@
+
+                                                                </td>
+                                                                <td class="table-check-box">
+                                                                    @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                    *@
+                                                                    @Html.CheckBox("chkFriday", false, new
+                                                               {
+                                                                   @class = "form-control validate",
+                                                                   @ng_model = "obj.Friday",
+                                                                   @ng_checked = "obj.Friday",
+                                                                   @ng_disabled = "obj.Type=='0'",
+                                                                   @ng_change = "checkAll(obj)"
+                                                               })
+                                                                    <label for=""></label>
+                                                                    @*
+            </div>*@
+
+                                                                </td>
+                                                                <td class="table-check-box">
+                                                                    @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                    *@
+                                                                    @Html.CheckBox("chkSaturday", false, new
+                                                               {
+                                                                   @class = "form-control validate",
+                                                                   @ng_model = "obj.Saturday",
+                                                                   @ng_checked = "obj.Saturday",
+                                                                   @ng_disabled = "obj.Type=='0'",
+                                                                   @ng_change = "checkAll(obj)"
+                                                               })
+                                                                    <label for=""></label>
+                                                                    @*
+            </div>*@
+
+                                                                </td>
+                                                                <td class="table-check-box">
+                                                                    @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                    *@
+                                                                    @Html.CheckBox("chkSunday", false, new
+                                                               {
+                                                                   @class = "form-control validate",
+                                                                   @ng_model = "obj.Sunday",
+                                                                   @ng_checked = "obj.Sunday",
+                                                                   @ng_disabled = "obj.Type=='0'",
+                                                                   @ng_change = "checkAll(obj)"
+                                                               })
+                                                                    <label for=""></label>
+                                                                    @*
+            </div>*@
+
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        <div class="col-sm-12 col-md-3 col-xs-12 col-lg-3 mgbt-xs-15" ng-init="GetSubjectGroup()">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Section<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <div class="">
+                                                            <div class="checkbox checkbox-primary check-box">
+                                                                <input type="checkbox" @*ng-disabled="disableForEdit"*@ ng-model="chkAllSection"
+                                                                       ng-bind="chkAllSection=(selectedSectionCount==(SectionList.length==0?1:SectionList.length)?true:false)" ng-change="AllSection()">
+                                                                <label>Select All</label>
+                                                            </div>
+                                                            <div class="text-box-msg-r2" style="font-weight: 500;">
+                                                                Total Selection: <label ng-model="selectedSectionCount" ng-bind="selectedSectionCount=(SectionList | filter:{'chk' : 'true'}).length"></label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="" style="position:relative;">
+                                                            <div class="slimScrollDiv-height3" id="">
+                                                                <table id="sdata" class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                                    <tbody>
+                                                                        <tr ng-repeat="x in SectionList">
+                                                                            <td class="srno">
+                                                                                <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+
+                                                                                    <input type="checkbox" ng-model="x.chk" @*ng-disabled="disableForEdit"*@ />
+                                                                                    <label for=""> </label>
+                                                                                </div>
+                                                                            </td>
+
+                                                                            <td style="float: left;display:none" ng-model="x.Code"></td>
+                                                                            <td> {{x.SectionName}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Subject Group<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <div class="">
+                                                            <div class="input-box">
+                                                                <div class="checkbox checkbox-primary check-box">
+                                                                    <input type="checkbox" @*ng-disabled="disableForEdit"*@ ng-model="chkAllSubjectGroup" ng-bind="chkAllSubjectGroup=(selectedSubjectGroupCount==SubjectGruopList.length?true:false)" ng-change="AllSubjectGroup();GetSubjectDetail()" class="ng-pristine ng-valid ng-binding ng-not-empty ng-touched">
+                                                                    <label>Select All</label>
+                                                                </div>
+                                                                <div class="text-box-msg-r2" style="font-weight: 500;">
+                                                                    Total Selection: <label ng-model="selectedSubjectGroupCount" ng-bind="selectedSubjectGroupCount=(SubjectGruopList | filter:{'chk' : 'true'}).length" class="ng-pristine ng-untouched ng-valid ng-binding ng-not-empty"></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="" style="position:relative;">
+                                                            <div class="slimScrollDiv-height3" id="">
+                                                                <table id="sdata" class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                        <tr ng-repeat="x in SubjectGruopList">
+                                                                            <td class="srno">
+                                                                                <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                                                                    <input type="checkbox" ng-model="x.chk" @*ng-disabled="disableForEdit"*@ ng-change="GetSubjectDetail()" />
+                                                                                    <label for=""> </label>
+                                                                                </div>
+                                                                            </td>
+
+                                                                            <td style="float: left;display:none" ng-model="x.Code"></td>
+                                                                            <td> {{x.SubjectGroupName}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionView")
+                                            </div>
+
+
+</form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+
+

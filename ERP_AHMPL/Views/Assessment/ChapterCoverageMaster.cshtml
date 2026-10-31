@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Chapter Topic Mapping";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/ChapterTopicMappingController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Chapter Coverage Master</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Academics</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Chapter Coverage Master</span></li>
+            </ol>
+        </div>
+    </div>            
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label>Academic Session</label>
+                                                @*@Html.Partial("ddlSession")*@
+                                                <select ng-disabled="clsSession" id="ddlSession" autocomplete='address-level2' class="select2 form-control validate" ng-model="SessionId" ng-init="GetSession()" ng-change="GetAllClass()">
+                                                    @*ddlSession_Change(SessionId)*@
+                                                    <option value="">Select Session</option>
+                                                    <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label>Class</label>
+                                                <select ng-disabled="clsClass" id="ddlClass" class="select2 form-control clear validate" ng-model="class" ng-init="GetAllClass();" ng-change="GetAllSubject();GetAllExams();">
+                                                    <option value="">Select Class</option>
+                                                    <option ng-repeat="classes in ClassList" value="{{classes.ClassCode}}">{{classes.ClassName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label>Subject</label>
+                                                <select ng-disabled="clsSubject" id="ddlSubject" class="select2 form-control clear validate" ng-model="Subject" ng-change="GetAllBookChapterExamList();">
+                                                    <option value="">Select Subject</option>
+                                                    <option ng-repeat="Subjects in SubjectList" value="{{Subjects.SubjectCode}}" ng-disabled="!Subjects.IsDisabled">{{Subjects.SubjectName}}</option>
+                                                    @*ng-disabled="!Subjects.IsDisabled"*@
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <div class="table-responsive" style="overflow-y: hidden;">
+                                                    <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S.No.</th>
+                                                                <th>Selection</th>
+                                                                <th>Book Name</th>
+                                                                <th>Chapter Name</th>
+                                                                <th>Topic Name</th>
+                                                                <th>No.of Periods</th>
+                                                                <th>Covered In</th>
+                                                                <th ng-repeat="exm in ExamList">{{exm.ExamName}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="obj in ChapterList">
+                                                                <td align="center" ng-bind="obj.Srno=($index+1)"></td>
+                                                                <td align="center"><input type="checkbox" ng-model="obj.Chk" class=" " onchange="angular.element(this).scope().onchange(this)" ng-change="obj.validate=obj.Chk?'validate':'';" ng-init="obj.validate=obj.Chk?'validate':''"/></td>
+                                                                <td>{{obj.NameOfBook}}</td>
+                                                                <td>{{obj.ChapterName}}</td>
+                                                                <td><input class="form-control clear" type="text" ng-model="obj.Topic" /></td>
+                                                                <td><input class="form-control clear {{obj.validate}}"  type="text" ng-model="obj.NoOfPeriod" allow-only-numbers /></td>
+                                                                <td>
+                                                                    <select id="ddlSessionMonth" autocomplete='address-level2' class="select2 form-control {{obj.validate}}" ng-model="obj.SessionMonth">
+                                                                        <option value="">Select Month</option>
+                                                                        <option ng-repeat="month in SessionMonths|filter:{'Year':SessionYear}" ng-value="month.Month">{{month.Month}}</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td ng-repeat="exms in obj.ExamList">
+                                                                    <input type="text" ng-model="exms.Marks " class="form-control clear {{obj.validate}}" allow-decimal-numbers />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>                                                                           
+                                        
+                                        <div class="col-md-8 col-sm-6 col-xs-12 ">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </div>
+                                </div>
+                                    @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

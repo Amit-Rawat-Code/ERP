@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Deviation ClassWise SubjectWise Report";
+    ViewBag.TitleList = "DeviationClassWiseSubjectWiseReport";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/DeviationClassWiseSubjectWiseReportController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Deviation ClassWise SubjectWise Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Academics</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Deviation Class Wise Subject Wise</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">                               
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                    <div class="section-toggle">
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>School</label>
+                                                <select id="ddlSchool" class="select2 form-control validate" ng-model="RelationshipId" ng-change="GetAllClass();">
+                                                    <option value="" selected>Select School</option>
+                                                    <option ng-repeat="GId in AssociatedBranches" value="{{GId.RelationshipId}}">
+                                                        {{GId.BranchName}} - {{GId.BranchAddress}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>                                        
+                                        
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Class</label>
+                                                <select id="ddlClass" class="select2 form-control clear validate" ng-model="class" ng-change="GetAllSection();">
+                                                    <option value="">Select Class</option>
+                                                    <option ng-repeat="classes in ClassList" value="{{classes.Code}}">{{classes.ClassName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Section</label>
+                                                <select id="ddlSection" class="select2 form-control clear validate" ng-model="Section" ng-change="GetAllSubject();">
+                                                    <option value="">Select Section</option>
+                                                    <option ng-repeat="Section in SectionList" value="{{Section.Code}}">{{Section.SectionName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Subject</label>
+                                                <select id="ddlSubject" class="select2 form-control clear validate" ng-model="Subject">
+                                                    <option value="">Select Subject</option>
+                                                    <option ng-repeat="Subjects in SubjectList" value="{{Subjects.Code}}">{{Subjects.SubjectName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label"><span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ActionSearch")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    @Html.Partial("SummaryReportGrid")
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

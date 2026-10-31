@@ -1,0 +1,456 @@
+﻿
+@{
+    ViewBag.Title = "MediaGallery";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<div ng-init="GetAboutUs()" ng-cloak>
+    <section class="page-section allenhose-story news-letter Achievement">
+        <div class="container" >
+            <h3 class="section-title">{{MediaGalleryData[0].AlbumTitle}}</h3>
+            <div class="section-title-bottom-line">
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="searchform1">
+                            <div class="gallery-searchA">
+                                <ul>
+                                    @*<li>
+                                        <input id="RadioSearchAll" name="filter" ng-model="filter" type="radio" value="ALL Search" ng-change="clearFilter()" ><label for="RadioSearchAll">All Search</label>
+                                    </li>*@
+                                    <li>
+                                        <input id="RadioTitle" name="filter" ng-model="filter" type="radio" value="Title" ng-change="clearFilter()"><label for="RadioTitle">Title</label>
+                                    </li>
+                                    <li>
+                                        <input id="RadioVenue" name="filter" ng-model="filter" type="radio" value="Venue" ng-change="clearFilter()"><label for="RadioVenue">Venue</label>
+                                    </li>
+
+                                    <li>
+                                        <input id="RadioDescription" name="filter" ng-model="filter" type="radio" value="Description" ng-change="clearFilter()"><label for="RadioDescription">Description</label>
+                                    </li>
+                                    <li>
+                                        <input id="RadioDate" name="filter" ng-model="filter" type="radio" value="EventDate" ng-change="clearFilter()"><label for="RadioDate">Event Date</label>
+                                    </li>
+                                    <li>
+                                        <input id="RadioAcdYear" name="filter" ng-model="filter" type="radio" value="Year" ng-change="clearFilter()"><label for="RadioAcdYear"> Year</label>
+                                    </li>
+
+                                    <li class="lastli mLeft">
+                                        <div class="searchbox">
+                                            <input type="text" class="searchfield d a1" ng-model="searchText[filter]" placeholder="{{filter}}">
+                                        </div>
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 news-letter-box" style="text-align: center;" ng-repeat="data in MediaGalleryData | filter:searchText">
+                    <div class="box1">
+                        <img src="{{data.MediaFilePath}}" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="" class="Event">{{data.Title}}</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Newspaper:</b>
+                                <span id="" class="EventVenue">{{data.Venue}}</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Published On:</b>
+                                <span id="" class="EventDate EventDate1">{{data.EventDate}}</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Updated On:</b>
+                                <span id="" class="EventDate EventDate1">{{data.EventDate}}</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="" class="Description"><br />{{data.Description}},&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="{{data.PdfFilePath}}" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </section>
+    @*<section class="page-section allenhose-story news-letter Achievement">
+        <div class="container">
+            <h3 class="section-title">Co-Scholastic Achievements</h3>
+            <div class="section-title-bottom-line">
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="searchform1">
+                        <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+                            <div class="gallery-searchA">
+                                <ul>
+                                    <li>
+                                        <input id="ctl00_ContentPlaceHolder1_RadioSearchAll" type="radio" name="ctl00$ContentPlaceHolder1$CP" value="RadioSearchAll" checked="checked" onclick="showhide('.c','Enter album title or description');"><label for="ctl00_ContentPlaceHolder1_RadioSearchAll">All Search</label>
+                                    </li>
+                                    <li>
+                                        <input id="ctl00_ContentPlaceHolder1_Radiotitle" type="radio" name="ctl00$ContentPlaceHolder1$CP" value="Radiotitle" onclick="showhide('.a','Enter title or venue');"><label for="ctl00_ContentPlaceHolder1_Radiotitle">Title or Venue</label>
+                                    </li>
+                                    <li>
+                                        <input id="ctl00_ContentPlaceHolder1_RadioDescription" type="radio" name="ctl00$ContentPlaceHolder1$CP" value="RadioDescription" onclick="showhide('.c','Enter description');"><label for="ctl00_ContentPlaceHolder1_RadioDescription">Description</label>
+                                    </li>
+                                    <li>
+                                        <input id="ctl00_ContentPlaceHolder1_RadioDate" type="radio" name="ctl00$ContentPlaceHolder1$CP" value="RadioDate" onclick="showhide('.d','Pick a date');"><label for="ctl00_ContentPlaceHolder1_RadioDate">Event Date</label>
+                                    </li>
+                                    <li>
+                                        <input id="ctl00_ContentPlaceHolder1_RadioAcdYear" type="radio" name="ctl00$ContentPlaceHolder1$CP" value="RadioAcdYear" onclick="showhide('.b','');"><label for="ctl00_ContentPlaceHolder1_RadioAcdYear"> Year</label>
+                                    </li>
+                                    <li class="lastli mLeft">
+                                        <div class="searchbox">
+                                            <input name="ctl00$ContentPlaceHolder1$txttitle" type="text" maxlength="40" id="ctl00_ContentPlaceHolder1_txttitle" class="searchfield a a1" style="display: none;">
+                                            <select name="ctl00$ContentPlaceHolder1$ddlYear" id="ctl00_ContentPlaceHolder1_ddlYear" class="searchfield b a1" style="display: none;">
+                                                <option value="2021">2021</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2017">2017</option>
+                                            </select>
+                                            <input name="ctl00$ContentPlaceHolder1$txtdiscription" type="text" maxlength="40" id="ctl00_ContentPlaceHolder1_txtdiscription" class="searchfield c a1" placeholder="Enter title or description" style="">
+                                            <input name="ctl00$ContentPlaceHolder1$txtDate" type="text" id="ctl00_ContentPlaceHolder1_txtDate" class="searchfield d a1" readonly="readonly" style="display: none;">
+                                        </div>
+                                        <div class="searchbtn">
+                                            <input type="submit" name="ctl00$ContentPlaceHolder1$Button1" value="Search" onclick="return checkvalidation();" id="ctl00_ContentPlaceHolder1_Button1" class="searchbutton">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">AITA Championship...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">AITA Championship...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+                <div class="col-md-3 news-letter-box" style="text-align: center;">
+                    <div class="box1">
+                        <img src="images/news-letter/Allenheight-Chapter-4-1.jpg" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblAlbumName" class="Event">Potpourri...</span>
+                            </div>
+                            <div class="achi-dt2">
+                                <b>Venue:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lbleventdaye" class="EventVenue">Navy Children...</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_lblupdateon" class="EventDate EventDate1">19-Feb-2021</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Description:</b>
+                                <span id="ctl00_ContentPlaceHolder1_Repeater1_ctl00_Label1" class="Description">Pranav Kartik of Class 5-A,&amp;nb...</span>
+                            </div>
+                        </div>
+                        <a href="pdf/Allenheight%20Chapter%204%20.pdf" target="_blank">   <button type="button" class="btn btn-primary">Read More</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+</div>
+

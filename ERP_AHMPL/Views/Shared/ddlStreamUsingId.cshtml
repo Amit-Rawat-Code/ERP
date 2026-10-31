@@ -1,0 +1,6 @@
+﻿<select id="ddlStream" class="select2 form-control validate" ng-model="studentDetails.StreamId"
+        ng-init="GetStreamUsingId();disableStream=false"
+        ng-disabled="disableStream">
+    <option value="">Select Stream</option>
+    <option ng-repeat="stream in Streames" value="{{stream.StreamId}}" ng-disabled="!stream.IsActive">{{stream.StreamName}}</option>
+</select>

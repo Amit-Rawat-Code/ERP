@@ -1,0 +1,20 @@
+﻿@*<script>
+    $(document).ready(function () {
+        $('#ddlParmanentState').change(function () {
+            var ddlCity = $('#ddlParmanentCity');
+            if (ddlCity != null) {
+                loadCity('#ddlParmanentState', '#ddlParmanentCity');
+            }
+        });
+        
+    });
+</script>*@
+<select id="ddlParmanentState" autocomplete='address-level1' class="select2 form-control validate" ng-model="studentDetails.ParmanentStateId" 
+        ng-change="GetCities(studentDetails.ParmanentStateId,'P')"
+        ng-options="state.StateId as state.StateName for state in ParmanentStates">
+    <option value="">Select State</option>
+    @*<option ng-repeat="state in ParmanentStates" value="{{state.StateId}}">{{state.StateName}}</option>*@
+</select>
+
+
+

@@ -1,0 +1,214 @@
+﻿@{
+    ViewBag.Title = "Fee Head Master";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/FeeHeadMasterController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Fee Head Master</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fee</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Fee Head Master</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Fee head Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("FeeheadName", "", new { @class = "form-control clear validate", @placeholder = "", @ng_model = "FeeHeadName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Frequency<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlFrequency" class="select2 form-control validate" ng-model="Frequency" ng-init="GetFrequency();">
+                                                    <option value="">Select Frequency</option>
+                                                    <option ng-repeat="x in FrequencyList" value="{{x.Code}}">{{x.Name}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Due From Month<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlMonthList")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Display Order</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("DisplayOrder", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "DisplayOrder", @allow_Only_Numbers = "" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">FeeHead Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlHeadType" class="select2 form-control clear validate" ng-model="HeadType">
+                                                    <option Value="">Select</option>
+                                                    <option Value="Admission">Admission</option>
+                                                    <option Value="Tution">Tution</option>
+                                                    <option Value="Transport">Transport</option>
+                                                    <option Value="Hostel">Hostel</option>
+                                                    <option Value="Library">Library</option>
+                                                    <option Value="Opening">Opening</option>
+                                                    <option Value="Registration">Registration</option>
+                                                    <option Value="Other">Other</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Unacrued Ledger A/c</label>
+                                            <div class="input-box">
+                                                <select id="ddlUnacruedLedgerAc" class="select2 form-control validate" ng-init="GetUnacruedLedgerAc();" ng-model="UnacruedLedgerAc">
+                                                    <option value="">Select </option>
+                                                    <option ng-repeat="x in UnacruedLedgerAclist" value="{{x.Code}}">{{x.Name}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Corpus Ledger A/c</label>
+                                            <div class="input-box">
+                                                <select id="ddlCorpusLedgerAc" class="select2 form-control validate" ng-init="GetCorpusLedgerAc();" ng-model="CorpusLedgerAc">
+                                                    <option value="">Select </option>
+                                                    <option ng-repeat="x in CorpusLedgerAclist" value="{{x.Code}}">{{x.Name}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Deposit A/C</label>
+                                            <div class="input-box">
+                                                <select id="ddlDepositAc" class="select2 form-control validate" ng-init="GetDepositAc();" ng-model="DepositAc">
+                                                    <option value="">Select </option>
+                                                    <option ng-repeat="x in DepositAclist" value="{{x.Code}}">{{x.Name}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Concession Ledger<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlLedger" class="select2 form-control validate" ng-init="GetLedger('Concession');" ng-model="ConcessionLedgerCode">
+                                                    <option value="">Select </option>
+                                                    <option ng-repeat="x in LedgerList" value="{{x.SubCode}}">{{x.LedgerName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Account No.</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("Accountnumber", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Accountnumber" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Fee Refundable<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlFeeRefundable" class="select2 form-control clear validate" ng-model="IsFeeRefundable" ng-init="IsFeeRefundable='false';">
+                                                    <option Value="">Select</option>
+                                                    <option Value="true">Yes</option>
+                                                    <option Value="false">No</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlActive")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Monthly Breakup Req.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlMonthlyBreakupReq" class="select2 form-control clear validate" ng-model="IsMonthlyBreakupReq" ng-init="IsMonthlyBreakupReq='false';">
+                                                    <option Value="">Select</option>
+                                                    <option Value="true">Yes</option>
+                                                    <option Value="false">No</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Show In Certificate<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlShowInCertificate" class="select2 form-control clear validate" ng-model="IsShowInCertificate" ng-init="IsShowInCertificate='false';">
+                                                    <option Value="">Select</option>
+                                                    <option Value="true">Yes</option>
+                                                    <option Value="false">No</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

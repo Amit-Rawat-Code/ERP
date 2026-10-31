@@ -1,0 +1,6 @@
+﻿@*ItemCategoryMast*@
+<select id="ddlItemCategory" class="select2 form-control validate" ng-model="ItemCategoryCode" ng-init="BindItemCategory();"
+        ng-change="ddlItemCategory_change(ItemCategoryCode);">
+    <option value="">Select</option>
+    <option ng-repeat="itemcategory in ItemCategoryList" value="{{itemcategory.Code}}">{{itemcategory.Name}}</option>
+</select>

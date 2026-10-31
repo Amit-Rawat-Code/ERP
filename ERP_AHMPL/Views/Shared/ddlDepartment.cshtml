@@ -1,0 +1,4 @@
+﻿<select id="ddlDepartment" class="select2 form-control validate" ng-model="DepartmentCode" ng-init="GetDepartments();" ng-change="ddl_DepartmentChange()" >
+    <option value="">Select Department</option>
+    <option ng-repeat="dl in DepartmentList" value="{{dl.Code}}" ng-disabled="!dl.IsActive">{{dl.DepartmentName}}</option>
+</select>

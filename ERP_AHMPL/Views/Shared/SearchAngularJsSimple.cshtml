@@ -1,0 +1,44 @@
+﻿
+<script src="~/Content/html2canvas.js"></script>
+<style>
+    .modal-body {
+        overflow-y: auto;
+    }
+    #anchor {
+        display: none;
+    }
+    .lbl-padding-25 {
+        padding-right: 25px;
+    }
+    .dataTables_filter{
+        float:right
+    }
+    .row-1 {
+    margin: -10px 0px 0px 0px;
+    text-align: center;
+}
+</style>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+    <div class="table-heading-box">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class="datatable-responsive table-responsive advance-btn-table"
+                 ng-init="GetReportHeaderUsingCategory('Page Report')">
+                <div id="ReportHeader" ng-bind-html="ReportHeader" ng-hide="true"></div>
+                <div id="UpdatePanel">
+
+                </div>
+                <div id="UpdatePanel1">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

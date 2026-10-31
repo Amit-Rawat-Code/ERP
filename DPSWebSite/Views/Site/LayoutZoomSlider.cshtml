@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "LayoutZoomSlider";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<style>
+
+    .img530 {
+        max-width: 510px;
+    }
+
+    .nccUl, .campUl5 {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+        .nccUl li {
+            max-width: 49%;
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .campUl5 li {
+            display: inline-block;
+            padding: 10px;
+        }
+</style>
+
+<section class="page-section allenhose-story">
+    <div class="container">
+        <div class="tz-gallery">
+            <ul class="campUl5" ng-init="PhotoSlider();">
+                <li ng-repeat="pics in PhotoSliderList">
+                    <a href="{{pics.Pic}}" style="width:{{pics.width=='237px'?pics.width:'237px'}};height:{{pics.height=='133px'?pics.height:'133px'}}" rel="lightbox-journey1" >
+                        <img src="{{pics.Pic}}" style="width:{{pics.width=='237px'?pics.width:'237px'}};height:{{pics.height=='133px'?pics.height:'133px'}}" >
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

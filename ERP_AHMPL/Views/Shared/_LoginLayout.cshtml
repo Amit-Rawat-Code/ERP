@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html ng-app="myLoginApp" >
+<head>
+    @{
+        ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/loginstyle.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/css/font-awesome.css" rel="stylesheet" type="text/css" />*@
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/loginstyle.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css" />
+    @*<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    @*<script src="~/scripts/angular.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/modernizr-2.6.2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/myjslib/myJs.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/angular.min.js")"></script>
+    <script src="~/Scripts/myjslib/loginController.js?Ver=@ViewBag.Version"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/bootstrap.min.js")"></script>
+
+</head>
+<body>
+
+
+    <div class="body-content"  ng-controller="myLoginController">
+        @RenderBody()
+
+    </div>
+
+
+</body>
+</html>
+

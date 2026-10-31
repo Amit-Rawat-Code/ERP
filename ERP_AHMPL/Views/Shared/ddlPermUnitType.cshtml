@@ -1,0 +1,7 @@
+﻿<select id="ddlUnitType" class="select2 form-control clear validate" ng-model="UnitTypeCode"
+        ng-init="GetUnitTypePerm()" ng-change="GetUnitPerm(UnitTypeCode);">
+    <option value="">Select Unit Type</option>
+    <option ng-repeat="GetUnitType in GetUnitTypePerms" value="{{GetUnitType.Code}}">{{GetUnitType.UnitType}}</option>
+</select>
+
+

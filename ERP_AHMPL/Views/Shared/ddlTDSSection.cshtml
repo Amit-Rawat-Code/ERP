@@ -1,0 +1,4 @@
+﻿<select id="ddlTDSSection" class="select2 form-control" ng-model="TDSSectionModel" ng-init="BindTDSSection();" ng-disabled = "TDSdisability" ng-change="GetChallanCode();" >
+    <option value="">Select</option>
+    <option ng-repeat="sectionlist in TDSSectionList" value="{{sectionlist.Code}}">{{sectionlist.Name}}</option>
+</select>

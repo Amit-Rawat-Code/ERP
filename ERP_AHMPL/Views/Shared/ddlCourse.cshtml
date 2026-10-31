@@ -1,0 +1,28 @@
+﻿@*<script>
+    $(document).ready(function () {
+        $('#ddlCourse').change(function () {
+            var ddlClass = $('#ddlClass');
+            if (ddlClass != null) {
+                loadClass('#ddlCourse', '#ddlClass');
+            }
+        });
+        
+    });
+
+    function fillCourse(data) {
+        var ddlCourse = $('#ddlCourse');
+        var optionfirst = $('<option value="-1">Select Course</option>');
+        ddlCourse.html(optionfirst);
+        $.each(data, function (i, val) {
+            var option = $('<option value=' + val.CourseId + '>' + val.CourseName + '</option>');
+            ddlCourse.append(option);
+        });
+    };
+</script>*@
+<select id="ddlCourse" class="select2 form-control validate" ng-model="studentDetails.CourseId"
+        ng-init="GetCourses();"
+        ng-change="GetClasses(studentDetails.CourseId);">
+    <option value="">Select Course</option>
+    <option ng-repeat="course in Courses" value="{{course.CourseId}}" ng-disabled="!course.IsActive">{{course.CourseName}}</option>
+</select>
+

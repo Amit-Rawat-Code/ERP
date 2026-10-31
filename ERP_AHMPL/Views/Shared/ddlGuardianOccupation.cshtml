@@ -1,0 +1,12 @@
+﻿<select id="ddlGuardianOccupation" class="select2 form-control" ng-model="GuardianOccupationCode"
+            ng-init="GetOccupation(1);">
+         <option value="">Select Occupation</option>
+        <option ng-repeat="x in Occupations" value="{{x.OccupationName}}">{{x.OccupationName}}</option>
+    </select>
+@*<select id="ddlFatherOccupation" class="select2 form-control" ng-model="GuardianOccupationCode"
+        ng-init="GetOccupation(1);">
+    <option value="">Select Occupation</option>
+    <option value="Business">Business</option>
+    <option value="Worker">Worker</option>
+    <option value="Worker">Home Maker</option>
+</select>*@

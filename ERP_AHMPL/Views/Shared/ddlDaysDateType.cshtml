@@ -1,0 +1,6 @@
+﻿@Html.DropDownList("ddlDaysDateType", new List<SelectListItem>{
+    new SelectListItem{Text="Select Type", Value=""},
+    new SelectListItem{Text="Number Of Days", Value="NumberOfDays"},
+    new SelectListItem{Text="Date Range", Value="DateRange"}
+},
+    new { @class = "select2 form-control", @ng_model = "sml.DateType", /*@ng_init = ""*/ })

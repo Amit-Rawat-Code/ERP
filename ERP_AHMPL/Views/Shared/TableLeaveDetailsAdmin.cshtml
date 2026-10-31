@@ -1,0 +1,49 @@
+﻿
+
+    <div class="datatable-responsive table-responsive advance-btn-table no-padding">
+        <table id="tblLeaveDetails" class="table compact compact2 table-hover  table-bordered nowrap mgbt-xs-0 height-175 text-center " ng-model="LeaveDetail" >
+            <thead>
+                
+                <tr>
+                    @*<th class="sr-no-w ">Sr. No.</th>*@
+                    <th>Leave Type</th>
+                    <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Alloted Leaves">AL</span></th>
+                    <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Alloted Leaves">EL</span></th>
+                    <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Leave Taken">LT</span></th>
+                    <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Balance">B</span></th>
+                    <th>
+                        <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Approve Leave">
+                            Approve Max {{ApproveMaxLeave}} Leave
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="id in LeaveDetails" repeat-done>
+                    <td class="text-left">
+                        {{id.LeaveType}} ({{id.TotalLeaves}})
+                    </td>
+                    <td>{{id.AllotedLeaves}}</td>
+                    <td>{{id.EL}}</td>
+                    <td>{{id.LeaveTaken}}</td>
+                    @*<td style="color:red ">{{id.AllotedLeaves-id.LeaveTaken-id.ApprovedLeave}}</td>*@
+                    <td style="color:red ">{{id.Balance}}</td>
+                    <td style="padding: 1px 1px !important;">
+                        <input id={{'txtLeaveType_'+$index}} type="text" class="form-control t-input" ng-model="id.ApprovedLeave"
+                               ng-change="GetBalanceLeave(id.AllotedLeaves-id.LeaveTaken-id.ApprovedLeave,$index)" ng-disabled="true" />
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <td>{{Sumoflist('LeaveDetails','AllotedLeaves')}}</td>
+                    <td>{{Sumoflist('LeaveDetails','EL')}}</td>
+                    <td>{{Sumoflist('LeaveDetails','LeaveTaken')}}</td>
+                    <td>{{Sumoflist('LeaveDetails','Balance')}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+   
+

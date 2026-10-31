@@ -1,0 +1,347 @@
+﻿
+@{
+    ViewBag.Title = "VoucherNoSetting";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script>
+    //wizard with options and events
+    $(document).ready(function () {
+        BindVocherMaster();
+        $("#wizard").bootstrapWizard({
+            onTabShow: function (a, b, c) {
+                var d = b.find("li").length,
+                    e = c + 1,
+                    f = e / d * 100,
+                    g = $("#wizard");
+                g.find(".progress-bar").css({
+                    width: f + "%"
+                }), e >= d ? (g.find(".pager .next").hide(), g.find(".pager .finish").show(), g.find(".pager .finish").removeClass("disabled")) : (g.find(".pager .next").show(), g.find(".pager .finish").hide())
+            }
+            ,
+            onNext: function () {
+                return SaveSetting();
+            },
+            onTabClick: function () {
+                return SaveSetting();
+            }
+        })
+    });
+</script>
+<style>
+    .input-visible-isphysicallydisabled-show {
+        display: block !important;
+    }
+
+    .input-visible-isnotphysicallydisabled-hide {
+        display: none !important;
+    }
+</style>
+
+
+<script>
+
+    function BindVocherMaster() {
+        
+        $.ajax({
+            url: "@Url.Action("VocherMasterBind", "Administrator")",
+            data: '{sessionId:' + JSON.stringify(sessionId) + ',schoolcode:' + JSON.stringify(schoolCode) + ',branchcode:' + JSON.stringify(branchCode) + ',FYId:' + JSON.stringify(fyId) + '}',
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('#ddlvoucherMaster').prepend($("<option></option>").attr("value", "-1").text("Select Voucher Type"));
+                $.each(data, function (i, val) {
+                    $('#ddlvoucherMaster').append($("<option></option>").attr("value", val.VoucherMasterId).text(val.VoucherType));
+                });
+
+            },
+            error: function () {
+                alert("Failed! Please try again.");
+            }
+        });
+    }
+
+</script>
+
+<script src="../Scripts/myjslib/voucherNoSetting.js?Ver=@ViewBag.Version"></script>
+
+
+<input type="hidden" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Voucher No. Setting</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>System Define</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Voucher No. Setting</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h6 class="panel-title txt-dark">
+                            Voucher No. : <small>
+                                <label id="lblVoucherId" class="control-label" for="prefix" style="text-transform:none"></label>
+                            </small>
+                        </h6>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div id="wizard" class="form-wizard wizard">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+                                        <ul class="wizard-navigation nav-justified steps">
+                                            <li id="li1">
+                                                <a href="#tab1" data-toggle="tab" id="a1">
+                                                    <span class="number">1</span>
+                                                    <span class="title">Counter</span>
+                                                </a>
+                                            </li>
+                                            <li id="li2">
+                                                <a href="#tab2" data-toggle="tab" id="a2">
+                                                    <span class="number">2</span> <span class="title">Prefix</span>
+                                                </a>
+                                            </li>
+                                            <li id="li3">
+                                                <a href="#tab3" data-toggle="tab" id="a3">
+                                                    <span class="number">3</span> <span class="title">Sufix</span>
+                                                </a>
+                                            </li>
+                                            <li id="li4">
+                                                <a href="#tab4" data-toggle="tab" id="a4">
+                                                    <span class="number">4</span> <span class="title">Thank you!</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <div id="bar" class="progress progress-xs mgtp-xs-20">
+                                            @*progress-bar progress-bar-inverse*@
+                                            <div class="progress-bar progress-bar-striped active"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="tab1">
+                                                <form class="voucher-box-mh">
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Voucher Type</label>
+                                                        <div class="input-box">
+                                                            <select id="ddlvoucherMaster" onchange="GetSetting()" class="select2 form-control"></select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Setting Type<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.DropDownList("ddlSettingType", new List<SelectListItem>{
+                                           new SelectListItem { Text="Automatic", Value="Automatic" },
+                                           new SelectListItem { Text="Manual", Value="Manual" }}, new { @class = "select2 form-control" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Counter Start From<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtCounterStartFrom", "", new { @class = "form-control numbersOnly", @placeholder = "", @autocomplete = "name" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Counter Length</label>
+                                                        <div class="input-box">
+                                                            @Html.DropDownList("ddlCounterLength",
+                                           new List<SelectListItem>{
+                                            new SelectListItem { Text="0", Value="0" },
+                                            new SelectListItem { Text="1", Value="1" },
+                                            new SelectListItem { Text="2", Value="2" },
+                                            new SelectListItem { Text="3", Value="3" },
+                                            new SelectListItem { Text="4", Value="4" },
+                                            new SelectListItem { Text="5", Value="5" },
+                                            new SelectListItem { Text="6", Value="6" }
+                                            }, new { @class = "select2 form-control" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Increment No.</label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtCounterIncrementNo", "", new { @class = "form-control numbersOnly", @placeholder = "", autocomplete = "name" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Seprator<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtCounterSeprator", "", new { @class = "form-control", @placeholder = "", @autocomplete = "name" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="tab-pane" id="tab2">
+                                                <form class="voucher-box-mh">
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Prefix<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtPrefix", "", new { @class = "form-control prefix", @placeholder = "", @autocomplete = "name" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Increment No.<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtPrefixIncrementNo", "", new { @class = "form-control numbersOnly prefix", @placeholder = "", autocomplete = "name" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Seprator<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtPrefixSeprator", "", new { @class = "form-control", @placeholder = "", @autocomplete = "name" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </form>
+                                            </div>
+
+                                            <div class="tab-pane" id="tab3">
+                                                <form class="voucher-box-mh" action='#' method="POST">
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Sufix<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtSufix", "", new { @class = "form-control sufix", @placeholder = "", @autocomplete = "name" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Increment No.<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtSufixIncrementNo", "", new { @class = "form-control numbersOnly sufix", @placeholder = "", autocomplete = "name" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Seprator<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtSufixSeprator", "", new { @class = "form-control", @placeholder = "", @autocomplete = "name" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="tab-pane" id="tab4">
+                                                <form class="voucher-box-mh" action='#' method="POST">
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Max Prefix<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtMaxPrefix", "", new { @class = "form-control", @placeholder = "", @autocomplete = "name", @onkeyup = "GetSudentId()" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Max Counter<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtMaxCounter", "", new { @class = "form-control", @placeholder = "", @autocomplete = "name", @onkeyup = "GetSudentId()", @maxlength = "6" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Max Sufix<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtMaxSufix", "", new { @class = "form-control", @placeholder = "", @autocomplete = "name", @onkeyup = "GetSudentId()" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <p class="mb-lg">Thank you! Your submission has been received.</p>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                                <div class="description ml mr mt-n-md">
+                                                    <ul class="pager wizard">
+                                                        <li class="previous">
+                                                            <button id="btnprev" class="btn btn-primary pull-left">
+                                                                <i class="fa fa-caret-left"></i> Previous
+                                                            </button>
+                                                        </li>
+                                                        <li class="next">
+                                                            <button class="btn btn-primary pull-right">
+                                                                Next
+                                                                <i class="fa fa-caret-right"></i>
+                                                            </button>
+                                                        </li>
+                                                        <li class="finish" style="display: none">
+                                                            <button class="btn btn-success pull-right" style="display: none">
+                                                                Finish
+                                                                <i class="fa fa-check"></i>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

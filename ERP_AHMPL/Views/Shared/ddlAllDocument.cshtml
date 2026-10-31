@@ -1,0 +1,7 @@
+﻿<select id="ddlAllDocument" class="select2 form-control validate" ng-model="DocumentId" ng-init="GetDocumentList();">
+    <option value="">Select Document</option>
+    <option ng-repeat="document in DocumentList" value="{{document.DocumentId}}" 
+            ng-disabled="!document.IsActive">
+        {{document.DocumentName}}
+    </option>
+</select>

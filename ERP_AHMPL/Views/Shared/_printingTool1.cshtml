@@ -1,0 +1,29 @@
+﻿<div class="print-menu-box2">
+    <div class="pull-left inline-block mr-15 dt-buttons">
+        <a href id="test" onClick="javascript:fnExcelReport();"><span class="dt-button buttons-excel"></span></a>
+        <button class="dt-button buttons-print" tabindex="0" type="button" title="Print"
+                ng-click="Export('print')">
+            <span>Print</span>
+        </button>
+    </div>
+    <select id="ddlDocSize" class="pull-left inline-block mr-15"
+            ng-model="DocSize">
+        <option value="a4">A4</option>
+        <option value="a3">A3</option>
+    </select>
+    <select id="ddlDocOrientation" class="pull-left inline-block mr-15"
+            ng-model="DocOrientation">
+        <option value="portrait">Portrait</option>
+        <option value="landscape">Landscape</option>
+    </select>
+    <select id="ddlFonts" class="pull-left inline-block mr-15"
+            ng-model="FontSize">
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+    </select>
+</div>

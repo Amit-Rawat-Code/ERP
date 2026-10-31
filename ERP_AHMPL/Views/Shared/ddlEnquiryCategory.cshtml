@@ -1,0 +1,5 @@
+﻿<select id="ddlEnquiryCategory" class="select2 form-control" ng-model="EnquiryCategory" ng-init="GetEnquiryCategory();">
+    <option value="">Select Enquiry Category</option>
+    <option ng-repeat="ecl in EnquiryCategoryList" value="{{ecl.EnquiryCategory}}">{{ecl.EnquiryCategory}}</option>
+</select>
+

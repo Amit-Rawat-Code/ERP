@@ -1,0 +1,5 @@
+﻿<select id="ddlShift" class="select2 form-control validate" ng-init="GetShifts();isShiftDisabled=false" ng-model="ShiftCode" ng-change="ddlShift_change()"
+        ng-disabled="isShiftDisabled">
+    <option value="">Select Shift</option>
+    <option ng-repeat="shift in Shifts" value="{{shift.ShiftCode}}" ng-disabled="!shift.IsActive">{{shift.ShiftWithTime}}</option>
+</select>

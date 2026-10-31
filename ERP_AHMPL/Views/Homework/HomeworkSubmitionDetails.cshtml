@@ -1,0 +1,315 @@
+﻿@{
+    ViewBag.Title = "Verify Homework";
+    ViewBag.TitleList = "Student List";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="../Scripts/myjslib/HomeworkSubmitionDetailsController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="hdnEmployeeCode">
+
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Verify Homework</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Communication</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Verify Homework</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in">
+                                    <form id="user-form">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" id="dvclass">
+                                                <label class="control-label">From Date<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @*@Html.Partial("FromDate")*@
+                                                    <input class="form-control" id="txtFromDate" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="FromDate" type="date" value="" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" id="dvclass">
+                                                <label class="control-label">To Date<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @*@Html.Partial("ToDate")*@
+                                                    <input class="form-control" id="txtToDate" name="txtToDate" ng-model="ToDate" type="date" value="" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" id="dvclass">
+                                                <label class="control-label">Class<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlClass" class="form-control clear validate" ng-model="BindClass" ng-init="BindEmpClass();" ng-change="BindEmpSection();">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in classRec" value="{{x.ClassCode}}">{{x.ClassName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Section<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlSection" class="form-control clear validate" ng-model="BindSection">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in SecRec" value="{{x.SectionCode}}">{{x.SectionName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Homework Topic<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlHomeworkTopic" class="form-control clear validate" ng-model="BindTopic" ng-change="GetHomeWork()">
+                                                        <option value="">Select Topics</option>
+                                                        <option ng-repeat="ht in HWTopic" value="{{ht.TopicName}}">{{ht.TopicName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                <div class="datatable-responsive table-responsive advance-btn-table">
+                                                    <table id="tblHomeworkDetails" ng-hide="tblhideHomeworkDetails" ng-init="tblhideHomeworkDetails=true"
+                                                           class="table compact table-hover table-striped table-bordered nowrap dataTable" ng-cloak>
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="srno">Sr.No.</th>
+                                                                <th>Student ID</th>
+                                                                <th>Student</th>
+                                                                <th>Father</th>
+                                                                <th>Homework Date</th>
+                                                                <th>Verification Status</th>
+                                                                <th>Submission Status</th>
+                                                                <th class="srno text-center">View</th>
+                                                            </tr>
+
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="x in AllHomeWork">
+                                                                <td>{{$index+1}}</td>
+                                                                <td>{{x.StudentId}}</td>
+                                                                <td>{{x.StudentName}}</td>
+                                                                <td>{{x.FatherName}}</td>
+                                                                <td>{{x.SubmissionDate}}</td>
+                                                                <td>{{x.VerificationStatus}}</td>
+                                                                <td>{{x.SubmissionStatus}}</td>
+                                                                <td class="text-center" >
+                                                                    <i class="fa fa-eye-slash" ng-if="x.IsHomeworkSubmitted==0" 
+                                                                       title="Homework not submitted."></i>
+                                                                    <i class="fa fa-eye"  ng-if="x.IsHomeworkSubmitted==1" @*ng-style="x.VerificationStatus== 'Verified' ? {'cursor': 'not-allowed'} : {'cursor': 'pointer'}"*@
+                                                                       ng-click="Redirect(x.TransId,x.VoucherNo,x.VerificationStatus,x.IsSubmitted,x.StudentCode,x.Remark,x.StudentName,x.SubmissionDate)" title="Homework submitted." ></i>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-dialog model-full-100">
+                            <div class="modal-content">
+
+                                <div class="modal-header StudentHWTitleBox">
+                                    <h3 ng-model="StdName">{{StdName}}<span ng-model="HDate" class="homework-date font-12">&nbsp;({{HDate}})</span></h3>
+                                    <div class="close2">
+                                        <i class="icofont-close-line"></i>
+                                    </div>
+                                </div>
+
+                                <div class="modal-body HomeworkBindBox">
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 AHW-AHR-box">
+                                        <div class="AttachmentHomeworkListBox" ng-repeat="item in AttachmentList" modal-height-find>
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach=='block'" ng-click="ShowContent(item.Attachment)">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 1</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment,'Filetype')"><i class="fa {{item.Filetype}}" ></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach2=='block'" ng-click="ShowContent(item.Attachment2)">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 2</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment2}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment2,'Filetype2')"><i class="fa {{item.Filetype2}}" ></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach3=='block'">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 3</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment3}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment3,'Filetype3')"><i class="fa {{item.Filetype3}}" ng-click="ShowContent(item.Attachment3)"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach4=='block'">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 4</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment4}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment4,'Filetype4')"><i class="fa {{item.Filetype4}}" ng-click="ShowContent(item.Attachment4)"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach5=='block'">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 5</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment5}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment5,'Filetype5')"><i class="fa {{item.Filetype5}}" ng-click="ShowContent(item.Attachment5)"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach6=='block'">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 6</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment6}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment6,'Filetype6')"><i class="fa {{item.Filetype6}}" ng-click="ShowContent(item.Attachment6)"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach7=='block'">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 7</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment7}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment7,'Filetype7')"><i class="fa {{item.Filetype7}}" ng-click="ShowContent(item.Attachment7)"></i></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach8=='block'">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 8</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment8}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment8,'Filetype8')"><i class="fa {{item.Filetype8}}" ng-click="ShowContent(item.Attachment8)"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach9=='block'">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 9</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment9}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment9,'Filetype9')"><i class="fa {{item.Filetype9}}" ng-click="ShowContent(item.Attachment9)"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="AttachmentHomeworkBoxO" ng-if="item.Attach10=='block'">
+                                                <div class="AttachmentHomeworkBoxIn">
+                                                    <div class="A-title">Attachment 10</div>
+                                                    <a class="A-download" href="" ng-href={{item.Attachment10}} title="Attachment Download" download>
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <span class="A-view" title="Attachment View" ng-init="CheckFileType(item.Attachment10,'Filetype10')"><i class="fa {{item.Filetype10}}" ng-click="ShowContent(item.Attachment10)"></i></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="HomeworkRemarkBox">
+                                            <div class="col-md-12 no-padding mgbt-xs-15">
+                                                <label class="control-label">Homework Remark</label>
+                                                <textarea id="RemarkHeightSet" rows="3" ng-model="Remark" class="form-control"></textarea>
+                                            </div>
+                                            <div class="col-md-12 no-padding text-left" ng-if="isShow">
+                                                @Html.Partial("ActionSave")
+                                                <button id="btnReSubmit" type="button" value="ReSubmit" class="btn2 btn-common btn-3 btn-3d pe-7s-check" name="ReSubmitButton"
+                                                        ng-model="ReSubmit" ng-init="ReSubmit='ReSubmit'" ng-click="ReSubmitRecord()"
+                                                        ng-disabled="disableAdd">
+                                                    <span class="triangle-box" title="ReSubmit"></span>
+                                                    <span id="btnReSubmittxt" ng-bind="ReSubmit">ReSubmit</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 HomeworkAttachmentViewBox {{imagesrc.length>0?'img-m-class':pdfsrc.length>0?'pdf-m-class':videosrc.length?'video-m-class':audiosrc.length>0?'audio-m-class':''}}">
+                                        <div class="HomeworkAttachmentView {{imagesrc.length>0?'img-class':pdfsrc.length>0?'pdf-class':videosrc.length?'video-class':audiosrc.length>0?'audio-class':''}}">
+                                            <!--   <img class="imgBoxs" src="" ng-src="{{imagesrc}}" ng-if="imagesrc.length>0" />-->
+
+                                            <ul id="ImageGalleryBox" class="imgBoxs" data-col="1" ng-show="imagesrc.length>0">
+
+                                                <li class="item tall" ng-click="RecreateGallery()" data-src="{{imagesrc}}"
+                                                    repeat-gallery>
+                                                    <a href="#" class="for-click">
+                                                        <img class="img-responsive-view" ng-src="{{imagesrc}}" alt="" />
+                                                    </a>
+                                                    <div class="me-icon-list-show">
+                                                        <div class="icon-list">
+                                                            <div class="link" title="Zoom View">
+                                                                <i class="icofont-resize"> </i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                            <iframe class="iframeBoxs" src="" ng-src="{{pdfsrc}}" ng-if="pdfsrc.length>0"></iframe>
+                                            <video class="videoBoxs" controls="controls" ng-if="videosrc.length>0">
+                                                <source src="" ng-src="{{videosrc}}" type="video/mp4" />
+                                            </video>
+                                            <audio class="audioBoxs" controls="controls" ng-if="audiosrc.length>0">
+                                                <source src="" ng-src="{{audiosrc}}" type="audio/mpeg" />
+                                            </audio>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

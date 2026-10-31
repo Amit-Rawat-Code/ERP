@@ -1,0 +1,91 @@
+﻿
+@{
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/ImageController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="hfUnitId" id="UnitId" name="UnitId" value="" />
+<input type="hidden" ng-model="hfLayoutId" id="LayoutId" name="LayoutCode" value="" />
+<input type="hidden" ng-model="hfLayoutPartId" id="LayoutPartId" name="LayoutPartId" value="" />
+<input type="hidden" ng-model="hfTabId" id="TabId" name="TabId" value="" />
+<input type="hidden" ng-model="hfMenuId" id="MenuId" name="MenuId" value="" />
+<input type="hidden" ng-model="hfSubMenuId" id="SubMenuId" name="SubMenuId" value="" />
+
+
+<div class="app-content  my-3 ">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Upload Image</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Unit Manager</span></li>
+                        <li class="breadcrumb-item">Unit Detail Master</li>
+                        <li class="breadcrumb-item active" aria-current="page">Create Content</li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="br-pagebody">
+                <div class="">
+                    <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                        <div class="card-body">
+                            <div class="row">
+
+
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <label class="content-title">Image Upload <span class="red-i">*</span></label>
+                                    <div class="input-box file-i">
+                                        <img class="img-fix" id="imgfileInput" src="~/Content/noimage.png" ng-model="imgfileInput" ng-src="{{imgfileInput}}" alt="" width="150" height="150" ng-click="OpenFileUpload()">
+                                        <input onchange="angular.element(document).scope().fuImageChange(this)" upload-files type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" ng-model="fileInput" multiple />
+
+                                        <div class="text-box-msg-r">
+                                            <input type="hidden" id="AlbumIcon" />
+                                        </div>
+                                    </div>
+                                    <div class=" photo-ins">
+                                        <strong>Note:</strong>
+                                        <ol>
+                                            <li><b>For Title/Sub Title-</b><span style="color:red">(Heading 3, Times New Roman, 20)</span>&nbsp;&nbsp; </li>
+                                            <li><b>For Content- </b><span style="color:red">(Normal, Times New Roman, 18, Justify)</span></li>
+
+
+                                        </ol>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Image Alignment</label>
+                                        <select ng-model="ImgAlign" class="form-control">
+                                            <option value=""> -- Select -- </option>
+                                            <option value="Left">Left</option>
+                                            <option value="Right">Right</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                    @Html.Partial("ActionView")
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    @Html.Partial("SearchAngularJs")
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+

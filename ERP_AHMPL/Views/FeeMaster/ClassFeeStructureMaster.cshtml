@@ -1,0 +1,208 @@
+﻿@{
+    ViewBag.Title = "Class Fee Structure Master";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/ClassFeeStructureMasterController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Class Fee Structure Master</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fee</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Class Fee Structure Master</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Academic Session<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSession")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Fee Structure Group<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlFeeStructureGroup" class="select2 form-control clear validate" ng-model="FeeStructureGroup" ng-init="GetFeeStructureGroup();">
+                                                    <option value="">Select </option>
+                                                    <option ng-repeat="x in GetFeeStructureGroupList" value="{{x.Code}}">{{x.FeeStructureGroupName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Class<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlClass")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Section<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSection")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Stream<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlStream")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlActive")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <div class="input-box datatable-responsive table-responsive advance-btn-table">
+                                                <table class="table compact table-hover table-striped table-bordered nowrap  dataTable" >
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Fee</th>
+                                                            <th>Frequency</th>
+                                                            <th>Net. Amount</th>
+                                                            <th>Yearly Amount</th>
+                                                            <th>Details</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in ClassFeeStructureList">
+                                                            <td ng-bind="obj.Srno=($index+1)"></td>
+                                                            <td>
+                                                                <select id="ddlFeeHead" class="select2 form-control clear" ng-model="ClassFeeStructureList[$index].FeeHeadCode"  ng-change="SetFrequency(ClassFeeStructureList[$index].FeeHeadCode,$index);CalculateYearlyAmt(ClassFeeStructureList[$index].FeeHeadCode,ClassFeeStructureList[$index].NetAmt,$index)">
+                                                                    <option value="">Select </option>
+                                                                    <option ng-repeat="x in FeeHeadList" value="{{x.Code}}">{{x.FeeHeadName}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input ng-model="ClassFeeStructureList[$index].Frequency" ng-disabled="true" class="form-control clear" />
+                                                            </td>
+                                                            <td>
+                                                                <input ng-model="ClassFeeStructureList[$index].NetAmt" class = "form-control clear" ng-blur="CalculateYearlyAmt(ClassFeeStructureList[$index].FeeHeadCode,ClassFeeStructureList[$index].NetAmt,$index)"/>
+                                                            </td>
+                                                            <td>
+                                                                <input ng-model="ClassFeeStructureList[$index].YearlyAmt" ng-disabled="true" class = "form-control clear"/>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <button class="btn-me btn-primary " data-toggle="modal" data-target="#FeeStructure" ng-click="ShowDetails(ClassFeeStructureList[$index].FeeHeadCode,ClassFeeStructureList[$index].NetAmt,$index)">Show Details</button>
+                                                            </td>
+                                                            <td>
+                                                                <input class="btn btn-square btn-primary btn-xs" type="button" value="+" ng-click="AddRow()" ng-if="ClassFeeStructureList.length==1 || ClassFeeStructureList.length==obj.Srno" />
+                                                                <input class="btn btn-square btn-secondary btn-xs" type="button" value="-" ng-click="RemoveRow(obj.Srno)" ng-if="ClassFeeStructureList.length>1" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+
+                                                    </tfoot>
+                                                </table>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                 
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="FeeStructure" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Details</h4>
+            </div>
+            <div class="modal-body">
+                <table id="example2" class="table table-striped table-bordered compact" style="width:100%" > 
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Due On</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in DueMonthList"  >
+                            <td ng-bind="obj.Srno=($index+1)"></td>
+                            <td>{{obj.DueOn}}</td>
+                            <td>{{NetAmt}}</td>
+                        </tr>                        
+                        <tr>
+                            <td colspan="2" class="text-center"><b>Total:</b></td>
+                            <td><b>{{total}}</b></td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

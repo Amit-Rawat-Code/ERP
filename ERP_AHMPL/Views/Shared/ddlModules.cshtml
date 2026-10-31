@@ -1,0 +1,9 @@
+﻿@*Used in forms:*@
+@*1-RoleOptionsMaster*@
+
+<select id="ddlModules" class="select2 form-control validate" ng-model="ModuleId" ng-init="GetModules();" ng-change="ddl_ModulesChange()">
+    <option value="">Select Module</option>
+    <option ng-repeat="ml in ModulesList" value="{{ml.ModuleId}}">
+        {{ml.ModuleName}}
+    </option>
+</select>

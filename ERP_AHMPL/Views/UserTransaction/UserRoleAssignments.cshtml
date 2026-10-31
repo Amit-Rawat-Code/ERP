@@ -1,0 +1,257 @@
+﻿@{
+    ViewBag.Title = "User Role Assignments";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/UserRoleAssignmentsController.js?Ver=@ViewBag.Version"></script>
+<style>
+    .Loader {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        background: #0000004d;
+        height: 100%;
+    }
+
+        .Loader i {
+            margin-top: 150px;
+        }
+</style>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">User Role Assignments</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>User</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>User Role Assignments</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">School(s)<span class="vd_red"></span></label>
+                                            <div class="input-box chk-validate">
+                                                <div class="toggle-ddl" id="openAssociatedBranches"
+                                                     ng-init="ToogleDDL('openAssociatedBranches','openAssociatedBranches')">
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary select-btn'
+                                                            data-ng-click='openAssociatedBranches=!openAssociatedBranches'
+                                                            ng-bind="GetCount(AssociatedBranches,'Select Branch')">
+                                                        Select Branch
+                                                    </button>
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                            data-ng-click='openAssociatedBranches=!openAssociatedBranches'>
+                                                        <span class='fa fa-chevron-down'></span>
+                                                    </button>
+
+                                                    <div ng-show="openAssociatedBranches" class="ddlMultiple" ng-cloak>
+                                                        <div ng-click="ddlCheckAll('AssociatedBranches');ddlAssociatedBranchesCheckAll_click();">
+                                                            Check All
+                                                            <span class="btn-counts-right">Total Count: {{AssociatedBranches.length}}</span>
+                                                        </div>
+                                                        <div ng-click="ddlUnCheckAll('AssociatedBranches');ddlAssociatedBranchesUnCheckAll_click();">Uncheck All</div>
+                                                        <hr style="margin:0px !important" />
+                                                        <div ng-repeat="il in AssociatedBranches">
+                                                            <input type="checkbox" ng-model="il.chk" ng-value="il.RelationshipId"
+                                                                   ng-change="ddlAssociatedBranches_Change(il.Code);" />
+                                                            {{il.BranchName}}-{{il.BranchAddress}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">User Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlGroupId" class="select2 form-control validate" ng-model="UserTypeId" ng-init="GetUserTypes()"
+                                                        ng-change="GetUserSelectionofSchool();GetRoleStudent(UserTypeId);">
+                                                    <option value="" selected>Select User Type</option>
+                                                    <option ng-repeat="LUT in ListedUserTypes|filter:{UserTypeName:'!SA'}" value="{{LUT.UserTypeId}}">{{LUT.UserTypeName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="Save=='Edit'">
+                                            <label class="control-label">User Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <label class="form-control" ng-model="AssignedUserId" ng-bind="AssignedUserName" style="line-height: normal;"></label>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="Save=='Save' && UserTypeId!='5' && UserTypeId!='6'">
+                                            <label class="control-label">User Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlUser" class="select2 form-control validate" ng-model="$parent.AssignedUserId" ng-change="ddl_UserChange()">
+                                                    <option value="">Select User</option>
+                                                    <option ng-repeat="unl in UserNameList" value="{{unl.UserId}}">{{unl.EmpName}} </option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="Save=='Save' && (UserTypeId=='5' || UserTypeId=='6')" >
+                                            <label class="control-label">Users<span class="vd_red"></span></label>
+                                            <div class="input-box chk-validate">
+                                                <div class="toggle-ddl" id="openUserNameList"
+                                                     ng-init="ToogleDDL('openUserNameList','openUserNameList')">
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary select-btn'
+                                                            data-ng-click='$parent.openUserNameList=!$parent.openUserNameList;$parent.openUserNameList?SetFocus("#txtSearchUserName","",300):""'
+                                                            ng-bind="GetCount(UserNameList,'Select Branch')">
+                                                        Select Branch
+                                                    </button>
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                            data-ng-click='$parent.openUserNameList=!$parent.openUserNameList;$parent.openUserNameList?SetFocus("#txtSearchUserName","",300):""'>
+                                                        <span class='fa fa-chevron-down'></span>
+                                                    </button>
+                                                    <div ng-show="$parent.openUserNameList" class="ddlMultiple" style="min-height: 400px;" ng-cloak>
+                                                        <div ng-click="ddlCheckAll('UserNameList');ddlUserNameListCheckAll_click();">
+                                                            Check All
+                                                            <span class="btn-counts-right">Total Count: {{UserNameList.length}}</span>
+                                                        </div>
+                                                        <div ng-click="ddlUnCheckAll('UserNameList');ddlUserNameListUnCheckAll_click();">Uncheck All</div>
+                                                        <input id="txtSearchUserName" type="text" class="form-control" placeholder="search" ng-model="SearchUserName" />
+                                                        <hr style="margin:0px !important" />
+                                                        <div ng-repeat="il in UserNameList|filter:SearchUserName">
+                                                            <input type="checkbox" ng-model="il.chk" ng-value="il.UserId"
+                                                                   ng-change="ddlUserNameList_Change(il.Code);" />
+                                                            {{il.EmpName}}
+                                                        </div>
+                                                        <div ng-if="UserNameList.length==0" class="Loader">
+                                                            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                                                            <span class="sr-only">Loading...</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="IsNonTeachingRoleAssign==true || (UserTypeId>0 && UserTypeId<5)">
+                                            <label class="control-label">Class<span class="vd_red"></span></label>
+                                            <div class="input-box chk-validate" ng-init="GetClasses();">
+                                                <div class="toggle-ddl" id="openClass" ng-init="ToogleDDL('openClass','openClass')">
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary select-btn'
+                                                            data-ng-click='openClass=!openClass' ng-bind="GetCount(ClassList,'Select Class')">
+                                                        Select Classs
+                                                    </button>
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                            data-ng-click='openClass=!openClass'>
+                                                        <span class='fa fa-chevron-down'></span>
+                                                    </button>
+                                                    <div ng-show="openClass" class="ddlMultiple" ng-cloak>
+                                                        <div ng-click="ddlCheckAll('ClassList')">
+                                                            Check All
+                                                            <span class="btn-counts-right">Total Count: {{ClassList.length}}</span>
+                                                        </div>
+                                                        <div ng-click="ddlUnCheckAll('ClassList')">Uncheck All</div>
+                                                        <hr style="margin:0px !important" />
+                                                        <div ng-repeat="cls in ClassList">
+                                                            <input type="hidden" ng-bind="cls.Srno=($index+1)" />
+                                                            <input type="checkbox" ng-model="cls.chk" id="chkCls" ng-value="cls.ClassCode"
+                                                                   ng-change="ddlClass_Change(cls);" ng-disabled="cls.disabled" />
+                                                            {{cls.ClassName}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                            @Html.Partial("tblUserDetails")
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                            <div class="table-responsive">
+                                                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Role</th>
+                                                            <th>Assign Role Till Date</th>
+                                                            <th class="text-right">
+                                                                <div class="checkbox check-box checkbox-success">
+                                                                    @*checkbox checkbox-success*@
+                                                                    <input type="checkbox" class="toggle-vis" data-column="1" checked="">
+                                                                    <label>Selection</label>
+                                                                </div>
+                                                            </th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="role in RolesList">
+                                                            <td ng-bind="$index+1"></td>
+                                                            <td>{{role.RoleName}}{{' ('+role.LevelName+')'}}</td>
+                                                            <td>
+                                                                <input ng-model="role.ToDate" ng-init="FormatDate(role)" type="date" class="form-control" max="{{role.maxDate}}" min="{{role.minDate}}" />
+                                                            </td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" data-column="16" ng-model="role.IsSelected" checked=""
+                                                                           ng-change="ClassEnableDisabled(role.RoleId);">
+                                                                    <label class=""></label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Income/Expenditure Report";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+
+<script src="~/Scripts/myjslib/IncomeExpenditureController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Income/Expenditure Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Accountancy</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Income/Expenditure Report</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+
+                                <div class="collapse in">
+                                    <form id="user-form">
+                                        <div id="hdngetstu" style="display:none"></div>
+                                        <div class="section-toggle">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                                <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">From Date</label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("txtFromDate")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">To Date</label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("txtToDate")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">&nbsp; </label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("ActionSearch")
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12  ">
+                                                        @Html.Partial("ActionSearch")
+                                                    </div>
+                                                </div>*@
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box DetailTrial">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    @Html.Partial("ddlIncomeExpenditure")
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

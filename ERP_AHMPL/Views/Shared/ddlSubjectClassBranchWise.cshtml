@@ -1,0 +1,7 @@
+﻿@*<script src="~/Scripts/myjslib/controller.js"></script>*@
+<select id="ddlSubjectClassBranchWise" class="select2 form-control validate" ng-model="Classbranchwisesubjectmodel.SubjectId" ng-change="ddlSubjectTopics()" >
+    <option value="">Select Subject</option>
+    <option ng-repeat="subject in Classbranchwisesubjects" value="{{subject.SubjectId}}" ng-disabled="!subject.IsActive">{{subject.SubjectName}}</option>﻿
+</select>
+
+

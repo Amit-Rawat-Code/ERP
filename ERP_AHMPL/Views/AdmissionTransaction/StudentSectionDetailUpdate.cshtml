@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Student Section Detail Update";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/StudentSectionUpdateController.js?Ver=@ViewBag.Version"></script>
+
+<div id="hdngetstu"></div>
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Student Section Detail Update</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Student </span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Student Section Detail Update</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                    <div class="section-toggle">
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Class</label>
+                                            <div class="input-box">
+                                                <select id="ddlClass" class="select2 form-control validate" ng-init="GetAllClass();" ng-model="ClassCode" ng-change="GetSection(ClassCode);">
+                                                    <option value="">Select Class</option>
+                                                    <option ng-repeat="cl in ClassList" value="{{cl.Code}}"> {{cl.ClassName}} </option>
+                                                </select>
+                                                <div class="text-box-msg-r"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Fields List For Updation</label>
+                                            <div class="input-box">
+                                                <div class="input-box chk-validate">
+                                                    <div class="toggle-ddl" id="fields" ng-init="GetFieldsForUpdation();ToogleDDL('fields','fields')">
+                                                        <button class='btn btn-primary select-btn' data-ng-click='fields=!fields' ng-bind="GetCount(FieldsNameList,'Select Fields')">Select Fields</button>
+                                                        <button class='btn btn-primary dropdown-toggle select-btn-sub' data-ng-click='fields=!fields'> <span class='fa fa-chevron-down'></span> </button>
+                                                        <div ng-show="fields" class="ddlMultiple" ng-cloak>
+                                                            <div ng-click="ddlCheckAll('FieldsNameList');ddlCheckAll();">Check All <span class="btn-counts-right">Total Count: {{FieldsNameList.length}}</span></div>
+                                                            <div ng-click="ddlUnCheckAll('FieldsNameList');ddlUnCheckAll();">Uncheck All</div>
+                                                            <hr style="margin:0px !important" />
+                                                            <div ng-repeat="f1 in FieldsNameList">
+                                                                <input type="checkbox" ng-model="f1.chk" value="Sr_No" /> {{f1.FieldName}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">&nbsp;</label>
+                                            <div class="input-box">
+                                                <button id="btnGo" type="button" value="Go" class="btn-me btn-primary hvr-float-shadow" ng-model="Go" ng-click="GetStudentList();">
+                                                    Go
+                                                    <span id="btnGotxt" class="action-txt" ng-bind="Go">GO</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <div class="datatable-responsive table-responsive table-scroll" ng-cloak>
+                                                <table ng-show="StudentList.length>0" cellpadding="0" cellspacing="0" class="table compact table-hover table-striped table-bordered mgbt-xs-5" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.No.</th>
+                                                            <th>Select</th>
+                                                            <th>Admission No.</th>
+                                                            <th>Student Name</th>
+                                                            <th>Father's Name</th>
+                                                            <th>Class Name</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Section'}">Section</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="sl in StudentList">
+                                                            <td ng-bind="sl.SrNo=($index+1)"></td>
+                                                            <td><input type="checkbox" ng-model="sl.chk" ng-init="sl.chk=false" /></td>
+                                                            <td>{{sl.AdmissionNo}}</td>
+                                                            <td>{{sl.StudentName}}</td>
+                                                            <td>{{sl.FatherName}}</td>
+                                                            <td>{{sl.ClassName}}</td>
+                                                            
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Section'}">
+                                                                <select id="ddlSection" class="select2 form-control" ng-model="sl.SectionCode" ng-disabled="sl.chk==false">
+                                                                    <option value="">Select Section</option>
+                                                                    <option ng-repeat="section in Sections" value="{{section.Code}}">{{section.SectionName}}</option>
+                                                                </select>
+                                                            </td>                                                            
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1" @*ng-hide="buttonUpdate"*@>
+                                <button id="btnUpdate" type="button" value="Update" class="btn-me btn-primary hvr-float-shadow" name="saveButton" ng-model="Update"
+                                        ng-init="Update='Update'" ng-click="SaveRecord()">
+                                    <span id="btnUpdatetxt" class="action-txt" ng-bind="Update">Update</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

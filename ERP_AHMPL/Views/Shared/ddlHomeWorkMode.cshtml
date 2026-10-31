@@ -1,0 +1,10 @@
+﻿@*<div class="radio radio-primary radio-box" ng-repeat="hwmode in GSHomeworksMode">
+        <input id="viewmode" type="radio" name="occurrences" ng-model="$parent.HomeworkModeModel"  value="{{hwmode.ModeId}}"
+               ng-change="ddlStudentWiseSubject(hwmode.ModeId)">
+        <label for="">{{hwmode.ModeText}}</label>
+</div>*@
+<select id="ddlViewMode" class="select2 form-control validate" ng-model="HomeworkModeModel"
+        ng-init="HomeworkMode()" ng-change="ddlStudentWiseSubject(HomeworkModeModel)">
+    <option value="">Select Mode</option>
+    <option ng-repeat="hwmode in GSHomeworksMode" value="{{hwmode.ModeId}}">{{hwmode.ModeText}}</option>
+</select>

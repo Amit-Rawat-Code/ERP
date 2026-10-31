@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "Item Master";
+    ViewBag.TitleList = "Sort By Column";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/InventoryItemMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><a href="#"><span>Inventory</span></a></li>
+                <li><a href="#"><span>Master</span></a></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Item Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtItemName", "", new { @class = "form-control clear validate", @placeholder = "Item Name", @ng_model = "ItemName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Short Name</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtShortName", "", new { @class = "form-control clear ", @placeholder = "Short Name", @ng_model = "ItemCode" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Re-Order Level</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtReOrder", "", new { @class = "form-control clear", @placeholder = "Re-Order Level", @ng_model = "ReOrder" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Item Category<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlItemCategory")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Item Group</label>
+                                            <div class="form-control  input-box">
+                                                <label ng-model="ItemGroupCode">{{ItemGroupName}}</label>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Base Unit<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlUnit" class="select2 form-control validate" ng-model="BaseUnitCode" ng-init="BindUnit();" ng-change="ddlUnit_change();">
+                                                    <option value="">Select</option>
+                                                    <option ng-repeat="unitcode in UnitCodeList" value="{{unitcode.Code}}">{{unitcode.Name}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Max Qty</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtMaximum", "", new { @class = "form-control clear", @placeholder = "Max Qty", @ng_model = "MaxQty" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Min Qty</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtMinimum", "", new { @class = "form-control clear", @placeholder = "Min Qty", @ng_model = "MinQty" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlItemType", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="RAW", Value="RAW"},
+                                                    new SelectListItem{Text="Finished", Value="Finished"},
+                                                    new SelectListItem{Text="Semi-Finished", Value="Semi-Finished"},
+                                                    new SelectListItem{Text="Consumable", Value="Consumable"},
+                                                    new SelectListItem{Text="Packing", Value="Packing"},
+                                                     new SelectListItem{Text="Waste", Value="Waste"},
+                                                     new SelectListItem{Text="Asset", Value="Asset"}
+                                                },
+                                                    new { @class = "select2 form-control validate", @ng_model = "ItemType" })
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">HSN Code</label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlVatCommodityCode")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlActive")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

@@ -1,0 +1,504 @@
+﻿
+@{
+    ViewBag.Title = "Material Inward Entry";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<style>
+    legend {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: inherit;
+        display: table;
+        max-width: initial;
+        padding: 0;
+        white-space: normal;
+        width: auto;
+        padding: 0 10px !important;
+    }
+</style>
+
+
+<script src="~/Scripts/myjslib/InventoryMaterialInwardEntryController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-2 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><a href="#"><span>Inventory</span></a></li>
+                <li><a href="#"><span>Transaction</span></a></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+
+                                            <fieldset class="fieldset">
+                                                <legend class="legend">Supplier Details</legend>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Type<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlMaterialInwardEntryType" class="select2 form-control validate" ng-model="MaterialInwardEntryTypeCode" ng-init="BindMaterialInwardEntryType();getMaterialInwardEntryVoucherNo();disableMaterialTypeCode=false" ng-disabled="disableMaterialTypeCode">
+                                                                <option value="">Select</option>
+                                                                <option ng-repeat="mietl in MaterialInwardEntryTypeList"
+                                                                        value="{{mietl.VoucherType}}">
+                                                                    {{mietl.Description}}
+                                                                </option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">G.E. No.<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear " id="txtVoucherNo" ng-model="VoucherNo" type="text" placeholder="Voucher No" ng-disabled="true" />
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">G.E. Date<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear validate" id="txtVoucherDate" ng-model="VoucherDate" type="date" ng-change="CalDueDate(Days,'DueDate');"
+                                                                   placeholder="Voucher Date" min="{{GEFromDate | date:'yyyy-MM-dd'}}" max="{{GEToDate | date:'yyyy-MM-dd'}}" />
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="true">
+                                                        <label class="control-label">Supplier<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @*@Html.Partial("ddlSupplier")*@
+                                                            <select id="ddlSupplier" class="select2 form-control" ng-model="$parent.SupplierCode" ng-init="GetSupplierData();disabledSupplier=false; GetDate()"
+                                                                    ng-change="getSuplierDetail(SupplierCode);ddlSupplier_change();" ng-disabled="$parent.disabledSupplier">
+                                                                <option value="">Select</option>
+                                                                <option ng-repeat="supplier in SupplierList|filter:{'Code':supcode}" value="{{supplier.Code}}">{{supplier.Name}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Address<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtAddress", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Address1", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">City<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+
+                                                            @Html.TextBox("txtCity", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "CityName", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">GSTN<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtTinNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "GSTN", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Cancel<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.Partial("ddlBillCanceled")
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <fieldset class="fieldset">
+                                                <legend class="legend">Bill Details</legend>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Challan No.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtChallanNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "ChallanNo" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Challan Date<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input class="form-control clear" ng-model="ChallanDate" type="date" date-picker="ChallanDate"
+                                                               placeholder="Challan Date" min="{{GEFromDate | date:'yyyy-MM-dd'}}" max="{{GEToDate | date:'yyyy-MM-dd'}}" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">G.R. No.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input class="form-control clear" id="txtGRNo" ng-model="GRNo" type="text" placeholder="G.R. No." />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Transporter<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("ddlTransporter")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">G.R. Date<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input class="form-control clear" id="txtGRDate" ng-model="GRDate" type="date" placeholder="G.R. Date"
+                                                               min="{{GEFromDate | date:'yyyy-MM-dd'}}" max="{{GEToDate | date:'yyyy-MM-dd'}}" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Vehicle No.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtVehicleNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "VehicleNo" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Gross Wt.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtGrossWt", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "GrossWt", @ng_change = "" }) @*CalculateGrNetWt()*@
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Tare Wt.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtTareWt", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "TareWt" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="input-box">
+                                                    <div class="radio radio-primary radio-box">
+                                                        <input type="radio" ng-model="IsAgainstIndent" value="1" ng-init="IsAgainstIndent='1';AddGRN_Detail();disableIsAgainstIndent=false" class="select2 form-control validate" ng-disabled="disableIsAgainstIndent">
+                                                        <label for="ClassWise">Direct </label>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <div class="text-box-msg-r"></div>
+                                            <div class="input-box">
+                                                 <div class="radio radio-primary radio-box">
+                                                        <input type="radio" ng-model="IsAgainstIndent" value="2" class="ng-valid ng-not-empty ng-dirty ng-touched" ng-disabled="disableIsAgainstIndent">
+                                                        <label for="AgainstIndent">Against Indent</label>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                 </div>
+                                            </div>
+                                            <div class="text-box-msg-r">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 " ng-if="IsAgainstIndent=='2'" ng-init="GetIndentApprovalData()">
+                                            <div class="datatable-responsive table-responsive advance-btn-table">
+
+                                                <fieldset class="fieldset">
+                                                    <legend class="legend">Indent Approval Details</legend>
+                                                    <table class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>SrNo</th>
+                                                                <th>Indent No</th>
+                                                                <th>Indent Date</th>
+                                                                <th>Indent Name</th>
+                                                                <th>Ref No</th>
+                                                                <th>Ref Date</th>
+                                                                <th>Item</th>
+                                                                <th>Unit</th>
+                                                                <th>Stock Qty</th>
+                                                                <th>Indent Qty</th>
+                                                                <th>Approve Qty</th>
+                                                                <th>Select</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="ind in IndentApprovalDetail">
+                                                                <td>
+                                                                    <label id="txtSrno" ng-model="ind.SrNo" value="ind.SerialNo=$index+1" ng-bind="ind.SrNo=$index+1"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIApprovalNo" ng-bind="ind.IndentANo"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIApprovalDate" ng-bind="ind.IndentADate"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIApprovalRefNo" ng-bind="ind.Indenter"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIApprovalRefNo" ng-bind="ind.RefNo"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIApprovalRefDate" ng-bind="ind.RefDate"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIApprovalItemName" ng-bind="ind.ItemName"></label>
+                                                                <td>
+                                                                    <label id="lblIApprovalUnitName" ng-bind="ind.UnitName"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIApprovalStockQty" ng-bind="ind.StockQty"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIApprovalIndentQty" ng-bind="ind.IndentQty"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIApprovalIndentQty" ng-bind="ind.ApproveQty"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="checkbox" ng-model="ind.chk" />
+                                                                </td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-8 col-sm-12 col-xs-12 mgtp-22 pt-20">
+                                                <button type="button" value="Ok" class="btn2 btn-common btn-3 btn-3d pe-7s-search"
+                                                        ng-model="Ok" ng-click="BindIndentApprovalDetail();">
+                                                    <span class="triangle-box" title="Ok"></span>
+                                                    <span>Ok</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                                <fieldset class="fieldset">
+                                                    <legend class="legend">Material Details</legend>
+                                                    <div class="datatable-responsive table-responsive advance-btn-table">
+
+                                                        <table class="table table-in-input-box compact table-bordered nowrap dataTable t-mgtb-n" >
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="srno">Sr.No.</th>
+                                                                    <th ng-if="IsAgainstIndent=='2'"> Indent No</th>
+                                                                    <th ng-if="IsAgainstIndent=='2'"> Indent Date</th>
+                                                                    <th ng-if="IsAgainstIndent=='2'"> Indent Ref No</th>
+                                                                    <th ng-if="IsAgainstIndent=='2'"> Indent Ref Date</th>
+                                                                    <th ng-if="IsAgainstIndent=='1'">Item Group</th>
+                                                                    <th style="width:100px !important;">Item</th>
+                                                                    <th >Unit</th>
+                                                                    <th class="text-right" ng-if="IsAgainstIndent=='2'">Stock Qty</th>
+                                                                    <th class="text-right" ng-if="IsAgainstIndent=='2'">Indent Qty</th>
+                                                                    <th class="text-right">Doc.Qty.</th>
+                                                                    <th class="text-right">Rec. Qty.</th>
+                                                                    <th class="text-right">Rate</th>
+                                                                    <th class="text-right">Amount</th>
+                                                                    <th class="text-center" ng-if="IsAgainstIndent=='1'">Add/Remove</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="obj in GRN_Detail" repeat-done>
+                                                                    <td>
+                                                                        <label style="width:40px !important;" ng-model="obj.Srno" ng-bind="obj.Srno=$index+1"></label>
+                                                                    </td>
+                                                                    <td ng-if="IsAgainstIndent=='2'">{{obj.IndentANo}}</td>
+                                                                    <td ng-if="IsAgainstIndent=='2'">{{obj.IndentADate}}</td>
+                                                                    <td ng-if="IsAgainstIndent=='2'">{{obj.RefNo}}</td>
+                                                                    <td ng-if="IsAgainstIndent=='2'">{{obj.RefDate}}</td>
+                                                                    <td ng-if="IsAgainstIndent=='1'">
+                                                                        <select style="width:100% !important;" name="ddlItemGroup" class="select2 form-control"
+                                                                                ng-model="obj.ItemGroupCode" ng-change="resetRow($index);">
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="item in ItemGroupList" value="{{item.Code}}">{{item.Name}}</option>
+                                                                        </select>
+                                                                    </td>
+                                                                  
+                                                                    <td ng-if="IsAgainstIndent=='1'">
+                                                                        <select style="width:100% !important;" name="ddlItem" class="select2 form-control validate"
+                                                                                ng-model="obj.ItemCode"
+                                                                                ng-change="resetRow($index);">
+                                                                            @*CalculateGrNetWt()*@;
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="item in ItemList|filter:{'ItemGroupCode':obj.ItemGroupCode}" value="{{item.Code}}">{{item.ItemName}}</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td ng-if="IsAgainstIndent=='2'">
+                                                                        <label id="lblIApprovalItemName" ng-bind="obj.ItemName" ng-disabled="true"></label>
+                                                                    </td>
+                                                                    <td ng-if="IsAgainstIndent=='1'">
+                                                                        <select style="width:100% !important;" id="ddlBaseUnit{{$index}}" name="ddlBaseUnit" ng-disabled="SaudaTransId" class="select2 form-control validate"
+                                                                                ng-model="obj.BaseUnitCode" ng-change="BindRate(obj.ItemCode,obj.BaseUnitCode,$index);">
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="baseunit in BaseUnitList|filter:{'ItemCode':obj.ItemCode}:true"
+                                                                                    value="{{baseunit.BaseUnitCode}}">
+                                                                                {{baseunit.Unit}}
+                                                                            </option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td ng-if="IsAgainstIndent=='2'">
+                                                                        <label id="lblIApprovalItemUnitName" ng-bind="obj.UnitName" ng-disabled="true"></label>
+                                                                    </td>
+
+
+                                                                    <td ng-if="IsAgainstIndent=='2'">
+                                                                        <label id="lblIApprovalItemStockQty" ng-bind="obj.StockQty" ng-disabled="true"></label>
+                                                                    </td>
+                                                                    <td ng-if="IsAgainstIndent=='2'">
+                                                                        <label id="lblIApprovalItemIndentQty" ng-bind="obj.IndentQty" ng-disabled="true"></label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input style="width:100% !important;" type="text" class="form-control text-right clear"
+                                                                               placeholder="" ng-model="obj.BillQty" ng-init="obj.BillQty=ConvertQtyToDecimalPoint(obj.BillQty)"
+                                                                               validate-number-and-decimal-only two-decimal-place />
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input style="width:100% !important;" type="text" class="form-control text-right clear validate"
+                                                                               placeholder="" ng-model="obj.RecQty"
+                                                                               ng-init="obj.RecQty=ConvertQtyToDecimalPoint(obj.RecQty)"
+                                                                               ng-change="getgrossAmt(obj.RecQty,obj.Rate,$index)"
+                                                                               ng-blur="calculateBillValue();"
+                                                                               validate-number-and-decimal-only two-decimal-place />
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <input style="width:100% !important;" type="text" class="form-control text-right  clear validate" placeholder=""
+                                                                               ng-model="obj.Rate"
+                                                                               ng-init="obj.Rate=ConvertToDecimalPoint(obj.Rate,0,2)"
+                                                                               ng-change="getgrossAmt(obj.RecQty,obj.Rate,$index)"
+                                                                               ng-blur="calculateBillValue();"
+                                                                               validate-number-and-decimal-only ten-decimal-place />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input style="width:100% !important;" type="text" class="form-control text-right clear validate" placeholder=""
+                                                                               ng-init="obj.Amount=ConvertAmountToDecimalPoint(obj.Amount)"
+                                                                               ng-model="obj.Amount" validate-number-and-decimal-only two-decimal-place />
+                                                                    </td>
+
+                                                                    <td class="text-center" ng-if="IsAgainstIndent=='1'">
+                                                                        <input type="button" value="+" class="btn btn-default" ng-click="AddGRN_Detail()" data-toggle="tooltip" data-placement="top" title="Add Row" 
+                                                                               ng-if="obj.Srno==GRN_Detail.length" />
+                                                                        <input type="button" class="btn btn-default" id="btnRemoveCourses" value="-" ng-click="RemoveGRN_Detail($index);"
+                                                                               ng-if="GRN_Detail.length>1"  />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-if="GRN_Detail.length==0">
+                                                                    <td colspan="13" class="text-center">
+                                                                        No Record(s) found.
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12 col-xs-12 no-padding">
+                                                <div class="col-md-12 col-sm-12 col-xs-12 pb-20">
+                                                    <label class="control-label">Remarks</label>
+                                                    <div class="input-box">
+                                                        @Html.TextArea("txtRemarks", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Remarks" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-xs-12 pt-15">
+                                                <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <table class="table table-in-input-box compact table-bordered nowrap dataTable t-mgtb-n">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width:33.33%">
+                                                                        <span style="font-weight:600">Net Quantity </span>
+                                                                    </td>
+                                                                    <td colspan="2">
+                                                                        <input type="text" id="txtNetAmount" class="form-control text-right clear validate" placeholder=""
+                                                                               ng-model="NetQty" value="{{SumofQty('NetQty')}}" ng-disabled="true" />
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <table class="table table-in-input-box compact table-bordered nowrap dataTable t-mgtb-n">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width:33.33%">
+                                                                        <span style="font-weight:600">Net Amount </span>
+                                                                    </td>
+                                                                    <td colspan="2">
+                                                                        <input type="text" id="txtNetAmount" class="form-control text-right clear validate" placeholder=""
+                                                                               ng-model="NetAmount" value="{{SumofList('NetAmount')}}" ng-disabled="true" />
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                                @Html.Partial("ActionView")
+                                            </div>
+</form>
+                                </div>
+                            </div>
+
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Row -->
+    </div>
+</div>

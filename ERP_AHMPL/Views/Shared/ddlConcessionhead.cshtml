@@ -1,0 +1,6 @@
+﻿<select id="ddlConcessionhead" class="select2 form-control clear validate" ng-model="ConcessionheadCode" 
+        ng-init="GetConcessionheads();">
+    <option value="">Select Concession Head</option>
+    <option ng-repeat="chl in ConcessionheadList" value="{{chl.Code}}" ng-disabled="!chl.IsActive">{{chl.ConcessionHeadName}}</option>
+</select>
+

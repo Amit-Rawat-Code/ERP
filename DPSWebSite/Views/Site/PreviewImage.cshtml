@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "PreviewImage";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<table ng-init="PreImage();">
+    <tr ng-repeat="FL in [1, 2, 3]">
+        <td><input id="fileupload" type="file" onchange="SetPreview(this)" /></td>
+        <td>
+            <img ID="btnImage" height="100" Width="100" style="display: none"
+                             class="ImageButton" />
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script language="javascript" type="text/javascript">
+    function SetPreview(ele) {
+        var btnImage = $(ele).closest('tr').find('[id*=btnImage]');
+        $(btnImage).removeAttr("src");
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+        if (regex.test($(ele).val().toLowerCase())) {
+                if (typeof (FileReader) != "undefined") {
+                    $(btnImage).show();
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $(btnImage).attr("src", e.target.result);
+                    }
+                    reader.readAsDataURL($(ele)[0].files[0]);
+                } else {
+                    alert("This browser does not support FileReader.");
+                }
+        } else {
+            alert("Please upload a valid image file.");
+        }
+    };
+</script>
+

@@ -1,0 +1,745 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout21.cshtml";
+}
+
+<!---main-website-content-->
+<div class="website-main-content" >
+    <section class="website-banner">
+        <!-- partial:index.partial.html -->
+
+        <div class="Modern-Slider">
+            <!-- Item -->
+            <div class="item" ng-repeat="BannImg in BannerImage">
+                <div class="img-fill">
+                    <img src="{{BannImg.BannerImagePath}}" alt="{{BannImg.BannerAltText}}">
+                    <div class="info">
+                        <div>
+                            <h3>{{BannImg.BannerDescription1}}</h3>
+                            <h5>{{BannImg.BannerDescription2}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section our-core-values">
+        <div class="container" ng-repeat="ThemeData in GetThemeData">
+            <h3 class="section-title" style="color:#{{ThemeData.BannerBottomLineTextColour}} !important">Our core values</h3>
+            <div class="row">
+                <div class="col-sm-3">
+                    <figure class="stm-action-box__figure_box integrity">
+                        <span class="stm-action-box__thumbnail">
+                            <img class="" src="../../content/images/homepage/core-values/integrity.jpeg" width="225" height="225" alt="integrity" title="integrity">
+                        </span>
+                        <span class="stm-action-box__figcaption-title">
+                            <span class="stm-action-box__title-text">Integrity</span>
+                        </span>
+                        <figcaption class="stm-action-box__figcaption_box">
+                            <div class="stm-action-box__content-text">
+                                We are honest in our actions and speech. We believe in doing what is right. We practice integrity.
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-sm-3">
+
+                    <figure class="stm-action-box__figure_box individuality">
+                        <span class="stm-action-box__thumbnail">
+                            <img class="" src="../../content/images/homepage/core-values/Individuality.jpg" width="390" height="390" alt="Individuality" title="Individuality">
+                        </span>
+                        <span class="stm-action-box__figcaption-title">
+                            <span class="stm-action-box__title-text">Individuality</span>
+                        </span>
+                        <figcaption class="stm-action-box__figcaption_box">
+                            <div class="stm-action-box__content-text">
+                                Each child is unique and capable. We train them to embrace their individuality and be just themselves.
+                            </div>
+                        </figcaption>
+                    </figure>
+
+
+                </div>
+                <div class="col-sm-3">
+                    <figure class="stm-action-box__figure_box innovation">
+                        <span class="stm-action-box__thumbnail">
+                            <img class="" src="../../content/images/homepage/core-values/Innovation.jpg" width="390" height="390" alt="Innovation" title="Innovation">
+                        </span>
+                        <span class="stm-action-box__figcaption-title">
+                            <span class="stm-action-box__title-text">Innovation</span>
+                        </span>
+                        <figcaption class="stm-action-box__figcaption_box">
+                            <div class="stm-action-box__content-text">
+                                Learning activities, materials, etc. are introduced into the classroom environment that encourages innovation.
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-sm-3">
+                    <figure class="stm-action-box__figure_box excellence">
+                        <span class="stm-action-box__thumbnail">
+                            <img class="" src="../../content/images/homepage/core-values/Excellence.jpg" width="390" height="390" alt="Excellence" title="Excellence">
+                        </span>
+                        <span class="stm-action-box__figcaption-title">
+                            <span class="stm-action-box__title-text">Excellence</span>
+                        </span>
+                        <figcaption class="stm-action-box__figcaption_box">
+                            <div class="stm-action-box__content-text">
+                                We pursue excellence in education to remain effective by learning constantly and being the best we can be.
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    <section class="page-section why-choose-allenkids home-sec">
+        <div class="container" ng-repeat="ThemeData in GetThemeData">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h3 class="section-title" style="color:#{{ThemeData.WhyChooseHeadingTextColour}} !important">
+                        Why Choose Allenkids?
+                    </h3>
+                    <p class="discription">
+                        Just like no two flowers in the garden are the same, no two children can be the same. Each child is a blossoming bud with its own special fragrance. It is our responsibility as facilitators and parents, to provide them the environment they need to achieve their fullest potential.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-6">
+                            <div class="image-thumbnail">
+                                <img src="../../content/images/homepage/why-choose/Motor-Skill-min.jpg" alt="motor-skill">
+                            </div>
+                            <div class="skillname">Motor Skills</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <div class="image-thumbnail">
+                                <img src="../../content/images/homepage/why-choose/development-skill-2-1536x2048-min-2.jpg" alt="Language Development">
+                            </div>
+                            <div class="skillname">Language Development</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <div class="image-thumbnail">
+                                <img src="../../content/images/homepage/why-choose/Peer-Interaction-1536x709-min.jpg" alt="Social Development">
+                            </div>
+                            <div class="skillname">Social Development</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <div class="image-thumbnail">
+                                <img src="../../content/images/homepage/why-choose/Cognitive-1536x1023-min.jpg" alt="Cognitive Development">
+                            </div>
+                            <div class="skillname">Cognitive Development</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="why-choose-main-image">
+                        <img src="../../content/images/homepage/why-choose/why-choose-main.jpg" alt="why-coose-us">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-----------------classes-carousels------------>
+    <section class="page-section classes">
+        <div class="container" ng-repeat="ThemeData in GetThemeData">
+            <h3 class="section-title" style="color:#{{ThemeData.OurProgramsHeadingTextColour}} !important">
+                Our Programs
+            </h3>
+            <div class="classes-carousels">
+                <div id="news-slider" class="owl-carousel">
+                    <div class="post-slide" ng-repeat="SliderImgs in SliderImages">
+                        <div class="post-img">
+                            <img style="object-fit:{{SliderImgs.ImageObjectFit}}" height="{{SliderImgs.ImageHeight}}" ng-src="{{SliderImgs.BannerImagePath}}" alt="{{SliderImgs.BannerAltText}}">
+                            <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title" >
+                                <a href="#" style="color:#{{ThemeData.OurProgramsSliderHeadingTextColour}} !important">
+                                    {{SliderImgs.BannerDescription1}}
+                                </a>
+                            </h3>
+                            <p class="post-description">
+                                {{SliderImgs.BannerDescription2}}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section why-choose-allenkids our-program">
+        <div class="" ng-repeat="ThemeData in GetThemeData">
+            <div class="container">
+                <div class="col-sm-5">
+                    <div class="why-choose-main-image">
+                        <img src="../../content/images/homepage/why-choose/why-choose-main.jpg" alt="why-coose-us">
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <h3 class="section-title" style="color:#{{ThemeData.ClassesHeadingTextColour}} !important">
+                        Classes
+                    </h3>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="our-program-box">
+                                <div class="icon">
+                                    <span class="icon-span">
+                                        <img src="../../content/images/homepage/programs/program1.png" alt="program1">
+                                    </span>
+                                </div>
+                                <div class="stm-icon-box__content">
+                                    <div class="stm-icon-box__title" style="color:#{{ThemeData.ClassesImageHeadingTextColour}} !important">Playgroup 1 : (2 yrs to 3 yrs)</div>
+
+                                    <div class="stm-icon-box__descr ">We practice an integrated thematic study which aims at enhancing the development and education of children through play.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="our-program-box">
+                                <div class="icon">
+                                    <span class="icon-span">
+                                        <img src="../../content/images/homepage/programs/program2.png" alt="program1">
+                                    </span>
+                                </div>
+                                <div class="stm-icon-box__content">
+                                    <div class="stm-icon-box__title" style="color:#{{ThemeData.ClassesImageHeadingTextColour}} !important">Playgroup 2 ( 3 yrs to 4 yrs)</div>
+
+                                    <div class="stm-icon-box__descr ">Our specially designed curriculum encourages children to develop self- confidence and self -esteem to feel valued as individuals.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="our-program-box">
+                                <div class="icon">
+                                    <span class="icon-span">
+                                        <img src="../../content/images/homepage/programs/program3.png" alt="program1">
+                                    </span>
+                                </div>
+                                <div class="stm-icon-box__content">
+                                    <div class="stm-icon-box__title" style="color:#{{ThemeData.ClassesImageHeadingTextColour}} !important">Nursery</div>
+
+                                    <div class="stm-icon-box__descr ">Children learn different skills like communication and language including listening, speaking and understanding.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="our-program-box">
+                                <div class="icon">
+                                    <span class="icon-span">
+                                        <img src="../../content/images/homepage/programs/program4.png" alt="program1">
+                                    </span>
+                                </div>
+                                <div class="stm-icon-box__content">
+                                    <div class="stm-icon-box__title" style="color:#{{ThemeData.ClassesImageHeadingTextColour}} !important">Preparatory: (Age group 5-6 years)</div>
+
+                                    <div class="stm-icon-box__descr ">A preparatory year is a programme designed to prepare the students for the primary classes.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section classes event">
+        <div class="container" ng-repeat="ThemeData in GetThemeData">
+            <h3 class="section-title" style="color:#{{ThemeData.EventsHeadingTextColour}} !important">
+                Events
+            </h3>
+            <div class="classes-carousels">
+                <div id="news-slider2" class="owl-carousel">
+                    <div class="post-slide" ng-repeat="EventsImgs in EventsSliderImages">
+                        <div class="post-img">
+                            <img style="object-fit:{{EventsImgs.ImageObjectFit}};" height="{{EventsImgs.ImageHeight}}" src="{{EventsImgs.BannerImagePath}}" alt="{{EventsImgs.BannerAltText}}">
+                            <a href="" ng-href="{{GetEventUrl(EventsImgs.Code)}}" target="_blank" class="over-layer"><i class="fa fa-link"></i></a>
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title">
+                                <a style="color:#{{ThemeData.EventsSliderHeadingTextColour}} !important" href="" ng-href="{{GetEventUrl(EventsImgs.Code)}}" target="_blank">{{EventsImgs.BannerDescription1}}</a>
+                            </h3>
+                            <p class="post-description" ng-bind-html="trustAsHtml(EventsImgs.BannerDescription2)">
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section video-background-section">
+        <section class="fullsize-video-bg">
+            <div class="inner">
+                <div>
+                    <h1>Welcome to AllenKids!</h1>
+                    <p>Where Learning is Serious Fun
+                </div>
+            </div>
+            <div id="video-viewport">
+                <video autoplay muted loop>
+                    <source src="../../content/video/ALLEN-KIDS-30-SEC-KANPUR.mp4" type="video/mp4" />
+                    <source src="https://storage.googleapis.com/coverr-main/webm/Winter-Grass.webm" type="video/webm" />
+                </video>
+            </div>
+        </section>
+    </section>
+
+
+    <section class="page-section winning-laurels-bulletin">
+        <div class="container" ng-repeat="ThemeData in GetThemeData">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="section-title" style="color:#{{ThemeData.WinningLaurelsHeadingTextColour}} !important">
+                        Winning Laurels
+                    </h3>
+                    <div class="win-laurels-slider">
+                        <div id="news-slider1" class="owl-carousel">
+                            <div class="post-slide" ng-repeat="WinningLaurelsSliderImgs in WinningLaurelsSliderImages">
+                                <div class="post-img">
+                                    <img style="object-fit:"{{WinningLaurelsSliderImgs.ImageObjectFit}}" height="{{WinningLaurelsSliderImgs.ImageHeight}}"  ng-src="{{WinningLaurelsSliderImgs.BannerImagePath}}" alt="{{WinningLaurelsSliderImgs.BannerAltText}}">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h3 class="section-title" style="color:#{{ThemeData.BulletinHeadingTextColour}} !important">
+                        Bulletin
+                    </h3>
+                    <div class="bullet-in-section">
+                        <div class="card panel-default">
+                            <div class="card-header"> <i class="icon-signal"></i><b>News</b></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <ul class="demo1" style="">
+                                            <li class="news-item" ng-repeat="Headline in AllNotice">
+                                                <table cellpadding="4">
+                                                    <tr>
+                                                        <td>
+                                                            <img src="../../content/images/homepage/bulletin/1.png" width="60" class="img-circle" />
+                                                        </td>
+                                                        <td>
+                                                            <p>
+                                                                <a href="">
+                                                                    {{Headline.NoticeHeadline}}
+                                                                </a>
+                                                            </p>
+                                                            <p ng-bind-html="trustAsHtml(Headline.Description)">
+                                                            </p>
+                                                            <a href="#">Read more...</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section testimonial-section">
+        <div class="container" ng-repeat="ThemeData in GetThemeData">
+            <h3 class="section-title" style="color:#{{ThemeData.OurHappyParentsHeadingTextColour}} !important">
+                Our Happy Parents
+            </h3>
+            <div class="main-testi">
+                <section id="testim" class="testim">
+                    <div class="wrap">
+                        <span id="right-arrow" class="arrow right fa fa-chevron-right"></span>
+                        <span id="left-arrow" class="arrow left fa fa-chevron-left "></span>
+                        <ul id="testim-dots" class="dots">
+                            <li ng-repeat="OurHappyParentsSliderImgs in OurHappyParentsSliderImages" class="dot {{$index==0?'active':''}}"></li>
+                        </ul>
+                        <div id="testim-content" class="cont">
+                            <div ng-repeat="OurHappyParentsSliderImgs in OurHappyParentsSliderImages" testimonial-repeat-done>
+                                <div class="img">
+                                    <img style="object-fit:{{OurHappyParentsSliderImgs.ImageObjectFit}}" height="{{OurHappyParentsSliderImgs.ImageHeight}}" ng-src="{{OurHappyParentsSliderImgs.BannerImagePath}}" alt="{{OurHappyParentsSliderImgs.BannerAltText}}" />
+                                </div>
+                                <h2 style="color:#{{ThemeData.OurHappyParentsHeadingTextColour}} !important">
+                                {{OurHappyParentsSliderImgs.BannerDescription1}}
+                                </h2>
+                                <p>
+                                    {{OurHappyParentsSliderImgs.BannerDescription2}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+    <section class="page-section school-group">
+        <div class="container" >
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 ng-repeat="ThemeData in GetThemeData" class="section-title" style="color:#{{ThemeData.OurGroupInstitutionsHeadingTextColour}} !important">
+                        Our Group Institutions
+                    </h3>
+                    <div class="win-laurels-slider">
+                        <div id="news-slider3" class="owl-carousel">
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0012_Allenhouse Khalasi Line.jpg" alt="Pakhi-Newatia">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Khalasi Line, Kanpur</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Clay Modelling</a>
+                                        </h3>
+                                        <p class="post-description">Clay Modelling is a play-based learning which encourages trial and error, and develops fine motor skills.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0011_Allenhouse Rooma.jpg" alt="Remo De Talentos Winners">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Vasundhra, Ghaziabad</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Collage Making</a>
+                                        </h3>
+                                        <p class="post-description">Collage Making a fun way to encourage your child’s awareness of color and texture helps child build fine motor skills.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0000_Allenhouse Ghaziabad.jpg" alt="Suhasini-1">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Khalasi Line, Kanpur</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Yoga & Karate</a>
+                                        </h3>
+                                        <p class="post-description">Yoga classes for young children help keep them calm and focused. Karate encourages discipline to help develop good study habits, and non-violent conflict resolution.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0005_Allenhouse Vrindavan.jpg" alt="Suhasini Nanhe Kavi">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Vrindavan, Lucknow</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Skating</a>
+                                        </h3>
+                                        <p class="post-description">Skating for exercise helps kids burn off extra energy,build strong muscles, and maintain a healthy weight.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0001_Allenhouse Panki.jpg" alt="Suhasini Panorama">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Panki, Kanpu</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Nature Walk</a>
+                                        </h3>
+                                        <p class="post-description">We take them outside, surrounded by nature,children experience an ever-changing and free-flowing environment that stimulates all the senses.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0007_Allenhouse Public School Jhansi.jpg" alt="Pakhi-Newatia">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Jhansi</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Clay Modelling</a>
+                                        </h3>
+                                        <p class="post-description">Clay Modelling is a play-based learning which encourages trial and error, and develops fine motor skills.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0013_Allen Kids Kakadeo.jpg" alt="Remo De Talentos Winners">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allen Kids, Naveen Nagar, Kakadeo, Kanpur</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Collage Making</a>
+                                        </h3>
+                                        <p class="post-description">Collage Making a fun way to encourage your child’s awareness of color and texture helps child build fine motor skills.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/Allen_Kids_demo-lightbox.jpg" alt="Suhasini-1">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Khalasi Line, Kanpur</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Yoga & Karate</a>
+                                        </h3>
+                                        <p class="post-description">Yoga classes for young children help keep them calm and focused. Karate encourages discipline to help develop good study habits, and non-violent conflict resolution.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/Allen_Kids_demo-lightbox.jpg" alt="Suhasini Nanhe Kavi">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Khalasi Line, Kanpur</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Skating</a>
+                                        </h3>
+                                        <p class="post-description">Skating for exercise helps kids burn off extra energy,build strong muscles, and maintain a healthy weight.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0015_Delhi Public School Kalyanpur.jpg" alt="Suhasini Panorama">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Delhi Public School, Kalyanpur, Kanpur</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Nature Walk</a>
+                                        </h3>
+                                        <p class="post-description">We take them outside, surrounded by nature,children experience an ever-changing and free-flowing environment that stimulates all the senses.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0006_Delhi Public School Eldeco.jpg" alt="Pakhi-Newatia">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Delhi Public School, Eldeco, Lucknow</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Clay Modelling</a>
+                                        </h3>
+                                        <p class="post-description">Clay Modelling is a play-based learning which encourages trial and error, and develops fine motor skills.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/Allen_Kids_demo-lightbox.jpg" alt="Remo De Talentos Winners">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Khalasi Line, Kanpur</p>
+                                </div>
+                                  @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Collage Making</a>
+                                        </h3>
+                                        <p class="post-description">Collage Making a fun way to encourage your child’s awareness of color and texture helps child build fine motor skills.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                  </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0002_Delhi Public School Jankipuram.jpg" alt="Suhasini-1">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Delhi Public School, Jankipuram, Lucknow</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Yoga & Karate</a>
+                                        </h3>
+                                        <p class="post-description">Yoga classes for young children help keep them calm and focused. Karate encourages discipline to help develop good study habits, and non-violent conflict resolution.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0016_Delhi Public School Gomti Nagar.jpg" alt="Suhasini Nanhe Kavi">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Delhi Public School, Gomti Nagar, Lucknow</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Skating</a>
+                                        </h3>
+                                        <p class="post-description">Skating for exercise helps kids burn off extra energy,build strong muscles, and maintain a healthy weight.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0002_Delhi Public School Jankipuram.jpg" alt="Suhasini Panorama">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Delhi Public School, Bareilly</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Nature Walk</a>
+                                        </h3>
+                                        <p class="post-description">We take them outside, surrounded by nature,children experience an ever-changing and free-flowing environment that stimulates all the senses.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0009_Delhi Public School Sahranpur.jpg" alt="Suhasini-1">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Delhi Public School, Saharanpur</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Yoga & Karate</a>
+                                        </h3>
+                                        <p class="post-description">Yoga classes for young children help keep them calm and focused. Karate encourages discipline to help develop good study habits, and non-violent conflict resolution.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0009_Delhi Public School Sahranpur.jpg" alt="Suhasini Nanhe Kavi">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Allenhouse Public School, Khalasi Line, Kanpur</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Skating</a>
+                                        </h3>
+                                        <p class="post-description">Skating for exercise helps kids burn off extra energy,build strong muscles, and maintain a healthy weight.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+                            <div class="post-slide">
+                                <div class="post-img">
+                                    <img src="../../content/images/homepage/college-group/light-box/_0003_Delhi Public School Unnao.jpg" alt="Suhasini Panorama">
+                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <p>Delhi Public School, Akrampur, Unnao</p>
+                                </div>
+                                @*<div class="post-content">
+                                        <h3 class="post-title">
+                                            <a href="#">Nature Walk</a>
+                                        </h3>
+                                        <p class="post-description">We take them outside, surrounded by nature,children experience an ever-changing and free-flowing environment that stimulates all the senses.</p>
+                                        <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                        <a href="#" class="read-more">read more</a>
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section facebook-feeds-youtube-contact-form">
+        <div class="container" ng-repeat="ThemeData in GetThemeData">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3  class="section-title" style="color:#{{ThemeData.FacebookfeedssHeadingTextColour}} !important">
+                        Facebook feeds
+                    </h3>
+                    <div class="facebook-feed">
+                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fallenkidsswaroopnagar&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="280"
+                                height="340" style="border:none;overflow:hidden;width: 100%;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <h3 class="section-title" style="color:#{{ThemeData.YouTubeHeadingTextColour}} !important">
+                        YouTube
+                    </h3>
+                    <div class="youtube-feed">
+                        <div class="embed">
+                            <div id="yt-embed"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <h3 class="section-title" style="color:#{{ThemeData.ContactUsHeadingTextColour}} !important">
+                        Contact Us
+                    </h3>
+                    <div class="contact-form">
+                        <form>
+                            <div class="form-group">
+                                <label for="email">Enquiry For Session:</label>
+                                <select id="ddlSession" autocomplete='address-level2' class="form-control"
+                                        ng-model="ddlSession" ng-init="GetSession()">
+                                    <option value="">Select Session</option>
+                                    <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Choose Class:</label>
+                                <select class="form-control" id="Class" name="Class" ng-model="Class">
+                                    <option value="">Choose your class</option>
+                                    <option>PG</option>
+                                    <option>Nursery</option>
+                                    <option>Prep</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Father/Mother/Guardian Name:</label>
+                                <input type="text" class="form-control" placeholder="Enter Your Guardian Name" id="Name" name="Name" ng-model="Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Enter Contact:</label>
+                                <input type="number" id="Contact" name="Contact" ng-model="Contact" class="form-control" onKeyPress="if(this.value.length==10) return false;">
+                            </div>
+                            <div class="form-group">
+                                <label>Your email:</label>
+                                <input type="email" class="form-control" placeholder="Enter Your Email" ng-model="Email" required>
+                            </div>
+                            <button type="button" class="btn btn-default" ng-click="SaveRecord()" name="saveButton" ng-model="Save" ng-init="Save='Save'">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

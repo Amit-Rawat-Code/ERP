@@ -1,0 +1,214 @@
+﻿
+@{
+    ViewBag.Title = "Shift Class Mapping";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/ShiftClassMappingController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Shift Class Mapping</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>TimeTable</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Shift Class Mapping</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15  pull-right">
+                                            <label class="control-label">Is Student Wise Mapping in Shift<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlIsActive", new List<SelectListItem>{
+                                                 new SelectListItem{Text="Select", Value=""},
+                                                 new SelectListItem{Text="Yes", Value="true"},
+                                                 new SelectListItem{Text="No", Value="false"}
+                                             },
+                                                 new { @class = "select2 form-control validate", @ng_model = "IsActive", @ng_init = "IsActive='false'", @ng_change= "CheckStudentRequiredChk()" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15  pull-right">
+                                            <label class="control-label">Shift<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlShift")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.No.</th>
+                                                        <th><input type="checkbox" ng-model="ChkAll" ng-change="CheckALL()" /></th>
+                                                        <th>Class</th>
+                                                        <th>Section</th>
+                                                        <th ng-if="IsActive=='true'">Total Students</th>
+                                                        <th ng-if="IsActive=='true'">Mapped Students</th>
+                                                        <th ng-if="IsActive=='true'"><input type="checkbox" ng-model="StudentRequiredAll" ng-change="CheckStudentRequiredAll()" /> Students Required</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="obj in ClassWiseTotalStudentlist">
+                                                        <td ng-bind="obj.Srno=($index+1)"></td>
+                                                        <td><input type="checkbox" ng-model="obj.Chk" ng-change="UnMappedAllStudent(obj,obj.Chk,obj.ClassCode,obj.SectionCode,$index)" /></td>
+                                                        <td>{{obj.ClassName}}</td>
+                                                        <td>
+                                                            {{obj.SectionName}}
+                                                        </td>
+                                                        <td ng-if="IsActive=='true'">
+                                                            <a href="#" class="" data-toggle="modal" data-target="#ViewModal" ng-click="FilterRecords(obj.ClassCode,obj.SectionCode,obj.StudentRequired,$index)">{{obj.TotalStudent}}</a>
+                                                        </td>
+                                                        <td ng-if="IsActive=='true'">
+                                                            <a href="#" class="" data-toggle="modal" data-target="#ViewModalMapped" ng-click="UpdateIndex($index,obj.ClassCode,obj.SectionCode)" ng-init="MappedStudentList[$index]=[]">
+                                                                {{MappedStudentList[$index].length>0 ? MappedStudentList[$index].length:obj.AllotTotalStudent }}
+                                                            </a>
+                                                        </td>
+                                                        <td ng-if="IsActive=='true'"><input type="checkbox" ng-model="obj.StudentRequired" ng-disabled="obj.Chk!=true" ng-change="UnMappedAllStudent(obj,obj.StudentRequired,obj.ClassCode,obj.SectionCode,$index)" /> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1 no-padding">
+                                            @Html.Partial("ActionView")
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="ViewModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Total List</h4>
+            </div>
+            <div class="modal-body">
+                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>RegNo</th>
+                            <th>Name</th>
+                            <th>FatherName</th>
+                            <th>ShiftName</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in UnMappedStudentList">
+                            <td ng-bind="x.Srno=($index+1)"></td>
+                            <td>{{x.RegNo}}</td>
+                            <td>{{x.Name}}</td>
+                            <td>{{x.FatherName}}</td>
+                            <td>{{x.ShiftName}}</td>
+                            <td>
+                                <div class="checkbox checkbox-primary check-box chech-box-mp-n" ng-if="x.isSameShift">
+                                    <input type="checkbox" ng-model="x.chk" ng-true-value="1" ng-false-value="0" 
+                                           ng-click="GetMappedStudentList()" ng-disabled="x.disabled" ng-init="x.disabled==false" />
+                                    <label for=""> </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-primary" ng-click="GetMappedStudentList()">Ok</button>*@
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="ViewModalMapped" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Mapped List</h4>
+            </div>
+            <div class="modal-body">
+                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>RegNo</th>
+                            <th>Name</th>
+                            <th>FatherName</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in MappedStudentList[index1]">
+                            <td ng-bind="x.Srno=($index+1)"></td>
+                            <td>{{x.RegNo}}</td>
+                            <td>{{x.Name}}</td>
+                            <td>{{x.FatherName}}</td>
+                            <td>
+                                <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                    <input type="checkbox" ng-model="x.chk" ng-true-value="1" ng-false-value="0" ng-disabled="true" />
+                                    <label for=""> </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

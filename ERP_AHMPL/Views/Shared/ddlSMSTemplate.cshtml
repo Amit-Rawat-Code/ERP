@@ -1,0 +1,6 @@
+﻿<select id="ddlSMSTemplate" class="select2 form-control validate" ng-model="SMSTemplateCode"
+        ng-change="ddlSMSTemplate_Change();" ng-disabled="disabledDDLSMSTemplate">
+    <option value="">Select Template</option>
+    <option ng-repeat="sms_template in SMSTemplateList" value="{{sms_template.Code}}" ng-disabled="!sms_template.IsActive">{{sms_template.SMSTemplateName}}</option>
+</select>
+

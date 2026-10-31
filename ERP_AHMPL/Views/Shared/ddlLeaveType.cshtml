@@ -1,0 +1,6 @@
+﻿<select id="ddlLeaveType" class="select2 form-control validate" ng-model="AbbrTypeId" ng-init="GetLeaveType();">
+    <option value="">Select Leave Type</option>
+
+    <option ng-repeat="leaveType in LeaveTypes" value="{{leaveType.AbbrTypeId}}">{{leaveType.AbbrType}}</option>﻿
+
+</select>

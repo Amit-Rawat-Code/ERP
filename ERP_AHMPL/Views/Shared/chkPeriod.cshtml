@@ -1,0 +1,31 @@
+﻿@*<div>
+    <label>
+        <input type="checkbox" ng-model="chkAll" id="chkAll" />
+        Select All
+    </label>
+</div>*@
+<div  ng-init="GetPeriods();" class="validate-chk" id="periodChkDiv">
+    <table class="table compact table-hover table-striped table-bordered mgbt-xs-0">
+        <thead>
+            <tr>
+                <th>Period</th>
+                <th>Duration (min.)</th>
+                <th class="text-center" width="70px">Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="period in Periods">
+                <td>{{period.PeriodName}}</td>
+                <td>{{period.PeriodDuration}}</td>
+                <td class="table-check-box">
+                    <div class="checkbox checkbox-primary check-box table-check">
+                        <input type="checkbox" class="clear" ng-model="period.Selected" ng-value={{period.PeriodId}} ng-change="checkChkAll();" onchange="checkchk($(this));"
+                          ng-disabled="!period.IsActive" />
+                        <label for=""></label>
+                    </div>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

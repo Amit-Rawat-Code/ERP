@@ -1,0 +1,5 @@
+﻿@Html.DropDownList("ddlEntryMode", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="School", Value="School"},
+    new SelectListItem{Text="Bank", Value="Bank"}},
+    new { @class = "select2 form-control validate", @ng_model = "EntryMode", @ng_init="EntryMode='School'" })

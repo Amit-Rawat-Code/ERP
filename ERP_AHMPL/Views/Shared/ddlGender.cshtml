@@ -1,0 +1,11 @@
+﻿@*@Html.DropDownList("ddlGender", new List<SelectListItem>{ new SelectListItem{Text="Select Gender", Value=""},
+    new SelectListItem{Text="Male", Value="Male"},
+    new SelectListItem{Text="Female", Value="Female"}}, new { @class = "select2 form-control ", @ng_model = "Gender" })*@
+
+
+<select id="ddlGender" class="select2 form-control validate" ng-model="Gender"
+        ng-init="GetGender();">
+    <option value="">Select Gender</option>
+    <option ng-repeat="gender in GenderList" value="{{gender.Gender}}" >{{gender.Gender}}</option>
+</select>
+

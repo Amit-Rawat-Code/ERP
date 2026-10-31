@@ -1,0 +1,498 @@
+﻿
+@{
+    ViewBag.Title = "Material Approval";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+
+<style>
+    legend {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: inherit;
+        display: table;
+        max-width: initial;
+        padding: 0;
+        white-space: normal;
+        width: auto;
+        padding: 0 10px !important;
+    }
+</style>
+<script src="~/scripts/myjslib/InventoryMaterialApprovedController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-2 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Material Approval</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><a href="#"><span>Inventory</span></a></li>
+                <li><a href="#"><span>Transaction</span></a></li>
+                <li class="active"><span>Material Approval</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+
+                                            <fieldset class="fieldset">
+                                                <legend class="legend">Supplier Details</legend>
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Type<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("ddlMaterialInwardEntryType")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Approval Date<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <input class="form-control clear validate" id="txtApprovalDate" ng-model="ApprovalDate"
+                                                               type="date" placeholder="Approval Date" min="{{GEFromDate | date:'yyyy-MM-dd'}}"
+                                                               max="{{GEToDate | date:'yyyy-MM-dd'}}" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">G.E. No.<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <i class="fa fa-times" ng-show="showdiv" ng-click="showdiv=false"
+                                                           aria-hidden="true" style="margin: 10px 5px -20px 0px;float: right;" ng-cloak></i>
+                                                        <input class="form-control clear validate" id="txtVoucherNo" autocomplete="off"
+                                                               ng-model="txtGENo" type="text" placeholder="Voucher No"
+                                                               ng-click="showdiv=(Isdisabled==false?true:false)"
+                                                               ng-keydown="clearText($event)" ng-disabled="Isdisabled" />
+                                                        <div class="input-z-in" ng-show="showdiv">
+                                                            <div if="overflow" class="datatable-responsive table-responsive advance-btn-table" ng-cloak>
+                                                                <table class="table table-in-input-box compact table-bordered nowrap dataTable t-mgtb-n">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>G.E. No.</th>
+                                                                            <th>Challan No.</th>
+                                                                            <th>Supplier</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="list in List1 | filter:txtGENo"
+                                                                            ng-init="list.index=$index"
+                                                                            ng-click="ChangeStyle(list.index,list.TransId);showdiv=false"
+                                                                            style="background-color:{{list.bc}};">
+                                                                            <td style="color:{{list.c}}">{{list.VoucherNo}}</td>
+                                                                            <td style="color:{{list.c}}">{{list.ChallanNo}}</td>
+                                                                            <td style="color:{{list.c}}">{{list.SupplierName}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">G.E. Date<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <input class="form-control clear validate" id="txtVoucherDate" ng-model="VoucherDate"
+                                                               type="date" placeholder="Voucher Date" min="{{GEFromDate | date:'yyyy-MM-dd'}}"
+                                                               max="{{GEToDate | date:'yyyy-MM-dd'}}" ng-disabled="true" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="true" ng-disabled="true">
+                                                    <label class="control-label">Supplier<span class="vd_red">*</span></label>
+
+                                                    <div class="input-box">
+                                                        @Html.Partial("ddlSupplier")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Address<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtAddress", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Address1", @ng_disabled = "true" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">City<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+
+                                                        @Html.TextBox("txtCity", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "CityName", @ng_disabled = "true" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">GSTN<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtTinNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "GSTN", @ng_disabled = "true" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Cancel<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("ddlBillCanceled")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <fieldset class="fieldset">
+                                                <legend class="legend">Bill Details</legend>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Challan No.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtChallanNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "ChallanNo", @ng_disabled = "true" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Challan Date<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input class="form-control clear" ng-model="ChallanDate" type="date" date-picker="ChallanDate"
+                                                               placeholder="Challan Date" min="{{GEFromDate | date:'yyyy-MM-dd'}}" max="{{GEToDate | date:'yyyy-MM-dd'}}"
+                                                               ng-disabled="true" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Transporter<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("ddlTransporter")
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">G.R. No.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input class="form-control clear" id="txtGRNo" ng-model="GRNo" type="text" placeholder="G.R. No." ng-disabled="true" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">G.R. Date<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input class="form-control clear" id="txtGRDate" ng-model="GRDate" type="date" placeholder="G.R. Date"
+                                                               min="{{GEFromDate | date:'yyyy-MM-dd'}}" max="{{GEToDate | date:'yyyy-MM-dd'}}" ng-disabled="true" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Vehicle No.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtVehicleNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "VehicleNo", @ng_disabled = "true" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Gross Wt.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtGrossWt", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "GrossWt", @ng_disabled = "true" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Tare Wt.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtTareWt", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "TareWt", @ng_disabled = "true" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <fieldset class="fieldset">
+                                                <legend class="legend">Material Details</legend>
+                                                <div class="datatable-responsive table-responsive advance-btn-table">
+
+                                                    <table class="table table-in-input-box compact table-bordered nowrap dataTable t-mgtb-n">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="srno">Sr.No.</th>
+                                                                <th>Item Group</th>
+                                                                <th style="width:100px !important;">Item</th>
+                                                                <th>Unit</th>
+                                                                @*<th ng-if="ApplicationCodeIsAllowed=='1'">Application</th>
+                                                                    <th ng-if="BatchNoIsAllowed=='1'">Batch No.</th>
+                                                                    <th ng-if="ColorIsAllowed=='1'">Color</th>
+                                                                    <th ng-if="ExpDateIsAllowed=='1'">Expiry Date</th>
+                                                                    <th ng-if="ItemMakeIsAllowed=='1'">Make</th>
+                                                                    <th ng-if="MfgDateIsAllowed=='1'">Mfg Date</th>
+                                                                    <th ng-if="ModelCodeIsAllowed=='1'">Model</th>
+                                                                    <th ng-if="PackingIsAllowed=='1'">Packing</th>
+                                                                    <th ng-if="ProdCodeIsAllowed=='1'">Product</th>
+                                                                    <th ng-if="SizeIsAllowed=='1'">Size</th>*@
+                                                                <th class="text-right">Rec. Qty.</th>
+                                                                <th class="text-right">Doc. Qty.</th>
+                                                                @*<th class="text-right" ng-if="PackingIsAllowed!='-1'">Qty.(In Bags)</th>
+                                                                    <th class="text-right" ng-if="PackingIsAllowed!='-1'">Qty.Per Bag(In KG)</th>*@
+                                                                <th class="text-right">Accept Qty.</th>
+                                                                <th class="text-right">Excess Qty.</th>
+                                                                <th class="text-right">Rate</th>
+                                                                <th class="text-right">Amount</th>
+
+                                                                <th class="text-right">Rej. Qty.</th>
+                                                                @*<th class="text-left" style="width: 150px;">Store</th>*@
+                                                                @*<th class="text-left" style="width: 150px;" ng-if="LotNoApplicable">Lot No.</th>*@
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="obj in GRN_Detail" repeat-done>
+                                                                <td>
+                                                                    <label style="width:40px !important;" ng-model="obj.Srno" ng-bind="obj.Srno=$index+1"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <select style="width:100% !important;" name="ddlItemGroup" class="select2 form-control" ng-model="obj.ItemGroupCode"
+                                                                            ng-init="BindItemGroup()" ng-change="resetRow($index);" ng-disabled="true">
+                                                                        <option value="">Select</option>
+                                                                        <option ng-repeat="item in ItemGroupList" value="{{item.Code}}">{{item.Name}}</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select style="width:100% !important;" name="ddlItem" class="select2 form-control validate" ng-model="obj.ItemCode"
+                                                                            ng-change="resetRow($index);bindMaterialfromInvoiceMaster(GRN_DetailTypeCode);BindVatCommodityUsingCode(obj.ItemCode,$index)" ng-disabled="true">
+                                                                        <option value="">Select</option>
+                                                                        <option ng-repeat="item in ItemList | filter:{'ItemGroupCode':obj.ItemGroupCode}" value="{{item.Code}}">{{item.ItemName}}</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select style="width:100% !important;" id="ddlBaseUnit{{$index}}" name="ddlBaseUnit" class="select2 form-control validate"
+                                                                            ng-model="obj.BaseUnitCode"
+                                                                            ng-change="BindRate(obj.ItemCode,obj.BaseUnitCode,$index);" ng-disabled="true">
+                                                                        <option value="">Select</option>
+                                                                        <option ng-repeat="baseunit in BaseUnitList|filter:{'ItemCode':obj.ItemCode}:true"
+                                                                                value="{{baseunit.BaseUnitCode}}">
+                                                                            {{baseunit.Unit}}
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                @*<td ng-if="ApplicationCodeIsAllowed=='1'">
+                                                                        <select class="select2 form-control" ng-model="obj.ApplicationCode" ng-disabled="true">
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="acode in ApplicationCodeList" value="{{acode.Code}}">{{acode.Name}}</option>
+                                                                        </select>
+
+                                                                    </td>
+                                                                    <td ng-if="BatchNoIsAllowed=='1'">
+                                                                        <input type="text" class="form-control clear" placeholder="Batch No."
+                                                                               ng-model="GRN_Detail[$index].BatchNo" ng-init="obj.BatchNo" ng-disabled="true" />
+                                                                    </td>
+                                                                    <td ng-if="ColorIsAllowed=='1'">
+                                                                        <select class="select2 form-control" ng-model="obj.Color" ng-disabled="true">
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="ccode in ColorList" value="{{ccode.Code}}">{{ccode.Name}}</option>
+                                                                        </select>
+
+                                                                    </td>
+                                                                    <td ng-if="ExpDateIsAllowed=='1'">
+                                                                        <input type="text" class="form-control clear" placeholder="Expiry Date"
+                                                                               ng-model="obj.ExpDate" ng-init="GRN_Detail[$index].ExpDate" />
+                                                                    </td>
+                                                                    <td ng-if="ItemMakeIsAllowed=='1'">
+                                                                        <select class="select2 form-control" ng-model="obj.ItemMake" ng-disabled="true">
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="icode in ItemMakeList" value="{{icode.Code}}">{{icode.Name}}</option>
+                                                                        </select>
+
+                                                                    </td>
+                                                                    <td ng-if="MfgDateIsAllowed=='1'">
+                                                                        <input type="text" class="form-control clear" placeholder="Manufacturing Date"
+                                                                               ng-model="obj.MfgDate" ng-init="obj.MfgDate" ng-disabled="true" />
+                                                                    </td>
+                                                                    <td ng-if="ModelCodeIsAllowed=='1'">
+                                                                        <select class="select2 form-control" ng-model="obj.ModelCode" ng-disabled="true">
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="mcode in ModelCodeList" value="{{mcode.Code}}">{{mcode.Name}}</option>
+                                                                        </select>
+
+                                                                    </td>
+                                                                    <td ng-if="PackingIsAllowed=='1'">
+                                                                        <select class="select2 form-control" ng-model="obj.Packing" ng-disabled="true">
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="pcode in PackingList" value="{{pcode.Code}}">{{pcode.Name}}</option>
+                                                                        </select>
+
+                                                                    </td>
+                                                                    <td ng-if="ProdCodeIsAllowed=='1'">
+                                                                        <input type="text" class="form-control clear" placeholder="Product"
+                                                                               ng-model="obj.Product" ng-init="obj.Product" ng-disabled="true" />
+                                                                    </td>
+                                                                    <td ng-if="SizeIsAllowed=='1'">
+                                                                        <select class="select2 form-control" ng-model="obj.Size" ng-disabled="true">
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="scode in SizeList" value="{{scode.Code}}">{{scode.Name}}</option>
+                                                                        </select>
+
+                                                                    </td>*@
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right clear validate"
+                                                                           placeholder="" ng-model="obj.RecQty"
+                                                                           ng-init="obj.RecQty=ConvertQtyToDecimalPoint(obj.RecQty)"
+                                                                           validate-number-and-decimal-only two-decimal-place ng-disabled="true" />
+                                                                </td>
+
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right clear validate" placeholder=""
+                                                                           ng-model="obj.BillQty"
+                                                                           ng-init="obj.BillQty=ConvertQtyToDecimalPoint(obj.BillQty)"
+                                                                           validate-number-and-decimal-only two-decimal-place ng-disabled="true" />
+                                                                </td>
+                                                                @*<td ng-if="PackingIsAllowed!='-1'">
+                                                                        <input style="width:100px !important;" type="text" id="txtBillQty{{$index}}" class="form-control text-right clear validate" placeholder=""
+                                                                               ng-model="obj.QtyInBags"
+                                                                               ng-init="obj.QtyInBags=ConvertQtyToDecimalPoint(obj.QtyInBags)"
+                                                                               ng-blur="obj.RecQty=obj.QtyInBags*obj.RecQtyUnitWise" ng-disabled="true" validate-number-and-decimal-only />
+                                                                    </td>
+                                                                    <td ng-if="PackingIsAllowed!='-1'">
+                                                                        <input style="width:100px !important;" type="text" id="txtQtyperbagKG{{$index}}" class="form-control text-right clear validate"
+                                                                               placeholder="" ng-model="obj.RecQtyUnitWise"
+                                                                               ng-init="obj.RecQtyUnitWise=ConvertQtyToDecimalPoint(obj.RecQtyUnitWise)"
+                                                                               ng-blur="obj.RecQty=obj.QtyInBags*obj.RecQtyUnitWise" ng-disabled="true" validate-number-and-decimal-only />
+                                                                    </td>*@
+
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right clear validate"
+                                                                           placeholder="" ng-model="obj.AcceptQty"
+                                                                           ng-init="obj.AcceptQty=obj.RecQty;" ng-change="getgrossAmt(obj.AcceptQty,obj.Rate,$index)"
+                                                                           ng-blur="getgrossAmt(obj.AcceptQty,obj.Rate,$index);calculateBillValue();"
+                                                                           validate-number-and-decimal-only two-decimal-place />
+                                                                </td>
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right clear validate"
+                                                                           ng-init="obj.ExcessQty=ConvertQtyToDecimalPoint(obj.ExcessQty)"
+                                                                           ng-change="getgrossAmt(obj.ExcessQty,obj.AcceptQty,obj.Rate,$index)"
+                                                                           placeholder="" ng-model="obj.ExcessQty" validate-number-and-decimal-only two-decimal-place />
+                                                                </td>
+
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right  clear validate" placeholder=""
+                                                                           ng-model="obj.Rate"
+                                                                           ng-init="obj.Rate=ConvertToDecimalPoint(obj.Rate,0)"
+                                                                           ng-change="getgrossAmt(obj.AcceptQty,obj.Rate,$index)"
+                                                                           ng-blur="calculateBillValue();"
+                                                                           validate-number-and-decimal-only ten-decimal-place />
+                                                                </td>
+
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right clear validate" placeholder=""
+                                                                           ng-init="obj.Amount=ConvertAmountToDecimalPoint(obj.Amount)"
+                                                                           ng-model="obj.Amount" validate-number-and-decimal-only two-decimal-place />
+                                                                </td>
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right clear validate"
+                                                                           ng-init="GRN_Detail[$index].RejectQty='0'"
+                                                                           placeholder="" ng-model="GRN_Detail[$index].RejectQty"
+                                                                           validate-number-and-decimal-only two-decimal-place ng-disabled="true" value="{{obj.RejectQty}}" />
+
+                                                                </td>
+                                                                @*<td>
+                                                                        <select style="width:100px !important;" id="ddlStore" class="select2 form-control validate"
+                                                                                ng-model="obj.StoreCode" ng-disabled="true">
+                                                                            <option value="">Select</option>
+                                                                            <option ng-repeat="store in StoreList" value="{{store.Code}}">{{store.Name}}</option>
+                                                                        </select>
+                                                                    </td>*@
+                                                                @*<td ng-if="LotNoApplicable">
+                                                                        <input style="width:100% !important;" type="text" class="form-control clear"
+                                                                               placeholder="" ng-model="obj.LotNo" ng-disabled="true" />
+                                                                    </td>*@
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 pt-20">
+                                            
+                                                @Html.Partial("ActionView")
+                                            
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 pt-15">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                <table class="table table-in-input-box compact table-bordered nowrap dataTable t-mgtb-n">
+                                                    <tbody>
+                                                        <tr >
+                                                            <td style="width:33.33%">
+                                                                <span style="font-weight:600">Net Amount</span>
+                                                            </td>
+                                                            <td colspan="2" >
+                                                                <input type="text" id="txtNetAmount" class="form-control text-right clear validate" placeholder=""
+                                                                       ng-model="NetAmount" value="{{SumofList('NetAmount')}}" ng-disabled="true" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+<script>
+    $('#ddlTransporter').removeClass('validate');
+    $('#ddlSupplier').addClass('validate');
+    $('#ddlSupplier').attr('disabled', 'disabled');
+    $('#ddlBillCanceled').attr('disabled', 'disabled');
+    $('#ddlTransporter').attr('disabled', 'disabled');
+    $('#ddlIsBillCanceled').attr('disabled', 'disabled');
+</script>

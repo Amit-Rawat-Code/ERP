@@ -1,0 +1,301 @@
+Z:\SEF\bin\SEF.dll.config
+Z:\SEF\bin\SEF.dll
+Z:\SEF\bin\SEF.pdb
+Z:\SEF\bin\roslyn\csc.exe
+Z:\SEF\bin\roslyn\csc.exe.config
+Z:\SEF\bin\roslyn\csc.rsp
+Z:\SEF\bin\roslyn\csi.exe
+Z:\SEF\bin\roslyn\csi.rsp
+Z:\SEF\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+Z:\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+Z:\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+Z:\SEF\bin\roslyn\Microsoft.CodeAnalysis.dll
+Z:\SEF\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+Z:\SEF\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+Z:\SEF\bin\roslyn\Microsoft.CSharp.Core.targets
+Z:\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+Z:\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+Z:\SEF\bin\roslyn\Microsoft.VisualBasic.Core.targets
+Z:\SEF\bin\roslyn\System.AppContext.dll
+Z:\SEF\bin\roslyn\System.Collections.Immutable.dll
+Z:\SEF\bin\roslyn\System.Diagnostics.StackTrace.dll
+Z:\SEF\bin\roslyn\System.IO.FileSystem.dll
+Z:\SEF\bin\roslyn\System.IO.FileSystem.Primitives.dll
+Z:\SEF\bin\roslyn\System.Reflection.Metadata.dll
+Z:\SEF\bin\roslyn\vbc.exe
+Z:\SEF\bin\roslyn\vbc.exe.config
+Z:\SEF\bin\roslyn\vbc.rsp
+Z:\SEF\bin\roslyn\VBCSCompiler.exe
+Z:\SEF\bin\roslyn\VBCSCompiler.exe.config
+Z:\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+Z:\SEF\bin\Microsoft.Web.Infrastructure.dll
+Z:\SEF\bin\Newtonsoft.Json.dll
+Z:\SEF\bin\System.Net.Http.Formatting.dll
+Z:\SEF\bin\System.Web.Helpers.dll
+Z:\SEF\bin\System.Web.Http.dll
+Z:\SEF\bin\System.Web.Http.WebHost.dll
+Z:\SEF\bin\System.Web.Mvc.dll
+Z:\SEF\bin\System.Web.Razor.dll
+Z:\SEF\bin\System.Web.Webpages.Deployment.dll
+Z:\SEF\bin\System.Web.Webpages.dll
+Z:\SEF\bin\System.Web.Webpages.Razor.dll
+Z:\SEF\bin\System.Web.Razor.xml
+Z:\SEF\bin\System.Web.Webpages.xml
+Z:\SEF\bin\System.Web.Webpages.Deployment.xml
+Z:\SEF\bin\System.Web.Webpages.Razor.xml
+Z:\SEF\bin\System.Web.Helpers.xml
+Z:\SEF\bin\System.Web.Mvc.xml
+Z:\SEF\bin\Newtonsoft.Json.xml
+Z:\SEF\bin\System.Net.Http.Formatting.xml
+Z:\SEF\bin\System.Web.Http.xml
+Z:\SEF\bin\System.Web.Http.WebHost.xml
+Z:\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+Z:\SEF\obj\Debug\SEF.csprojAssemblyReference.cache
+Z:\SEF\obj\Debug\SEF.csproj.CoreCompileInputs.cache
+Z:\SEF\obj\Debug\SEF.csproj.CopyComplete
+Z:\SEF\obj\Debug\SEF.dll
+Z:\SEF\obj\Debug\SEF.pdb
+Y:\SEF\bin\SEF.dll.config
+Y:\SEF\bin\SEF.dll
+Y:\SEF\bin\SEF.pdb
+Y:\SEF\bin\roslyn\csc.exe
+Y:\SEF\bin\roslyn\csc.exe.config
+Y:\SEF\bin\roslyn\csc.rsp
+Y:\SEF\bin\roslyn\csi.exe
+Y:\SEF\bin\roslyn\csi.rsp
+Y:\SEF\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+Y:\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+Y:\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+Y:\SEF\bin\roslyn\Microsoft.CodeAnalysis.dll
+Y:\SEF\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+Y:\SEF\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+Y:\SEF\bin\roslyn\Microsoft.CSharp.Core.targets
+Y:\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+Y:\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+Y:\SEF\bin\roslyn\Microsoft.VisualBasic.Core.targets
+Y:\SEF\bin\roslyn\System.AppContext.dll
+Y:\SEF\bin\roslyn\System.Collections.Immutable.dll
+Y:\SEF\bin\roslyn\System.Diagnostics.StackTrace.dll
+Y:\SEF\bin\roslyn\System.IO.FileSystem.dll
+Y:\SEF\bin\roslyn\System.IO.FileSystem.Primitives.dll
+Y:\SEF\bin\roslyn\System.Reflection.Metadata.dll
+Y:\SEF\bin\roslyn\vbc.exe
+Y:\SEF\bin\roslyn\vbc.exe.config
+Y:\SEF\bin\roslyn\vbc.rsp
+Y:\SEF\bin\roslyn\VBCSCompiler.exe
+Y:\SEF\bin\roslyn\VBCSCompiler.exe.config
+Y:\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+Y:\SEF\bin\Microsoft.Web.Infrastructure.dll
+Y:\SEF\bin\Newtonsoft.Json.dll
+Y:\SEF\bin\System.Net.Http.Formatting.dll
+Y:\SEF\bin\System.Web.Helpers.dll
+Y:\SEF\bin\System.Web.Http.dll
+Y:\SEF\bin\System.Web.Http.WebHost.dll
+Y:\SEF\bin\System.Web.Mvc.dll
+Y:\SEF\bin\System.Web.Razor.dll
+Y:\SEF\bin\System.Web.Webpages.Deployment.dll
+Y:\SEF\bin\System.Web.Webpages.dll
+Y:\SEF\bin\System.Web.Webpages.Razor.dll
+Y:\SEF\bin\System.Web.Razor.xml
+Y:\SEF\bin\System.Web.Webpages.xml
+Y:\SEF\bin\System.Web.Webpages.Deployment.xml
+Y:\SEF\bin\System.Web.Webpages.Razor.xml
+Y:\SEF\bin\System.Web.Helpers.xml
+Y:\SEF\bin\System.Web.Mvc.xml
+Y:\SEF\bin\Newtonsoft.Json.xml
+Y:\SEF\bin\System.Net.Http.Formatting.xml
+Y:\SEF\bin\System.Web.Http.xml
+Y:\SEF\bin\System.Web.Http.WebHost.xml
+Y:\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+Y:\SEF\obj\Debug\SEF.csprojAssemblyReference.cache
+Y:\SEF\obj\Debug\SEF.csproj.CoreCompileInputs.cache
+Y:\SEF\obj\Debug\SEF.csproj.CopyComplete
+Y:\SEF\obj\Debug\SEF.dll
+Y:\SEF\obj\Debug\SEF.pdb
+E:\Krishna Current Work\SEF\bin\SEF.dll.config
+E:\Krishna Current Work\SEF\bin\SEF.dll
+E:\Krishna Current Work\SEF\bin\SEF.pdb
+E:\Krishna Current Work\SEF\bin\roslyn\csc.exe
+E:\Krishna Current Work\SEF\bin\roslyn\csc.exe.config
+E:\Krishna Current Work\SEF\bin\roslyn\csc.rsp
+E:\Krishna Current Work\SEF\bin\roslyn\csi.exe
+E:\Krishna Current Work\SEF\bin\roslyn\csi.rsp
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\Krishna Current Work\SEF\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Krishna Current Work\SEF\bin\roslyn\System.AppContext.dll
+E:\Krishna Current Work\SEF\bin\roslyn\System.Collections.Immutable.dll
+E:\Krishna Current Work\SEF\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\Krishna Current Work\SEF\bin\roslyn\System.IO.FileSystem.dll
+E:\Krishna Current Work\SEF\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\Krishna Current Work\SEF\bin\roslyn\System.Reflection.Metadata.dll
+E:\Krishna Current Work\SEF\bin\roslyn\vbc.exe
+E:\Krishna Current Work\SEF\bin\roslyn\vbc.exe.config
+E:\Krishna Current Work\SEF\bin\roslyn\vbc.rsp
+E:\Krishna Current Work\SEF\bin\roslyn\VBCSCompiler.exe
+E:\Krishna Current Work\SEF\bin\roslyn\VBCSCompiler.exe.config
+E:\Krishna Current Work\SEF\bin\BAL.dll
+E:\Krishna Current Work\SEF\bin\DAL.dll
+E:\Krishna Current Work\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Krishna Current Work\SEF\bin\Microsoft.Web.Infrastructure.dll
+E:\Krishna Current Work\SEF\bin\Newtonsoft.Json.dll
+E:\Krishna Current Work\SEF\bin\System.Net.Http.Formatting.dll
+E:\Krishna Current Work\SEF\bin\System.Web.Helpers.dll
+E:\Krishna Current Work\SEF\bin\System.Web.Http.dll
+E:\Krishna Current Work\SEF\bin\System.Web.Http.WebHost.dll
+E:\Krishna Current Work\SEF\bin\System.Web.Mvc.dll
+E:\Krishna Current Work\SEF\bin\System.Web.Razor.dll
+E:\Krishna Current Work\SEF\bin\System.Web.Webpages.Deployment.dll
+E:\Krishna Current Work\SEF\bin\System.Web.Webpages.dll
+E:\Krishna Current Work\SEF\bin\System.Web.Webpages.Razor.dll
+E:\Krishna Current Work\SEF\bin\BAL.pdb
+E:\Krishna Current Work\SEF\bin\DAL.pdb
+E:\Krishna Current Work\SEF\bin\System.Web.Razor.xml
+E:\Krishna Current Work\SEF\bin\System.Web.Webpages.xml
+E:\Krishna Current Work\SEF\bin\System.Web.Webpages.Deployment.xml
+E:\Krishna Current Work\SEF\bin\System.Web.Webpages.Razor.xml
+E:\Krishna Current Work\SEF\bin\System.Web.Helpers.xml
+E:\Krishna Current Work\SEF\bin\System.Web.Mvc.xml
+E:\Krishna Current Work\SEF\bin\Newtonsoft.Json.xml
+E:\Krishna Current Work\SEF\bin\System.Net.Http.Formatting.xml
+E:\Krishna Current Work\SEF\bin\System.Web.Http.xml
+E:\Krishna Current Work\SEF\bin\System.Web.Http.WebHost.xml
+E:\Krishna Current Work\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Krishna Current Work\SEF\obj\Debug\SEF.csprojAssemblyReference.cache
+E:\Krishna Current Work\SEF\obj\Debug\SEF.csproj.CoreCompileInputs.cache
+E:\Krishna Current Work\SEF\obj\Debug\SEF.csproj.CopyComplete
+E:\Krishna Current Work\SEF\obj\Debug\SEF.dll
+E:\Krishna Current Work\SEF\obj\Debug\SEF.pdb
+Z:\Krishna Current Work\SEF\obj\Debug\SEF.csprojAssemblyReference.cache
+Z:\Krishna Current Work\SEF\obj\Debug\SEF.csproj.CoreCompileInputs.cache
+Z:\Krishna Current Work\SEF\obj\Debug\SEF.dll
+Z:\Krishna Current Work\SEF\obj\Debug\SEF.pdb
+Z:\Krishna Current Work\SEF\bin\SEF.dll.config
+Z:\Krishna Current Work\SEF\bin\SEF.dll
+Z:\Krishna Current Work\SEF\bin\SEF.pdb
+Z:\Krishna Current Work\SEF\bin\roslyn\csc.exe
+Z:\Krishna Current Work\SEF\bin\roslyn\csc.exe.config
+Z:\Krishna Current Work\SEF\bin\roslyn\csc.rsp
+Z:\Krishna Current Work\SEF\bin\roslyn\csi.exe
+Z:\Krishna Current Work\SEF\bin\roslyn\csi.rsp
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.CSharp.Core.targets
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\Microsoft.VisualBasic.Core.targets
+Z:\Krishna Current Work\SEF\bin\roslyn\System.AppContext.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\System.Collections.Immutable.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\System.Diagnostics.StackTrace.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\System.IO.FileSystem.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\System.IO.FileSystem.Primitives.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\System.Reflection.Metadata.dll
+Z:\Krishna Current Work\SEF\bin\roslyn\vbc.exe
+Z:\Krishna Current Work\SEF\bin\roslyn\vbc.exe.config
+Z:\Krishna Current Work\SEF\bin\roslyn\vbc.rsp
+Z:\Krishna Current Work\SEF\bin\roslyn\VBCSCompiler.exe
+Z:\Krishna Current Work\SEF\bin\roslyn\VBCSCompiler.exe.config
+Z:\Krishna Current Work\SEF\bin\BAL.dll
+Z:\Krishna Current Work\SEF\bin\DAL.dll
+Z:\Krishna Current Work\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+Z:\Krishna Current Work\SEF\bin\Microsoft.Web.Infrastructure.dll
+Z:\Krishna Current Work\SEF\bin\Newtonsoft.Json.dll
+Z:\Krishna Current Work\SEF\bin\System.Net.Http.Formatting.dll
+Z:\Krishna Current Work\SEF\bin\System.Web.Helpers.dll
+Z:\Krishna Current Work\SEF\bin\System.Web.Http.dll
+Z:\Krishna Current Work\SEF\bin\System.Web.Http.WebHost.dll
+Z:\Krishna Current Work\SEF\bin\System.Web.Mvc.dll
+Z:\Krishna Current Work\SEF\bin\System.Web.Razor.dll
+Z:\Krishna Current Work\SEF\bin\System.Web.Webpages.Deployment.dll
+Z:\Krishna Current Work\SEF\bin\System.Web.Webpages.dll
+Z:\Krishna Current Work\SEF\bin\System.Web.Webpages.Razor.dll
+Z:\Krishna Current Work\SEF\bin\BAL.pdb
+Z:\Krishna Current Work\SEF\bin\DAL.pdb
+Z:\Krishna Current Work\SEF\bin\System.Web.Razor.xml
+Z:\Krishna Current Work\SEF\bin\System.Web.Webpages.xml
+Z:\Krishna Current Work\SEF\bin\System.Web.Webpages.Deployment.xml
+Z:\Krishna Current Work\SEF\bin\System.Web.Webpages.Razor.xml
+Z:\Krishna Current Work\SEF\bin\System.Web.Helpers.xml
+Z:\Krishna Current Work\SEF\bin\System.Web.Mvc.xml
+Z:\Krishna Current Work\SEF\bin\Newtonsoft.Json.xml
+Z:\Krishna Current Work\SEF\bin\System.Net.Http.Formatting.xml
+Z:\Krishna Current Work\SEF\bin\System.Web.Http.xml
+Z:\Krishna Current Work\SEF\bin\System.Web.Http.WebHost.xml
+Z:\Krishna Current Work\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+Z:\Krishna Current Work\SEF\obj\Debug\SEF.csproj.CopyComplete
+Z:\SEFERP\SEF\bin\SEF.dll.config
+Z:\SEFERP\SEF\bin\SEF.dll
+Z:\SEFERP\SEF\bin\SEF.pdb
+Z:\SEFERP\SEF\bin\roslyn\csc.exe
+Z:\SEFERP\SEF\bin\roslyn\csc.exe.config
+Z:\SEFERP\SEF\bin\roslyn\csc.rsp
+Z:\SEFERP\SEF\bin\roslyn\csi.exe
+Z:\SEFERP\SEF\bin\roslyn\csi.exe.config
+Z:\SEFERP\SEF\bin\roslyn\csi.rsp
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.CodeAnalysis.dll
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.CSharp.Core.targets
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.Managed.Core.targets
+Z:\SEFERP\SEF\bin\roslyn\Microsoft.VisualBasic.Core.targets
+Z:\SEFERP\SEF\bin\roslyn\System.Buffers.dll
+Z:\SEFERP\SEF\bin\roslyn\System.Collections.Immutable.dll
+Z:\SEFERP\SEF\bin\roslyn\System.Memory.dll
+Z:\SEFERP\SEF\bin\roslyn\System.Numerics.Vectors.dll
+Z:\SEFERP\SEF\bin\roslyn\System.Reflection.Metadata.dll
+Z:\SEFERP\SEF\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+Z:\SEFERP\SEF\bin\roslyn\System.Text.Encoding.CodePages.dll
+Z:\SEFERP\SEF\bin\roslyn\System.Threading.Tasks.Extensions.dll
+Z:\SEFERP\SEF\bin\roslyn\vbc.exe
+Z:\SEFERP\SEF\bin\roslyn\vbc.exe.config
+Z:\SEFERP\SEF\bin\roslyn\vbc.rsp
+Z:\SEFERP\SEF\bin\roslyn\VBCSCompiler.exe
+Z:\SEFERP\SEF\bin\roslyn\VBCSCompiler.exe.config
+Z:\SEFERP\SEF\bin\BAL.dll
+Z:\SEFERP\SEF\bin\DAL.dll
+Z:\SEFERP\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+Z:\SEFERP\SEF\bin\Microsoft.Web.Infrastructure.dll
+Z:\SEFERP\SEF\bin\Newtonsoft.Json.dll
+Z:\SEFERP\SEF\bin\System.Net.Http.Formatting.dll
+Z:\SEFERP\SEF\bin\System.Web.Helpers.dll
+Z:\SEFERP\SEF\bin\System.Web.Http.dll
+Z:\SEFERP\SEF\bin\System.Web.Http.WebHost.dll
+Z:\SEFERP\SEF\bin\System.Web.Mvc.dll
+Z:\SEFERP\SEF\bin\System.Web.Razor.dll
+Z:\SEFERP\SEF\bin\System.Web.Webpages.Deployment.dll
+Z:\SEFERP\SEF\bin\System.Web.Webpages.dll
+Z:\SEFERP\SEF\bin\System.Web.Webpages.Razor.dll
+Z:\SEFERP\SEF\bin\BAL.pdb
+Z:\SEFERP\SEF\bin\DAL.pdb
+Z:\SEFERP\SEF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+Z:\SEFERP\SEF\bin\Newtonsoft.Json.xml
+Z:\SEFERP\SEF\bin\System.Web.Razor.xml
+Z:\SEFERP\SEF\bin\System.Web.Webpages.xml
+Z:\SEFERP\SEF\bin\System.Web.Webpages.Deployment.xml
+Z:\SEFERP\SEF\bin\System.Web.Webpages.Razor.xml
+Z:\SEFERP\SEF\bin\System.Web.Helpers.xml
+Z:\SEFERP\SEF\bin\System.Web.Mvc.xml
+Z:\SEFERP\SEF\bin\System.Net.Http.Formatting.xml
+Z:\SEFERP\SEF\bin\System.Web.Http.xml
+Z:\SEFERP\SEF\bin\System.Web.Http.WebHost.xml
+Z:\SEFERP\SEF\obj\Debug\SEF.csprojAssemblyReference.cache
+Z:\SEFERP\SEF\obj\Debug\SEF.csproj.CoreCompileInputs.cache
+Z:\SEFERP\SEF\obj\Debug\SEF.csproj.CopyComplete
+Z:\SEFERP\SEF\obj\Debug\SEF.dll
+Z:\SEFERP\SEF\obj\Debug\SEF.pdb

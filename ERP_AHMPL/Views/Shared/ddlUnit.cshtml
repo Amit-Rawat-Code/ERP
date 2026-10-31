@@ -1,0 +1,5 @@
+﻿@*UOMMast*@
+<select id="ddlUnit" class="select2 form-control validate" ng-model="BaseUnitCode" ng-init="BindUnit();" ng-change="ddlUnit_change();">
+    <option value="">Select</option>
+    <option ng-repeat="baseunitcode in UnitCodeList" value="{{baseunitcode.Code}}">{{baseunitcode.Name}}</option>
+</select>

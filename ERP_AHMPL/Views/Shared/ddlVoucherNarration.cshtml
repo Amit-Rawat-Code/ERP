@@ -1,0 +1,4 @@
+﻿<select id="ddlVoucherNarration" class="select2 form-control" ng-change="SetVoucherNarration();" ng-model="VoucherNarrationModel" ng-init="BindVoucherNarrations();">
+    <option value="">Select</option>
+    <option ng-repeat="vouchernarration in VoucherNarrationList"  value="{{vouchernarration.Narration}}">{{vouchernarration.Narration}}</option>
+</select>

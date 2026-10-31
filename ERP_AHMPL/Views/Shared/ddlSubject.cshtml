@@ -1,0 +1,7 @@
+<select id="ddlSubject" class="select2 form-control validate" ng-init="GetSubjectList()" ng-model="SubjectCode">
+    <option value="">Select Subject</option>
+
+    <option ng-repeat="subject in SubjectList" value="{{subject.Code}}">{{subject.SubjectName}}</option>﻿
+
+</select>
+

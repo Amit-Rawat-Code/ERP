@@ -1,0 +1,4 @@
+﻿<select id="ddlMailServer" class="select2 form-control validate" ng-disabled="IsMailDisable" ng-init="GetMailServers();" ng-model="MailServers.MailServerId">
+    <option value="">Select Mail Server </option>
+    <option ng-repeat="MailServer in MailServers" value="{{MailServer.MailServerId}}">{{MailServer.MailServer}}</option>
+</select>

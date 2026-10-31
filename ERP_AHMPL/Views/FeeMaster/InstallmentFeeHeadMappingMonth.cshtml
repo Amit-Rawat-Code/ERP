@@ -1,0 +1,227 @@
+﻿
+@{
+    ViewBag.Title = "Installment Fee Head Mapping Month";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/InstallmentFeeHeadMappingMonthController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Installment Fee Head Mapping Month</h5>
+        </div>
+        <!-- Breadcrumb --> 
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Enquiry</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Installment Fee Head Mapping Month</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Academic Session<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSession")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Installment Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlInstallment")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Class<span class="vd_red">*</span></label>
+                                            @Html.Partial("ddlClassSectionMul")
+                                        </div>
+                                        @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+            <label class="control-label">Section<span class="vd_red">*</span></label>
+            <div class="input-box">
+                @Html.Partial("ddlSection")
+                <div class="text-box-msg-r">
+                </div>
+            </div>
+        </div>*@
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Stream<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlStream")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Fee Structure Group<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlFeeStructureGroup" class="select2 form-control clear validate" ng-model="FeeStructureGroupCode" ng-init="GetFeeStructureGroup();"
+                                                        ng-change="GetFeestructureWiseMonths();">
+                                                    <option value="">Select </option>
+                                                    <option ng-repeat="x in GetFeeStructureGroupList" value="{{x.Code}}">{{x.FeeStructureGroupName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlActive")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            <label class="control-label">Month Selection</label>
+                                            <div class="">
+
+                                                <div class="input-box chk-validate">
+                                                    <div class="toggle-ddl" id="openMonthList"
+                                                         ng-init="ToogleDDL('openMonthList','openMonthList')">
+                                                        @*btn-validate*@
+                                                        <button class='btn btn-primary select-btn'
+                                                                data-ng-click='openMonthList=!openMonthList'
+                                                                ng-bind="GetCount(MonthList,'Select Month')">
+                                                            Select Month
+                                                        </button>
+                                                        @*btn-validate*@
+                                                        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                                data-ng-click='openMonthList=!openMonthList'>
+                                                            <span class='fa fa-chevron-down'></span>
+                                                        </button>
+                                                        <div ng-show="openMonthList" class="ddlMultiple" ng-cloak>
+                                                            @*<div ng-click="ddlCheckAll('MonthList')">
+                                                                Check All
+                                                                <span class="btn-counts-right">Total Count: {{MonthList.length}}</span>
+                                                            </div>
+                                                            <div ng-click="ddlUnCheckAll('MonthList')">Uncheck All</div>*@
+                                                            @*<hr style="margin:0px !important" />*@
+                                                            <div ng-repeat="ml in MonthList">
+                                                                <input type="checkbox" ng-model="ml.chk" ng-value="ml.Code" ng-change="chkChange(ml)" />
+                                                                {{ml.Month}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                @*<div class="checkbox checkbox-primary check-box">
+                    <input type="checkbox" ng-model="chkAllMonth" ng-bind="chkAllMonth=(selectedMonthCount==MonthList.length?true:false)" ng-change="AllMonth()">
+                    <label>Select All</label>
+                </div>
+                <div class="text-box-msg-r2" style="font-size: 10px;font-weight: 500;">
+                    Total Selection: <label ng-model="selectedMonthCount" ng-bind="selectedMonthCount=(MonthList | filter:{'IsActive' : 'true'}).length"></label>
+                </div>
+                <div class="input-box" style="width:100%;background:#484848;position:relative; float:left; color:#fff;">
+                    <div class="checkbox checkbox-primary check-box-head">
+                        Month
+                    </div>
+                </div>*@
+
+                                            </div>
+                                            @*<div class="" style="position:relative;">
+                <div class="slimScrollDiv-height3" id="slimScrollDiv-height2">
+                    <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                        <tbody>
+                            <tr ng-repeat="XL in MonthList">
+                                <td class="srno" ng-init="XL.Srno=($index+1)">
+                                    <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                        <input type="checkbox" ng-model="XL.IsActive" ng-change="chkChange(XL)" />
+                                        <label for=""> </label>
+                                    </div>
+                                </td>
+                                <td style="float: left;display:none ">{{XL.MonthYear}}</td>
+                                <td> {{XL.Month}}</td>
+                            </tr>
+                            <tr ng-if="MonthList.length==0">
+                                <td colspan="2" class="text-center" style="height: 135px;">No Record(s) found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>*@
+                                        </div>
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            <label class="control-label">Installment/Fee Head/Mapping/Month</label>
+                                            <table id="example2" class="table table-bordered compact" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.No.</th>
+                                                        <th>Class</th>
+                                                        <th>Section</th>
+                                                        <th>Fee Head</th>
+                                                        <th>Frequency</th>
+                                                        <th>Amount</th>
+                                                        <th>Month</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="fs in FeeStructure" marge-cell-rowspan>
+                                                        <td>{{fs.Srno}}</td>
+                                                        <td>{{fs.ClassName}}</td>
+                                                        <td>{{fs.SectionName}}</td>
+                                                        <td>{{fs.FeeHeadName}}</td>
+                                                        <td>{{fs.FrequencyName}}</td>
+                                                        <td>{{fs.NetAmt}}</td>
+                                                        <td>{{fs.Month}}</td>
+                                                    </tr>
+                                                    <tr ng-if="FeeStructure.length==0">
+                                                        <td colspan="7" class="text-center">No Record(s) found.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,301 @@
+﻿@{
+    ViewBag.Title = "Digital Notice Creation Master";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/DigitalNoticeCreationController.js?Ver=@ViewBag.Version"></script>
+@*<script src="~/Content/editorbootstrap/tinymce.min.js"></script>
+<script src="~/Content/editorbootstrap/tinymce.init.js"></script>*@
+<style>
+    .PhysicallyDisable-div select {
+        display: table;
+        width: auto;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+
+    .PhysicallyDisable-div input {
+        padding-left: 90px;
+    }
+    .search-feild.search-feild-No-Search .input-box input#txtSearchBox {
+        padding: 6px 10px;
+    }
+    .search-feild .input-box button.Srch-btn {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        padding: 5px 10px;
+        line-height: 16px;
+        background: #484848;
+        color: #ffffff;
+        border-color: #556ee6;
+        border: 2px solid #484848 !important;
+    }
+    .text-box-msg-r {
+        position: absolute;
+        right: 30px;
+        top: 0px;
+        color: red;
+    }
+    .searchbox {
+        position: absolute;
+        background: #fff;
+        width: 100%;
+        z-index: 99999;
+        border: 1px solid #ccc;
+        box-shadow: 0px 4px 49.68px 4.32px rgb(159 157 157 / 70%);
+        min-height: 65px; 
+        overflow-y: auto;
+        max-height: 260px;
+    }
+    table.dataTable {
+        clear: both;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        max-width: none !important;
+        border-collapse: separate !important;
+    }
+</style>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Digital Notice Creation Master</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Global</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Digital Notice Creation Master</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Create Notice For<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" id="AllNotice" ng-model="NoticeFor" value="1" name="CreateNoticeFor" class="ng-valid ng-not-empty ng-dirty ng-touched validate" ng-change="StudentLists=[];Show=false;ClassCode='';">
+                                                            <label for="AgainstEnquiry">All</label>
+                                                        </div>
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" ng-model="NoticeFor" value="2" name="CreateNoticeFor" class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched validate" ng-change="StudentLists=[];Show=false;ClassCode='';">
+                                                            <label for="Direct">Student</label>
+                                                        </div>
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" id="TeacherNotice" ng-model="NoticeFor" value="3" name="CreateNoticeFor" class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched validate" ng-change="StudentLists=[];Show=false;ClassCode='';">
+                                                            <label for="Direct">Staff</label>
+                                                        </div>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15" ng-if="NoticeFor=='2'?true:false">
+                                                    <label class="control-label">Choose For<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" ng-model="$parent.ChooseFor" value="1" name="ChooseFor" class="ng-valid ng-not-empty ng-dirty ng-touched validate">
+                                                            <label for="AgainstEnquiry">Class Wise</label>
+                                                        </div>
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" ng-model="$parent.ChooseFor" value="2" name="ChooseFor" class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched validate">
+                                                            <label for="Direct">Individual Student</label>
+                                                        </div>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15" ng-if="NoticeFor=='3'?true:false">
+                                                    <label class="control-label">Choose For<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" id="All" ng-model="$parent.ChooseFor" value="4" name="ChooseFor" class="ng-valid ng-not-empty ng-dirty ng-touched validate">
+                                                            <label for="AgainstEnquiry">Teaching</label>
+                                                        </div>
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" ng-model="$parent.ChooseFor" value="5" name="ChooseFor" class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched validate">
+                                                            <label for="Direct"> Non-Teaching</label>
+                                                        </div>
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" ng-model="$parent.ChooseFor" value="3" name="ChooseFor" class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched validate">
+                                                            <label for="Direct">Both</label>
+                                                        </div>
+
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                               
+
+                                                
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15" ng-if="(ChooseFor=='2' ||ChooseFor=='1')&& NoticeFor=='2'">
+                                                    <label class="control-label">Class<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        @Html.Partial("ddlClass")
+                                                    </div>
+                                                </div>
+
+                                                <div ng-show="ChooseFor=='2'&& NoticeFor=='2' " class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 search-feild search-feild-No-Search">
+                                                    <label class="control-label">Select Student<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <div class="text-box-msg-r" style="left:0px !important">
+                                                        </div> 
+                                                        @Html.TextBox("txtSearchBox", "", new { @class = "form-control", @placeholder = "{{(StudentLists|filter:{Chk:true}).length==0?'Search Name':(StudentLists|filter:{Chk:true}).length+' Selection'}}", @ng_model = "SearchBox", 
+                                                        ng_disabled = "IsSearchBoxDisabled", ng_click= "ShowStudent();" })
+                                                        <div class="text-box-msg-r">
+                                                            <button class="Srch-btn" ng-click="Show=false">X</button>
+                                                        </div>
+                                                        @*Table*@
+                                                        <div ng-show="Show" class="searchbox">
+                                                            <table class="table compact table-hover table-striped table-bordered nowrap  dataTable">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Class</th>
+                                                                        <th>Name</th>
+                                                                        <th>Father</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="i in StudentLists | filter:SearchBox" class="data-ctrl" ng-show="StudentLists.length>0">
+                                                                        <td>{{i.ClassName}}</td>
+                                                                        <td>{{i.Name}}</td>
+                                                                        <td>{{i.FatherName}}</td>
+                                                                        <td class="text-align-right">
+                                                                            <input type="checkbox" value="{{i.ID}}" ng-model="i.Chk" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr ng-show="StudentLists.length==0">
+                                                                        <td colspan="4" class="text-center">
+                                                                            No Records found.
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Notice By<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <select id="ddlRole" class="select2 form-control validate" ng-model="SendBy" ng-init="GetAllRole();">
+                                                            <option value="">Select Notice By</option>
+                                                            <option ng-repeat="rl in RolesList" value="{{rl.RoleId}}" ng-disabled="!rl.IsActive">{{rl.RoleName}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Show Date<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <input type="date" ng-model="ShowDate" class="form-control validate" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">End Date<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <input type="date" ng-model="EndDate" class="form-control validate" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Notice Headline<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtNoticeHeadline", "", new { @class = "form-control clear textOnly validate", @placeholder = "", @ng_model = "NoticeHeadline" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                                    <label class="control-label">Notice Details<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        @*<div class="dropify-loader"></div>*@
+                                                        @*@Html.TextArea("txtTextEditor", "", new { @class = "form-control clear textOnly validate", @placeholder = "", @ng_model = "TextEditor" })*@
+                                                        <textarea id="TextEditor" type="text" ng-model="TextEditor" name="" class="form-control textOnly validate" style="height:30px"></textarea>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Attachment<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <div class="dropify-loader"></div>
+                                                        <input id="fuStudentPhoto" type="file" class="dropify" data-max-file-size-preview="3M" ng-model="NoticeImage" upload-files>
+                                                        <img id="imgStudentPhoto" style="display:none;">
+                                                        {{NoticeImage}}
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                    <link href="~/Content/plugins/assets/fonts/feather-icon/feather-icon.css" rel="stylesheet" />
+
+                                                    <button id="btnSearch" type="button" value="Search" class="btn-me btn-success  hvr-float-shadow" name="searchButton" data-toggle="collapse"
+                                                            data-target="#CollapseSearchTableList" aria-expanded="false" aria-controls="CollapseSearchTableList" ng-model="Search"
+                                                            ng-click="CheckSearchPermission();SearchRecord()" ng-disabled="disableSearch" @*ng-show="visibleSearch"*@>
+                                                        View Notice List
+                                                        <i data-feather="printer"></i>
+                                                    </button>
+                                                    <button id="btnSave" type="button" value="Save" class="btn-me btn-primary hvr-float-shadow" name="saveButton" ng-model="Save"
+                                                            ng-init="Save='Save'" ng-click="CheckSavePermission();SaveRecord()" ng-disabled="disableAdd">
+                                                        <span id="btnSavetxt" ng-bind="Save">Save</span>
+                                                        <i data-feather="edit"></i>
+                                                    </button>
+
+                                                    <script src="~/Content/plugins/assets/fonts/feather-icon/icons/feather-icon/feather.min.js"></script>
+                                                    <script src="~/Content/plugins/assets/fonts/feather-icon/icons/feather-icon/feather-icon.js"></script>
+                                                    <script src="~/Content/plugins/assets/fonts/feather-icon/icons/feather-icon/feather-icon-clipart.js"></script>
+
+                                                </div>
+                                            </div>
+</form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

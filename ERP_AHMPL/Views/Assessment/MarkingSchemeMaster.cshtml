@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Marking Scheme Master";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script src="~/Scripts/myjslib/MarkingSchemeMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Marking Scheme Master</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Academics</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Marking Scheme Master</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label>Academic Session</label>
+                                                @*@Html.Partial("ddlSession")*@
+                                                <select ng-disabled="clsSession" id="ddlSession" autocomplete='address-level2' class="select2 form-control validate" ng-model="SessionId" ng-init="GetSession()" ng-change="GetAllClass()">
+                                                    @*ddlSession_Change(SessionId)*@
+                                                    <option value="">Select Session</option>
+                                                    <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label>Class</label>
+                                                <select ng-disabled="clsClass" id="ddlClass" class="select2 form-control clear validate" ng-model="class" ng-init="GetAllClass();" ng-change="GetAllSubject();GetAllExam();">
+                                                    <option value="">Select Class</option>
+                                                    <option ng-repeat="classes in ClassList" value="{{classes.ClassCode}}">{{classes.ClassName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label>Subject</label>
+                                                <select ng-disabled="clsSubject" id="ddlSubject" class="select2 form-control clear validate" ng-model="Subject" ng-change="GetAllChapterWithTopic();">
+                                                    <option value="">Select Subject</option>
+                                                    <option ng-repeat="Subjects in SubjectList" value="{{Subjects.SubjectCode}}" ng-disabled="!Subjects.IsDisabled">{{Subjects.SubjectName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <div class="table-responsive" style="overflow-y: hidden;">
+                                                    <br />
+                                                    <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="6"></th>
+                                                                <th colspan={{MarksList.length}} class="text-center">Number of Questions</th>
+                                                                <th colspan="2"></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>S.No.</th>
+                                                                <th>Exam Name</th>
+                                                                <th>Book Name</th>
+                                                                <th>Chapter Name</th>
+                                                                <th>Topic Name</th>
+                                                                <th>Total Marks</th>
+                                                                <th class="text-center" ng-repeat="marks in MarksList">{{marks.Keys}}</th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="obj in ChapterTopicList" value="{{obj.ChapterCode}}">
+                                                                <td ng-bind="obj.Srno=($index+1)"></td>
+                                                                <td ng-model="obj.Code">{{obj.ExamName}}</td>
+                                                                <td ng-model="obj.BookCode">{{obj.NameOfBook}}</td>
+                                                                <td ng-model="obj.ChapterCode">{{obj.ChapterName}}</td>
+                                                                <td>{{obj.Topic}}</td>
+                                                                <td>{{obj.marks}}</td>
+                                                                <td ng-repeat="mks in obj.MarksList">
+                                                                    <input class="form-control clear text-center" type="text" ng-model="mks.NoofQuestions" ng-init="TotalMarks(obj);" ng-change="TotalMarks(obj);" /> @*ng-init="obj[mks.Marks]=0"*@                                                                   
+                                                                </td>
+                                                                <td><label ng-model="obj.Total" ng-bind="obj.Total" ng-init="obj.Total=0"></label></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-md-8 col-sm-6 col-xs-12 ">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

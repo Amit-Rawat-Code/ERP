@@ -1,0 +1,6 @@
+﻿<select id="ddlAllSchoolBranch" class="select2 form-control validate" ng-model="SchoolBranchId" ng-init="GetSchoolBranch();">
+    <option value="">Select SchoolBranch</option>
+    <option ng-repeat="schoolbranch in SchoolBranchsList" value="{{schoolbranch.SchoolCode}}">
+        {{schoolbranch.SchoolName}}
+    </option>
+</select>

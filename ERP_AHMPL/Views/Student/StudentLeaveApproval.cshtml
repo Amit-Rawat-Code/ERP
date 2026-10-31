@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "StudentLeaveApproval";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+ 
+<script src="~/Scripts/myjslib/StudentLeaveApprovalController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Student Leave Approval</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Student</span></li>
+                <li class="active"><span>Monthly Leave</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading bg-white">
+                        <div class="pull-left">
+                        </div>
+                        <div class="pull-right">
+                            <a class="pull-left inline-block mr-15" data-toggle="collapse" href="#Circular_1" aria-expanded="true">
+                                <i class="mdi mdi-chevron-down"></i>
+                                <i class="mdi mdi-chevron-up"></i>
+                            </a>
+                            <a href="#" class="pull-left inline-block refresh mr-15"  > <i class="mdi mdi-replay"></i> </a>
+                            <a href="#" class="pull-left inline-block full-screen mr-15"> <i class="mdi mdi-fullscreen"></i> </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Circular_1" class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding mgbt-xs-15">
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                    <div class="all-msg-box-list">
+                                        <div class="msg-list-header-count" ng-init="BindAllLeave()">
+                                            <h6 class="tx-list">Leave Application List <span class="tx-roboto">(<label ng-bind="CircularListCount"></label>)</span></h6>
+                                        </div>
+                                        <div class="msg-list-body">
+                                            <div class="msg-box-list-scroll">
+                                                <div class="br-msg-box-list-item" ng-click="LeaveClick(x.LeaveId,x.LeaveReason,x.StudentName,x.ClassName,x.SectionName,x.StartDate,x.EndDate)"   ng-repeat="x in BindStudentLeave"
+                                                     ng-model="cirs" >
+                                                    <div class="tx-list2">
+                                                        {{x.StudentName}}
+                                                        Class {{x.ClassName}}-{{x.SectionName}}
+                                                    </div>
+                                                    <div class="tx-list2-date-w-attach-file">
+                                                        <div class="date-format">Leave from : {{x.StartDate}} To {{x.EndDate}}</div>
+                                                         <div class="attach-file-show" ><span>{{x.Status}}</span></div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 mgbt-xs-15">
+                                    <div class="msg-show-box">
+                                        <div class="msg-show-bind"  >
+                                            <div class="msg-show-header">
+                                                <div class="tx-list2">
+                                                 <div ng-bind="StuName" type="" ng-model="StuName"></div>
+                                                </div>
+                                                <div class="tx-list2-date-w-goback">
+                                                    <div class="date-format"><div ng-bind="LeaveDate" ng-model="LeaveDate" ></div></div>
+                                                    <div class="date-format"><div ng-bind="ClassName" ng-model="ClassName"></div></div>
+                                                    <div class="back-to-main-msg-box">
+                                                        <a href="../DashBoard/DashBoard" class="go-back"><span><i class="icofont-rounded-double-left"></i>&nbsp;Go Back</span></a>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="msg-show-body">
+                                                <div class="note-box-body-scorll">
+                                                    <div class="msg-show-full-detail" ng-bind-html="trustAsHtml(BreakLine(LeaveReason))" ng-model="LeaveReason" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

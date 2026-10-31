@@ -1,0 +1,5 @@
+﻿<select id="ddlTDSDeductee" class="select2 form-control" ng-model="TDSDeducteeModel" ng-init="BindTDSDeductee();" 
+        ng-change="BindTDSDeducteeStatus(TDSDeducteeModel)" ng-disabled = "TDSdisability">
+    <option value="">Select</option>
+    <option ng-repeat="deducteelist in TDSDeducteeList" value="{{deducteelist.Code}}">{{deducteelist.Name}}</option>
+</select>

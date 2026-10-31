@@ -1,0 +1,225 @@
+﻿<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" id="printDiv" ng-init="GetReportHeaderUsingCategory('General Report');PrintVoucher()">
+    <div class="voucher-layout">
+        <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+        <table class="table table-sp">
+            <tbody>
+                <tr>
+                    <td class="sp-header2-s" colspan="4">
+                        <h3 style="margin-top:4px !important; text-decoration:none !important;"><span ng-bind="VoucherType"></span></h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sp-common-t" colspan="2" style="border-right:none;">
+                        <b>Voucher No. &nbsp;</b><span ng-bind="VoucherNo"></span>
+                    </td>
+                    <td class="sp-common-t date" colspan="2" style="border-left:0;">
+                        <b>Date:</b> <span ng-bind="VDate"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <table class="table table-sp" style="margin-bottom:10px;">
+                        <tbody>
+                            <tr>
+                                <td class="sp-common-t bb" colspan="2"><b>Particular</b></td>
+                                <td class="sp-common-t bb dr"><b>Dr.</b></td>
+                                <td class="sp-common-t bb cr"><b>Cr.</b></td>
+                            </tr>
+                            <tr ng-repeat="dd in VoucherDetailData">
+                                <td class="sp-common-t" colspan="2"><b><span ng-bind="dd.debit"></span> </b><span ng-bind="dd.Particular"></span></td>
+                                <td class="sp-common-t dr"><span ng-bind="dd.DrAmt==0?'-':dd.DrAmt"></span></td>
+                                <td class="sp-common-t cr"><span ng-bind="dd.CrAmt==0?'-':dd.CrAmt"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="sp-common-t" colspan="2"><b>Total </b></td>
+                                <td class="sp-common-t dr"><b><span ng-bind="totalDrAmt==0?'-':totalDrAmt"></span></b></td>
+                                <td class="sp-common-t cr"><b><span ng-bind="totalCrAmt==0?'-':totalCrAmt"></span></b></td>
+                            </tr>
+                            <tr>
+                                <td class="sp-common-t " colspan="4"><b>In Words </b><span ng-bind="InWords"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="sp-common-t " colspan="4"><b>Narration: </b><b><span ng-bind="VNarr"></span></b></td>
+                            </tr>
+
+                            <tr ng-if="CNCD==0? false:true">
+                                <td class="sp-common-t bb" colspan="4"><b>Chq. No. </b><span ng-bind="ChqNo"></span> <b>&nbsp;Chq. Date: </b><span ng-bind="ChqDate"></span></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="printed-on" ng-if="V_Type == 'CP' || V_Type == 'CR'">
+            <div class="box-left">
+                <b>Approved By:</b>
+                <p>&nbsp;</p>
+            </div>
+            <div class="box-right">
+                <b>Received By:</b>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+        <div class="printed-on" ng-if="V_Type == 'BP' || V_Type == 'BR' || V_Type == 'CONT' || V_Type == 'JV'">
+            <div class="box-left">
+                <b>Checked By:</b>
+                <p>&nbsp;</p>
+            </div>
+            <div class="box-right">
+                <b>Prepared By:</b>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+    </div>
+    <style>
+        .voucher-layout {
+            width: 800px;
+            margin: 30px auto 0;
+        }
+
+        .table-sp {
+            font-family: arial, sans-serif;
+            width: 100%;
+            float: left;
+            margin-bottom: 0;
+            font-size: 12px;
+            border: 1px solid #dddddd;
+        }
+
+        .table-sp > tbody > tr > td {
+                font-family: arial, sans-serif;
+                border: 1px solid #dddddd;
+                padding: 10px 10px !important;
+                font-size: 12px;
+            }
+
+        .sp-logo-s {
+            width: 150px;
+            text-align: center;
+        }
+
+        .sp-reg-no {
+            font-size: 14px;
+        }
+
+            .sp-reg-no b {
+                font-weight: 600;
+            }
+
+        .sp-header-s {
+            text-align: center;
+        }
+
+            .sp-header-s h3 {
+                font-size: 32px;
+                font-weight: 600;
+                line-height: normal;
+                text-transform: none !important;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            .sp-header-s h4 {
+                font-size: 18px;
+                font-weight: 600;
+                line-height: normal;
+                margin-bottom: 5px;
+                text-transform: none !important;
+            }
+
+            .sp-header-s h5 {
+                font-size: 15px;
+                text-transform: none !important;
+            }
+
+                .sp-header-s h5 b {
+                    font-weight: 600;
+                }
+
+        .table-sp > tbody > tr > td.bb, .table-sp > tbody > tr > td.bb {
+            border-bottom: 1px solid #dddddd !important;
+        }
+
+        .sp-header2-s {
+            text-align: center;
+        }
+
+            .sp-header2-s h3 {
+                font-size: 22px;
+                font-weight: 600;
+                line-height: normal;
+                text-transform: none !important;
+                text-decoration: underline;
+            }
+
+        .table-sp > tbody > tr > td.sp-common-t {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: normal;
+            text-transform: none !important;
+        }
+
+            .table-sp > tbody > tr > td.sp-common-t b {
+                font-weight: 600;
+                line-height: normal;
+                text-transform: none !important;
+            }
+
+        .table-sp > tbody > tr > td.dr, .table-sp > tbody > tr > td.cr {
+            width: 100px;
+            text-align: right;
+        }
+
+        .table-sp > tbody > tr > td.date {
+            text-align: right;
+        }
+
+        .table-sp > tbody > tr > td.sp-common-f-t {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+            .table-sp > tbody > tr > td.sp-common-f-t .text-l {
+                text-align: left;
+                float: left;
+            }
+
+            .table-sp > tbody > tr > td.sp-common-f-t .text-c {
+                text-align: center;
+            }
+
+            .table-sp > tbody > tr > td.sp-common-f-t .text-r {
+                text-align: right;
+                float: right;
+            }
+
+        .printed-on {
+            float: left;
+            width: 100%;
+            padding: 25px 10px 0;
+        }
+
+            .printed-on .box-left {
+                float: left;
+                width: 30%;
+            }
+
+            .printed-on b {
+                float: left;
+            }
+
+            .printed-on p {
+                margin-top: -6px;
+                border-bottom: dashed 1px #000;
+                width: 62%;
+                float: left;
+            }
+
+            .printed-on .box-right {
+                float: right;
+                width: 31%;
+            }
+    </style>
+</div>

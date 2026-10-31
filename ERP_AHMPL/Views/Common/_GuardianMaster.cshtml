@@ -1,0 +1,1360 @@
+﻿@{
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="myApp" ng-controller="myController" ng-cloak>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title ng-if="title.length>0" ng-model="title" ng-bind="title">@ViewBag.Title</title>
+    <title ng-if="title==null">@ViewBag.Title</title>
+    <title ng-if="title.length==0">@ViewBag.Title</title>
+
+    <!-- FAVICON ICON -->
+    <link rel="icon" href="@Url.Content("~/Content/img/favicon.png")" type="image/x-icon">
+
+    @RenderSection("head", required: false)
+
+
+    <!--alerts CSS -->
+    <!-- Tooltipster css -->
+    <link href="@Url.Content("~/Content/plugins/vendors/bower_components/tooltipster/tooltipster.bundle.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/plugins/vendors/bower_components/sweetalert/dist/sweetalert.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/Content/plugins/assets/css/default.css?Ver="+ViewBag.Version+"")" rel="stylesheet" />
+    @*<link href="@Url.Content("~/Content/plugins/assets/fonts/Ionicons/css/ionicons.css?Ver="+ViewBag.Version+"")" rel="stylesheet" />*@
+    <link href="@Url.Content("~/Content/plugins/assets/fonts/boxicons/css/boxicons.min.css?Ver="+ViewBag.Version+"")" rel="stylesheet" />
+    @*<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css")" />
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/css/buttons.dataTables.min.css")" />
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css")" />*@
+
+
+    @RenderSection("styles", required: false)
+    <link href="@Url.Content("~/Content/CustomDDlCSS.css")" rel="stylesheet" />
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/jscolor.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/myJs.js?Ver="+ViewBag.Version+"")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.js")"></script>
+    @*<script src="~/Scripts/maps/map.js?key=AIzaSyCx1-t55JuyYxAhEGZNZQhCen5rYLX2gBM"></script>*@
+    @*<script src="~/Scripts/maps/map.js?key=AIzaSyCx1-t55JuyYxAhEGZNZQhCen5rYLX2gBM&callback=initMap"
+        async defer></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/angular.min.js")"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap-tpls.js'></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/angular-sanitize.min.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/angular-filter.min.js")"></script>
+
+    @*<script src="~/scripts/textextenderui-bootstrap-tpls-0.12.0.js"></script>*@
+    <script src="@Url.Content("~/Scripts/ng-map.js")"></script>
+    <script src="@Url.Content("~/Scripts/ng-currency.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/app.js?Ver="+ViewBag.Version+"")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/service.js?Ver="+ViewBag.Version+"")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/service0265.js?Ver="+ViewBag.Version+"")"></script>*@
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/controller.js?Ver="+ViewBag.Version+"")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/GetMasterController.js?Ver="+ViewBag.Version+"")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/SwitchSchoolController.js?Ver="+ViewBag.Version+"")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/NavigationController.js?Ver="+ViewBag.Version+"")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/ddlBindings.js?Ver="+ViewBag.Version+"")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/controller0265.js?Ver="+ViewBag.Version+"")"></script>*@
+
+    <script>
+        $(window).ready(function FindWindow() {
+
+            var InW = $(window).width();
+            var InH = $(window).height();
+
+            var IfSetHeight;
+            if (InW > 1024) {
+                IfSetHeight = InH - 126;
+                $('.iframe-wrapper').find('.iframedesign ').css({ "height": IfSetHeight });
+            }
+            else {
+                IfSetHeight = InH - 132;
+                $('.iframe-wrapper').find('.iframedesign ').css({ "height": IfSetHeight });
+                //$('.iframe-wrapper').find('.iframedesign ').css({ "width": InW });
+            }
+            $('input').removeAttr('readonly');
+        });
+
+        $(window).on('resize', function () {
+            var InW = $(window).width();
+            var InH = $(window).height();
+
+            var IfSetHeight;
+            if (InW > 1024) {
+                IfSetHeight = InH - 126;
+                $('.iframe-wrapper').find('.iframedesign ').css({ "height": IfSetHeight });
+            }
+            else {
+                IfSetHeight = InH - 132;
+                $('.iframe-wrapper').find('.iframedesign ').css({ "height": IfSetHeight });
+                //$('.iframe-wrapper').find('.iframedesign ').css({ "width": InW });
+            }
+            $('input').removeAttr('readonly');
+        })
+    </script>
+    <style>
+        div#ModalSwitchSchool {
+            padding: 5px !important;
+        }
+
+        .school-switch-modal .design-part {
+            display: table;
+            width: 100%;
+        }
+
+        .school-switch-modal .modal-footer {
+            background: #4680ff;
+            margin-top: -5px;
+            padding: 15px 30px;
+            text-align: left;
+        }
+
+        .school-switch-modal .form-panel .form-panel-heading {
+            font-size: 12px;
+        }
+
+        .school-switch-modal .form-panel .form-panel-heading {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .school-switch-modal .modal-title {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .school-switch-modal img.current-login-logo {
+            height: 75px;
+            margin: 0 auto;
+            display: table;
+            margin-bottom: 15px;
+        }
+
+        .school-switch-modal h3.current-login-title {
+            font-size: 14px;
+            margin: 0px;
+            color: #606060;
+            font-weight: 400;
+            text-align: center;
+            line-height: 18px;
+        }
+
+        .school-switch-modal h3.current-login-sub-title {
+            font-size: 14px;
+            margin: 0px;
+            color: #4680ff;
+            font-weight: 400;
+        }
+
+        div#ModalSwitchSchool .modal-dialog.modal-lg {
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .school-switch-modal .school-details h3.current-login-title span {
+            font-weight: 500;
+            color: #666;
+            display: inline-block;
+            padding: 0px 5px;
+        }
+
+        .school-switch-modal .school-details h3.current-login-title {
+            font-size: 12px;
+            color: #1453dd;
+            font-weight: 500;
+            line-height: 18px;
+        }
+
+        .panel-shadow {
+            box-shadow: rgb(135, 135, 135) 0px 2px 10px -1px;
+        }
+
+        .row.switch-icon-fit {
+            position: relative;
+        }
+
+            .row.switch-icon-fit svg {
+                position: absolute;
+                left: 50%;
+                height: 20px !important;
+                width: 20px !important;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+        .school-switch-modal .form-panel {
+            margin: 0px 0px 25px 0px;
+        }
+
+        .school-switch-modal .school-details h3.current-login-title.branch-address {
+            min-height: 40px;
+        }
+
+        .school-switch-modal .row.form-panel-body {
+            margin-top: -25px;
+        }
+
+        .school-switch-modal .modal-body {
+            padding-bottom: 0px;
+            padding-top: 22px;
+        }
+
+        @@media only screen and (max-width: 767px) {
+            .row.switch-icon-fit {
+                position: relative;
+                flex-direction: column;
+            }
+
+                .row.switch-icon-fit .form-panel.panel-shadow .row.form-panel-body {
+                    flex-direction: column;
+                }
+
+                .row.switch-icon-fit svg {
+                    margin-top: -13px;
+                }
+        }
+    </style>
+
+</head>
+@*ng-init="NavMenu()"*@
+<body class="theme-orange" ng-model="facog" ng-init="facog=false">
+    <div id="cover-spin">
+        <script>$('#cover-spin').show(0);</script>
+    </div>
+    <script>
+        $(window).ready(function () {
+            $('#cover-spin').hide()
+        });
+    </script>
+    <div class="wrapper light-theme slide-nav-toggle">
+        <div id="IframeUpperLayer"></div>
+        <!-- Top Header -->
+        <nav class="navbar navbar-inverse navbar-fixed-top navbar-top-bg">
+
+            <div class="mobile-only-brand pull-left">
+                <div class="nav-header pull-left">
+                    <div class="logo-wrap">
+                        <div class="mobile-logo-box">
+                            <a href="@Url.Action("QuickLinksDashBoard", "DashBoard")" data-toggle="tooltip" data-placement="top" data-original-title="Logo" tooltip>
+                                <div class="panel-logo-box hidden-xs hidden-sm hidden-md">
+                                    @*<img class="brand-img" src="" ng-src="{{DashBoardLogoSmall}}" alt="Vidya Well" />*@
+                                    <img class="brand-img" src="@Url.Content("~/Content/plugins/assets/img/admin-logo.png")" alt="Vidya Well" />
+                                </div>
+                                <div class="panel-logo-box-title">
+                                    @*<img class="brand-img2" src="" ng-src="{{DashBoardLogo}}" alt="Vidya Well" />*@
+                                    <img class="brand-img2" src="@Url.Content("~/Content/plugins/assets/img/vidyawell-logo-full.png")" alt="Vidya Well" />
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @*ng-if="MenuList.length > 0"*@
+
+                <div class="pull-left">
+                    <a id="toggle-btn" class="toggle-left-nav-btn inline-block pull-left" href="javascript:void(0);"><i class="bx bx-left-indent"></i></a>
+
+                    <a id="toggle-btn-modules" class="toggle-left-nav-btn toggle-left-nav-btn2 inline-block pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Modules">
+                        <i class="bx bx-customize" ng-init="GetModule();"></i>
+                        @*<i class="bx bx-customize"></i>*@
+                    </a>
+
+                    <div class="Selected-Module-Tab inline-block pull-left module-title" ng-show="MenuList.length>0">
+                        <div class=" ">
+                            <i ng-model="ModuleIcon" class="{{ModuleIcon}} mr-12 " data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Selected Module"></i>
+                            <span ng-model="ModuleTextName">{{ModuleTextName}}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="fixed-sidebar-top-for-modules point-module-box">
+                        <ul class="top-modules-nav">
+                            <li ng-repeat="module in NavigationData | unique:'ModuleName'">
+
+
+                                <a href="" ng-click="GetMenu(module.ModuleId);ModuleIcon=module.ModuleIcon;ModuleTextName=module.ModuleName;">
+                                    <div class="mega-menu-box-content">
+                                        <i class="{{module.ModuleIcon}} mr-12"></i>
+                                        <span class="right-nav-text">{{module.ModuleName}}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    @*<div class="fixed-sidebar-top-for-modules point-module-box">
+                            <ul class="top-modules-nav">
+                                <li>
+                                    <a href="">
+                                        <div class="mega-menu-box-content">
+                                            <i class="icofont-man-in-glasses mr-12"></i>
+                                            <span class="right-nav-text ng-binding">User Management</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="mega-menu-box-content">
+                                            <i class="icofont-man-in-glasses mr-12"></i>
+                                            <span class="right-nav-text ng-binding">Enquiry Management</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>*@
+                </div>
+                <div class="pull-left">
+                    <a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);"><i class="mdi mdi-more"></i></a>
+                </div>
+            </div>
+
+            <div id="mobile_right_sidebar" class="mobile-right-sidebar pull-right">
+                <ul class="nav navbar-right top-nav pull-right manage-box">
+
+
+                    <li class="branch-box">
+                        <div class="branch-box-main">
+                            <div class="branch-logo-box ">
+                                <img class="branch-logo" src="../Content/plugins/login/images/RSYSIC-logo.png" ng-src="{{Logo}}" alt="" />
+                            </div>
+                            <div class="branch-box branch-name-box">
+                                <h4 class="bb-school-name" title="{{SchoolName}}">{{SchoolName}}</h4>
+                                @*<h5 class="bb-branch-name">{{BranchName}}</h5>
+
+                                    <h4 class="bb-school-name">Super House Education</h4>*@
+                                <h5 class="bb-branch-name" title="{{SchoolAddress}}">{{SchoolAddress}}</h5>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown alert-drp">
+                        <a href="#" id="session" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="bx bx-calendar-star top-nav-icon" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Session"></i>
+                        </a>
+
+                        <div class="vd_mega-menu-content left-sm dropdown-menu alert-dropdown session right-xs" role="menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                            <ul id="session-menu">
+                                @*<li role="presentation" ng-repeat="x in SessionList">
+                                        <a href="#" id="{{x.SessionId}}" class="session-show-box" style='border-color:{{Color[x.SessionId]}}' ng-init="SetColor(x.SessionId);">
+                                            <div class="session-title-box" ng-click="ChangeSession(x.SessionId,x.SessionName)" value="{{x.SessionId}}">
+                                                <div class="session-name">{{x.SessionName}}</div>
+                                                <div class="session-name2">{{x.UsingSession}}</div>
+                                            </div>
+                                        </a>
+                                    </li>*@
+
+                                <li role="presentation">
+                                    <a href="#" id="1" class="session-show-box" style='border-color:green'>
+                                        <div class="session-title-box" value="1">
+                                            <div class="session-name">2021-2022</div>
+                                            <div class="session-name2">2021-2022</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    @*<li class="dropdown alert-drp">
+
+                        <a href="" ng-click="ShowPopup();" class="dropdown-toggle">
+                            <i class="fa fa-window-restore top-nav-icon"></i>
+                        </a>
+
+                    </li>*@
+                    @*ng-show="lblNcount>0"*@
+                    <li> <a id="open_right_sidebar" href="#"><i class="bx bx-bell top-nav-icon bx-tada" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Notification"></i><span class="top-nav-icon-badge btn-sonar"><label id="lblNcount">12</label></span></a> </li>
+
+
+                    @*<li>
+                            <a title="Change Password" href="" data-path="@Url.Action("ChangePassCode", "ChangePassCode")" ng-click="SelectIfram('/ChangePassCode/ChangePassCode','ChangePassCode')"><i class="pe-7s-config top-nav-icon"></i></a>
+
+                        </li>*@
+
+                    <li class="dropdown auth-drp">
+                        <a href="#" class="dropdown-toggle avtar-drop-box" data-toggle="dropdown">
+                            <div class="profile-cover-pic-box">
+                                <img src='../Content/Photos/no-image.png' ng-src={{PhotoPath}} alt="User Picture" class="user-auth-img " />
+                            </div>
+                            @*<span class="user-online-status"></span>*@
+                        </a>
+                        <div class="vd_mega-menu-content left-sm dropdown-menu alert-dropdown main-user-profile-box right-xs pad-0" role="menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                            <div class="user-profile-box-bg profile-box">
+                                <div class="profile-cover-pic">
+                                    @*<div class="profile-image-overlay profile_bg"></div>*@
+                                </div>
+                                <div class="user-profile-box">
+                                    <div class="user-auth-img-box">
+                                        <img src='../Content/Photos/no-image.png' ng-src={{PhotoPath}} alt="User Picture" class="user-auth-img " />
+                                    </div>
+                                    <div class="login-user-name">{{ProfileName}}</div>
+                                    @*<div class="login-user-name">Mohit Gupta</div>*@
+                                    @*<div class="login-user-designation">(<span ng-bind="Designation"></span>)</div>*@
+                                    <div class="login-user-designation">(Student)</div>
+                                    <div class="last-login-time-box">
+                                        <span>Last Login Time  </span>
+                                        <span ng-model="LastLogin" ng-bind="LastLogin"></span>
+                                    </div>
+                                    <input type="hidden" id="hfCode" ng-model="Code" ng-value="Code" />
+                                </div>
+                            </div>
+                            <div class="profile-menu-box">
+                                <ul class="profile-menu-list">
+                                    <li> <a href="#"><i class="bx bx-user"></i><span>View Profile</span></a> </li>
+                                    @*<li> <a title="Change Password" href="" data-path="@Url.Action("ChangePassCode", "ChangePassCode")" ng-click="SelectIfram('/ChangePassCode/ChangePassCode','ChangePassCode')"><i class="bx bx-lock"></i><span>Change Password</span></a> </li>*@
+                                    <li> <a id="logout" href="" title="Logout" ng-click="Logout();"><i class="bx bx-exit"></i><span>LogOut</span></a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    @*<li class="dropdown alert-drp logout-box">
+                            <a id="logout" href="" ng-click="Logout();"><i class="bx bx-exit top-nav-icon" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Logout"></i></a>
+
+                        </li>*@
+                </ul>
+            </div>
+            <div class="academic-session"> <span>Academic Session</span> {{AcademicSession}}</div>
+        </nav>
+        <!-- /Top Menu Items class="active-page" -->
+        <!-- Left Sidebar Menu -->
+        <div class="fixed-sidebar-left app-sidebar" ng-show="MenuList.length>0">
+            <ul class="nav navbar-nav side-nav nicescroll-bar" ng-show="MenuList.length>0">
+                <li ng-repeat="menu in MenuList" ng-model="SelectMenu">
+                    @*| unique:'MenuName'*@
+
+                    <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu{{menu.MenuId}}" title={{menu.MenuName}}
+                       ng-click="GetSubMenu(menu.MenuId,$index);">
+                        <div class="pull-left">
+                            <i class="{{menu.MenuIcon}}"></i>
+                            <span class="right-nav-text">{{menu.MenuName}}</span>
+                        </div>
+                        <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                        <div class="clearfix"></div>
+                    </a>
+                    <ul id="Menu{{menu.MenuId}}" class="collapse collapse-level-1" ng-model="menu.SubMenuList">
+                        <li ng-repeat="submenu in menu.SubMenuList" ng-model="SelectSubMenu">
+                            <a class="selectifram" href="" data-path={{submenu.SubMenuPath}}
+                               ng-click="SelectIfram(submenu.SubMenuPath,submenu.SubMenuName);showModuleIcon();" title={{submenu.SubMenuName}}>
+                                <div class="pull-left">
+                                    <i class="{{submenu.SubMenuIcon}}"></i>
+                                    <span class="right-nav-text">{{submenu.SubMenuName}}</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
+            <div _ngcontent-c0="" class="sidebar-background menu-bg-6 menu-bg-c7"></div>
+        </div>
+        @*<div class="fixed-sidebar-left app-sidebar">
+                <ul class="nav navbar-nav side-nav nicescroll-bar">
+                    <li>
+                        <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu3" title='Master'>
+                            <div class="pull-left">
+                                <i class="mdi mdi-chevron-right"></i>
+                                <span class="right-nav-text">DashBoard</span>
+                            </div>
+                            <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="Menu3" class="collapse collapse-level-1">
+                            <li>
+                                <a class="selectifram" href="" data-path="/DashBoard/EnquiryDashBoradLevel1"
+                                   ng-click="SelectIfram('/DashBoard/EnquiryDashBoradLevel1','Enquiry DashBorad');" title="Class Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Lavel-1 DashBaord</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu1" title='Master'>
+                            <div class="pull-left">
+                                <i class="mdi mdi-chevron-right"></i>
+                                <span class="right-nav-text">Master</span>
+                            </div>
+                            <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="Menu1" class="collapse collapse-level-1">
+                            <li>
+                                <a class="selectifram" href="" data-path="/EnquiryMaster/CityAreaMaster"
+                                   ng-click="SelectIfram('/EnquiryMaster/CityAreaMaster','CityArea Master');" title="Class Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">City Area Master</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/EnquiryMaster/EnquiryTypeMaster"
+                                   ng-click="SelectIfram('/EnquiryMaster/EnquiryTypeMaster','Enquiry Type Master');" title="Class Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Enquiry Type Master</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/EnquiryMaster/EnquirySourceMaster"
+                                   ng-click="SelectIfram('/EnquiryMaster/EnquirySourceMaster','Enquiry Source Master');" title="Class Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Enquiry Source Master</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu2" title='Master'>
+                            <div class="pull-left">
+                                <i class="mdi mdi-chevron-right"></i>
+                                <span class="right-nav-text">Transaction</span>
+                            </div>
+                            <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="Menu2" class="collapse collapse-level-1">
+                            <li>
+                                <a class="selectifram" href="" data-path="/EnquiryTransaction/EnquiryFormForSocialMediaWebsite"
+                                   ng-click="SelectIfram('/EnquiryTransaction/EnquiryFormForSocialMediaWebsite','Enquiry Form For Social Media/Website');" title="Class Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Enquiry Form For WebSite/Social Media</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/EnquiryTransaction/EnquiryForm"
+                                   ng-click="SelectIfram('/EnquiryTransaction/EnquiryForm','Enquiry Form');" title="Class Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Enquiry Form Entry</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu4" title='Master'>
+                            <div class="pull-left">
+                                <i class="mdi mdi-chevron-right"></i>
+                                <span class="right-nav-text">Report</span>
+                            </div>
+                            <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="Menu4" class="collapse collapse-level-1">
+                            <li>
+                                <a class="selectifram" href="" data-path="/EnquiryReport/EnquiryRegisterReport"
+                                   ng-click="SelectIfram('/EnquiryReport/EnquiryRegisterReport','Enquiry Register');" title="Class Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Enquiry Register</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/EnquiryReport/MonthlyEnquiryStatisticsReport"
+                                   ng-click="SelectIfram('/EnquiryReport/MonthlyEnquiryStatisticsReport','Monthly Enquiry Statistics');" title="Class Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Monthly Enquiry Statistics</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu7" title='Master'>
+                            <div class="pull-left">
+                                <i class="mdi mdi-chevron-right"></i>
+                                <span class="right-nav-text">Master</span>
+                            </div>
+                            <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="Menu7" class="collapse collapse-level-1">
+                            <li>
+                                <a class="selectifram" href="" data-path="/Master/GroupMaster"
+                                   ng-click="SelectIfram('/Master/GroupMaster','Group Master');" title="Group Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Group Master</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/Master/SocietyMaster"
+                                   ng-click="SelectIfram('/Master/SocietyMaster','Scociety Master');" title="Scociety Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Society Master</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/Master/SchoolMaster"
+                                   ng-click="SelectIfram('/Master/SchoolMaster','School Master');" title="School Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">School Master</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/Master/BranchMaster"
+                                   ng-click="SelectIfram('/Master/BranchMaster','Branch Master');" title="Branch Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Branch Master</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu5" title='Master'>
+                            <div class="pull-left">
+                                <i class="mdi mdi-chevron-right"></i>
+                                <span class="right-nav-text">Master</span>
+                            </div>
+                            <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="Menu5" class="collapse collapse-level-1">
+                            <li>
+                                <a class="selectifram" href="" data-path="/EnquiryMaster/CityAreaMaster"
+                                   ng-click="SelectIfram('/UserMaster/UserMaster','User Master');" title="User Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">User Master</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/EnquiryMaster/EnquiryTypeMaster"
+                                   ng-click="SelectIfram('/Role/RoleMaster','Role Master');" title="Role Master">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Role Master</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu6" title='Master'>
+                            <div class="pull-left">
+                                <i class="mdi mdi-chevron-right"></i>
+                                <span class="right-nav-text">Transaction</span>
+                            </div>
+                            <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="Menu6" class="collapse collapse-level-1">
+                            <li>
+                                <a class="selectifram" href="" data-path="/UserTransaction/RoleOptions"
+                                   ng-click="SelectIfram('/UserTransaction/RoleOptions','Role Option');" title="Role Option">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Role Option</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/UserTransaction/UserRoleAssignments"
+                                   ng-click="SelectIfram('/UserTransaction/UserRoleAssignments','User Role Assignments');" title="User Role Assignments">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">User Role Assignments</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/UserTransaction/UserPermission"
+                                   ng-click="SelectIfram('/UserTransaction/UserPermission','User Permission');" title="User Permission">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">User Permission</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="selectifram" href="" data-path="/UserTransaction/SchoolWisePermission"
+                                   ng-click="SelectIfram('/UserTransaction/SchoolWisePermission','User Permission School Wise');" title="User Permission">
+                                    <div class="pull-left">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="right-nav-text">Modify User Wise School Wise Permission</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div _ngcontent-c0="" class="sidebar-background menu-bg-6 menu-bg-c7"></div>
+            </div>*@
+
+        <!-- /Left Sidebar Menu -->
+        <!-- Right Sidebar Menu -->
+        <div class="fixed-tab-menu-sidebar-right">
+            <div class="more-than-tab-v">
+                <a id="open_right_sidebar_tab_menu_box" href="#" title="Recent Open Pages"><i class="mdi mdi-step-forward"></i></a>
+            </div>
+            <div class="more-than-tab-v2">
+                <a id="toggle-fullscreen" href="#" title="Windows Resizer"><i id="change-icon" class="glyphicon glyphicon-fullscreen"></i></a>
+            </div>
+            <div class="more-than-tab-v3">
+                <a id="toggle-Top-Navigation" href="#" title="Remove Top  Navigation Bar"><i class="fa fa-arrows-v"></i></a>
+            </div>
+            <div class="more-than-tab-v4">
+                <a id="toggle-Left-Navigation" href="#" title="Remove Left Navigation Bar"><i class="fa fa-arrows-h"></i></a>
+            </div>
+            <ul class="right-sidebar">
+                <li>
+                    <div class="recent-open-tab-h">
+                        <h3 class="inline-block txt-dark">Recent Open Pages</h3>
+                        <a href="javascript:void(0)" id="CloseRecentOpenPages" class="inline-block txt-grey" title="Close Tab"> <i class="icofont-close-line close-box"></i> </a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <ul class="right-side-menu-tab-bind"></ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /Right Sidebar Menu -->
+        <!-- Right Sidebar Menu -->
+        <div class="fixed-sidebar-right">
+            <ul class="right-sidebar">
+                <li>
+                    <div class="tab-struct user-tabs">
+
+                        <div class="tab-content" id="right_sidebar_content">
+                            <div id="notification_tab" class="tab-pane fade active in" role="tabpanel">
+                                <div class="chat-cmplt-wrap">
+                                    <div class="chat-box-wrap">
+                                        <div class="add-friend">
+                                            <span class="inline-block txt-dark">Notification List</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="chat_list_scroll">
+                                            <div class="nicescroll-bar">
+                                                <ul class="chat-list-wrap">
+                                                    <li class="chat-list">
+                                                        <div class="chat-body">
+                                                            <div class="notification-item" ng-repeat="x in AllNotification" ng-model="Notification">
+                                                                <a href="" data-path="{{x.link}}" ng-click="SelectIframForNID(x.link,x.TransId,x.UserId,'NotificationList')" title="List">
+
+                                                                    <div class="notification-data">
+                                                                        <div class="notification-img-type">
+                                                                            <div class="notification-img">
+                                                                                <img class="user-bg img-circle" src="#"
+                                                                                     ng-src="{{x.Notification.length>0?'../Content/plugins/assets/img/icons/seo-developement/'+x.Notification+'-Notification.svg':''}}" title="{{x.Notification=='N'?'Notice':(x.Notification=='P'?'PTM':(x.Notification=='H'?'Homework':(x.Notification=='C'?'Circule':'')))}}" alt="">
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="notification-content">
+                                                                            <span class="n-content block truncate capitalize-font">{{x.Title}}</span>
+                                                                            <span class="date txt-grey">{{x.CreatedOn}}</span>
+                                                                            <span class="eye-action" data-original-title="{{x.Status}}" data-toggle="tooltip" data-placement="bottom"><i class="{{x.addclass}}"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <div class="notification-respond-box" id="dvrevertmsg" style="display:{{x.display}}">
+                                                                    <div class="notification-respond-msg">
+                                                                        Respond this msg.
+                                                                        <div class="notification-respond-input">
+                                                                            <input type="button" class="respond-btn pro-btn pro1" ng-click="responsemsg(x.Title,x.UserId,x.SlotMessage,x.TransId,1)" value="Yes" />
+                                                                            <input type="button" class="respond-btn pro-btn pro2" id="btnrevertmsg" ng-click="responsemsg(x.Title,x.UserId,x.SlotMessage,x.TransId,0)" value="No" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <label class="revert-msg" id="lblrevertmsg"></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="recent-chat-box-wrap">
+                                        <div class="recent-chat-wrap">
+                                            <div class="panel-heading ma-0">
+                                                <div class="goto-back">
+                                                    <a id="goto_back" href="javascript:void(0)" class="inline-block txt-grey"> <i class="mdi mdi-chevron-left"></i> </a> <span class="inline-block txt-dark">Max</span> <a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="mdi mdi-more"></i></a>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-wrapper collapse in">
+                                                <div class="panel-body pa-0">
+                                                    <div class="chat-content">
+                                                        <ul class="nicescroll-bar pt-20">
+                                                            <li class="friend">
+                                                                <div class="friend-msg-wrap">
+                                                                    <img class="user-img img-circle block pull-left" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-2.jpg")" alt="user" />
+                                                                    <div class="msg pull-left">
+                                                                        <p class="msng-name">Sam Wrote:</p>
+                                                                        <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet?</p>
+                                                                        <div class="msg-per-detail text-right"> <span class="msg-time txt-grey">5:01 PM</span> </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="self mb-10">
+                                                                <div class="self-msg-wrap">
+                                                                    <div class="msg block pull-right">
+                                                                        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet
+                                                                        <div class="msg-per-detail text-right"> <span class="msg-time txt-light">5:01 pm</span> </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="self">
+                                                                <div class="self-msg-wrap">
+                                                                    <div class="msg block pull-right">
+                                                                        Consectetur, adipisci velit.
+                                                                        <div class="msg-per-detail text-right"> <span class="msg-time txt-light">5:13 pm</span> </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="friend">
+                                                                <div class="friend-msg-wrap">
+                                                                    <img class="user-img img-circle block pull-left" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-2.jpg")" alt="user" />
+                                                                    <div class="msg pull-left">
+                                                                        <p class="msng-name">Sam Wrote:</p>
+                                                                        <p>Neque porro quisquam.</p>
+                                                                        <div class="msg-per-detail  text-right"> <span class="msg-time txt-grey">6:35 pm</span> </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <input type="text" id="input_msg_send" name="send-msg" class="input-msg-send form-control" placeholder="Type something">
+                                                        <div class="input-group-btn emojis">
+                                                            <div class="dropup">
+                                                                <button type="button" class="btn  btn-default  dropdown-toggle" data-toggle="dropdown"><i class="mdi mdi-mood"></i></button>
+                                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                                    <li><a href="javascript:void(0)">Action</a></li>
+                                                                    <li><a href="javascript:void(0)">Another action</a></li>
+                                                                    <li class="divider"></li>
+                                                                    <li><a href="javascript:void(0)">Separated link</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-group-btn attachment">
+                                                            <div class="fileupload btn  btn-default">
+                                                                <i class="mdi mdi-attachment-alt"></i>
+                                                                <input type="file" class="upload">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="messages_tab" class="tab-pane fade" role="tabpanel">
+                                <div class="message-box-wrap">
+                                    <div class="add-friend">
+                                        <span class="inline-block txt-dark">messages</span> <a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="mdi mdi-search"></i></a> <a href="javascript:void(0)" class="inline-block txt-grey"> <i class="mdi mdi-more"></i> </a>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="set-height-wrap">
+                                        <div class="streamline message-box nicescroll-bar">
+                                            <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-2.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Peter Wyatt</span> <span class="inline-block font-11  pull-right message-time">12:28 AM</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-1.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Vivian Rox</span> <span class="inline-block font-11  pull-right message-time">1 Feb</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-3.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Mr. Danielle</span> <span class="inline-block font-11  pull-right message-time">31 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur nominees</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-4.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Tom Taylor</span> <span class="inline-block font-11  pull-right message-time">29 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-5.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Mitch Blue</span> <span class="inline-block font-11  pull-right message-time">27 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam.</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-2.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Michelle</span> <span class="inline-block font-11  pull-right message-time">19 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam es.</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-1.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Linda Stack</span> <span class="inline-block font-11  pull-right message-time">13 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam.</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div id="settings_tab" class="tab-pane fade" role="tabpanel">
+                                    <div class="settings-box-wrap">
+                                        <div class="add-settings text-center txt-dark pt-15">
+                                            General Settings
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="set-height-wrap">
+                                            <!-- settings-List -->
+                                            <ul class="settings-list nicescroll-bar">
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">Email Notifications</div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">Site Tracking</div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" checked class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">SMS Alerts </div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">Backup Storage</div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" checked class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">Audit Logs</div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="add-settings text-center txt-dark pt-15">
+                                                        SYSTEM SETTINGS
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">System Logs </div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">Error Reporting </div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" checked class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">Applications Logs </div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" checked class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">Backup Servers</div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                                <li class="settings-item">
+                                                    <div class="list-settings">
+                                                        <div class="pull-left">Audit Logs</div>
+                                                        <div class="pull-right">
+                                                            <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <!-- /settings-List -->
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /Right Sidebar Menu -->
+        <!-- Main Content -->
+        @*<div class="page-wrapper {{MenuList.length==0 || MenuList==null?'no-menu-bind':''}}">*@
+        <div class="page-wrapper">
+            @RenderBody()
+            <div id="msgbox" style="display:none">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong><i id="faicon"></i> </strong> <label id="lblmsg"></label>
+            </div>
+            <!-- Footer -->
+            <footer class="footer container-fluid ">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="pull-left session-box  hidden-xs"> Academic Session {{AcademicSession}}  &nbsp; | &nbsp; Financial Year {{FinancialYear}} &nbsp; | &nbsp; School Code {{DisplayCode}}</div>
+                        <div class="pull-right copyright-box ">
+                            @*Copyright © 2020 Vidya Well. All Rights Reserved &nbsp; | &nbsp;*@
+                            Powered by <a href="https://superhouseeducation.com/" target="_blank">Superhouse Education Foundation</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </footer>
+            <!-- /Footer -->
+        </div>
+        <!-- /Main Content -->
+    </div>
+
+    <style>
+        .modal-footer-30 {
+            padding: 30px;
+    </style>
+    <!-- Modal ModalSwitchSchool -->
+    <!--<div class="modal fade school-switch-modal" id="ModalSwitchSchool" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">School Switch</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-panel">
+                        <h5 class="form-panel-heading">Switch To<span class="vd_red"></span></h5>
+                        <div class="row form-panel-body">
+                            <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <label class="control-label">Academic Session</label>
+                                <div class="input-box">
+                                    <select id="ddlAllotedSession" autocomplete='address-level2' class="select2 form-control"
+                                            ng-model="SessionId" ng-change="ddlSession_Change()">
+                                        <option value="">Select Session</option>
+                                        <option ng-repeat="sl in AllotedSessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                    </select>-->
+                                    @*@Html.Partial("ddlAllotedSession")*@
+                                    <!--<div class="text-box-msg-r">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <label class="control-label">Financial Year</label>
+                                <div class="input-box">
+                                    <select id="ddlAllotedFinancialYear" autocomplete='address-level2' class="select2 form-control"
+                                            ng-model="FinancialYearId">
+                                        <option value="">Select FinancialYear</option>
+                                        <option ng-repeat="sl in AllotedFinancialYearList" value="{{sl.FinancialYearId}}">{{sl.FinancialYearName}}</option>
+                                    </select>-->
+                                    @*@Html.Partial("ddlAllotedFinancialYear")*@
+                                    <!--<div class="text-box-msg-r">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <label class="control-label">School</label>
+                                <div class="input-box">
+                                    <select id="ddlAllotedSchoolSessionWise" autocomplete='address-level2' class="select2 form-control"
+                                            ng-model="RelationshipId" ng-change="ddlSchool_Change(RelationshipId)">
+                                        <option value="">Select School</option>
+                                        <optgroup ng-repeat="asl in AllotedSchoolList" label="{{$index+1}}.{{asl.BranchName}}-{{asl.BranchAddress}}">
+                                            <option value="{{asl.RelationshipId}}">{{asl.BranchName}}-{{asl.DisplayCode}}</option>
+                                        </optgroup>-->
+                                        @*<option value="">Select School</option>
+                                            <option ng-repeat="asl in AllotedSchoolList" value="{{asl.RelationshipId}}">{{asl.BranchName}}-{{asl.DisplayCode}}</option>*@
+                                    <!--</select>-->
+                                    @*@Html.Partial("ddlAllotedSchool")*@
+                                    <!--<div class="text-box-msg-r">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row switch-icon-fit">
+                        <div class="col-sm-6">
+                            <div class="form-panel panel-shadow">
+                                <h5 class="form-panel-heading">Currently Login In<span class="vd_red"></span></h5>
+                                <div class="row form-panel-body">
+                                    <div class="col-sm-12">
+                                        <img src="" ng-src="{{CurrentlySchoolLogo==''?'N/A':CurrentlySchoolLogo}}" alt="logo" class="current-login-logo" />
+                                    </div>
+                                    <div class="col-sm-12">
+
+
+
+                                        <h3 class="current-login-title">{{CurrentlySchool==''?'N/A':CurrentlySchool}}</h3>
+
+                                        <div class="school-details">
+
+                                            <h3 class="current-login-title"><span>School Code:</span> {{CurrentlySchoolCode==''?'N/A':CurrentlySchoolCode}}</h3>
+                                            <h3 class="current-login-title branch-address"><span>Branch Name:</span> {{CurrentlySchoolAddress==''?'N/A':CurrentlySchoolAddress}}</h3>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        @*<div class="col-sm-6">
+                                <div class="form-panel panel-shadow">
+                                    <h5 class="form-panel-heading">Currently Login In<span class="vd_red"></span></h5>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <img src="" ng-src="{{CurrentlySchoolLogo}}" alt="logo" class="current-login-logo" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+
+                                                    <h3 class="current-login-title">{{CurrentlyAllotedSchool}}</h3>
+
+                                                    <div class="school-details">
+                                                        <h3 class="current-login-title"><span>Branch Name:</span> {{CurrentlyAllotedSchoolAddress}}</h3>
+                                                        <h3 class="current-login-title"><span>School Code:</span> {{CurrentlyAllotedSchoolCode}}</h3>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!--<div class="col-sm-6">
+                            <div class="form-panel panel-shadow">
+                                <h5 class="form-panel-heading">Switch To<span class="vd_red"></span></h5>
+                                <div class="row form-panel-body">
+                                    <div class="col-sm-12">
+                                        <img src="" ng-src="{{SwitchToSchoolLogo==''?'https://nlp.nexterp.in/helpcenter/wp-content/uploads/2019/06/default.png':SwitchToSchoolLogo}}" alt="logo" class="current-login-logo" />
+                                    </div>
+                                    <div class="col-sm-12">
+
+
+
+                                        <h3 class="current-login-title">{{SwitchToSchool==''?'School Name':SwitchToSchool}}</h3>
+
+                                        <div class="school-details">
+
+                                            <h3 class="current-login-title"><span>School Code:</span> {{SwitchToSchoolCode==''?'N/A':SwitchToSchoolCode}}</h3>
+                                            <h3 class="current-login-title branch-address"><span>Branch Name:</span> {{SwitchToSchoolAddress==''?'N/A':SwitchToSchoolAddress}}</h3>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 491.807 491.807" style="enable-background:new 0 0 491.807 491.807;" xml:space="preserve">
+<g>
+                        <g>
+                        <path d="M485.802,221.184l-184.32-184.32c-5.857-5.837-14.643-7.619-22.323-4.444c-7.659,3.154-12.636,10.65-12.636,18.924v82.002    c-117.842,4.833-220.651,84.398-253.583,198.41c-14.254,49.439-13.148,89.6-12.739,104.735l0.082,3.973    c0,9.216,6.164,17.306,15.032,19.743c1.823,0.492,3.645,0.737,5.448,0.737c7.086,0,13.844-3.707,17.592-9.994    c81.121-136.356,188.6-140.227,228.168-136.376v105.411c0,8.274,4.977,15.77,12.636,18.924c7.68,3.195,16.466,1.413,22.323-4.444    l184.32-184.32C493.809,242.135,493.809,229.191,485.802,221.184z" />
+
+
+
+
+
+
+
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                    </div>
+
+
+                </div>
+                <div class="design-part">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" style="transform:rotate(180deg);margin-bottom:-1px">
+                        <path class="elementor-shape-fill" fill="#4680ff" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z">
+                        </path>
+                        <path class="elementor-shape-fill" fill="#4680ff" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+                        <path class="elementor-shape-fill" fill="#4680ff" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+                    </svg>
+                </div>
+                <div class="modal-footer modal-footer-30">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="SwitchSchool();">-->
+                        @*<span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1"><path d="M886.2 604.8H137.8c-22.1 0-40 17.9-40 40 0 8.4 2.6 16.2 7 22.6 1.9 4.5 4.8 8.7 8.4 12.4L289.5 856c7.8 7.8 18 11.7 28.3 11.7s20.5-3.9 28.3-11.7c15.6-15.6 15.6-40.9 0-56.6L231.3 684.8h654.8c22.1 0 40-17.9 40-40s-17.8-40-39.9-40zM137.8 419.2h748.4c22.1 0 40-17.9 40-40 0-8.4-2.6-16.2-7-22.6-1.4-3.3-3.4-6.5-5.8-9.5L769.2 170.9c-14-17.1-39.2-19.6-56.3-5.6-17.1 14-19.6 39.2-5.6 56.3l96.3 117.6H137.8c-22.1 0-40 17.9-40 40s17.9 40 40 40z" /></svg>
+                            </span>*@
+                        <!--Switch School
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+
+    <!-- /#wrapper -->
+    <!-- JavaScript -->
+    <!-- jQuery -->
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/jquery/dist/jquery.min.js")"></script>
+    <!-- Bootstrap Core JavaScript -->
+
+
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js")"></script>
+    <!-- data-table js -->
+    @*<script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net/js/jquery.dataTables.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/dataTables.scroller.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/dataTables.colReorder.min.js")"></script>
+        <script src="@Url.Content("~/Content/colResizable-1.6.js")"></script>*@
+
+    @*<script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js")"></script>
+        <script src="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/js/jszip.min.js")"></script>
+        <script src="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/js/pdfmake.min.js")"></script>
+        <script src="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/js/vfs_fonts.js")"></script>
+        <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js")"></script>
+        <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js")"></script>
+        <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js")"></script>
+        <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js")"></script>
+        <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js")"></script>*@
+
+    @*<script src="@Url.Content("~/Scripts/dataTables.colReorder.min.js")"></script>*@
+    <!-- Tooltipster js -->
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/tooltipster/tooltipster.bundle.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/assets/js/jquery.tooltipster.js")"></script>
+    <!-- Slimscroll JavaScript -->
+
+    <script src="@Url.Content("~/Content/plugins/assets/js/jquery.slimscroll.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/assets/js/jquery.scrollbar.js")"></script>
+
+    <!-- Fancy Dropdown JS -->
+    <script src="@Url.Content("~/Content/plugins/assets/js/dropdown-bootstrap-extended.js")"></script>
+    <!-- Owl JavaScript -->
+    @*<script src="@Url.Content("~/Content/plugins/vendors/bower_components/owl.carousel/dist/owl.carousel.min.js")"></script>*@
+    <!-- Sweet-Alert  -->
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/sweetalert/dist/sweetalert.js")"></script>
+    <!-- Switchery JavaScript -->
+    @*<script src="@Url.Content("~/Content/plugins/vendors/bower_components/switchery/dist/switchery.min.js")"></script>
+        <script src="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/js/data-table-custom.js")"></script>*@
+    <!-- EChartJS JavaScript -->
+    <!-- Init JavaScript -->
+    <script src="@Url.Content("~/Content/plugins/assets/js/init.js?Ver="+ViewBag.Version+"")"></script>
+
+    @*<script type="text/javascript" src="@Url.Content("~/Content/lib/underscore/underscore.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/lib/bootstrap-select/dist/js/bootstrap-select.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/lib/select2/select2.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/lib/moment/moment.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/lib/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js")"></script>*@
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

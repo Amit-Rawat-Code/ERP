@@ -1,0 +1,9 @@
+﻿@Html.DropDownList("ddlIAm", new List<SelectListItem>
+    {
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Student", Value="Student"},
+    new SelectListItem{Text="Parent", Value="Parent"},
+    new SelectListItem{Text="Other", Value="Other"}
+
+    },
+    new { @class = "select2 form-control validate", @ng_model = "IAm", @ng_init = "IAm='Parent'" })

@@ -1,0 +1,182 @@
+﻿
+<script src="@Url.Content("~/Scripts/jspdf.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/html2canvas.js")"></script>
+@*<style>
+    .text-message{
+        white-space: normal;
+    }
+    
+</style>*@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+    <div class="collapse" id="CollapseSearchTableList">
+        <div class="table-heading-box">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+               @Html.Partial("_printingTool1")
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="{{DocSize}} {{DocOrientation}}">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" id="ExportDiv">
+
+                        <div id="SetPageMargin">
+                            <div class="me-col-12" ng-init="GetReportHeaderUsingCategory('General Report')">
+                                <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                            </div>
+                            <div class="me-col-12 dt-print-view">
+                                <h1>@ViewBag.Title</h1>
+                            </div>
+                            @*<table class="table-p-0 " ng-repeat="(index,val) in keys" ng-if="keys.length>0">
+                                <tbody>
+                                    <tr>
+                                        <td>*@
+                                            <table class="table compact table-hover table-striped table-bordered nowrap fee-card">
+                                                <caption style="caption-side:center"
+                                                         ng-if="RepeatHeader==1?true:(index==0?true:false)">
+                                                    <div id="FilterTitle">
+                                                        <span class="filter" ng-model="$parent.FilterMsg"
+                                                              ng-bind-html="trustAsHtml(FilterMsg)"></span>
+                                                    </div>
+                                                </caption>
+                                                <caption style="caption-side: right">
+                                                    <div>
+                                                        <p class="text-message" ng-model="TextMessage" 
+                                                           ng-bind-html="trustAsHtml(TextMessage)"></p>
+                                                    </div>
+                                                </caption>
+                                                <thead ng-if="RepeatHeader==1?true:(index==0?true:false)">
+                                                    <tr>
+                                                        <th ng-repeat="th in tblheader" width={{th.Width}}
+                                                            style="text-align:{{th.TextAlign==null?'Left':th.TextAlign}};font-size:{{FontSize}}px !important;">
+                                                            <span ng-bind="th.HeaderText"></span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody ng-repeat="(index,val) in keys" ng-if="keys.length>0">
+                                                    <tr ng-repeat="tr in tblbody|filter:{FilterCol:val}" ng-model="rowindex"
+                                                        ng-init="rowindex=$index">
+                                                        <td ng-repeat="th in tblheader" width={{th.Width}}
+                                                            style="font-size:{{FontSize}}px !important;text-align:{{th.TextAlign==null?'Left':th.TextAlign}};"
+                                                            rowspan="{{rowindex==0&&$index<=tr['Tillindex']?tr['RowSpan']:1}}"
+                                                            ng-if="rowindex==0?true:($index<=tr['Tillindex']?false:true)">
+                                                            <span ng-bind="tr[th.HeaderValue]"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-if="tblbody.length==0">
+                                                        <td style="text-align:center" colspan="{{tblheader.length}}">Sorry No Record Found...</td>
+                                                    </tr>
+                                                    <tr ng-repeat="footerrepeat in tblfootermain|filter:{FilterCol:val}" class="total-t-b">
+                                                        <td ng-repeat="(key,val1) in footerrepeat" class="total-t-b"
+                                                            style="text-align:right; font-size:{{FontSize}}px !important;">
+                                                            <span ng-bind="Formatter(val1==val?'':val1)"></span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr ng-repeat="footerrepeat1 in tblfootermain1" class="total-t-b">
+                                                        <td ng-repeat="(key,val) in footerrepeat1" class="total-t-b"
+                                                            style="text-align:right; font-size:{{FontSize}}px !important;">
+                                                            <span ng-bind="Formatter(val)"></span>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        @*</td>
+                                    </tr>
+                                </tbody>
+                            </table>*@
+                            <table class="table-p-0 " ng-if="keys.length==0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <table class="table compact table-hover table-striped table-bordered nowrap fee-card">
+                                                <caption style="caption-side: center">
+                                                    <div id="FilterTitle">
+                                                        <span class="filter" ng-model="$parent.FilterMsg"
+                                                              ng-bind-html="trustAsHtml(FilterMsg)"></span>
+                                                    </div>
+                                                </caption>
+                                                <caption style="caption-side: right">
+                                                    <div>
+                                                        <span class="text-message" ng-model="TextMessage" ng-bind="TextMessage"></span>
+                                                    </div>
+                                                </caption>
+                                                <thead>
+                                                    <tr>
+                                                        <th ng-repeat="th in tblheader" width={{th.Width}}
+                                                            style="text-align:{{th.TextAlign==null?'Left':th.TextAlign}};font-size:{{FontSize}}px !important;">
+                                                            <span ng-bind="th.HeaderText"></span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="tr in tblbody" ng-model="rowindex" ng-init="rowindex=$index">
+                                                        <td ng-repeat="th in tblheader"
+                                                            style="font-size:{{FontSize}}px !important;text-align:{{th.TextAlign==null?'Left':th.TextAlign}};">
+                                                            <span ng-bind="th.HeaderValue=='Id'?rowindex+1:tr[th.HeaderValue]"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-if="tblbody.length==0">
+                                                        <td style="text-align:center" colspan="{{tblheader.length}}">
+                                                            Sorry No Record Found...
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr ng-repeat="footerrepeat in tblfootermain" class="total-t-b">
+                                                        <td ng-repeat="(key,val) in footerrepeat" class="total-t-b"
+                                                            style="text-align:right; font-size:{{FontSize}}px !important;">
+                                                            <span ng-bind="Formatter(val)"></span>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table-p-0 page-b-before-a" ng-if="tblbodySummary.length>0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <table class="table compact table-hover table-striped table-bordered nowrap fee-card ">
+                                                <thead>
+                                                    <tr ng-repeat="theadRow in tblheaderSummary">
+                                                        <th ng-repeat="th in theadRow" width={{th.Width}} colspan={{th.ColSpan==null?1:th.ColSpan}}
+                                                            style="font-size:{{FontSize}}px !important;text-align:{{th.TextAlign==null?'Left':th.TextAlign}}"><span ng-bind="th.HeaderText"></span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="tr in tblbodySummary" ng-model="rowindex" ng-init="rowindex=$index">
+                                                        <td ng-repeat="th in tblheaderSummary[headerIndex]"
+                                                            style="font-size:{{FontSize}}px !important;text-align:{{th.TextAlign==null?'Left':th.TextAlign}}">
+                                                            <span ng-bind="th.HeaderValue=='Id'?rowindex+1:tr[th.HeaderValue]"></span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr ng-repeat="tfootRow in tblfooterSummary">
+                                                        <td ng-repeat="td in tfootRow" colspan={{td.ColSpan==null?1:td.ColSpan}} class="total-t-b"
+                                                            style="font-size:{{FontSize}}px !important;text-align:{{td.TextAlign==null?'Left':td.TextAlign}};">
+                                                            <span ng-bind="Formatter(td.FooterText)"></span>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

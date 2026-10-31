@@ -1,0 +1,7 @@
+﻿
+<select id="ddlSchool" class="select2 form-control validate" ng-model="SchoolId" ng-init="GetSchool()" ng-change="GetBranchCode(SchoolId);SendToSchool();">
+    <option value=""  selected>Select School</option>
+    <option ng-repeat="GId in SchoolList" value="{{GId.SchoolId}}">
+        {{GId.SchoolName}} - {{GId.SchoolAddress}}
+</option>
+</select>

@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "Fee Concession Chart Report";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<script src="~/scripts/myjslib/FeeConcessionChartReportController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Fee Concession Chart Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fees</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Fee Concession Chart Report</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+                                    <div class="section-toggle">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Select Class</label>
+                                            <div class="input-box">
+                                              @Html.Partial("ddlMultiClasswithSection")
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+
+                                                <style>
+
+
+                                                    .down-arrow {
+                                                        border: solid black;
+                                                        border-width: 0 2px 2px 0px;
+                                                        display: inline-block;
+                                                        padding: 2px;
+                                                        transform: rotate(45deg);
+                                                        -webkit-transform: rotate(45deg);
+                                                        margin: 0px 0px 4px 0px;
+                                                    }
+
+                                                    div.scrollmenu {
+                                                        /*width:300px;*/
+                                                        overflow: auto;
+                                                        max-height: 300px;
+                                                        /*z-index: 99999;*/
+                                                    }
+
+                                                    table thead tr th {
+                                                        /* Important */
+                                                        position: sticky;
+                                                        top: 0;
+                                                    }
+                                                </style>
+
+                                                <input type="text" id="txtStudent" class="form-control clear FeeStuListOnOff"
+                                                       ng-model="SearchText" ng-click="SearchStudents()"
+                                                       ng-blur="HideStudentList();txtStudent_blur();" autocomplete="off" ng-disabled="disabledSearch || Save=='Edit'"
+                                                       ng-init="disabledSearch=true;GetStudentsFeeConcessionChartReport();" placeholder="{{hideloader?'Please Wait...':'Select Student'}}" />
+
+                                                <div class="input-icons FeeStuListOnOff" ng-model="hideloader">
+                                                    <i class="fa fa-circle-o-notch fa-spin icon FeeStuListOnOff" ng-show="hideloader"></i>
+                                                    <i class="down-arrow FeeStuListOnOff" ng-hide="hideloader" ng-click="Save=='Edit'?'':SearchStudents();"></i>
+                                                </div>
+                                                <div id="FeeStuListOnOff" class="InputInTabBox FeeStuListOnOff scrollmenu" width="javascript:$('#txtStudent').width()" onclick="event2();">
+
+                                                    <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card header-fixed">
+                                                        <thead>
+                                                            <tr>
+                                                                <th width="10px">Sr. No.</th>
+                                                                <th>Status</th>
+                                                                <th>Adm. No.</th>
+                                                                <th>Student Name</th>
+                                                                <th>Class</th>
+                                                                <th>Father Name</th>
+                                                                @*<th width="20%">Reg. No.</th>*@
+                                                                <th>Mobile No.</th>
+                                                                @*<th>Address</th>*@
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="student in StudentList|filter:SearchText" ng-model="StudentCode"
+                                                                ng-click="FillStudentDetail(student);" class="FeeStuListOnOff">
+                                                                <td>{{$index+1}}</td>
+                                                                <td>{{student.IsActive==1?'Active':student.IsActive==2?'Partial Active':'InActive'}}</td>
+                                                                <td>{{student.AdmissionNo}}</td>
+                                                                <td>{{student.Name}}</td>
+                                                                <td>{{student.ClassName}}</td>
+                                                                <td>{{student.FatherName}}</td>
+                                                                @*<td>{{student.RegNo}}</td>*@
+                                                                <td>{{student.Mobile}}</td>
+                                                                @*<td>{{student.Address}}</td>*@
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-6 col-xs-12 mgtp-24 mgbt-xs-15">
+                                            @Html.Partial("ActionSearch")
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        @Html.Partial("GeneralReportGrid")
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#ddlClass').removeClass('validate');
+</script>

@@ -1,0 +1,115 @@
+﻿<div class="input-box">
+    <style>
+    </style>
+    <style>
+        .input-icons {
+            color: #01090c;
+            font-size: 15px;
+            line-height: 35px;
+            position: absolute;
+            top: 1px;
+            background: #d6d6d6;
+            text-align: center;
+            width: 31px;
+            left: unset !important;
+            right: 1px;
+            height: 28px;
+            border-left: 1px solid #484848;
+        }
+
+        .down-arrow {
+            border: solid black;
+            border-width: 0 2px 2px 0px;
+            display: inline-block;
+            padding: 2px;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            margin: 0px 0px 4px 0px;
+        }
+
+        div.scrollmenu {
+            /*width:300px;*/
+            overflow: auto;
+            max-height: 300px;
+            /*z-index: 99999;*/
+        }
+
+        table thead tr th {
+            /* Important */
+            position: sticky;
+            top: 0;
+        }
+
+        element.style {
+        }
+
+        #StuListOnOff {
+            display: none;
+        }
+
+        div.scrollmenu {
+            /* width: 300px; */
+            overflow: auto;
+            max-height: 300px;
+            /* z-index: 99999; */
+        }
+
+        .DropdownInInput {
+            position: absolute;
+            z-index: 30;
+            width: 100%;
+            left: 0px;
+            background: #fff;
+                box-shadow: 2px 2px 5px #d6d6d6;
+        }
+    </style>
+
+    <input type="text" id="txtStudent" class="form-control clear"
+           ng-model="SearchText" ng-click="ShowCollapsedList('StuListOnOff');"
+           ng-blur="HideExpandList('StuListOnOff');txtStudent_blur();" ng-keyup="ClearTextDropDownStd();" autocomplete="off" ng-disabled="disabledSearch"
+           ng-init="disabledSearch=false;GetAllStudentList()" placeholder="{{hideloader?'Please Wait...':'Select Student'}}" />
+    <div class="input-icons" ng-model="hideloader" ng-show="hideloader" ng-cloak>
+        <i class="fa fa-circle-o-notch fa-spin icon"></i>
+    </div>
+    <div class="input-icons" ng-click="Save=='Edit'?'':ShowCollapsedList('StuListOnOff');" ng-hide="hideloader" ng-cloak>
+        <i class="down-arrow"></i>
+    </div>
+    <div id="StuListOnOff" class="DropdownInInput scrollmenu" width="javascript:$('#txtStudent').width()" ng-click="GetBookDetails();">
+
+        <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card header-fixed">
+            <thead>
+                <tr>
+                    <th width="10px"></th>
+                    <th width="20%">Student</th>
+                    <th width="20%">Student ID</th>
+                    <th width="20%">Father Name</th>
+                    <th width="20%">Class</th>
+                    <th width="10%">Contact No.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in StudentsList|filter:SearchText|filter:{'StudentCode':$scope.StudentCode}"
+                    ng-click="setStudentName(student)">
+                    <td>
+                        <div class="radio radio-primary table-radio">
+                            <input ng-model="$parent.StudentCode" type="radio" value="{{student.StudentCode}}" ng-disabled="!student.IsActive" />
+                            <label for=""></label>
+                        </div>
+                    </td>
+                    <td>{{student.Name}}</td>
+                    <td>{{student.StudentCode}}</td>
+                    <td>{{student.FatherName}}</td>
+                    <td>{{student.CollegeCourseName}}</td>
+                    <td>{{student.ContactNo}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="text-box-msg-r">
+    </div>
+</div>
+
+
+
+

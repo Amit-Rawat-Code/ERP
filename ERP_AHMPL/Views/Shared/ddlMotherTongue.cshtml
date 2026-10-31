@@ -1,0 +1,6 @@
+﻿@*Used In forms:*@
+@*Student Registration Submission*@
+<select id="ddlMotherTongue" class="select2 form-control " ng-init="GetMotherTongue();" ng-model="MotherTongueCode">
+    <option value="">Select MotherTongue</option>
+    <option ng-repeat="MotherTongue in MotherTongueList" value="{{MotherTongue.MotherTongueName}}">{{MotherTongue.MotherTongueName}}</option>
+</select>

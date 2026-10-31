@@ -1,0 +1,381 @@
+﻿@{
+    ViewBag.Title = "Fees Receipt Cancellation";
+    ViewBag.TitleList = "Fees Receipt Cancellation";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/FeesReceiptCancellationController.js?Ver=@ViewBag.Version"></script>
+<style>
+    .blue-text{
+        color: #5690e4 !important;
+    }
+</style>
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Fees Receipt Cancellation</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Fees</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active">
+                    <span>Fees Receipt Cancellation</span>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Class<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlClass")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Section<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlSection")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Student<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("TblStudentList")
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="tblbody.length>0">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <div class="datatable-responsive table-responsive advance-btn-table">
+                                                        <table class="table compact table-hover table-striped table-bordered
+                                                                nowrap dataTable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Sr.No.</th>
+                                                                    <th>Admission No.</th>
+                                                                    <th>Name</th>
+                                                                    <th>Receipt No.</th>
+                                                                    <th>Voucher Type</th>
+                                                                    <th>Fee's Date</th>
+                                                                    <th>Installment</th>
+                                                                    <th>(₹) Fee Amt</th>
+                                                                    <th>Pay Mode</th>
+                                                                    <th>Cancel</th>
+                                                                    <th>Transfer</th>
+                                                                    <th>Cancel Date</th>
+                                                                    <th>Cheque Bounce</th>
+                                                                    <th>Fine Amt</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="tr in tblbody">
+                                                                    <td>{{$index+1}}</td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.AdmissionNo"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.StudentName"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.FeeReceipetNo"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.FeeVoucher"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.FeeDate"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.Installment"></span>
+                                                                    </td>
+                                                                    <td style="text-align:right">
+                                                                        <span ng-bind="tr.FeeAmt"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.PayMode"></span>
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <div class="radio radio-primary table-radio-wt">
+                                                                            <input ng-model="$parent.Cancel" type="radio"
+                                                                                   value="{{tr.FeeTransId}}"
+                                                                                   ng-click="ChangeReceipt(tr.FeeTransId,Cancel);" />
+                                                                            <label for=""></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <div class="checkbox checkbox-primary table-check-wt">
+                                                                            <input class="{{Cancel!=tr.FeeTransId?'':'validate'}}"
+                                                                                   type="checkbox"
+                                                                                   ng-model="tr.IsTransfer"
+                                                                                   ng-disabled="Cancel!=tr.FeeTransId">
+                                                                            <label></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input class="form-control t-input
+                                                                               {{Cancel!=tr.FeeTransId?'':'validate'}}"
+                                                                               type="date" ng-model="tr.V_Date"
+                                                                               ng-disabled="Cancel!=tr.FeeTransId"
+                                                                               onchange="isValidate()" min="{{ConverToDate(tr.FeeDate,'YYYY-MM-DD')}}">
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <div class="checkbox checkbox-primary table-check-wt">
+                                                                            <input class="{{Cancel!=tr.FeeTransId?'':'validate'}}"
+                                                                                   type="checkbox"
+                                                                                   ng-model="tr.IsCheckBounced"
+                                                                                   ng-disabled="Cancel!=tr.FeeTransId"
+                                                                                   ng-change="tr.CheckBounceAmt=0">
+                                                                            <label></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input class="text-right form-control t-input
+                                                                               {{Cancel!=tr.FeeTransId?'':'validate'}}"
+                                                                               type="text" ng-model="tr.CheckBounceAmt"
+                                                                               ng-value="tr.CheckBounceAmt"
+                                                                               ng-disabled="!tr.IsCheckBounced"
+                                                                               onchange="isValidate()" allow-decimal-numbers>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="tblEditCancelation.length>0">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <div class="datatable-responsive table-responsive advance-btn-table">
+                                                        <table class="table compact table-hover table-striped table-bordered
+                                                                nowrap dataTable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Sr.No.</th>
+                                                                    <th>Student Id</th>
+                                                                    <th>Name</th>
+                                                                    <th>Receipt No.</th>
+                                                                    <th>Voucher Type</th>
+                                                                    <th>Fee's Date</th>
+                                                                    <th>Bill No.</th>
+                                                                    <th>Installment</th>
+                                                                    <th>(₹) Fee Amt</th>
+                                                                    <th>Pay Mode</th>
+                                                                    <th>Canceled</th>
+                                                                    <th>Transfer</th>
+                                                                    <th>Cancel Date</th>
+                                                                    <th>Chq Bounced</th>
+                                                                    <th>Fine Amt</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="tr in tblEditCancelation">
+                                                                    <td>{{$index+1}}</td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.StudentId"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.StudentName"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.FeeReceipetNo"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.FeeVoucher"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.FeeDate"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.BillNo"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.Installment"></span>
+                                                                    </td>
+                                                                    <td style="text-align:right">
+                                                                        <span ng-bind="tr.FeeAmt"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.PayMode"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span>Yes</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.IsTransfer"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input class="form-control t-input validate"
+                                                                               type="date" ng-model="tr.V_Date"
+                                                                               onchange="isValidate()"
+                                                                               ng-init="tr.V_Date=ConvertDate(tr.V_Date)" min="{{ConverToDate(tr.FeeDate,'YYYY-MM-DD')}}">
+
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <div class="checkbox checkbox-primary table-check-wt">
+                                                                            <input type="checkbox" ng-model="tr.IsCheckBounced"
+                                                                                   ng-change="tr.CheckBounceAmt=0">
+                                                                            <label></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input class="text-right form-control t-input validate"
+                                                                               type="text" ng-model="tr.CheckBounceAmt"
+                                                                               ng-value="tr.CheckBounceAmt"
+                                                                               ng-disabled="!tr.IsCheckBounced"
+                                                                               onchange="isValidate()" allow-decimal-numbers>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="tblSummary.length>0">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <div class="datatable-responsive table-responsive advance-btn-table">
+                                                        <table class="table compact table-hover table-striped table-bordered nowrap dataTable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th colspan="12">Receipt Details</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Sr.No.</th>
+                                                                    <th>Installment</th>
+                                                                    <th>Month</th>
+                                                                    <th>Fee</th>
+                                                                    <th>Fee Type</th>
+                                                                    <th style="text-align:right">(₹) Actual Amt.</th>
+                                                                    <th style="text-align:right">(₹) Concession Amt.</th>
+                                                                    <th style="text-align:right">(₹) Payable Amt.</th>
+                                                                    <th style="text-align:right">(₹) Paid</th>
+                                                                    <th style="text-align:right">(₹) Net Payable</th>
+                                                                    <th style="text-align:right">(₹) Balance</th>
+                                                                    <th>Remark</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="tr in tblSummary">
+                                                                    <td>{{$index+1}}</td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.Installment"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.Months"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.FeeHeadName"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.FeeType"></span>
+                                                                    </td>
+                                                                    <td style="text-align:right">
+                                                                        <span ng-bind="tr.FeeAmt"></span>
+                                                                    </td>
+                                                                    <td style="text-align:right">
+                                                                        <span ng-bind="tr.DisAmt"></span>
+                                                                    </td>
+                                                                    <td style="text-align:right">
+                                                                        <span ng-bind="tr.NetAmt"></span>
+                                                                    </td>
+                                                                    <td style="text-align:right">
+                                                                        <span ng-bind="tr.PaidAmt"></span>
+                                                                    </td>
+                                                                    <td style="text-align:right">
+                                                                        <span ng-bind="tr.FeeRect"></span>
+                                                                    </td>
+                                                                    <td style="text-align:right">
+                                                                        <span ng-bind="tr.BalAmt"></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span ng-bind="tr.Remark"></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr ng-if="tblSummary.length>0">
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td style="font-weight: 500;" class="text-right">Total</td>
+                                                                    <td style="text-align:right;font-weight: 500;">
+                                                                        <span ng-bind="Formatter(TotalFeeRect)"></span>
+                                                                    </td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">
+                                                    Remark<span class="vd_red"></span>
+                                                </label>
+                                                <div class="input-box">
+                                                    <input class="form-control"
+                                                           type="text" ng-model="Remark">
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn2-nM3-2">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<script>
+    $('#ddlClass').removeClass('validate');
+    $('#ddlSection').removeClass('validate');
+</script>

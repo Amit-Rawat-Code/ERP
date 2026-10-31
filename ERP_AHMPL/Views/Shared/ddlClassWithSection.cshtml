@@ -1,0 +1,4 @@
+﻿<select id="ddlClassSection" class="select2 form-control" ng-model="AllClassSection" ng-init="GetAllClassesWithSections();" ng-change="GetAllStudentAdmissionNoByClassSection()">
+    <option value="">Select Class With Sections</option>
+    <option ng-repeat="cl in AllClassSectionList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassSectionName}}</option>
+</select>

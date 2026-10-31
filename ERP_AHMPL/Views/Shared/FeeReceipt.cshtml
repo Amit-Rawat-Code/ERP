@@ -1,0 +1,198 @@
+﻿
+<div id="ExportDiv" style="width:100%; float:left; display:none;">
+    <style>
+        table.fee-receipt-table {
+            width: 100%;
+        }
+
+        table.fee-receipt-table-row {
+            width: 100%;
+            font-family: Arial;
+        }
+
+            table.fee-receipt-table-row td, table.fee-receipt-table-row th {
+                padding:2px 5px;
+            }
+
+            table.fee-receipt-table-row.table-boder {
+                text-align: left;
+                border-collapse: collapse;
+            }
+
+                table.fee-receipt-table-row.table-boder th, table.fee-receipt-table-row.table-boder td {
+                    border: 1px solid #000;
+                }
+
+            table.fee-receipt-table-row th {
+                color: #000;
+                font-weight: bold;
+            }
+    </style>
+    <table class="fee-receipt-table">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row">
+                        <tbody>
+                            <tr>
+                                <td style="text-transform: uppercase; text-align: center; width:33%; vertical-align: top;">
+                                    <img style="display: inline-block; height: 76px; " src="{{Logo}}" alt="" />
+                                </td>
+                                <td style="text-align: center; vertical-align:top;">
+                                    <h1 style="font-size:30px; line-height:33px;" ng-if="SchoolName"> {{SchoolName}}</h1>
+                                    <p>{{SchoolAddress}}</p>
+                                    @*<p style="font-family:Arial; font-size:18px; padding:0; margin:0 0 5px 0;">884, B Block Panki, Kanpur -208020</p>
+                                    <p style="font-family:Arial; font-size:18px; padding:0; margin:0 0 5px 0;">School Affiliation No : 2133160</p>
+                                    <p style="font-family:Arial; font-size:18px; padding:0; margin:0 0 5px 0;">Website:www.allenhousepanki.com | Contact:7388268885</p>*@
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <table class="fee-receipt-table" style="border-top:solid 1px #000;">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row">
+                        <tbody>
+                            <tr>
+                                <td style="text-transform: uppercase; text-align: center; font-family:Arial;font-size:22px; font-weight:bold;">
+                                    Fee Receipt
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left; width:60%;">
+                                    <strong>Academic Session: </strong><span>{{AcademicSession}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; width:60%;">
+                                    <strong>Receipt No : </strong><span>{{RcptNo}}</span>
+                                </td>
+                                <td style="text-align:left;">
+                                    <strong>Date : </strong><span>{{FeeDepositDate | date:'dd-MMM-yyyy'}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left;">
+                                    <strong>Adm No : </strong><span>{{AdmissionNo}}</span>
+                                </td>
+                                <td style="text-align:left;">
+                                    <strong>Class : </strong><span>{{ClassName}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left;">
+                                    <strong>Name : </strong><span>{{StudentName}}</span>
+                                </td>
+                                <td style="text-align:left;">
+                                    <strong>Payment Mode : </strong><span>{{FeeMode}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left;">
+                                    <strong>Father's Name : </strong><span>{{ParentName}}</span>
+                                </td>
+                                <td style="text-align:left;">
+                                    <strong>Fee Type : </strong><span>{{EntryMode}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left;">
+                                    <strong>Remark : </strong><span>{{Remark}}</span>
+                                </td>
+                                <td style="text-align:left;">
+                                    <strong>Installment : </strong><span>{{Installment}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row table-boder">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Head Name
+                                </th>
+                                <th style="text-align:center">
+                                    Recd Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="swfs in GroupWiseFeeStructure" repeat-done>
+                                <td style="font-weight:bold;">
+                                    {{swfs.FeeHeadName}}
+                                </td>
+                                <td style="text-align:center">
+                                    {{swfs.NetPayable}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:bold;">
+                                    Total
+                                </td>
+                                <td style="text-align:center">
+                                    <strong> {{Sumoflist('GroupWiseFeeStructure','NetPayable')}}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row ">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <strong> Amount(In Words) :</strong> {{AmtInWords}} Only.
+                                </td>
+                                <td style="text-align:right;">
+                                    
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row ">
+                        <tbody>
+                            <tr>
+                                <td style="text-transform: uppercase; text-align: left; padding-top:10px;">
+                                    <div style="float: right;">
+                                        <span>Cashier</span>
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

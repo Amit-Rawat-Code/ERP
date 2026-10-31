@@ -1,0 +1,456 @@
+﻿@{
+    ViewBag.Title = "TicketResponse";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script src="~/Content/ckfinder/ckfinder.js"></script>
+<script src="//cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        CKEDITOR.replace("EnglishEditor", { customConfig: "/Content/ckeditor/config1.js", toolbar: 'MA' });
+    })
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        CKEDITOR.replace("EnglishEditor1", { customConfig: "/Content/ckeditor/config1.js", toolbar: 'MA' });
+    })
+</script>
+
+<style>
+    .multi-attachment-input-box-popup input[type="file"] {
+        z-index: -1;
+        position: absolute;
+        opacity: 0;
+    }
+
+    .multi-attachment-input-box-popup .attachment-input-box-s .input-group-addon {
+        height: 30px;
+    }
+
+    .multi-attachment-input-box-popup:hover {
+        position: static;
+        box-shadow: none;
+    }
+
+    .ticket-genrating-tab ul.nav.nav-tabs li:first-child a {
+        border-radius: 20px 0px 0px 20px;
+    }
+
+    .ticket-genrating-tab ul.nav.nav-tabs li a {
+        background: #bdb9b9;
+        color: #fff;
+        padding: 7px 60px !important;
+        min-width: 260px;
+    }
+
+    .ticket-genrating-tab ul.nav.nav-tabs li.active a {
+        background: red;
+    }
+
+    .ticket-genrating-tab ul.nav.nav-tabs li {
+        margin: 0px;
+    }
+
+        .ticket-genrating-tab ul.nav.nav-tabs li:last-child a {
+            border-radius: 0px 20px 20px 0px;
+        }
+
+    .ticket-genrating-tab .tab-content {
+        padding: 20px 0px 0px 0px;
+    }
+
+
+
+    .modal-body {
+        ViewBag .Title position: inherit;
+        padding: 20px;
+        font-size: medium;
+        margin-left: 20px;
+    }
+</style>
+
+<link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
+<script src="~/Scripts/myjslib/TicketResponseController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <!--<div class="br-pageheader">-->
+    <!-- Title -->
+    <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+        <h5 class="txt-dark"> Response By Supported Team</h5>
+    </div>-->
+    <!-- Breadcrumb -->
+    <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Ticket</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Ticket Response</span></li>
+            </ol>
+        </div>
+    </div>-->
+
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh response-by-supported-team">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                        <h3>
+                                            Response By Supported Team
+                                            <input id="btnPrint" type="button" value="Print" class="btn-me btn-primary print-btn" style="float: right;" ng-click="Print()" />
+                                            <input type="button" value="Back" class="btn-me btn-primary print-btn" style="float: right;" ng-click="RedirectPage()" />
+                                        </h3>
+                                    </div>
+
+                                    <div class="form-panel">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <h6 class="form-panel-heading">Ticket Detail</h6>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Ticket No.</label>
+                                                <input type="text" ng-model="TicketNo" id="txtticketno" class="form-control clear validate" ng-disabled="true" />@*ng-blur="GetTicketDetailWithTicketNo();"*@
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Ticket Date</label>
+                                                @Html.TextBox("txtticketdate", "", new { @class = "form-control clear validate", @type = "Date", @ng_model = "TicketDate", @ng_disabled = "true" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">School/College Name</label>
+                                                @Html.TextBox("txtschoolname", "", new { @class = "form-control clear", @ng_model = "SchoolName", @ng_disabled = "true" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Name of User</label>
+                                                @Html.TextBox("txtusername", "", new { @class = "form-control clear", @ng_model = "UserName", @ng_disabled = "true" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Designation of User</label>
+                                                @Html.TextBox("txtdesigname", "", new { @class = "form-control clear", @ng_model = "DesignationName", @ng_disabled = "true" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Contact No. of User</label>
+                                                @Html.TextBox("txtusername", "", new { @class = "form-control clear", @ng_model = "ContactNo", @ng_disabled = "true" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Module Name</label>
+                                                @Html.TextBox("txtmodulename", "", new { @class = "form-control clear", @ng_model = "ModuleName", @ng_disabled = "true" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Page Type</label>
+                                                @Html.TextBox("txtpagetypename", "", new { @class = "form-control clear", @ng_model = "PageTypeName", @ng_disabled = "true" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Page Name</label>
+                                                @Html.TextBox("txtpagename", "", new { @class = "form-control clear", @ng_model = "PageName", @ng_disabled = "true" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <div id="product-tab1">
+                                                <div class="resp-tabs-container">
+                                                    <div class="resp-tab-content" aria-labelledby="tab_item-0">
+                                                        <label class="control-label">Ticket Description</label>
+                                                        <div class="col-information">
+                                                            @Html.TextBox("EnglishEditor", "", new { @id = "EnglishEditor", @class = "form-control clear ", @ng_model = "EnglishEditor", @ng_disabled = "true" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <label class="control-label">Attachment Files</label>
+                                            <div class="tz-gallery">
+                                                <div class="row">                                                  
+                                                    <div class="col-sm-12 col-md-4" ng-repeat="obj in TicketDetailList" ng-hide="obj.FilePath ==''">
+                                                        <a class="lightbox" href="{{obj.FilePath}}" target="_blank" ng-if="obj.File_Extension =='.pdf'">
+                                                            <img src="../Uploads/Site/Ticket/pdf_img.jfif" alt="{{obj.FileName}}" height="100" width="250">
+                                                        </a>
+                                                        <a class="lightbox" href="#" data-toggle="modal" data-target="#img_show" ng-click="Full_Image(obj.FileName);" ng-if="obj.File_Extension !='.pdf'">
+                                                            <img src="{{obj.FilePath}}" alt="{{obj.FileName}}" height="100" width="250">
+                                                        </a>
+                                                    </div>
+                                                    @*<div class="col-sm-12 col-md-4">
+                                                        <a class="lightbox" href="https://raw.githubusercontent.com/LeshikJanz/libraries/master/Related%20images/Bootstrap%20example/bridge.jpg">
+                                                            <img src="https://raw.githubusercontent.com/LeshikJanz/libraries/master/Related%20images/Bootstrap%20example/bridge.jpg" alt="Bridge">
+                                                        </a>
+                                                    </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-panel">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <h6 class="form-panel-heading">Ticket Response Detail</h6>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Ticket Type<span class="vd_red">*</span></label>
+                                                <select id="ddlTicket" class="select2 form-control clear validate" ng-model="TicketType" ng-init="GetTicketType();">
+                                                    <option value="">Select Ticket Type</option>
+                                                    <option ng-repeat="TL in TicketTypeList" value="{{TL.ID}}">{{TL.TicketTypeName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Ticket Status<span class="vd_red">*</span></label>
+                                                <select id="ddlTicketStatus" class="select2 form-control clear" ng-model="TicketStatus" ng-init="GetTicketStatus();" ng-disabled="dis_status">
+                                                    <option value="">Select Ticket Status</option>
+                                                    <option ng-repeat="TS in TicketStatusList" value="{{TS.ID}}">{{TS.TicketStatusName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-8 col-xs-8 mgbt-xs-15">
+                                            <div id="product-tab">
+                                                <div class="resp-tabs-container">
+                                                    <div class="resp-tab-content" aria-labelledby="tab_item-0">
+                                                        <label class="control-label">Remark by Support Department<span class="vd_red">*</span></label>
+                                                        <div class="col-information">
+                                                            @Html.TextBox("EnglishEditor1", "", new { @id = "EnglishEditor1", @class = "form-control clear", @ng_model = "EnglishEditor1" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-padding ">
+                                            <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Attachment <span class="vd_red" style="font-size: 10px;">Upload [.jpg|.jpeg|.bmp|.doc|.docx|.xls|.xlsx|.pdf] files.</span></label>
+
+                                                <div class="input-box input-box-me max-h-114" ng-init="AddRow()">
+                                                    <div class="multi-attachment-input-box-popup">
+                                                        <div class="attachment-input-box-s ng-scope" ng-repeat="attachment in Attachments">
+                                                            <div class="input-group-addon input-group-addon2 ng-scope" ng-if="attachment.Name!='preview'"><i class="icofont-upload-alt"></i></div>
+                                                            <input type="file" ng-click="SetIndex($index)" id=file{{$index}} upload-files multiple>
+                                                            <label for=file{{$index}} class="form-control input-padding form-control-attachment2" ng-model="attachment.FileName">{{attachment.name==undefined?'Upload Image':attachment.name}}</label>
+
+                                                            <div class="input-group-btn input-group-btn-d">
+                                                                <input type="submit" class="btn-dec ng-scope" value="-" ng-click="RemoveRow($index)" ng-if="Attachments.length>0 &amp;&amp; Attachments.length!=1">
+                                                                <input type="submit" class="btn-add ng-scope" value="+" ng-click="AddRow()" ng-if="$index==Attachments.length-1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-box-msg-r">
+                                                        <input type="hidden" id="pdfAttachment" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                       
+                                        <div class="col-md-8 col-sm-6 col-xs-12 ">
+                                            @Html.Partial("ActionSave")
+                                        </div>                                       
+                                    </div>
+                                   
+                                    <div class="form-panel">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <h6 class="form-panel-heading">Response History</h6>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                            <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                                                <table id="example1" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th align="center">S.No.</th>
+                                                            <th style="display:none">Trans ID</th>
+                                                            <th>Response Date</th>
+                                                            <th>Response Time</th>
+                                                            <th>Response Status</th>
+                                                            <th style="min-width:100px;">Response Description</th>
+                                                            <th>Response User</th>
+                                                            <th>Attachment</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in ResponseDetail">
+                                                            <td ng-bind="$index+1" align="center" style="vertical-align:top;"></td>
+                                                            <td style="display:none; vertical-align:top;">{{obj.TransID}}</td>
+                                                            <td style="vertical-align:top;">{{obj.vdate}}</td>
+                                                            <td style="vertical-align:top;">{{obj.vtime}}</td>
+                                                            <td style="vertical-align:top;">{{obj.TicketStatusName}}</td>
+                                                            <td ng-bind-html="trustAsHtml(obj.ResponseDescription)" class="td-table"></td>
+                                                            <td style="vertical-align:top;">{{obj.profileName}}</td>
+                                                            <td ng-click="GetResponseHistory_Attachments(obj.TransID)"><a href="#" style="color:blue" data-toggle="modal" data-target="#showAttachments" ng-show="obj.TotalAttachment>0">{{obj.TotalAttachment}} Attachment</a></td>
+                                                        </tr>
+                                                        <tr ng-if="ResponseDetail.length==0"><td colspan="7" class="text-center">Response History Not Found</td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15" id="print" style="display:none; border:none;">
+                                    <div class="table-responsive" style="border:none;">
+                                        <h4 align="center" style="background:#808080; color:#fff; padding:5px 0;">Ticket Detail</h4>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                            <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                                                <table id="example11" style="width:100%; border:none;" ng-repeat="obj in TicketDetailList">
+                                                    <tr>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label">Ticket No.</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label">{{obj.PVNo}}</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label">Ticket Date</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label">{{obj.VDate}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">School Name</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">{{obj.SchoolName}}</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;">&nbsp;</td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">User Name</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">{{obj.UserName}}</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">Designation of User</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">{{obj.Designation}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">Contact No. of User</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">{{obj.MobileNo}}</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;">&nbsp;</td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">Module Name</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">{{obj.ModuleName}}</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">Page Type</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label">{{obj.MenuName}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">Page Name</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">{{obj.SubMenuName}}</label></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;">&nbsp;</td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;"><label class="control-label control-labelticket">Ticket Description</label></td>
+                                                        <td ng-bind-html="trustAsHtml(obj.TicketDescription)" style="border:solid 1px #000; padding:2px 4px;"></td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;">&nbsp;</td>
+                                                        <td style="border:solid 1px #000; padding:2px 4px;">&nbsp;</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <h4 align="center" style="background:#808080; color:#fff; padding:5px 0;">Response History</h4>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                            <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                                                <table id="example1" class="table table-striped table-bordered compact" style="border:solid 1px #000;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th align="center">S.No.</th>
+                                                            <th>Response Date</th>
+                                                            <th>Response Time</th>
+                                                            <th>Response Status</th>
+                                                            <th>Response Description</th>
+                                                            <th>Response User</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in ResponseDetail">
+                                                            <td ng-bind="$index+1" align="center"></td>
+                                                            <td>{{obj.vdate}}</td>
+                                                            <td>{{obj.vtime}}</td>
+                                                            <td>{{obj.TicketStatusName}}</td>
+                                                            <td ng-bind-html="trustAsHtml(obj.ResponseDescription)" class="text-1"></td>
+                                                            <td>{{obj.profileName}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.Partial("SearchAngularJs")
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showAttachments" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Attachment List</h4>
+            </div>
+            <div class="modal-body">
+                <ul style="list-style-type:square" data-ng-repeat="ob1 in ResponseDetail_Attachment">
+                    <li><a href="{{ob1.FilePath}}" style="color:blue" download>{{ob1.FileName}}</a></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="img_show" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            @*<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Image</h4>
+            </div>*@
+        <div class="modal-body" style="margin-left:0">           
+            <div data-ng-repeat="t1 in TicketImages">
+                <img src="{{t1.FilePath}}" alt="{{t1.FileName}}" height="350" style="width: 100%;border-radius: 8px;">
+            </div>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+

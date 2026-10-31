@@ -1,0 +1,305 @@
+﻿
+@{
+    ViewBag.Title = "Employee Leave Approval";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/EmployeeLeaveApprovalController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="hfId" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Employee Leave Approval</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+
+                <li><span>Attendance</span></li>
+                <li><span>Employee</span></li>
+                <li class="active"><span>Employee Leave Approval (Administration)</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        @*<a class="btn-action btn-outline-secondary no-padding box-r-to-l" data-toggle="tooltip" data-placement="top" data-original-title="Go to Back" title="" ng-href="../Attendance/EmployeeLeaveList"><= Back</a>*@
+                                        <div class="datatable-responsive table-responsive advance-btn-table no-padding" ng-init="GetAllLeaveDates()">
+                                            <table id="tblLeaveTypeDetail" class="table compact compact2 table-hover  table-bordered nowrap mgbt-xs-0 height-175 text-center " ng-model="LeaveTypeDetail">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">S.R.No.</th>
+                                                        <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Alloted Leaves">Leave Date</span></th>
+                                                        <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Leave Taken">First Authority Leave Type</span></th>
+                                                        <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Leave Taken">First Approval Authority Status</span></th>
+                                                        <th ng-hide='AFS == "First"' class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Leave Taken">Second Authority Leave Type</span></th>
+                                                        <th ng-hide='AFS == "First"' class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Leave Taken">Second Approval Authority Status</span></th>
+                                                        <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="" data-original-title="Leave Taken">Is Attendance Reversal Status</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="dates in AllLeavesDates">
+                                                        <td ng-model="dates.Srno" ng-init="dates.Srno=($index+1)"> {{dates.Srno}}</td>
+                                                        <td>
+                                                            {{dates.DateData}}
+                                                        </td>
+                                                        <td>
+                                                            <select id="ddlLeaveType" class="select2 form-control" ng-model="dates.AbbrTypeIdFirst" ng-init="GetLeaveTypeFirst();"
+                                                                    ng-change="FillCountLeaveAccordingLeaveType(AllLeavesDates)" ng-disabled='AFS == "Second"'>
+                                                                <option value="">Select LeaveType</option>
+                                                                <option ng-repeat="leaveType in LeaveTypes" value="{{leaveType.AbbrTypeId}}">{{leaveType.AbbrType}}</option>﻿
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-control clear" id="ddlFirstApprove" ng-change="CheckLeaveRejectStatusFirst($index+1,$index,AllLeavesDates,dates)"
+                                                                    ng-model="dates.FirstIsApproved" ng-disabled='AFS == "Second"'>
+                                                                <option value="">Select Status</option>
+                                                                <option value="1">Approved</option>
+                                                                <option value="2">Rejected</option>
+                                                            </select>
+                                                        </td>
+                                                        <td ng-hide='AFS == "First"'>
+                                                            <select id="ddlLeaveTypeSecond" class="select2 form-control" ng-model="dates.AbbrTypeIdSecond" ng-init="dates.AbbrTypeIdSecond=dates.AbbrTypeIdSecond==null?dates.AbbrTypeIdFirsts:dates.AbbrTypeIdSecond;GetLeaveTypeFirst();"
+                                                                    ng-change="FillCountLeaveAccordingLeaveTypeSecond(AllLeavesDates)">
+                                                                <option value="">Select LeaveType</option>
+                                                                <option ng-repeat="leaveType in LeaveTypes" value="{{leaveType.AbbrTypeId}}">{{leaveType.AbbrType}}</option>﻿
+                                                            </select>
+                                                        </td>
+                                                        <td ng-hide='AFS == "First"'>
+                                                            <select class="form-control clear" id="ddlSecondApprove" ng-change="CheckLeaveRejectStatusSecond($index+1,$index,AllLeavesDates,dates)" ng-model="dates.SecondIsApproved" ng-init="dates.SecondIsApproved=dates.FirstIsApproved">
+                                                                <option value="">Select Status</option>
+                                                                <option value="1">Approved</option>
+                                                                <option value="2">Rejected</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="checkbox" ng-model="dates.IsAttendanceReversal" ng-disabled="true" /></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-padding box-r-to-l" id="LeaveBalanceStatusViewOnly">
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12  mgbt-xs-15" ng-init="GetEmployeeLeaveDetail()">
+                                                <div class="table-design1 ">
+                                                    <h3>Leave Balance Status</h3>
+                                                    @Html.Partial("TableLeaveDetailsAdmin")
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15" id="ViewTMFApllyLeaveBTN">
+                                                <a class="btn-f-TM" ng-click="LBSVTM(2)">Leave Apply Now </a>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-padding " id="ApllyLeavebox1">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15" id="LeaveBalanceStatusViewBTN">
+                                                <a class="btn-f-TM" ng-click="LBSVTM(1)">Leave Balance Status View</a>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Apply Date<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtApplyDate", "", new { @class = "form-control clear validate", @type = "Date", @ng_model = "VoucherDate", @placeholder = "", @ng_disabled = "true" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Employee<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlEmployee")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Department<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlDepartment")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Designation<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlDesignation")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave Reason<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtLeaveReason", "", new { @class = "form-control clear validate", @ng_model = "LeaveReason", @placeholder = "Leave Reason", @ng_disabled = "true" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding " id="ApllyLeavebox2">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave For<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select class="form-control clear" id="ddlLeaveFor" ng-model="LeaveFor" ng-disabled="true">
+                                                        <option value="">---Select Leave For---</option>
+                                                        <option value="F">Full</option>
+                                                        <option value="HDF">First Half</option>
+                                                        <option value="HDS">Second Half</option>
+                                                    </select>
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave From<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtFromDate", "", new { @class = "form-control validate", @type = "date", @ng_model = "FromDate", @min = "{{startDate}}", @max = "{{endDate}}" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave To<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtToDate", "", new { @class = "form-control", @type = "date", @ng_model = "ToDate", @min = "{{startDate}}", @max = "{{endDate}}", @ng_disabled = "true" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">In Absence Responsible Employee<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <div class="input-box">
+                                                        <select id="ddlResponsibleEmployee" class="select2 form-control validate" ng-model="ResEmployeeValue"
+                                                                ng-init="GetEmployees();">
+                                                            <option value="">Select Employee</option>
+                                                            <option ng-repeat="el in EmployeesList|filter:{EmployeeCode:'!' +EmployeeValue}"
+                                                                    value="{{el.EmployeeCode}}">
+                                                                {{el.FullName}}
+                                                            </option>
+                                                        </select>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>-->
+                                                    @*<select id="ddlResponsibleEmployee" class="select2 form-control validate"
+                                                                ng-model="ResEmployeeValue" ng-init="GetEmployees();">
+                                                            <option value="">Select Employee</option>
+                                                            <option ng-repeat="Employee in Employees|filter:{EmployeeCode:'!' +EmployeeValue}" value="{{Employee.EmployeeCode}}">{{Employee.FullName}}</option>
+                                                        </select>*@
+                                                    <!--<div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Communication Preferred Mode<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select class="form-control clear" id="ddlMode" ng-model="CommunicationPrefferedMode">
+                                                        <option value="">Select Preferred Mode</option>
+                                                        <option value="Email">Email</option>
+                                                        <option value="Mobile">Mobile</option>
+
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">On Leave Contact No<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtOnLeaveContactNo", "", new { @class = "form-control clear validate numbersOnly", @ng_model = "OnLeaveContactNo", @onblur = "validatePhoneNo('#txtOnLeaveContactNo')", @placeholder = "", @maxlength = "10" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">On Leave Address<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtOnLeaveAddress", "", new { @class = "form-control clear validate", @ng_model = "OnLeaveAddress", @placeholder = "On Leave Address" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave Approve From<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtApprovedFrom", "", new { @class = "form-control clear validate", @type = "Date", @ng_model = "ApprovedFrom", @placeholder = "Leave Approve From", @min = "{{MinFromDate}}", @max = "{{MinToDate}}" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave Approve To<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtApprovedTo", "", new { @class = "form-control clear validate", @type = "Date", @ng_model = "ApprovedTo", @placeholder = "Leave Approve To", @min = "{{MinFromDate}}", @max = "{{MinToDate}}" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                            @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Is Approved<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select class="form-control clear" id="ddlApprove" ng-model="IsApproved">
+                                                        <option value="">Select Approval</option>
+                                                        <option value="0">Pending</option>
+                                                        <option value="1">Approved</option>
+                                                        <option value="2">Rejected</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Approval Authority Remarks<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtRemarks", "", new { @class = "form-control clear validate", @ng_model = "Remarks", @placeholder = "Remarks" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12  mgbt-xs-15">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+
+</div>
+
+

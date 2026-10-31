@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "Daily Fee Collection Report";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<script src="~/scripts/myjslib/FeeCollectionReportController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Daily Fee Collection Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fees</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Daily Fee Collection Report</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+                                    <div class="section-toggle">
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">From Date</label>
+                                            <div class="input-box">
+                                                @Html.Partial("FromDate")
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">to Date</label>
+                                            <div class="input-box">
+                                                @Html.Partial("ToDate")
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            
+                                                <label class="control-label">Select Class</label>
+                                                <div class="input-box">
+                                                    @*@Html.Partial("ddlClass")*@
+                                                    <select id="ddlClass" class="select2 form-control validate" ng-model="ClassCode"
+                                                            ng-init="GetClasses();" ng-change="ddlClass_Change(ClassCode);" ng-disabled="disabledDDLClass">
+                                                        <option value="">Select Class</option>
+                                                        <option ng-repeat="cl in ClassList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassName}}</option>
+                                                    </select>
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Select Section</label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSectionUsingId")
+
+                                               
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                     
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Branch</label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlBranch")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student</label>
+                                            <div class="input-box">
+                                                @Html.Partial("TblStudentListcsb")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Admission No.</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAdmissionNo", "", new { @class = "form-control clear", @placeholder = "", @autocomplete = "name", @ng_model = "AdmissionNo" })
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Institute RollNo.</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtInstituteRollNo", "", new { @class = "form-control clear", @placeholder = "", @autocomplete = "name", @ng_model = "InstituteRollNo" })
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Fee Mode</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlFeeMode", new List<SelectListItem>{
+                                                new SelectListItem{Text="All", Value="All"},
+                                                new SelectListItem{Text="Cash", Value="Cash"},
+                                                new SelectListItem{Text="Cheque", Value="Cheque"},
+                                                new SelectListItem{Text="Card", Value="Card"},
+                                                new SelectListItem{Text="DD", Value="DD"}},
+                                                new { @class = "select2 form-control validate", @ng_model = "FeeMode", @ng_init = "FeeMode='Cash'" })
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Summary Filter</label>
+                                            <div class="input-box">
+                                                <div class="input-box">
+                                                    <div class="radio radio-primary radio-box">
+                                                        <input ng-model="SummaryFilter" type="radio" value="4" ng-init="SummaryFilter='4'" />
+                                                        <label for="">Summary</label>
+                                                    </div>
+                                                    <div class="radio radio-primary radio-box">
+                                                        <input ng-model="SummaryFilter" type="radio" value="2" />
+                                                        <label for="">Details</label>
+                                                    </div>
+                                                </div>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgtp-24 mgbt-xs-15">
+                                            @Html.Partial("ActionSearch")
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        @Html.Partial("SummaryRepeatReportAddFooterGrid")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#ddlFeeMode').removeClass('validate');
+    $('#ddlClass').removeClass('validate');
+    $('#ddlSection').removeClass('validate');
+    $('#ddlBranch').removeClass('validate');
+</script>

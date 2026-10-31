@@ -1,0 +1,6 @@
+﻿<select id="ddlRoles" class="select2 form-control validate" ng-model="RoleId" ng-init="GetRoles();" ng-change="ddl_RoleChange()">
+    <option value="">Select Role</option>
+    <option ng-repeat="role in RolesList" value="{{role.RoleId}}">
+        {{role.RoleName}}{{' ('+role.LevelName+')'}}
+    </option>
+</select>

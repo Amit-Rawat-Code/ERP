@@ -1,0 +1,919 @@
+﻿<style>
+    body{font-family:Arial; font-size:13px; font-weight:normal;}
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .margin-bt-15 {
+        margin-bottom: 15px;
+    }
+
+    .fee-recipt {
+        width:33.33%;
+        float: left;
+        box-sizing: border-box;
+        padding: 5px;
+    }
+
+        .fee-recipt .table-adm {
+            width: 100%;
+            font-size: 14px;
+            color: #000;
+            font-family: initial;
+            border-collapse: collapse;
+        }
+
+        .fee-recipt > table.table-adm {
+            border: 1px solid #000;
+        }
+
+    .table-adm-row td {
+        padding: 5px;
+    }
+
+    .CollegeName {
+        font-size: 20px;
+        background: #000000;
+        display: inline-block;
+        margin: 0 auto;
+        line-height: 30px;
+        border-radius: 8px;
+        color: #fff;
+        padding: 0px 30px;
+    }
+
+    .CollegeName1 {
+        font-size: 16px;
+    }
+
+    .bodered-class th {
+        background: #000;
+        padding: 5px;
+        color: #fff;
+    }
+
+    .bodered-class tr, .bodered-class td, .bodered-class th {
+        border: 1px solid #000;
+    }
+
+    .fee-recipt-border-spacing {
+        padding: 5px;
+    }
+
+    .fee-recipt-border-spacing {
+        padding: 5px;
+        border: 1px solid #000;
+    }
+    .repeat-section1 {
+        width: 100%;
+        page-break-after: always;
+        page-break-before: always;
+    }
+
+        .repeat-section1 > tbody > tr > td {
+            width: 33.33%;
+            padding: 5px;
+        }
+
+        .repeat-section1 .table-adm1 {
+            border: solid 1px #000;
+            width: 100%;
+            float: left;
+            padding: 5px;
+        }
+</style>
+<div id="ExportDiv" style="width:100%; float:left; display:none;">
+    <table ng-repeat="fb in  FeeBooklet" class="repeat-section1">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="table-adm table-adm1">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:right;">
+                                                    <strong> Parent's Copy </strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-family:Arial; font-size:12px; font-weight:normal; padding-left:5px;">
+                                                    <strong>Adm No</strong> : <span>{{fb.AdmissionNo}}</span>
+                                                </td>
+                                                <td style="font-size:12px; font-family:Arial; font-weight:normal; text-align:right; width:150px;">
+                                                    <strong>Due Date</strong> : <span>{{fb.DueOn}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="CollegeName" style="background:#000; color:#fff; border-radius:4px; padding:10px 10px; display:inline-block; margin:auto; font-size:14px;">{{SchoolName}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="CollegeName1">{{SchoolAddress}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="CollegeName1"><strong>PAN : </strong></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <strong>Session</strong> : <span>{{fb.SessionName}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:right;">
+                                                    <strong>Date</strong> : <span></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Fee Detail</strong> : <span>{{fb.InstallmentName}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span>Class : {{SelectedClassCode}}  Sec : {{SelectedSectionCode}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Scholar's Name</strong> : <span>{{fb.Student}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Father's Name</strong> : <span>{{fb.FatherName}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Remark</strong> : <span></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                        <thead style="background:#000; color:#fff;">
+                                            <tr>
+                                                <th>Particulars</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Installment - <span>{{fb.InstallmentName}}</span>
+                                                </td>
+                                                <td style="text-align:right; border-left:solid 1px #000">
+                                                    {{fb.PayableAmt}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Cash/Cheque/UTR No./IMPS No. :
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Total
+                                                </td>
+                                                <td style="text-align:right; border-left:solid 1px #000">
+                                                    {{fb.PayableAmt}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row ">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                    <div>Cashier</div>
+                                                </td>
+                                                <td style="text-align:center;">
+                                                    @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                    <div>Depositor</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row" style="border:solid 1px #000; margin-bottom:5px;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Bank Details:
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Bank Name : <span>{{BankName}}</span>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Account No : <span>{{AccountNo}}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    IFSC Code : <span>{{IfscCode}}</span>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+
+
+
+
+                <td>
+
+                    <table class="table-adm table-adm1">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:right;">
+                                                    <strong> School's Copy </strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-family:Arial; font-size:12px; font-weight:normal; padding-left:5px;">
+                                                    <strong>Adm No</strong> : <span>{{fb.AdmissionNo}}</span>
+                                                </td>
+                                                <td style="text-align: right; width: 150px; font-size: 12px; font-family: Arial; font-weight: normal;">
+                                                    <strong>Due Date</strong> : <span>{{fb.DueOn}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="CollegeName" style="background:#000; color:#fff; border-radius:4px; padding:10px 10px; display:inline-block; margin:auto; font-size:14px;">{{SchoolName}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="CollegeName1">{{SchoolAddress}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="CollegeName1"><strong>PAN :</strong></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <strong>Session</strong> : <span>{{fb.SessionName}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:right;">
+                                                    <strong>Date</strong> : <span></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Fee Detail</strong> : <span>{{fb.InstallmentName}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span>Class : {{SelectedClassCode}}  Sec : {{SelectedSectionCode}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Scholar's Name</strong> : <span>{{fb.Student}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Father's Name</strong> : <span>{{fb.FatherName}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Remark</strong> : <span></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000; width:100%;">
+                                        <thead style="background:#000; color:#fff;">
+                                            <tr>
+                                                <th>Particulars</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Installment - <span>{{fb.InstallmentName}}</span>
+                                                </td>
+                                                <td style="text-align:right; border-left:solid 1px #000;">
+                                                    {{fb.PayableAmt}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Cash/Cheque/UTR No./IMPS No. :
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Total
+                                                </td>
+                                                <td style="text-align:right; border-left:solid 1px #000;">
+                                                    {{fb.PayableAmt}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row ">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                    <div>Cashier</div>
+                                                </td>
+                                                <td style="text-align:center;">
+                                                    @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                    <div>Depositor</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row" style="border:solid 1px #000; margin-bottom:5px;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Bank Details:
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Bank Name : <span>{{BankName}}</span>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Account No : <span>{{AccountNo}}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    IFSC Code : <span>{{IfscCode}}</span>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+
+                <td>
+
+                    <table class="table-adm table-adm1">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:right;">
+                                                    <strong> Bank's Copy </strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-family:Arial; font-size:12px; font-weight:normal; padding-left:5px;">
+                                                    <strong>Adm No</strong> : <span>{{fb.AdmissionNo}}</span>
+                                                </td>
+                                                <td style="font-size:12px; font-family:Arial; font-weight:normal; text-align:right; width:150px;">
+                                                    <strong>Due Date</strong> : <span>{{fb.DueOn}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="CollegeName" style="background:#000; color:#fff; border-radius:4px; padding:10px 10px; display:inline-block; margin:auto; font-size:14px;">{{SchoolName}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="CollegeName1">{{SchoolAddress}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="CollegeName1"><strong>PAN :</strong></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <strong>Session</strong> : <span>{{fb.SessionName}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:right;">
+                                                    <strong>Date</strong> : <span></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Fee Detail</strong> : <span>{{fb.InstallmentName}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span>Class : {{SelectedClassCode}}   Sec : {{SelectedSectionCode}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Scholar's Name</strong> : <span>{{fb.Student}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Father's Name</strong> : <span>{{fb.FatherName}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Remark</strong> : <span></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000; width:100%;">
+                                        <thead style="background:#000; color:#fff;">
+                                            <tr>
+                                                <th>Particulars</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Installment - <span>{{fb.InstallmentName}}</span>
+                                                </td>
+                                                <td style="text-align:right; border-left: 1px #000;">
+                                                    {{fb.PayableAmt}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Cash/Cheque/UTR No./IMPS No. :
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Total
+                                                </td>
+                                                <td style="text-align:right; border-left:solid 1px #000;">
+                                                    {{fb.PayableAmt}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row ">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                    <div>Cashier</div>
+                                                </td>
+                                                <td style="text-align:center;">
+                                                    @*<img src="https://www.pikpng.com/pngl/b/41    6-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                    <div>Depositor</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row" style="border:solid 1px #000; margin-bottom:5px;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Bank Details:
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Bank Name : <span>{{BankName}}</span>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Account No : <span>{{AccountNo}}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    IFSC Code : <span>{{IfscCode}}</span>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

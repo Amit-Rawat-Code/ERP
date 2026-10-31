@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "CenterContentWithBottomSlider";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="website-main-content" ng-init="RightSliderWithBottomSlider();GetAboutUs();" ng-cloak>
+   
+        <section class="page-banner-breadcrumbs">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <h3 class="title-of-page">
+                        {{ImageContentPageData[0].UnitTitle}}
+                    </h3>
+                </div>
+            </div>
+        </section>
+        <section class="page-section why-choose-allen-kids Event">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCC'})[0].BodyContent)">
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="event-carousel-1">
+                            <div id="event-carousel-1" class="owl-carousel">
+                                <div class="post-slide" ng-repeat="BottomSliderData in BottomSliderWithRightSlider" ng-event-carousel-one>
+                                    <div class="post-img">
+                                        <img src="{{BottomSliderData.BannerImage}}" alt="{{BottomSliderData.BannerAltText}}">
+                                        <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+

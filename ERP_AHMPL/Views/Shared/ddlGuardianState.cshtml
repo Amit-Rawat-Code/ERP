@@ -1,0 +1,9 @@
+﻿<select id="ddlGuardianState" autocomplete='address-level1' class="select2 form-control validate" ng-model="studentDetails.GuardianStateId"
+        ng-change="GetCities(studentDetails.GuardianStateId,'G')"
+        ng-options="state.StateId as state.StateName for state in GuardianStates">
+    <option value="">Select State</option>
+    @*<option ng-repeat="state in GuardianStates" value="{{state.StateId}}">{{state.StateName}}</option>*@
+</select>
+
+
+

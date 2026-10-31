@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "AdminMediaGallery";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/scripts/myjslib/AdminMediaGalleryController.js"></script>
+<input type="hidden" ng-model="hdnVideoTransId" id="hdnVideoTransId" />
+<!-- Section: inner-header -->
+<div class="app-content  my-3 ">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Upload Album Media</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Album</span></li>
+                        <li class="active"><span>Upload Album Media</span></li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="br-pagebody">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="collapse in" id="collapseinputbox">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Unit Type</label>
+                                                        @Html.Partial("ddlPermUnitType")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Unit</label>
+                                                        @Html.Partial("ddlPermUnit")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Media Album Name</label>
+                                                        <select id="ddlGalleryType" class="form-control clear validate" ng-change="SetAlbumn()" ng-model="MediaAlbumId" ng-init="AlbumName();">
+                                                            <option value="">Select</option>
+                                                            @*<option ng-repeat="x in rec" value="{{x.TransId}}|{{x.Title}}">{{x.Title}}</option>*@
+                                                            <option ng-repeat="x in rec" value="{{x.TransId}}">{{x.Title}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="input-box">
+                                                        <label class="content-title">Title<span class="red-i">*</span></label>
+                                                        <input type="text" id="Title" ng-model="Title" class="form-control clear validate" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="content-title">Venue<span class="red-i">*</span></label>
+                                                    <div class="input-box">
+                                                        <input id="txtVenue" class="form-control clear validate" ng-model="Venue" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="content-title">Event Date<span class="red-i">*</span></label>
+                                                    <div class="input-box ">
+                                                        <input type="date" id="EventDate" class="form-control clear validate" ng-model="EventDate" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="content-title">Event Description<span class="red-i">*</span></label>
+                                                    <div class="input-box">
+                                                        <input id="txtDescription" class="form-control clear validate" ng-model="Description" />
+
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label class="content-title">Upload Pdf File<span class="red-i">*</span></label>
+                                                        <input type="file" accept="pdf" id="fileInput" onchange="angular.element(this).scope().showPdf(this)" ng-model="fileInput" class="form-control clear dropify validate" />
+                                                    </div>
+
+                                                    <div>
+                                                        <strong>Instructions to Upload Files</strong>
+                                                        <ul>
+                                                            <li> 1) Upload pdf File in selected Album.</li>
+                                                            <li> 2) Use Only pdf File <br /></li>
+                                                            <li> 3) Album pdf Size is not more than 5 Mb</li>
+                                                            @*<li> 4) Maximum five Videos upload at a time</li>*@
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="content-title">Upload Album Icon <span class="red-i">*</span></label>
+                                                    <div class="input-box file-i">
+                                                        <img id="AlbumIcon" style="display: none;" src="" alt="" />
+                                                        <input type="file" id="AlbumIcon" accept="image/jpg,image/png,image/jpeg" onchange="angular.element(this).scope().showImg(this,)" ng-model="AlbumIcon" class="form-control clear dropify validate" />
+                                                        <div class="text-box-msg-r">
+                                                            <input type="hidden" id="AlbumIcon" />
+                                                        </div>
+                                                    </div>
+                                                    <div class=" photo-ins">
+
+                                                        <strong>Instructions to Upload Files</strong>
+                                                        <ol>
+                                                            <li>Upload Multiple Images/Videos in Album Cover. </li>
+                                                            <li>Use Standard photo Format (Width: 640px Height: 480px).</li>
+                                                            <li>Album Cover Image Size is not more than 1 Mb</li>
+
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                                <!--<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label class="content-title">Upload Pdf File<span class="red-i">*</span></label>
+                                                        <input type="file" accept="pdf" id="fileInput" onchange="angular.element(this).scope().showPdf(this)" ng-model="fileInput" class="form-control clear dropify validate" />
+                                                    </div>
+
+                                                    <div>
+                                                        <strong>Instructions to Upload Files</strong>
+                                                        <ul>
+                                                            <li> 1) Upload pdf File in selected Album.</li>
+                                                            <li> 2) Use Only pdf File <br /></li>
+                                                            <li> 3) Album pdf Size is not more than 5 Mb</li>-->
+                                                            @*<li> 4) Maximum five Videos upload at a time</li>*@
+                                                        <!--</ul>
+                                                    </div>
+                                                </div>-->
+
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 footer-listad">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

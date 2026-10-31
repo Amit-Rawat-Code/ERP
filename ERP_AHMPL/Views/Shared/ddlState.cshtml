@@ -1,0 +1,5 @@
+﻿<select id="ddlState" class="select2 form-control validate" ng-model="StateCode"
+        ng-change="GetCity(StateCode)">
+    <option value="">Select State</option>
+    <option ng-repeat="x in Statelist" value="{{x.Code}}">{{x.StateName}}</option>
+</select>

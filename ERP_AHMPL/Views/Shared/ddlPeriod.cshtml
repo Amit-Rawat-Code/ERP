@@ -1,0 +1,4 @@
+﻿<select id="ddlPeriod" class="select2 form-control validate" ng-model="PeriodId" ng-init="GetPeriods()" ng-change="ddlPeriod_Change()">
+    <option value="">Select Period</option>
+    <option ng-repeat="period in Periods" value="{{period.PeriodId}}" ng-disabled="!period.IsActive">{{period.PeriodName}}</option>
+</select>

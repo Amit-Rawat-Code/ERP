@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EA050A77-8581-4BBE-A8DA-26F43404378B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MCPG.CCA.Util">
+      <HintPath>Z:\amit rawat\MCPG.CCA.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Z:\amit rawat\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager">
+      <HintPath>Z:\amit rawat\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComplainDLL.cs" />
+    <Compile Include="DALAccount.cs" />
+    <Compile Include="DALCollegeAttendance.cs" />
+    <Compile Include="DALCollegeAdmissionModule.cs" />
+    <Compile Include="DALAdmissionModule.cs" />
+    <Compile Include="DALAssessment.cs" />
+    <Compile Include="DALAttendance.cs" />
+    <Compile Include="DALAttendanceReport.cs" />
+    <Compile Include="DALCommunication.cs" />
+    <Compile Include="DALDigital.cs" />
+    <Compile Include="DALDynamicWebsite.cs" />
+    <Compile Include="DALEmployee.cs" />
+    <Compile Include="DALCollegeEnquiryModule.cs" />
+    <Compile Include="DALEnquiryModule.cs" />
+    <Compile Include="DALExam_Master.cs" />
+    <Compile Include="DALFeeModule.cs" />
+    <Compile Include="DALGetMaster.cs" />
+    <Compile Include="DALGlobalMaster.cs" />
+    <Compile Include="DALHomework.cs" />
+    <Compile Include="DALHRManagement.cs" />
+    <Compile Include="DALInventory_Master.cs" />
+    <Compile Include="DALInventory_Report.cs" />
+    <Compile Include="DALInventory_Trans.cs" />
+    <Compile Include="DALLibrary.cs" />
+    <Compile Include="DALMaster.cs" />
+    <Compile Include="DALMIS.cs" />
+    <Compile Include="DALMobileNavigationMenu.cs" />
+    <Compile Include="DALNavigationMenu.cs" />
+    <Compile Include="DALNotifications.cs" />
+    <Compile Include="DALRegistrationModule.cs" />
+    <Compile Include="DALSMS_Master.cs" />
+    <Compile Include="DALSMS_Transaction.cs" />
+    <Compile Include="DALStudentAndTeacher.cs" />
+    <Compile Include="DalTestModule.cs" />
+    <Compile Include="DALTicket_Dash.cs" />
+    <Compile Include="DALTicket_Master.cs" />
+    <Compile Include="DALTicket_Trans.cs" />
+    <Compile Include="DALCollegeTimeTableModule.cs" />
+    <Compile Include="DALTimeTableModule.cs" />
+    <Compile Include="DALTransport_Master.cs" />
+    <Compile Include="DALTransport_Report.cs" />
+    <Compile Include="DALTransport_Trans.cs" />
+    <Compile Include="DALUserModule.cs" />
+    <Compile Include="DataTransferService\LedgerTransfer.cs" />
+    <Compile Include="DataTransferService\MasterTransfer.cs" />
+    <Compile Include="DataTransferService\StudentTransfer.cs" />
+    <Compile Include="ExceptionLogging.cs" />
+    <Compile Include="PaymentService\AXIS\AxisPaymentGateWay.cs" />
+    <Compile Include="PaymentService\AXIS\AxisPaymentGatewayResponse.cs" />
+    <Compile Include="PaymentService\AXIS\AxisPaymentGatewayRquest.cs" />
+    <Compile Include="PaymentService\AXIS\AXISPaymentStatus.cs" />
+    <Compile Include="PaymentService\HDFC\HDFCPaymentGateWay.cs" />
+    <Compile Include="PaymentService\HDFC\HDFCPaymentGatewayResponse.cs" />
+    <Compile Include="PaymentService\HDFC\HDFCPaymentGatewayRquest.cs" />
+    <Compile Include="PaymentService\HDFC\HDFCPaymentStatus.cs" />
+    <Compile Include="PaymentService\ICICI\PaymentCreation.cs" />
+    <Compile Include="PaymentService\OnlinePayment.cs" />
+    <Compile Include="PaymentService\PaymentGatewayCredential.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlDBHelper.cs" />
+    <Compile Include="WebHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BAL\BAL.csproj">
+      <Project>{eff4e8ed-b59f-4453-8a78-ca0c0dcd15ca}</Project>
+      <Name>BAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{4097d760-fcb9-4be5-8d98-699fb29cbc30}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\DAL.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

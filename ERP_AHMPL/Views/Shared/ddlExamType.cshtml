@@ -1,0 +1,4 @@
+﻿<select id="ddlExamType" class="select2 form-control clear validate" ng-model="ExamTypeId" ng-init="GetExamType();">
+    <option value="">Select Exam Type</option>
+    <option ng-repeat="x in ExamTypelist" value="{{x.Id}}">{{x.Name}}</option>
+</select>

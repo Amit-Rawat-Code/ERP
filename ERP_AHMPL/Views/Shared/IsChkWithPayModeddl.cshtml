@@ -1,0 +1,8 @@
+﻿Pay Mode  &nbsp;<input type="checkbox" value="1" ng-model="IsPayMode" ng-init="IsPayMode=0" />  Is Online
+<select id="ddlPayMode" class="select2 form-control validate" ng-model="PaymentType" ng-init="GetPayModes()">
+    <option value="">Select Payment Mode</option>
+    <option ng-repeat="x in PayModeList|filter:{Name:IsPayMode>0?'!Cash':'Cash'}" value="{{x.Code}}">{{x.Name}}</option>
+    <option ng-repeat="x in PayModeList|filter:{Name:IsPayMode==0?'Cheque':'None'}" value="{{x.Code}}">{{x.Name}}</option>
+</select>
+
+

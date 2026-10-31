@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "HOEmployeeAttendanceDateWise";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/HOEmployeeAttendanceDateWiseController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="hfId" name="Id" value="" />
+<input type="hidden" id="hfVoucherNo" name="VoucherNo" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">H.O Employee Attendance Date Wise</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Attendance</span></li>
+                <li><span>H.O Employee</span></li>
+                <li class="active"><span>H.O Employee Attendance Date Wise</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Attendance Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAttendanceDate", "", new
+                                                {
+                                                    @class = "form-control clear validate",
+                                                    @type = "Date",
+                                                    @ng_model = "AttendanceDate",
+                                                    @placeholder = "",
+                                                    @ng_change = "EmployeeAttendanceList(AttendanceDate);InsertedAttendace();"
+                                           })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Departments<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlDepartment")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <div class="input-box">
+                                                <input class="form-control contact-page-button" type="button" value="Get Biometric Attendance" ng-model="btnGetBiometricAttendance"
+                                                       ng-click="HOEmployeeAttendanceListBioMetric(AttendanceDate);" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 " ng-init="HOEmployeeAttendanceList(AttendanceDate);InsertedAttendace();">
+                                            <div class="datatable-responsive table-responsive" ng-cloak>
+                                                <table id="tblEmployeeAttendanceList" class="table compact  table-hover table-striped table-bordered mgbt-xs-0" ng-model="EmpAttendanceList">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><input type="checkbox" ng-model="ChkAll" ng-change="CheckALL()" />&nbsp;Select All</th>
+                                                            <th class="sr-no-w text-center">Sr. No.</th>
+                                                            <th>Employee ID</th>
+                                                            <th>Employee Name</th>
+                                                            <th>Employee Registered In</th>
+                                                            @*<th>Father Name</th>*@
+                                                            @*<th>Designation</th>*@
+                                                            <th>Punching Location</th>
+                                                            <th>Department</th>
+                                                            <th>Status</th>
+                                                            <th>Log In</th>
+                                                            <th>Log Out</th>
+                                                            <th>Is On Duty</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="Attendance in HOEmployeeAttendanceLists" ng-class="{'bg-success':Attendance.Status==1 }" repeat-done>
+                                                            <td><input type="checkbox" ng-model="Attendance.Chk" ng-disabled='Attendance.IsAttendanceLock==true' /></td>
+                                                            <td class="text-center">
+                                                                {{$index+1}}
+                                                                <input type="hidden" id="Employeecode" value="{{Attendance.EmployeeCode}}" />
+                                                            </td>
+                                                            <td>{{Attendance.EmployeeId}}</td>
+                                                            <td>{{Attendance.EmpName}}</td>
+                                                            <td>{{Attendance.BranchName}}</td>
+                                                            @*<td>{{Attendance.FatherName}}</td>*@
+                                                            @*<td>{{Attendance.DesignationName}}</td>*@
+                                                            <td>{{Attendance.PunchingBranchName}}</td>
+                                                            <td>{{Attendance.DepartmentName}}</td>
+                                                            <td class="table-in-input-box">
+                                                                <select ng-disabled='Attendance.IsAttendanceLock==true' id="ddlAbbreviation" class="select2 form-control clear" ng-model="Attendance.AbbreviationCode"
+                                                                        style="width: 100px;">
+                                                                    <option value="">Select Status</option>
+                                                                    <option ng-repeat="S in AbbreviationList" value="{{S.Code}}">{{S.Abbreviation}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td><input type="time" ng-model="Attendance.LogIn" ng-disabled='Attendance.IsAttendanceLock==true' value="{{Attendance.LogIn}}" /></td>
+                                                            <td><input type="time" ng-model="Attendance.LogOut" ng-disabled='Attendance.IsAttendanceLock==true' value="{{Attendance.LogOut}}" /></td>
+                                                            <td><input type="checkbox" ng-model="Attendance.ChkIsOnDuty" ng-disabled='Attendance.IsOnDuty==true' /></td>
+                                                        </tr>
+                                                        <tr ng-if="HOEmployeeAttendanceLists.length==0">
+                                                            <td colspan="7" class="text-center">
+                                                                Sorry, No Records found.
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            @Html.Partial("ActionView")
+                                            <button ng-click="UpdateAndLockRecord();" id="btnUpdateAndLock" type="button" value="Update & Lock" class="btn-me btn-primary" name="lockButton" ng-model="UpdateAndLock">
+
+                                                <span id="btnUpdateLocktxt" class="action-txt" ng-bind="Update & Lock">Update & Lock</span>
+
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("Search")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+
+</div>
+<script>
+    $('#txtAttendanceDate').attr('max', moment(new Date()).format('YYYY-MM-DD'))
+    $('#ddlDepartment').removeClass('validate');
+</script>
+

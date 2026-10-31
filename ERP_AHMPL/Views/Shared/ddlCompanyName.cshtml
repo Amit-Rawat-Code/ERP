@@ -1,0 +1,4 @@
+﻿<select id="ddlCompany" class="select2 form-control validate" ng-model="CompanyModel" ng-init="BindCompany();" ng-change="HQCheck()" >
+    <option value="">Select</option>
+    <option ng-repeat="Company in CompanyList" value="{{Company.Comp_Code}}">{{Company.Comp_Name}}</option>
+</select>

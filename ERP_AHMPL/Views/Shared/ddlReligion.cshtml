@@ -1,0 +1,5 @@
+﻿<select id="ddlReligion" class="select2 form-control" ng-init="GetReligions();" ng-model="Religion">
+    <option value="">Select Religion</option>
+    <option ng-repeat="religion in Religions" value="{{religion.Religion}}">{{religion.Religion}}</option>
+</select>
+

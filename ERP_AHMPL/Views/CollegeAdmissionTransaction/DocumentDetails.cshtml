@@ -1,0 +1,253 @@
+﻿
+@{
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Title = "DocumentDetails";
+}
+
+<script src="~/Scripts/myjslib/CollegeDocumentDetailsController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Details of Documents</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Student</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Details of Documents</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper collapse in ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                        <div class="form-panel">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                        @Html.Partial("TblStudentListCollege")
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Name<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Name", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Father's Name<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtFatherName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "FatherName", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Course<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtCourse", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Course", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">College/Univ. Roll No.<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtCollegeUniversityRollNo", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "CollegeUniversityRollNo", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Gender<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <div class="radio radio-primary radio-box">
+                                                                @*<input type="radio" id="PrimaryNo_1" ng-model="PrimaryNo" value="1">*@
+                                                                @Html.RadioButton("IsGender", "Male", new { @ng_model = "Gender", @ng_disabled = "true" })
+                                                                <label for="IsGender"> Male </label>
+                                                            </div>
+                                                            <div class="radio radio-primary radio-box">
+                                                                @*<input type="radio" id="WhatsAppNo_1" ng-model="PrimaryNo" value="1">*@
+                                                                @Html.RadioButton("IsGender", "Female", new { @ng_model = "Gender", @ng_disabled = "true" })
+                                                                <label for="IsGender"> Female</label>
+                                                            </div>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Category<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <div class="checkbox checkbox-primary check-box">
+                                                                <input type="checkbox" id="chkGeneral" ng-model="General" ng-disabled="true" value="GEN">
+                                                                <label>General</label>
+                                                            </div>
+                                                            <div class="checkbox checkbox-primary check-box">
+                                                                <input type="checkbox" id="chkOBC" ng-model="OBC" ng-disabled="true" value="OBC">
+                                                                <label>OBC</label>
+                                                            </div>
+                                                            <div class="checkbox checkbox-primary check-box">
+                                                                <input type="checkbox" id="chkSC" ng-model="SC" ng-disabled="true" value="SC">
+                                                                <label>SC</label>
+                                                            </div>
+                                                            <div class="checkbox checkbox-primary check-box">
+                                                                <input type="checkbox" id="chkST" ng-model="ST" ng-disabled="true" value="ST">
+                                                                <label>ST</label>
+                                                            </div>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Contact Number<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtContactNumber", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "ContactNumber", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Yearly Income<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtYearlyIncome", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "YearlyIncome", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Specify If Case of Samaj Kalyan<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlCasteCategory" class="select2 form-control clear validate" ng-model="CasteCategory" ng-init="GetAbbrType();">
+                                                                <option value="">Yes</option>
+                                                                <option value="">No</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">General/OBC:Partial Reimbursement(If Yes)<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <div class="checkbox checkbox-primary check-box">
+                                                                <input type="checkbox" ng-model="chkGenObc" @*ng-bind="chkAllClass=(selectedClassCount==ClassList.length?true:false)" ng-change="AllClass();" class="ng-pristine ng-valid ng-binding ng-not-empty ng-touched"*@>
+                                                                <label>General/OBC</label>
+                                                            </div>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Domicile<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtDomicile", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Domicile", @ng_disabled = "true" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Total tution fee waiver<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <div class="checkbox checkbox-primary check-box">
+                                                                <input type="checkbox" ng-model="chkScSt" @*ng-bind="chkAllClass=(selectedClassCount==ClassList.length?true:false)" ng-change="AllClass();" class="ng-pristine ng-valid ng-binding ng-not-empty ng-touched"*@>
+                                                                <label>SC/ST</label>
+                                                            </div>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+
+                                                        <table id="tbl1" class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n" ng-init="GetDocumentList();">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>SNo.</th>
+                                                                    <th>Descripton Of Document</th>
+                                                                    <th>Original</th>
+                                                                    <th>Photocopy</th>
+                                                                    <th ng-if="Save=='Update'">Choose File.</th>
+                                                                    <th ng-if="Save=='Update'">Upload Document.</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="DL in DocumentList">
+                                                                    <td ng-init="DL.SNo=$index+1">
+                                                                        {{$index+1}}<input type="hidden" id="hdDc{{$index}}" value="{{DL.DocumentCode}}" />
+                                                                    </td>
+                                                                    <td>{{DL.DocName}}</td>
+                                                                    <td class="text-center">
+                                                                        <div class="checkbox-primary ">
+                                                                            <input type="checkbox" ng-model="DL.IsOriginal" ng-bind="chkOrgDoc=(DL.IsOriginal==true?true:false)">
+                                                                            <label></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <div class="checkbox-primary ">
+                                                                            <input type="checkbox" ng-model="DL.IsPhotoCopy" ng-bind="chkCopyDoc=(DL.IsPhotoCopy==true?true:false)">
+                                                                            <label></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td ng-if="Save=='Update'"><input id="FileOriginalUpld{{$index}}" ng-click="SetIndex($index)" type="file" data-max-file-size-preview="1M" upload-files></td>
+                                                                    <td ng-if="Save=='Update'">
+                                                                        <input type="button" id="btnupload{{$index}}" value="Upload" class="btn btn-primary" ng-click="UploadFile($index);" />
+                                                                        <a href="#" class="btn btn-primary" ng-click="GetImagePath(DL.OriginalUpld)" ng-if="DL.OriginalUpld!=null?true:false">View</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                        @Html.Partial("ActionView")
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                    @Html.Partial("SearchAngularJs")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 no-padding ">
+                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                            <div class="scroll-table table-scrollbar2">
+                                @Html.Partial("ImagePopUp")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <
+            </div>
+        </div>
+    </div>
+</div>
+
+

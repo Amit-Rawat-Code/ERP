@@ -1,0 +1,4 @@
+﻿<select id="ddlExpensesModel" class="select2 form-control validate" ng-model="ExpensesModel" >
+    <option value="">Select</option>
+    <option ng-repeat="Expenses in ExpensesLedgerList" value="{{Expenses.SubCode}}">{{Expenses.Name}}</option>
+</select>

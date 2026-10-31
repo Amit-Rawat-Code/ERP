@@ -1,0 +1,6 @@
+﻿<select id="ddlStream" class="select2 form-control" ng-model="StreamCode"
+        ng-init="GetStream();isStreamDisabled=false" ng-change="ddlStream_Change()" ng-disabled="isStreamDisabled">
+    <option value="">Select Stream</option>
+    <option ng-repeat="sl in StreamList" value="{{sl.Code}}" ng-disabled="!sl.IsActive">{{sl.StreamName}}</option>
+</select>
+

@@ -1,0 +1,4 @@
+﻿<select id="ddlBookAccessoriesLib" class="select2 form-control clear" ng-model="BookAcceName" ng-init="GetBookAcceNameLibList();">
+    <option value="">Select</option>
+    <option ng-repeat="x in BookAcceNameLibList" value="{{x.Code}}">{{x.Name}}</option>
+</select>

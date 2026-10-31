@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Teacher Break Master";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/TeacherBreakMasterController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Teacher Break Master</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>TimeTable</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Teacher Break Master</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+                                                    <div class="col-xs-12 ng-scope" >
+                                                        <div class="input-box search-feild search-feild1">
+                                                            <input class="form-control " id="txtSearch" name="txtSearch" ng-model="SearchText" ng-blur="SearchTeacher();" placeholder="Enquiry No./Student Name/Mobile No." type="text" value="">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>    
+                                                    </div>
+                                                    @*<div class="col-xs-4">
+                                                        <button id="btnSave" type="button" value="Search" class="btn-me btn-primary hvr-float-shadow ng-pristine ng-untouched ng-valid ng-not-empty" name="saveButton" ng-model="Saves" ng-init="Saves='Search'" ng-click="CheckSavePermission();SearchTeacher();" ng-disabled="disableAdd">
+                                                            <span id="btnSavetxt" ng-bind="Saves" class="ng-binding">Search</span>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                                                        </button>
+                                                    </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                                <div class="table-responsive">
+                                                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Teacher</th>
+                                                            <th>Break After No. Of Periods</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in TeacherBreakList">
+                                                            <td ng-bind="obj.Srno=($index+1)"></td>
+                                                            <td>{{obj.EmployeeName}}{{' - '+obj.EmployeeId}}</td>
+                                                            <td>
+                                                                <input ng-model="obj.BreakAfterNoOfConsecutiveLecture" class="form-control clear" />
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionView")
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

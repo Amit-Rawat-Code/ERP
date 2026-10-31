@@ -1,0 +1,740 @@
+﻿
+@{
+    ViewBag.Title = "ApplicationFormGeneralDetails";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/CollegeApplicationFormGeneralDetails.js?Ver=@ViewBag.Version"></script>
+<style>
+    .PhysicallyDisable-div select {
+        display: table;
+        width: auto;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+    .PhysicallyDisable-div input {
+        padding-left: 90px;
+    }
+</style>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Application Form General Details</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Global</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Application Form General Details</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="input-box">
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" id="AgainstEnquiry" ng-value="1" ng-model="AdmissionType" ng-checked="AdmissionType" name="RBG" class="ng-valid ng-not-empty ng-dirty ng-touched">
+                                                            <label for="AgainstEnquiry">Against Enquiry</label>
+                                                        </div>
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" id="Direct" ng-value="2" ng-model="AdmissionType" ng-checked="AdmissionType" name="RBG" class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched">
+                                                            <label for="Direct">Direct</label>
+                                                        </div>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 search-feild" ng-if="AdmissionType==1?true:false">
+                                                    <div class="input-box">
+
+                                                        @Html.TextBox("txtEnquiryNo", "", new { @class = "form-control", @placeholder = "Enter Enquiry No.", @ng_model = "EnquirySearch" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                                        <button class="Srch-btn">Search</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Registration Code(CRN)<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtRegistrationCode", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "RegNo" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Admission Form Number(AFN)<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <input id="txtDateOfAdmission" type="text" class="form-control clear validate" placeholder=""
+                                                           ng-model="AdmissionFormNo" ng-init="GetAdmissionFormNo()" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Date of Admission<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <input id="txtDateOfAdmission" type="date" class="form-control clear validate" placeholder=""
+                                                           ng-model="DateOfAdmission" ng-init="Date=GetTodayDate()" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Academic Session<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlSession" autocomplete='address-level2' class="select2 form-control validate"
+                                                            ng-model="AcademicSessionId" ng-init="GetSession()">
+                                                        <option value="">Select Session</option>
+                                                        <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <h5 class="control-label">Applying For</h5>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Course<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlCollegeCourse")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Semester<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlSemester")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Mode of Admission<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlModeOfAdmission", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Online", Value="Online"},
+                                                    new SelectListItem{Text="Offline", Value="Offline"}
+                                                    },
+                                                    new { @class = "select2 form-control", @ng_model = "AdmissionMode", @ng_init = "AdmissionMode='Offline'" })
+
+
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Lateral Entry<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlLateralEntry", new List<SelectListItem>{
+                                                       new SelectListItem{Text="Select", Value=""},
+                                                       new SelectListItem{Text="Yes", Value="true"},
+                                                       new SelectListItem{Text="No", Value="false"}
+                                                       },
+                                                       new { @class = "select2 form-control", @ng_model = "LaternalEntry", @ng_init = "LaternalEntry='false'" })
+
+
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Admission Through<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlAdmissionThrough", new List<SelectListItem>{
+                                                   new SelectListItem{Text="Select", Value=""},
+                                                   new SelectListItem{Text="Refferance", Value="true"},
+                                                   new SelectListItem{Text="Direct", Value="false"}
+                                                   },
+                                                   new { @class = "select2 form-control", @ng_model = "AdmissionThrough", @ng_init = "AdmissionThrough='false'" })
+
+
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="AdmissionThrough=='false'?true:false">
+                                                <label class="control-label">Enquiry Source<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlEnquirySource")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="AdmissionThrough=='true'?true:false">
+                                                <label class="control-label">Reference Of<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtReferenceOf", "", new { @class = "form-control clear textOnly", @placeholder = " ", @ng_model = "ReferenceOf" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <h5>Preference of branch(for B.tech,diploma)<span class="vd_red"></span></h5>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-repeat="mpl in MaxPreferenceList">
+                                                <label class="control-label">{{mpl.PName}}<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlPreference{{$index}}" class="select2 form-control {{$index<2?'validate':''}}" ng-change="PreferenceAlert(mpl.PPreferedBranch,$index)" ng-model="mpl.PPreferedBranch" ng-init="GetCollegeBranch();">
+                                                        <option value="">Select Branch</option>
+                                                        <option ng-repeat="cl in CollegeBranchList" value="{{cl.Code}}">{{cl.CollegeBranchName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label><b>Note:</b>Your Applied Course Will be treated on 1st Preference</label>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Initials<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlInitials", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Mr.", Value="Mr."},
+                                                    new SelectListItem{Text="Ms.", Value="Ms."}
+                                                    },
+                                                    new { @class = "select2 form-control", @ng_model = "Initials", @ng_init = "Initials=''" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Gender<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlGender")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 PhysicallyDisable-div">
+                                                <label class="control-label">Physically Disable<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlPhysicallyDisable", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                    },
+                                                    new { @class = "select2 form-control", @ng_model = "IsPhyDisable", @ng_init = "IsPhyDisable='false'" })
+
+                                                    @Html.TextBox("txtPhysicallyDisable", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "DisabilityDetails", @ng_disabled = "IsPhyDisable=='true'?false:true" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Blood Group<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlBloodGroup")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Student First Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtStudentFirstName", "", new { @class = "form-control clear textOnly validate", @placeholder = " ", @ng_model = "StudentFirstName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Student Middle Name<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtStudentMiddleName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "StudentMiddleName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Student Last Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtStudentLastName", "", new { @class = "form-control clear textOnly validate", @placeholder = "", @ng_model = "StudentLastName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Hostel<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlHostel", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                    },
+                                                    new { @class = "select2 form-control", @ng_model = "Hostel", @ng_init = "Hostel='false'" })
+
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Transport<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlTransport", new List<SelectListItem>{
+                                                     new SelectListItem{Text="Select", Value=""},
+                                                     new SelectListItem{Text="Yes", Value="true"},
+                                                     new SelectListItem{Text="No", Value="false"}
+                                                     },
+                                                     new { @class = "select2 form-control", @ng_model = "Transport", @ng_init = "Transport='false'" })
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 PhysicallyDisable-div">
+                                                <label class="control-label">Willing For Education Loan<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlWillingForEducationLoan", new List<SelectListItem>{
+                                                     new SelectListItem{Text="Select", Value=""},
+                                                     new SelectListItem{Text="Yes", Value="true"},
+                                                     new SelectListItem{Text="No", Value="false"}
+                                                     },
+                                                     new { @class = "select2 form-control", @ng_model = "EducationLoan", @ng_init = "EducationLoan='false'" })
+
+                                                    @Html.TextBox("txtWillingForEducationLoan", "", new { @class = "form-control clear textOnly", @placeholder = " If Yes Give Details", @ng_model = "EducationLoanLocation", @ng_disabled = "EducationLoan=='true'?false:true" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Date of birth<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <input id="txtDateofEnquiry" type="date" class="form-control clear" placeholder=""
+                                                           ng-model="DateOfBirth" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Religion<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlReligion")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Student Mobile<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtStudentMobile", "", new { @class = "form-control clear textOnly validate", @placeholder = "", @ng_model = "StudentMobileNo", @maxlength = "10", @allow_only_numbers = "" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Student Alternative Mobile</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtStudentAlternativeMobile", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "StudentAlternativeMobileNo", @maxlength = "10", @allow_only_numbers = "" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Student Email<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtStudentEmail", "", new { @class = "form-control clear textOnly validate", @placeholder = "", @ng_model = "StudentEmail" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Student Alternative Email</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtStudentAlternativeEmail", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "StudentAlternativeEmailid" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Father Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtFatherName", "", new { @class = "form-control clear textOnly validate", @placeholder = "", @ng_model = "FatherName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Father Mobile No.<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtFatherMobileNo", "", new { @class = "form-control clear textOnly validate ", @placeholder = "", @ng_model = "FatherMobile", @maxlength = "10", @allow_only_numbers = "" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Mother Name<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtMotherName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "MotherName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Mother Mobile No.<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtMotherMobileNo", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "MotherMobile", @maxlength = "10", @allow_only_numbers = "" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Father Occupation<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlFatherOccupation")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Grand Father's Name<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtGrandFatherName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "GrandFatherName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Local Guardian Name<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtGuardianName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "GuardianName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Local Guardian Mobile No.<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtGuardianMobile", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "GuardianMobile", @maxlength = "10", @allow_only_numbers = "" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                        <h5 class="control-label pull-left">Current Address<span class="vd_red"></span></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Address Line 1<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtAddressLine1", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Curr_Address1" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Address Line 2<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtAddressLine2", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Curr_Address2" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Address Line 3<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtAddressLine3", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Curr_Address3" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Country<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlCountry" class="select2 form-control validate" ng-model="Curr_CountryCode" ng-init="GetCountry();"
+                                                                    ng-change="GetState(Curr_CountryCode)">
+                                                                <option value="">Select Country</option>
+                                                                <option ng-repeat="x in Countrylist" value="{{x.Code}}">{{x.CountryName}}</option>
+                                                            </select>
+
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">State<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlState" class="select2 form-control validate" ng-model="Curr_StateCode"
+                                                                    ng-change="GetCity(Curr_StateCode)">
+                                                                <option value="">Select State</option>
+                                                                <option ng-repeat="x in Statelist" value="{{x.Code}}">{{x.StateName}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">City<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+
+                                                            <select id="ddlCity" class="select2 form-control validate" ng-model="Curr_CityCode">
+                                                                <option value="">Select City</option>
+                                                                <option ng-repeat="x in Citylist" value="{{x.Code}}">{{x.CityName}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Pincode<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtPinCode", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Curr_PinCode", @maxlength = "6", @allow_only_numbers = "" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                        <h5 class="control-label pull-left">Permanent Address</h5>
+                                                        <div class="checkbox checkbox-primary check-box pull-right">
+                                                            <input type="checkbox" ng-model="IsAddressSame" ng-value="0" ng-change="CopyAddress()" class="ng-pristine ng-valid ng-binding ng-not-empty ng-touched">
+                                                            <label>Same as Current Address</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Address Line 1</label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtAddressLine1", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Per_Address1" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Address Line 2<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtAddressLine2", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Per_Address2" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Address Line 3<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtAddressLine3", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Per_Address3" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Country<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlCountry" class="select2 form-control" ng-model="Per_CountryCode" ng-init="PerGetCountry();"
+                                                                    ng-change="PerGetState(Per_CountryCode)">
+                                                                <option value="">Select Country</option>
+                                                                <option ng-repeat="x in PerCountrylist" value="{{x.Code}}">{{x.CountryName}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">State<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlState" class="select2 form-control" ng-model="Per_StateCode"
+                                                                    ng-change="PerGetCity(Per_StateCode)">
+                                                                <option value="">Select State</option>
+                                                                <option ng-repeat="x in PerStatelist" value="{{x.Code}}">{{x.StateName}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">City<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlCity" class="select2 form-control" ng-model="Per_CityCode">
+                                                                <option value="">Select City</option>
+                                                                <option ng-repeat="x in PerCitylist" value="{{x.Code}}">{{x.CityName}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Pincode<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtPinCode", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Per_PinCode", @maxlength = "6", @allow_only_numbers = "" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <h5 class="control-label pull-left">Upload Important files<span class="vd_red">*</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+
+                                            @*<input id="studentpic" type="file" upload-files />
+                                              <input id="studentsig" type="file" upload-files />*@
+
+                                            @*onchange="angular.element(this).scope().SelectImage(this, '#imgStudentPhoto', 'StudentPhoto')"*@
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Candidate Photo<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <div class="dropify-loader"></div>
+                                                    <input id="fuStudentPhoto" type="file" class="dropify" data-max-file-size-preview="3M" ng-model="StudentPhoto" upload-files>
+                                                    <img id="imgStudentPhoto" style="display:none;">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Candidate Signature<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <div class="dropify-loader"></div>
+                                                    <input id="fuStudentSign" type="file" class="dropify" data-max-file-size-preview="3M" ng-model="StudentSign" upload-files>
+                                                    <img id="imgStudentSign" style="display:none;" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Father's Photo<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <div class="dropify-loader"></div>
+                                                    <input id="fuFatherPhoto" type="file" class="dropify" data-max-file-size-preview="3M" ng-model="FatherPhoto" upload-files>
+                                                    <img id="imgFatherPhoto" style="display:none;" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Father's Signature<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <div class="dropify-loader"></div>
+                                                    <input id="fuFatherSign" type="file" class="dropify" data-max-file-size-preview="3M" ng-model="FatherSign" upload-files>
+                                                    <img id="imgFatherSign" style="display:none;" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Mother's Photo<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <div class="dropify-loader"></div>
+                                                    <input id="fuMotherPhoto" type="file" class="dropify" data-max-file-size-preview="3M" ng-model="MotherPhoto" upload-files>
+                                                    <img id="imgMotherPhoto" style="display:none;" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Mother's Signature<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <div class="dropify-loader"></div>
+                                                    <input id="fuMotherSign" type="file" class="dropify" data-max-file-size-preview="3M" ng-model="MotherSign" upload-files>
+                                                    <img id="imgMotherSign" style="display:none;" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Local Guardian Photo<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <div class="dropify-loader"></div>
+                                                    <input id="fuLocalGuardianPhoto" type="file" class="dropify" data-max-file-size-preview="3M" ng-model="LocalGuardianPhoto" upload-files>
+                                                    <img id="imgLocalGuardianPhoto" style="display:none;" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Local Guardian Signature<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <div class="dropify-loader"></div>
+                                                    <input id="fuLocalGuardianSign" type="file" class="dropify" data-max-file-size-preview="3M" ng-model="LocalGuardianSign" upload-files>
+                                                    <img id="imgLocalGuardianSign" style="display:none;" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

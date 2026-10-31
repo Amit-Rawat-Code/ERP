@@ -1,0 +1,205 @@
+﻿@{
+    ViewBag.Title = "CreateQuestions";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script src="~/Scripts/myjslib/CreateQuestionsController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="app-content  my-3">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+                    <h5 class="txt-dark">Create Questions</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Create Questions</span></li>
+                        <li class="active"><span>Create Questions</span></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="br-pagebody">
+                <div class="">
+                    <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Class</label>
+                                        <select id="ddlClass" class="select2 form-control clear validate" ng-model="Class"
+                                                ng-init="GetAllClass();" ng-change="GetAllSubject();">
+                                            <option value="">Select Class</option>
+                                            <option ng-repeat="classes in ClassList" value="{{classes.ClassCode}}">{{classes.ClassName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Subject</label>
+                                        <select id="ddlSubject" class="select2 form-control clear validate" ng-model="Subject" ng-change="GetAllBook();">
+                                            <option value="">Select Subject</option>
+                                            <option ng-repeat="Subjects in SubjectList" value="{{Subjects.SubjectCode}}">{{Subjects.SubjectName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Stream</label>
+                                        <select id="ddlStream" class="select2 form-control validate" ng-model="Stream"
+                                                ng-init="GetStream();" ng-change="ddlStream_Change()">
+                                            <option value="">Select Stream</option>
+                                            <option ng-repeat="sl in StreamList" value="{{sl.Code}}" ng-disabled="!sl.IsActive">{{sl.StreamName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Branch</label>
+                                        <select id="ddlBranch" class="select2 form-control validate" ng-init="GetBranchSides();" ng-change="ddl_ChangeBranch()" ng-model="Branch">
+                                            <option value="">Select Branch</option>
+                                            <option ng-repeat="branch in BranchList" value="{{branch.Code}}" ng-disabled="!branch.IsActive">{{branch.BranchName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Name Of Book</label>
+                                        <select id="ddlNameOfBook" class="select2 form-control clear validate" ng-model="Book"
+                                                ng-init="GetAllBookName();" ng-change="GetAllConcept();GetAllChapter();">
+                                            <option value="">Select Book</option>
+                                            <option ng-repeat="Books in BookNameList" value="{{Books.Code}}">{{Books.NameOfBook}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Chapter</label>
+                                        <select id="ddlChapter" class="select2 form-control clear validate" ng-model="Chapter">
+                                            <option value="">Select Chapter</option>
+                                            <option ng-repeat="chaps in ChapterList" value="{{chaps.ID}}">{{chaps.ChapterName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Concept</label>
+                                        <select id="ddlConcept" class="select2 form-control clear validate" ng-model="Concept">
+                                            <option value="">Select Concept</option>
+                                            <option ng-repeat="cons in ConceptList" value="{{cons.ID}}">{{cons.ConceptName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Question Type</label>
+                                        <select id="ddlQuestionType" class="select2 form-control clear validate" ng-model="QuestionType" ng-change="SetQuestionType()">
+                                            <option value="">Select Question Type</option>
+                                            <option value="Objective">Objective</option>
+                                            <option value="Subjective">Subjective</option>
+                                            <option value="Comprehensive">Comprehensive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12" ng-hide="QuestionTextDiv" , ng-init="QuestionTextDiv=true">
+                                    <div class="form-group">
+                                        <label>Question Text</label>
+                                        <input type="text" id="QuestionText" ng-model="QuestionText" class="form-control clear" />
+                                        <input type="button" value="Add Image" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12" ng-hide="OptionsTypeDiv" , ng-init="OptionsTypeDiv=true">
+                                    <div class="form-group">
+                                        <label>Options Type</label>
+                                        <select id="ddlOptionType" class="select2 form-control clear validate" ng-model="OptionsType">
+                                            <option value="">Select Options Type</option>
+                                            <option value="Radio">Radio Button</option>
+                                            <option value="MultiSelect">Multi Select</option>
+                                            <option value="Textbox">Textbox Or One Word</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12" ng-hide="ComprehensiveQuestionTypeDiv" , ng-init="ComprehensiveQuestionTypeDiv=true">
+                                    <div class="form-group">
+                                        <label>Comprehensive Question Type</label>
+                                        <select id="ddlComprehensiveQuestionType" class="select2 form-control clear validate" ng-model="ComprehensiveQuestionType" ng-change="SetComprehensiveQuestionType()">
+                                            <option value="">Select Comprehensive Question Type</option>
+                                            <option value="Objective">Objective</option>
+                                            <option value="Subjective">Subjective</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12" ng-hide="NumberOfOptionDiv" , ng-init="NumberOfOptionDiv=true">
+                                    <div class="form-group">
+                                        <label>Number Of Options</label>
+                                        <select id="ddlNumberOfOption" class="select2 form-control clear validate" ng-model="NumberOfOption" ng-change="AddRowByNumberOfOptions();">
+                                            <option value="">Select Number Of Options</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Difficulty Level</label>
+                                        <select id="ddlDifficultyLevel" class="select2 form-control clear validate" ng-model="DifficultyLevel">
+                                            <option value="">Select Difficulty Level</option>
+                                            <option value="1">Easy</option>
+                                            <option value="2">Medium</option>
+                                            <option value="3">Difficult</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Marks</label>
+                                        <input type="text" id="txtMarks" class="form-control clear" ng-model="Marks" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12" ng-hide="ComprehensiveQuestionTextDiv" , ng-init="ComprehensiveQuestionTextDiv=true">
+                                    <div class="form-group">
+                                        <label>Comprehensive Question Text</label>
+                                        <input type="text" class="form-control clear" id="ComprehensiveQuestionText" ng-model="ComprehensiveQuestionText" />
+                                        <input type="button" value="Add Image" />
+                                    </div>
+                                </div>
+                                <table id="ObjectiveRowTable" class="table compact table-hover table-striped table-bordered nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Answer</th>
+                                            <th>R</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="val in rowsList">
+                                            <td>
+                                                <input type="text" id="answerText" ng-model="answerText">                                            
+                                            </td>
+                                            <td  ng-hide='OptionsType == "MultiSelect"'><input type="radio" id="answerRadio" ng-model="answerRadio" /></td>
+                                            <td ng-hide='OptionsType == "Radio"'><input type="checkbox" id="answerMultiSelect" ng-model="answerMultiSelect" /></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    @Html.Partial("ActionView")
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

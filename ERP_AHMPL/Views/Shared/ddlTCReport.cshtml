@@ -1,0 +1,287 @@
+﻿
+<div class="a4-box" ng-repeat="SD in StudentDetails"  ng-cloak >
+    <table class="table-TC no-p-rc table-TC-r1">
+        <tbody>
+
+            <tr>
+                <td>
+                    <table class="table-TC exam-table-f1 table-TC-r1">
+
+                        <tbody>
+
+                            <tr><td></td><td class="col-w-a"><span class="e-txt">पंजीकरण</span></td><td class="b-d-bro w-150"><span class="b-txt">{{RegistrationNo}}</span></td></tr>
+                            <tr>
+                                <td colspan="3" class="text-center" style="text-align:center!important;" ng-init="GetReportHeaderUsingCategory('Exam ReportCard')">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 b-d-input">
+                                        <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                                        <br />
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+              
+                <td>
+                    <table class="table-TC table-TC-r1" >
+                        <tbody>
+
+                            <tr>
+                                <td style="text-align: center;"><span style="border:1px solid #000;padding: 5px 60px;">छात्र सम्बन्धी पंजी तथा पृथकीय प्रमाण - पत्र </span></td>                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+
+            </tr>
+            <tr>
+
+
+                <td><br /><br />
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">1 -</span><span class="e-txt">विद्यार्थी  का नाम ( हिंदी में )</span></td>
+                                <td class="b-d-bro" style="width: 30%;"><span class="b-txt"> {{SD.CandidateNameinHindi}}</span></td>
+                                <td class="col-w-a"><span class="e-txt">अंग्रेजी के बड़े अक्षरों में </span></td>
+                                <td class="b-d-bro"> <span class="b-txt"> {{SD.StudentName}} </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">2 -</span><span class="e-txt">जति यदि हिन्दू है अथवा धर्म </span></td>
+                                <td class="b-d-bro" style="width: 29.5%;"><span class="b-txt"> {{SD.ReligionName}} </span></td>
+                                <td class="col-w-a"><span class="h-no">3 -</span><span class="e-txt">राष्ट्रीयता </span></td>
+                                <td class="b-d-bro"> <span class="b-txt"> {{SD.Nationality}} </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">4 -</span><span class="e-txt">पिता का नाम ( हिंदी में )</span></td>
+                                <td class="b-d-bro" style="width: 31.5%;"><span class="b-txt"> {{SD.FatherNameinHindi}}</span></td>
+                                <td class="col-w-a"><span class="e-txt">अंग्रेजी के बड़े अक्षरों में </span></td>
+                                <td class="b-d-bro"> <span class="b-txt"> {{SD.FatherName}} </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">5 -</span><span class="e-txt">माता का नाम ( हिंदी में )</span></td>
+                                <td class="b-d-bro" style="width: 31.5%;"><span class="b-txt"> {{SD.MotherNameinHindi}} </span></td>
+                                <td class="col-w-a"><span class="e-txt">अंग्रेजी के बड़े अक्षरों में </span></td>
+                                <td class="b-d-bro"> <span class="b-txt">{{SD.MotherName}} </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">6 -</span><span class="e-txt">स्थाई पता </span></td>
+                                <td class="b-d-bro"><span class="b-txt"> {{SD.ParmanentAddress}} </span></td>
+                            </tr>
+                        </tbody>
+                    </table><table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+
+                                <td class="col-w-a"><span class="h-no">&nbsp;</span></td>
+                                <td class="b-d-bro" style="width: 44.8%;"><span class="b-txt"></span></td>
+                                <td class="col-w-a"><span class="h-no">7 -</span><span class="e-txt">व्यवसाय </span></td>
+                                <td class="b-d-bro"><span class="b-txt"> {{SD.FatherOccupation}} </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">8 -</span><span class="e-txt">संरक्षक का नाम </span></td>
+                                <td class="b-d-bro" style="width: 35.8%;"><span class="b-txt"> {{SD.GuardianName}} </span></td>
+                                <td class="col-w-a" ><span class="h-no">9 -</span><span class="e-txt">संबन्ध</span></td>
+                                <td class="b-d-bro"><span class="b-txt"> {{SD.Relationship}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">10 -</span><span class="e-txt">पता </span></td>
+                                <td class="b-d-bro"><span class="b-txt">{{SD.GuardianAddress}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">&nbsp;</span></td>
+                                <td class="b-d-bro" style="width: 44.5%;"><span class="b-txt"></span></td>
+                                <td class="col-w-a"><span class="h-no">11 -</span><span class="e-txt">व्यवसाय </span></td>
+                                <td class="b-d-bro"><span class="b-txt"> </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">12 -</span><span class="e-txt">जन्मतिथि </span></td>
+                                <td class="b-d-bro" style="width: 39.2%;"><span class="b-txt"> {{SD.DateofBirth}} </span></td>
+                                <td class="col-w-a"><span class="e-txt">शब्दों में</span></td>
+                                <td class="b-d-bro"> <span class="b-txt">{{SD.DOBInWord}} </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">13 -</span><span class="h-txt">पुरानी  संस्था  जिसमें  वह  पढ़ा  हो </span></td>
+                                <td class="b-d-bro"><span class="b-txt"> {{SD.PreviousSchoolNameAddress}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td class="col-w-a"><span class="h-no">14 -</span><span class="h-txt">पुरानी संस्था के प्रमाण - पत्र  की संख्या तिथि  </span></td>
+                                <td class="b-d-bro"><span class="b-txt"> {{SD.PreviousSchoolCertificateDate}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td><span class="b-txt">&nbsp;</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    <table class="table-TC table-TC-b-a table-TC-th-h-b text-center">
+                        <thead>
+                            <tr>
+                                <th>कक्षा </th>
+                                <th>प्रवेश की तिथि </th>
+                                <th>उन्नति की तिथि </th>
+                                <th>पृथक होने की तिथि</th>
+                                <th>संस्था से प्रथक होने का कारण</th>
+                                <th>वर्ष </th>
+                                <th>आचरण </th>
+                                <th>परीक्षाफल </th>
+                                <th>हस्ताक्षर </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="TCD in TCDetail" class="text-center">
+                                <td> {{TCD.ClassName }} </td>
+                                <td> {{TCD.EntranceDate }}</td>
+                                <td> {{TCD.PassedDate }}</td>
+                                <td> {{TCD.LastDaySchoolDate }}</td>
+                                <td> {{TCD.LeavingReason}} </td>
+                                <td> {{TCD.Year }} </td>
+                                <td> {{TCD.Behaviour}} </td>
+                                <td> {{TCD.Result }}</td>
+                                <td> {{TCD.Signature }} </td>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td><span class="b-txt">&nbsp;</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td>प्रमाणित किया जाता है कि उपरोक्त छात्र संबन्धी पंजिका छात्र के संस्था छोड़ने के समय पूरा कर दिया है |</td>
+                            </tr>
+                            <tr>
+                                <td><span class="b-txt">&nbsp;</span></td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-TC table-TC-r1">
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td class="col-w-a ">
+                                    <span class="h-txt">प्रधानाचार्य CPA  </span> <span class="b-txt"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="col-w-a ">
+                                    <span class="h-txt">दिनांक  </span> <span class="b-txt"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>'

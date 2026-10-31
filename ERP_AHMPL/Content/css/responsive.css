@@ -1,0 +1,273 @@
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (max-width: 1199px) {
+    section.page-section.why-choose-allenkids.our-program .col-sm-7 {
+        max-width: 1170px;
+        padding: 40px 15px;
+        width: 100%;
+        margin: 0 auto;
+        float: none;
+    }
+    section.page-section.why-choose-allenkids.our-program .col-sm-5 {
+        display: none;
+    }
+    section.page-section.why-choose-allenkids.our-program .col-sm-7 .col-sm-6 {
+        margin-bottom: 20px;
+    }
+    section.legacy-section-photo-discription .discription-section {
+        padding: 20px 20px 0px 0px;
+    } 
+       section.page-banner-breadcrumbs h3.title-of-page {
+
+        font-size: 40px;
+    }
+    ul#menu-group-schools li {
+        width: 50%;
+        
+    }
+
+  }
+
+   /* Large devices (laptops/desktops, 992px and up) */
+   @media only screen and (max-width: 992px) {
+    div#navbar ul.nav>li>a {
+        padding: 0px 5px;
+    }
+    section.page-section.our-core-values .col-sm-3 {
+        width: 50%;        
+        float: left;
+    }
+    .Modern-Slider .item .img-fill .info div {
+        background: #00000087;
+        padding: 20px;
+        width: 80%;
+    }
+    footer .col-sm-3 {
+        width: 50%;
+    }
+    h3.play-title {
+        font-size: 25px;
+        line-height: 65px;
+    }
+    ul#lightgallery>li {
+        flex-basis: 33.33%;
+    }
+
+  } 
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (max-width: 767px) {
+        a.navbar-brand {
+            height: 60px;
+            padding: 5px 15px;
+        }
+        .header-bottom .navbar-header button.navbar-toggle {
+            background: #38618f;
+            margin: 13px 15px;
+        }
+        div#navbar {
+           
+            margin: 0px;
+            overflow: hidden;
+        }
+        .website-main-content {
+            padding-top: 100PX;
+        }
+        div#navbar ul.nav>li>a {
+            line-height: 40px;
+            padding: 0px 15px;
+            border-bottom: 1px solid #ccc;
+            margin: 0px;
+        }
+        .navbar-nav .open .dropdown-menu {
+            background-color: #fdfcee;
+            padding-left: 30px;
+        }
+        .navbar-nav {
+            margin: 3.5px -15px;
+            padding: 0px 10px;
+        }
+        .Modern-Slider .item h3 {
+            font-size: 32px;
+        }
+        .Modern-Slider .item .img-fill .info div {
+            background: #00000087;
+            padding: 20px;
+            width: 70%;
+        }
+        section.page-section.our-core-values .stm-action-box__figure_box {
+            text-align: center;
+            margin: 20px auto 0px;
+    
+        }
+        div#navbar ul.nav>li>a span.badge {
+            float: right;
+            top: 8px;
+        }
+        ul.nav.navbar-nav.navbar-right> li:last-child >a {
+            border: 0  !important;
+        }
+        ul.dropdown-menu>li:last-child>a {
+            border: 0px;
+        }
+        .stm-action-box__figure_box figcaption.stm-action-box__figcaption_box {
+            min-height: 275px;
+        }
+        section.page-section h3.section-title {
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+        .why-choose-main-image {
+            padding: 0px 0px 0px 0px;
+        }
+        section.page-section.why-choose-allenkids h3.section-title {
+            text-align: center;
+        }
+        section.page-section.why-choose-allenkids p.discription {
+            text-align: center;
+        }
+        .facebook-feed iframe {
+            text-align: center;
+            display: table;
+            margin: 30px auto;
+        }
+        section.page-section.event-section .event-section-title-btn h1 {
+
+
+            font-size: 35px;
+        }
+        section.page-section.facebook-feeds-youtube-contact-form .youtube-feed {
+            padding: 20px 0px;
+        }
+        section.page-banner-breadcrumbs{
+            min-height: auto;
+        }
+        section.page-banner-breadcrumbs h3.title-of-page {
+            margin: 15px 0px;
+            font-size: 30px;
+            line-height: 50px;
+        }
+        section.legacy-section-photo-discription .container-fluid .col-sm-6 {
+            padding: 0px 15px;
+        }
+        section.legacy-section-photo-discription .photo-section {
+            width: 100%;
+        }
+        section.legacy-section-photo-discription .discription-section {
+            max-width: none;
+        }
+        footer .col-sm-3 {
+            width: 100%;
+        }
+        h3.section-title-color {
+            font-size: 25px;
+        }
+        section.why-choose-allen-kids.Playgroup-1 .photo-section {
+            padding: 20px 0px;
+        }
+        .play-group-icon-title h3.play-title {
+            width: calc(100% - 75px);
+            font-size: 18px;
+            line-height: 75px;
+        }
+        .play-group-icon-title .icon {
+            WIDTH: 75PX;
+        }
+        section.page-section.why-choose-allen-kids.admission-page .discription-section {
+            display: table;
+            width: 100%;
+        }
+        section.page-section.why-choose-allen-kids.sports-and-performing-arts .col-sm-6 .discription-section {
+            padding: 20px;
+        }
+        section.page-section.why-choose-allen-kids.Event .photo-section img {
+            margin: 10px 0px;
+        }
+        section.page-section.why-choose-allen-kids.Playgroup-1 .photo-section img {
+            height: auto;
+        }
+        ul#menu-group-schools li {
+            width: 100%;
+        }
+        section.page-section.why-choose-allenkids.home-sec .why-choose-main-image {
+            margin: 40px auto 0px;
+        }
+        .header-bottom a.navbar-brand {
+            position: static;
+            transform: translate(0px, 0px);
+            padding: 10px 15px;
+        }
+        .header-bottom:after{
+            display:none;
+
+        }
+        ul.nav.navbar-nav.navbar-left {
+            border-top: 1px solid #ccc;
+        }
+
+    } 
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 480px) {
+    .header-top {
+        display: none;
+    }
+
+    .website-main-content {
+        padding-top: 72px;
+    }
+    .Modern-Slider .item h3 {
+        font-size: 25px;
+        line-height: 33px;
+        font-weight: bold;
+    }
+  
+    section.page-section.our-core-values .col-sm-3 {
+        width: 100%;
+        
+    }
+    section.page-section.why-choose-allenkids .col-sm-6.col-xs-6 {
+        width: 100%;
+    }
+    .why-choose-main-image {
+        padding: 20px 0px;
+    }
+    section.page-section.event-section .event-section-title-btn h1 {
+        font-size: 25px;
+    }
+    .play-group-icon-title h3.play-title {
+        width: calc(100% - 75px);
+        font-size: 15px;
+        line-height: 75px;
+    }
+    ul#lightgallery>li {
+        flex-basis: 50%;
+    }
+    ul.stm-contact-details__items_box {
+        list-style-type: none;
+        padding: 0px;
+    }
+    section.why-choose-allen-kids {
+        padding: 20px 0px;
+    }
+    .fullsize-video-bg {
+
+        height: 20vh;
+    }
+    ul#menu-group-schools li a {
+        font-size: 12px;
+    }
+    .fullsize-video-bg h1 {
+
+        font-size: 2em;
+    }
+    .fullsize-video-bg h1 + p {
+
+        font-size: .8em;
+    }
+    .header-bottom {
+        background: #fff;
+        padding: 10px 0px 0px 0px;
+    }
+
+}

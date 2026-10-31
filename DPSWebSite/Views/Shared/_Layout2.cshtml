@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+
+<html ng-app="myApp" ng-controller="myController">
+<head>
+    <title>@*Home - DPS Amrapali, Best School Lucknow*@{{LogoImagePath[0].BranchTitle}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Fondamento:ital@0;1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <!-----------------home-classes-carousels---------->
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css">
+    <!-----------------Home-classes-carousels---------->
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.css">
+    @*<link rel="stylesheet" href="~/Content/css/foundation.css">*@
+    <link rel="stylesheet" href="~/Content/css/style2.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/responsive.css" type="text/css">
+    <script src="~/Scripts/angular.js"></script>
+    <script src='~/content/js/ui-bootstrap-tpls.js'></script>
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/angular-filter.min.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/service.js"></script>
+    <script src="~/Script/controller.js"></script>
+    <link href="/content/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/lightgallery.css" rel="stylesheet">
+    <link href="/content/js/lightbox.min.css" rel="stylesheet" type="text/css">
+    <script src="/content/js/lightbox-plus-jquery.min.js" type="text/javascript"></script>
+    @*<script src="htpps://ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js"></script>*@
+    <script src="~/Script/LayoutController.js"></script>
+    <style>
+        .foobg {
+            background: #ffffff;
+            color: #014828;
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-init="GetUrl();" ng-cloak>
+        <header>
+            <nav class="navbar  navbar-fixed-top">
+                <div class="header-top" ng-repeat="ThemeData in GetThemeData" ng-style="background-color:#{{ThemeData.TopHeaderFirstLineColour}}">
+                    <div class="container" ng-repeat="ContactData in ContactUsPageData">
+                        <ul class="contact_details__box left">
+                            <li><label>Follow Us</label></li>
+                        </ul>
+                        <ul class="contact_details__box left" ng-repeat="left in TopHeaderDataLeft">
+                            <li class="top-bar__contact top-bar__contact_phone"><a style="color: #{{ThemeData.TopHeaderFirstLineTextColour}}" href="{{left.CaptionLink}}" target="_blank"><img class="top-bar-icon" src="{{left.CaptionIcon}}" alt="top-icon" ng-show="left.CaptionIcon.length>0" />{{left.CaptionName}}</a></li>
+                        </ul>
+                        <ul class="contact_details__box pull-right" ng-repeat="right in TopHeaderDataRight">
+                            <li class="top-bar__contact top-bar__contact_phone"><a style="color: #{{ThemeData.TopHeaderFirstLineTextColour}}" href="{{right.CaptionLink}}" target="_blank"><i style="color: #{{ThemeData.TopHeaderFirstLineIconColour}}" class="{{right.CaptionIcon}}"></i>{{right.CaptionName}}@*{{ContactData.BodyContentMobileNoText}}*@</a></li>
+                        </ul>
+                    </div>
+                    <!--<div class="container" ng-repeat="ContactData in ContactUsPageData">
+                <ul class="contact_details__box left">
+                    <li><label>Follow Us</label></li>-->
+                    @*<li class="top-bar__contact top-bar__contact_email"><a href="https://twitter.com/DPS_Eldeco"><i class="icon-twitter"></i></a></li>
+                    <li class="top-bar__contact top-bar__contact_phone"><a href="https://www.facebook.com/DPSEldeco"><i class="icon-facebook"></i></a></li>
+                    <li class="top-bar__contact top-bar__contact_phone"><a href="https://www.youtube.com/channel/UCxmvL-ygRAvBaX_TnZNN2dw"><i class="icon-youtube"></i></a></li>
+                    <li class="top-bar__contact top-bar__contact_email"><a href="https://www.dpseldeco.com/menu/Career/career.aspx"><i class="icon-hand-down"></i></a></li>
+                    <li class="top-bar__contact top-bar__contact_phone"><a href="https://www.dpseldeco.com/Menu/ContactDirection/ContactUs.aspx"><i class="icon-edit"></i></a></li>*@
+                    <!--<li class="top-bar__contact top-bar__contact_email"><a ng-style="color: #{{ThemeData.TopHeaderFirstLineTextColour}}" href="#" title="{{ContactData.FacebookLink}}"><i style="color: #{{ThemeData.TopHeaderFirstLineIconColour}}" class="icon-facebook"></i></a></li>
+                    <li class="top-bar__contact top-bar__contact_email"><a ng-style="color: #{{ThemeData.TopHeaderFirstLineTextColour}}" href="#" title="{{ContactData.InstagramLink}}"><i style="color: #{{ThemeData.TopHeaderFirstLineIconColour}}" class="icon-instagram"></i></a></li>
+                    <li class="top-bar__contact top-bar__contact_email"><a ng-style="color: #{{ThemeData.TopHeaderFirstLineTextColour}}" href="#" title="{{ContactData.YoutubeLink}}"><i style="color: #{{ThemeData.TopHeaderFirstLineIconColour}}" class="icon-youtube"></i></a></li>
+                </ul>
+                <ul class="contact_details__box pull-right">
+                    <li class="top-bar__contact top-bar__contact_phone"><a ng-style="color: #{{ThemeData.TopHeaderFirstLineTextColour}}" href="#" title="{{ContactData.BodyContentMobileNoText}}" >Contact Us</a></li>
+                    <li class="top-bar__contact top-bar__contact_email"><a ng-style="color: #{{ThemeData.TopHeaderFirstLineTextColour}}" href="#" title="mailto:{{ContactData.BodyContentEmailText}}">e-Care Login</a></li>-->
+                    @*<li class="top-bar__contact top-bar__contact_phone"><a href="tel:+91-7897403730">e-Care Login</a></li>
+                    <li class="top-bar__contact top-bar__contact_email"><a href="mailto:contact@allenkids.in">Contact Us</a></li>*@
+                    <!--</ul>
+                </div>-->
+                </div>
+                <div class="header-bottom">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="{{LogoImagePath[0].WebsiteURL}}">
+                                <img src="{{LogoImagePath[0].Logopath}}" alt="DPS-logo">
+
+                            </a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse navbar-right" aria-expanded="false" style="height: 1px;">
+                            @*<ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown" ng-repeat="Tabs in Tabs1" ng-model="SelectTabsR" menurepeat-done>
+                                    <a style="color:#{{ThemeData.TopHeaderSecondLineTextColour}}" target='_self' href="{{Tabs.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : Tabs.LayoutPageName}}" class="dropdown-toggle" data-toggle={{Menuss[$index].length==0?'none':'dropdown'}}>
+                                        <img src="{{Tabs.TabImagePath}}">
+                                        <span ng-bind-html="trustAsHtml(Tabs.TabName)">
+                                            {{Tabs.TabName}}
+                                        </span>
+                                        <span class="caret" ng-if="Menuss[$index].length>0"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" id="Tabs{{Tabs.TabId}}" ng-init="GetMenu1(Tabs.TabId,$index)" ng-hide="Menuss[$index].length==0">
+                                        <li ng-repeat="menus in Menuss[$index]" ng-model="SelectTabsR" menurepeat-done>
+                                                <a style="color:#{{ThemeData.TopHeaderSecondLineTextColour}}" target='_self' href="{{menus.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : menus.LayoutPageName}}" class="dropdown-toggle" data-toggle={{SubMenus[menus.MenuId].length==0?'none':'dropdown'}} >
+                                                    <span ng-bind-html="trustAsHtml(menus.MenuName)">{{menus.MenuName}}</span>
+                                                    <i class="fa fa-angle-right" aria-hidden="true" ng-hide="SubMenus[menus.MenuId].length==0"></i>
+                                                </a>
+                                                <ul class="dropdown-menu" id="Menu{{menus.MenuId}}" ng-init="GetSubMenu(menus.MenuId,$index)" ng-hide="SubMenus[menus.MenuId].length==0">
+                                                    <li class="dropdown-item" ng-repeat="submenus in SubMenus[menus.MenuId]" ng-model="SelectSubMenu">
+                                                        <a ng:href="{{submenus.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : submenus.LayoutPageName}}" target='_self' data-path="{{submenus.PageName}}" title="{{submenus.SubMenuName}}" ng-click="GetDetailBySubMenuId(submenus.SubMenuId)" onclick="return anchor(event)">
+                                                            <span ng-bind-html="trustAsHtml(submenu.SubMenuName)"></span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>*@
+                            @*<ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                        <span class="defaultAcademicsIcon icon"></span>
+                                        <div class="nav-title">Academics <span class="caret"></span></div>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="ourcurriculum.html">Our Curriculum</a></li>
+                                        <li>
+                                            <div class="dropdown-item dropdown-submenu">
+                                                <a class="dropdown-item dropdown-item-toggle" data-toggle="" href="#">Achievements</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="achievements.html">Achievements</a>
+                                                    <a class="dropdown-item" href="scholastic-achievements.html">Scholastic Achievements</a>
+                                                    <a class="dropdown-item" href="co-scholastic-achievements.html">Co-scholastic Achievements</a>
+                                                    <a class="dropdown-item" href="sports-achievements.html">Sports Achievements</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li><a href="Toppers.html">TOPPERS CLASS XII</a></li>
+                                        <li><a href="Toppers10.html">TOPPERS CLASS X</a></li>
+                                        <li><a target="_blank" href="https://kidscorner.dpseldeco.com/">Kindergarten</a></li>
+                                    </ul>
+
+                                </li>
+                            </ul>*@
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown" ng-repeat="Tabs in Tabs1" ng-model="SelectTabsR" menurepeat-done>
+                                    <a href="{{Tabs.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : Tabs.LayoutPageName}}" class="dropdown-toggle" data-toggle="{{Menuss[$index].length==0?'none':'dropdown'}}" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <span class="defaultAcademicsIcon icon"><img ng-src="{{Tabs.TabImagePath}}" /></span>
+                                        <div class="nav-title"><span ng-bind-html="trustAsHtml(Tabs.TabName)">{{Tabs.TabName}}</span> <span class="caret" ng-if="Menuss[$index].length>0"></span></div>
+                                    </a>
+                                    <ul class="dropdown-menu" id="Tabs{{Tabs.TabId}}" ng-init="GetMenu1(Tabs.TabId,$index);" ng-hide="Menuss[$index].length==0">
+                                        <li class="dropdown-item dropdown-submenu" ng-repeat="menus in Menuss[$index]" ng-model="SelectTabsR" menurepeat-done>
+                                            <a id="AMenu{{menus.MenuId}}" href="{{menus.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : menus.LayoutPageName}}" class="{{SubMenus[menus.MenuId].length==0?'none':'dropdown-item dropdown-item-toggle'}}" data-toggle={{SubMenus[menus.MenuId].length==0?'none':'dropdown'}} ng-click="loadTarget(menus)">
+                                                <span ng-bind-html="trustAsHtml(menus.MenuName)"></span>
+                                            </a>
+                                            <ul class="dropdown-menu" id="Menu{{menus.MenuId}}" ng-init="GetSubMenu(menus.MenuId,$index)" ng-hide="SubMenus[menus.MenuId].length==0">
+                                                <li class="dropdown-item" ng-repeat="submenus in SubMenus[menus.MenuId]" ng-model="SelectTabsR" menurepeat-done>
+                                                    <a href="{{submenus.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : submenus.LayoutPageName}}">
+                                                        <span ng-bind-html="trustAsHtml(submenus.SubMenuName)">{{submenus.SubMenuName}}</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!--/.nav-collapse -->
+                        </div>
+                    </div>
+            </nav>
+        </header>
+        <div class="website-main-content">
+            <script src="~/Content/js/jquery.min.js"></script>
+
+            @RenderBody()
+
+        </div>
+        <div class="panel foobg pgmstr">
+            <footer>
+                <section class="footer-links">
+                    <div class="container ipad-reso">
+                        <div class="row no-mar" ng-repeat="ContactData1 in ContactUsPageData">
+                            <div class="col-md-4">
+                                <h4 class="footer-link-heading">Youtube</h4>
+                                <iframe id="vid_frame" src="" ng-src="{{YoutubeFeedLink}}" frameborder="0" width="" ng-model="YoutubeFeedLink" ng-init="YoutubeFeedUrl(LogoImagePath[0].YoutubeFeed)" style=" height: 398px;"></iframe>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4 class="footer-link-heading">Facebook</h4>
+                                <iframe id="facebook_frame" src="" ng-src="{{FacebookFeedLink}}" ng-model="FacebookFeedLink" ng-init="FacebookFeedUrl(LogoImagePath[0].FacebookFeed)" style="border: none; overflow: hidden; width: 100%; height: 398px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                @*<iframe id="facebook_frame" src="" ng-src="{{FacebookFeedLink}}" width="340" height="500" ng-model="FacebookFeedLink" ng-init="FacebookFeedUrl(LogoImagePath[0].FacebookFeed)" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>*@
+                                @*<iframe class="newiframe" ng-src="{{FacebookLink}}" ng-model="FacebookLink" ng-init="ChangeFacebookUrl(ContactData1.FacebookLink)" width="100%" height="360" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>*@
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4 class="footer-link-heading">Career </h4>
+
+                                @*<iframe ng-src="{{LinkedInLink}}" ng-model="LinkedInLink" ng-init="ChangeLinkedInUrl(ContactData1.LinkedInLink)" width="100%" height="360" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                <h3 class="section-title" style="color:#{{ThemeData.ContactUsHeadingTextColour}} !important">
+                                    Career
+                                </h3>*@
+                                <div class="contact-form">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="name">Enter Name:</label>
+                                            <input type="text" class="form-control" placeholder="Enter Your Name" id="Name" ng-model="Name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contact">Enter Contact:</label>
+                                            <input type="number" id="Contact" name="Contact" ng-model="Contact" class="form-control" onKeyPress="if(this.value.length==10) return false;" placeholder="Enter Your Contact Number">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Your Email:</label>
+                                            <input type="email" class="form-control" placeholder="Enter Your Email" id="Email" ng-model="Email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Enter Skills:</label>
+                                            <input type="text" class="form-control" placeholder="Enter Your Profile" id="Skills" ng-model="Skills" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Upload Your Resume</label>
+                                            <input type="file" class="form-control" placeholder="Enter Your Skills" id="fileInput" ng-model="fileInput" required onchange="angular.element(this).scope().showPdf(this)">
+                                        </div>
+                                        @*<button type="button" class="btn ourbtn-default" ng-click="SaveRecord()" id="btnSave" name="saveButton" ng-model="Save" ng-init='Save="Save"'>Submit</button>*@
+                                        <button id="btnSave" type="button" value="Save" class="btn btn-default" name="saveButton" ng-model="Save"
+                                                ng-init='Save="Save"' ng-click="SaveCareerEnquiry(Name,Contact,Email,Skills,MediafileUrl,Save)">
+                                            Submit
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </footer>
+            <div class="copyright">
+                <div>
+                    &copy; Copyright All rights reserved by <span class="pvt">@*Delhi Public School,  Amrapali, Lucknow*@{{LogoImagePath[0].SiteLocation}}</span><br>
+                    Designed & Maintained by:{{LogoImagePath[0].MaintainedBy}}
+                </div>
+            </div>
+        </div>
+
+
+        <script src="~/Content/js/bootstrap.min.js"></script>
+
+        <script src='~/Content/js/slick.js'></script>
+        <script src='~/Content/js/owl.carousel.min.js'></script>
+
+        <script src='~/Content/js/jquery.bootstrap.newsbox.js'></script>
+
+        <script src='~/Content/js/picturefill.min.js'></script>
+        <script src='~/Content/js/jquery.mousewheel.min.js'></script>
+        <script src='~/Content/js/lightgallery-all.min.js'></script>
+        @*<script src="~/Content/js/custom.js"></script>*@
+
+
+
+        @*<script>
+            $(window).on("load", function () {
+                (function () {
+                    $(function () {
+
+                        $('.dropdown-submenu > a').on('click', function (e) {
+                            alert("pappu");
+                            var submenu;
+                            submenu = $(this);
+                            $('.dropdown-submenu .dropdown-menu').removeClass('show');
+                            submenu.next('.dropdown-menu').addClass('show');
+                            e.stopPropagation();
+                        });
+
+                    });
+
+                }).call(this);
+            });
+        </script>*@
+    
+        <script language="javascript" type="text/javascript">
+            var showhide = function (val, placeHolder) {
+                $("#ctl00_ContentPlaceHolder1_txtdiscription").val('').attr('placeholder', placeHolder);
+                $("#ctl00_ContentPlaceHolder1_txttitle").val('').attr('placeholder', placeHolder);
+                $("#ctl00_ContentPlaceHolder1_txtDate").val('').attr('placeholder', placeHolder);
+
+                $(".a1").hide();
+                $(val).show();
+            }
+            $(document).ready(function () {
+                if ($('#ctl00_ContentPlaceHolder1_RadioAcdYear').is(':checked')) {
+                    $(".a1").hide();
+                    $(".b").show();
+                }
+                if ($('#ctl00_ContentPlaceHolder1_Radiotitle').is(':checked')) {
+                    $(".a1").hide();
+                    $(".a").show();
+                }
+                if ($('#ctl00_ContentPlaceHolder1_RadioDate').is(':checked')) {
+                    $(".a1").hide();
+                    $(".d").show();
+                }
+                if ($('#ctl00_ContentPlaceHolder1_RadioDescription').is(':checked')) {
+                    $(".a1").hide();
+                    $(".c").show();
+                }
+                if ($('#ctl00_ContentPlaceHolder1_RadioSearchAll').is(':checked')) {
+                    $(".a1").hide();
+                    $(".c").show();
+                }
+            });
+        </script>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        //$(".Modern-Slider").slick({
+        //    autoplay: true,
+        //    autoplaySpeed: 10000,
+        //    speed: 600,
+        //    slidesToShow: 1,
+        //    slidesToScroll: 1,
+        //    pauseOnHover: false,
+        //    dots: true,
+        //    pauseOnDotsHover: true,
+        //    cssEase: 'linear',
+        //     fade:true,
+        //    draggable: false,
+        //    prevArrow: '<a class="PrevArrow"></a>',
+        //    nextArrow: '<a class="NextArrow"></a>',
+        //});
+
+
+        $("#event-carousel-1").owlCarousel({
+            items: 5,
+            itemsDesktop: [1199, 3],
+            itemsDesktopSmall: [980, 2],
+            itemsMobile: [600, 1],
+            navigation: true,
+            navigationText: ["", ""],
+            pagination: true,
+            autoPlay: true
+        });
+        $("#news-slider").owlCarousel({
+            items: 3,
+            itemsDesktop: [1199, 3],
+            itemsDesktopSmall: [980, 2],
+            itemsMobile: [600, 1],
+            navigation: true,
+            navigationText: ["", ""],
+            pagination: true,
+            autoPlay: true
+        });
+        $("#news-slider1").owlCarousel({
+            items: 1,
+            itemsDesktop: [1199, 1],
+            itemsDesktopSmall: [980, 1],
+            itemsMobile: [600, 1],
+            navigation: true,
+            navigationText: ["", ""],
+            pagination: true,
+            autoPlay: true
+        });
+        $("#music-dance").owlCarousel({
+            items: 5,
+            itemsDesktop: [1199, 3],
+            itemsDesktopSmall: [980, 2],
+            itemsMobile: [600, 1],
+            navigation: true,
+            navigationText: ["", ""],
+            pagination: true,
+            autoPlay: true
+        });
+        $("#news-slider2").owlCarousel({
+            items: 3,
+            itemsDesktop: [1199, 3],
+            itemsDesktopSmall: [980, 2],
+            itemsMobile: [600, 1],
+            navigation: true,
+            navigationText: ["", ""],
+            pagination: true,
+            autoPlay: true
+        });
+    };
+</script>
+</html>

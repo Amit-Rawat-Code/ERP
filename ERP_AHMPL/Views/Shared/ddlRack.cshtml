@@ -1,0 +1,4 @@
+﻿<select id="ddlRack" class="select2 form-control validate" ng-model="RackCode" ng-init="BindRack();">
+    <option value="">Select</option>
+    <option ng-repeat="rack in RackList" value="{{rack.Code}}">{{rack.Name}}</option>
+</select>

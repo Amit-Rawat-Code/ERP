@@ -1,0 +1,7 @@
+<select id="ddlOptionalSubject" class="select2 form-control" ng-init="GetOptionalSubjectList()" ng-model="OptionalSubjectCode">
+    <option value="">Select Subject</option>
+
+    <option ng-repeat="subject in OptionalSubjectList" value="{{subject.Code}}" ng-disabled="!subject.IsActive">{{subject.SubjectName}}</option>﻿
+
+</select>
+

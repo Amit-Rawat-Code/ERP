@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "BookIssueRegister";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/BookIssueRegisterLibController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Book Issue Register</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Library</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Book Issue Register</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="section-toggle">
+                                    <form id="user-form">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Member Type</label>
+                                                <div class="input-box">
+                                                    <div class="radio radio-primary radio-box">
+                                                        @Html.RadioButton("IsMemberType", "Student", new { @ng_model = "MemberTypeM", @ng_change = "MemberType()" })
+                                                        <label for="IsMemberType">Student</label>
+                                                    </div>
+                                                    <div class="radio radio-primary radio-box">
+                                                        @Html.RadioButton("IsMemberType", "Employee", new { @ng_model = "MemberTypeM", @ng_change = "MemberType()" })
+                                                        <label for="IsMemberType">Employee</label>
+                                                    </div>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="EmployeePanel">
+                                                <label class="control-label">Employee Name</label>
+                                                <div class="input-box">
+                                                    @Html.Partial("TblEmployeeListLibNew")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="StudentPanel">
+                                                <label class="control-label">Student</label>
+                                                <div class="input-box">
+                                                    @Html.Partial("TblStudentListLibNew")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Accession ID</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtAccessionId", "", new { @class = "form-control clear", @ng_model = "AccessionId" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Book Name</label>
+                                                <select class="select2 form-control" ng-model="BookCode" ng-init="GetBookDetail()">
+                                                    <option value="">Select</option>
+                                                    <option ng-repeat="x in BookList" value="{{x.Code}}">{{x.BookName}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Subject</label>
+                                                <div class="input-box">
+                                                    <select id="ddlSubjectLib" class="select2 form-control clear" ng-model="SubjectCode" ng-init="GetSubjectLibList();">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in SubjectLibList" value="{{x.Code}}">{{x.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionSearch")
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                            <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                <div class="arrow-2">
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                                <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                            </div>
+                            @Html.Partial("GeneralReportGridH")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

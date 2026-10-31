@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "SubMenuMaster";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<script src="~/Scripts/myjslib/SubMenuMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="app-content  my-3 ">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Create Sub Menu</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Unit Manager</span></li>
+                        <li class="active"><span>Create Sub Menu</span></li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="br-pagebody">
+                <div class="">
+                    <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="">
+                                        <label>Select Unit Type</label>
+                                        @Html.Partial("ddlPermUnitType")
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="">
+                                        <label>Select Unit</label>
+                                        @Html.Partial("ddlPermUnit")
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="">
+                                        <label>Select Tab</label>
+                                        @Html.Partial("ddlTab")
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="">
+                                        <label>Select Menu</label>
+                                        @Html.Partial("ddlMenu")
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="">
+                                        <label>Sub Menu Name</label>
+                                        @Html.TextBox("SubMenuName", "", new { @class = "form-control clear validate", @ng_model = "SubMenuName", @placeholder = "" })
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="">
+                                        <label>URL Type</label>
+                                        @Html.Partial("ddlURLType")
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-model="TargetUnitDiv" ng-hide="TargetUnitDiv" , ng-init="TargetUnitDiv=true">
+                                    <div class="">
+                                        <div class="">
+                                            <label>Target Unit</label>
+                                            @Html.Partial("ddlAllUnit")
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-model="URLDiv" ng-hide="URLDiv" , ng-init="URLDiv=true">
+                                    <div class="">
+                                        <div class="">
+                                            <label>URL</label>
+                                            @Html.TextBox("txtURL", "", new { @class = "form-control clear", @ng_model = "URL", @placeholder = "" })
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-model="fileInputDiv" ng-hide="fileInputDiv" , ng-init="fileInputDiv=true">
+                                    <div class="">
+                                        <div class="">
+                                            <label>Attachment</label>
+                                            <input type="file" accept="image/*,.doc, .docx,.xls,.xlsx,.ppt, .pptx,.txt,.pdf" id="fileInput" ng-model="fileInput" multiple class="form-control file-input clear" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="">
+                                        <label>Target Layout</label>
+                                        @Html.Partial("ddlLayout")
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="">
+                                        <label>Sequence Number</label>
+                                        @Html.TextBox("SeqNo", "", new { @class = "form-control clear validate", @ng_model = "SeqNo", @placeholder = "" })
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="">
+                                        <label>Status</label>
+                                        @Html.Partial("ddlApproved")
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Active</label>
+                                        @Html.Partial("ddlActive")
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    @Html.Partial("ActionView")
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    <div class="" ng-show="showhide">
+                                        <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr. No</th>
+                                                    <th>Unit Type Name</th>
+                                                    <th>Unit Name</th>
+                                                    <th>Tab Name</th>
+                                                    <th>Menu Name</th>
+                                                    <th>Sub Menu Name</th>
+                                                    <th>URL Type</th>
+                                                    <th>Target Layout</th>
+                                                    <th>Sequence No</th>
+                                                    <th>Status</th>
+                                                    <th>Is Active</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="obj in SubMenuMasterList">
+                                                    <td ng-bind="obj.Srno={{$index+1}}"></td>
+                                                    <td>{{obj.UnitTypeName}}</td>
+                                                    <td>{{obj.UnitName}}</td>
+                                                    <td>{{obj.TabName}}</td>
+                                                    <td>{{obj.MenuName}}</td>
+                                                    <td>{{obj.SubMenuName}}</td>
+                                                    <td>{{obj.URLType}}</td>
+                                                    <td>{{obj.LayoutName}}</td>
+                                                    <td>{{obj.SeqNo}}</td>
+                                                    <td>{{obj.IsApproved}}</td>
+                                                    <td>{{obj.IsActive}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    @Html.Partial("SearchAngularJs")
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+

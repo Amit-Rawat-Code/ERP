@@ -1,0 +1,98 @@
+﻿<style>
+    .accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+    /*.panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }*/
+
+.accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+
+</style>
+
+
+<div ng-init="Homeworks()">
+    <h3 class="accordion" ng-model="Homeworkmodel" ng-repeat="id in GSHomeworks" ng-if="(GSHomeworks|filter:{ViewMode:1}).length > 0">
+        <a ng-click="HomeworksDetail(id.HomeWorkDate,'',id.ViewMode)">{{id.HomeWorkDate}}</a>
+        <table id="{{id.HomeWorkDate}}" class="table table-striped table-bordered nowrap accordion-content"
+               ng-model="HomeWorkDetailModel" style="width:100%" ng-if="(GSHomeworksDetail|filter:{HomeWorkDate:id.HomeWorkDate}).length > 0">
+            <thead>
+                <tr>
+                    <th>Sr. No. </th>
+                    <th>Subject Name</th>
+                    <th>Home Work Description</th>
+                    <th>Submission Date</th>
+                    <th>Download File</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="id in GSHomeworksDetail|filter:{HomeWorkDate:id.HomeWorkDate}" repeat-done>
+                    <td>{{$index+1}}</td>
+                    <td>{{id.SubjectName}}</td>
+                    <td><div ng-bind-html="trustAsHtml(id.HomeworkDetails)"></div></td>
+                    <td>{{id.SubmissionDate}}</td>
+                    <td><a ng-click="download(id.TransId)"><img height="25" width="25" src="~/Content/img/attachment.png"></a></td>
+
+                    @*<td>{{id.Attachment}}</td>*@
+                </tr>
+            </tbody>
+        </table>
+    </h3>
+
+    <h3 class="accordion" ng-model="Homeworkmodel1" ng-repeat="id in GSHomeworks" ng-if="(GSHomeworks|filter:{ViewMode:2}).length > 0">
+        <a ng-click="HomeworksDetail('',id.SubjectId,id.ViewMode)">{{id.SubjectName}}</a>
+        <table id="{{id.HomeWorkDate}}" class="table table-striped table-bordered nowrap accordion-content"
+               ng-model="HomeWorkDetailModel1" style="width:100%" ng-if="(GSHomeworksDetail|filter:{SubjectId:id.SubjectId}).length > 0">
+            <thead>
+                <tr>
+                    <th>Sr. No. </th>
+                    <th>Home Work Date</th>
+                    <th>Home Work Description</th>
+                    <th>Submission Date</th>
+                    <th>Download File</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="id in GSHomeworksDetail" repeat-done>
+                    <td>{{$index+1}}</td>
+                    <td>{{id.HomeWorkDate}}</td>
+                    <td><div ng-bind-html="trustAsHtml(id.HomeworkDetails)"></div></td>
+                    <td>{{id.SubmissionDate}}</td>
+                    <td><a ng-click="download(id.TransId)"><img height="25" width="25" src="~/Content/img/attachment.png"></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </h3>
+</div>
+
+

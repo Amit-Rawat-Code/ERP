@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "DocumentAndInformation";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div ng-init="GetAboutUs();" ng-cloak>
+    
+    <section class="page-section why-choose-allen-kids Event">
+        <div class="container">
+            <div class="row">
+                <div class="master-hdr" >
+                    <h3 class="section-title" style="text-transform:uppercase">
+                        {{DocsAndInfoData[0].Title}}
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <table class="fit-india-table" cellpadding="2" cellspacing="0" width="100%" border="1" style="border: 1px solid #C0C0C0;
+                                border-collapse: collapse;" ng-repeat="theme in GetThemeData">
+                    <tbody style="text-transform:uppercase; text-align:center">
+                        <tr align="Center" style="color:#fff; background-color:#1d7e84; text-transform:uppercase; text-align:center">
+
+                            <th align="Center" width="10%" style="text-transform:uppercase; text-align:center">
+                                Sr No.
+                            </th>
+                            <th align="center" width="75%" style="text-transform:uppercase; text-align:center">
+                                Documents/Information
+                            </th>
+                            <th align="center" width="15%" style="text-transform:uppercase; text-align:center">
+                                Upload Document Link
+                            </th>
+                        </tr>
+                        <tr ng-repeat="dt in DocsAndInfoData">
+                            <td ng-bind="dt.Srno=($index+1)"></td>
+                            <td>{{dt.Discription}}</td>
+                            <td><a ng-href="{{dt.PdfFilePath}}" target="_blank">VIEW</a></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </section>
+</div>
+

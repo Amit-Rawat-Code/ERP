@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "VideoPage";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<style>
+    .headingI {
+        float: left;
+        color: #2a4678;
+        font-weight: 600;
+        padding: 0px 0 0px 0;
+        text-transform: uppercase;
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .newGallery {
+        width: 100%;
+        float: left;
+        margin-top: 10px;
+    }
+
+    .pgBack {
+        width: 100%;
+        float: left;
+        text-align: center;
+        border: 1px solid #858585;
+        margin: 0px 0% 7px 0%;
+    }
+
+        .pgBack li {
+            display: inline-block;
+            float: none;
+            text-align: center;
+            font-size: 15px;
+            padding: 8px 10px 8px 10px;
+            margin: 0px 3.5%;
+            vertical-align: middle;
+        }
+
+    .eventDates b, .updatedOnD b, .totalImages b {
+        color: #2a4678;
+        font-weight: 600;
+    }
+
+    .pgBack .eventDates span {
+        font-weight: 400;
+        color: #363636;
+    }
+
+    .fullDescription {
+        line-height: 26px;
+        padding: 9px 0px 0 0px;
+        width: 100%;
+        float: left;
+        text-align: justify;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+        .fullDescription .DescriptionH {
+            color: #2a4678;
+            font-weight: 600;
+        }
+
+    span#ctl00_ContentPlaceHolder1_lblDescription {
+        color: #363636;
+    }
+
+    .pgBack li a {
+        color: #363636;
+        font-weight: 600;
+    }
+</style>
+
+<section class="page-section allenhose-story" ng-cloak>
+    <div class="container" ng-init="GetVideoData()">        
+        <div class="master-hdr">
+            <h3 class="section-title">{{VideoContent[0].Title}}</h3>
+        </div>
+        <div class="col-sm-12">
+            @*<div class="headingI">
+                <span>SALAD DECORATION ACTIVITY BY PRE PRIMARY</span>
+            </div>*@
+            <div class="inner_img">
+                <div class="newGallery">
+                    <ul class="pgBack">
+                        <li class="eventDates">
+                            <b>Event Date:</b>
+                            <span>{{VideoContent[0].EventDate}}</span>
+                        </li>
+                        <li class="updatedOnD">
+                            <b>Updated On:</b>
+                            <span>{{VideoContent[0].EventDate}}</span>
+                        </li>
+                        <li class="totalImages">
+                            <b>
+                                <span>Total Video(s):</span>
+                            </b>
+                            <span>{{VideoContent[0].CountT}}</span>
+                        </li>
+                        <li class="changeAlbums chAl">
+                            <span><a style="cursor:pointer" ng-href="{{BackUrl}}" ng-model="BackUrl" ng-click="BacktoVideoGallery()"><span>&lt;&lt; Change Video </span></a></span>
+                        </li>
+                    </ul>
+                    <div class="fullDescription">
+                        <span class="DescriptionH">Description: </span>
+                        <span>{{VideoContent[0].Description}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="main-full">
+                <div class="slider slider-for-full">
+                    <div class="lSSlideOuter vertical noPager" style="padding-right: 305px;">
+                        <div class="lSSlideWrapper usingCss" style="height: 485px;">
+                            <ul id="vertical" class="lightSlider lsGrab lSSlide" style="height: 485px;">
+
+                                <li data-thumb="https://i.ytimg.com/vi/jMxX8_CofMM/0.jpg" class="lslide active" style="height: 485px; margin-bottom: 0px;list-style:none">
+                                    <iframe frameborder="0" allowfullscreen="true" allowtransparency="true" width="100%" height="100%" class="video_height2 ls-youtube" ng-src="{{YoutubePageUrl}}"></iframe>
+
+                                </li>
+
+                            </ul><div class="lSAction" style="display: none;"><a class="lSPrev"></a><a class="lSNext"></a></div>
+                        </div><ul class="lSPager lSGallery" style="margin-left: 5px; width: 300px; transition-duration: 400ms; height: 253px; transform: translate3d(0px, 0px, 0px);"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

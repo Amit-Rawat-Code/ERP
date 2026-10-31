@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "CollegeShiftPeriodsMapping";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/CollegeShiftPeriodsMappingController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Shift And Periods Mapping</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>TimeTable</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Shift And Periods Mapping</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 pull-right">
+                                            <label class="control-label">Shift<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                <select id="ddlShift" class="select2 form-control validate" ng-init="GetShifts();isShiftDisabled=false" ng-model="ShiftCode" ng-change="ddlShift_change()"
+                                                        ng-disabled="isShiftDisabled">
+                                                    <option value="">Select Shift</option>
+                                                    <option ng-repeat="shift in Shifts" value="{{shift.ShiftCode}}" ng-disabled="!shift.IsActive">{{shift.ShiftWithTime}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 no-padding" ng-if="ShiftCode">
+                                            <div class="input-box datatable-responsive table-responsive advance-btn-table">
+                                                <table class="table compact table-hover table-striped table-bordered nowrap  dataTable" ng-init="AddRow()">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Period Name</th>
+                                                            <th>From Time</th>
+                                                            <th>To Time</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in ShiftPeriodMappingList">
+                                                            <td ng-bind="obj.Srno=($index+1)"></td>
+                                                            <td>
+                                                                <input ng-model="ShiftPeriodMappingList[$index].PeriodName"
+                                                                       class="form-control clear validate" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="time" ng-model="ShiftPeriodMappingList[$index].FromTime"
+                                                                       class="form-control clear validate" ng-init="ShiftPeriodMappingList[$index].FromTime=ConverDate(ShiftPeriodMappingList[$index].FromTime)" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="time" ng-model="ShiftPeriodMappingList[$index].ToTime"
+                                                                       class="form-control clear validate" ng-init="ShiftPeriodMappingList[$index].ToTime=ConverDate(ShiftPeriodMappingList[$index].ToTime)" />
+                                                            </td>
+                                                            <td>
+                                                                <input class="btn btn-square btn-primary btn-xs" type="button" value="+" ng-click="AddRow()" ng-if="ShiftPeriodMappingList.length==1 || ShiftPeriodMappingList.length==obj.Srno" />
+                                                                <input class="btn btn-square btn-secondary btn-xs" type="button" value="-" ng-click="RemoveRow(obj.Srno)" ng-if="ShiftPeriodMappingList.length>1" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+
+                                                    </tfoot>
+                                                </table>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+
+
+
+

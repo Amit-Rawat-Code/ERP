@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "EventCalendarForMaster";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/EventCalendarForMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="hfId" name="Id" value="" />
+<div class="autohide-scroll autoheightset" style="height: 167px;">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Event Calendar For</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>HR</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Event Calendar For Master</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form" class="ng-pristine ng-valid">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Calendar For<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlCalendarFor" class="select2 form-control clear validate" ng-model="CalendarFor" ng-change="DisplayDiv();">
+                                                    <option value="">--Select--</option>
+                                                    <option value="Staff">Staff</option>
+                                                    <option value="Student">Student</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-hide="hideEmployeeType">
+                                            <label class="control-label">Staff Type<span class="vd_red">*</span></label>
+                                            <div class="input-box" ng-init="GetEmployeeType();">
+                                                <select id="ddlEmployeeType" class="select2 form-control clear" ng-model="EmployeeType">
+                                                    <option value="">--Select--</option>
+                                                    <option ng-repeat="EmpType in EmployeeTypeList" value="{{EmpType.Code}}">
+                                                        {{EmpType.Name}}
+                                                    </option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-hide="hideStudentType">
+                                            <label class="control-label">Student Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlStudentType" class="select2 form-control clear" ng-model="StudentType">
+                                                    <option value="">--Select--</option>
+                                                    <option value="20000003">Student</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>                                       
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn-mgbt-5 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+

@@ -1,0 +1,4 @@
+﻿<select id="ddlSubject" class="select2 form-control validate" ng-model="SubjectCode" ng-disabled="disableSubject" ng-change="ddlSubject_Change()">
+    <option value="">Select Subject</option>
+    <option ng-repeat="subject in SubjectList" value="{{subject.Code}}" ng-disabled="!subject.IsActive">{{subject.SubjectName}}</option>
+</select>

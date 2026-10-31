@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "CollegeAdmissionDateWisedetail";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/scripts/myjslib/CollegeAdmissionDateWisedetailController.js?Ver=@ViewBag.Version"></script>
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>College Admission</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in">
+                                    <form id="user-form">
+                                        <div class="section-toggle col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                            <div class="col-md-3 col-sm-3 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Course</label>
+                                                <div class="input-box">
+                                                    <select id="ddlCollegeCourse" class="select2 form-control" ng-model="$parent.CollegeCourseCode"
+                                                            ng-init="GetCollegeCourse();" ng-change="ddlCollegeCourse_Change($parent.CollegeCourseCode)">
+                                                        <option value="">Select Course</option>
+                                                        <option ng-repeat="cl in CollegeCourseList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.CollegeCourseName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Selected For Branch</label>
+                                                <div class="input-box">
+                                                    <select id="ddlSelectedForBranch" class="select2 form-control" ng-model="SelectedForBranch" ng-init="GetCollegeBranch();">
+                                                        <option value="">Select Branch</option>
+                                                        <option ng-repeat="sb in CollegeBranchList" value="{{sb.Code}}">{{sb.CollegeBranchName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Semester</label>
+                                                <div class="input-box">
+                                                    <select id="ddlSemester" class="select2 form-control" ng-model="Semester"
+                                                            @*ng-init="GetSemester();"*@>
+                                                        <option value="">Select Semester</option>
+                                                        <option ng-repeat="sm in SemesterList" value="{{sm.Code}}">{{sm.Semester}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionSearch")
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    @Html.Partial("GeneralReportGrid")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgbt-xs-15 pt-20">
+                            <table id="example2" class="table compact table-hover table-striped table-bordered nowrap" role="grid" style="width:100%">
+                                <tbody ng-repeat="dl in DataList">
+                                    <tr role="row">
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

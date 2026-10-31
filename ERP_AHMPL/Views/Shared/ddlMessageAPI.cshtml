@@ -1,0 +1,5 @@
+﻿<select id="ddlMessageAPI" class="select2 form-control validate" ng-disabled="IsMsgDisable" ng-init="GetMasterAPIs();" ng-model="MessageAPI.APIId">
+    <option value="">Select Message API </option>
+    <option ng-repeat="API in MasterAPIs" value="{{API.APIId}}">{{API.APIName}}</option>
+</select>
+

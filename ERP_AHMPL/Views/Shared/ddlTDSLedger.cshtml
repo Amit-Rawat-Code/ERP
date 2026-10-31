@@ -1,0 +1,4 @@
+﻿<select id="ddlTDSLedger" class="select2 form-control" ng-model="TDSLedgerModel" ng-init="BindTDSLedger();" ng-disabled = "TDSdisability">
+    <option value="">Select</option>
+    <option ng-repeat="ledgerlist in TDSLedgerList" value="{{ledgerlist.SubCode}}">{{ledgerlist.Name}}</option>
+</select>

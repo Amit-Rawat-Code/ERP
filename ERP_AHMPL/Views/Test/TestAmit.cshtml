@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "TEST";
+    ViewBag.TitleList = "TEST";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/TestAmitController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Generate Assignment</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Time Table</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Generate Assignment</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper">
+                        <div class="panel-body" ng-cloak>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Shift<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlShift" class="select2 form-control validate" ng-disabled="isShiftDisabled" ng-init="GetShifts();isShiftDisabled=false" ng-model="ShiftCode" ng-change="GetClassUsingShift();"
+                                                        >
+                                                    <option value="">Select Shift</option>
+                                                    <option ng-repeat="shift in Shifts" value="{{shift.ShiftCode}}">{{shift.ShiftWithTime}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Class<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlClass" class="select2 form-control validate" ng-disabled="isClassDisabled" ng-init="isClassDisabled=false" ng-model="ClassCode" ng-change="ddlClass_Change();" >
+                                                    <option value="">Select Class</option>
+                                                    <option ng-repeat="cl in ClassList" value="{{cl.Code}}"
+                                                            ng-disabled="!cl.IsActive">
+                                                        {{cl.ClassName}}
+                                                    </option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Section<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlSection" class="select2 form-control" ng-model="SectionCode" ng-disabled="isSectionDisabled" ng-init="isSectionDisabled=false" >
+                                                    <option value="">Select Section</option>
+                                                    <option ng-repeat="section in Sections" value="{{section.Code}}"
+                                                            ng-disabled="!section.IsActive">
+                                                        {{section.SectionName}}
+                                                    </option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Branch<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlBranch")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Give Input<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <input id="txtGotInput" type="text" class="form-control clear " ng-disabled="isGotInputDisabled" ng-init="isGotInputDisabled=false" ng-model="GotInput" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Medium<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlMedium")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlActive")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                        <!--<div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="datatable-responsive table-responsive ">-->
+                                                @*<input type="hidden" id="Id" name="Id" value="" ng-model="hfactiveid" />*@
+                                                <!--<table class="table compact table-hover table-striped table-bordered nowrap " style="text-align:center;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="text-align:center;">S.R.No.</th>
+                                                            <th style="text-align:center;"></th>
+                                                            <th style="text-align:center;">Teacher</th>
+                                                            <th style="text-align:center;">Subject</th>
+                                                            <th style="text-align:center;">Class Teacher</th>
+                                                            <th style="text-align:center;">Engaged In</th>
+                                                            <th style="text-align:center;">Fixed Allocation</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="leftPeriod in LeftPeriodList">
+                                                            <td>
+                                                                {{$index+1}}
+                                                                <input id="hfSubjectIdWithEmpCode" type="hidden"
+                                                                       ng-model="Subject[$index].SubjectIdWithEmpCode"
+                                                                       ng-init="Subject[$index].SubjectIdWithEmpCode=leftPeriod.SubjectIdWithEmpCode" />
+                                                            </td>
+                                                            <td>-->
+                                                                @*ng-change="chkChange($index)"*@
+                                                                <!--<input type="checkbox" class="check-box validate" ng-model="chk[$index]"
+                                                                       ng-change="chkChange(leftPeriod,chk[$index]);" ng-init="chk[$index]=leftPeriod.chk" style="margin: 0 auto; display: table; float: none;" />
+                                                            </td>
+                                                            <td>{{leftPeriod.EmployeeName}}</td>
+                                                            <td>{{leftPeriod.SubjectName}}</td>
+                                                            <td>{{leftPeriod.IsClassTeacher}}</td>
+                                                            <td>{{leftPeriod.EngagedIn}}</td>
+                                                            <td ng-model="leftPeriod.FixedAllocationHideShow"
+                                                                ng-init="leftPeriod.FixedAllocationHideShow=leftPeriod.FixedAllocation">
+                                                                <input type="checkbox" class="check-box validate" ng-model="leftPeriod.FixedAllocation"
+                                                                       ng-disabled="!chk[$index]" ng-change="chkChange1(leftPeriod.FixedAllocation,leftPeriod.EmployeeCode,leftPeriod)" ng-if="(leftPeriod.FixedAllocationHideShow==true && leftPeriod.Count>0) || (leftPeriod.FixedAllocationHideShow==false && leftPeriod.Count==0)" style="margin: 0 auto; display: table; float: none;" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>-->
+                                        @*<div class="col-md-12 col-sm-12 col-xs-12" id="print">
+                                            <div class="text-center">
+                                                <h4 id="txtReportTitle" style="display:none">Day Wise Teacher Subject Alloted Report</h4>
+
+                                                <div class="datatable-responsive table-responsive">
+                                                    <style>
+                                                        .td-active {
+                                                            background-color: #fbeac5ba !important;
+                                                        }
+                                                    </style>
+                                                    <table id="timetableManual" class="table compact table-hover table-striped table-bordered nowrap" style="text-align:center;" ng-model="timetableManual">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="text-align:center;">Period</th>
+                                                                <th style="text-align:center;" ng-repeat="wk in WeekDays">{{wk.name}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="period in Periods">
+                                                                <td ng-model="period.srno" ng-init="period.srno=$index"> {{period.PeriodName}}</td>
+                                                                <td ng-repeat="wk in WeekDays" id="{{'active'+period.srno+$index}}"
+                                                                    ng-dblclick="GETLeftPeriod(period.PeriodCode,wk.name,'active'+period.srno+$index,period.srno,$index,period.PeriodType)">
+                                                                    <input type="hidden" ng-model="cell" ng-init="cell=$index" />
+                                                                    <ul ng-repeat="edata in rows|filter:{row:period.srno,cell:$index}">
+                                                                        <li>{{edata.EmployeeSubject}}</li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn3-nM3-3">
+                                            @Html.Partial("testOperations")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

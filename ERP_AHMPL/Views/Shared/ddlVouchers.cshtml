@@ -1,0 +1,5 @@
+﻿<select id="ddlVouchers" class="select2 form-control validate" ng-disabled="Voucherdisability" 
+        ng-change="CheckVoucherConfirm()" ng-model="VoucherModel" ng-init="BindVouchers();">
+    <option value="">Select</option>
+    <option ng-repeat="voucher in VouchersList"  value="{{voucher.VoucherType}}">{{voucher.Description}}</option>
+</select>

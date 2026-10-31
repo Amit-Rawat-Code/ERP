@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "Login Credential Slip";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/MailMessageController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Login Credential Slip</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Utility</span></li>
+                <li><span>Mail Setting</span></li>
+                <li class="active"><span>Login Credential Slip</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh" id="SetMinHeight">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="col-md-1 col-sm-2 col-xs-12 no-padding">
+                                    <nav class="menu blue-tooltip" data-toggle="tooltip" data-placement="right" title="Student Credential">
+                                        <input type="checkbox" href="#" class="menu-open" name="menu-open" 
+                                               id="menu-open" />
+                                        <label class="menu-open-button" for="menu-open">
+                                            <span class="hamburger hamburger-1"></span>
+                                            <span class="hamburger hamburger-2"></span>
+                                            <span class="hamburger hamburger-3"></span>
+                                        </label>
+                                        <a id="btnshow" ng-click="GenerateCredentials();" href="#" class="menu-item" title="Generate Credential Sheet"> <i class="icofont-file-alt"></i> </a>
+                                        <button id="btnprint" ng-click="PrintCredentials();" href="#" class="menu-item" title="Print Credential Receipt" ng-disabled="CredentialsList.length==0"> <i class="icofont-print"></i> </button>
+                                        <button id="btnsms" ng-click="MessageCredentials();" href="#" class="menu-item" title="Send Credential to Mobile" ng-disabled="CredentialsList.length==0"> <i class="icofont-ipod-touch"></i> </button>
+                                        <button id="btnemail" ng-click="MailCredentials();" href="#" class="menu-item " title="Send Credential to E-Mail" ng-disabled="CredentialsList.length==0"> <i class="icofont-email"></i> </button>
+                                        <button id="btnclear" ng-click="ClearCredentials();" href="#" class="menu-item " title="Clear Credential" ng-disabled="CredentialsList.length==0"> <i class="icofont-trash"></i> </button>
+                                    </nav>
+                                </div>
+                                <div class="col-md-11 col-sm-10 col-xs-12 no-padding">
+                                    <div class="collapse in" id="collapseinputbox">
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+                                            <div ng-if="showPrint" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41">
+                                                <div class="CredentialBackBox">
+                                                <a id="CredentialPage" ng-click="hideDiv();" 
+                                                   class="btngoback" href>Go Back</a>
+                                                </div>
+                                                
+                                              @Html.Partial("PrintCredentialSlip")
+
+                                            </div>
+                                            <div ng-show="showSearch && CredentialsList.length>0" class="col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                <div class="datatable-responsive table-responsive advance-btn-table credential-r">
+                                                    <table id="example1" class="table credential compact table-hover table-striped table-bordered nowrap dataTable mg-none">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr.No.</th>
+                                                                <th>Guardian Id</th>
+                                                                <th>Guardian</th>
+                                                                <th>Email</th>
+                                                                <th>Contact No.</th>
+                                                                <th>Student Id</th>
+                                                                <th>Student</th>
+                                                                <th>Class</th>
+                                                                <th>Section</th>
+                                                                <th>Username</th>
+                                                                <th>Password</th>
+                                                                <th><input type="checkbox" 
+                                                                           ng-model="chkAll" 
+                                                                           ng-click="checkUncheck(chkAll);"  /></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="crl in CredentialsList">
+                                                                <td>{{crl.Sr}}</td>
+                                                                <td>{{crl.GuardianId}}</td>
+                                                                <td>{{crl.GuardianName}}</td>
+                                                                <td>{{crl.GuardianEmail}}</td>
+                                                                <td>{{crl.GuardianContactNo}}</td>
+                                                                <td>{{crl.StudentId}}</td>
+                                                                <td>{{crl.StudentName}}</td>
+                                                                <td>{{crl.ClassName}}</td>
+                                                                <td>{{crl.SectionName}}</td>
+                                                                <td>{{crl.UserName}}</td>
+                                                                <td>{{crl.Password}}</td>
+                                                                <td ng-bind-html="trustAsHtml(crl.SCheck)"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>                     
+                                                @*@Html.Partial("SearchAngularJs")*@
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-sm-2 col-xs-12 pull-right no-padding" style="display:none;">
+                                            <nav class="menu2 blue-tooltip " data-toggle="tooltip" data-placement="left" title="Staff Credential">
+                                                <input type="checkbox" href="#" class="menu-open2" name="menu-open2" id="menu-open2" />
+                                                <label class="menu-open-button2" for="menu-open2">
+                                                    <span class="hamburger2 hamburger-12"></span>
+                                                    <span class="hamburger2 hamburger-22"></span>
+                                                    <span class="hamburger2 hamburger-32"></span>
+                                                </label>
+                                                <a id="btnshow" ng-click="GenerateCredentials();" href="#" class="menu-item2" title="Generate Credential Sheet"> <i class="icofont-file-alt"></i> </a>
+                                                <a id="btnprint" ng-click="PrintCredentials();" href="#" class="menu-item2" title="Print Credential Receipt"> <i class="icofont-print"></i> </a>
+                                                <a id="btnsms" ng-click="MessageCredentials();" href="#" class="menu-item2" title="Mobile Credential Receipt"> <i class="icofont-ipod-touch"></i> </a>
+                                                <a id="btnemail" ng-click="MailCredentials();" href="#" class="menu-item2 " title="Web Credential Receipt"> <i class="icofont-globe"></i> </a>
+
+                                            </nav>
+                                        </div>
+
+                                        @*<div class="col-md-3 col-sm-6 col-xs-12 text-center mgbt-xs-15">
+                    <button class="btn-me3 btn-facebook-c blue-tooltip" data-toggle="tooltip" data-placement="right" title="Generate Credential Sheet"><i class="fa fa-twitter"></i></button>
+
+                    <input id="btnshow" type="button" value="Generate Credential Sheet" class="button2" ng-click="GenerateCredentials();">
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center mgbt-xs-15">
+                    <input id="btnemail" type="button" value="Web Credential Receipt" class="button2" ng-click="MailCredentials();">
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center mgbt-xs-15">
+                    <input id="btnsms" type="button" value="Mobile Credential Receipt" class="button2" ng-click="MessageCredentials();">
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center mgbt-xs-15">
+                    <input id="btnprint" type="button" value="Print Credential Receipt" class="button2" ng-click="PrintCredentials();">
+                </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+
+</div>

@@ -1,0 +1,5 @@
+﻿<select id="ddlBranchChange" class="select2 form-control validate" ng-init="GetBranchs();" ng-model="studentDetails.BranchId" 
+        ng-change="ddlClassBranchWiseSubjects();">
+    <option value="">Select Branch</option>
+    <option ng-repeat="branch in Branchs" value="{{branch.BranchId}}" ng-disabled="!branch.IsActive">{{branch.BranchName}}</option>
+</select>

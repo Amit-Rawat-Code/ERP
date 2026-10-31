@@ -1,0 +1,852 @@
+﻿<style>
+        /*Table Fixed Header and body scroll Css End*/
+        /*Table Transfer Certificate Css Start*/
+        .exam-report-box {
+            width: 1024px;
+            margin: auto;
+            padding: 30px;
+            box-shadow: 0px 0px 5px #696969;
+        }
+
+        .table-FWH {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #000;
+            border-spacing: 10px;
+        }
+
+        .TC-box-h {
+            border: 2px solid #000;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .T-VA-T {
+            vertical-align: top;
+        }
+
+        .T-VA-M {
+            vertical-align: middle;
+        }
+
+        .T-VA-B {
+            vertical-align: bottom;
+        }
+
+        .T-TA-L {
+            text-align: left;
+        }
+
+        .T-TA-C {
+            text-align: center;
+        }
+
+        .T-TA-R {
+            text-align: right;
+        }
+
+        .T-BB {
+            border-bottom: 1px dotted #000;
+        }
+
+        .H1P {
+            height: 1%;
+        }
+
+        .T-TC5 {
+            width: 100%;
+            border-spacing: 0px;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+            .T-TC5 > tbody > tr > td, .T-TC5 > tbody > tr > th, .T-TC5 > tfoot > tr > td, .T-TC5 > tfoot > tr > th, .T-TC5 > thead > tr > td, .T-TC5 > thead > tr > th {
+                padding: 3px 5px;
+                line-height: normal;
+                white-space: nowrap;
+            }
+
+                .T-TC5 > tbody > tr > td.WS-NR, .T-TC5 > tbody > tr > th.WS-NR, .T-TC5 > tfoot > tr > td.WS-NR, .T-TC5 > tfoot > tr > th.WS-NR, .T-TC5 > thead > tr > td.WS-NR, .T-TC5 > thead > tr > th.WS-NR {
+                    white-space: normal !important;
+                }
+
+        .TB6 {
+            font-weight: 600 !important;
+        }
+
+        .TDWA {
+            width: auto;
+        }
+
+        .TDW100 {
+            width: 100px;
+        }
+
+        .TDW50 {
+            width: 50px;
+        }
+
+        .TDW1 {
+            width: 1px;
+        }
+
+        .T-TC5A > tbody > tr > td:nth-child(1) {
+            width: 20px;
+            text-align: right;
+            padding: 3px 0px;
+        }
+
+        .T-TC5A > tbody > tr > td:nth-child(2) {
+            white-space: normal;
+            width: 46%;
+        }
+
+        .T-TC5A > tbody > tr > td:nth-child(3) {
+            width: auto;
+            text-align: right;
+            font-weight: 600;
+            padding: 3px 10px;
+            vertical-align: bottom;
+        }
+
+        .T-TC5A > tbody > tr > td:nth-child(4) {
+            font-weight: 600;
+            padding: 3px 0px;
+            border-bottom: 1px solid #000;
+            vertical-align: bottom;
+            width: 46%;
+        }
+
+        .table-TC {
+            width: 100%;
+            font-size: 14px;
+            color: #000;
+            font-family: initial;
+            font-weight: 600;
+            border-collapse: collapse;
+        }
+
+            .table-TC > tbody > tr > td, .table-TC > tbody > tr > th, .table-TC > tfoot > tr > td, .table-TC > tfoot > tr > th, .table-TC > thead > tr > td, .table-TC > thead > tr > th {
+                padding: 8px;
+                line-height: normal;
+                vertical-align: top;
+            }
+
+        .table-TC-r1 > tbody > tr > td, .table-TC-r1 > tbody > tr > th, .table-TC-r1 > tfoot > tr > td, .table-TC-r1 > tfoot > tr > th, .table-TC-r1 > thead > tr > td, .table-TC-r1 > thead > tr > th {
+            padding: 3px 6px;
+            line-height: normal;
+            vertical-align: top;
+            white-space: nowrap;
+        }
+
+        .t-RC-broder > tbody > tr > td, .t-RC-broder > tbody > tr > th, .t-RC-broder > tfoot > tr > td, .t-RC-broder > tfoot > tr > th, .t-RC-broder > thead > tr > td, .t-RC-broder > thead > tr > th {
+        }
+
+        .no-p-rc > tbody > tr > td, .no-p-rc > tbody > tr > th, .no-p-rc > tfoot > tr > td, .no-p-rc > tfoot > tr > th, .no-p-rc > thead > tr > td, .no-p-rc > thead > tr > th {
+            padding: 0px !important;
+        }
+
+        .table-TC-r1 {
+            border: none !important;
+        }
+
+        .table-TC-b-a {
+            border: 1px solid #000 !important;
+        }
+
+            .table-TC-b-a > tbody > tr > td, .table-TC-b-a > tbody > tr > th, .table-TC-b-a > thead > tr > td, .table-TC-b-a > thead > tr > th {
+                border: 1px solid #000 !important;
+                text-align: center;
+            }
+
+        .table-TC-th-h-b > thead > tr > td, .table-TC-th-h-b > thead > tr > th {
+            font-weight: 600 !important;
+            padding: 4px 10px !important;
+            height: 25px;
+            vertical-align: middle;
+        }
+
+        .table-TC-th-h-b > tbody > tr > th, .table-TC-th-h-b > tbody > tr > td {
+            font-weight: 500 !important;
+            padding: 4px 10px !important;
+            height: 25px;
+            vertical-align: middle;
+        }
+
+        .table-TC-r1 > tbody > tr > td.td-b, .table-TC-r1 > tbody > tr > th.td-b, .table-TC-r1 > thead > tr > td.td-b, .table-TC-r1 > thead > tr > th.td-b {
+            border: 1px solid #000;
+        }
+
+        .table-TC-r1 > tbody > tr > td.td-b-no, .table-TC-r1 > tbody > tr > th.td-b-no, .table-TC-r1 > thead > tr > td.td-b-no, .table-TC-r1 > thead > tr > th.td-b-no {
+            border: none !important;
+        }
+
+        .table-TC-r1 > tbody > tr > td.r-h-f-b, .table-TC-r1 > tbody > tr > th.r-h-f-b {
+            line-height: normal;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: sans-serif;
+        }
+
+        .table-TC-r1 > tbody > tr > td.r-h-f-n, .table-TC-r1 > tbody > tr > th.r-h-f-n {
+            line-height: normal;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .table-TC-r1 > tbody > tr > td.r-h-wd1, .table-TC-r1 > tbody > tr > th.r-h-wd1 {
+            line-height: normal;
+            /* font-size: 15px; */
+            font-weight: 600;
+            width: 110px;
+            position: relative;
+        }
+
+        .table-TC-r1 > tbody > tr > td.r-h-wd1, .table-TC-r1 > tbody > tr > th.r-h-wd1 {
+            line-height: normal;
+            /* font-size: 15px; */
+            font-weight: 600;
+            width: 125px;
+            position: relative;
+        }
+            /*.table-TC-r1>tbody>tr>td.r-h-wd1:before, .table-TC-r1>tbody>tr>th.r-h-wd1:before {
+       content: ":";
+        font-weight: 600;
+        position: absolute;
+        top: 2px;
+        right: 0px;
+    }*/
+            .table-TC-r1 > tbody > tr > td.r-h-wd1.no-bef:before, .table-TC-r1 > tbody > tr > th.r-h-wd1.no-bef:before {
+                content: "";
+            }
+
+        .table-TC-r2 {
+            width: 100%;
+            /*font-size: 12px;*/
+            color: #000;
+            font-family: initial;
+        }
+
+            .table-TC-r2 > tbody > tr > td, .table-TC-r2 > tbody > tr > th, .table-TC-r2 > tfoot > tr > td, .table-TC-r2 > tfoot > tr > th, .table-TC-r2 > thead > tr > td, .table-TC-r2 > thead > tr > th {
+                padding: 3px 6px;
+                line-height: normal;
+                vertical-align: top;
+                text-align: center !important;
+            }
+
+            .table-TC-r2 > thead > tr > td, .table-TC-r2 > thead > tr > th {
+                font-weight: 600;
+            }
+
+                .table-TC-r2 > thead > tr > td.t-l, .table-TC-r2 > thead > tr > th.t-l, .table-TC-r2 > tbody > tr > td.t-l, .table-TC-r2 > tbody > tr > th.t-l {
+                    text-align: left !important;
+                }
+
+                .table-TC-r2 > thead > tr > td.t-c, .table-TC-r2 > thead > tr > th.t-c, .table-TC-r2 > tbody > tr > td.t-c, .table-TC-r2 > tbody > tr > th.t-c {
+                    text-align: center !important;
+                }
+
+                .table-TC-r2 > thead > tr > td.t-r, .table-TC-r2 > thead > tr > th.t-r, .table-TC-r2 > tbody > tr > td.t-r, .table-TC-r2 > tbody > tr > th.t-r {
+                    text-align: right !important;
+                }
+
+            .table-TC-r2 > tbody > tr > td:nth-child(1), .table-TC-r2 > tbody > tr > th:nth-child(1) {
+                width: 100px;
+            }
+
+            .table-TC-r2 > tbody > tr > td.f-b, .table-TC-r2 > tbody > tr > th.f-b {
+                font-weight: 600;
+            }
+
+            .table-TC-r2 > tbody > tr > td.f-n, .table-TC-r2 > tbody > tr > th.f-n {
+                font-weight: 500;
+            }
+
+            .table-TC-r2 > tbody > tr > td.r-h-wd1:before, .table-TC-r2 > tbody > tr > th.r-h-wd1:before {
+                content: ":";
+                font-weight: 600;
+                position: absolute;
+                top: 2px;
+                right: 0px;
+            }
+
+            .table-TC-r2 > tbody > tr > td.r-h-wd1.no-bef:before, .table-TC-r2 > tbody > tr > th.r-h-wd1.no-bef:before {
+                content: "";
+            }
+
+        .table-TC-r3 {
+            width: 100%;
+            /*font-size: 12px;*/
+            color: #000;
+            font-family: initial;
+        }
+
+            .table-TC-r3 > tbody > tr > td, .table-TC-r3 > tbody > tr > th, .table-TC-r3 > tfoot > tr > td, .table-TC-r3 > tfoot > tr > th, .table-TC-r3 > thead > tr > td, .table-TC-r3 > thead > tr > th {
+                padding: 3px 6px;
+                line-height: normal;
+                vertical-align: top;
+                /*text-align:center !important;*/
+            }
+
+            .table-TC-r3 > thead > tr > td, .table-TC-r3 > thead > tr > th {
+                font-weight: 600;
+            }
+
+            .table-TC-r3 > tbody > tr > td:nth-child(2), .table-TC-r3 > tbody > tr > th:nth-child(2), .table-TC-r3 > tbody > tr > td:nth-child(4), .table-TC-r3 > tbody > tr > th:nth-child(4) {
+                width: 50px;
+            }
+
+        .bor-b-d {
+            position: relative;
+        }
+
+
+
+        .mgtp-50 {
+            margin-top: 50px !important;
+        }
+
+        .table-signature {
+        }
+
+            .table-signature > tbody > tr > td, .table-signature > tbody > tr > th, .table-signature > tfoot > tr > td, .table-signature > tfoot > tr > th, .table-signature > thead > tr > td, .table-signature > thead > tr > th {
+                padding: 3px 6px;
+                line-height: normal;
+                vertical-align: top;
+                /*text-align:center !important;*/
+            }
+
+                .table-signature > thead > tr > td:nth-child(odd), .table-signature > thead > tr > th:nth-child(odd) {
+                    width: 22%;
+                }
+
+                .table-signature > thead > tr > td:nth-child(even), .table-signature > thead > tr > th:nth-child(even) {
+                    width: 4%;
+                }
+
+            .table-signature > thead > tr > td, .table-signature > thead > tr > th {
+                font-weight: 600;
+            }
+
+        .w-a {
+            width: 5%;
+            white-space: nowrap;
+        }
+
+        .w-5-p {
+            width: 5%;
+        }
+
+        .w-25-p {
+            width: 25%;
+        }
+
+        .w-50-p {
+            width: 50%;
+        }
+
+        .overflow-h-200 {
+            overflow-y: auto;
+            max-height: 100px;
+        }
+
+        .t-l {
+            text-align: left !important;
+        }
+
+        .t-c {
+            text-align: center !important;
+        }
+
+        .t-r {
+            text-align: right !important;
+        }
+
+        .f-b {
+            font-weight: 600 !important;
+        }
+
+        .f-n {
+            font-weight: 500 !important;
+        }
+
+        .f-i {
+            font-style: italic !important;
+        }
+
+        .table-RC-r2 > tbody > tr > td, .table-RC-r3 > tbody > tr > td, .table-RC-r2 > tfoot > tr > th, .table-signature > thead > tr > th {
+            color: #002bff;
+        }
+
+
+        /*Table Transfer Certificate Css end*/
+
+        .a4-box {
+            width: 1024px;
+            margin: 0px auto;
+        }
+
+        .h-txt {
+            font-weight: 600;
+        }
+
+        .b-d-bro {
+            position: relative;
+            vertical-align: bottom !important;
+        }
+
+            .b-d-bro:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                left: 0px;
+                bottom: 1px;
+                border-bottom: 1px dotted #000;
+            }
+
+        .col-w-a {
+            width: 15px;
+        }
+
+        .col-w-no {
+            width: 1px;
+            padding: 3px 3px !important;
+        }
+
+        .Fhead {
+            color: #000000 !important;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .h-no {
+            width: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .p-start {
+            width: 100px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .b-txt {
+            color: #000000 !important;
+            font-weight: 500;
+        }
+
+        .hb-text {
+            color: #000000 !important;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .w-150 {
+            width: 150px;
+        }
+
+        .w-200 {
+            width: 200px;
+        }
+
+        .color-black {
+            color: black;
+        }
+
+        .exam-table-f2 {
+        }
+
+            .exam-table-f2 > tbody > tr > td, .exam-table-f2 > tbody > tr > th, .exam-table-f2 > tfoot > tr > td, .exam-table-f2 > tfoot > tr > th,
+            .exam-table-f2 > thead > tr > td, .exam-table-f2 > thead > tr > th {
+            }
+
+            .exam-table-f2 > tbody > tr > td, .exam-table-f2 > tbody > tr > th {
+                text-align: center !important;
+            }
+
+        .sign-c1 {
+        }
+
+            .sign-c1 > tbody > tr > td {
+            }
+
+                .sign-c1 > tbody > tr > td:nth-child(1) {
+                }
+
+                .sign-c1 > tbody > tr > td:nth-child(2) p {
+                }
+
+        .sign-c2 {
+        }
+
+            .sign-c2 tbody > tr > td:nth-child(1) {
+            }
+
+            .sign-c2 > tbody > tr > td:nth-child(2) p {
+            }
+
+        .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+            border: 1px solid #565656;
+        }
+
+        .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+            background-color: #ffffff;
+        }
+
+        .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
+            background-color: #ffffff;
+        }
+
+        .table-b-p-no.table-TP > tbody > tr:nth-child(1) > td {
+            float: left;
+            width: 100%;
+        }
+
+            .table-b-p-no.table-TP > tbody > tr:nth-child(1) > td.v-line-c {
+                float: left;
+                width: 100%;
+                padding: 5px 0px;
+            }
+
+                .table-b-p-no.table-TP > tbody > tr:nth-child(1) > td.v-line-c:before {
+                    content: "";
+                    position: absolute;
+                    top: 3px !important;
+                    left: 0%;
+                    border-bottom: 1px dashed #afafaf;
+                    height: 3px !important;
+                    width: 100% !important;
+                    /* background: #afafaf; */
+                }
+
+        .a4-box.ng-hide {
+            display: none;
+        }
+
+        .print-a4-box {
+            width: 100%;
+        }
+
+            .print-a4-box table:last-child {
+                page-break-after: always;
+            }
+
+            .print-a4-box table {
+                border-collapse: collapse;
+            }
+
+            .print-a4-box .table-RC.ng-hide {
+                display: none;
+            }
+
+            .print-a4-box .ng-hide {
+                display: none;
+            }
+        /*fee Receipt end*/
+        /*Me Css End*/
+</style>
+
+<div id="ExportDiv" style="display:none;" ng-cloak>
+    @*ng-repeat="SD in TCList" ng-if="ISFormated==477"*@
+
+    <table class="table-FWH" style="border:none !important;">
+        <tbody>
+            <tr>
+                <td class="T-VA-T H1P" ng-init="GetReportHeaderUsingCategory('TC Report','TCReportHeader')">
+                    <div id="ReportHeader" ng-model="TCReportHeader" ng-bind-html="TCReportHeader"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="T-VA-T T-TA-C H1P">
+                    <span class="TC-box-h" style="margin-top:146px;">स्थानांतरण  प्रमाण-पत्र / TRANSFER CERTIFICATE</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="T-VA-T">
+
+                    <table class="T-TC5">
+                        <tbody>
+                            <tr>
+                                <td class="TDW1">School No : </td>
+                                <td class="TB6" colspan="3" style="width:66%;">{{StudentTC.schoolNo}}</td>
+                                <td class="TDW1">Sr.No. : </td>
+                                <td class="TB6">{{StudentTC.SrNo}}</td>
+                                @*<td class="TDW1">Book No : </td>
+                    <td class="TB6">{{StudentTC.BookNo}}</td>*@
+                            </tr>
+                            <tr>
+                                <td class="TDW1">AffiliationNo : </td>
+                                <td class="TB6" colspan="3">{{StudentTC.AffiliationNo}}</td>
+                                <td class="TDW1">Admission No : </td>
+                                <td class="TDW1 TB6">{{StudentTC.AdmissionNo}}</td>
+                            </tr>
+                            @*<tr>
+                                        <td class="TDW1">AffiliationNo : </td>
+                                        <td class="TDW1 TB6">{{StudentTC.AffiliationNo}}</td>
+                                        <td class="TDW1">Renewed Upto : </td>
+                                        <td class="TDW1 TB6">{{StudentTC.Renewed}}</td>
+                                        <td class="TDW1">Status of School : </td>
+                                        <td class="TB6">{{StudentTC.SchoolStatus}}</td>
+
+
+                                    </tr>
+                                    @*<tr>
+                    <td class="TDW1"><span class="h-no"></span></td>
+
+                    <td class="TDW1">Admission Date : </td>
+                    <td class="TDW1 TB6">{{StudentTC.DateOfAdmission}}</td>
+                </tr>*@
+                        </tbody>
+                    </table>
+
+
+
+
+                    <table class="T-TC5 T-TC5A">
+                        <tbody>
+                            <tr>
+                                <td style="width:10px;"></td>
+                                <td style="text-align: left;">Registration No. of the Candidate(In case of IX to XII)</td>
+                                <td>:</td>
+                                <td style="padding: 3px 0px; border-bottom: 1px solid #000;">{{StudentTC.RegNo}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+                    <table class="T-TC5 T-TC5A">
+
+                        <tbody>
+
+                            <tr>
+                                <td style="width:10px;">1.</td>
+                                <td>विद्यार्थी का नाम / Name of Student</td>
+                                <td>:</td>
+                                <td>{{StudentTC.StudentName}}</td>
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>पिता का नाम /Father's Name </td>
+                                <td>:</td>
+                                <td>{{StudentTC.FatherName}}</td>
+                            </tr>
+                            <tr>
+                                <td>3.</td>
+                                <td>माता का नाम / Mother's Name </td>
+                                <td>:</td>
+                                <td>{{StudentTC.MotherName}}</td>
+                            </tr>
+                            <tr>
+                                <td>4.</td>
+                                <td>राष्ट्रीयता / Nationality </td>
+                                <td>:</td>
+                                <td>{{StudentTC.Nationality}}</td>
+                            </tr>
+                            <tr>
+                                <td>5.</td>
+                                <td>
+                                    विद्यालय में प्रवेश की तिथि एव  कक्षा/ <br />
+                                    Date of Admission in school with class
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.DateOfAdmission}},{{StudentTC.AdmissionClassName}}</td>
+                            </tr>
+                            <tr>
+                                <td>6.</td>
+                                <td>
+                                    क्या अनु0जाति/ज0जा0/पिछड़ा वर्ग से सम्बंधित है <br />
+                                    Whether the candidate belongs to Schedule Caste /Schedule Tribe / OBC
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.Category_YN}}</td>
+                            </tr>
+                            <tr>
+                                <td>7.</td>
+                                <td>
+                                    प्रवेश पुस्तिका के अनुसार जन्म तिथि (अंको में)/<br />
+                                    Date of Birth according to Admission Register (in figures) <br />
+                                </td>
+                                <td>:</td>
+                                <td> {{StudentTC.DOB_Print}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>(शब्दों में /in words)</td>
+                                <td>:</td>
+                                <td>{{StudentTC.DOB_InWord}}</td>
+                            </tr>
+                            <tr>
+                                <td>8.</td>
+                                <td>
+                                    क्या विद्यार्थी का परीक्षा परिणाम अनुतीर्ण है ? <br />
+                                    Whether the student is failed
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.StudentResult_Print}}</td>
+                            </tr>
+                            <tr>
+                                <td>9.</td>
+                                <td>
+                                    प्रस्तावित विषय /Subjects Offered
+                                </td>
+                                <td>:</td>
+                                <td style="word-wrap: break-word; word-break: break-all; white-space: normal !important; ">{{StudentTC.SubjectDetail}}</td>
+                            </tr>
+                            <tr>
+                                <td>10.</td>
+                                <td>
+                                    कक्षा जिसमे विद्यार्थी अध्ययनरत था : <br />
+                                    Class in which the pupil last studied
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.CurrentClass}}</td>
+                            </tr>
+                            <tr>
+                                <td>11.</td>
+                                <td>
+                                    पिछले विद्यालय / बोर्ड परीक्षा एवं परिणाम <br />
+                                    School/Board Annual Examination last taken with result
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.PreSchool}}</td>
+                            </tr>
+                            <tr>
+                                <td>12.</td>
+                                <td>
+                                    क्या उच्च कक्षा में पदोन्नति का अधिकारी है ? <br />
+                                    Whether qualified for promotion to the next higher class ?
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.PromotedtoHigherClass}}</td>
+                            </tr>
+                            <tr>
+                                <td>13.</td>
+                                <td>
+                                    क्या विद्यार्थी ने विद्यालय की सभी देय राशि का भुगतान कर दिया है?<br />
+                                    Whether the pupil has paid all dues to the School ?
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.DuesPrint}}</td>
+                            </tr>
+                            <tr>
+                                <td>14.</td>
+                                <td>
+                                    क्या विद्यार्थी को कोई शुल्क रियायत प्रदान की गयी थी यदि हाँ तो उसकी प्रकृति / <br />
+                                    Whether the pupil was in receipt of any concession, if so the nature of such concession ?
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.FeesConcessionPrint}}</td>
+                            </tr>
+                            <tr>
+                                <td>15.</td>
+                                <td>
+                                    क्या विद्यार्थी एन0 सी0 सी0 कैडेट / स्काउट है ? विवरण दें <br />
+                                    Whether the pupil in NCC Cadet/Boy Scout/ Guide(give details)
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.ActivityPrint}}</td>
+                            </tr>
+                            <tr>
+                                <td>16.</td>
+                                <td>
+                                    विद्यालय से विद्यार्थी का नाम काटे जाने की तिथि/<br />
+                                    Date on which pupil's name was struck off the rolls of the School
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.LastPresentDate_Print}}</td>
+                            </tr>
+                            <tr>
+                                <td>17.</td>
+                                <td>विद्यालय छोड़ने का कारण / Reasons for leaving the School</td>
+                                <td>:</td>
+                                <td>{{StudentTC.ReasonOfLeaving}}</td>
+                            </tr>
+                            <tr>
+                                <td>18.</td>
+                                <td>
+                                    अंतिम तिथि तक उपस्थितियों की कुल संख्या/ No. of days presence till last date
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.NoOfDays}}</td>
+                            </tr>
+                            <tr>
+                                <td>19.</td>
+                                <td>
+                                    विद्यार्थी की विद्यालय दिवसों की कुल उपस्तिथियां/ No. of school days the pupil attended
+                                </td>
+                                <td>:</td>
+                                <td>{{StudentTC.NoOfDaysPresent}}</td>
+                            </tr>
+                            <tr>
+                                <td>20.</td>
+                                <td>सामान्य आचरण / General Conduct</td>
+                                <td>:</td>
+                                <td>{{StudentTC.GeneralConduct}}</td>
+                            </tr>
+                            @*<tr>
+                    <td>20.</td>
+                    <td>
+                        क्या विद्यालय सरकारी/अल्पसंख्यक/गैर सहायता प्राप्त में आता है <br />
+                        Whether School is under Govt. / Minority Unaided
+                    </td>
+                    <td>:</td>
+                    <td></td>
+                </tr>*@
+                            <tr>
+                                <td>21.</td>
+                                <td>कोई अन्य टिप्पणी / Any other Remark</td>
+                                <td>:</td>
+                                <td>{{StudentTC.Remark}}</td>
+                            </tr>
+                            <tr>
+                                <td>22.</td>
+                                <td>प्रमाण-पत्र जारी करने की तिथि / Date of issue of certificate </td>
+                                <td>:</td>
+                                <td>{{StudentTC.CertificateIssusDate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="T-VA-B" style="padding-bottom:45px;">
+                    <table class="T-TC5">
+                        <tbody>
+                            <tr>
+                                <td class="T-BB"></td>
+                                <td></td>
+                                <td class="T-BB"></td>
+                                <td></td>
+                                <td class="T-BB"></td>
+                            </tr>
+                            <tr>
+                                <td class="TDW1 T-TA-C TB6">तैयारकर्ता / Prepared by</td>
+                                <td class="TDW100"></td>
+                                <td class="TDW1 T-TA-C TB6">जांचकर्ता / Checked by</td>
+                                <td class="TDW100"></td>
+                                <td class="TDW1 T-TA-C TB6">
+                                    ह० प्रधानाचार्य ( कार्यालय मोहर के साथ ) <br />
+                                    Sign. of Principal with Official Seal
+                                    <br />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="T-TC5">
+                        <tbody>
+                            <tr>
+                                <td class="TDW1">
+                                    <b class="TB6">नोट :</b>  यदि यह स्थानांतरण पत्र इंचार्ज द्वारा हस्ताक्षरित हो तो प्रबंधक / अध्यक्ष विद्यालय प्रबंधन समिति द्वारा प्रति हस्ताक्षरित अवश्य करायें | <br />
+                                    <b class="TB6">Note :</b>  If this T.C. is issued by the officiating / incharge Principal, in variably countersigned by the manager - V.M.C.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

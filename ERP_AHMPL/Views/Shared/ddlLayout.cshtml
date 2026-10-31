@@ -1,0 +1,9 @@
+﻿<select id="ddlLayout" class="select2 form-control clear validate" ng-model="LayoutCode" ng-init="GetLayoutMaster()" ng-change="GetLayoutPart(LayoutCode)">
+    <option value="">Select Layout</option>
+    <option ng-repeat="GetLayout in GetLayouts" value="{{GetLayout.LayoutCode}}">{{GetLayout.LayoutName}}</option>
+</select>
+
+
+
+
+

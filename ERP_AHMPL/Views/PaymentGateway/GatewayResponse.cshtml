@@ -1,0 +1,81 @@
+﻿@*@model string
+    @{
+        ViewBag.Title = "RedirectAndPOST";
+        Layout = "";
+    }
+
+    @Html.Raw(Model)*@
+@*@model string
+    @{
+        ViewBag.Title = "RedirectAndPOST";
+        Layout = "";
+    }*@
+@*<script>
+        debugger;
+
+        var jsonobj = @Html.Raw(Model);
+        document.write(JSON.parse(jsonobj));
+    </script>*@
+@{
+    ViewBag.Title = "Payment Acknowledgement";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/ICICIGatewayResponseController.js?Ver=@ViewBag.Version"></script>
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link href="~/Content/payment.css" rel="stylesheet" />
+<div class="container">
+    <div id="ExportDiv">
+        <div class="row">
+            <div class="col-md-6 mx-auto mt-5">
+                <div class="payment">
+                    <div class="payment_header">
+                        <div class="check">
+                            <i class="fa fa-check" aria-hidden="true" ng-if="PaymentStatus=='Success'"></i>
+                            <i class="fa fa-times" aria-hidden="true" ng-if="PaymentStatus!='Success'"></i>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h1>Payment {{PaymentStatus}}</h1>
+                        <h3>OrderId {{PaymentOrderId}}</h3>
+                        <h3>Bank Ref. No. {{BankRefNo}}</h3>
+                        <h3>StudentName {{StudentName}}</h3>
+                        <h3>AdmissionNo {{AdmissionNo}}</h3>
+                        <h3>ClassName {{ClassName}}</h3>
+                        <h3>FatherName {{FatherName}}</h3>
+                        <h3>MobileNo {{MobileNo}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="payment">
+                <div class="content">
+                    <p>Transaction will be settled with in 48 hours. If any query please contact +91-9876678654 or e-mail us at: feeinfo@superhouseerp.com</p>
+                    <a href onclick="window.close();" class="btn btn-success" style="margin-bottom: 10px;">Close</a>
+                    <a href onclick="print();" class="btn btn-warning" style="margin-bottom: 10px;">Print</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function print() {
+        var content = document.getElementById("ExportDiv").innerHTML;
+        var popupWin = window.open('', '_blank');
+        popupWin.document.open();
+        var head = '<html><head><title>Payment Acknowledgement</title><meta charset="utf-8" /><link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" media="all" rel="stylesheet" /><link href="../Content/plugins/assets/css/font-icons/font-awesome.min.css" media="all" rel="stylesheet" /><link href="../Content/payment.css" media="all" rel="stylesheet" /></head><body onload="window.print()">' + content + '</body></html>';
+        popupWin.document.write(head);
+        popupWin.document.close();
+    }
+</script>
+
+
+
+
+
+
+

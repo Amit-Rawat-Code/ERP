@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "Binding Return Entry";
+    ViewBag.TitleList = "Binding Return Entry List";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/BindingReturnEntryLibController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="hfStudentId" id="StudentId" name="StudentId" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Binding Return Entry</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Library</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Binding Return Entry</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Return Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlVoucherType" class="select2 form-control validate" ng-model="VoucherM" ng-init="GetVoucherType('BNDIS');" ng-disabled="true">
+                                                    <option value="">Select</option>
+                                                    <option ng-repeat="x in VoucherTypeList" value="{{x.VCode}}">{{x.VoucherType}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Return Date</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtVDate", "", new { @class = "form-control clear", @type = "date", @ng_disabled = "true", @ng_model = "VDate" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Return No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtReturnNo", "", new { @class = "form-control clear validate", @ng_disabled = "true", @placeholder = "", @ng_model = "PVNo" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Issue No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlIssueNo" class="select2 form-control validate" ng-init="GetIssueNo();" ng-model="IssueNoM" ng-change="GetIssueNoDetails(IssueNoM)">
+                                                    <option value="">Select</option>
+                                                    <option ng-repeat="x in IssueNoList" value="{{x.TransID}}">{{x.VrNo}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Binder Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtBinderName", "", new { @class = "form-control clear validate", @ng_disabled = "true", @placeholder = "", @ng_model = "BinderName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Address</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAddress", "", new { @class = "form-control clear", @ng_disabled = "true", @ng_model = "AddressM" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+
+                                            <div class="datatable-responsive table-responsive advance-btn-table">
+                                                <table class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="srno">Sr.No.</th>
+                                                            <th>Binding Type</th>
+                                                            <th>Per Unit Rate</th>
+                                                            <th>Total Qty.</th>
+                                                            <th>Total Amt.</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="btl in bindingtype">
+                                                            <td class="col-1"><label>{{$index+1}}</label></td>
+                                                            <td class="col-2">
+                                                                <label>{{btl.BindingType}}</label>
+                                                            </td>
+                                                            <td>
+                                                                <label>{{btl.Rate}}</label>
+                                                            </td>
+                                                            <td>
+                                                                <label>{{btl.TotalQty}}</label>
+                                                            </td>
+                                                            <td>
+                                                                <label>{{btl.TotalAmt}}</label>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <div class="datatable-responsive table-responsive advance-btn-table">
+                                                <table class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.No.</th>
+                                                            <th>Accession No</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Publisher</th>
+                                                            <th>Edition</th>
+                                                            <th>Publisher Year</th>
+                                                            <th>Binding Type</th>
+                                                            <th>Rate</th>
+                                                            <th>Return</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in BD">
+                                                            <td ng-init="obj.SrNo=$index+1">
+                                                                {{obj.SrNo}}
+                                                            </td>
+                                                            <td class="col-2">
+                                                                {{obj.AccessionNo}}
+                                                            </td>
+                                                            <td>{{obj.BookName}}</td>
+                                                            <td>{{obj.Author}}</td>
+                                                            <td>
+                                                                {{obj.Publisher}}
+                                                            </td>
+                                                            <td>
+                                                                {{obj.Edition}}
+                                                            </td>
+                                                            <td>
+                                                                {{obj.PublisherYear}}
+                                                            </td>
+                                                            <td class="col-2">
+
+                                                                {{obj.BindingType}}
+                                                            </td>
+                                                            <td>
+                                                                {{obj.Rate}}
+                                                            </td>
+                                                            <td>
+                                                                <select id="ddlReturnStatus" class="select2 form-control validate" ng-model="obj.ReturnStatus" ng-init="obj.ReturnStatus=='1'">
+                                                                    <option value="">Select</option>
+                                                                    <option value="1">Yes</option>
+                                                                    <option value="0">No</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

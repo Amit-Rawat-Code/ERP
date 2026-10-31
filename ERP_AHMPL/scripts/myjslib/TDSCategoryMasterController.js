@@ -1,0 +1,206 @@
+﻿app.TDSNatureMasterController = function ($scope, $element, $filter, myService) {
+
+    $scope.SetFocus('#txtNatureOfPayment');
+
+    $scope.SaveRecord = function () {
+        if (isValidate()) {
+            $scope.showLoader();
+            var collectionobj = {};
+
+            collectionobj.CategoryName = $scope.NatureOfPayment;
+            collectionobj.SectionCode = $scope.TDSSectionModel;
+            collectionobj.CompanyPer = $scope.CompanyFirmPercent;
+            collectionobj.IndPer = $scope.IndividualPercent;
+            collectionobj.LimitFY = $scope.LimitOfFY;
+            collectionobj.LimitST = $scope.LimitOfSingleTrans;
+
+            collectionobj.IsActive = $scope.IsActive;
+            collectionobj.FYId = fyId;
+            collectionobj.RelationshipId = relationshipId;
+            
+
+            if ($scope.Save == "Save") {
+                collectionobj.Action = 1;
+                collectionobj.CreatedBy = JSON.parse(userid);
+                var getData = myService.methode('POST', "../Api/AccountMasterApi/InsertUpdateDeleteTDSCategory", collectionobj);
+                getData.then(function (response) {
+                    debugger;
+                    if (showMsgBox(response.data)) {
+                        $scope.ClearControl(1);
+                    }
+                });
+            }
+            else {
+                collectionobj.Action = 2;
+                collectionobj.CategoryCode = $scope.hfId;
+                collectionobj.UpdatedBy = JSON.parse(userid);
+                var getData = myService.methode('POST', "../Api/AccountMasterApi/InsertUpdateDeleteTDSCategory", collectionobj);
+                getData.then(function (response) {
+                    debugger;
+                    if (showMsgBox(response.data)) {
+                        $scope.ClearControl(1);
+                    }
+                });
+            }
+        }
+    }
+
+    $scope.ClearControl = function (flag) {
+        if (flag == 1) {
+            $scope.ResetControl(flag);
+        }
+        else {
+            clearConfirmbox("Do you want to clear fields?", function () { $scope.ResetControl(0); });
+        }
+    };
+
+    $scope.ResetControl = function (flag) {
+        debugger;
+        $scope.Save = "Save";
+        $scope.disableDelete = true;
+        $scope.disablePrint = true;
+        $scope.NatureOfPayment = "";
+        $scope.TDSSectionModel = "";
+        $scope.ChallanCode = "";
+        $scope.CompanyFirmPercent = "";
+        $scope.IndividualPercent = "";
+        $scope.LimitOfFY = "";
+        $scope.LimitOfSingleTrans = "";
+        $scope.SetFocus('#txtNatureOfPayment');
+        $scope.IsActive = "true";
+        $scope.hfId = "";
+        $scope.TDSCategoryList = [];
+        if (flag == 0) {
+            showMsgBox('4');
+        };
+
+    }
+
+
+    $scope.TDSCategoryList = [];
+    /*Search Button Click Event*/
+    $scope.SearchRecord = function () {
+        $('#collapseinputbox').attr('class', 'collapse in');
+        $('#CollapseSearchTableList').attr('class', 'collapse');
+        $scope.started();
+    };
+
+    $scope.started = function () {
+        var collectionobj = {};
+        collectionobj.Action = 4;
+        collectionobj.FYId = fyId;
+        collectionobj.RelationshipId = relationshipId;
+        
+
+
+        var getData = myService.methode('POST', "../Api/AccountMasterApi/GetTDSCategory", collectionobj);
+        getData.then(function (response) {
+
+            var tblheader =
+            [
+            { "HeaderText": "Sr.No.", "Value": "Code", "HeaderValue": "Id", "Width": "50px", "ShowColumn": "Yes", "ImageColumn": "No", "CssClass": "srno" },
+            { "HeaderText": "Nature Of Payment", "HeaderValue": "Name", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+            { "HeaderText": "Section", "Value": "SectionCode", "HeaderValue": "Section", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+            { "HeaderText": "Challan Code","HeaderValue": "ChallanCode", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+            { "HeaderText": "Company/Firm (%)", "HeaderValue": "CompanyPer", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+            { "HeaderText": "Individual (%)", "HeaderValue": "IndPer", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+            { "HeaderText": "Limit F.Y.", "HeaderValue": "LimitFY", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+            { "HeaderText": "Limit Single Transaction", "HeaderValue": "LimitST", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+            { "HeaderText": "IsActive", "HeaderValue": "IsActive", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+            ];
+            debugger;
+            $scope.TDSCategoryList = response.data;
+            loadDataUsingPreDefinedColumn(tblheader, response.data);
+            $('#example tbody').on('dblclick', 'tr', function () {
+                $scope.showLoader();
+
+                var row = $('#example').DataTable().row(this).data();
+                $scope.hfId = $(this).find('input[type="hidden"]').val();
+                debugger;
+                $scope.TDSCategoryList = $filter('filter')($scope.TDSCategoryList, { 'Code': $scope.hfId });
+                $scope.NatureOfPayment = row[1];
+                $scope.TDSSectionModel = $(FindHtml(row[2])).val();
+                $scope.ChallanCode = row[3];
+                $scope.CompanyFirmPercent = row[4];
+                $scope.IndividualPercent = row[5];
+                $scope.LimitOfFY = row[6];
+                $scope.LimitOfSingleTrans = row[7];
+                $scope.IsActive = row[8] == "Yes" ? "true" : "false";
+                $scope.Save = "Edit";
+                $scope.disableDelete = false;
+                $scope.$apply();
+                //collapse box
+                $('.br-pageheader').fadeIn();
+                $('#collapseinputbox').fadeIn();
+                $('#CollapseSearchTableList').fadeOut();
+
+                $scope.SetFocus('#txtNatureOfPayment', true);
+                $scope.hideLoader();
+
+
+            });
+        });
+    };
+
+    /*Delete Button Click Event*/
+    $scope.DeleteRecord = function () {
+        deleteConfirmbox("Do you want to delete this record?", $scope.deleteRecord);
+    };
+
+    $scope.deleteRecord = function () {
+
+        debugger;
+        var collectionobj = {};
+        collectionobj.Action = 3;
+        collectionobj.CategoryCode = $scope.hfId;
+        collectionobj.RelationshipId = relationshipId;
+        
+
+        collectionobj.FYId = fyId;
+        collectionobj.UpdatedBy = JSON.parse(userid);
+        var getData = myService.methode('POST', "../Api/AccountMasterApi/InsertUpdateDeleteTDSCategory", collectionobj);
+        getData.then(function (response) {
+            if (showMsgBox(response.data)) {
+                $scope.ClearControl(1);
+            }
+        });
+    };
+    $(document).on("click", ".RefreshSearchTable", function (e) {
+        debugger;
+        var panelToRefresh = $(this).closest('.panel').find('.refresh-container');
+        var dataToRefresh = $(this).closest('.panel').find('.panel-wrapper');
+        var loadingAnim = panelToRefresh.find('.loading-progress');
+        panelToRefresh.show();
+        setTimeout(function () {
+            loadingAnim.addClass('la-animate');
+        }, 100);
+        $scope.started();
+        return false;
+    });
+
+    $scope.PrintRecord = function () {
+        var tblheader =
+                 [
+                  { "HeaderText": "Sr.No.", "Value": "Branch_Code", "HeaderValue": "Id", "Width": "50px", "ShowColumn": "Yes", "ImageColumn": "No", "CssClass": "srno" },
+                  { "HeaderText": "Section Name", "HeaderValue": "SectionName", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+                  { "HeaderText": "Challan Code", "HeaderValue": "ChallanCode", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+                  { "HeaderText": "IsActive", "HeaderValue": "IsActive", "Width": "100%", "ShowColumn": "Yes", "ImageColumn": "No" },
+                 ];
+        $scope.PrintMaster(tblheader, $scope.TDSCategoryList, window.document.title);
+    };
+
+
+    $scope.GetChallanCode = function () {
+        debugger;
+        $scope.collectionobj = {};
+        $scope.collectionobj["Action"] = 5;
+        $scope.collectionobj["CategoryCode"] = $scope.TDSSectionModel
+        $scope.collectionobj["SchoolCode"] = schoolCode;
+        $scope.collectionobj["BranchCode"] = branchCode;
+        $scope.collectionobj["FYId"] = fyId;
+        var getData = myService.methode('POST', '../Api/AccountMasterApi/GetTDSCategory', '{obj:' + JSON.stringify($scope.collectionobj) + '}');
+        getData.then(function (response) {
+            $scope.ChallanCode = response.data[0].ChallanCode;
+        });
+    };
+}

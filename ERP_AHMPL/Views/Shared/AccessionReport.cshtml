@@ -1,0 +1,24 @@
+﻿<div id="ExportDiv" style="width:100%; float:left; display:none;" ng-cloak>
+    <table class="table compact table-striped table-bordered nowrap dataTable mgbt-xs-0 fixTableHead">
+        <thead>
+            <tr>
+                <th class="a-width-col">Sr.No.</th>
+                <th>Book Name</th>
+                <th>AuthorName</th>
+                <th>Publisher</th>
+                <th>AccessionNo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="APL in AccessionPrintList">
+                <td>{{$index+1}}</td>
+                <td>{{APL.BookName}}</td>
+                <td>{{APL.AuthorName}}</td>
+                <td>{{APL.Publisher}}</td>
+                <td>{{APL.AccessionID}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

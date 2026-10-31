@@ -1,0 +1,5 @@
+﻿
+    <select id="ddlUnit" class="select2 form-control clear validate" ng-model="UnitId" ng-change="GetTab(UnitId);">
+            <option value="">Select Unit</option>
+            <option ng-repeat="GetUnit in GetUnitPerms" value="{{GetUnit.Code}}">{{GetUnit.UnitName}}</option>
+        </select>

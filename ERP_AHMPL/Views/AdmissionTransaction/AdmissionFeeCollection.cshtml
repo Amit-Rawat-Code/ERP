@@ -1,0 +1,311 @@
+﻿
+@{
+    ViewBag.Title = "Admission Fee Collection";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/AdmissionFeeCollectionController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="hfClngDate" id="hfClngDate" name="hfClngDate" value="" />
+
+<input type="hidden" ng-model="EnquiryTransID" id="EnquiryTransID" name="EnquiryTransID" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Admission Fee Collection</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Global</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Admission Fee Collection</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Session<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSession")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Class<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlClass")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 search-feild">
+                                            <label class="control-label">Student Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtStudentName", "", new { @class = "form-control", @placeholder = "Student Name", @ng_model = "StudentName" })
+                                                @*@Html.Partial("ddlSession")*@
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                                <button class="Srch-btn">Search</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Reg No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtRegNo", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "RegNo" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtStudentName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "StudentName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Parent/Guardian Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtParentGuardianName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "ParentGuardianName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Contact<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtContact", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Contact" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student Date of birth<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <input id="txtStudentDateofEnquiry" type="date" class="form-control clear validate" placeholder=""
+                                                       ng-model="StudentDateOfBirth" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Merit List<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtMeritList", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "MeritList" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Adm. No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAdmNo", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "AdmNo" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Concession<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlConcession" class="select2 form-control clear validate" ng-model="ddlConcession">
+                                                    <option value="">Select </option>
+
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Remark<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtRemark", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "Remark" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <h5>Fee Deposite Entry<span class="vd_red"></span></h5>
+                                        </div>
+
+
+
+                                        <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.No.</th>
+                                                    <th>Fee Head</th>
+                                                    <th>Fee Amount</th>
+                                                    <th>Concession</th>
+                                                    <th>Received Amount</th>
+                                                    <th>Balance Amount</th>
+                                                    <th>Next due date</th>
+
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Admission Fees</td>
+                                                    <td>6500</td>
+                                                    <td>0</td>
+                                                    <td>5000</td>
+                                                    <td>1500</td>
+                                                    <td>1/May/2021</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Admission Fees</td>
+                                                    <td>6500</td>
+                                                    <td>0</td>
+                                                    <td>5000</td>
+                                                    <td>1500</td>
+                                                    <td>1/May/2021</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <h5>Fee Deposite History<span class="vd_red"></span></h5>
+                                        </div>
+                                        <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.No.</th>
+                                                    <th>Fee Deposite Date</th>
+                                                    <th>Receipt No.</th>
+                                                    <th>Fee Head</th>
+                                                    <th>Deposite Amount</th>
+                                                    <th>Next Due Date</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>4-Feb-21</td>
+                                                    <td>106</td>
+                                                    <td>Admission Fees</td>
+                                                    <td>10,000</td>
+                                                    <td>1/May/2021</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>4-Feb-21</td>
+                                                    <td>106</td>
+                                                    <td>Admission Fees</td>
+                                                    <td>10,000</td>
+                                                    <td>1/May/2021</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>4-Feb-21</td>
+                                                    <td>106</td>
+                                                    <td>Admission Fees</td>
+                                                    <td>10,000</td>
+                                                    <td>1/May/2021</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Receive Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <input id="txtReceiveDate" type="date" class="form-control clear validate" placeholder=""
+                                                       ng-model="ReceiveDate" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Pay Mode<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlPayMode" class="select2 form-control clear validate" ng-model="ddlPayMode">
+                                                    <option value="">Select </option>
+
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Deposit Bank Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlDepositBankName" class="select2 form-control clear validate" ng-model="ddlDepositBankName">
+                                                    <option value="">Select </option>
+
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+
+                                            <div class="input-box">
+                                                <div class="Checkbox radio-primary Checkbox">
+                                                    <input type="checkbox" id="Direct" ng-model="IsAgainstEnquiry" value="0" class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" name="EnquiryType">
+                                                    <label for="WhatsAppNo_1">Cheque Bounce</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<script>
+    $('#ddlCityArea').removeClass('validate');
+    $('#ddlGender').removeClass('validate');
+    $('#ddlCollegeBranch').removeClass('validate');
+</script>

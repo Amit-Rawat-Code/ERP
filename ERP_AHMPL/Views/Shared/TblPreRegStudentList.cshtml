@@ -1,0 +1,36 @@
+﻿    <input type="text" id="txtStudent" class="form-control clear" ng-model="SearchText" ng-click="SearchStudents()"
+           ng-blur="HideStudentList();txtStudent_blur();" autocomplete="off" ng-disabled="disabledSearch" 
+           ng-init="disabledSearch=false;GetAllStudents('9')"  />
+    <div id="FeeStuListOnOff" class="InputInTabBox" >
+        <div class="fee-Stu-List-scroll">
+            <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card ">
+                <thead>
+                    <tr>
+                        <th width="10px"></th>
+                        <th width="25%">Student</th>
+                        <th width="25%">Father Name</th>
+                        <th width="20%">Class</th>
+                        <th width="30%">Contact No.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in StudentsList|filter:SearchText|filter:{'ClassId':studentDetails.ClassId}"
+                        ng-click="setStudentName(student)">
+                        <td>
+                            <div class="radio radio-primary table-radio">
+                                <input ng-model="$parent.StudentCode" type="radio" value="{{student.StudentCode}}" ng-disabled="!student.IsActive" />
+                                <label for=""></label>
+                            </div>
+                        </td>
+                        <td>{{student.StudentName}}</td>
+                        <td>{{student.FatherName}}</td>
+                        <td>{{student.ClassName}}</td>
+                        <td>{{student.FatherContactNo}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+

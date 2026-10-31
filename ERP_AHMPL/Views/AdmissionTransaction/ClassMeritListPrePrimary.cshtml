@@ -1,0 +1,198 @@
+﻿
+@{
+    ViewBag.Title = "Send Email And Sms";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/ClassMeritListPrePrimaryController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Master- Class Merit List Pre Primary</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Global</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Master- Class Merit List Pre Primary</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Class<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        <div class="">
+                                                            <div class="input-box">
+                                                                <div class="checkbox checkbox-primary check-box">
+                                                                    <input type="checkbox" ng-model="chkAllClass" ng-bind="chkAllClass=(selectedClassCount==ClassListRespectOfCreatedBatch.length?true:false)" ng-change="AllClass();" class="ng-pristine ng-valid ng-binding ng-not-empty ng-touched">
+                                                                    <label>Select All</label>
+                                                                </div>
+                                                                <div class="text-box-msg-r2" style="font-size: 10px;font-weight: 500;">
+                                                                    Total Selection: <label ng-model="selectedClassCount" ng-bind="selectedClassCount=(ClassListRespectOfCreatedBatch | filter:{'IsActive' : 'true'}).length" class="ng-pristine ng-untouched ng-valid ng-binding ng-not-empty"></label>
+                                                                </div>
+                                                                <div class="input-box" style="width: 100%;background: #484848;position: relative;float: left;color: #fff;">
+                                                                    <div class="checkbox checkbox-primary check-box-head">
+                                                                        Class
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="" style="position:relative;">
+                                                            <div class="slimScrollDiv-height3" id="slimScrollDiv-height2">
+
+
+                                                                <table id="sdata" class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                                    <tbody>
+                                                                        <tr ng-repeat="XL in ClassListRespectOfCreatedBatch">
+                                                                            <td class="srno">
+                                                                                <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                                                                    <input type="checkbox" ng-model="XL.IsActive" />
+                                                                                    <label for=""> </label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td style="float: left;display:none ">{{XL.Code}}</td>
+                                                                            <td> {{XL.ClassName}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <button id="btncollect" type="submit" class="btn-me btn-primary" ng-disabled="disableForEdit" ng-click="CollectStudent();">Get Student(s)</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                        <div class="" style="position:relative;" ng-cloak ng-if="StudentData.length>0">
+                                                            <div class="slimScrollDiv-height3" id="slimScrollDiv-height2" style="height:500px !important">
+                                                                <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Sr. No </th>
+                                                                            <th>Batch</th>
+                                                                            <th>Class</th>
+                                                                            <th>Student Name </th>
+                                                                            <th>Reg No</th>
+                                                                            <th>Father Name </th>
+                                                                            <th>
+                                                                                <div class="checkbox checkbox-primary check-box">
+                                                                                    <input type="checkbox" ng-disabled="disableForEdit" ng-model="chkAllStudent" ng-bind="chkAllStudent=(selectedStudentCount==StudentData.length?true:false)" ng-change="AllStudent(chkAllStudent);" class="ng-pristine ng-valid ng-binding ng-not-empty ng-touched">
+                                                                                    <label>Select</label>
+                                                                                </div>
+                                                                                <div class="pull-right" style="font-size: 10px;font-weight: 500; color:#fff;line-height: 20px;padding: 5px;">
+                                                                                    Total Selection: <label style="width:20px;" ng-model="selectedStudentCount" ng-bind="selectedStudentCount=(StudentData | filter:{'IsActive' : 'true'}).length" class="ng-pristine ng-untouched ng-valid ng-binding ng-not-empty"></label>
+                                                                                </div>
+                                                                            </th>
+                                                                            <th>
+                                                                                Recommended Class
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="XL in StudentData">
+                                                                            <td> {{$index+1}}.</td>
+                                                                            <td> {{XL.BatchName}}</td>
+                                                                            <td> {{XL.ClassName}}</td>
+                                                                            <td> {{XL.StudentName}}</td>
+                                                                            <td> {{XL.RegNo}}</td>
+                                                                            <td> {{XL.FatherName}}</td>
+                                                                            <td class="srno">
+                                                                                <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                                                                    <input type="checkbox" ng-model="XL.IsActive" />
+                                                                                    <label for=""> </label>
+                                                                                </div>
+
+                                                                            </td>
+                                                                            <td>
+                                                                                <select id="ddlClass" class="select2 form-control"
+                                                                                        ng-model="XL.SubClassCode"
+                                                                                        ng-disabled="disabledDDLClass">
+                                                                                    <option value="">Select Class</option>
+                                                                                    <option ng-repeat="cl in ClassList" value="{{cl.Code}}"
+                                                                                            ng-disabled="!cl.IsActive">
+                                                                                        {{cl.ClassName}}
+                                                                                    </option>
+                                                                                </select>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Merit List<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.Partial("ddlMerit")
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+                                            
+
+</form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

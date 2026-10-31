@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "Update Ledger Opening";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<div id="hdngetstu"></div>
+<script src="~/Scripts/myjslib/LedgerOpeningController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" id="hdnVoucherId" />
+<style>
+    .dataTables_scrollBody {
+        overflow: scroll !important;
+        height: 400px;
+    }
+</style>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Update Ledger Opening</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Accountancy</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Update Ledger Opening</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <form id="user-form">
+                                    <div class="collapse in" id="collapseinputbox">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Ladger Group</label>
+                                            <div class="input-box">
+                                                <select id="ddlLedgerGroup" class="select2 form-control" ng-model="LedgerGroup" ng-init="BindLedgerGroup();">
+                                                    <option value="">Select</option>
+                                                    <option ng-repeat="ledgergrp in LedgerGroupList" value="{{ledgergrp.GroupCode}}">{{ledgergrp.GroupName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Nature</label>
+                                            <div class="input-box">
+                                                <select id="ddlNature" class="select2 form-control" ng-model="Nature" ng-init="GetNatureList();">
+                                                    <option value="">Select</option>
+                                                    <option ng-repeat="NL in NatureList" value="{{NL.Nature}}">{{NL.Nature}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Ledger Name</label>
+                                            <div class="input-box">
+                                                <select id="ddlLedgerGroup" class="select2 form-control" ng-model="SubCode" ng-init="LoadLedger();">
+                                                    <option value="">Select</option>
+                                                    <option ng-repeat="Ll in LedgerList|filter:{ GroupCode: LedgerGroup, Nature: Nature }" value="{{Ll.SubCode}}">{{Ll.Name}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <button id="btnProcess" type="button" value="Process" class="btn-me btn-primary hvr-float-shadow" name="ProcessButton" ng-model="Process" ng-click="SearchData()">
+
+                                                <span id="btnProcesstxt" class="action-txt">Process</span>
+                                                <i data-feather="edit"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="TableList" class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1 collapse">
+                                        <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                                            <table id="example1" class="table table-striped table-bordered compact" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.No</th>
+                                                        <th><input  type="checkbox" ng-model="chkAll" ng-change="CheckAll();" ng-init="chkAll=true" /></th>
+                                                        <th class="width-150">Ledger Name</th>
+                                                        <th>Ledger Code</th>
+                                                        <th>Ledger Group</th>
+                                                        <th>Nature</th>
+                                                        <th class="text-right">Opening Amount</th>
+                                                        <th class="text-center">Dr./Cr.</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="LDL in LedgerDataList" ng-repeat-done>
+                                                        <td style="padding-left:15px !important;">
+                                                            {{LDL.Sno}}
+                                                        </td>
+                                                        <td><input type="checkbox" ng-model="LDL.chk" ng-change="UnCheckAll();" /></td>
+                                                        <td>
+                                                            {{LDL.LedgerName}}
+                                                        </td>
+                                                        <td>
+                                                            {{LDL.LedgerCode}}
+                                                        </td>
+                                                        <td>
+                                                            {{LDL.LedgerGroup}}
+                                                        </td>
+                                                        <td>{{LDL.Nature}}</td>
+                                                        <td><input type="text" id="txtOpeningAmt" class="form-control clear text-right" placeholder="" ng-model="LDL.OpeningAmt" /></td>
+                                                        <td style="text-align:center;">
+                                                            <select class="select2 form-control" ng-model="LDL.DrCr">
+                                                                <option value="">Select</option>
+                                                                <option value="D">Dr</option>
+                                                                <option value="C">Cr</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" placeholder="S.No" /></td>
+                                                        <td></td>
+                                                        <td><input type="text" class="form-control"  placeholder="Ledger Name" /></td>
+                                                        <td><input type="text" class="form-control"  placeholder="Ledger Code" /></td>
+                                                        <td><input type="text" class="form-control"  placeholder="Ledger Group" /></td>
+                                                        <td><input type="text" class="form-control"  placeholder="Nature" /></td>
+                                                        <td><input type="text" class="form-control text-right"  placeholder="Opening Amount" /></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                
+                                        
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 no-padding">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </div>                                    
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+

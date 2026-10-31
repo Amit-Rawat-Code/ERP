@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "AllComplainList";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"]; 
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/guardianDashBoardController.js?Ver=@ViewBag.Version"></script>
+<script src="~/Scripts/myjslib/AllComplainListController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">All Complain List</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Communication</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Complain List</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div id="Circular_1" class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding " id="MainMoveBoxMobile">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 no-padding " id="SelectMsgBoxMobile">
+                                    <div class="all-msg-box-list bg-w">
+
+                                        <div class="conversation-header-count" ng-init="BindAllComplain()">
+                                            <div class="search-member-title">
+                                                <h6 class="tx-list mb-0">All Complain List <span class="tx-roboto pull-right"><label ng-bind="ComplaineListCount"></label></span></h6>
+                                            </div>
+                                        </div>
+                                        <div class="msg-list-body">
+                                            <div class="circular-list-scroll">
+                                                <div class="br-msg-box-list-item bg-w {{ComplainId==x.ComplainId?'active':''}}" ng-click="Complainclick(x.Complain,x.ComplainId,x.CreatedOn,x.Names)" ng-repeat="x in AllComplain" ng-model="cirs" all-circular-list>
+                                                    <div class="tx-list2">
+                                                        {{x.Names}}
+                                                    </div>
+                                                    <div class="tx-list2-date-w-attach-file">
+                                                        <div class="date-format">
+                                                             {{x.CreatedOn}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12 query-show-box-m" id="MsgBoxMobile">
+                                    <div class="query-show-box bg-w">
+                                        <div class="query-show-bind">
+                                            <div class="query-show-header">
+                                                <div class="tx-list2">
+                                                    <div class="SelectThreadName pull-left" id="QHeaderHight">
+                                                        <div ng-bind="Names" type="" ng-model="Names"></div>
+                                                        <input type="hidden" ng-bind="ComplainId" ng-model="ComplainId" />
+                                                    </div>
+                                                    <div class="CreatedThreadTime" ng-bind="CreatedOn" ng-model="CreatedOn">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="query-show-body">
+                                                <div class="body-details-scorll">
+                                                    <div class="body-attachment-box">
+                                                        <div class="msg-show-full-detail msg-format" ng-bind-html="trustAsHtml(BreakLine(Complain))" ng-model="Complain">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

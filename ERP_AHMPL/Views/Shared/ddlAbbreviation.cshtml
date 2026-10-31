@@ -1,0 +1,4 @@
+﻿<select id="ddlAbbreviation" class="select2 form-control clear" ng-model="AbbreviationCode">
+    <option value="">Select Status</option>
+    <option ng-repeat="S in AbbreviationList" value="{{S.AttendanceAbbrId}}" ng-disabled="!S.IsActive">{{S.Abbreviation}}</option>
+</select>

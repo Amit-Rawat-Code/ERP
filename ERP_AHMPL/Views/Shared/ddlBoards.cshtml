@@ -1,0 +1,4 @@
+﻿<select id="ddlBoardUniversity" class="select2 form-control validate " ng-init="GetBoards();" ng-model="BoardCode">
+    <option value="">Select Board</option>
+    <option ng-repeat="board in BoardList" value="{{board.BoardName}}">{{board.BoardName}}</option>
+</select>

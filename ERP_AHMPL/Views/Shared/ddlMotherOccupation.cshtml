@@ -1,0 +1,6 @@
+﻿ 
+<select id="ddlMotherOccupation" class="select2 form-control" ng-model="MotherOccupationCode"
+        ng-init="GetOccupation(2);">
+    <option value="">Select Occupation</option>
+    <option ng-repeat="x in Occupations" value="{{x.OccupationName}}">{{x.OccupationName}}</option>
+</select>

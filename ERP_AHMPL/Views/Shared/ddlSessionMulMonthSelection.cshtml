@@ -1,0 +1,14 @@
+﻿
+<select id="ddlSessionMonth" multiple autocomplete='address-level2' class="select2 form-control validate"
+        ng-model="SessionMonth" extra-settings="dropdownSetting" checkboxes="true">
+    <option value="">Select Month</option>
+    <option ng-repeat="month in SessionMonths|filter:{'Year':SessionYear}" ng-value="month.Month">{{month.Month}}</option>
+</select>
+
+
+
+@*<div class="form-control validate">
+  <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" options="SessionMonth" selected-model="SessionMonths" checkboxes="false"  ></div>
+</div>*@
+
+  

@@ -1,0 +1,168 @@
+
+@{
+    ViewBag.Title = "UnitMaster";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/UnitMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="hflogopath" id="logopath" name="logopath" value="" />
+<div class="app-content  my-3 ">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Create Unit</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Unit Manager</span></li>
+                        <li class="active"><span>Create Unit</span></li>
+                    </ol>
+                </div>
+            </div>
+            <form method="post" action="/DynamicWebsite/UnitMaster/" enctype="multipart/form-data">
+                <div class="br-pagebody">
+                    <div class="">
+                        <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Unit Type</label>
+                                            @Html.Partial("ddlUnitType")
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Unit Name</label>
+                                            @Html.TextBox("txtUnitName", "", new { @class = "form-control clear validate", @ng_model = "UnitName", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Unit Title</label>
+                                            @Html.TextBox("txtUnitTitle", "", new { @class = "form-control clear validate", @ng_model = "UnitTitle", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Attachment</label>
+                                            <input type="file" accept="image/*" id="fileInput" name="fileInput" ng-model="fileInput" multiple class="form-control file-input clear" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Facebook Link</label>
+                                            @Html.TextBox("txtFacebookLink", "", new { @class = "form-control clear", @ng_model = "FacebookLink", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Twitter Link</label>
+                                            @Html.TextBox("txtTwitterLink", "", new { @class = "form-control clear", @ng_model = "TwitterLink", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>You Tube Link</label>
+                                            @Html.TextBox("txtYoutubeLink", "", new { @class = "form-control clear", @ng_model = "YoutubeLink", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 " ng-if="hfUnitId!=2">
+                                        <div class="form-group">
+                                            <label>Video Link</label>
+                                            @Html.TextBox("txtHomeVideoLink", "", new { @class = "form-control clear", @ng_model = "$parent.HomeVideoLink", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>You Tube Feed</label>
+                                            @Html.TextBox("txtYoutubeFeed", "", new { @class = "form-control clear", @ng_model = "YoutubeFeed", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Facebook Feed</label>
+                                            @Html.TextBox("txtFacebookFeed", "", new { @class = "form-control clear", @ng_model = "FacebookFeed", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Location</label>
+                                            @Html.TextBox("txtSiteLocation", "", new { @class = "form-control clear", @ng_model = "SiteLocation", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Maintained By</label>
+                                            @Html.TextBox("txtMaintainedBy", "", new { @class = "form-control clear", @ng_model = "MaintainedBy", @placeholder = "" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            @Html.Partial("ddlApproved")
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label>Active</label>
+                                            @Html.Partial("ddlActive")
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1 ">
+                                        @Html.Partial("ActionView")
+                                    </div>
+                                    @*<div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 " ng-show="showhide">
+            <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Sr. No</th>
+                        <th>Unit Type</th>
+                        <th>Unit Name</th>
+                        <th>Unit Title</th>
+                        <th>Facebook Link</th>
+                        <th>Twitter Link</th>
+                        <th>YouTube Link</th>
+                        <th>Video Link</th>
+                        <th>Status</th>
+                        <th>Is Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="obj in UnitMasterList">
+                        <td ng-bind="obj.Srno={{$index+1}}"></td>
+                        <td>{{obj.UnitTypeCode}}</td>
+                        <td>{{obj.UnitName}}</td>
+                        <td>{{obj.UnitTitle}}</td>
+                        <td>{{obj.FacebookLink}}</td>
+                        <td>{{obj.TwitterLink}}</td>
+                        <td>{{obj.YoutubeLink}}</td>
+                        <td>{{obj.VideoLink}}</td>
+                        <td>{{obj.IsApproved}}</td>
+                        <td>{{obj.IsActive}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>*@
+                                    <div class="col-md-12 col-sm-12 col-xs-12 ">
+
+                                        @Html.Partial("SearchAngularJs")
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+

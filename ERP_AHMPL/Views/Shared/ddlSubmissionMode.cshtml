@@ -1,0 +1,6 @@
+﻿@Html.DropDownList("ddlSubmissionMode", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Online", Value="Online"},
+    new SelectListItem{Text="Offline", Value="Offline"}
+},
+    new { @class = "select2 form-control validate", @ng_model = "SubmissionType", @ng_init = "SubmissionType='Online'" })

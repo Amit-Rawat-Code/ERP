@@ -1,0 +1,4 @@
+﻿<select id="ddlTransMode" class="select2 form-control" ng-model="TransModeModel"  ng-disabled="disabledTransModeModel">
+    <option value="">Select</option>
+    <option ng-repeat="transmode in TransModeList" value="{{transmode.TMId}}">{{transmode.TMValue}}</option>
+</select>

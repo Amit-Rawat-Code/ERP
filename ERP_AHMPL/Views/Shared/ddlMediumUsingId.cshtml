@@ -1,0 +1,6 @@
+﻿<select id="ddlMedium" class="select2 form-control validate" ng-model="studentDetails.MediumId"
+        ng-init="GetMediumUsingId();disableMedium=false"
+        ng-disabled="disableMedium">
+    <option value="">Select Medium</option>
+    <option ng-repeat="medium in Mediumes" value="{{medium.MediumId}}" ng-disabled="!medium.IsActive">{{medium.MediumName}}</option>
+</select>

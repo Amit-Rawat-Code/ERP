@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "AccordianAlbum";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<script src="~/Scripts/myjslib/AccordianAlbumController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+
+
+<div class="app-content  my-3 ">
+    <div class="side-app">
+
+        <div class="br-pageheader">
+            <!-- Title -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                <h5 class="txt-dark">Create Accordian</h5>
+            </div>
+            <!-- Breadcrumb -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                <ol class="breadcrumb">
+                    <li><span>Album</span></li>
+                    <li class="active"><span>Create Accordian</span></li>
+                </ol>
+            </div>
+
+        </div>
+
+        <div class="br-pagebody">
+            <div class="">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <div class="row">
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="">
+                                                <label>Select Unit Type</label>
+                                                @Html.Partial("ddlPermUnitType")
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Select Unit</label>
+                                                @Html.Partial("ddlPermUnit")
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Select Tab</label>
+                                                <select id="ddlTab" class="select2 form-control clear validate" ng-model="TabId" ng-init="GetTab(UnitId);" ng-change="GetddlMenu(TabId)">
+                                                    <option value="">Select Tab</option>
+                                                    <option ng-repeat="Tab in Tabs" value="{{Tab.TabId}}">{{Tab.TabName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Select Menu</label>
+                                                <select id="ddlMenu" class="select2 form-control clear validate" ng-model="MenuId" ng-init="GetMenu();"
+                                                        ng-change="GetddlSubMenu(MenuId);">
+                                                    <option value="">Select Menu</option>
+                                                    <option ng-repeat="Menu in Menus" value="{{Menu.Code}}">{{Menu.MenuName}}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Select Sub Menu</label>
+                                                <select id="ddlSubMenu" class="select2 form-control clear validate" ng-model="SubMenuId" ng-init="GetddlSubMenu(MenuId);" ng-change="GetLayoutAccordingSubMenu(MenuId,SubMenuId);">
+                                                    <option value="">Select Sub Menu</option>
+                                                    <option ng-repeat="SubMenu in SubMenus" value="{{SubMenu.Code}}">{{SubMenu.SubMenuName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Select Layout</label>
+                                                <select id="ddlLayout" class="select2 form-control clear validate" ng-model="LayoutId" ng-init="GetLayoutMaster()">
+                                                    <option value="">Select Layout</option>
+                                                    <option ng-repeat="GetLayout in GetLayouts" value="{{GetLayout.LayoutCode}}">{{GetLayout.LayoutName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Accordian Name</label>
+                                                @Html.TextBox("AccordianName", "", new { @class = "form-control clear validate", @ng_model = "AccordianName" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Sequence No</label>
+                                                @Html.TextBox("SequenceNo", "", new { @class = "form-control clear validate", @ng_model = "SequenceNo" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="form-group">
+                                                <label>Status</label>
+                                                @Html.Partial("ddlApproved")
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

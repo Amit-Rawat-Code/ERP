@@ -1,0 +1,31 @@
+﻿<div id="ddlClassSectionMul" class="input-box chk-validate " ng-init="GetAllSections();">
+    <div class="toggle-ddl" id="openSections"
+         ng-init="ToogleDDL('openSections','openSections')">
+        @*btn-validate*@
+        <button class='btn btn-primary select-btn'
+                data-ng-click='openSections=!openSections'
+                ng-bind="GetCount(Sections,'Select Class')">
+            Select Class
+        </button>
+        @*btn-validate*@
+        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                data-ng-click='openSections=!openSections'>
+            <span class='fa fa-chevron-down'></span>
+        </button>
+        <div ng-show="openSections" class="ddlMultiple" ng-cloak>
+            <div ng-click="ddlCheckAll('Sections')">
+                Check All
+                <span class="btn-counts-right">Total Count: {{Sections.length}}</span>
+            </div>
+            <div ng-click="ddlUnCheckAll('Sections')">Uncheck All</div>
+            <hr style="margin:0px !important" />
+            <div ng-repeat="sm in Sections">
+                <input type="checkbox" ng-model="sm.chk" ng-value="sm.Code" ng-disabled="!sm.IsActive"
+                       ng-change="ddlSection_Change(sm);" />
+                {{sm.ClassName}}-{{sm.SectionName}}
+                @*   <br />{{sm.TransId}}*@
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,306 @@
+﻿@{
+    ViewBag.Title = "Fee Deposit";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<style>
+    .fee-deposit-box-profile .profile-header {
+        padding: 10px;
+        position: relative;
+        height: 71px;
+        box-shadow: 0px 5px 12px 0px #a7a7a7, 0px 0px 0px 0px rgb(141 142 143);
+    }
+
+        .fee-deposit-box-profile .profile-header .profile-pic {
+            margin: 0 auto;
+            float: none;
+            position: absolute;
+        }
+
+    .fee-deposit-box-profile .profile-header {
+        padding: 10px;
+        background: url(../Content/img/fee-deposit-profile.png);
+        background-position: center center;
+    }
+
+    .fee-deposit-box-profile .profile-data {
+        background: #f2ece0;
+        padding-top: 60px;
+    }
+
+    .fee-deposit-box-profile .profile-header .profile-pic {
+        box-shadow: 0px 5px 12px 0px #999a9b, 0px 0px 0px 0px rgb(139 140 141);
+        border: 5px solid #ffffff;
+    }
+
+    .profile-box-fee-deposit span.icon i {
+        color: #484848;
+    }
+
+    lable.feild-title {
+        position: absolute;
+        left: 35px;
+        top: 0px;
+        font-weight: 500;
+        color: #ffffff;
+        font-size: 12px;
+        height: 29px;
+        line-height: 30px;
+        padding-left: 15px;
+        width: 114px;
+        border-radius: 0px 20px 20px 0px;
+        background-position: center center;
+        background: #484848;
+    }
+
+    .input-icons {
+        color: #01090c;
+        font-size: 15px;
+        line-height: 35px;
+        position: absolute;
+        top: 1px;
+        background: #d6d6d6;
+        text-align: center;
+        width: 31px;
+        left: unset !important;
+        right: 1px;
+        height: 28px;
+        border-left: 1px solid #484848;
+    }
+
+    .btnpay:disabled {
+        pointer-events: none;
+        opacity: 0.65;
+    }
+
+    .srno-btn1 {
+        width: 17px;
+        /*background: #f65f5f;*/
+        background: #5c8d55;
+        color: #fff !important;
+        position: absolute;
+        left: -1px;
+        height: 100%;
+        top: 0;
+        text-align: center;
+        line-height: 74px;
+        font-size: 20px;
+        border-radius: 8px 0 0 8px;
+    }
+    .print-btn1 {
+        width: 17px;
+        /*background: #f65f5f;*/
+        background: #5c8d55;
+        color: #fff !important;
+        position: absolute;
+        right: 0;
+        height: 100%;
+        top: 0;
+        text-align: center;
+        line-height: 72px;
+        font-size: 14px;
+        border-radius: 0 8px 8px 0;
+    }
+    .feepaydetail ul {
+        margin-left: 10px;
+    }
+
+</style>
+<script src="~/Scripts/myjslib/OnlineFeeDepositController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-init="ShowStudentFeeCard();GetPaymentHistory();" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Online Fee Deposit</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fee</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Fee Deposit</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                <div class="collapse in">
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                        <div class="feepay-auto">
+                                                            <div id="hdngetstu" style="display:none"></div>
+                                                            <div class="section-toggle">
+
+                                                                <div id="exTab1" class="refreshcontainer">
+                                                                    <ul class="nav nav-pills">
+                                                                        <li class="active-new1">
+                                                                            <a href="#1a" data-toggle="tab">Fee Pay</a>
+                                                                        </li>
+                                                                        <li class="active-new">
+                                                                            <a href="#2a" data-toggle="tab">Payment History</a>
+                                                                        </li>
+                                                                    </ul>
+
+                                                                    <div class="tab-content clearfix">
+                                                                        <div class="tab-pane active" id="1a">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-12" ng-repeat="feedetails in StudentFeeDetails" style="width: 100%;">
+                                                                                    <div class="feepaydetail">
+                                                                                        <h2>
+                                                                                            <span ng-model="feedetails.InstallmentName" ng-bind="feedetails.InstallmentName"></span>
+                                                                                            <span>
+                                                                                                <input class="styled-checkbox" type="checkbox" value="value1" ng-model="feedetails.Chk"
+                                                                                                       ng-if="feedetails.FeeStatus!='Paid'" ng-init="feedetails.Chk=false" ng-change="CheckInstallments($index,feedetails.Chk)">
+                                                                                            </span>
+                                                                                        </h2>
+                                                                                        <p>DUE DATE - <span ng-model="feedetails.DueOn" ng-bind="feedetails.DueOn"></span></p>
+                                                                                        <div class="paydetail">
+                                                                                            <strong>Fee Amount: <i class="fa fa-inr" aria-hidden="true"></i> <span ng-model="feedetails.PayableAmt" ng-bind="feedetails.PayableAmt"></span></strong>
+                                                                                            <strong>Paid Amount: <i class="fa fa-inr" aria-hidden="true"></i> <span ng-model="feedetails.FeeRect" ng-bind="feedetails.FeeRect"></span></strong>
+                                                                                            <strong>
+                                                                                                Payble Amount: <i class="fa fa-inr" aria-hidden="true"></i>
+                                                                                                <span ng-model="feedetails.Balance" ng-bind="feedetails.Balance=feedetails.PayableAmt-feedetails.FeeRect"></span>
+                                                                                            </strong>
+                                                                                            <small><span ng-model="feedetails.FeeStatus" ng-bind="feedetails.FeeStatus"></span></small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-12">
+                                                                                <div class="balance-academic">
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-8">
+                                                                                            <strong><i class="fa fa-inr" aria-hidden="true"></i> <span ng-model="paymentRequest.AMT" ng-bind="paymentRequest.AMT=Sumoflist('StudentFeeDetails','Balance',{'Chk':true},'2');">{{paymentRequest.AMT}}</span></strong>
+                                                                                            <p>TOTAL PAYABLE</p>
+                                                                                        </div>
+                                                                                        <div class="col-lg-4">
+                                                                                            <button type="button" value="pay" class="btnpay" ng-model="btnClass" ng-click="FeePayment();" ng-disabled="btndisabled" ng-if="paymentRequest.AMT>0">PAY NOW</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tab-pane active-div" id="2a">
+                                                                            <div class="scroll">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-12" ng-repeat="paymentHistory in PaymentHistory">
+                                                                                        <div class="feepaydetail" style="position:relative;">
+                                                                                            <div href="" class="srno-btn1" ng-bind="$index+1"></div>
+                                                                                            <ul>
+                                                                                                <li><strong>Ref. No.:</strong><span ng-model="paymentHistory.OrderId">{{paymentHistory.OrderId}}</span></li>
+                                                                                                <li><strong>Bank Ref. No.:</strong><span ng-model="paymentHistory.BankRefId">{{paymentHistory.BankRefId}}</span></li>
+                                                                                                <li><strong>Amount:</strong><span ng-model="paymentHistory.Amount">{{paymentHistory.Amount}}</span></li>
+                                                                                                <li><strong>Payment Status:</strong><span ng-model="paymentHistory.OrderStatus">{{paymentHistory.OrderStatus}}</span></li>
+                                                                                                <li><strong>Installment(s):</strong><span ng-model="paymentHistory.InstallmentName">{{paymentHistory.InstallmentName}}</span></li>
+
+                                                                                                <li><strong>Payment Date</strong><span ng-model="paymentHistory.ResponseDateTime">{{paymentHistory.ResponseDateTime}}</span></li>
+
+                                                                                            </ul>
+                                                                                            <a href="" class="print-btn1" ng-click="PrintAck(paymentHistory);"><i class="fa fa-print"></i></a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div ng-if="PaymentHistory.length==0">
+                                                                                        <p style="padding:10px;text-align: center;margin-left: 189px;">
+                                                                                            No payment history found.
+                                                                                        </p>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                        <div class="fee-deposit-box-profile">
+                                                            <div class="profile-header">
+                                                                <div class="profile-pic">
+                                                                    <img src="../Content/Photos/user-profile-Icon.png"
+                                                                         ng-src="{{StudentPhoto}}" alt="profile-pic">
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-data">
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-notepad"></i></span>
+                                                                    <lable class="feild-title">Admission No.</lable>
+                                                                    <p class="input-feild-data">{{AdmissionNo}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-notepad"></i></span>
+                                                                    <lable class="feild-title">Student Name</lable>
+                                                                    <p class="input-feild-data">{{StudentName}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-brand-microsoft"></i></span>
+                                                                    <lable class="feild-title">Class</lable>
+                                                                    <p class="input-feild-data">{{ClassName}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-man-in-glasses"></i></span>
+                                                                    <lable class="feild-title">Father Name</lable>
+                                                                    <p class="input-feild-data">{{ParentName}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-smart-phone"></i></span>
+                                                                    <lable class="feild-title">Mobile No.</lable>
+                                                                    <p class="input-feild-data">{{Contact}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-home"></i></span>
+                                                                    <lable class="feild-title">Email</lable>
+                                                                    <p class="input-feild-data">{{EmailId}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-home"></i></span>
+                                                                    <lable class="feild-title">Address</lable>
+                                                                    <p class="input-feild-data">{{Address}}</p>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+</div>

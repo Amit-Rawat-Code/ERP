@@ -1,0 +1,656 @@
+﻿
+@{
+    ViewBag.Title = "AdmissionFeeDeposit1";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/AdmissionFeeDepositController.js?Ver=@ViewBag.Version"></script>
+
+<style>
+    .fee-deposit-box-profile .profile-header {
+        padding: 10px;
+        position: relative;
+        height: 71px;
+        box-shadow: 0px 5px 12px 0px #a7a7a7, 0px 0px 0px 0px rgb(141 142 143);
+    }
+
+        .fee-deposit-box-profile .profile-header .profile-pic {
+            margin: 0 auto;
+            float: none;
+            position: absolute;
+        }
+    .fee-deposit-box-profile .profile-header {
+        padding: 10px;
+        background: url(../Content/img/fee-deposit-profile.png);
+        background-position: center center;
+    }
+    .fee-deposit-box-profile .profile-data {
+        background: #f2ece0;
+        padding-top: 60px;
+    }
+    .fee-deposit-box-profile .profile-header .profile-pic {
+        box-shadow: 0px 5px 12px 0px #999a9b, 0px 0px 0px 0px rgb(139 140 141);
+        border: 5px solid #ffffff;
+    }
+    .profile-box-fee-deposit span.icon i {
+        color: #484848;
+    }
+    lable.feild-title {
+        position: absolute;
+        left: 35px;
+        top: 0px;
+        font-weight: 500;
+        color: #ffffff;
+        font-size: 12px;
+        height: 29px;
+        line-height: 30px;
+        padding-left: 15px;
+        width: 114px;
+        border-radius: 0px 20px 20px 0px;
+        background-position: center center;
+        background: #484848;
+    }
+</style>
+
+
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Admission Fee Deposit</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fee</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Admission Fee Deposit</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="row">
+
+                                            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                        <div class="fee-deposit-box-profile">
+                                                            <div class="profile-header">
+                                                                <div class="profile-pic">
+                                                                    <img src="https://ssc98hsc00.com/uploads/user/340558.jpeg"  alt="profile-pic">
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="profile-data">
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-notepad"></i></span>
+                                                                    <lable class="feild-title">Academic Session</lable>
+                                                                    <p class="input-feild-data">{{SessionName}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-notepad"></i></span>
+                                                                    <lable class="feild-title">Student Name</lable>
+                                                                    <p class="input-feild-data">{{AdmStudentName}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-notepad"></i></span>
+                                                                    <lable class="feild-title">Reg. No.</lable>
+                                                                    <p class="input-feild-data">{{RegNo}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-brand-microsoft"></i></span>
+                                                                    <lable class="feild-title">Class</lable>
+                                                                    <p class="input-feild-data">{{ClassName}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-man-in-glasses"></i></span>
+                                                                    <lable class="feild-title">Father Name</lable>
+                                                                    <p class="input-feild-data">{{ParentName}}</p>
+                                                                </div>
+                                                                @*<div class="profile-box-fee-deposit">
+                                                                        <span class="icon"><i class="icofont-woman-in-glasses"></i></span>
+                                                                        <lable class="feild-title">MOTHER NAME</lable>
+                                                                        <p class="input-feild-data">{{MotherName}}</p>
+                                                                    </div>*@
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-smart-phone"></i></span>
+                                                                    <lable class="feild-title">Mobile No.</lable>
+                                                                    <p class="input-feild-data">{{Contact}}</p>
+                                                                </div>
+
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-home"></i></span>
+                                                                    <lable class="feild-title">Address</lable>
+                                                                    <p class="input-feild-data">{{Address}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-user-alt-7"></i></span>
+                                                                    <lable class="feild-title">From Merit List</lable>
+                                                                    <p class="input-feild-data">{{IsFromMerit}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                        <label class="control-label">Session<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.Partial("ddlSession")
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Fee Structure Group<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlFeeStructureGroup" class="select2 form-control clear validate" ng-model="FeeStructureGroup" ng-init="GetFeeStructureGroup();">
+                                                                <option value="">Select </option>
+                                                                <option ng-repeat="x in GetFeeStructureGroupList" value="{{x.Code}}">{{x.FeeStructureGroupName}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                        <label class="control-label">Class<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.Partial("ddlClass")
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Student<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <style>
+                                                                .input-icons {
+                                                                    left: 93.6% !important;
+                                                                }
+                                                            </style>
+                                                            <style>
+                                                                .input-icons {
+                                                                    color: #01090c;
+                                                                    font-size: 15px;
+                                                                    line-height: 35px;
+                                                                    position: absolute;
+                                                                    top: 1px;
+                                                                    left: 93.6%;
+                                                                    background: #d6d6d6;
+                                                                    text-align: center;
+                                                                    width: 31px;
+                                                                    height: 28.4px;
+                                                                }
+
+                                                                .down-arrow {
+                                                                    border: solid black;
+                                                                    border-width: 0 2px 2px 0px;
+                                                                    display: inline-block;
+                                                                    padding: 2px;
+                                                                    transform: rotate(45deg);
+                                                                    -webkit-transform: rotate(45deg);
+                                                                    margin: 0px 0px 4px 0px;
+                                                                }
+
+                                                                div.scrollmenu {
+                                                                    /*width:300px;*/
+                                                                    overflow: auto;
+                                                                    max-height: 300px;
+                                                                    /*z-index: 99999;*/
+                                                                }
+
+                                                                table thead tr th {
+                                                                    /* Important */
+                                                                    position: sticky;
+                                                                    top: 0;
+                                                                }
+                                                            </style>
+
+                                                            <input type="text" id="txtStudent" class="form-control clear FeeStuListOnOff"
+                                                                   ng-model="SearchText" ng-click="SearchStudents()"
+                                                                   ng-blur="HideStudentList();txtStudent_blur();" autocomplete="off" ng-disabled="disabledSearch || Save=='Edit'"
+                                                                   ng-init="disabledSearch=true;GetNewAdmissionStudents();" placeholder="{{hideloader?'Please Wait...':'Select Student'}}" />
+
+                                                            <div class="input-icons FeeStuListOnOff" ng-model="hideloader">
+                                                                <i class="fa fa-circle-o-notch fa-spin icon FeeStuListOnOff" ng-show="hideloader"></i>
+                                                                <i class="down-arrow FeeStuListOnOff" ng-hide="hideloader" ng-click="Save=='Edit'?'':SearchStudents();"></i>
+                                                            </div>
+                                                            <div id="FeeStuListOnOff" class="InputInTabBox FeeStuListOnOff scrollmenu" width="javascript:$('#txtStudent').width()" onclick="event2();">
+
+                                                                <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card header-fixed">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th width="10px">Sr. No.</th>
+                                                                            <th width="30%">Student Name</th>
+                                                                            <th width="20%">Father Name</th>
+                                                                            <th width="20%">Class</th>
+                                                                            <th width="20%">Reg. No.</th>
+                                                                            <th width="10%">Mobile No.</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="student in Students|filter:SearchText" ng-model="StudentCode"
+                                                                            ng-click="FillStudentDetail(student);" class="FeeStuListOnOff">
+                                                                            <td>{{$index+1}}</td>
+                                                                            <td>{{student.StudentName}}</td>
+                                                                            <td>{{student.FatherName}}</td>
+                                                                            <td>{{student.ClassName}}</td>
+                                                                            <td>{{student.RegNo}}</td>
+                                                                            <td>{{student.Contact}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*<div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                            <label class="control-label">Student<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                <select id="ddlStudents" class="select2 form-control validate" ng-if="Save=='Save'"
+                                                                        ng-model="$parent.StudentCode" ng-change="FillStudentDetail()">
+                                                                    <option value="">Select Student</option>
+                                                                    <option ng-repeat="stu in Students" value="{{stu.StudentCode}}" ng-disabled="!stu.IsActive || disabledrow">{{stu.ddlStudentName}}</option>
+                                                                </select>
+                                                                <label class="form-control" ng-if="Save=='Edit'" style="line-height: 20px !important;">{{AdmStudentName}}</label>
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Section<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.Partial("ddlSection")
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*<div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Reg. No.<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtRegNo", "", new { @class = "form-control clear", @placeholder = "", @type = "text", @ng_model = "RegNo", @ng_disabled = "true" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
+                                                    @*<div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Parent/Guardian Name<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtParentName", "", new { @class = "form-control clear", @placeholder = "", @type = "text", @ng_model = "ParentName", @ng_disabled = "true" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
+                                                    @*<div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Contact<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtContact", "", new { @class = "form-control clear", @placeholder = "", @type = "text", @ng_model = "Contact" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
+                                                    @*<div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Student DOB<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtStudentDOB", "", new { @class = "form-control clear", @placeholder = "", @type = "Date", @ng_model = "StudentDOB", @ng_disabled = "true" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
+                                                    @*<div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                            <label class="control-label">Merit List<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtMeritList", "", new { @class = "form-control clear", @placeholder = "", @type = "text", @ng_model = "IsFromMerit", @ng_disabled = "true" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Receive Date<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtFeeDepositDate", "", new { @class = "form-control clear", @placeholder = "", @type = "Date", @ng_model = "FeeDepositDate", @ng_init = "FeeDepositDate=GetTodayDate()" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Entry Mode<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <select class="select2 form-control validate" id="ddlEntryMode" name="ddlEntryMode"
+                                                                    ng-init="EntryMode='School'" ng-model="EntryMode">
+                                                                <option value="">Select</option>
+                                                                <option value="School" selected="selected">School</option>
+                                                                <option value="Bank">Bank</option>
+                                                            </select>
+
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Pay Mode<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <select class="select2 form-control validate" id="ddlFeeMode" name="ddlFeeMode" ng-init="FeeMode='Cash'" ng-model="FeeMode">
+                                                                <option value="">Select</option>
+                                                                <option value="Cash" selected="selected">Cash</option>
+                                                                <option value="Cheque">Cheque</option>
+                                                                <option value="Card">Card</option>
+                                                                <option value="DD">DD</option>
+                                                                <option value="NEFT">RTGS/NEFT</option>
+                                                                <option value="PayTm">PayTm</option>
+                                                                <option value="PhonePe">PhonePe</option>
+                                                                <option value="GooglePay">GooglePay</option>
+                                                            </select>
+
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="FeeMode=='Cheque'">
+                                                        <label class="control-label">Bank and Cheque No.<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtChequeNo", "", new { @class = "form-control clear validate", @ng_model = "$parent.ChequeNo" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="FeeMode=='Cheque'">
+                                                        <label class="control-label">Cheque Date<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtChequeDate", "", new { @type = "date", @class = "form-control clear validate", @ng_model = "$parent.ChequeDate" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3  col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="FeeMode=='DD'">
+                                                        <label class="control-label">Bank and DD No.<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtDDNo", "", new { @class = "form-control clear validate", @ng_model = "$parent.DDNo" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="FeeMode=='DD'">
+                                                        <label class="control-label">DD Date<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtDDDate", "", new { @type = "date", @class = "form-control clear validate", @ng_model = "$parent.ChequeDDDate" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="FeeMode=='NEFT'">
+                                                        <label class="control-label">Bank and UTR No.<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtNEFTNo", "", new { @class = "form-control clear validate", @ng_model = "$parent.UTRNo" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="FeeMode=='NEFT'">
+                                                        <label class="control-label">RTGS/NEFT Date<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtNEFTDate", "", new { @type = "date", @class = "form-control clear validate", @ng_model = "$parent.NEFTDate" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="FeeMode!=''&&FeeMode!='Cash'">
+                                                        <label class="control-label">Bank Name<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlBankAC" class="select2 form-control validate" ng-model="$parent.BankName"
+                                                                    ng-init="BindBankLedger()">
+                                                                <option value="">Select</option>
+                                                                <option ng-repeat="bankac in BankACList" value="{{bankac.SubCode}}">{{bankac.Name}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Bill No.<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtBillNo", "", new { @class = "form-control clear", @ng_model = "BillNo" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Bill Date<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtBillDate", "", new { @class = "form-control clear", @ng_model = "BillDate", @type = "date" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-init="GetInstallment();">
+                                                        <label class="control-label">Select Installment<span class="vd_red"></span></label>
+                                                        <div class="input-box chk-validate">
+                                                            <div class="toggle-ddl" id="openInstallment"
+                                                                 ng-init="ToogleDDL('openInstallment','openInstallment')">
+                                                                @*btn-validate*@
+                                                                <button class='btn btn-primary select-btn'
+                                                                        data-ng-click='openInstallment=!openInstallment'
+                                                                        ng-bind="GetCount(InstallmentList,'Select Installment')">
+                                                                    Select Installment
+                                                                </button>
+                                                                @*btn-validate*@
+                                                                <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                                        data-ng-click='openInstallment=!openInstallment'>
+                                                                    <span class='fa fa-chevron-down'></span>
+                                                                </button>
+                                                                <div ng-show="openInstallment" class="ddlMultiple" ng-cloak style="width: 400px; height: 220px">
+                                                                    <div ng-click="ddlCheckAll('InstallmentList')">
+                                                                        Check All
+                                                                        <span class="btn-counts-right">Total Count: {{InstallmentList.length}}</span>
+                                                                    </div>
+                                                                    <div ng-click="ddlUnCheckAll('InstallmentList')">Uncheck All</div>
+                                                                    <hr style="margin:0px !important" />
+                                                                    <table class="table compact table-hover table-striped table-bordered
+                                                                   nowrap dataTable t-mgtb-n">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Installment</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <!-- ngRepeat: XL in ClassList -->
+                                                                            <tr ng-repeat="il in InstallmentList|filter:{DisplayOrder:'!0'}" class="ng-scope">
+                                                                                <td>
+                                                                                    <input type="checkbox" ng-model="il.chk" ng-value="il.Code"
+                                                                                           ng-change="GetStudentConcession();" ng-disabled="il.disabled"
+                                                                                           ng-if="il.FeeStatus!='Paid' " id="{{il.Code}}" />
+                                                                                    <label for="{{il.Code}}">{{il.InstallmentName}}</label>
+                                                                                </td>
+                                                                            </tr><!-- end ngRepeat: XL in ClassList -->
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Applied Concession Head's<span class="vd_red"></span></label>
+                                                        <div class="input-box chk-validate">
+                                                            <div class="toggle-ddl" id="openConcessionHead"
+                                                                 ng-init="ToogleDDL('openConcessionHead','openConcessionHead')">
+                                                                @*btn-validate*@
+                                                                <button class='btn btn-primary select-btn'
+                                                                        data-ng-click='openConcessionHead=!openConcessionHead'
+                                                                        ng-bind="GetCount(ConcessionheadList,'Show Concession Head')">
+                                                                    Show Concession Head
+                                                                </button>
+                                                                @*btn-validate*@
+                                                                <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                                        data-ng-click='openConcessionHead=!openConcessionHead'>
+                                                                    <span class='fa fa-chevron-down'></span>
+                                                                </button>
+                                                                <div ng-show="openConcessionHead" class="ddlMultiple" ng-cloak>
+                                                                    <div>
+                                                                        <span class="btn-counts-right">Total Count: {{ConcessionheadList.length}}</span>
+                                                                    </div>
+                                                                    <hr style="margin:0px !important" />
+                                                                    <table class="table compact table-hover table-striped table-bordered
+                                                                   nowrap dataTable t-mgtb-n">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Concession Head</th>
+                                                                                <th>Installment</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <!-- ngRepeat: XL in ClassList -->
+                                                                            <tr ng-repeat="XL in ConcessionheadList" class="ng-scope">
+                                                                                <td>{{XL.ConcessionHeadName}}</td>
+                                                                                <td>{{XL.InstallmentName}}</td>
+                                                                            </tr><!-- end ngRepeat: XL in ClassList -->
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Active<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.Partial("ddlActive")
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                        <label class="control-label">Remark<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtRemark", "", new { @class = "form-control clear", @placeholder = "", @type = "text", @ng_model = "Remark" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label class="control-label">Fee Detail<span class="vd_red"></span></label>
+                                                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Installment</th>
+                                                            <th>Month</th>
+                                                            <th>Fee</th>
+                                                            <th>Fee Type</th>
+                                                            <th>Actual Amt.</th>
+                                                            <th>Concession Amt.</th>
+                                                            <th>Net Payable</th>
+                                                            <th>Balance</th>
+                                                            <th>Remark</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="fs in ClassWiseFeesStructure">
+
+                                                            <td ng-model="fs.SrNo" ng-init="fs.SrNo=($index+1)">
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" ng-model="fs.chk" class="toggle-vis"
+                                                                           ng-change="CheckAdmissionFee()" ng-disabled="fs.disabled" />
+                                                                    <label for="">{{fs.SrNo}}</label>
+                                                                </div>
+                                                            </td>
+                                                            <td>{{fs.InstallmentName}}</td>
+                                                            <td>{{fs.Month}}</td>
+                                                            <td>{{fs.FeeHeadName}}</td>
+                                                            <td>{{fs.Frequency}}</td>
+                                                            <td>{{fs.Amount}}</td>
+                                                            <td>
+                                                                <input id="txtConcessionAmt" type="text" class="form-control"
+                                                                       ng-model="fs.ConcessionAmt"
+                                                                       ng-change="NetPayableAmt(fs)" ng-disabled="fs.IsConDisable" />
+                                                            </td>
+                                                            <td>
+                                                                <input id="txtNetPayable" type="text" class="form-control" ng-model="fs.NetPayable"
+                                                                       @*ng-disabled="fs.ConcessionAmt>0"*@ />
+                                                            </td>
+                                                            <td>{{fs.Balance=((fs.Amount-fs.ConcessionAmt)-fs.NetPayable)}}</td>
+                                                            <td><input id="txtRemark" type="text" class="form-control" ng-model="fs.Remark" /></td>
+
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>Total</td>
+                                                            <td>{{Sumoflist('ClassWiseFeesStructure','Amount')}}</td>
+                                                            <td>{{Sumoflist('ClassWiseFeesStructure','ConcessionAmt')}}</td>
+                                                            <td>{{Sumoflist('ClassWiseFeesStructure','NetPayable',{chk:true})}}</td>
+                                                            <td>{{Sumoflist('ClassWiseFeesStructure','Balance')}}</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<script>
+    $("#ddlConcessionhead").removeClass('validate');
+    $("#ddlSection").addClass('validate');
+</script>

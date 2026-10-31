@@ -1,0 +1,221 @@
+﻿
+@{
+    ViewBag.Title = "BookSearch";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<style>
+    .row1 {
+        background-color:Pink !important;
+    }
+
+    .row2 {
+        background-color: #299bc1 !important;
+    }
+
+    .row3 {
+        background-color: none !important;
+    }
+  
+</style>
+<script src="/Scripts/myjslib/BookSearchLibController.js?Ver="></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="hfStudentId" id="StudentId" name="StudentId" value="" />
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Book Search</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Library</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Book Search</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="section-toggle">
+                                    <form id="user-form">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Book Name</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtBookName", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "BookNameM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Author</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtAuthor", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "AuthorM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Almirah</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtAlmera", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "AlmeraM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">AccessionID</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtAccessionID", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "AccessionIDM" })
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Edition</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtEdition", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "EditionM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Publisher</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtPublisher", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "PublisherM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Rack</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtRack", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "RackM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">ISBN</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtISBN", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "ISBNM" })
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Publisher Year</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtPublisherYear", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "PublisherYearM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Subject Group</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtSubjectGroup", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "SubjectGroupM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Bin</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtBin", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "BinM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">DDC</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtDDC", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "DDCM" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Book Accessories</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtBookAccessories", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "BookAccessoriesM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Subject</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtSubject", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "SubjectM" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">No Of Book Copy</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtBookAccessories", "", new { @class = "form-control clear", @ng_disabled = "false", @ng_model = "BookAccessoriesM" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionSearch")
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                            <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                <div class="arrow-2">
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                                <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                            </div>
+                            @Html.Partial("GeneralReportGridH")
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 no-padding ">
+                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                            <div class="scroll-table table-scrollbar2">
+                                @Html.Partial("ViewPopUp")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

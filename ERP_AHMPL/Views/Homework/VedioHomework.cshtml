@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "VedioHomework";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+ 
+<script src="~/Scripts/myjslib/VedioHomeWorkController.js"></script>
+
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">HomeWork</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>HomeWork</span></li>              
+                <li class="active"><span>Vedio Approve List</span></li>
+            </ol>
+        </div>
+
+    </div> 
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+
+                                <div class="collapse in">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" ng-model="Video" ng-init="LoadVideHomeWork();">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                                    <div id="VideoListScroll">
+                                                        <div class="video-article" ng-repeat="x in VedioHomeWorkList" repeat-gallery>
+                                                            <div class="select-video-play">
+                                                                <div class="video-show-tab">
+
+                                                                    <iframe width="500px" height="250px" src="{{Url(x.VedioPath)}}"></iframe>
+                                                                </div>
+                                                                <div class="video-title-tab">
+                                                                    <div class="album-categories-title">Topic Name : {{x.TopicName}}</div>
+                                                                    <div class="video-title">Vedio Disable on :{{x.VedioHideDate}}</div>
+                                                                    <br />
+                                                                    <div class="video-title" ng-model="IsVedioApproval" ng-if="IsVedioApproval=='1'">
+                                                                        <button id="btnreadmore" type="button" value="More View" class="btn2 btn-common btn-3 btn-3d pe-7s-check"
+                                                                                ng-click="ApproveVedio(x.TransId)">
+                                                                            <span class="triangle-box"></span>
+                                                                            <span>Click here to Approve </span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  text-center">
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

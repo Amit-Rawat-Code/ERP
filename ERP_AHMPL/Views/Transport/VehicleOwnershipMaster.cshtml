@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Vehicle Ownership Master";
+    ViewBag.TitleList = "Vehicle Ownership Master";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/VehicleOwnerMasterController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Transport</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vehicle Owner Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("VehicleOwner", "", new { @class = "form-control clear", @placeholder = "Owner Name", @autocomplete = "name", @ng_model = "VehicleOwner" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vehicle Vender Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("VehicleVendor", "", new { @class = "form-control clear", @placeholder = "Vendor Name", @autocomplete = "name", @ng_model = "VehicleVendor" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vendor Type<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("VehicleType", new List<SelectListItem>
+                                                            {
+                                                            new SelectListItem{Text="Select Vehicle Type", Value=""},
+                                                            new SelectListItem{Text="Hire", Value="1"},
+                                                            new SelectListItem{Text="Own", Value="2"},
+                                                            new SelectListItem{Text="Rent", Value="3"}
+                                                            },
+                                                            new { @class = "select2 form-control validate", @ng_model = "VehicleType", @ng_init = "VehicleType=''", @ng_change = "" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Contact No<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("Contact", "", new { @class = "form-control clear", @placeholder = "Contact", @autocomplete = "name", @ng_model = "Contact", @type = "number" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Address<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextArea("Address", "", new { @class = "form-control clear", @placeholder = "Address", @autocomplete = "name", @ng_model = "Address" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlActive")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

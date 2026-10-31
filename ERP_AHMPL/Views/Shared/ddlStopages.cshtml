@@ -1,0 +1,7 @@
+﻿<select id="ddlStopages" class="select2 form-control validate" ng-init="GetStopages();" ng-model="Transtopages.StoppageId">
+    <option value="">Select Stoppage</option>
+    <option ng-repeat="Stoppage in Stoppages" value="{{Stoppage.StoppageId}}">{{Stoppage.StoppageName}}</option>
+</select>
+
+
+

@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Enquiry Register";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+
+<script src="~/Scripts/myjslib/EnquiryRegisterReportController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Enquiry Register</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Enquiry</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Enquiry Register</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">From Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("txtFromDate")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">To Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("txtToDate")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionSearch")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                                <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                    <div class="arrow-2">
+                                        <i class="fa fa-angle-down"></i>
+                                    </div>
+                                    <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                </div>
+                                @Html.Partial("GeneralReportGrid")
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                <table id="example2" class="table table-striped table-bordered compact layout-fixed" style="width:100%" ng-if="CategoryList.length>0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:100px">S.No.</th>
+                                            <th style="">Enquiry Category</th>
+                                            <th style="">Description</th>
+                                            <th style="width:120px">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="sml in CategoryList">
+                                            <td ng-bind="sml.Srno=($index+1)"></td>
+                                            <td>{{sml.FollowupCategory}}</td>
+                                            <td>{{sml.followupDescription}}</td>
+                                            <td>{{sml.Total}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                <table id="example3" class="table table-striped table-bordered compact layout-fixed" style="width:100%" ng-if="Statuslist.length>0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:100px">S.No.</th>
+                                            <th style="">Enquiry Status</th>
+                                            <th style="">Description</th>
+                                            <th style="width:120px">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="sml in Statuslist">
+                                            <td ng-bind="sml.Srno=($index+1)"></td>
+                                            <td>{{sml.StatusName}}</td>
+                                            <td>{{sml.Description}}</td>
+                                            <td>{{sml.Count}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

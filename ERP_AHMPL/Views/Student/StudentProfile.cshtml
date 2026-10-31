@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "StudentProfile";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/studentProfile.js?Ver=@ViewBag.Version"></script>
+<h2>Today BirthDay</h2>
+<!-- Row -->
+<div class="row">
+    <div class="col-xs-12">
+
+        <div id="owl_demo_2" class="owl-carousel owl-theme">
+            <div class="item" ng-repeat="birthDay in BirthDayList">
+                <img src={{birthDay.StudentPhoto}} alt="Owl Image">
+                Happy BirthDay {{birthDay.Name}}
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /Row -->
+
+<h2>Subject Teacher</h2>
+<!-- Row -->
+<div class="row">
+    <div class="col-xs-12">
+
+        <div id="owl_demo_3" class="owl-carousel owl-theme">
+            <div class="item" ng-repeat="subjectTeacher in SubjectTeacherList">
+                <img src={{subjectTeacher.PhotoPath}} alt="Owl Image">
+                {{subjectTeacher.FullName}}
+                {{subjectTeacher.SubjectName}}
+                {{subjectTeacher.ContactNo}}
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /Row -->
+
+<h2>Classmate</h2>
+<!-- Row -->
+<div class="row">
+    <div class="col-xs-12">
+
+        <div id="owl_demo_4" class="owl-carousel owl-theme">
+            <div class="item" ng-repeat="classMate in ClassMateList">
+                <img src={{classMate.StudentPhoto}} alt="Owl Image">
+                {{classMate.FullName}}
+                {{classMate.FatherName}}
+                {{classMate.MotherName}}
+                {{classMate.GuardianContactNo}}
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /Row --> 

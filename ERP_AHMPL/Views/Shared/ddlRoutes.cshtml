@@ -1,0 +1,6 @@
+﻿<select id="ddlRoutes" class="select2 form-control validate" ng-init="GetRoutes();" ng-model="TransRoutes.RouteId" >
+    <option value="">Select Route</option>
+    <option ng-repeat="Route in Routes" value="{{Route.RouteId}}">{{Route.RouteName}}</option>
+</select>
+
+

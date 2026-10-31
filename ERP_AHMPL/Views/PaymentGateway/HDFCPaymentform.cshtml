@@ -1,0 +1,410 @@
+﻿@{
+    ViewBag.Title = "Test Payment";
+    ViewBag.TitleList = "Payment List";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<style>
+   
+
+
+</style>
+<script src="~/Scripts/myjslib/PaymentController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-init="ShowStudentFeeCard();" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Fee Pay</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fee</span></li>
+                <li><span>Pay</span></li>
+                <li class="active"><span>Fee Pay</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="feepay-auto">
+                    <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                        <div class="refresh-container">
+                            <div class="preloader">
+                                <div class="circles-1">
+                                    <div class="circles-1-center"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-wrapper">
+                            <div class="panel-body">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                    <div class="collapse in">
+                                        <form id="user-form">
+                                            <div id="hdngetstu" style="display:none"></div>
+                                            <div class="section-toggle">
+                                           
+                                                <div id="exTab1" class="refreshcontainer">
+                                                    <ul class="nav nav-pills">
+                                                        <li class="active-new1">
+                                                            <a href="#1a" data-toggle="tab">Fee Pay</a>
+                                                        </li>
+                                                        <li class="active-new">
+                                                            <a href="#2a" data-toggle="tab">Refresh</a>
+                                                        </li>
+                                                    </ul>
+
+                                                    <div class="tab-content clearfix">
+                                                        <div class="tab-pane active" id="1a">
+                                                            <div class="row">
+                                                                <div class="col-lg-12" ng-repeat="feedetails in StudentFeeDetails">
+                                                                    <div class="feepaydetail">
+                                                                        <h2>
+                                                                            <span ng-model="feedetails.InstallmentName" ng-bind="feedetails.InstallmentName"></span>
+                                                                            <span>
+                                                                                <input class="styled-checkbox" type="checkbox" value="value1" ng-model="feedetails.Chk"
+                                                                                       ng-if="feedetails.FeeStatus!='Paid'" ng-init="feedetails.Chk=false">
+                                                                            </span>
+                                                                        </h2>
+                                                                        <p>DUE DATE - <span ng-model="feedetails.DueOn" ng-bind="feedetails.DueOn"></span></p>
+                                                                        <div class="paydetail">
+                                                                            <strong>Fee Amount: <i class="fa fa-inr" aria-hidden="true"></i> <span ng-model="feedetails.PayableAmt" ng-bind="feedetails.PayableAmt"></span></strong>
+                                                                            <strong>Paid Amount: <i class="fa fa-inr" aria-hidden="true"></i> <span ng-model="feedetails.FeeRect" ng-bind="feedetails.FeeRect"></span></strong>
+                                                                            @*<strong>Payble Amount: <i class="fa fa-inr" aria-hidden="true"></i> <span ng-model="feedetails.Balance" ng-bind="feedetails.Balance=feedetails.PayableAmt-feedetails.FeeRect"></span></strong>*@
+                                                                            <strong>Payble Amount: <i class="fa fa-inr" aria-hidden="true"></i> <span ng-model="feedetails.Balance" ng-bind="feedetails.Balance=1.00"></span></strong>
+                                                                            <small><span ng-model="feedetails.FeeStatus" ng-bind="feedetails.FeeStatus"></span></small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="balance-academic">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-8">
+                                                                            <strong><i class="fa fa-inr" aria-hidden="true"></i> <span ng-model="paymentRequest.amount" ng-bind="paymentRequest.amount=Sumoflist('StudentFeeDetails','Balance',{'Chk':true},'2');">{{paymentRequest.amount}}</span></strong>
+                                                                            <p>TOTAL PAYABLE</p>
+                                                                        </div>
+                                                                        <div class="col-lg-4">
+                                                                            @*<input type="button" ng-model="btnClass" ng-click="HDFCPayment();" ng-disabled="HDFCPaymentdisabled" class="btn {{btnClass}}" value="Checkout" />*@
+                                                                            <button type="button" value="pay" class="btnpay" ng-model="btnClass" ng-click="HDFCPayment();" ng-disabled="btndisabled" ng-if="paymentRequest.amount>0">PAY NOW</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane active-div" id="2a">
+                                                            <div class="row">
+                                                                <div class="col-lg-12" ng-repeat="paymentHistory in PaymentHistory">
+                                                                    <div class="feepaydetail">
+                                                                        <div class="col-lg-8">
+                                                                            <strong>Ref. No.:<span ng-model="paymentHistory.reference_no">{{paymentHistory.reference_no}}</span></strong>
+                                                                            <strong>OrderId:<span ng-model="paymentHistory.order_no">{{paymentHistory.order_no}}</span></strong>
+                                                                            <strong>Amount:<span ng-model="paymentHistory.amount">{{paymentHistory.amount}}</span></strong>
+                                                                        </div>
+                                                                        <div class="col-lg-4">
+                                                                            <button type="button" value="varify" class="btnvarify" ng-model="btnClass" ng-click="HDFCVarify(paymentHistory);">varify</button>
+                                                                        </div>
+                                                                        <div class="col-lg-12" style="color:black !important">
+                                                                            <strong>Result:</strong> 
+                                                                            <span>{{hdfcResponseBystatusApi}}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    @Html.Partial("GeneralReportGrid")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @*sachin*@
+                    @*<div class="panel-wrapper ">
+                <div class="panel-body">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                        <div class="collapse in" id="collapseinputbox">
+                            <form id="user-form">
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                    <table width="40%" height="100" border='1' align="center">
+                                        <tr>
+                                            <td>Parameter Name:</td>
+                                            <td>Parameter Value:</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"> Compulsory information</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Amount</td>
+                                            <td><input type="text" class="form-control" name="amount" ng-model="paymentRequest.amount" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Currency</td>
+                                            <td><input type="text"  class="form-control" name="currency" ng-model="paymentRequest.currency" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Billing information(optional):</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Billing Name</td>
+                                            <td><input type="text"  class="form-control" name="billing_name" ng-model="paymentRequest.billing_name" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Billing Address:</td>
+                                            <td><input type="text"  class="form-control" name="billing_address" ng-model="paymentRequest.billing_address" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Billing City:</td>
+                                            <td><input type="text"  class="form-control" name="billing_city" ng-model="paymentRequest.billing_city" /></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>Billing State:</td>
+                                            <td><input type="text" class="form-control" name="billing_state" ng-model="paymentRequest.billing_state" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Billing Zip:</td>
+                                            <td><input type="text"  class="form-control" name="billing_zip" ng-model="paymentRequest.billing_zip" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Billing Country:</td>
+                                            <td><input type="text"  class="form-control" name="billing_country" ng-model="paymentRequest.billing_country" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Billing Tel:</td>
+                                            <td><input type="text"  class="form-control" name="billing_tel" ng-model="paymentRequest.billing_tel" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Billing Email:</td>
+                                            <td><input type="text"  class="form-control" name="billing_email" ng-model="paymentRequest.billing_email" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Shipping information(optional):</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping Name</td>
+                                            <td><input type="text" class="form-control" name="delivery_name" ng-model="paymentRequest.delivery_name" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping Address:</td>
+                                            <td><input type="text"  class="form-control" name="delivery_address" ng-model="paymentRequest.delivery_address" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>shipping City:</td>
+                                            <td><input type="text"  class="form-control" name="delivery_city" ng-model="paymentRequest.delivery_city" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>shipping State:</td>
+                                            <td><input type="text"  class="form-control" name="delivery_state" ng-model="paymentRequest.delivery_state" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>shipping Zip:</td>
+                                            <td><input type="text"  class="form-control" name="delivery_zip" ng-model="paymentRequest.delivery_zip" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>shipping Country:</td>
+                                            <td><input type="text"  class="form-control" name="delivery_country" ng-model="paymentRequest.delivery_country" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping Tel:</td>
+                                            <td><input type="text"  class="form-control" name="delivery_tel" ng-model="paymentRequest.delivery_tel" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Merchant Param1</td>
+                                            <td><input type="text"  class="form-control" name="merchant_param1" ng-model="paymentRequest.merchant_param1" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Merchant Param2</td>
+                                            <td><input type="text"  class="form-control" name="merchant_param2" ng-model="paymentRequest.merchant_param2" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Merchant Param3</td>
+                                            <td><input type="text"  class="form-control" name="merchant_param3" ng-model="paymentRequest.merchant_param3" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Merchant Param4</td>
+                                            <td><input type="text"  class="form-control" name="merchant_param4" ng-model="paymentRequest.merchant_param4" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Merchant Param5</td>
+                                            <td><input type="text"  class="form-control" name="merchant_param5" ng-model="paymentRequest.merchant_param5" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <input type="button" ng-model="btnClass" ng-click="HDFCPayment();" ng-disabled="HDFCPaymentdisabled"  class="btn {{btnClass}}" value="Checkout" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+                    @*sachin*@
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+@*<form method="post" name="customerData" action="ccavRequestHandler.aspx">
+    <table width="40%" height="100" border='1' align="center"><caption><font size="4" color="blue"><b>Integration Kit</b></font></caption></table>
+    <table width="40%" height="100" border='1' align="center">
+        <tr>
+            <td>Parameter Name:</td>
+            <td>Parameter Value:</td>
+        </tr>
+        <tr>
+            <td colspan="2"> Compulsory information</td>
+        </tr>
+        <tr>
+            <td>TID	:</td>
+            <td><input type="text" name="tid" id="tid" readonly /></td>
+        </tr>
+        <tr>
+            <td>Merchant Id</td>
+            <td><input type="text" name="merchant_id" id="merchant_id" value="2954" /></td>
+        </tr>
+        <tr>
+            <td>Order Id</td>
+            <td><input type="text" name="order_id" value="123654789" /></td>
+        </tr>
+        <tr>
+            <td>Amount</td>
+            <td><input type="text" name="amount" value="1.00" /></td>
+        </tr>
+        <tr>
+            <td>Currency</td>
+            <td><input type="text" name="currency" value="INR" /></td>
+        </tr>
+        <tr>
+            <td>Redirect URL</td>
+            <td><input type="text" name="redirect_url" value="http://localhost:1044/MCPG.ASP.net.2.0.kit/ccavResponseHandler.aspx" /></td>
+        </tr>
+        <tr>
+            <td>Cancel URL</td>
+            <td><input type="text" name="cancel_url" value="http://localhost:1044/mcpg_new/iframe/ccavResponseHandler.php" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">Billing information(optional):</td>
+        </tr>
+        <tr>
+            <td>Billing Name</td>
+            <td><input type="text" name="billing_name" value="Charli" /></td>
+        </tr>
+        <tr>
+            <td>Billing Address:</td>
+            <td><input type="text" name="billing_address" value="Room no 1101, near Railway station Ambad" /></td>
+        </tr>
+        <tr>
+            <td>Billing City:</td>
+            <td><input type="text" name="billing_city" value="Indore" /></td>
+        </tr>
+        <tr>
+            <td>Billing State:</td>
+            <td><input type="text" name="billing_state" value="MP" /></td>
+        </tr>
+        <tr>
+            <td>Billing Zip:</td>
+            <td><input type="text" name="billing_zip" value="425001" /></td>
+        </tr>
+        <tr>
+            <td>Billing Country:</td>
+            <td><input type="text" name="billing_country" value="India" /></td>
+        </tr>
+        <tr>
+            <td>Billing Tel:</td>
+            <td><input type="text" name="billing_tel" value="9899622605" /></td>
+        </tr>
+        <tr>
+            <td>Billing Email:</td>
+            <td><input type="text" name="billing_email" value="test@gmail.com" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">Shipping information(optional):</td>
+        </tr>
+        <tr>
+            <td>Shipping Name</td>
+            <td><input type="text" name="delivery_name" value="Chaplin" /></td>
+        </tr>
+        <tr>
+            <td>Shipping Address:</td>
+            <td><input type="text" name="delivery_address" value="room no.701 near bus stand" /></td>
+        </tr>
+        <tr>
+            <td>shipping City:</td>
+            <td><input type="text" name="delivery_city" value="Hyderabad" /></td>
+        </tr>
+        <tr>
+            <td>shipping State:</td>
+            <td><input type="text" name="delivery_state" value="Andhra" /></td>
+        </tr>
+        <tr>
+            <td>shipping Zip:</td>
+            <td><input type="text" name="delivery_zip" value="425001" /></td>
+        </tr>
+        <tr>
+            <td>shipping Country:</td>
+            <td><input type="text" name="delivery_country" value="India" /></td>
+        </tr>
+        <tr>
+            <td>Shipping Tel:</td>
+            <td><input type="text" name="delivery_tel" value="9896426054" /></td>
+        </tr>
+        <tr>
+            <td>Merchant Param1</td>
+            <td><input type="text" name="merchant_param1" value="additional Info." /></td>
+        </tr>
+        <tr>
+            <td>Merchant Param2</td>
+            <td><input type="text" name="merchant_param2" value="additional Info." /></td>
+        </tr>
+        <tr>
+            <td>Merchant Param3</td>
+            <td><input type="text" name="merchant_param3" value="additional Info." /></td>
+        </tr>
+        <tr>
+            <td>Merchant Param4</td>
+            <td><input type="text" name="merchant_param4" value="additional Info." /></td>
+        </tr>
+        <tr>
+            <td>Merchant Param5</td>
+            <td><input type="text" name="merchant_param5" value="additional Info." /></td>
+        </tr>
+        <tr>
+            <td>Promo Code</td>
+            <td><input type="text" name="promo_code" /></td>
+        </tr>
+        <tr>
+            <td>Customer Id:</td>
+            <td><input type="text" name="customer_identifier" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Checkout" /></td>
+        </tr>
+    </table>
+</form>*@

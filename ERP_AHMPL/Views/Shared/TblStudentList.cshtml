@@ -1,0 +1,96 @@
+﻿<style>
+    .input-icons {
+        color: #01090c;
+        font-size: 15px;
+        line-height: 35px;
+        position: absolute;
+        top: 1px;
+        left: 95%;
+        background: #d6d6d6;
+        text-align: center;
+        width: 31px;
+        height: 28.4px;
+    }
+
+    .down-arrow {
+        border: solid black;
+        border-width: 0 2px 2px 0px;
+        display: inline-block;
+        padding: 2px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        margin: 0px 0px 4px 0px;
+    }
+
+    div.scrollmenu {
+        /*width:300px;*/
+        overflow: auto;
+        max-height: 300px;
+        /*z-index: 99999;*/
+    }
+
+    table thead tr th {
+        /* Important */
+        position: sticky;
+        top: 0;
+    }
+</style>
+@*<script>
+        $("body").click(function (e) {
+            if (e.target.className !== "FeeStuListOnOff") {
+                angular.element(document).scope().HideStudentList();
+            }
+        });
+    </script>*@
+
+<input type="text" id="txtStudent" class="form-control clear FeeStuListOnOff"
+       ng-model="SearchText" ng-click="SearchStudents()"
+       ng-blur="HideStudentList();txtStudent_blur();" autocomplete="off" ng-disabled="disabledSearch || Save=='Edit'"
+       ng-init="disabledSearch=true;GetCurrentAcademicSessionAllStudents();" placeholder="{{hideloader?'Please Wait...':'Select Student'}}" />
+
+<div class="input-icons FeeStuListOnOff" ng-model="hideloader" ng-show="hideloader" ng-cloak>
+    <i class="fa fa-circle-o-notch fa-spin icon FeeStuListOnOff"></i>
+</div>
+<div class="input-icons FeeStuListOnOff" ng-click="Save=='Edit'?'':SearchStudents();" ng-hide="hideloader"  ng-cloak>
+    <i class="down-arrow FeeStuListOnOff" ></i>
+</div>
+<div id="FeeStuListOnOff" class="InputInTabBox FeeStuListOnOff scrollmenu" width="javascript:$('#txtStudent').width()" onclick="event2();">
+
+    <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card header-fixed">
+        <thead>
+            <tr>
+                <th width="10px">Sr. No.</th>
+                <th width="30%">Student</th>
+                <th width="20%">Student ID</th>
+                <th width="20%">Father Name</th>
+                <th width="20%">Class</th>
+                <th width="10%">Contact No.</th>
+                @*<th width="10%">Roll No.</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="student in StudentList|filter:SearchText|filter:{'ClassCode':ClassCode,'SectionCode':SectionCode,'BranchCode':BranchCode}"
+                ng-click="setStudentName(student);ddl_StudentsListChange(student)" class="FeeStuListOnOff">
+                @*<td>
+                        <div class="radio radio-primary table-radio">
+                            <input ng-model="$parent.StudentCode" type="radio" value="{{student.StudentCode}}" ng-disabled="!student.IsActive" />
+                            <label for=""></label>
+                        </div>
+                    </td>*@
+                <td>{{$index+1}}</td>
+                <td ng-model="$parent.StudentCode">{{student.Name}}</td>
+                <td>{{student.AdmissionNo}}</td>
+                <td>{{student.FatherName}}</td>
+                <td>
+                    {{student.ClassName}}-{{student.SectionName}}{{student.StreamName?'-':''}}{{student.StreamName}}
+                </td>
+                <td>{{student.Mobile}}</td>
+                @*<td>{{student.InstituteRollNo}}</td>*@
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+

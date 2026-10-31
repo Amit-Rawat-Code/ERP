@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "SearchProcess";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div ng-init="GetAboutUs();" ng-cloak>
+    <h2>SearchProcess</h2>
+    <div class="master-div">
+        <h3 class="text-center">Search By</h3>
+        <div class="text-center">
+            <div class="tcbox">
+                <ul class="tc">
+                    <li>
+                        <select name="ctl00$ContentPlaceHolder1$ddlSearch" id="ctl00_ContentPlaceHolder1_ddlSearch" class="Ipcl" onclick="ShowHidediv(this)">
+                            <option value="0">Select</option>
+                            <option value="1">Admission No</option>
+                            <option selected="selected" value="2">Candidate Name</option>
+
+                        </select>
+                        <p>
+                            <span id="ctl00_ContentPlaceHolder1_rfvddlsearch" style="color:Red;display:none;">Please select search by</span>
+                        </p>
+                    </li>
+                    <li>
+                        <input name="ctl00$ContentPlaceHolder1$txtSearch" type="text" value="2" id="ctl00_ContentPlaceHolder1_txtSearch" class="Ipcl">
+                        <p>
+                            <span id="ctl00_ContentPlaceHolder1_lblMsg" style="color:Red;">Sorry no record found...!</span>
+                        </p>
+                    </li>
+                    <li>
+                        <span class="forsetbtn">
+                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnSearch" value="Search" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$btnSearch&quot;, &quot;&quot;, true, &quot;S&quot;, &quot;&quot;, false, false))" id="ctl00_ContentPlaceHolder1_btnSearch" class="ct-bnt tc-search">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <ul style="border: 0px solid #C0C0C0; width: 80%">
+                <li style="width: 40%;">
+                    <span id="ctl00_ContentPlaceHolder1_TotalRec"> </span>
+                </li>
+                <li style="width: 60%; text-align: right;">
+                    <span id="ctl00_ContentPlaceHolder1_lblPageCountTop"> </span>
+                </li>
+            </ul>
+            <ul style="width: 100%;">
+            </ul>
+        </div>
+    </div>
+</div>

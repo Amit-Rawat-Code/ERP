@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="website-main-content" ng-init="GetAboutUs();" ng-cloak>
+
+    <section class="page-banner-breadcrumbs">
+        <div class="container">
+            <div class="breadcrumbs">
+                <span class="page-name">Our Beginners Kakadeo</span><span class="seprator">></span><span class="page-name"> {{ImageContentPageData[0].UnitTitle}}</span>
+                <h3 class="title-of-page">
+                    {{ImageContentPageData[0].UnitTitle}}
+                </h3>
+            </div>
+        </div>
+    </section>
+    <section class="page-section why-choose-allen-kids Playgroup-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="discription-section">
+                        <center>
+                            <div ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCC'})[0].BodyContent)"></div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+

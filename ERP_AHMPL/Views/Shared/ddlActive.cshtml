@@ -1,0 +1,6 @@
+﻿@Html.DropDownList("ddlIsActive", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Yes", Value="true"},
+    new SelectListItem{Text="No", Value="false"}
+},
+    new { @class = "select2 form-control validate", @ng_model = "IsActive", @ng_init = "IsActive='true'" })

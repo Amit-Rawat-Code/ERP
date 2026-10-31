@@ -1,0 +1,35 @@
+﻿
+<input type="text" id="txtBinder" class="form-control clear" ng-model="SearchBinderText" ng-click="ShowCollapsedList('FeeStuListOnOff')"
+       ng-blur="HideExpandList('FeeStuListOnOff');" autocomplete="off" ng-disabled="disabledSearch"
+       ng-init="disabledSearch=false;GetBinderList(5)" />
+<div id="FeeStuListOnOff" class="InputInTabBox">
+    <div class="fee-Stu-List-scroll">
+        <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card ">
+            <thead>
+                <tr>
+                    <th width="5px"></th>
+                    <th width="30%">Binder</th>
+                    <th width="65%">Address</th>
+                    @*<th width="15%">Father Name</th>
+                    <th width="15%">DepartmentName</th>
+                    <th width="10%">DesignationName</th>
+                    <th width="10%">Contact No.</th>
+                    <th width="10%">Joining Date </th>*@
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="binder in BinderList|filter:SearchBinderText"
+                    ng-click="setBinderLib(binder);ddl_BinderListChange(binder)">
+                    <td>
+                        <div class="radio radio-primary table-radio">
+                            <input ng-model="$parent.SubCode" type="radio" value="{{binder.SubCode}}" />
+                            <label for=""></label>
+                        </div>
+                    </td>
+                    <td>{{binder.BinderName}}</td>
+                    <td>{{binder.Address}}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

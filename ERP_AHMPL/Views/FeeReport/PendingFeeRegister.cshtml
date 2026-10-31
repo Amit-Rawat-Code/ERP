@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "Fees Outstanding Report";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<script src="~/scripts/myjslib/PendingFeeRegisterReportController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Fees Outstanding Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fees</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Fees Outstanding Report</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                @*<div  class="row ">*@
+
+                                <div class="section-toggle row">
+                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                        <label class="control-label">Report Category</label>
+                                        <div class="input-box">
+                                            @Html.DropDownList("ddlReportCategory", new List<SelectListItem>{
+                                               new SelectListItem{Text="Select", Value=""},
+                                               new SelectListItem{Text="Total Outstanding", Value="TO"},
+                                               new SelectListItem{Text="Installmet Wise", Value="IW"}
+                                               },
+                                           new { @class = "select2 form-control validate", @ng_model = "ReportCategory", @ng_init = "ReportCategory='IW'" })
+                                            <div class="text-box-msg-r">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                        <label class="control-label">Due Amount as on Date</label>
+                                        <div class="input-box">
+                                            @Html.TextBox("txtDueDate", "", new { @class = "form-control clear", @placeholder = "", @type = "Date", @ng_model = "FromDate", @max = "{{endDate}}", @min = "{{startDate}}" })
+                                            <div class="text-box-msg-r">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+
+                                        <label class="control-label">Select Class</label>
+                                        <div class="input-box">
+                                            @Html.Partial("ddlClassSectionMul")
+                                            <div class="text-box-msg-r">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                        <label class="control-label">Student</label>
+                                        <div class="input-box">
+                                            @Html.Partial("TblStudentListcsb")
+                                            <div class="text-box-msg-r">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                        <label class="control-label">Admission No.</label>
+                                        <div class="input-box">
+                                            @Html.TextBox("txtAdmissionNo", "", new { @class = "form-control clear", @placeholder = "", @autocomplete = "name", @ng_model = "AdmissionNo" })
+
+                                            <div class="text-box-msg-r">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                        <label class="control-label">Institute RollNo.</label>
+                                        <div class="input-box">
+                                            @Html.TextBox("txtInstituteRollNo", "", new { @class = "form-control clear", @placeholder = "", @autocomplete = "name", @ng_model = "InstituteRollNo" })
+
+                                            <div class="text-box-msg-r">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-hide="ReportCategory=='IW'">
+                                        <label class="control-label">Type of Amount</label>
+                                        <div class="input-box">
+                                            @Html.DropDownList("ddlCategory", new List<SelectListItem>{
+                                                new SelectListItem{Text="Select", Value=""},
+                                                new SelectListItem{Text="Only Outstanding", Value="O"},
+                                                new SelectListItem{Text="Only Advance", Value="A"},
+                                                new SelectListItem{Text="Outstanding+Advance", Value="OA"}
+                                                },
+                                            new { @class = "select2 form-control validate", @ng_model = "Category", @ng_init = "Category='OA'" })
+                                            <div class="text-box-msg-r">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 mgtp-24 mgbt-xs-15">
+                                        @Html.Partial("ActionSearch")
+                                    </div>
+                                </div>
+                                @*</div>*@
+
+
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41">
+                                <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                    <div class="arrow-2">
+                                        <i class="fa fa-angle-down"></i>
+                                    </div>
+                                    <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                </div>
+                                @Html.Partial("GeneralReportGrid")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#ddlFeeMode').removeClass('validate');
+    $('#ddlClass').removeClass('validate');
+    $('#ddlSection').removeClass('validate');
+    $('#ddlBranch').removeClass('validate');
+</script>

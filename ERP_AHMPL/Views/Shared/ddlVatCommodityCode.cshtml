@@ -1,0 +1,6 @@
+﻿@*CommodityMast*@
+<select id="ddlVatCommodityCode" class="select2 form-control" ng-model="VATComCode" ng-init="BindVatCommodity();">
+    <option value="">Select</option>
+    <option ng-repeat="vatcommodity in VatCommodityList" value="{{vatcommodity.Code}}">{{vatcommodity.Name}}</option>
+</select>
+

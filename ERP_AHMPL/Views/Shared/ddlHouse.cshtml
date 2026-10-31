@@ -1,0 +1,7 @@
+﻿<select id="ddlHouse" class="select2 form-control validate" ng-init="GetHouses()" ng-model="studentDetails.HouseId">
+    <option value="">Select House</option>
+    <option ng-repeat="house in Houses" value="{{house.HouseId}}" ng-disabled="!house.IsActive">{{house.HouseName}}</option>
+</select>
+
+
+

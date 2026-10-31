@@ -1,0 +1,17 @@
+﻿@Html.DropDownList("ddlMonth",
+    new List<SelectListItem>{
+        new SelectListItem{Text="Select Month", Value=""},
+        new SelectListItem{Text="Jan", Value="Jan"},
+        new SelectListItem{Text="Feb", Value="Feb"},
+        new SelectListItem{Text="Mar", Value="Mar"},
+        new SelectListItem{Text="Apr", Value="Apr"},
+        new SelectListItem{Text="May", Value="May"},
+        new SelectListItem{Text="Jun", Value="Jun"},
+        new SelectListItem{Text="Jul", Value="Jul"},
+        new SelectListItem{Text="Aug", Value="Aug"},
+        new SelectListItem{Text="Sep", Value="Sep"},
+        new SelectListItem{Text="Oct", Value="Oct"},
+        new SelectListItem{Text="Nov", Value="Nov"},
+        new SelectListItem{Text="Dec", Value="Dec"},
+    },
+    new { @class = "select2 form-control validate", @ng_model = "Month" })

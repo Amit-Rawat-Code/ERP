@@ -1,0 +1,5 @@
+﻿<select id="ddlTitle" class="select2 form-control validate" ng-model="Title" ng-init="GetTitleList()">
+    <option value="">Select Title</option>
+    <option ng-repeat="title in TitleList" value="{{title.TimeTableDateWiseId}}">{{title.Title}}</option>
+</select>
+

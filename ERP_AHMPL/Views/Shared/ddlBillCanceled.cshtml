@@ -1,0 +1,6 @@
+﻿@Html.DropDownList("ddlIsBillCanceled", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Yes", Value="True"},
+    new SelectListItem{Text="No", Value="False"}
+},
+    new { @class = "select2 form-control validate", @ng_model = "IsBillCanceled",@ng_disabled = "disabledCanceled", @ng_init = "IsBillCanceled='False';disabledCanceled=false" })

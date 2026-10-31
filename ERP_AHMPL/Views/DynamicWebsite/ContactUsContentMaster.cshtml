@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "ContactUsContentMaster";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/ContactUsContentMasterController.js?Ver=@ViewBag.Version"></script>
+
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="hfUnitId" id="UnitId" name="UnitId" value="" />
+<input type="hidden" ng-model="hfLayoutId" id="LayoutId" name="LayoutCode" value="" />
+<input type="hidden" ng-model="hfLayoutPartId" id="LayoutPartId" name="LayoutPartId" value="" />
+<input type="hidden" ng-model="hfTabId" id="TabId" name="TabId" value="" />
+<input type="hidden" ng-model="hfMenuId" id="MenuId" name="MenuId" value="" />
+<input type="hidden" ng-model="hfSubMenuId" id="SubMenuId" name="SubMenuId" value="" />
+<div class="app-content  my-3 ">
+    <div class="side-app">
+
+
+        <div class="br-pageheader">
+            <!-- Title -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                <h5 class="txt-dark">Create Content</h5>
+            </div>
+            <!-- Breadcrumb -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                <ol class="breadcrumb">
+                    <li><span>Unit Manager</span></li>
+                    <li class="breadcrumb-item">Unit Detail Master</li>
+                    <li class="breadcrumb-item active" aria-current="page">Create Content</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="br-pagebody">
+            <div class="">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <div id="product-tab">
+                                    <div class="resp-tabs-container">
+                                        <div class="resp-tab-content" aria-labelledby="tab_item-0">
+                                            <b>Mobile No Text</b>
+                                            <div class="col-information">
+                                                @Html.TextBox("MobileNoText", "", new { @id = "MobileNoText", @class = "form-control clear", @ng_model = "MobileNoText" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <div id="product-tab">
+                                    <div class="resp-tabs-container">
+                                        <div class="resp-tab-content" aria-labelledby="tab_item-0">
+                                            <b>Email Text</b>
+                                            <div class="col-information">
+                                                @Html.TextBox("EmailText", "", new { @id = "EmailText", @class = "form-control clear", @ng_model = "EmailText" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <div id="product-tab">
+                                    <div class="resp-tabs-container">
+                                        <div class="resp-tab-content" aria-labelledby="tab_item-0">
+                                            <b>Timing Text</b>
+                                            <div class="col-information">
+                                                @Html.TextBox("TimingText", "", new { @id = "TimingText", @class = "form-control clear", @ng_model = "TimingText" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <div id="product-tab">
+                                    <div class="resp-tabs-container">
+                                        <div class="resp-tab-content" aria-labelledby="tab_item-0">
+                                            <b>Address Text</b>
+                                            <div class="col-information">
+                                                @Html.TextBox("AddressText", "", new { @id = "AddressText", @class = "form-control clear", @ng_model = "AddressText" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <div id="product-tab">
+                                    <div class="resp-tabs-container">
+                                        <div class="resp-tab-content" aria-labelledby="tab_item-0">
+                                            <b>Skype Address</b>
+                                            <div class="col-information">
+                                                @Html.TextBox("SkypeAddress", "", new { @id = "AddressText", @class = "form-control clear", @ng_model = "SkypeAddress" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <div class="form-group-div">
+                                    <label><b>Facebook Link</b></label>
+                                    @Html.TextBox("FacebookLink", "", new { @class = "form-control clear validate", @ng_model = "FacebookLink", @placeholder = "" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <div class="form-group-div">
+                                    <label><b>Instagram Link</b></label>
+                                    @Html.TextBox("InstagramLink", "", new { @class = "form-control clear validate", @ng_model = "InstagramLink", @placeholder = "" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <div class="form-group-div">
+                                    <label><b>LinkedIn Link</b></label>
+                                    @Html.TextBox("LinkedInLink", "", new { @class = "form-control clear validate", @ng_model = "LinkedInLink", @placeholder = "" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                <div class="form-group-div">
+                                    <label><b>Youtube Link</b></label>
+                                    @Html.TextBox("YoutubeLink", "", new { @class = "form-control clear validate", @ng_model = "YoutubeLink", @placeholder = "" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                            @Html.Partial("ActionView")
+                        </div>                     
+                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+

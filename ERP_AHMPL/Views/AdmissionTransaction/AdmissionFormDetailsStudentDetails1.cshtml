@@ -1,0 +1,921 @@
+﻿
+@{
+    ViewBag.Title = "Admission Form Details1";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/AdmissionFormDetailsController.js?Ver=@ViewBag.Version"></script>
+
+<style>
+
+    .search-feild .input-box input#txtSearchBox {
+        padding-left: 90px;
+    }
+</style>
+
+<input type="hidden" id="Id" name="Id" value="" ng-model="studentDetails.StudentCode" />
+
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Admission Form</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Student</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Admission Form</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper collapse in ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+
+
+                                    <style>
+                                        .Admission-form-data * {
+                                            margin: 0px;
+                                            padding: 0px;
+                                        }
+
+                                        .Admission-form-data .margin-bt-15 {
+                                            margin-bottom: 15px;
+                                        }
+
+                                        .Admission-form-data .table-adm {
+                                            width: 100%;
+                                            font-size: 14px;
+                                            color: #000;
+                                            font-family: initial;
+                                            font-weight: 600;
+                                            border-collapse: collapse;
+                                        }
+
+                                        .Admission-form-data .table-adm-row {
+                                            border: none;
+                                        }
+
+                                        .Admission-form-data img.logo {
+                                            height: 120px;
+                                            object-fit: contain;
+                                        }
+
+                                        .Admission-form-data .text-center {
+                                            text-align: center;
+                                        }
+
+                                        .Admission-form-data .admission-head {
+                                            transform: translateX(-100px);
+                                            padding: 5px 20px;
+                                            border: 1px solid #000;
+                                            display: inline-block;
+                                        }
+
+                                        .Admission-form-data .logo-width-adjust {
+                                            transform: translateX(-100px);
+                                        }
+
+                                        .Admission-form-data .table-TC-r1 > tbody > tr > td {
+                                            padding: 3px 6px;
+                                            line-height: normal;
+                                            vertical-align: top;
+                                            white-space: nowrap;
+                                        }
+
+                                        .Admission-form-data .table-TC > tbody > tr > td {
+                                            padding: 8px;
+                                            line-height: normal;
+                                            vertical-align: top;
+                                        }
+
+                                        .Admission-form-data .ser-td-width {
+                                            width: 40px;
+                                        }
+
+                                        .Admission-form-data .col-w-a {
+                                            width: 15px;
+                                        }
+
+                                        .Admission-form-data .h-no {
+                                            width: 30px;
+                                            position: relative;
+                                            display: inline-block;
+                                        }
+
+                                        .Admission-form-data .table-adm-row > tbody > tr > td {
+                                            padding: 3px 6px;
+                                            line-height: normal;
+                                            vertical-align: top;
+                                            white-space: nowrap;
+                                            box-sizing: border-box;
+                                            line-height: 24px;
+                                            font-size: 14px;
+                                        }
+
+                                        .Admission-form-data .b-d-bro:after {
+                                            content: "";
+                                            position: absolute;
+                                            width: calc(100% - 10px);
+                                            left: 7px;
+                                            bottom: 1px;
+                                            border-bottom: 1px dotted #000;
+                                        }
+
+                                        .Admission-form-data .b-d-bro {
+                                            position: relative;
+                                            vertical-align: bottom !important;
+                                        }
+
+                                        .Admission-form-data span.e-txt {
+                                            display: table;
+                                        }
+
+                                        .Admission-form-data img.profile-pic {
+                                            height: 225px;
+                                            object-fit: cover;
+                                            width: 100%;
+                                        }
+
+                                        .Admission-form-data .student-photo {
+                                            border: 2px solid #000;
+                                            height: 225px;
+                                            width: 225px;
+                                            margin: 0 auto;
+                                            padding: 2px;
+                                            border-radius: 4px;
+                                        }
+
+                                        .Admission-form-data span.data-block {
+                                            display: inline-block;
+                                            width: 35px;
+                                            height: 35px;
+                                            border: 1px solid #000;
+                                            margin-left: 20px;
+                                            vertical-align: middle;
+                                            padding: 0px;
+                                            box-sizing: border-box;
+                                            text-align: center;
+                                            line-height: 35px;
+                                        }
+
+                                        .Admission-form-data .v-align-mid {
+                                            vertical-align: middle;
+                                        }
+
+                                        .Admission-form-data .table-adm-row > tbody > tr > td span.data-block:nth-child(3) {
+                                            margin-left: 2px;
+                                        }
+
+                                        .Admission-form-data .table-with-border {
+                                            border: 1px solid #000;
+                                        }
+
+                                        .Admission-form-data .admission-head1 {
+                                            transform: translateX(-100px);
+                                            padding: 0px 20px;
+                                            border-bottom: 1px solid #000;
+                                            display: inline-block;
+                                        }
+
+                                        .Admission-form-data .seprator {
+                                            padding-top: 30px;
+                                            border-top: 2px solid #000;
+                                            margin-top: 30px;
+                                        }
+                                    </style>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center Admission-form-data">
+                                        <table class="table-adm">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <table class="table-adm">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="2">
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tr>
+                                                                                <td class="ser-td-width">
+                                                                                    <img class="logo" src="https://allenhouseinstituteoftechnology.in/wp-content/uploads/2018/09/esto.png" alt="logo">
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    <h1 class="logo-width-adjust" style="font-size: 40px;line-height: 50px;">Allenhouse Public School</h1>
+                                                                                    <h4 class="logo-width-adjust margin-bt-15" style="font-size: 20px;">Kulgaon Road, Rooma, Kanpur</h4>
+                                                                                    <div class="admission-head">Admission Form</div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2">
+                                                                        <table class="table-adm table-adm-row" style="width: 300px;">
+                                                                            <tr>
+                                                                                <td class="col-w-a"><span class="e-txt">क्र०संo/Sr.No</span></td>
+                                                                                <td class="b-d-bro"><span class="b-txt "> 1234567890</span></td>
+
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td style="">
+
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tr>
+                                                                                <td class="col-w-a" style="width: 292px;">
+                                                                                    <span class="e-txt">कक्षा जिसमे प्रवेश चाहिए:</span>
+                                                                                    <span class="e-txt">Class in which admission is sought for:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro" style=""><span class="b-txt "> First Class</span></td>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt">सत्र/ </span>
+                                                                                    <span class="e-txt">Session</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro" style="">
+                                                                                    <span class="b-txt "> 2021-2022</span>
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                        </table>
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no">1. </span>(a) विद्यार्थी का नाम:</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>Full Name of the Child (in capital letters):</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt "> Amit Rawat</span></td>
+
+
+                                                                            </tr>
+
+                                                                        </table>
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tr>
+                                                                                <td class="col-w-a v-align-mid" style="width: 292px;">
+                                                                                    <span class="e-txt"><span class="h-no"></span>(b) लिंग/Sex:</span>
+                                                                                </td>
+                                                                                <td class=""><span class="b-txt v-align-mid">पुरुष/Male</span> <span class="data-block" style="padding: 2px 0px;"><img src="https://www.pngfind.com/pngs/m/55-559850_check-mark-check-png-transparent-png.png" alt="" style="height: 18px; object-fit: contain;"></span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">स्त्री/Female</span><span class="data-block"></span></td>
+
+
+                                                                            </tr>
+
+                                                                        </table>
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tr>
+                                                                                <td class="col-w-a v-align-mid" style="width: 292px;">
+                                                                                    <span class="e-txt"><span class="h-no">2.</span>जन्म तिथि (अंको में)/Date of Birth:</span>
+                                                                                </td>
+                                                                                <td class=""><span class="b-txt v-align-mid">दिन/Day</span> <span class="data-block">2</span><span class="data-block">6</span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">मास/Month</span><span class="data-block">1</span><span class="data-block">1</span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">वर्ष/Year</span><span class="data-block">9</span><span class="data-block">1</span></td>
+
+
+                                                                            </tr>
+
+                                                                        </table>
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td class="col-w-a" style="width: 292px;">
+
+
+                                                                                        <span class="e-txt"><span class="h-no"></span>शब्दों में/In words</span>
+                                                                                    </td>
+                                                                                    <td class="b-d-bro"><span class="b-txt ">Twenty Six Of November Nineteen Ninety One</span></td>
+
+
+                                                                                </tr>
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td class="col-w-a v-align-mid" style="width: 292px;">
+                                                                                        <span class="e-txt"><span class="h-no"></span>कक्षा में प्रवेश के समय ३१ मार्च को आयु</span>
+                                                                                        <span class="e-txt"><span class="h-no"></span>Age of the student as on 31st March:</span>
+                                                                                    </td>
+                                                                                    <td class=""><span class="b-txt v-align-mid">दिन/Day</span> <span class="data-block">2</span><span class="data-block">6</span></td>
+                                                                                    <td class=""><span class="b-txt v-align-mid">मास/Month</span><span class="data-block">1</span><span class="data-block">1</span></td>
+                                                                                    <td class=""><span class="b-txt v-align-mid">वर्ष/Year</span><span class="data-block">9</span><span class="data-block">1</span></td>
+
+
+                                                                                </tr>
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td class="col-w-a">
+                                                                                        <span class="e-txt"><span class="h-no">3. </span>बच्चे का रक्त समूह/Blood Group of the child</span>
+                                                                                    </td>
+                                                                                    <td class="b-d-bro"><span class="b-txt ">Not Applicable</span></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                    <td>
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+                                                                                    <div class="student-photo">
+                                                                                        <img class="profile-pic" src="https://www.trickscity.com/wp-content/uploads/2017/12/stylish-dp-for-boys.jpg.webp" alt="">
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table class="table-adm">
+
+
+                                                            <tbody>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt"><span class="h-no">4. </span>क्या आप सामान्य श्रेणी/अनुसूचित जनजाति/ओबीसी से/आर्थिक रूप से कमजोर वर्ग/विकलांग/इकलौती कन्या से सम्बंधित हैं? यदि हाँ तो प्रमाण पत्र संलग्न करें।</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>Do you belong to Gen./SC/ST/OBC/EWS/Disabled/S.G. Child (?) attach certificate if applicable.</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>निम्नलिखित में से जो लागू हो उसे (<img src="https://www.pngfind.com/pngs/m/55-559850_check-mark-check-png-transparent-png.png" alt="" style="height: 18px; object-fit: contain;">) करे</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class=""><span class="h-no"></span><span class="b-txt v-align-mid">सामान्य श्रेणी/Gen. Cat.</span> <span class="data-block" style="padding: 2px 0px;"><img src="https://www.pngfind.com/pngs/m/55-559850_check-mark-check-png-transparent-png.png" alt="" style="height: 18px; object-fit: contain;"></span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">अनु०जाति/SC</span><span class="data-block"></span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">अनु० जनजाति/ST</span><span class="data-block"></span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">ओ०बी०सी०/OCB</span><span class="data-block"></span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">आर्थिक रूप से कमजोर वर्ग/EWS</span><span class="data-block"></span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">विकलांग/Disabled</span><span class="data-block"></span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">इकलौती कन्या/SB Child</span><span class="data-block"></span></td>
+
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row ">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no">5. </span>माता/पिता का ब्यौरा/Details of parents:</span>
+                                                                                    <table class="table-adm table-adm-row table-with-border" border="1">
+                                                                                        <thead>
+                                                                                        <th>माता/पिता का ब्यौरा/Details of Mother/Father</th>
+                                                                                        <th>माता/Mother</th>
+                                                                                        <th>पिता/Father</th>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>(i) नाम/Name (in capital letters)</td>
+                                                                                                <td>Amit Rawat</td>
+                                                                                                <td>NIL</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <div>(ii) राष्ट्रीयता/Nationality</div>
+                                                                                                    <div>व्यवसाय/Occupation</div>
+                                                                                                </td>
+                                                                                                <td></td>
+                                                                                                <td></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <div>(iii) कार्यालय का नाम पूरा पता व दूरभाष/</div>
+                                                                                                    <div>Name of the office and full address with tele. no.</div>
+                                                                                                </td>
+                                                                                                <td></td>
+                                                                                                <td></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <div>(iv) पूर्ण आवासीय पता एवं दूरभाष/</div>
+                                                                                                    <div>Full residential address with tele. no.</div>
+                                                                                                </td>
+                                                                                                <td></td>
+                                                                                                <td></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <div>(v) स्थायी पता/Permanent address</div>
+                                                                                                </td>
+                                                                                                <td></td>
+                                                                                                <td></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <div>(vi) वार्षिक आय/ Annual income in.(Rs.)</div>
+                                                                                                </td>
+                                                                                                <td></td>
+                                                                                                <td></td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+
+                                                                                </td>
+
+
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no">6. </span>स्थानीय अभिभावक का पता (यदि हो):</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>Name & Address of local guardian (if any):</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">guardian name</span></td>
+
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no">7. </span>अंतिम विद्यालय का नाम व पता जहाँ पढ़ा हो:</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>Name & Address of the last school with class:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">Allenhouse Public Inter College.</span></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no">8. </span>क्या पिछला विद्यालय के०मा०शि० बोर्ड से सम्बद्धता प्राप्त था:</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>Whether previous school was affiliated with CBSE:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">CBS</span></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no">9. </span>यदि पिछले विद्यालय केंद्रीय माध्यमिक शिक्षा बोर्ड से सम्बद्ध नहीं है तो सम्बंधित बोर्ड का नाम दर्शायें:</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>If, the previous school was not affiliated with CBSE, specify name of board:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">Utter pradesh</span></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt"><span class="h-no">10. </span>(a) विगत परीक्षा परिणाम/Result of previous examination:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">first Division</span></td>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt">(b)प्रतिशत/Percentage:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">80%</span></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt"><span class="h-no">11. </span>लिए जाने वाले प्रस्तावित विषय/Subjects proposed to offer:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">1.</span></td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">2.</span></td>
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a" style="padding: 0px;">
+                                                                                    <span class="h-no"></span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">3.</span></td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">4.</span></td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">5.</span></td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">6.</span></td>
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no">12. </span>क्या स्थानांतरण प्रमाण-पत्र संलग्न है? हाँ/नहीं</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>Whether the transfer certificate is attached: Yes/No</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">yes</span></td>
+                                                                                <td class="col-w-a" style="vertical-align: bottom;">
+                                                                                    <span class="e-txt"><span class="h-no"></span>Date of T.C./टी० सी० का दिनाँक</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">26/11/1991</span></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no">13. </span>मातृ-भाषा/Mother tongue:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">Hindi</span></td>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt"><span class="h-no"></span>गृह नगर/Home Town</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">Lucknow</span></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a text-center" style="padding: 20px 0px;">
+
+                                                                                    <div class="admission-head" style="transform: translateX(0);">DECLARATION BY THE PARENTS</div>
+                                                                                </td>
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no"> </span>मैं एतद् द्वारा घोषणा करता करती हूँ कि मेरे द्वारा दी गयी उपर्युक्त सूचना मेरी जानकारी में सत्य व सही है।</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>I hereby declare that the above information furnished by me is correct to the best of my knowledge & best belief.</span>
+                                                                                    <span class="e-txt"><span class="h-no"> </span>मैं विद्यालय के नियमो से प्रतिबद्ध हंगी/I shall abide by the rules of the Vidyalaya.</span>
+                                                                                </td>
+
+
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt"><span class="h-no"></span>तिथि/Date:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt ">21-10-21</span></td>
+                                                                                <td class="col-w-a" style="width: 80%;">
+                                                                                    <span class="e-txt" style="float: right;">माता-पिता के हस्ताक्षर/Signature of parents</span>
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <div style="page-break-after: always;"></div>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a text-center" style="padding: 20px 0px;">
+
+                                                                                    <div class="admission-head1" style="transform: translateX(0);">FOR THE OFFICE USE ONLY</div>
+                                                                                </td>
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a" style="WIDTH: 80%;">
+
+                                                                                    <span class="e-txt"><span class="h-no">1. </span>प्रमाणित किया जाता है कि मैंने आवेदन-पत्र और सम्बद्ध कागजातों की जाँच कर ली है |</span>
+                                                                                    <span class="e-txt"><span class="h-no"></span>Certified that I have checked the application form and the relevent papers are found in order.</span>
+                                                                                </td>
+                                                                                <td class="col-w-a" style="text-align: right;">
+                                                                                    <img src="https://static.cdn.wisestamp.com/wp-content/uploads/2020/08/Oprah-Winfrey-Signature-1.png" alt="signature" style="height: 70px;object-fit: contain;">
+                                                                                    <span class="b-txt " style="display: block;border-top: 2px solid #000;margin-top: -10px;">प्रवेश प्रभारी/Admission Incharge</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt"><span class="h-no">2. </span>सम्बद्ध कागजातों के निरीक्षणोपरान्त एवम शुल्क प्राप्तोपरान्त कृपया कक्षा</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro" style="width: 35%;"><span class="b-txt "></span></td>
+                                                                                <td class="col-w-a"><span class="b-txt ">वर्ग</span></td>
+                                                                                <td class="b-d-bro" style="width: 35%;"><span class="b-txt "></span></td>
+                                                                                <td class="col-w-a"><span class="b-txt ">में प्रवेश दें।</span></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt"><span class="h-no"></span>Please admit to class</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro" style="width: 35%;"><span class="b-txt "></span></td>
+                                                                                <td class="col-w-a"><span class="b-txt ">Section</span></td>
+                                                                                <td class="b-d-bro" style="width: 35%;"><span class="b-txt "></span></td>
+                                                                                <td class="col-w-a"><span class="b-txt ">after checking the relevent papers and realise the dues.</span></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a" style="height: 90px;vertical-align: bottom;text-align: right;">
+
+                                                                                    <span class="e-txt">तिथि/Date:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro" style="height: 90px;vertical-align: bottom;"><span class="b-txt ">21-10-21</span></td>
+                                                                                <td class="col-w-a" style="width: 80%;height: 90px;vertical-align: bottom;text-align: right;">
+                                                                                    <img src="https://static.cdn.wisestamp.com/wp-content/uploads/2020/08/Oprah-Winfrey-Signature-1.png" alt="signature" style="height: 70px;object-fit: contain;">
+                                                                                    <span class="e-txt" style="display: block;margin-top: -20px;">प्राचार्य/PRINCIPAL</span>
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <div class="seprator"></div>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt">Admitted to class</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro" style=""><span class="b-txt "></span></td>
+                                                                                <td class="col-w-a"><span class="b-txt ">Section</span></td>
+                                                                                <td class="b-d-bro" style=""><span class="b-txt "></span></td>
+                                                                                <td class="col-w-a"><span class="b-txt ">Fee Receipt No</span></td>
+                                                                                <td class="b-d-bro" style=""><span class="b-txt "></span></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <div style="padding: 30px 0px;">
+                                                                        <table class="table-adm table-adm-row">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td class="col-w-a" style="width: 50%;" rowspan="5">
+                                                                                        <span class="e-txt">Details of amount received:</span>
+                                                                                    </td>
+                                                                                    <td class="col-w-a" style="width: 350px;"><span class="b-txt ">Admission Fee</span></td>
+                                                                                    <td class="b-d-bro"><span class="h-no">&#8377;</span><span class="b-txt "></span></td>
+                                                                                    <td class="col-w-a" style="width: 200px;"><span class="b-txt "></span></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="col-w-a" style="width: 350px;"><span class="b-txt ">Tution Fee</span></td>
+                                                                                    <td class="b-d-bro"><span class="h-no">&#8377;</span><span class="b-txt "></span></td>
+                                                                                    <td class="col-w-a" style="width: 200px;"><span class="b-txt "></span></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="col-w-a" style="width: 350px;"><span class="b-txt ">Any other Fee</span></td>
+                                                                                    <td class="b-d-bro"><span class="h-no">&#8377;</span><span class="b-txt "></span></td>
+                                                                                    <td class="col-w-a" style="width: 200px;"><span class="b-txt "></span></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="col-w-a" style="width: 350px;"><span class="b-txt ">Computer Fee</span></td>
+                                                                                    <td class="b-d-bro"><span class="h-no">&#8377;</span><span class="b-txt "></span></td>
+                                                                                    <td class="col-w-a" style="width: 200px;"><span class="b-txt "></span></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="col-w-a" style="width: 350px;"><span class="b-txt ">Total</span></td>
+                                                                                    <td class="b-d-bro"><span class="h-no">&#8377;</span><span class="b-txt "></span></td>
+                                                                                    <td class="col-w-a" style="width: 200px;"><span class="b-txt "></span></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a v-align-mid" style="width: 40%;">
+                                                                                    <span class="e-txt">कक्षा उपस्थिति पंजिका में नाम दर्ज किया गया ।</span>
+                                                                                    <span class="e-txt">Name has been entered in the Class Attendance Register : (<img src="https://www.pngfind.com/pngs/m/55-559850_check-mark-check-png-transparent-png.png" alt="" style="height: 18px; object-fit: contain;">)</span>
+                                                                                </td>
+                                                                                <td class="" style="width: 20px;"><span class="b-txt v-align-mid">Yes</span> <span class="data-block" style="padding: 2px 0px;"><img src="https://www.pngfind.com/pngs/m/55-559850_check-mark-check-png-transparent-png.png" alt="" style="height: 18px; object-fit: contain;"></span></td>
+                                                                                <td class=""><span class="b-txt v-align-mid">No</span><span class="data-block" style="padding: 2px 0px;"><img src="https://www.pngfind.com/pngs/m/55-559850_check-mark-check-png-transparent-png.png" alt="" style="height: 18px; object-fit: contain;"></span></td>
+
+
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt">प्रमाणित किया जाता है कि समस्त प्रवृष्टियाँ छात्र पंजिका में दर्ज की गई एवं शुल्क का भुगतान इस कार्यालय द्वारा प्राप्त किया गया |</span>
+                                                                                    <span class="e-txt">Certified that all the entries have been made in the Scholar's Register and the dues have been received.</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+
+                                                                                    <span class="e-txt">विद्यार्थी कि छात्र पंजीयन संख्या (ए.डब्लू०आर०)/</span>
+                                                                                    <span class="e-txt">Registration No. of the student in Admission Withdrawl Register is</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt "> --------------</span></td>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt">Vol</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro"><span class="b-txt "> --------------</span></td>
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a" style="height: 90px;vertical-align: bottom;text-align: right;">
+
+                                                                                    <span class="e-txt">तिथि/Date:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro" style="height: 90px;vertical-align: bottom;"><span class="b-txt ">21-10-21</span></td>
+                                                                                <td class="col-w-a" style="width: 80%;height: 90px;vertical-align: bottom;text-align: right;">
+                                                                                    <img src="https://static.cdn.wisestamp.com/wp-content/uploads/2020/08/Oprah-Winfrey-Signature-1.png" alt="signature" style="height: 70px;object-fit: contain;">
+                                                                                    <span class="e-txt" style="display: block;margin-top: -20px;">कार्यालय अधीक्षक/Office Suptd.</span>
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <div class="seprator"></div>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a">
+                                                                                    <span class="e-txt">बोर्ड द्वारा निर्धारित मानकों के अनुसार छात्र के आवेदन को प्रवेश हेतु स्वीकार करते हुए अनुमोदित किया जाता है |</span>
+                                                                                    <span class="e-txt">Admission considered by the school is in accordance with the provisions of the Board & approved.</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                                <tr>
+                                                                    <table class="table-adm table-adm-row">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="col-w-a" style="height: 90px;vertical-align: bottom;text-align: right;">
+
+                                                                                    <span class="e-txt">तिथि/Date:</span>
+                                                                                </td>
+                                                                                <td class="b-d-bro" style="height: 90px;vertical-align: bottom;"><span class="b-txt ">21-10-21</span></td>
+                                                                                <td class="col-w-a" style="width: 80%;height: 90px;vertical-align: bottom;text-align: right;">
+                                                                                    <img src="https://static.cdn.wisestamp.com/wp-content/uploads/2020/08/Oprah-Winfrey-Signature-1.png" alt="signature" style="height: 70px;object-fit: contain;">
+                                                                                    <span class="e-txt" style="display: block;margin-top: -20px;">हस्ताक्षर प्राचार्य/कार्यालय की मोहर</span><span class="e-txt" style="display: block;">Sign. of Principal/Office Seal</span></span>
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                              
+                            </div>
+                           
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

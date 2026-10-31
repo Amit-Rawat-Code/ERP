@@ -1,0 +1,739 @@
+﻿
+@{
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="myApp" ng-controller="myController" ng-cloak>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title ng-if="title.length>0" ng-model="title" ng-bind="title">@ViewBag.Title</title>
+    <title ng-if="title==null">@ViewBag.Title</title>
+    <title ng-if="title.length==0">@ViewBag.Title</title>
+    <link rel='stylesheet' href='https://boomtownroi.github.io/boomstrap/css/boomstrap.css'>
+    <link rel='stylesheet' href='https://boomtownroi.github.io/boomstrap/css/boomstrap-docs.css'>
+
+    <!-- FAVICON ICON -->
+    <link rel="icon" href="@Url.Content("~/Content/img/favicon.png")" type="image/x-icon">
+
+    @RenderSection("head", required: false)
+
+
+    <!--alerts CSS -->
+    <!-- Tooltipster css -->
+    <link href="@Url.Content("~/Content/plugins/vendors/bower_components/tooltipster/tooltipster.bundle.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/plugins/vendors/bower_components/sweetalert/dist/sweetalert.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/Content/plugins/assets/css/default.css?Ver="+ViewBag.Version+"")" rel="stylesheet" />
+
+   
+
+    @*<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css")" />
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/css/buttons.dataTables.min.css")" />
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css")" />*@
+
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
+    @RenderSection("styles", required: false)
+
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/jscolor.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/myJs.js?Ver="+ViewBag.Version+"")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.js")"></script>
+    @*<script src="~/Scripts/maps/map.js?key=AIzaSyCx1-t55JuyYxAhEGZNZQhCen5rYLX2gBM"></script>*@
+    @*<script src="~/Scripts/maps/map.js?key=AIzaSyCx1-t55JuyYxAhEGZNZQhCen5rYLX2gBM&callback=initMap"
+        async defer></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/angular.min.js")"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap-tpls.js'></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/angular-sanitize.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/angular-filter.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/ng-map.js")"></script>
+    <script src="@Url.Content("~/Scripts/ng-currency.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/app.js?Ver="+ViewBag.Version+"")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/service.js?Ver="+ViewBag.Version+"")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/service0265.js?Ver="+ViewBag.Version+"")"></script>*@
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/controller.js?Ver="+ViewBag.Version+"")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/GetMasterController.js?Ver="+ViewBag.Version+"")"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/myjslib/controller0265.js?Ver="+ViewBag.Version+"")"></script>*@
+    <script src='https://boomtownroi.github.io/boomstrap/js/boomstrap.min.js'></script>
+    <script src='https://boomtownroi.github.io/boomstrap/js/boomstrap-angular.min.js'></script>
+    <script>
+        $(window).ready(function FindWindow() {
+
+            var InW = $(window).width();
+            var InH = $(window).height();
+
+            var IfSetHeight;
+            if (InW > 1024) {
+                IfSetHeight = InH - 126;
+                $('.iframe-wrapper').find('.iframedesign ').css({ "height": IfSetHeight });
+            }
+            else {
+                IfSetHeight = InH - 132;
+                $('.iframe-wrapper').find('.iframedesign ').css({ "height": IfSetHeight });
+                $('.iframe-wrapper').find('.iframedesign ').css({ "width": InW });
+            }
+            $('input').removeAttr('readonly');
+        });
+
+        $(window).on('resize', function () {
+            var InW = $(window).width();
+            var InH = $(window).height();
+
+            var IfSetHeight;
+            if (InW > 1024) {
+                IfSetHeight = InH - 126;
+                $('.iframe-wrapper').find('.iframedesign ').css({ "height": IfSetHeight });
+            }
+            else {
+                IfSetHeight = InH - 132;
+                $('.iframe-wrapper').find('.iframedesign ').css({ "height": IfSetHeight });
+                $('.iframe-wrapper').find('.iframedesign ').css({ "width": InW });
+            }
+            $('input').removeAttr('readonly');
+        })
+    </script>
+
+</head>
+<body class="theme-orange" ng-init="NavMenu()">
+
+    <div id="cover-spin">
+        <script>$('#cover-spin').show(0);</script>
+    </div>
+    <script>
+    $(window).ready(function () {
+        $('#cover-spin').hide()
+    });
+    </script>
+    <div class="wrapper light-theme">
+        <div id="IframeUpperLayer"></div>
+        <!-- Top Header -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+
+            <div class="mobile-only-brand pull-left">
+                <div class="nav-header pull-left">
+                    <div class="logo-wrap">
+                        <div class="mobile-logo-box">
+                            <a href="@Url.Action("DashBoard", "DashBoard")" data-toggle="tooltip" data-placement="top" data-original-title="Logo" tooltip>
+                                <div class="panel-logo-box ">
+                                    @*<img class="brand-img" src="" ng-src="{{DashBoardLogoSmall}}" alt="Vidya Well" />*@
+                                    <img class="brand-img" src="@Url.Content("~/Content/plugins/assets/img/admin-logo.png")" alt="Vidya Well" />
+                                </div>
+                                <div class="panel-logo-box-title">
+                                    @*<img class="brand-img2" src="" ng-src="{{DashBoardLogo}}" alt="Vidya Well" />*@
+                                    <img class="brand-img2" src="@Url.Content("~/Content/plugins/assets/img/admin-logo2.png")" alt="Vidya Well" />
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>                
+                <a id="toggle-btn" class="toggle-left-nav-btn inline-block pull-left" href="javascript:void(0);">
+                <i class="mdi mdi-format-list-bulleted"></i>
+                </a>
+                @*<a id="toggle_mobile_search" data-toggle="collapse" data-target="#search_form" class="mobile-only-view" href="javascript:void(0);"><i class="mdi mdi-search"></i></a>*@
+                <a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);">
+                <i class="mdi mdi-more"></i></a>
+             
+            </div>
+
+            <div id="mobile_right_sidebar" class="mobile-right-sidebar pull-right">
+                <ul class="nav navbar-right top-nav pull-right manage-box">
+                   
+                    <li class="dropdown auth-drp">
+                        <a href="#" class="dropdown-toggle " data-toggle="dropdown">
+                            <div class="user-auth-name-box"> 
+                                <lable class="login-user-name"  ng-if="false"> Login Time:</lable>
+                                <label  class="login-user-name" ng-if="false" ng-model="CurrLogin" ng-bind="CurrLogin"></label>
+                            </div> 
+
+                            @*<div class="login-user-name" >{{UserName}}</div>*@  
+                            <div class="login-user-name">Mohit Gupta</div> 
+                            <div class="last-login-time-box">
+                                <lable class="last-login-time">Last Login Time : </lable>
+                                @*<lable class="last-login-time" ng-model="LastLogin" ng-bind="LastLogin"></lable>*@ 
+                                <lable class="last-login-time">20/Feb/2021 10:00:00 AM</lable> 
+                            </div>
+                            <input type="hidden" id="hfCode" ng-model="Code" ng-value="Code" />
+                            <div class="user-auth-img-box">
+                              
+                            <img src='../Content/Photos/no-image.png' ng-src={{PhotoPath}} alt="User Image not found!"
+                                 class="user-auth-img img-circle" />
+                            </div>
+                            <span class="user-online-status"></span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown alert-drp">
+                        <a href="#" id="session" title="Session Manage" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="pe-7s-repeat top-nav-icon"></i>
+                        </a>
+                        <div class="vd_mega-menu-content left-sm dropdown-menu alert-dropdown session right-xs" role="menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+
+
+                            <ul id="session-menu">
+                                @*<li role="presentation" ng-repeat="x in SessionList">
+                                    <a href="#" id="{{x.SessionId}}" class="session-show-box"  style='border-color:{{Color[x.SessionId]}}' ng-init="SetColor(x.SessionId);">
+                                        <div class="session-title-box" ng-click="ChangeSession(x.SessionId,x.SessionName)" value="{{x.SessionId}}"> 
+                                           <div class="session-name">{{x.SessionName}}</div> 
+                                           <div class="session-name2">{{x.UsingSession}}</div>
+                                        </div>
+                                    </a>
+                                </li>*@
+
+                                <li role="presentation">
+                                    <a href="#" id="1" class="session-show-box" style='border-color:green'>
+                                        <div class="session-title-box" value="1">
+                                            <div class="session-name">2021-2022</div>
+                                            <div class="session-name2">2021-2022</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li> <a id="open_right_sidebar" href="#"><i class="pe-7s-bell top-nav-icon"></i><span class="top-nav-icon-badge btn-sonar" ng-show="lblNcount>0"><label id="lblNcount"></label></span></a> </li>
+                     
+
+                    <li>
+                        <a title="Change Password"  href="" data-path="@Url.Action("ChangePassCode", "ChangePassCode")" ng-click="SelectIfram('/ChangePassCode/ChangePassCode','ChangePassCode')"  ><i class="pe-7s-config top-nav-icon"></i></a>
+                       
+                    </li>
+                    <li class="dropdown alert-drp">
+                        <a id="logout" href="" title="Logout" ng-click="Logout();"><i class="pe-7s-power top-nav-icon"></i></a>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /Top Menu Items class="active-page" -->
+
+        <!-- Left Sidebar Menu -->
+        <div class="fixed-sidebar-left app-sidebar ">
+            <ul class="nav navbar-nav side-nav nicescroll-bar">
+                @*<li class="navigation-header"> <span>Main</span> <i class="mdi mdi-more"></i> </li>*@
+                <li>
+                    <a href="@Url.Action("DashBoard", "DashBoard")">
+                        <div class="pull-left"><i class="fa fa-dashboard mr-28"></i><span class="right-nav-text">Dashboard</span></div>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-toggle="collapse" data-target="#Module1">
+                        <div class="pull-left">
+                            <i class="icofont-royal"></i>
+                            <span class="right-nav-text">Golbal</span>
+                        </div>
+                        <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                        <div class="clearfix"></div>
+                    </a>
+                    <ul id="Module1" class="collapse collapse-level-1">
+                        <li>
+                            <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu1" >
+                                <div class="pull-left">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                    <span class="right-nav-text">Master</span>
+                                </div>
+                                <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                                <div class="clearfix"></div>
+                            </a>
+                            <ul id="Menu1" class="collapse collapse-level-2">
+                                <li>
+
+                                    <a class="selectifram" href="" data-path="/GblMaster/ClassMaster" title="Class Master" 
+                                       ng-click="SelectIfram('/GblMaster/ClassMaster','Class Master');"
+                                       >
+                                        <div class="pull-left"><i class="mdi mdi-chevron-right"></i><span class="right-nav-text">Class Master</span></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                @*<li ng-repeat="module in ModuleList" ng-model="SelectModule" menurepeat-done>
+                    <a href="javascript:void(0);" data-toggle="collapse" data-target="#Module{{module.ModuleId}}">
+                        <div class="pull-left">
+                            <i class="{{module.ModuleIcon}}"></i>
+                            <span class="right-nav-text">{{module.ModuleName}}</span>
+                        </div>
+                        <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                        <div class="clearfix"></div>
+                    </a>
+                    <ul id="Module{{module.ModuleId}}" class="collapse collapse-level-1">
+                        <li ng-repeat="menu in module.menu" ng-model="SelectMenu">
+                            <a ng:href="javascript:void(0);" data-toggle="collapse" data-target="#Menu{{menu.MenuId}}" title={{menu.MenuName}}>
+                                <div class="pull-left">
+                                    <i class="{{menu.MenuIcon}}"></i>
+                                    <span class="right-nav-text">{{menu.MenuName}}</span>
+                                </div>
+                                <div class="pull-right"><i class="mdi mdi-chevron-down"></i></div>
+                                <div class="clearfix"></div>
+                            </a>
+                            <ul id="Menu{{menu.MenuId}}" class="collapse collapse-level-2">
+                                <li ng-repeat="submenu in menu.submenu" ng-model="SelectSubMenu">
+                                    <a class="selectifram" href="" data-path={{submenu.SubMenuUrl}} 
+                                       ng-click="SelectIfram(submenu.SubMenuUrl,submenu.SubMenuName);ModuleIcon=module.ModuleIcon;showModuleIcon();" title={{submenu.SubMenuName}}>
+                                        <div class="pull-left"><i class="{{submenu.SubMenuIcon}}"></i><span class="right-nav-text">{{submenu.SubMenuName}}</span></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>*@
+            </ul>
+            <div _ngcontent-c0="" class="sidebar-background menu-bg-6 menu-bg-c7"></div>
+        </div>
+        <!-- /Left Sidebar Menu -->
+
+        <!-- Right Sidebar Menu -->
+        <div class="fixed-tab-menu-sidebar-right">
+            
+            <div class="more-than-tab-v">
+                <a id="open_right_sidebar_tab_menu_box" href="#" title="Recent Open Pages"><i  class="mdi mdi-step-forward"></i></a>
+            </div>
+            <div class="more-than-tab-v2">
+                <a id="toggle-fullscreen" href="#" title="Windows Resizer"><i id="change-icon" class="glyphicon glyphicon-fullscreen"></i></a>
+            </div>
+            <div class="more-than-tab-v3">
+                <a id="toggle-Top-Navigation" href="#" title="Remove Top  Navigation Bar"><i  class="fa fa-arrows-v"></i></a>
+            </div>
+            <div class="more-than-tab-v4">
+                <a id="toggle-Left-Navigation" href="#" title="Remove Left Navigation Bar"><i  class="fa fa-arrows-h"></i></a>
+            </div>
+            <ul class="right-sidebar">
+                <li>
+                    <div class="recent-open-tab-h">
+                        <h3 class="inline-block txt-dark">Recent Open Pages</h3>
+                        <a href="javascript:void(0)" id="CloseRecentOpenPages" class="inline-block txt-grey" title="Close Tab"> <i class="icofont-close-line close-box"></i> </a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <ul class="right-side-menu-tab-bind"></ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /Right Sidebar Menu -->
+
+        <!-- Right Sidebar Menu -->
+        <div class="fixed-sidebar-right">
+            <ul class="right-sidebar">
+                <li>
+                    <div class="tab-struct user-tabs">
+
+                        <div class="tab-content" id="right_sidebar_content">
+                            <div id="notification_tab" class="tab-pane fade active in" role="tabpanel">
+                                <div class="chat-cmplt-wrap">
+                                    <div class="chat-box-wrap">
+                                        <div class="add-friend">
+                                            <span class="inline-block txt-dark">Notification List</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="chat_list_scroll">
+                                            <div class="nicescroll-bar">
+                                                <ul class="chat-list-wrap">
+                                                    <li class="chat-list">
+                                                        <div class="chat-body" >
+                                                            <div class="notification-item" ng-repeat="x in AllNotification" ng-model="Notification">
+                                                                <a href="" data-path="{{x.link}}" ng-click="SelectIframForNID(x.link,x.TransId,x.UserId,'NotificationList')" title="List">
+
+                                                                    <div class="notification-data">
+                                                                        <div class="notification-img-type">
+                                                                            <div class="notification-img">
+                                                                                <img class="user-bg img-circle" src="#"
+                             ng-src="{{x.Notification.length>0?'../Content/plugins/assets/img/icons/seo-developement/'+x.Notification+'-Notification.svg':''}}" title="{{x.Notification=='N'?'Notice':(x.Notification=='P'?'PTM':(x.Notification=='H'?'Homework':(x.Notification=='C'?'Circule':'')))}}" alt="">
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="notification-content">
+                                                                            <span class="n-content block truncate capitalize-font" >{{x.Title}}</span>
+                                                                            <span class="date txt-grey">{{x.CreatedOn}}</span>
+                                                                            <span class="eye-action" data-original-title="{{x.Status}}" data-toggle="tooltip" data-placement="bottom"><i class="{{x.addclass}}"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <div class="notification-respond-box" id="dvrevertmsg" style="display:{{x.display}}">
+                                                                    <div class="notification-respond-msg">
+                                                                        Respond this msg.
+                                                                        <div class="notification-respond-input">
+                                                                            <input type="button" class="respond-btn pro-btn pro1" ng-click="responsemsg(x.Title,x.UserId,x.SlotMessage,x.TransId,1)" value="Yes" />
+                                                                            <input type="button" class="respond-btn pro-btn pro2" id="btnrevertmsg" ng-click="responsemsg(x.Title,x.UserId,x.SlotMessage,x.TransId,0)" value="No" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <label class="revert-msg" id="lblrevertmsg"></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="recent-chat-box-wrap">
+                                        <div class="recent-chat-wrap">
+                                            <div class="panel-heading ma-0">
+                                                <div class="goto-back">
+                                                    <a id="goto_back" href="javascript:void(0)" class="inline-block txt-grey"> <i class="mdi mdi-chevron-left"></i> </a> <span class="inline-block txt-dark">Max</span> <a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="mdi mdi-more"></i></a>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-wrapper collapse in">
+                                                <div class="panel-body pa-0">
+                                                    <div class="chat-content">
+                                                        <ul class="nicescroll-bar pt-20">
+                                                            <li class="friend">
+                                                                <div class="friend-msg-wrap">
+                                                                    <img class="user-img img-circle block pull-left" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-2.jpg")" alt="user" />
+                                                                    <div class="msg pull-left">
+                                                                        <p class="msng-name">Sam Wrote:</p>
+                                                                        <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet?</p>
+                                                                        <div class="msg-per-detail text-right"> <span class="msg-time txt-grey">5:01 PM</span> </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="self mb-10">
+                                                                <div class="self-msg-wrap">
+                                                                    <div class="msg block pull-right">
+                                                                        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet
+                                                                        <div class="msg-per-detail text-right"> <span class="msg-time txt-light">5:01 pm</span> </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="self">
+                                                                <div class="self-msg-wrap">
+                                                                    <div class="msg block pull-right">
+                                                                        Consectetur, adipisci velit.
+                                                                        <div class="msg-per-detail text-right"> <span class="msg-time txt-light">5:13 pm</span> </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="friend">
+                                                                <div class="friend-msg-wrap">
+                                                                    <img class="user-img img-circle block pull-left" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-2.jpg")" alt="user" />
+                                                                    <div class="msg pull-left">
+                                                                        <p class="msng-name">Sam Wrote:</p>
+                                                                        <p>Neque porro quisquam.</p>
+                                                                        <div class="msg-per-detail  text-right"> <span class="msg-time txt-grey">6:35 pm</span> </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <input type="text" id="input_msg_send" name="send-msg" class="input-msg-send form-control" placeholder="Type something">
+                                                        <div class="input-group-btn emojis">
+                                                            <div class="dropup">
+                                                                <button type="button" class="btn  btn-default  dropdown-toggle" data-toggle="dropdown"><i class="mdi mdi-mood"></i></button>
+                                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                                    <li><a href="javascript:void(0)">Action</a></li>
+                                                                    <li><a href="javascript:void(0)">Another action</a></li>
+                                                                    <li class="divider"></li>
+                                                                    <li><a href="javascript:void(0)">Separated link</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-group-btn attachment">
+                                                            <div class="fileupload btn  btn-default">
+                                                                <i class="mdi mdi-attachment-alt"></i>
+                                                                <input type="file" class="upload">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                </div>
+                            </div>
+                            @*<div id="messages_tab" class="tab-pane fade" role="tabpanel">
+                                <div class="message-box-wrap">
+                                    <div class="add-friend">
+                                        <span class="inline-block txt-dark">messages</span> <a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="mdi mdi-search"></i></a> <a href="javascript:void(0)" class="inline-block txt-grey"> <i class="mdi mdi-more"></i> </a>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="set-height-wrap">
+                                        <div class="streamline message-box nicescroll-bar">
+                                            <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-2.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Peter Wyatt</span> <span class="inline-block font-11  pull-right message-time">12:28 AM</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-1.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Vivian Rox</span> <span class="inline-block font-11  pull-right message-time">1 Feb</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-3.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Mr. Danielle</span> <span class="inline-block font-11  pull-right message-time">31 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur nominees</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-4.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Tom Taylor</span> <span class="inline-block font-11  pull-right message-time">29 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet consectetur</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-5.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Mitch Blue</span> <span class="inline-block font-11  pull-right message-time">27 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam.</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-2.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Michelle</span> <span class="inline-block font-11  pull-right message-time">19 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam es.</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a> <a href="javascript:void(0)">
+                                                <div class="sl-item">
+                                                    <div class="sl-avatar avatar avatar-sm avatar-circle"> <img class="img-responsive img-circle" src="@Url.Content("~/Content/plugins/assets/img/users/avatar-1.jpg")" alt="avatar" /> </div>
+                                                    <div class="sl-content">
+                                                        <span class="inline-block capitalize-font   pull-left message-per">Linda Stack</span> <span class="inline-block font-11  pull-right message-time">13 Jan</span>
+                                                        <div class="clearfix"></div>
+                                                        <span class="truncate message-subject">Neque porro quisquam.</span>
+                                                        <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur, adipisci velit</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                            @*<div id="settings_tab" class="tab-pane fade" role="tabpanel">
+                                <div class="settings-box-wrap">
+                                    <div class="add-settings text-center txt-dark pt-15">
+                                        General Settings
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="set-height-wrap">
+                                        <!-- settings-List -->
+                                        <ul class="settings-list nicescroll-bar">
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">Email Notifications</div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">Site Tracking</div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" checked class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">SMS Alerts </div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">Backup Storage</div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" checked class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">Audit Logs</div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="add-settings text-center txt-dark pt-15">
+                                                    SYSTEM SETTINGS
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">System Logs </div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">Error Reporting </div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" checked class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">Applications Logs </div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" checked class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">Backup Servers</div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                            <li class="settings-item">
+                                                <div class="list-settings">
+                                                    <div class="pull-left">Audit Logs</div>
+                                                    <div class="pull-right">
+                                                        <input type="checkbox" class="switch-setting-bar switch-setting" data-color="#716aca" data-size="small" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <!-- /settings-List -->
+                                    </div>
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /Right Sidebar Menu -->
+
+
+        <!-- Main Content -->
+        <div class="page-wrapper ">
+            @RenderBody()
+            <div id="msgbox" style="display:none">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong><i id="faicon"></i> </strong> <label id="lblmsg"></label>
+            </div>
+            <!-- Footer -->
+            <footer class="footer container-fluid ">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="pull-left session-box  hidden-xs"> Academic Session {{AcademicSession}}  &nbsp; | &nbsp; Financial Year {{FinancialYear}}</div>
+                        <div class="pull-right copyright-box ">
+                        @*Copyright © 2020 Vidya Well. All Rights Reserved &nbsp; | &nbsp;*@ Powered by <a href="https://superhouseeducation.com/" target="_blank">Superhouse Education Foundation</a></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </footer>
+            <!-- /Footer -->
+        </div>
+        <!-- /Main Content -->
+    </div>
+
+
+    <!-- /#wrapper -->
+    <!-- JavaScript -->
+    <!-- jQuery -->
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/jquery/dist/jquery.min.js")"></script>
+    <!-- Bootstrap Core JavaScript -->
+    
+
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js")"></script>
+    <!-- data-table js -->
+    @*<script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.scroller.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.colReorder.min.js")"></script>
+    <script src="@Url.Content("~/Content/colResizable-1.6.js")"></script>*@
+
+    @*<script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/js/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/js/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/js/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js")"></script>*@
+
+    @*<script src="@Url.Content("~/Scripts/dataTables.colReorder.min.js")"></script>*@
+    <!-- Tooltipster js -->
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/tooltipster/tooltipster.bundle.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/assets/js/jquery.tooltipster.js")"></script>
+    <!-- Slimscroll JavaScript -->
+
+    <script src="@Url.Content("~/Content/plugins/assets/js/jquery.slimscroll.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/assets/js/jquery.scrollbar.js")"></script>
+
+    <!-- Fancy Dropdown JS -->
+    <script src="@Url.Content("~/Content/plugins/assets/js/dropdown-bootstrap-extended.js")"></script>
+    <!-- Owl JavaScript -->
+    @*<script src="@Url.Content("~/Content/plugins/vendors/bower_components/owl.carousel/dist/owl.carousel.min.js")"></script>*@
+    <!-- Sweet-Alert  -->
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/sweetalert/dist/sweetalert.js")"></script>
+    <!-- Switchery JavaScript -->
+    @*<script src="@Url.Content("~/Content/plugins/vendors/bower_components/switchery/dist/switchery.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/vendors/bower_components/data-table/js/data-table-custom.js")"></script>*@
+    <!-- EChartJS JavaScript -->
+    <!-- Init JavaScript -->
+    <script src="@Url.Content("~/Content/plugins/assets/js/init.js?Ver="+ViewBag.Version+"")"></script>
+
+    @*<script type="text/javascript" src="@Url.Content("~/Content/lib/underscore/underscore.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/lib/bootstrap-select/dist/js/bootstrap-select.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/lib/select2/select2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/lib/moment/moment.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/lib/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js")"></script>*@
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>
+

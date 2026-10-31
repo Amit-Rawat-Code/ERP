@@ -1,0 +1,150 @@
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (max-width: 1200px) {
+      body{
+          background:red !important;
+      }
+
+  }
+
+   /* Large devices (laptops/desktops, 992px and up) */
+   @media only screen and (max-width: 992px) {
+    div#navbar ul.nav>li>a {
+        padding: 0px 5px;
+    }
+
+
+
+
+  } 
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (max-width: 767px) {
+        a.navbar-brand {
+            height: 60px;
+            padding: 5px 15px;
+        }
+        .header-bottom .navbar-header button.navbar-toggle {
+            background: #38618f;
+            margin: 13px 15px;
+        }
+        div#navbar {
+            border-top: 1px solid #ccc;
+        }
+        div#navbar ul.nav>li>a {
+            line-height: 40px;
+            padding: 0px 15px;
+            border-bottom: 1px solid #ccc;
+            margin: 0px;
+        }
+        .navbar-nav .open .dropdown-menu {
+            background-color: #fdfcee;
+            padding-left: 30px;
+        }
+        .navbar-nav {
+            margin: 3.5px -15px;
+            padding: 0px 10px;
+        }
+
+
+        div#navbar ul.nav>li>a span.badge {
+            float: right;
+            top: 8px;
+        }
+        ul.nav.navbar-nav.navbar-right> li:last-child >a {
+            border: 0  !important;
+        }
+        ul.dropdown-menu>li:last-child>a {
+            border: 0px;
+        }
+        .website-main-content {
+            padding-top: 104PX;
+        }
+        .Modern-Slider .item .img-fill {
+            height: calc(100vh - 104px );            
+        }
+        .Modern-Slider .item .img-fill img {           
+            height: calc(100vh - 104px);            
+        }
+        div#navbar ul.nav>li>a>span.icon {
+            display: inline-block;
+            float: left;
+            margin-right: 10px;
+            position: relative;
+            top: 4px;
+        }
+        div#navbar ul.nav>li>a>.nav-title {
+            display: inline-block;
+        }
+        ul.nav.navbar-nav.navbar-right li.dropdown.open {
+            margin-top: 0px;
+        }
+        .vid-container {
+            width: 100%;
+            float: none;
+        }
+        .vid-list-container {
+            margin-top: 361px;
+            width: 100%;
+        }
+        .vid-main-wrapper.clearfix {
+            min-width: unset;
+        }
+        ul.nav.navbar-nav.navbar-right ul.dropdown-menu li a {
+            border-bottom: 1px solid #ccc;
+        }
+        section.page-section.Event-Calendar-allenkid .icon ul li {
+            padding: 0px 5px;
+        }
+        section.page-section.Event-Calendar-allenkid .icon ul li.Event_Calendar a {
+            background-size: 40px;
+            padding-left: 48px;
+            font-size: 18px;
+            line-height: 40px;
+        }
+        section.page-section.Event-Calendar-allenkid .icon ul li.kids_corner a {
+            background-size: 40px;
+            padding-left: 48px;
+            font-size: 18px;
+            line-height: 40px;
+        }
+        #section-1.event-style .content-slider .slider .banner .banner-inner-wrapper {
+            padding-top: 5em;
+        }
+        #section-1.event-style .content-slider .slider .banner .banner-inner-wrapper h1 {
+            font-size: 2em;
+        }
+        section.testimonial {
+            height: calc( 100vh - 104px);
+        }
+        #section-1.event-style .content-slider nav {
+            bottom: 2em;
+        }
+        .Modern-Slider .item .info > div {
+            padding: 50px;
+        }
+        h3.section-title {
+            font-size: 20px;
+        }       
+                
+    } 
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 480px) {
+    .header-top {
+        display: none;
+    }
+    .header-bottom {
+        background: #fff;
+        padding: 10px 0px;
+    }
+    .website-main-content {
+        padding-top: 80PX;
+    }
+    section.page-section.Event-Calendar-allenkid .icon ul li {
+        padding: 0px 0px;
+    } 
+  
+   
+
+}

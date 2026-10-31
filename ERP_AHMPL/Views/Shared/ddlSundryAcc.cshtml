@@ -1,0 +1,53 @@
+﻿<div class="input-box chk-validate">
+    <div class="toggle-ddl" id="openSundry"
+         ng-init="ToogleDDL('openSundry','openSundry')">
+        @*btn-validate*@
+        <button class='btn btn-primary select-btn'
+                data-ng-click='openSundry=!openSundry'
+                ng-bind="GetCount(SundryList,'Select Ref. Voucher')">
+            Select Ref. Voucher
+        </button>
+        @*btn-validate*@
+        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                data-ng-click='openSundry=!openSundry'>
+            <span class='fa fa-chevron-down'></span>
+        </button>
+        <div ng-show="openSundry" class="ddlMultiple" ng-cloak>
+            <div>
+                <span class="btn-counts-right">Total Count: {{SundryList.length}}</span>
+            </div>
+            <hr style="margin:0px !important" />
+            <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Sundry</th>
+                        <th>Voucher</th>
+                        <th>Voucher No.</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Narration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="XL in SundryList" class="ng-scope">
+                        <td>
+                            <input type="checkbox" ng-model="XL.chk" ng-value="XL.TransID"
+                                   ng-change="ddlSundry_Change(XL);" ng-disabled="XL.disabled" />
+                        </td>
+                        <td>{{XL.Name}}</td>
+                        <td>{{XL.V_Type}}</td>
+                        <td>{{XL.PVNo}}</td>
+                        <td>{{XL.VDate}}</td>
+                        <td>{{XL.CrAmt}}</td>
+                        <td>{{XL.EntryNarr}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+

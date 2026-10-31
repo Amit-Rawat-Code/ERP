@@ -1,0 +1,4 @@
+﻿<select id="ddlStudentWiseSubject" class="select2 form-control validate" ng-model="StudentWiseSubjects" ng-disabled="HomeworkModeModel!=2">
+    <option value="">Select Subject</option>
+    <option ng-repeat="subject in GSSubjects" value="{{subject.SubjectId}}"  ng-disabled="!subject.IsActive">{{subject.SubjectName}}</option>
+</select>

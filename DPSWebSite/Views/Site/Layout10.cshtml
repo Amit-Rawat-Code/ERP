@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "ImageContentPage";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<style>
+    .tab ul li {
+        display: inline-block;
+        background: #f8bd1f;
+        border-radius: 5px;
+        padding: 10px;
+        width: 49%;
+        color: #fff;
+        text-align: center;
+        transition: ease-in-out 0.4s;
+        margin:5px;
+    }
+</style>
+<div ng-init="GetAboutUsNew();" ng-cloak>
+    <section class="page-section why-choose-allen-kids">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="master-hdr">
+                        <h3 class="section-title">{{(ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'IC'})[0].BodyContentHeading}}</h3>
+                    </div>
+                </div>
+                <div class="col-sm-12" ng-repeat="mimg in ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'IC'}" ng-if="(ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'IC'}).length==1?true:false">
+                    <div class="photo-section" style="text-align: -webkit-center;">
+                        <img src="{{mimg.ImgPath}}" height="{{mimg.ImageHeight}}">
+                    </div>
+                </div>
+                <div class="col-sm-6" ng-repeat="mimg in ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'IC'}" ng-if="(ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'IC'}).length==2?true:false">
+                    <div class="photo-section" style="text-align: -webkit-center;">
+                        <img src="{{mimg.ImgPath}}" height="{{mimg.ImageHeight}}">
+                    </div>
+                </div>
+                <div class="col-sm-4" ng-repeat="mimg in ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'IC'}" ng-if="(ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'IC'}).length==3?true:false">
+                    <div class="photo-section" style="text-align: -webkit-center;">
+                        <img src="{{mimg.ImgPath}}" height="{{mimg.ImageHeight}}">
+                    </div>
+                </div>
+                <div class="col-sm-3" ng-repeat="mimg in ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'IC'}" ng-if="(ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'IC'}).length>=4?true:false">
+                    <div class="photo-section" style="text-align: -webkit-center;">
+                        <img src="{{mimg.ImgPath}}" height="{{mimg.ImageHeight}}">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="atallenkids">
+                        <div class="discription-section">
+                            <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageDataNew|filter:{LayoutPartAbbreviationName:'BCC'})[0].BodyContent)">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" ng-init="GetAboutUsPageLink();">
+                    <ul>
+                        @*<li class="full_tab"><a href="activity_calendar.html">ACTIVITY CALENDAR 2019-2020</a></li>*@
+                        <li ng-repeat="PL in PageLinkDataList|filter:{LayoutPartAbbreviationName:'IC'}"><a href="{{PL.PageLink}}">{{PL.LinkName}}</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,5 @@
+﻿<select id="ddlBatchClassWise" class="select2 form-control " ng-model="BatchCode" ng-change="GetEntranceMarksEntryList();">
+    <option value="">Select Batch</option>
+    <option ng-repeat="bcwl in BatchClassWiseList" value="{{bcwl.Code}}">{{bcwl.BatchName}}</option>
+</select>
+

@@ -1,0 +1,346 @@
+﻿@{
+    ViewBag.Title = "Compose SMS";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/ComposeSMSController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Compose SMS</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>SMS</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Compose SMS</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Compose By<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlRole" class="select2 form-control validate" ng-model="ComposeBy" ng-init="GetAllRole();">
+                                                    <option value="">Select Compose By</option>
+                                                    <option ng-repeat="rl in RolesList" value="{{rl.RoleId}}" ng-disabled="!rl.IsActive">{{rl.RoleName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">SMS Subject<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSMSSubject")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Send To<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlUserType", new List<SelectListItem>{
+                                                     new SelectListItem{Text="Select", Value=""},
+                                                     new SelectListItem{Text="Staff", Value="Staff"},
+                                                     new SelectListItem{Text="Student", Value="Student"},
+                                                     new SelectListItem{Text="Both", Value="Both"}
+                                                 },
+                                                     new { @class = "select2 form-control validate", @ng_model = "UserType", @ng_change = "ddlUserType_Change()" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">SMS Template<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSMSTemplate")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Language<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlLanguage", new List<SelectListItem>{
+                                                     new SelectListItem{Text="Select", Value=""},
+                                                     new SelectListItem{Text="English", Value="English"},
+                                                     new SelectListItem{Text="Hindi", Value="Hindi"}
+                                                 },
+                                                     new { @class = "select2 form-control validate", @ng_model = "Language" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Send Sms copy to sender<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                <div class="input-box chk-validate">
+                                                    <div class="toggle-ddl" id="openEmployee"
+                                                         ng-init="ToogleDDL('openEmployee','openEmployee')">
+                                                        @*btn-validate*@
+                                                        <button class='btn btn-primary select-btn'
+                                                                data-ng-click='openEmployee=!openEmployee'
+                                                                ng-bind="GetCount(EmployeesList,'Select Employee')">
+                                                            Select Employee
+                                                        </button>
+                                                        @*btn-validate*@
+                                                        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                                data-ng-click='openEmployee=!openEmployee'>
+                                                            <span class='fa fa-chevron-down'></span>
+                                                        </button>
+                                                        <div ng-show="openEmployee" class="ddlMultiple" style="width: 100%;height: 220px;right:0;left:unset" ng-cloak>
+                                                            <div ng-click="ddlCheckAll('EmployeesList')">
+                                                                Check All
+                                                                <span class="btn-counts-right">Total Count: {{EmployeesList.length}}</span>
+                                                            </div>
+                                                            <div ng-click="ddlUnCheckAll('EmployeesList')">Uncheck All</div>
+                                                            <hr style="margin:0px !important" />
+                                                            <table class="table compact table-hover table-striped table-bordered
+                                                                   nowrap dataTable t-mgtb-n" ng-init="GetEmployees();">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Employee</th>
+                                                                        <th>Employee ID</th>
+                                                                        <th>Department</th>
+                                                                        <th>Designation</th>
+                                                                        <th>Mobile</th>
+                                                                        <th>Father</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="il in EmployeesList| orderBy: '+FullName'">
+                                                                        <td>
+                                                                            <input type="checkbox" ng-model="il.chk" ng-value="il.EmployeeCode"
+                                                                                   ng-change="" ng-disabled="il.disabled" /> {{il.FirstName}}{{il.MiddelName}}{{il.LastName}}
+                                                                        </td>
+                                                                        <td>{{il.EmployeeId}}</td>
+                                                                        <td>{{il.Department}}</td>
+                                                                        <td>{{il.Designation}}</td>
+                                                                        <td>{{il.ContactNo}}</td>
+                                                                        <td>{{il.Father}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Text Message<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextArea("txtTextMsg", "", new { @class = "form-control clear validate", @placeholder = "", @ng_model = "TextMsg", @style = "height:100px;", @maxlength = "320" })
+                                                <p style="text-align:right; color:#000;">(Text Message {{TextMsg.length}}/320 character limit.)</p>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="UserType=='Student'||UserType=='Both'">
+                                            <label class="control-label">Select Class<span class="vd_red"></span></label>
+                                            <div class="input-box chk-validate">
+                                                <div class="toggle-ddl" id="openSection"
+                                                     ng-init="ToogleDDL('openSection','openSection')">
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary select-btn'
+                                                            data-ng-click='openSection=!openSection'
+                                                            ng-bind="GetCount(Sections,'Select Class')">
+                                                        Select Class
+                                                    </button>
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                            data-ng-click='openSection=!openSection'>
+                                                        <span class='fa fa-chevron-down'></span>
+                                                    </button>
+                                                    <div ng-show="openSection" class="ddlMultiple" style="width: 100%;height: 220px;right:0;left:unset" ng-cloak>
+                                                        <div ng-click="ddlCheckAll('Sections');Section_Click()">
+                                                            Check All
+                                                            <span class="btn-counts-right">Total Count: {{Sections.length}}</span>
+                                                        </div>
+                                                        <div ng-click="ddlUnCheckAll('Sections');Section_Click()">Uncheck All</div>
+                                                        <hr style="margin:0px !important" />
+                                                        <table class="table compact table-hover table-striped table-bordered
+                                                                   nowrap dataTable t-mgtb-n" ng-init="GetAllSections();">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Class</th>
+                                                                    <th>Section</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="il in Sections" class="ng-scope">
+                                                                    <td>
+                                                                        <input type="checkbox" ng-model="il.chk" ng-change="chk_Change();" /> {{il.ClassName}}
+                                                                    </td>
+                                                                    <td>{{il.SectionName}}</td>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section-title-filter mt-40" ng-show="UserType=='Student'||UserType=='Both'">
+                                            <div class="pull-left section-title">
+                                                <h3 style="text-decoration:underline">Select Class & Student</h3>
+                                            </div>
+                                        </div>
+                                        <div id="divStudentList" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="UserType=='Student'||UserType=='Both'">
+                                            <div class="table-responsive" style="overflow-y: hidden;">
+                                                <table id="tblStudentList" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 10px">S.No.</th>
+                                                            <th style="width: 10%">Class</th>
+                                                            <th style="width: 30%">Student</th>
+                                                            <th style="width: 20%">Contact No.</th>
+                                                            <th style="width: 20%">Admission No.</th>
+                                                            <th style="width: 20%">Father</th>
+                                                            <th style="width: 10px"></th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="student in StudentList" scroll-div-footer="tblStudentList">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{student.ClassName}}</td>
+                                                            <td>{{student.Name}}</td>
+                                                            <td>{{student.Mobile}}</td>
+                                                            <td>{{student.AdmissionNo}}</td>
+                                                            <td>{{student.FatherName}}</td>
+                                                            <td>
+                                                                <input type="checkbox" ng-model="student.chk" />
+                                                            </td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td><input class="form-control" type="text" placeholder="S.No." /></td>
+                                                            <td><input class="form-control" type="text" placeholder="Class" /></td>
+                                                            <td><input class="form-control" type="text" placeholder="Student" /></td>
+                                                            <td><input class="form-control" type="text" placeholder="ContactNo" /></td>
+                                                            <td><input class="form-control" type="text" placeholder="Admission No." /></td>
+                                                            <td><input class="form-control" type="text" placeholder="Father" /></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tfoot>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        @*<div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="UserType=='Staff'||UserType=='Both'">
+            <label class="control-label">Type<span class="vd_red">*</span></label>
+            <div class="input-box">
+                <select id="ddlEmployeeType" class="select2 form-control clear validate" ng-model="Type" ng-change="ddlType_Change()" ng-init="GetEmployeeType();">
+                    <option value="">--Select--</option>
+                    <option ng-repeat="EmpType in EmployeeTypeList" value="{{EmpType.Code}}">
+                        {{EmpType.Name}}
+                    </option>
+                </select>
+                <div class="text-box-msg-r">
+                </div>
+            </div>
+        </div>*@
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section-title-filter mt-40" ng-show="UserType=='Staff'||UserType=='Both'">
+                                            <div class="pull-left section-title">
+                                                <h3 style="text-decoration:underline">Show Employee List</h3>
+                                            </div>
+                                        </div>
+                                        <div id="divStaffList" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="UserType=='Staff'||UserType=='Both'">
+                                            <div class="table-responsive" style="overflow-y: hidden;">
+                                                <table id="tblSendSMStoEmployeeList" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 10px">S.No.</th>
+                                                            <th style="width: 10%">Department</th>
+                                                            <th style="width: 10%">Designation</th>
+                                                            <th style="width: 20%">Employee Type</th>
+                                                            <th style="width: 20%">Employee Name</th>
+                                                            <th style="width: 20%">Contact No.</th>
+                                                            <th style="width: 10%">EmployeeId</th>
+                                                            <th style="width: 10%">Father</th>
+                                                            <th style="width: 10px"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="employee in SendSMStoEmployeeList" scroll-div-footer="tblSendSMStoEmployeeList">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{employee.Department}}</td>
+                                                            <td>{{employee.Designation}}</td>
+                                                            <td>{{employee.EmployeeTypeName}}</td>
+                                                            <td>{{employee.FullName}}</td>
+                                                            <td>{{employee.ContactNo}}</td>
+                                                            <td>{{employee.EmployeeId}}</td>
+                                                            <td>{{employee.Father}}</td>
+                                                            <td>
+                                                                <input type="checkbox" ng-model="employee.chk" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td><input class="form-control" type="text" placeholder="S.No." /></td>
+                                                            <td><input class="form-control" type="text" placeholder="Department" /></td>
+                                                            <td><input class="form-control" type="text" placeholder="Designation" /></td>
+                                                            <td><input class="form-control" type="text" placeholder="Employee Type" /></td>
+                                                            <td><input class="form-control" type="text" placeholder="Employee Name" /></td>
+                                                            <td><input class="form-control" type="text" placeholder="ContactNo" /></td>
+                                                            <td><input class="form-control" type="text" placeholder="EmployeeId" /></td>
+                                                            <td><input class="form-control" type="text" placeholder="Father" /></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionSendClear")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

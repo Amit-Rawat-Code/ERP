@@ -1,0 +1,8 @@
+﻿
+<select id="ddlSubjectGroup" class="select2 form-control validate" ng-model="SubjectGroupCode"
+        ng-init="GetSubjectGroup();" ng-change="ddlSubjectGroup_Change();">
+    <option value="">Select Subject Group</option>
+    <option ng-repeat="SubjectGroup in SubjectGroups" value="{{SubjectGroup.Code}}" ng-disabled="!SubjectGroup.IsActive">{{SubjectGroup.SubjectGroupName}}</option>
+</select>
+
+

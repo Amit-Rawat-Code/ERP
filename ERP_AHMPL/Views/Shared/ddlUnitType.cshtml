@@ -1,0 +1,6 @@
+﻿<select id="ddlUnitType" class="select2 form-control clear validate" ng-model="UnitTypeCode"
+        ng-init="GetUnitType1();">
+    <option value="">Select Unit Type</option>
+    <option ng-repeat="GetUnitType in GetUnitTypes" value="{{GetUnitType.Code}}">{{GetUnitType.UnitType}}</option>
+</select>
+

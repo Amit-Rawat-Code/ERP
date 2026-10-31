@@ -1,0 +1,20 @@
+@{
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/authorization.js?Ver=@ViewBag.Version"></script>
+<link href="~/Content/plugins/assets/fonts/feather-icon/feather-icon.css" rel="stylesheet" />
+
+<button id="btnDelete" type="button" value="Delete" class="btn-me btn-danger hvr-float-shadow" name="deleteButton" ng-model="Delete" ng-click="CheckDeletePermission();DeleteRecord()" 
+        ng-disabled="disableDelete" ng-show="visibleDelete" disabled>
+    <span class="action-txt">Delete</span>
+    <i data-feather="trash-2"></i>
+</button>
+
+
+
+
+
+
+
+

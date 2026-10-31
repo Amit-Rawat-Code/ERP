@@ -1,0 +1,5 @@
+﻿@Html.DropDownList("ddlTDSActive", new List<SelectListItem>{
+    new SelectListItem{Text="No", Value="N"},
+    new SelectListItem{Text="Yes", Value="Y"}
+},
+    new { @class = "form-control clear", @ng_model = "IsTDSActive",@ng_init="IsTDSActive='N'" })

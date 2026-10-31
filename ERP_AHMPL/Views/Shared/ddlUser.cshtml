@@ -1,0 +1,6 @@
+﻿<select id="ddlUser" class="select2 form-control validate" ng-model="UserName" ng-init="GetUserName();" ng-change="UserWiseRoles(); ddl_UserChange()">
+    <option value="" >Select User</option>
+    <option ng-repeat="unl in UserNameList" value="{{unl.UserId}}">
+        {{unl.EmpName}}
+    </option>
+</select>

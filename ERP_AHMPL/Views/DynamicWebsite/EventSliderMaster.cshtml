@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "EventSliderMaster";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script src="~/Scripts/myjslib/EventSliderMasterController.js?Ver=@ViewBag.Version"></script>
+<script src="//cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
+<script src="~/Content/ckfinder/ckfinder.js"></script>
+<script type="text/javascript">
+    $(function () {
+        CKEDITOR.replace("EnglishEditor", { customConfig: "/Content/ckeditor/config.js" });
+
+    })
+</script>
+
+<script>
+    CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://www.wiris.net/demo/plugins/ckeditor/', 'plugin.js');
+
+    CKEDITOR.editorConfig = function (config) {
+        config.toolbar = [
+            { name: 'wirisplugins', items: ['ckeditor_wiris_formulaEditor', 'ckeditor_wiris_formulaEditorChemistry'] }
+        ];
+        config.allowedContent = true;
+    };
+
+    CKEDITOR.replace('EnglishEditor', {
+        extraPlugins: 'ckeditor_wiris'
+    });
+</script>
+
+
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="ImageId" id="ImageId" name="ImageId" value="" />
+<div class="app-content  my-3 my-md-5" ng-init="GetRecommedSize();">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Create Event Slider</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Unit Manager</span></li>
+                        <li class="breadcrumb-item">Unit Detail Master</li>
+                        <li class="breadcrumb-item active" aria-current="page">Create Event Slider</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="br-pagebody">
+                <div class="">
+                    <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Image Type</label>
+                                        @Html.DropDownList("BannerType", new List<SelectListItem>{
+                                new SelectListItem{Text="Select", Value=""},
+                                new SelectListItem{Text="Event Slider", Value="Event Slider"}
+                            },
+                                new { @class = "select2 form-control validate", @ng_model = "BannerType" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Page Slider Category</label>
+                                        @Html.DropDownList("PageBannerCategoryCode", new List<SelectListItem>{
+                               new SelectListItem{Text="Select", Value=""},
+                               new SelectListItem{Text="Home Page Events Slider", Value="10000006"}
+                           },
+                               new { @class = "select2 form-control validate", @ng_model = "PageBannerCategoryCode" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Event From Date</label>
+                                        @Html.TextBox("EventFromDate", "", new { @class = "form-control clear", @type = "date", @ng_model = "EventFromDate", @placeholder = "Event From Date" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Event To Date</label>
+                                        @Html.TextBox("EventToDate", "", new { @class = "form-control clear validate", @type = "date", @ng_model = "EventToDate", @placeholder = "Event To Date" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Image Alternate Text</label>
+                                        @Html.TextBox("BanneraltText", "", new { @class = "form-control clear validate", @ng_model = "BanneraltText", @placeholder = "Banner alt Text" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label><b>Event Slider Image</b></label>
+                                        <img class="img-fix" id="imgfileInput" src="~/Content/noimage.png" ng-model="imgfileInput" ng-src="{{imgfileInput}}" alt="" width="150" height="150" ng-click="OpenFileUploadBanner()">
+                                        <input onchange="angular.element(document).scope().fuBannerImageChange(this)" type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" ng-model="fileInput" multiple class="validate" width="150" />
+
+                                    </div>
+                                    <div class="details" ng-repeat="ImageSize in  RecommedSizeImageData">
+                                        <b>Recommended Size:</b>&nbsp;
+                                        <span style="color:red">{{ImageSize.ContentImageDataDefaultSize}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label><b>Image Height</b></label>
+                                        <input class="form-control" type="text" maxlength="5" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="ImageHeight" ng-model="ImageHeight" />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label><b>Image object-fit Property</b></label>
+                                        @Html.DropDownList("ImageObjectFit", new List<SelectListItem>{
+                                                                    new SelectListItem{Text="Select", Value=""},
+                                                                    new SelectListItem{Text="fill", Value="fill"},
+                                                                    new SelectListItem{Text="contain", Value="contain"},
+                                                                    new SelectListItem{Text="cover", Value="cover"},
+                                                                    new SelectListItem{Text="none", Value="none"},
+                                                                    new SelectListItem{Text="scale-down", Value="scale-down"}
+                                                                },
+                                                                    new { @class = "select2 form-control validate", @ng_model = "ImageObjectFit" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label>Slider Description 1</label>
+                                        @Html.TextBox("BannerDescription1", "", new { @class = "form-control clear", @ng_model = "BannerDescription1", @placeholder = "Description 1" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label>Slider Description 2</label>
+                                        @Html.TextBox("EnglishEditor", "", new { @id = "EnglishEditor", @class = "form-control clear", @ng_model = "EnglishEditor" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    @Html.Partial("ActionView")
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    @Html.Partial("SearchAngularJs")
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

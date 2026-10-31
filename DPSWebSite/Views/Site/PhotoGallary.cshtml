@@ -1,0 +1,214 @@
+﻿
+@{
+    ViewBag.Title = "PhotoGallary";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<section class="page-section allenhose-story news-letter Achievement">
+    <div class="container" >
+        <div class="master-hdr">
+            <h3 class="section-title">Photo <span>Gallery</span></h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="searchform1">
+                    <div class="gallery-searchA">
+                        <ul>
+                            @*<li>
+                                    <input id="RadioSearchAll" name="filter" ng-model="filter" type="radio" value="ALL Search" ng-change="clearFilter()" ><label for="RadioSearchAll">All Search</label>
+                                </li>*@
+                            <li>
+                                <input id="RadioTitle" name="filter" ng-model="filter" type="radio" value="Title" ng-change="clearFilter()"><label for="RadioTitle">Title</label>
+                            </li>
+                            <li>
+                                <input id="RadioVenue" name="filter" ng-model="filter" type="radio" value="Venue" ng-change="clearFilter()"><label for="RadioVenue">Venue</label>
+                            </li>
+
+                            <li>
+                                <input id="RadioDescription" name="filter" ng-model="filter" type="radio" value="Description" ng-change="clearFilter()"><label for="RadioDescription">Description</label>
+                            </li>
+                            <li>
+                                <input id="RadioDate" name="filter" ng-model="filter" type="radio" value="EventDate" ng-change="clearFilter()"><label for="RadioDate">Event Date</label>
+                            </li>
+                            <li>
+                                <input id="RadioAcdYear" name="filter" ng-model="filter" type="radio" value="Year" ng-change="clearFilter()"><label for="RadioAcdYear"> Year</label>
+                            </li>
+
+                            <li class="lastli mLeft">
+                                <div class="searchbox">
+                                    <input type="text" class="searchfield d a1" ng-model="searchText[filter]" placeholder="{{filter}}">
+                                </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="photoG" >
+            <div class="col-md-3" style="text-align: center;" ng-repeat="data in ImageGalleryData | filter:searchText">
+                <div class="news-letter-box">
+                    <div class="box1">
+                        <img src="{{data.AlbumIcon}}" style="max-width:250px">
+                        <div class="achibg">
+                            <div class="achi-dtl ">
+                                <span id="" class="Event" title="{{data.Title.length>20?data.Title:''}}">{{AdjustLength(data.Title,15)}}</span>
+                            </div>
+                            @*<div class="achi-dt2">
+                                    <b>Newspaper:</b>
+                                    <span id="" class="EventVenue">{{data.Venue}}</span>
+                              </div>*@
+                            <div class="achi-dt2 aCHdate">
+                                <b>Event Date:</b>
+                                <span id="" class="EventDate EventDate1" title="{{data.EventDate.length>10?data.EventDate:''}}">
+                                {{AdjustLength(data.EventDate,10)}}</span>
+                            </div>
+                            <div class="achi-dt2 aCHdate">
+                                <b>Published On:</b>
+                                <span id="" class="EventDate EventDate1" title="{{data.EventDate.length>10?data.EventDate:''}}">
+                                {{AdjustLength(data.EventDate,10)}}</span>
+                            </div>
+                            <div class="achi-bg2 mTopAch">
+                                <b>Total Photo(s):</b>
+                                <span id="" class="Description">{{data.CountA}}</span>
+                            </div>
+                        </div>
+                        <a href="" ng-href="{{GetEventUrl(data.TransId,data.CountA)}}" ><button type="button" ng-disabled="data.CountStatus" class="btn btn-primary">{{data.PhotoGalleryType==1?'More Photos':data.PhotoGalleryType==2?'More Videos':data.PhotoGalleryType==3?'Read More':'No Value'}}</button></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script language="javascript" type="text/javascript">
+
+    var showhide = function (val, placeHolder)
+    {
+        $("#txtDate").val('').attr('placeholder', placeHolder);
+        $("#txtsearch1").val('').attr('placeholder', placeHolder);
+        $("#txtsearch").val('').attr('placeholder', placeHolder);
+        $(".a1").hide();
+        $(val).show();
+    }
+    $(document).ready(function ()
+    {
+
+        if ($('#Radioyear').is(':checked')) {
+            $(".a1").hide();
+            $(".b").show();
+        }
+        if ($('#RDAllSearch').is(':checked')) {
+            $(".a1").hide();
+            $(".c").show();
+        }
+        if ($('#RadioNews').is(':checked')) {
+
+            $(".a1").hide();
+            $(".a").show();
+        }
+        if ($('#RadioDate').is(':checked')) {
+
+            $(".a1").hide();
+            $(".d").show();
+        }
+        if ($('#RadioHeadline').is(':checked')) {
+
+            $(".a1").hide();
+            $(".c").show();
+        }
+
+
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        if ($('#RadioNews').is(':checked')) {
+            $("#txtsearch").attr('placeholder', "Enter newspaper name");
+        }
+        else if ($('#RDAllSearch').is(':checked')) {
+            $("#txtsearch1").attr('placeholder', "Enter newspaper name or headline");
+
+        }
+        else if ($('#RadioHeadline').is(':checked')) {
+            $("#txtsearch1").attr('placeholder', "Enter headline");
+
+        }
+        else if ($('#RadioDate').is(':checked')) {
+            $("#txtDate").attr('placeholder', "Pick a date");
+        }
+        //$("#txtsearch1").attr('placeholder', "Enter newspaper name or headline");
+        $("#Button1").click(function () {
+            var title = $("#txtsearch1").val();
+            //var descp = $("#txtdiscription").val();
+            var dates = $("#txtDate").val();
+            var descp = $("#txtsearch").val();
+            if ($('#RadioHeadline').is(':checked')) {
+                $("#txtdiscription").removeClass('borderred');
+                $("#txtsearch1").removeClass('borderred');
+                $("#txtDate").removeClass('borderred');
+                $("#txtsearch").removeClass('borderred');
+                //$("#txttitle").removeClass('borderred');
+                //alert('hi')
+                if ((title == "")) {
+                    $("#txtsearch1").addClass('borderred');
+                    return false;
+                }
+                else {
+                    $("#txtsearch1").removeClass('borderred');
+                    return true;
+                }
+            }
+            else if ($('#RadioNews').is(':checked')) {
+                $("#txtdiscription").removeClass('borderred');
+                $("#txtsearch1").removeClass('borderred');
+                $("#txtDate").removeClass('borderred');
+                $("#txtsearch").removeClass('borderred');
+                alert('hi')
+                if ((descp == "")) {
+                    $("#txtsearch").addClass('borderred');
+                    return false;
+
+                }
+                else {
+                    $("#txtsearch").removeClass('borderred');
+                    return true;
+                }
+            }
+            else if ($('#RadioDate').is(':checked')) {
+                $("#txtdiscription").removeClass('borderred');
+                $("#txtsearch1").removeClass('borderred');
+                $("#txtDate").removeClass('borderred');
+                $("#txtsearch").removeClass('borderred');
+                //alert('hi')
+                if ((dates == "")) {
+                    $("#txtDate").addClass('borderred');
+                    return false;
+                }
+                else {
+                    $("#txtDate").removeClass('borderred');
+                    return true;
+                }
+            }
+        });
+        $('#RadioNews,#RadioDate,#RadioHeadline').change(function () {
+            $("#txtsearch1").removeClass('borderred');
+            $("#txtDate").removeClass('borderred');
+            $("#txtsearch").removeClass('borderred');
+
+
+            $("#txtsearch1").val('').attr('placeholder', "Enter headline");
+
+        });
+        $('#RDAllSearch').change(function () {
+            $("#txtsearch1").removeClass('borderred');
+            $("#txtDate").removeClass('borderred');
+            $("#txtsearch").removeClass('borderred');
+            $("#txtsearch1").val('').attr('placeholder', "Enter newspaper name or headline");
+
+        });
+        $('#Radioyear').change(function () {
+            $("#ddlYear").prop("selectedIndex", 0);
+        });
+    });
+</script>
+

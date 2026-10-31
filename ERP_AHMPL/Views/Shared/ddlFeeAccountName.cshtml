@@ -1,0 +1,7 @@
+﻿<select id="ddlACCode" class="select2 form-control validate" ng-model="ACCode" ng-init="GetACCode();" >
+    <option value="">Select</option>
+    <option ng-repeat="accode in ACCodes" value="{{accode.SubCode}}">{{accode.Name}}</option>
+</select>
+
+
+

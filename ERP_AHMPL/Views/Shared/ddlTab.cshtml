@@ -1,0 +1,6 @@
+﻿<select id="ddlTab" class="select2 form-control clear validate" ng-model="TabId"  ng-change="GetddlMenu(TabId)">
+    <option value="">Select Tab</option>
+    <option ng-repeat="Tab in Tabs" value="{{Tab.TabId}}">{{Tab.TabName}}</option>
+</select>
+
+

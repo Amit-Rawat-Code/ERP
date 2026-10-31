@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "Ledger Transfer";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/InsertOpeningintoLedgerController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Ledger Transfer</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><span>Utility</span></li>
+                <li><span>Data Transfer</span></li>
+                <li class="active"><span>Ledger Transfer</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody" ng-cloak>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox" ng-cloak>
+                                    <form id="user-form">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <label class="control-label">To Session<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlSession" class="form-control clear validate" ng-model="ToSessionId" ng-init="GetSession()" ng-change="GetAllotedFinancialYear();">
+                                                    <option value="">Select To Session</option>
+                                                    <option ng-repeat="sl in SessionList|filter:{SessionId:'!'+WorkingSessionId}" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <label class="control-label">To FY<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlAllotedFinancialYear" autocomplete='address-level2' class="select2 form-control validate" ng-model="ToFYId" ng-change="ddlAllotedFinancialYear_Change()">
+                                                    <option value="">Select Financial Year</option>
+                                                    <option ng-repeat="sl in AllotedFinancialYearList" value="{{sl.FinancialYearId}}">{{sl.FinancialYearName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-show="LedgerList.length>0">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="datatable-responsive table-responsive table-scroll">
+                                                    <table ng-show="LedgerList.length>0" class="table compact table-hover table-striped table-bordered mgbt-xs-5 ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="sr-no-w text-center">Sr. No.</th>
+                                                                <th class="text-center">Ledger Group</th>
+                                                                <th class="text-center">Ledger Name</th>
+                                                                <th class="text-center">Ledger Code</th>
+                                                                <th class="text-center">Nature</th>
+                                                                <th class="text-center">Address</th>
+                                                                <th class="text-center">
+                                                                    <div class="checkbox checkbox-primary table-check-wt">
+                                                                        <input type="checkbox" class="clear" ng-model="chkAll"
+                                                                               ng-init="chkAll=true" ng-change="chkRowAll()" />
+                                                                        <label></label>
+                                                                    </div>
+                                                                </th>
+                                                                <th class="text-center">Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="ledger in LedgerList" repeat-done>
+                                                                <td class="text-center">
+                                                                    {{$index+1}}
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    {{ledger.LedgerGroup}}
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    {{ledger.LedgerName}}
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    {{ledger.LedgerCode}}
+                                                                </td>
+                                                                <td class="text-center">{{ledger.Nature}}</td>
+                                                                <td class="text-center">{{ledger.Address}}</td>
+                                                                <td class="text-center">
+                                                                    <div class="checkbox-primary table-check-wt">
+                                                                        <input type="checkbox" class="clear" id="chkAllow" ng-model="ledger.chkAllow"
+                                                                               ng-checked="ledger.chkAllow" ng-init="ledger.chkAllow=true"
+                                                                               ng-change="chkUncheck()" />
+                                                                    </div>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    {{ledger.Status==1?'Transferred':''}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr ng-if="LedgerTableList.length==0" style="text-align:center">
+                                                                <td colspan="12">No Record(s) found.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <button id="btnImport" type="button" value="Import" class="btn2 btn-common btn-3 btn-3d pe-7s-check" name="ImportButton"
+                                                        ng-model="Import" ng-init="Import='Import';" ng-click="TransferRecord();"
+                                                        ng-disabled="disabledImport">
+                                                    <span class="triangle-box" title="Import"></span>
+                                                    <span id="btnTransfertxt" ng-bind="Import">Import</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+<script>
+    $('#ddlSection').removeClass('validate');
+</script>

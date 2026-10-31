@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "AdminPhotoUploading";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script src="~/Scripts/myjslib/AdminPhotoUploadingController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hdnPhotoTransId" id="hdnPhotoTransId" />
+<!-- Section: inner-header -->
+<div class="app-content  my-3 ">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Upload Album Photos</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Album</span></li>
+                        <li class="active"><span>Upload Album Photos</span></li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="br-pagebody">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="collapse in" id="collapseinputbox">
+                                        <div class="row">
+
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Unit Type</label>
+                                                        @Html.Partial("ddlPermUnitType")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Unit</label>
+                                                        @Html.Partial("ddlPermUnit")
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Album Name</label>
+                                                        <select id="ddlGalleryType" class="form-control clear validate" ng-change="SetAlbumn()" ng-model="PhotoAlbumId" ng-init="AlbumName();">
+                                                            <option value="">Select</option>
+                                                            @*<option ng-repeat="x in rec" value="{{x.TransId}}|{{x.Title}}">{{x.Title}}</option>*@
+                                                            <option ng-repeat="x in rec | filter : PhotoGalleryType" value="{{x.TransId}}">{{x.Title}}</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+
+                                                    <div class="form-group">
+                                                        <label>Images  Upload</label>
+                                                        <input type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" onchange="angular.element(this).scope().show(this)" ng-model="fileInput" multiple class="form-control clear validate" />
+
+                                                    </div>
+                                                    <div>
+
+                                                        <strong>Instructions to Upload Files</strong>
+                                                        <ul>
+                                                            <li> 1) Upload Multiple Images in selected Album. </li>
+                                                            <li> 2) Use Standard photo Format <br />(Width: 640px Height: 480px).</li>
+                                                            <li> 3) Album Image Size is not more than 1 Mb</li>
+                                                            <li> 4) Maximum five Images upload at a time</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 footer-listad">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                            @*<div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15" ng-show="showhide">
+                                                <table id="example2" ng-model="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr. No</th>
+                                                            <th>Unit Type Name</th>
+                                                            <th>Unit Name</th>
+                                                            <th>Headline</th>
+                                                            <th>Updated Date</th>
+                                                            <th>Updated Time</th>
+                                                            <th>Total Photo</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in SearchPhotoList track by $index">
+                                                            <td ng-bind="obj.TransId={{$index+1}}"></td>
+                                                            <td>{{obj.UnitType}}</td>
+                                                            <td>{{obj.UnitName}}</td>
+                                                            <td>{{obj.Headline}}</td>
+                                                            <td>{{obj.UpdatedDate}}</td>
+                                                            <td>{{obj.UpdatedTime}}</td>
+                                                            <td>{{obj.TotalPhoto}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+

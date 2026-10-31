@@ -1,0 +1,360 @@
+﻿
+@{
+    ViewBag.Title = "Admission Enquiry";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<style>
+    .contact-main-container .hero .hero-body {
+        padding: 0px;
+    }
+
+    .contact-main-container .space.xlarge {
+        padding: 0px;
+        height: 0px;
+    }
+
+    .contact-main-container .contact-form {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-sizing: border-box;
+        margin-bottom: 30px;
+        -webkit-box-shadow: 0 0 10px 0 #3333338f;
+        box-shadow: 0 0 10px 0 #b9b37e;
+        margin-top: 30px;
+        background: #fff;
+    }
+
+    .contact-main-container .form-group {
+        border: 1px solid #014828;
+        display: flex;
+        display: -ms-flexbox;
+        margin: 0.5rem 0;
+    }
+
+    .contact-main-container div.top-background {
+        height: 315px;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+
+    .contact-main-container span.icon i {
+        font-size: 17px;
+    }
+
+    .contact-main-container div.top-background iframe {
+        height: 100%;
+    }
+
+    .contact-main-container div.top-background {
+        border-bottom: 2px solid #014828;
+    }
+
+    .contact-main-container .divider {
+        border-top: 0.05rem solid rgb(1 72 40);
+        height: 0.1rem;
+        margin: 1.8rem 0 1.6rem;
+        position: relative;
+    }
+
+    .contact-main-container .padded p.u-text-center {
+        color: #014828;
+        font-size: 14px;
+        color: #014828;
+        font-size: 14px;
+        line-height: 2;
+        margin-bottom: 1rem;
+        text-align: center !important;
+    }
+
+    .contact-main-container .form-group .form-group-label span.icon i {
+        color: #014828;
+    }
+
+    .contact-main-container .btn-group.u-pull-right button.btn-info {
+        background: #014828;
+        padding: 5px 25px;
+        font-size: 12px;
+    }
+
+    .contact-main-container input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]):not([type=reset]), select {
+        font-size: 15px;
+        height: 35px;
+        width: 100%;
+        border: 0pc;
+        padding: 0px 15px;
+    }
+
+    .contact-main-container textarea, textarea[type=text] {
+        font-size: 16px;
+        border: 1px solid #014828;
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+    }
+
+    .contact-main-container {
+        background: url(https://i.pinimg.com/originals/84/a5/f1/84a5f1a03629dcc48efa7115b53f3bd6.jpg);
+        background-size: 25px;
+        min-height: calc(100vh - 149px);
+    }
+
+        .contact-main-container .form-group .form-group-label {
+            height: 35px;
+            border-right: 2px solid #014828 !important;
+            height: 35px;
+            border-right: 2px solid #014828 !important;
+            background-color: var(--cirrus-form-group-bg);
+            border: 1px solid #dee2e6;
+            border-radius: 0.2rem;
+            color: var(--cirrus-form-group-fg);
+            margin: 0;
+            padding: 0.8rem;
+            user-select: none;
+        }
+
+        .contact-main-container .input-focused, input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]):not([type=reset]):focus, input[type=text].input-focused, select:focus, textarea:focus, textarea[type=text]:focus {
+            border-color: #014828db;
+            box-shadow: 0 0 0 0.2rem rgb(1 72 40 / 26%), inset 0 1px 8px rgb(0 0 0 / 7%);
+        }
+
+        .contact-main-container .padded > h1.u-text-center.u-font-alt {
+            color: #014828;
+        }
+
+        .contact-main-container .padded > h1.u-text-center.u-font-alt {
+            font-family: Montserrat,sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: .025rem;
+            color: #014828;
+            text-align: center !important;
+        }
+
+        .contact-main-container .icon {
+            display: inline-block;
+            text-align: center;
+            width: 1.5rem;
+            vertical-align: baseline;
+        }
+
+        .contact-main-container input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]):not([type=reset]), .contact-main-container select {
+            width: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 3px;
+            font-family: 'Nunito Sans';
+            font-size: var(--font-size-m);
+            letter-spacing: .02rem;
+            transition: .3s;
+            outline: 0;
+            padding: 0.85rem 1.1rem;
+        }
+
+        .contact-main-container .form-group .form-group-input:last-child:not(:first-child) {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            margin-left: -1px;
+            z-index: 0;
+        }
+
+        .contact-main-container .padded {
+            display: table;
+            width: 100%;
+        }
+
+        .contact-main-container .btn-group.u-pull-right {
+            float: right;
+        }
+
+        .contact-main-container .contact-details {
+            margin: 30px;
+            background: #fff;
+            padding: 30px;
+            -webkit-box-shadow: 0 0 10px 0 #3333338f;
+            box-shadow: 0 0 10px 0 #b9b37e;
+        }
+
+            .contact-main-container .contact-details .deatils {
+                border-bottom: 1px dotted #014828;
+                padding: 10px;
+            }
+
+                .contact-main-container .contact-details .deatils span {
+                    display: inline-block;
+                    margin-bottom: 10px;
+                }
+
+                    .contact-main-container .contact-details .deatils span i {
+                        font-size: 27px;
+                        color: #014828;
+                    }
+
+                .contact-main-container .contact-details .deatils p {
+                    margin-bottom: 0px;
+                }
+
+                .contact-main-container .contact-details .deatils:last-child {
+                    border: none;
+                }
+
+    label.form-label {
+        font-weight: 500;
+        text-transform: capitalize;
+        margin-bottom: 0px;
+        color: #014828;
+        font-size: 14px;
+    }
+
+    .contact-main-container .form-group {
+        margin-bottom: 15px;
+        margin-top: 0px;
+    }
+</style>
+
+
+<div class="contact-main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="contact-form">
+                    <div class="">
+                        <div style="margin: auto">
+                            <form class=" p-0" method="post">
+                                <div class="contact-body p-0">
+                                    <div class=" p-0 level fill-height">
+                                        <div class="col">
+                                            <div class="space xlarge"></div>
+                                            <div class="padded">
+                                                <h1 class="u-text-center u-font-alt">Enquiry For Admission</h1>
+                                                <div class="divider"></div>
+                                                <p class="u-text-center">If you have any query regarding admissions, feel free to write to us. Just fill in the form and we'll respond you at the earliest.</p>
+                                                <div class="divider"></div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label class="form-label">Select Session</label>
+                                                        <div class="form-group">
+                                                            <label class="form-group-label">
+                                                                <span class="icon">
+                                                                    <i class="icon-map-marker"></i>
+                                                                </span>
+                                                            </label>
+                                                            <select id="ddlSession" class="form-group-input" ng-model="ddlSession" ng-init="GetSession()">
+                                                                <option value="">Select Session</option>
+                                                                <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <label class="form-label">Select Class</label>
+                                                        <div class="form-group">
+                                                            <label class="form-group-label">
+                                                                <span class="icon">
+                                                                    <i class="icon-hospital"></i>
+                                                                </span>
+                                                            </label>
+                                                            <select id="ddlClass" class="form-group-input" ng-model="ClassCode">
+                                                                <option value="">Select Class</option>
+                                                                <option ng-repeat="cl in ClassList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassName}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <label class="form-label">Father/Mother/Guardian Name:</label>
+                                                        <div class="form-group">
+                                                            <label class="form-group-label">
+                                                                <span class="icon">
+                                                                    <i class="icon-edit"></i>
+                                                                </span>
+                                                            </label>
+                                                            <input type="text" class="form-group-input" placeholder="Enter Your Guardian Name" ng-model="Name" />
+                                                        </div>
+                                                        <label class="form-label">Email</label>
+                                                        <div class="form-group">
+                                                            <label class="form-group-label">
+                                                                <span class="icon">
+                                                                    <i class="icon-envelope"></i>
+                                                                </span>
+                                                            </label>
+                                                            <input type="email" class="form-group-input" placeholder="Enter your mail" ng-model="Email" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label class="form-label">Country</label>
+                                                        <div class="form-group">
+                                                            <label class="form-group-label">
+                                                                <span class="icon">
+                                                                    <i class="icon-map-marker"></i>
+                                                                </span>
+                                                            </label>
+                                                            @Html.Partial("ddlCountry")
+                                                        </div>
+                                                        <label class="form-label">State</label>
+                                                        <div class="form-group">
+                                                            <label class="form-group-label">
+                                                                <span class="icon">
+                                                                    <i class="icon-map-marker"></i>
+                                                                </span>
+                                                            </label>
+                                                            @Html.Partial("ddlState")
+                                                        </div>
+                                                        <label class="form-label">City</label>
+                                                        <div class="form-group">
+                                                            <label class="form-group-label">
+                                                                <span class="icon">
+                                                                    <i class="icon-map-marker"></i>
+                                                                </span>
+                                                            </label>
+                                                            @Html.Partial("ddlCity")
+                                                        </div>
+                                                        <label class="form-label">Mobile</label>
+                                                        <div class="form-group">
+                                                            <label class="form-group-label">
+                                                                <span class="icon">
+                                                                    <i class="icon-phone-sign"></i>
+                                                                </span>
+                                                            </label>
+                                                            <input type="text" class="form-group-input" placeholder="Mobile number" ng-model="Contact" onKeyPress="if(this.value.length==10) return false;" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <label class="form-label">Remark</label>
+                                                        <div class="form-group">
+                                                            <label class="form-group-label">
+                                                                <span class="icon">
+                                                                    <i class="icon-edit"></i>
+                                                                </span>
+                                                            </label>
+                                                            <textarea class="form-group-input" placeholder="" ng-model="Remark" onKeyPress="if(this.value.length==10) return false;"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="space"></div>
+
+                                                <div class="btn-group u-pull-right">
+                                                    <button class="btn-info" id="btnSave" type="button" value="Save" name="saveButton" ng-model="Save"
+                                                            ng-click="SaveRecord()" ng-init="Save='Save'">
+                                                        Send
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                            <div class="space xlarge"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+

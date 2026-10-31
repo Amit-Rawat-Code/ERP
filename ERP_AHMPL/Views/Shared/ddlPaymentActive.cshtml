@@ -1,0 +1,5 @@
+﻿@Html.DropDownList("ddlPIsActive", new List<SelectListItem>{
+    new SelectListItem{Text="No", Value="False"},
+    new SelectListItem{Text="Yes", Value="True"}
+},
+    new { @class = "select2 form-control", @ng_model = "PIsActive", @ng_init = "PIsActive='False'" })

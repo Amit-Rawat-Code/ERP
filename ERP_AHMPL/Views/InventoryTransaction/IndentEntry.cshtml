@@ -1,0 +1,235 @@
+﻿
+@{
+    ViewBag.Title = "Indent Entry";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<style>
+    legend {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: inherit;
+        display: table;
+        max-width: initial;
+        padding: 0;
+        white-space: normal;
+        width: auto;
+        padding: 0 10px !important;
+    }
+    .input-z-in {
+        width: 100% !important;
+        font-size: 12px;
+        text-transform: capitalize;
+        position: absolute;
+        z-index: 99;
+        overflow: auto;
+        height: 170px;
+    }
+</style>
+
+<script src="~/scripts/myjslib/InventoryIndentEntryController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-2 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><a href="#"><span>Inventory</span></a></li>
+                <li><a href="#"><span>Transaction</span></a></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Indent No.<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <input class="form-control clear " id="txtIndentNo" ng-model="IndentNo" type="text" placeholder="Indent No" ng-disabled="true" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Indent Date</label>
+                                                <div class="input-box">
+                                                    <input class="form-control clear validate" id="txtIndentDate" ng-model="IndentDate" type="date" 
+                                                           placeholder="Indent Date" min="{{GEFromDate | date:'yyyy-MM-dd'}}" max="{{GEToDate | date:'yyyy-MM-dd'}}" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Indent Reference No<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtIndentReferenceNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "IndentRefNo", @ng_disabled = "false" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Indent Reference Date</label>
+                                                <div class="input-box">
+                                                    <input class="form-control clear validate" id="txtIndentRefDate" ng-model="IndentRefDate" type="date" 
+                                                           placeholder="Indent Reference Date" min="{{GEFromDate | date:'yyyy-MM-dd'}}" max="{{GEToDate | date:'yyyy-MM-dd'}}" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Indenter<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <div id="Indenter" ng-init="createElement(attr,0,'Indenter')"></div>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <!--<div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Indenter<span class="vd_red">*</span></label>
+                                                <div class="input-box">-->
+                                                    @*@Html.TextBox("txtIndenter", "", new { @class = "form-control clear", @placeholder = "Indenter", @ng_model = "Indenter", @ng_disabled = "false" })*@
+                                                    @*@Html.Partial("ddlEmployee")*@
+                                                    <!--<select id="ddlEmployee" class="select2 form-control validate" ng-model="EmployeeCode" ng-init="GetEmployees();" ng-change="GetEmployeeDepartment()">
+                                                        <option value="">Select Intender</option>
+                                                        <option ng-repeat="Employee in EmployeesList" value="{{Employee.EmployeeCode}}" ng-disabled="!Employee.IsActive">{{Employee.FirstName}} {{Employee.MiddleName}} {{Employee.LastName}}</option>
+                                                    </select>
+
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                       
+                                            <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Department<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtDepartMent", "", new { @class = "form-control clear ", @placeholder = "DepartMent", @ng_disabled = "true", @ng_model = "DepartMent" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <fieldset class="fieldset">
+                                                <legend class="legend">Indent Details</legend>
+                                                <div class="datatable-responsive table-responsive advance-btn-table">
+
+                                                    <table class="table table-in-input-box compact table-bordered nowrap dataTable t-mgtb-n" ng-init="AddIndent_Detail();">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="srno">Sr.No.</th>
+                                                                <th style="width:250px !important;">Item</th>
+                                                                <th style="width:250px !important;">Unit</th>
+                                                                <th class="text-right">Stock Qty.</th>
+                                                                <th class="text-right">Indent Qty.</th>
+                                                                <th class="text-right">Remark</th>
+                                                                <th class="text-center">Add/Remove</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="obj in Indent_Detail" repeat-done>
+                                                                <td>
+                                                                    <label style="width:40px !important;" ng-model="obj.Srno" ng-bind="obj.Srno=$index+1"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <select style="width:100% !important;" name="ddlItem" class="select2 form-control validate"
+                                                                            ng-model="obj.ItemCode"
+                                                                            ng-change="resetRow($index);StockedItemQty(obj.ItemCode,$index);">
+                                                                        <option value="">Select</option>
+                                                                        <option ng-repeat="item in ItemList" value="{{item.Code}}">{{item.ItemName}}</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select style="width:100% !important;" id="ddlBaseUnit{{$index}}" name="ddlBaseUnit" ng-disabled="SaudaTransId" class="select2 form-control validate"
+                                                                            ng-model="obj.BaseUnitCode" ng-change="BindRate(obj.ItemCode,obj.BaseUnitCode,$index);">
+                                                                        <option value="">Select</option>
+                                                                        <option ng-repeat="baseunit in BaseUnitList|filter:{'ItemCode':obj.ItemCode}:true" 
+                                                                                value="{{baseunit.BaseUnitCode}}">{{baseunit.Unit}}</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right clear" 
+                                                                           placeholder="" ng-model="obj.StockQty" ng-init="obj.StockQty=ConvertQtyToDecimalPoint(obj.StockQty);"
+                                                                           validate-number-and-decimal-only two-decimal-place ng-disabled="true"/>
+                                                                </td>
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right clear validate"
+                                                                           placeholder="" ng-model="obj.IndentQty" @*ng-init="obj.RecQty=ConvertQtyToDecimalPoint(obj.RecQty)"*@
+                                                                           @*ng-change="getgrossAmt(obj.RecQty,obj.Rate,$index)"*@ ng-blur="calculateBillValue();"
+                                                                           validate-number-and-decimal-only two-decimal-place />
+                                                                </td>
+                                                                <td>
+                                                                    <input style="width:100% !important;" type="text" class="form-control text-right clear"
+                                                                           placeholder="" ng-model="obj.Remark" />
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <input type="button" value="+" class="btn btn-default" ng-click="AddIndent_Detail()" data-toggle="tooltip" data-placement="top" title="Add Row"
+                                                                           ng-if="obj.Srno==Indent_Detail.length" />
+                                                                    <input type="button" class="btn btn-default" id="btnRemoveCourses" value="-" ng-click="RemoveIndent_Detail($index);"
+                                                                           ng-if="Indent_Detail.length>1" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr ng-if="Indent_Detail.length==0">
+                                                                <td colspan="13" class="text-center">
+                                                                    No Record(s) found.
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+<script>
+    $('#txtIndentDate').removeClass('validate');
+    //$('#txtIndentReferenceDate').addClass('validate');
+    $('#txtIndentReferenceDate').removeClass('validate');
+    $('#txtDepartment').removeClass('validate');
+</script>
+

@@ -1,0 +1,6 @@
+﻿<select id="ddlClass" class="select2 form-control validate" ng-model="$parent.ClassCode"
+        ng-init="GetClasses();" ng-change="ddlClass_Change($parent.ClassCode);" ng-disabled="disabledDDLClass">
+    <option value="">Select Class</option>
+    <option ng-repeat="cl in ClassList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassName}}</option>
+</select>
+

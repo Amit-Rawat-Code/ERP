@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Master Transfer";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/MasterTransferWithAcademicController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Master Transfer</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Data Transfer</span></li>
+                <li><span>Data Transfer</span></li>
+                <li class="active"><span>Master Transfer</span></li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="br-pagebody" ng-cloak>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <label class="control-label">To Session<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlSession" autocomplete='address-level2' class="select2 form-control validate"
+                                                        ng-model="ToSessionId" ng-init="GetSession()" ng-change="BindNextFinancialYear();">
+                                                    <option value="">Select Session</option>
+                                                    @*<option ng-repeat="nsl in NextSessionList" value="{{nsl.SessionId}}">{{nsl.SessionName}}</option>*@
+                                                    <option ng-repeat="sl in SessionList|filter:{SessionId:'!'+WorkingSessionId}" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <label class="control-label">To FY<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlFinancialYear" autocomplete='address-level2'
+                                                        class="select2 form-control validate" ng-model="ToFYId">
+                                                    <option value="">Select FY</option>
+                                                    @*<option ng-repeat="nfy in NextFinancialYearList" value="{{nfy.FinancialYearId}}">{{nfy.FinancialYearName}}</option>*@
+                                                    <option ng-repeat="nfy in NextFinancialYearList" value="{{nfy.FinancialYearId}}">{{nfy.FinancialYearName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <div class="datatable-responsive table-responsive advance-btn-table cashpayment1">
+                                                <table cellpadding="0" cellspacing="0" class="table table-in-input-box compact table-bordered nowrap dataTable" ng-init="BindMasterTableList()">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr No.</th>
+                                                            <th>Master Table</th>
+                                                            <th>
+                                                                <div class="checkbox checkbox-primary table-check-wt">
+                                                                    <input type="checkbox" class="clear" ng-model="chkAll" ng-init="chkAll=true" ng-disabled="true" />
+                                                                    <label></label>
+                                                                </div>
+                                                            </th>
+                                                            <th>Academic Session</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody ng-repeat="MasterTables in MasterTableList">
+                                                        <tr ng-if="MasterTables.RefTable==Null">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>
+                                                                {{MasterTables.DisplayName}}
+                                                                <input type="hidden" id="hfTableName" value="{{MasterTables.TableSchema}}.{{MasterTables.TableName}}" />
+                                                            </td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-primary table-check-wt">
+                                                                    <input type="checkbox" class="clear" id="chkAllow" ng-model="chkAllow[$index]"
+                                                                           ng-checked="chkAllow[$index]" ng-init="chkAllow[$index]=true" ng-disabled="true" ng-change="chkRowAll($index)" />
+                                                                    <label></label>
+                                                                </div>
+                                                                <i ng-model="faviconload[$index]" ng-show="faviconload[$index]" ng-init="faviconload[$index]=false" class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+                                                                <i ng-model="favicongreen[$index]" ng-show="favicongreen[$index]" ng-init="favicongreen[$index]=false" class="fa fa-check" style="color:green" aria-hidden="true"></i>
+                                                                <i ng-model="faviconred[$index]" ng-show="faviconred[$index]" ng-init="faviconred[$index]=false" class="fa fa-times" style="color:red" aria-hidden="true"></i>
+                                                            </td>                                                            
+                                                            <td style="text-align:center;width:50px">{{MasterTables.ASYN}}
+                                                                <input type="hidden" id="AcSYN" value="{{MasterTables.ASYN}}" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <button id="btnImport" type="button" value="Import" class="btn2 btn-common btn-3 btn-3d pe-7s-check" name="ImportButton"
+                                                    ng-model="Import" ng-init="Import='Import';" ng-click="CheckSavePermission();TransferRecord()"
+                                                    ng-disabled="disabledImport">
+                                                <span class="triangle-box" title="Import"></span>
+                                                <span id="btnTransfertxt" ng-bind="Import">Import</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

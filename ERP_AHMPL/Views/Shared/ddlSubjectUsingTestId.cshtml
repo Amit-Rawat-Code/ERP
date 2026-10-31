@@ -1,0 +1,5 @@
+﻿<select id="ddlSubjectUsingTestId" class="select2 form-control validate" ng-model="Subject" 
+        ng-change="ddlSubject_change();">
+    <option value="">Select Subject</option>
+    <option ng-repeat="subject in SubjectTestList" value="{{subject.SubjectId}}">{{subject.SubjectName}}</option>﻿
+</select>

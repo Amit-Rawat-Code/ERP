@@ -1,0 +1,4 @@
+﻿<select id="ddlAbbrType" class="select2 form-control clear validate" ng-model="AbbrTypeId" ng-init="GetAbbreviationType();" ng-change="ddl_ChangeAbbrType()">
+    <option value="">Select Abbreviation Type</option>
+    <option ng-repeat="AbbrType in AbbrTypes" value="{{AbbrType.AbbrTypeId}}">{{AbbrType.AbbrType}}</option>
+</select>

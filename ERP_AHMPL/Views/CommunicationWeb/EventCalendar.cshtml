@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "EventCalendar";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/EventCalendarController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="hfId" name="Id" value="" />
+<div class="autohide-scroll autoheightset" style="height: 167px;">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Event Calendar</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Communication</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Event Calendar</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form" class="ng-pristine ng-valid">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Event For<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select ng-model="ActivityType" id="ddlActivityType" ng-change="DisplayEndDate();" class="form-control clear validate">
+                                                    <option value="">Select Activity Type</option>
+                                                    <option value="Single Day">Single Day</option>
+                                                    <option value="Multiple Day">Multiple Day</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Event from<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <input class="form-control clear validate red-validation" id="txtEventStartDate" ng-model="EventStartDate" name="txtEventStartDate" placeholder="" type="date" value="">
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" id="dveventdate" ng-hide="showEndDate">
+                                            <label class="control-label">End Till<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <input class="form-control clear" id="txtEventEndDate" name="txtEventEndDate" ng-model="EventEndDate" placeholder="" type="date" value="">
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Event Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlEventname" class="form-control clear validate" ng-model="Eventname">
+                                                    <option value="">Select Event Name</option>
+                                                    <option value="School Day/Celebration">Celebration Day/No Holiday</option>
+                                                    <option value="Holiday">Holiday</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Event Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <input class="form-control clear validate red-validation" ng-model="ActivityName" id="txtActivityName" name="txtActivityName" placeholder="" type="text" value="">
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Calendar For<span class="vd_red">*</span></label>
+                                                <div class="input-box" ng-init="GetCalendarForddl();">
+                                                    <select id="ddlEmployeeType" class="select2 form-control clear validate" ng-model="CalendarFor">
+                                                        <option value="">--Select--</option>
+                                                        <option ng-repeat="cf in CalendarForLists" value="{{cf.Code}}">
+                                                            {{cf.Name}}
+                                                        </option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                        <label class="control-label">Caldendar For<span class="vd_red">*</span></label>
+                                        <div class="input-box chk-validate" ng-init="GetCalendarForddl();">
+                                            <div class="toggle-ddl" id="openSections" ng-init="ToogleDDL('openSections','openSections')">
+                                                <button class='btn btn-primary select-btn'
+                                                        data-ng-click='openSections=!openSections'
+                                                        ng-bind="GetCount(CalendarForLists,'Select Class')">
+                                                    Select Class
+                                                </button>
+                                                <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                        data-ng-click='openSections=!openSections'>
+                                                    <span class='fa fa-chevron-down'></span>
+                                                </button>
+                                                <div ng-show="openSections" class="ddlMultiple" ng-cloak>
+                                                    <div ng-click="ddlCheckAll('CalendarForLists')">
+                                                        Check All
+                                                        <span class="btn-counts-right">Total Count: {{CalendarForLists.length}}</span>
+                                                    </div>
+                                                    <div ng-click="ddlUnCheckAll('CalendarForLists')">Uncheck All</div>
+                                                    <hr style="margin:0px !important" />
+                                                    <div ng-repeat="sm in CalendarForLists">
+                                                        <input type="hidden" ng-bind="sm.Srno=($index+1)" />
+                                                        <input type="checkbox" ng-model="sm.chk" ng-value="sm.Code"
+                                                               ng-change="ddlSection_Change(sm);" ng-disabled="sm.disabled"/>
+                                                        {{sm.Name}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select class="select2 form-control validate ng-pristine ng-untouched ng-valid ng-not-empty" id="ddlIsActive" name="ddlIsActive" ng-init="IsActive='True'" ng-model="IsActive">
+                                                    <option value="">Select</option>
+                                                    <option value="True" selected="selected">Yes</option>
+                                                    <option value="False">No</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn-mgbt-5 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+

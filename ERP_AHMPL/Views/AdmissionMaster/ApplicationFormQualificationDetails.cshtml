@@ -1,0 +1,321 @@
+﻿
+@{
+    ViewBag.Title = "Application Form Qualification Details";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/ApplicationFormQualificationDetailsController.js?Ver=@ViewBag.Version"></script>
+<style>
+    .PhysicallyDisable-div select {
+        display: table;
+        width: auto;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+    .PhysicallyDisable-div input {
+        padding-left: 90px;
+    }
+    </style>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Application Form Qualification Details</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Global</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Application Form Qualification Details</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+
+                                    <form id="user-form">
+                                        <div class="row">
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Result of Qualifying Exam<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlCasteCategory" class="select2 form-control clear validate" ng-model="CasteCategory" ng-init="GetAbbrType();">
+                                                        <option value="">Select---</option>
+                                                        <option value="">Select---</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+
+                                                <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Qualifying Exam</th>
+                                                            <th>Status</th>
+                                                            <th>Roll No</th>
+                                                            <th>Marks Obtained</th>
+                                                            <th>Max. Marks</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Diploma</td>
+                                                            <td>Passed</td>
+                                                            <td>1456325</td>
+                                                            <td>603</td>
+                                                            <td>800</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Diploma</td>
+                                                            <td>Passed</td>
+                                                            <td>1456325</td>
+                                                            <td>603</td>
+                                                            <td>800</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Diploma</td>
+                                                            <td>Passed</td>
+                                                            <td>1456325</td>
+                                                            <td>603</td>
+                                                            <td>800</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <h5 class="control-label">Marks at Intermediate level(Obt. Means Marks Obtained)</h5>
+                                                <label class="control-label">Sub-Caste Category<span class="vd_red">*</span></label>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+
+                                                <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Maths</th>
+                                                            <th>Physics</th>
+                                                            <th>Chemistry/Biology/Com.Sc</th>
+                                                            <th>English</th>
+                                                            <th>Aggregate</th>
+                                                            <th>%</th>
+                                                            <th>Remark If Any</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Obt:-- Max---</td>
+                                                            <td>Obt:-- Max---</td>
+                                                            <td>Obt:-- Max---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Obt:-- Max---</td>
+                                                            <td>Obt:-- Max---</td>
+                                                            <td>Obt:-- Max---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Obt:-- Max---</td>
+                                                            <td>Obt:-- Max---</td>
+                                                            <td>Obt:-- Max---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <h5 class="control-label">Details of Siblings</h5>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+
+                                                <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>SNo.</th>
+                                                            <th>Name</th>
+                                                            <th>Relation</th>
+                                                            <th>Class/Occupation</th>
+                                                            <th>School/College/Organization</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                              
+                                                <label class="control-label">Medical Fitness Certificate Submitted (Form registered medical Practioner note less than M.S.)<span class="vd_red">*</span></label>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Medical History<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlMedicalHistory" class="select2 form-control clear validate" ng-model="MedicalHistory" ng-init="GetAbbrType();">
+                                                        <option value="">Select---</option>
+                                                        <option value="">Select---</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Premedical Detail If Any<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtPremedicalDetailIfAny", "", new { @class = "form-control clear textOnly", @placeholder = "Premedical Detail If Any..", @ng_model = "PremedicalDetailIfAny" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <h5 class="control-label">In Case Of Medical Emergency:</h5>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Contact Person Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtContactPersonName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "ContactPersonName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Mobile No.<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtMobileNo", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "MobileNo" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <h5 class="control-label">Competitive Examination</h5>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+
+                                                <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>SNo.</th>
+                                                            <th>Entrance Test</th>
+                                                            <th>Appeared(Yes/No)</th>
+                                                            <th>Roll No.</th>
+                                                            <th>Rank(Overall,Genral,State)</th>
+                                                            <th>Max Marks.</th>
+                                                            <th>Max Obtained</th>
+                                                            <th>Photocopy(yes/No)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <p>
+                                                    I Here By Undertake that all the information mentioned above is complete, Correctg and trustworthy to the best of my knowledge and belif. I Undertake that I am aware about the free once paid shall not be refundable.
+                                                </p>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    @Html.Partial("ActionView")
+                                                </div>
+
+                                            </div>
+</form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

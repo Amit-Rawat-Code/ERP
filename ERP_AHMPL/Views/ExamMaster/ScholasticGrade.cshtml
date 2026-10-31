@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Scholastic Grade";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/SkillGradeMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+
+<style>
+    .custom-control-input {
+        float: left;
+        margin-top: 2px !important;
+        margin-right: 7px !important;
+    }
+</style>
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Scholastic Grade</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Exam</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Scholastic Grade</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" ng-init="GetAllSkillType();">
+                                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 mgbt-xs-15" ng-repeat="obj in SkillTypeList">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" value={{obj.TypeCode}} name="SkillType" ng-model="SkillType" @*ng-init="RadioSkill=[{{obj.TypeCode}}]"*@ ng-click="GetSkillTypeCode(obj.TypeCode)" @*ng-checked="true"*@>
+                                                    <label class="control-label">{{obj.SkillTypeName}}</label>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Grades for</label>
+                                            <div class="input-box">
+                                                <select id="ddlSection" class="select2 form-control" ng-model="GradeFor">
+                                                    <option value="">Select Grade </option>
+                                                    <option value="1">Subjects</option>
+                                                    <option value="2">Skills</option>                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Grades Type</label>
+                                            <div class="input-box">
+                                                <select id="ddlSection" class="select2 form-control" ng-model="GradeType">
+                                                    <option value="">Select Grade Type</option>
+                                                    <option value="1">With Range</option>
+                                                    <option value="2">Without Range</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Grade</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtGrade", "", new { @class = "form-control clear validate", @ng_model = "GradeName", placeholder = "Grade",style= "text-transform: uppercase;" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Grade Discription</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtGradeDescription", "", new { @class = "form-control clear validate", @ng_model = "GradeDescription", placeholder = "Grade Description" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Lower Limit</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtLowerlmt", "", new { @class = "form-control clear numbersOnly", @ng_model = "LowerLimit", placeholder = "Lower Limit", @ng_disabled = "GradeType=='2'" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Upper Limit</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtUpperlmt", "", new { @class = "form-control clear numbersOnly", @ng_model = "UpperLimit", placeholder = "Upper Limit", @ng_disabled ="GradeType=='2'" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Display Order</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtDisplayOrder", "", new { @class = "form-control clear", @ng_model = "DisplayOrder", placeholder = "Display Order" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-6 col-xs-12 ">
+                                            @Html.Partial("ActionView")
+                                        </div>
+
+                                    </div>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Row -->
+        </div>
+    </div>
+</div>
+
+

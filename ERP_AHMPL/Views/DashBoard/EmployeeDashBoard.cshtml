@@ -1,0 +1,547 @@
+﻿
+@{
+    ViewBag.Title = "Employee DashBoard";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+
+<!DOCTYPE html>
+<script src="~/Scripts/myjslib/adminDashBoardController.js?Ver=@ViewBag.Version"></script>
+
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Employee Statistics</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Employee</span></li>
+                <li class="active"><span>Employee Statistics</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="br-pagebody">
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+
+                    <div class="input-box">
+                        <select class="select2 form-control " id="ddlIsActive" name="ddlIsActive" ng-model="IsActive">
+                            <option value="">Select Branch</option>
+                            <option value="True">Branch 1</option>
+                            <option value="False">Branch 2</option>
+                        </select>
+
+                        <div class="text-box-msg-r">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 no-padding">
+
+
+
+
+                <div class="col-md-12">
+                    <div class="vd_status-widget mul_bg-bb widget shadow-base">
+                        <div class="vd_panel-menu">
+                            <div data-action="refresh" data-original-title="Refresh" data-rel="tooltip" class="menu entypo-icon smaller-font"><i class="icon-cycle"></i></div>
+                        </div>
+                        <!-- vd_panel-menu -->
+
+                        <a class="panel-body" href="#">
+                            <div class="clearfix">
+                                <span class="menu-icon">
+                                    <i class="icofont-users-alt-5"></i>
+                                </span>
+                                <span class="menu-value">
+                                    80
+                                </span>
+                            </div>
+                            <div class="menu-text clearfix">
+                                Total Employee Strength
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="vd_status-widget mul_bg-bb widget shadow-base">
+                        <div class="vd_panel-menu">
+                            <div data-action="refresh" data-original-title="Refresh" data-rel="tooltip" class="menu entypo-icon smaller-font"><i class="icon-cycle"></i></div>
+                        </div>
+                        <!-- vd_panel-menu -->
+
+                        <a class="panel-body" href="#">
+                            <div class="clearfix">
+                                <span class="menu-icon">
+                                    <i class="icofont-woman-in-glasses"></i>
+                                </span>
+                                <span class="menu-value">
+                                    30
+                                </span>
+                            </div>
+                            <div class="menu-text clearfix">
+                                Female Strength
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="vd_status-widget mul_bg-bb widget shadow-base">
+                        <div class="vd_panel-menu">
+                            <div data-action="refresh" data-original-title="Refresh" data-rel="tooltip" class="menu entypo-icon smaller-font"><i class="icon-cycle"></i></div>
+                        </div>
+                        <!-- vd_panel-menu -->
+
+                        <a class="panel-body" href="#">
+                            <div class="clearfix">
+                                <span class="menu-icon">
+                                    <i class="icofont-man-in-glasses"></i>
+                                </span>
+                                <span class="menu-value">
+                                   50
+                                </span>
+                            </div>
+                            <div class="menu-text clearfix">
+                                Male Strength
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-gb me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading  panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Department Wise</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh" ng-click="BindCategory()"> <i class="mdi mdi-autorenew"></i> </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Category_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg pa-0">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                @*<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 align-self-center ">
+                                        <div class="text-center box-icon-d">
+                                            <img src="../../assets/images/logo-login.png" class="logo" alt="u-logo">
+                                            <i class="fa fa-qrcode"></i>
+                                        </div>
+                                    </div>*@
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 b-r-light">
+                                        <div class="category-box">
+                                            <h2>10</h2>
+                                            <h3>Administration</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="category-box">
+                                            <h2>50</h2>
+                                            <h3>Teacher</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 b-r-light b-t-light">
+                                        <div class="category-box">
+                                            <h2>10</h2>
+                                            <h3>Academic</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 b-t-light">
+                                        <div class="category-box">
+                                            <h2>10</h2>
+                                            <h3>HR</h3>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="closing text-center">
+                                    <a href="">
+                                        See All Department List
+                                        <i class="fa fa-angle-double-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-yb me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading  panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Grade Wise</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh" ng-click="BindCategory()"> <i class="mdi mdi-autorenew"></i> </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Category_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg pa-0">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                @*<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 align-self-center ">
+                                        <div class="text-center box-icon-d">
+                                            <img src="../Content/Photos/relision.png" alt="">
+
+                                        </div>
+                                    </div>*@
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 b-r-light">
+                                        <div class="category-box">
+                                            <h2>50</h2>
+                                            <h3>A+</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="category-box">
+                                            <h2>10</h2>
+                                            <h3>A</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 b-r-light b-t-light">
+                                        <div class="category-box">
+                                            <h2>10</h2>
+                                            <h3>B</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 b-t-light">
+                                        <div class="category-box">
+                                            <h2>10</h2>
+                                            <h3>C</h3>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="closing text-center">
+                                    <a href="">
+                                        See All Grade List
+                                        <i class="fa fa-angle-double-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-bb me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading  panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">All Employee Attendance</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh" ng-click="BindCircular()"> <i class="mdi mdi-autorenew"></i> </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Circular_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg pa-0">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                <div class="content-list content-image menu-action-right h-f-343">
+                                    <div class="autohide-scroll-tab-dashboard h-f-343">
+                                        <table class="desh-tab">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+
+                                                    <th class="green">Present</th>
+                                                    <th class="red">Absent</th>
+                                                    <th class="blue1">Leave</th>
+                                                    <th class="blue">Not Mark</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Administration</td>
+                                                    <td class="green">8</td>
+                                                    <td class="red">2</td>
+                                                    <td class="blue1">0</td>
+                                                    <td class="blue">0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Teacher</td>
+
+                                                    <td class="green">40</td>
+                                                    <td class="red">5</td>
+                                                    <td class="blue1">5</td>
+                                                    <td class="blue">0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Academic</td>
+
+                                                    <td class="green">10</td>
+                                                    <td class="red">0</td>
+                                                    <td class="blue1">0</td>
+                                                    <td class="blue">0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>HR</td>
+
+                                                    <td class="green">0</td>
+                                                    <td class="red">8</td>
+                                                    <td class="blue1">0</td>
+                                                    <td class="blue">2</td>
+                                                </tr>
+                                                
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="closing text-center">
+                                    <a href="">
+                                        See All Month Wise Attendance
+                                        <i class="fa fa-angle-double-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 ">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-ob me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">All Employee Attendance Graph</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh"> <i class="mdi mdi-autorenew"></i> </a>
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Stu_Attendance_Graph_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg min-h-f pa-0">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                <div ng-model="TotalStudent">
+                                    <div id="chart33"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                            <div class="closing text-center">
+                                <a href="@Url.Action("StudentDateWiseCumulativeReport", "Report")">See All Employee Attendance <i class="fa fa-angle-double-right"></i></a>
+                                @*<a href="#">See All Month Wise Attendance <i class="fa fa-angle-double-right"></i></a>*@
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script>
+    function StudentAttendanceCount() {
+        var StudentData = [
+                        { name: "Present", y: 58 },
+                    { name: "Absent", y: 15 },
+                    { name: "Leave", y: 5 },
+                    { name: "Not Taken", y: 2 }];
+        var colour = ['#43cea2', '#ff5f62', '#4aa7e1', '#ff8d06'];
+        var TotalStudent = 80;
+
+            Highcharts.setOptions({
+                colors: Highcharts.map(colour, function (color) {
+                    return {
+                        radialGradient: {
+                            cx: 0.5,
+                            cy: 0.3,
+                            r: 0.7
+                        },
+                        stops: [
+                          [0, color],
+                          [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                        ]
+                    };
+                })
+            });
+            Highcharts.chart('chart33', {
+                chart: {
+                    type: 'pie',
+                    backgroundColor: 'transparent',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    options: {
+                        enabled: true,
+                        alpha: 100,
+                        beta: 0
+                    }
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: 'Total',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: -30,
+                    style: {
+                        fontSize: '150%',
+                        //color: 'red'
+                    }
+                },
+                subtitle: {
+                    text: '<b>' + TotalStudent + '</b>',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 0,
+                    style: {
+                        fontSize: '200%',
+                        color: '#000'
+                    }
+                },
+                tooltip: {
+                    pointFormat: '<b>{series.name}</b> : <b> {point.y} ({point.percentage:.1f}%)</b>'
+                },
+
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 100,
+                        dataLabels: {
+                            enabled: true,
+                            distance: 5,
+                            //format: '<b>{point.name} : {point.y}</b> ({point.percentage:.1f}%)',
+                            format: '<b>{point.y}</b> ({point.percentage:.1f}%)',
+                            style: {
+                                fontSize: 14,
+                                //color: '#000',
+                                fontWeight: 'normal',
+                            }
+                        },
+                        showInLegend: true,
+                        startAngle: 0,
+                        endAngle: 360,
+                        center: ['50%', '50%'],
+                        size: '270'
+                    }
+                },
+                legend: {
+                    enabled: true,
+                    //layout: 'vertical',
+                    //align: 'right',
+                    squareSymbol: true,
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Student',
+                    innerSize: '60%',
+                    colorByPoint: true,
+                    data: StudentData,
+                    colors: colour,
+                    lineWidth: 5
+                }]
+            });
+        }
+
+    $(document).ready(function () {
+        StudentAttendanceCount();
+    })
+
+</script>

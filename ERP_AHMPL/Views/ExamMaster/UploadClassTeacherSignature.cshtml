@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Upload Class Teacher Signature";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<script src="~/scripts/myjslib/UploadClassTeacherSignatureController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-2 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><a href="#"><span>Exam</span></a></li>
+                <li><a href="#"><span>Master</span></a></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 no-padding">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <div class="form-group">
+                                                    <select id="ddlClassSection" class="select2 form-control" ng-model="AllClassSection" ng-init="GetAllClassesWithSections();" ng-change="ddlClass_Change()">
+                                                        <option value="">Select Class With Sections</option>
+                                                        <option ng-repeat="cl in AllClassSectionList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassSectionName}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <div class="form-group">
+                                                    <select id="ddlTeacher" class="select2 form-control validate" ng-model="TeacherCode" ng-init="">
+                                                        <option value="">Select Employee</option>
+                                                        <option ng-repeat="teacher in ClassTeachersList" value="{{teacher.EmployeeCode}}" ng-disabled="!teacher.IsActive">
+                                                            {{teacher.EmployeeName}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <div class="form-group">
+                                                    <label class="content-title" style="float:left;">Upload Class Teacher Signature<span class="red-i">*</span></label>
+                                                    <img style="float:right; margin-bottom:10px;" class="img-fix" id="Signature" ng-model="Signature" src="~/Content/noimage.png" ng-src="{{Signature}}" alt="" width="200" height="200" ng-click="OpenFileUploadBanner()">
+                                                    <input onchange="angular.element(document).scope().fuBannerImageChange(this)" type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" ng-model="fileInput" class="form-control clear validate" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            @Html.Partial("ActionView")
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Row -->
+    </div>
+</div>

@@ -1,0 +1,4 @@
+﻿<select id="ddlExam" class="select2 form-control validate"  ng-model="ExamId" ng-init="BindExam()">
+    <option value="">Select Exam</option>
+    <option ng-repeat="exam in ExamList" value="{{exam.Code}}">{{exam.Name}}</option>﻿
+</select>

@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "ApprovedNotifications";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<style>
+    .common-btn {
+        font-size: 13px;
+        margin-top: 12px;
+        display: inline-block;
+    }
+
+</style>
+
+
+<script src="~/Scripts/myjslib/ApprovedNotificationsController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="hfId" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Approved Employee On Duty</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Approved</span></li>
+                <li><span>Employee</span></li>
+                <li class="active"><span>Approved Employee On Duty</span></li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+
+
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="datatable-responsive table-responsive" ng-cloak ng-init="GetAllEmployeeNotificationsRemarks();">
+                                    <table id="tblEmployeeNotificationRemarkList" class="table compact  table-hover table-striped table-bordered mgbt-xs-0" ng-model="EmployeeNotificationRemarkList">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox" ng-model="ChkAll" ng-change="CheckALL()" />&nbsp;Select All</th>
+                                                <th class="sr-no-w text-center">Sr. No.</th>
+                                                <th>Attendance Date</th>
+                                                <th>Employee Name</th>
+                                                <th>In Time</th>
+                                                <th>Out Time</th>
+                                                <th>Employee Remarks</th>
+                                                <th>Approval Authority Remarks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="Remark in EmployeeRemarksList" repeat-done>
+                                                <td><input type="checkbox" ng-model="Remark.Chk" /></td>
+                                                <td class="text-center">
+                                                    {{$index+1}}
+                                                </td>
+                                                <td>{{Remark.NotificationDate}}</td>
+                                                <td>{{Remark.EmpName}}</td>
+                                                <td>{{Remark.InTime}}</td>
+                                                <td>{{Remark.OutTime}}</td>
+                                                <td>{{Remark.EmployeeRemarks}}</td>
+                                                <td><input type="text" ng-model="Remark.ApprovalAuthorityRemarks"></td>
+                                            </tr>
+                                            <tr ng-if="EmployeeRemarksList.length==0">
+                                                <td colspan="7" class="text-center">
+                                                    Sorry, No Records found.
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 text-center">
+                                    <input type="button" class="btn-me btn-primary hvr-float-shadow ng-pristine ng-valid ng-not-empty ng-touched common-btn" value="Approved" name="approvedButton" ng-model="Approved" ng-click="ApprovedRecords();" />
+                                    <input type="button" value="Reject" class="btn-me btn-success hvr-float-shadow ng-pristine ng-untouched ng-valid ng-empty common-btn" name="rejectdButton" ng-model="Reject" ng-click="RejectRecords();" />
+                                </div>
+                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+
+</div>
+

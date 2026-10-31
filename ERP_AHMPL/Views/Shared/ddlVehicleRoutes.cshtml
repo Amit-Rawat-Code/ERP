@@ -1,0 +1,5 @@
+﻿<select id="ddlVehicleRoutes" class="select2 form-control validate" ng-model="TranRoute.RouteId" ng-change="GetRouteWiseStoppages(TranRoute.RouteId);">
+    <option value="">Select Route</option>
+    <option ng-repeat="RRoute in RRoutes" value="{{RRoute.RouteId}}">{{RRoute.RouteName}}</option>
+</select>
+

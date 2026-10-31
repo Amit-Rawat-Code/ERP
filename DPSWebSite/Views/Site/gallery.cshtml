@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "gallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="website-main-content">
+
+    <section class="page-section" ng-init="BindAllImage();" ng-cloak>
+        <div class="container">
+            <div class="col-sm-12">
+                <div class="gallery">
+                    <!-- partial:index.partial.html -->
+                    <div class="cont">
+                        <div class="demo-gallery">
+                            <ul id="lightgallery">
+                                <li ng-repeat="imagesn in AllImage" data-src="" unveil data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>"
+                                    data-pinterest-text="Pin it" data-tweet-text="share on twitter" abc="{{imagesn.PhotoName}}" testimonial-repeat-done>
+
+                                    <a href="">
+                                        <img class="img-responsive" src="{{imagesn.PhotoName}}">
+                                        <div class="demo-gallery-poster">                                           
+                                            <img src="~/content/images/gallery/search-icon.png" />
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+

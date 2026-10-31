@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "ImageContentPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="website-main-content" ng-init="GetAboutUs();" ng-cloak>
+    @*<div ng-repeat="PageData in ImageContentPageData">*@
+    <section class="page-banner-breadcrumbs">
+        <div class="container">
+            <div class="breadcrumbs">
+                <span class="page-name">AllenKids Swaroopnagar</span><span class="seprator">></span><span class="page-name">{{ImageContentPageData[0].UnitTitle}}</span>
+                <h3 class="title-of-page">
+                    {{ImageContentPageData[0].UnitTitle}}
+                </h3>
+            </div>
+        </div>
+    </section>
+    <section class="page-section why-choose-allen-kids our-approach">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="section-title-color text-center">
+                        {{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCC'})[0].BodyContentHeading}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="legacy-section-photo-discription">
+        <div class="container">
+            <div class="col-sm-6">
+                <div class="photo-section">
+                    <div class="play-group-icon-title">
+                        <div class="icon">
+                            <img src="" style="margin: 20px 0px;" ng-src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeadingImgPath}}" alt="pay-icon" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeadingImgPath)">
+                        </div>
+                        <h3 class="play-title">
+                            {{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeading}}
+                        </h3>
+                    </div>
+                    <img src="" style="margin: 20px 0px;width: 100%;" ng-src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath}}" alt="display-photo" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath)">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="discription-section">
+                    <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].BodyContent)">
+
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="page-section why-choose-allen-kids">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContent)">
+
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="photo-section">
+                        <img src="" style="margin: 20px 0px;" ng-src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImgPath}}" alt="display-photo" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImgPath)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section atallenkids-virtual-learning">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-{{HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImgPath)?'6':'12'}}">
+                    <div class="atallenkids">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBL'})[0].BodyContent)">
+
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].BodyContent)">
+
+                        </p>
+                        <div class="photo-section">
+                            <img style="margin: 20px auto;" src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImgPath}}" alt="display-photo"
+                                 ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImgPath)">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    @*<section class="legacy-section-photo-discription our-approach">
+            <div class="container">
+                <div class="col-sm-6">
+                    <div class="photo-section">
+                        <img src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath}}" alt="display-photo" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath)">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].BodyContent)">
+
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    @*<section class="page-section why-choose-allen-kids our-approach">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBL'})[0].BodyContent)">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+    @*<section class="legacy-section-photo-discription Our-mission" ng-show="MissionVissionSection">
+            <div class="container">
+                <div class="col-sm-6">
+                    <div class="photo-section" style="background-image:url({{PageData.ImgPathLeft}})">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml(PageData.BodyContentRight)">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+    @*<section class="legacy-section-photo-discription From-Chairman-desk" ng-show="FromChairManDeskSection1">
+            <div class="container">
+                <div class="col-sm-6">
+                    <div class="photo-section" style="background-image:url({{PageData.ImgPathLeft}})">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml(PageData.BodyContentRight)">
+
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section why-choose-allen-kids our-approach" ng-show="FromChairManDeskSection2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="discription" ng-bind-html="trustAsHtml(PageData.BodyContentBottom)">
+
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+    @*<section class="legacy-section-photo-discription From-principal-desk" ng-show="FromHeadMistressSection">
+            <div class="container">
+                <div class="col-sm-6">
+                    <div class="photo-section" style="background-image:url({{PageData.ImgPathLeft}})">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml(PageData.BodyContentRight)">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+    @*<section class="page-section why-choose-allen-kids Playgroup-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="play-group-icon-title">
+                        <div class="icon"><img src="{{PageData.BodyContentHeadingImgPath}}" alt="pay-icon"></div>
+                        <h3 class="play-title">{{PageData.BodyContentHeading}}</h3>
+                    </div>
+                    <p class="discription-section" ng-bind-html="trustAsHtml(PageData.BodyContentLeft)">
+
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="photo-section">
+                        <img  src="{{PageData.ImgPathRight}}" alt="display-photo">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="discription-section" ng-bind-html="trustAsHtml(PageData.BodyContentBottom)">
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>*@
+    @*</div>*@
+</div>
+

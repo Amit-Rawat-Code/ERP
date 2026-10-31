@@ -1,0 +1,4 @@
+﻿<select id="ddlFirmStatus" class="select2 form-control validate" ng-model="FirmStatusModel" ng-init="BindFirmStatus();">
+    <option value="">Select</option>
+    <option ng-repeat="firmstatuslist in FirmStatusList" value="{{firmstatuslist.Code}}">{{firmstatuslist.FirmName}}</option>
+</select>

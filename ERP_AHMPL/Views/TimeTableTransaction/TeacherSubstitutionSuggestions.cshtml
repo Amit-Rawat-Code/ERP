@@ -1,0 +1,313 @@
+﻿
+@{
+    ViewBag.Title = "Teacher Substitution Suggestions";
+    ViewBag.TitleList = "TeacherWise TimeTable";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/TeacherSubstitutionSuggestionsReportController.js?Ver=@ViewBag.Version"></script>
+@*<h2>SubjectClassGroupMaster</h2>*@
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Teacher Substitution Suggestions</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Time Table</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Teacher Substitution Suggestions</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Shift<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlShift")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Teacher<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlEmployee" class="select2 form-control validate" ng-model="EmployeeCode"
+                                                        ng-change="ddlEmployee_Change()" ng-init="isEmpDisabled=false"
+                                                        ng-disabled="isEmpDisabled">
+                                                    <option value="">Select Employee</option>
+                                                    <option ng-repeat="e in EmployeesList | orderBy:Name" value="{{e.EmployeeCode}}">
+                                                        {{e.EmployeeName}}
+                                                    </option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Substitute With Same Subject<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlSWithSameSubject", new List<SelectListItem>{
+                                                 new SelectListItem{Text="Select", Value=""},
+                                                 new SelectListItem{Text="Yes", Value="true"},
+                                                 new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                new
+                                                     {
+                                                         @class = "select2 form-control validate",
+                                                         @ng_model = "SWithSameSubject",
+                                                    @ng_init = "SWithSameSubject='true'"
+                                                })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">From Date<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                <input id="txtFromDate" type="date" class="form-control clear"
+                                                       ng-model="FromDate" ng-disabled="isEmpDisabled" />
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">To Date<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                <input id="txtToDate" type="date" class="form-control clear"
+                                                       ng-model="ToDate" ng-disabled="isEmpDisabled" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label"><span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                <button id="btnSave" type="button" value="Add" class="btn-me btn-primary hvr-float-shadow"
+                                                        ng-click="AddRecord()" ng-disabled="isEmpDisabled">
+                                                    <span id="btnAddtxt">+</span>
+                                                    <i data-feather="edit"></i>
+                                                </button>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                            <div class="table-responsive">
+                                                <table id="example1" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr. No</th>
+                                                            <th>From Date</th>
+                                                            <th>To Date</th>
+                                                            <th></th>
+                                                            <th>Total Period</th>
+                                                            <th>Substituted Period</th>
+                                                            <th>Period Remaining for Substitution</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in SubtitutionDateRange" ng-repeat-done>
+                                                            <td ng-bind="obj.Srno=($index+1)"></td>
+                                                            <td>{{obj.FromDate}}</td>
+                                                            <td>{{obj.ToDate}}</td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" ng-change="ddlChk_Change(obj)"
+                                                                           ng-model="obj.Chk" ng-if="obj.IsNotReplaced || Save=='Edit'" ng-init="obj.Chk=Save=='Edit'" />
+                                                                    <label for="" ng-if="obj.IsNotReplaced || Save=='Edit'"> </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>{{obj.EngagedPeriod}}</td>
+                                                            <td>{{obj.ReplacedPeriod}}</td>
+                                                            <td>{{obj.RemainingPeriod}}</td>
+                                                            <td class="text-center">
+                                                                <button id="btnRemove" type="button" value="Remove"
+                                                                        class="btn-me btn-primary hvr-float-shadow"
+                                                                        ng-click="RemoveRecord($index)"
+                                                                        ng-if="obj.Type=='M' && obj.IsNotReplaced">
+                                                                    <span id="btnRemovetxt">-</span>
+                                                                    <i data-feather="edit"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label"><span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                <button id="btnSave" type="button" value="LoadTimetable" class="btn-me btn-primary hvr-float-shadow"
+                                                        ng-click="LoadTimetable()">
+                                                    <span id="btnLoadTimetable">Load Timetable</span>
+                                                    <i data-feather="edit"></i>
+                                                </button>
+                                                <button id="btnPrint" type="button" value="Print" class="btn-me btn-primary hvr-float-shadow"
+                                                        ng-click="Print()">
+                                                    <span id="btnPrint">Print</span>
+                                                    <i data-feather="edit"></i>
+                                                </button>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                            <div class="table-responsive" id="print">
+                                                <div class="text-center">
+                                                    <h4>Teacher Substitution Suggestions</h4>
+                                                    <label class="text-bold color-black">Shift:</label>
+                                                    <span class="color-black">{{ShiftName}}</span>,
+                                                    <label class="text-bold color-black">Employee:</label>
+                                                    <span class="color-black">{{EmployeeName}}</span>,
+                                                    <label class="text-bold color-black">Substitute With Same Subject:</label>
+                                                    <span class="color-black">{{SubtWithSameSubj}}</span>
+                                                </div>
+
+
+
+                                                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+
+                                                    <thead style="position: sticky; top: 0; z-index: 10;">
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Day</th>
+                                                            <th ng-repeat="p in Periods">
+                                                                {{p.PeriodName}}
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in SubstitutionTimeTable" >
+                                                            <td ng-model="row" ng-init="row=$index">{{obj.Date}}</td>
+                                                            <td>{{obj.Day}}</td>
+                                                            <td ng-repeat="p1 in Periods">
+                                                                <div ng-repeat="p in obj.PeriodList|filter:{PeriodCode:p1.PeriodCode}" ng-dblclick="ShowModalPopUp(p,obj,row,p1.Srno)">
+                                                                    <div ng-repeat="s in p.SubjectList" style="background-color: #d95757;color: white;padding: 0px 10px;border: 1px solid #ccc;margin-top: 2px;box-shadow: 0px 0px 3px #ccc;border-radius: 20px;" ng-if="p.EmployeeName">
+                                                                        <p>
+                                                                            <span style="font-size: 12px;">{{p.EmployeeName}}/{{s.Subject}}/{{p.ClassName}}/{{p.SectionName}}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div ng-repeat="t in p.SubtituteTeacherList" ng-if="p.EmployeeName"
+                                                                         style="padding: 0px 10px; border: 1px solid #ccc; margin-top: 2px; box-shadow: 0px 0px 3px #ccc; border-radius: 20px; background-color:{{t.Chk==true?'Green':'#f9f979'}}; color:{{t.Chk==true?'White':'black'}};">
+                                                                        @*<p style="font-size: 11px;">{{t.EmployeeName}}/{{t.Subject}}/[E.P. {{t.TotalEngagedPeriods}}]/[T.P. {{t.TodayEngagedPeriods}}]</p>*@
+                                                                        <p style="font-size: 11px;">{{t.EmployeeName}}/{{t.Subject}}/[T.P. {{t.TodayEngagedPeriods}}]</p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-if="SubstitutionTimeTable.length==0" class="text-center">
+                                                            <td colspan="{{Periods.length+3}}">
+                                                                Sorry No record Found.
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                        <div class="table-responsive">
+                            <table class="table compact table-hover table-striped table-bordered nowrap ">
+                                <thead>
+                                    <tr>
+                                        <th>S.R.No.</th>
+                                        <th></th>
+                                        <th>Teacher</th>
+                                        <th>Subject</th>
+                                        <th>Teacher Total Engaged Periods</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="tlfs in TeacherListForSubstitution">
+                                        <td>
+                                            {{$index+1}}
+                                            @*<input id="hfSubjectIdWithEmpCode" type="hidden"
+                                                ng-model="Subject[$index].SubjectIdWithEmpCode"
+                                                ng-init="Subject[$index].SubjectIdWithEmpCode=tlfs.SubjectIdWithEmpCode" />*@
+
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="check-box validate" ng-model="tlfs.Chk" />
+                                        </td>
+                                        <td>{{tlfs.EmployeeName}}</td>
+                                        <td>{{tlfs.Subject}}</td>
+                                        <td>{{tlfs.TotalEngagedPeriods}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                    <button type="button" class="btn btn-primary" ng-click="SaveChange();">Save changes</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

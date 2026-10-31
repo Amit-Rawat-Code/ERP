@@ -1,0 +1,71 @@
+﻿@*<select multiple class="chosen-select" name="test" style="width:100%" ng-init="GetCdf()">
+        <option value="">Select Class</option>
+        <option ng-repeat="cl in ClassList" value="{{cl.Code}}">{{cl.ClassName}}</option>
+
+    </select>*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+<div style="width:100%">
+<select multiple="multiple" id="ddlClass" name="ddlClass" ng-model="ddlClass" class="chosen-select" ng-init="GetCdf();">
+    <option value="">Select Class</option>
+    
+</select>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="" style="position:relative;">
+        <div class="slimScrollDiv-height3" id="slimScrollDiv-height2">
+            <table class="table compact table-hover table-striped table-bordered  dataTable t-mgtb-n">
+                <tbody>
+                    <tr ng-repeat="cl in ClassList">
+                        <td class="srno">
+                            <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                <input type="checkbox" ng-model="XL.IsActive" />
+                                <label for=""> </label>
+                            </div>
+                        </td>
+                        <td style="float: left;display:none ">{{XL.ModuleId}}</td>
+                        <td> {{XL.ModuleName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>*@

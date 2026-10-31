@@ -1,0 +1,7 @@
+﻿<select id="ddlMenu" class="select2 form-control clear validate" ng-model="MenuId" ng-init="GetMenu();" 
+        ng-change="GetddlSubMenu(MenuId);GetLayoutAccordingMenu(MenuId);">
+    <option value="">Select Menu</option>
+    <option ng-repeat="Menu in Menus" value="{{Menu.Code}}">{{Menu.MenuName}}</option>
+</select>
+
+

@@ -1,0 +1,493 @@
+﻿
+@{
+    ViewBag.Title = "BookStockOpening";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<style>
+
+    a.fa-download {
+        float: right;
+        background: #484848;
+        color: #fff;
+        border-radius: 4px;
+        padding: 4px 12px;
+        margin-top: 5px;
+    }
+
+        a.fa-download:before {
+            display: none;
+        }
+    .search-box {
+        width: 30%;
+        float: right;
+    }
+
+        .search-box label {
+            float: left;
+            margin-right: 10px;
+            padding-top: 4px;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .search-box input {
+            width: 70%;
+            float: right;
+        }
+
+    @@media(max-width:991px) {
+        .search-box {
+            width: 100%;
+            float: right;
+        }
+
+            .search-box input {
+                width: 72%;
+                float: right;
+            }
+    }
+</style>
+<script src="~/Scripts/myjslib/BookStockOpeningLibController.js?Ver=@ViewBag.Version"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.1/xlsx.full.min.js"></script>
+<script src="http://oss.sheetjs.com/js-xlsx/jszip.js"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+@*<input type="hidden" ng-model="hfIssueId" id="Id" name="Id" value="" />*@
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Book Stock Opening</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><a href="#"><span>Library</span></a></li>
+                <li><a href="#"><span>Transaction</span></a></li>
+                <li class="active"><span>Book Stock Opening</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="form-panel">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <h5 class="form-panel-heading"><span class="vd_red"></span></h5>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Type<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlVoucherType" class="select2 form-control validate" ng-model="VoucherM" ng-init="GetVoucherType('OPNLB');" ng-disabled="true">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in VoucherTypeList" value="{{x.VCode}}">{{x.VoucherType}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">V Date</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtVDate", "", new
+                                                    {
+                                                        @class = "form-control clear validate",
+                                                        @type = "date"@*, @ng_disabled = "true"*@,
+                                                        @ng_model = "VDate"
+                                                    })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">V No.<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtVNo", "", new { @class = "form-control clear validate", @ng_disabled = "true", @placeholder = "", @ng_model = "PVNo", @ng_init = "GetVoucherNoLibList(6)" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-panel">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <h5 class="form-panel-heading">Assign Location<span class="vd_red"></span></h5>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Almirah Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlAlmera" class="select2 form-control clear {{validate1 == 'S'?'validate':''}}" ng-model="AlmeraCode" ng-init="GetAlmeraList();" ng-change="GetRackLibListByAlmera(AlmeraCode);" ng-disabled="disable">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in Almeralist" value="{{x.Code}}">{{x.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Rack Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlRack" class="select2 form-control clear {{validate1 == 'S'?'validate':''}}" ng-model="RackCode" ng-disabled="disable"
+                                                            ng-change="GetBinList(RackCode);">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in RacklibList" value="{{x.Code}}">{{x.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Bin Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlBin" class="select2 form-control {{validate1 == 'S'?'validate':''}}" ng-model="BinNameM" ng-disabled="disable">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in BinList" value="{{x.Code}}">{{x.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">From SrNo.</label>
+                                                <div class="input-box">
+                                                    <select id="ddlBin" class="select2 form-control {{validate1 == 'S'?'validate':''}}" ng-model="FromM" ng-disabled="disable">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="f in SrNoList" value="{{f.no}}">{{f.no}}</option>
+                                                    </select>
+                                                    @*@Html.TextBox("txtFrom", "", new { @class = "form-control clear", @ng_model = "FromM" })*@
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">To SrNo.</label>
+                                                <div class="input-box">
+                                                    <select id="ddlTo" class="select2 form-control {{validate1 == 'S'?'validate':''}}" ng-model="ToM" ng-disabled="disable">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="s in SrNoList" value="{{s.no}}">{{s.no}}</option>
+                                                    </select>
+                                                    @*@Html.TextBox("txtTo", "", new { @class = "form-control clear", @ng_model = "ToM" })*@
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">&nbsp;</label>
+                                                <div class="input-box">
+                                                    <button type="button" value="GenrateAccession" class="btn2 btn-common btn-3 btn-3d pe-7s-search"
+                                                            ng-model="GenerateAccessionM" ng-click="GenerateAccession()" ng-disabled="disable">
+                                                        <span class="triangle-box" title="Generate Accession"></span>
+                                                        <span>Assign Location </span>
+                                                    </button>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <input type="button" id="btnBookStock" value="+" class="add-btn" ng-click="AddBS()" />
+                                            <div class="datatable-responsive table-responsive advance-btn-table" ng-init="AddBS()">
+                                                <table ng-if="BS.length>0" class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="srno">Sr.No.</th>
+                                                            <th>Book Name</th>
+                                                            <th>Accession No</th>
+                                                            <th>Almera</th>
+                                                            <th>Rack</th>
+                                                            <th>Bin</th>
+                                                            <th>ISBN</th>
+                                                            <th>DDC</th>
+                                                            <th>BARID</th>
+                                                            <th>Author</th>
+                                                            <th>Publisher</th>
+                                                            <th class="srno">Add/Remove</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody ng-init="GetBookDetail()">
+                                                        <tr ng-repeat="obj in BS">
+                                                            <td ng-init="BS[$index].SrNo=$index+1">
+                                                                {{$index+1}}
+                                                                <input type="hidden" ng-model="BS[$index].SrNo" />
+                                                            </td>
+                                                            <td ng-model="obj.IsShow" ng-init="obj.IsShow=false">
+                                                                <select class="select2 form-control" ng-model="BS[$index].BookCode" 
+                                                                        ng-change="c(BS[$index].BookCode,$index)" ng-if="obj.IsShow">
+                                                                    <option value="">Select</option>
+                                                                    <option ng-repeat="x in BookList" value="{{x.Code}}">{{x.BookName}}</option>
+                                                                </select>
+                                                                <label ng-if="obj.IsShow==false" ng-click="obj.IsShow=true" style="color:blue;text-decoration:underline;cursor:pointer">{{obj.BookName==''?'Edit':obj.BookName}}</label>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].AccessionID" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Almera" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Rack" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Bin" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].ISBN" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].DDC" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].BARID" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Author" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Publisher" ng-readonly="true" />
+                                                            </td>
+                                                            <td class="srno">
+                                                                <input type="button" id="btnUPCourses" value="↑" ng-click="UpBS($index)" />
+                                                                <input type="button" id="btnDownCourses" value="↓" ng-click="DownBS($index)" />
+                                                                <input type="button" id="btnRemoveCourses" value="-" ng-click="RemoveBS($index)" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 no-padding">
+                                            <fieldset>
+                                                <legend style="width: auto;">Excel Entry Of Books Stock</legend>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    @*<h5 class="form-panel-heading">Excel Entry</h5>*@
+                                                    <a class="fa-download" href="{{ExcelPath}}" target="_blank">
+                                                        Sample Format For Bulk Uploading&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-download" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Select Excel File</label>
+                                                    <div class="input-box">
+                                                        <input accept=".xlsx,.xls" onchange="angular.element(document).scope().loadFile(this.files)" onclick="this.value=null;" ng-model="fileUpload" id="fileUpload" type="file" name="fileUpload" class="form-control clear" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Show Excel Records</label>
+                                                    <div class="input-box">
+                                                        <input type="button" class="form-control btn-success" value="Show Excel Records" ng-click="ShowExcelRecords()" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Upload Excel Records</label>
+                                                    <div class="input-box">
+                                                        <input type="button" class="form-control btn-success" value="Upload Excel Records" ng-click="UploadExcelRecords()" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <style>
+                                                    progress {
+                                                        text-align: center;
+                                                        height: 1.5em;
+                                                        width: 100%;
+                                                        -webkit-appearance: none;
+                                                        border: none;
+                                                        /* Set the progressbar to relative */
+                                                        position: relative;
+                                                    }
+
+                                                        progress:before {
+                                                            content: attr(data-label);
+                                                            font-size: 0.8em;
+                                                            vertical-align: 0;
+                                                            /*Position text over the progress bar */
+                                                            position: absolute;
+                                                            left: 0;
+                                                            right: 0;
+                                                            padding-top: 2px;
+                                                        }
+
+                                                        progress::-webkit-progress-bar {
+                                                            background-color: #c9c9c9;
+                                                        }
+
+                                                        progress::-webkit-progress-value {
+                                                            background-color: #7cc4ff;
+                                                        }
+
+                                                        progress::-moz-progress-bar {
+                                                            background-color: #7cc4ff;
+                                                        }
+                                                </style>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 pull-right">
+                                                </div>
+                                                <div ng-if="ProgressValue>0" class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 pull-right">
+                                                    <progress id="file" ng-model="ProgressValue" value="{{ProgressValue}}"
+                                                              max="100" style="width: 100%;height: 26px;" data-label="{{ProgressValue}} %"> {{ProgressValue}}% </progress>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 pull-right">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 no-padding">
+                                            <div ng-if="FilteredExcelList.length>0">
+                                                <div style="width:100%; display:inline-block;">
+                                                    <div class="search-box">
+                                                        <label>Search Here</label>
+                                                        <input type="text" ng-model="Search" class="form-control" placeholder="search" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="table-scroll">
+                                                    <table id="example2" class="table table-striped table-bordered compact" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>SrNo</th>
+                                                                <th>Accession No.</th>
+                                                                <th>Author</th>
+                                                                <th>Book Name/ Title</th>
+                                                                <th>Volume</th>
+                                                                <th>Publisher </th>
+                                                                <th>Group Name</th>
+                                                                <th>Subject</th>
+                                                                <th>Year of Publication</th>
+                                                                <th>Pages</th>
+                                                                <th>ISBN No.</th>
+                                                                <th>Edition</th>
+                                                                <th>DDC</th>
+                                                                <th>BarCode</th>
+                                                                <th>Almera</th>
+                                                                <th>Rack</th>
+                                                                <th>Bin</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="m in FilteredExcelList|filter:Search| limitTo:totalDisplayed" style="background-color:{{m.color}}">
+                                                                <td>
+                                                                    {{m.SrNo}}
+                                                                </td>
+                                                                <td>{{m.AccessionNo}}</td>
+                                                                <td>{{m.Author}}</td>
+                                                                <td>{{m.BookTitle}}</td>
+                                                                <td>{{m.Volume}}</td>
+                                                                <td>{{m.Publisher}}</td>
+                                                                <td>{{m.GroupName}}</td>
+                                                                <td>{{m.Subject}}</td>
+                                                                <td>{{m.YearofPublication}}</td>
+                                                                <td>{{m.Pages}}</td>
+                                                                <td>{{m.ISBNNo}}</td>
+                                                                <td>{{m.Edition}}</td>
+                                                                <td>{{m.DDC}}</td>
+                                                                <td>{{m.BarCode}}</td>
+                                                                <td>{{m.Almirah}}</td>
+                                                                <td>{{m.Rack}}</td>
+                                                                <td>{{m.Bin}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <style>
+                                                    .cust-btn {
+                                                        background-color: #fff;
+                                                        color: #f10404;
+                                                        border: none;
+                                                        font-weight: 600;
+                                                    }
+
+                                                    .cust-span {
+                                                        color: black !important;
+                                                        font-weight: 500;
+                                                    }
+
+                                                    .cust-exist {
+                                                        color: red !important;
+                                                        font-weight: 500;
+                                                    }
+                                                </style>
+                                                <div style="margin-top:10px">
+                                                    <span class="cust-span">Record Showing: <span ng-bind="(totalDisplayed<=FilteredExcelList.length)?totalDisplayed:(FilteredExcelList.length)"></span></span><span class="cust-span"> Out of: {{FilteredExcelList.length}}</span>
+                                                    <span ng-if="(StockExcelList | filter:{color:'#e97b51'}).length>0" style="color: #e97b51">Existing Record : {{(StockExcelList | filter:{color:'#e97b51'}).length}};</span>
+                                                    <span ng-if="(StockExcelList | filter:{color:'#e5bccd'}).length>0" style="color: #e5bccd"> Unmatchecd Record : {{(StockExcelList | filter:{color:'#e5bccd'}).length}}; </span>
+                                                    <span ng-if="Message2.length>0"><b>{{Message2}} Records Found Unmatched</b></span>
+                                                    <button ng-if="FilteredExcelList.length>500" type="button" class="cust-btn pull-right" value="Load More" ng-click="LoadMore()">Load More...</button>
+                                                </div>
+                                                <div style="margin:10px 0px 10px 0px">
+                                                    <style>
+                                                        .dotExist {
+                                                            height: 12px;
+                                                            width: 12px;
+                                                            background-color: #e97b51;
+                                                            border-radius: 50%;
+                                                            display: inline-block;
+                                                        }
+
+                                                        .dotUnmatched {
+                                                            height: 12px;
+                                                            width: 12px;
+                                                            background-color: #e5bccd;
+                                                            border-radius: 50%;
+                                                            display: inline-block;
+                                                        }
+                                                    </style>
+                                                    <span ng-if="(StockExcelList | filter:{color:'#e97b51'}).length>0">Existing Record Color Symbol </span>
+                                                    <span ng-if="(StockExcelList | filter:{color:'#e97b51'}).length>0" class="dotExist"></span>
+                                                    <span ng-if="(StockExcelList | filter:{color:'#e5bccd'}).length>0">Unmatchecd Record Color Symbol </span>
+                                                    <span ng-if="(StockExcelList | filter:{color:'#e5bccd'}).length>0" class="dotUnmatched"></span>
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <button type="button" class="form-control btn-primary" value="ALLRecord" ng-click="ShowALL()">Show ALLRecord</button>
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <button type="button" class="form-control btn-success" value="CorrerctRecord" ng-click="ShowCorrerct()">Show Non-Existing Record</button>
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <button type="button" class="form-control btn-danger" value="ExistingRecord" ng-click="ShowRed()">Show Existing Record</button>
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <button type="button" class="form-control btn-warning" value="UmatchedRecord" ng-click="ShowUnmatched()">Show Unmatched Record</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

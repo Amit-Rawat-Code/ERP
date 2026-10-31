@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "Driver Detail Master";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Driver Detail Master";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+
+<script src="~/scripts/myjslib/DriverDetailMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Transport</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Driver Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("DriverName", "", new { @class = "form-control clear", @placeholder = "Driver Name", @autocomplete = "name", @ng_model = "DriverName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Contact Number<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("ContactNumber", "", new { @class = "form-control clear", @placeholder = "Contact Number", @autocomplete = "name", @ng_model = "ContactNumber" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">DL Number<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("DLNumber", "", new { @class = "form-control clear", @placeholder = "DL Number", @autocomplete = "name", @ng_model = "DLNumber" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Address<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("DriverAddress", "", new { @class = "form-control clear", @placeholder = "Address", @autocomplete = "name", @ng_model = "DriverAddress" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Adhaar<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("Adhaar", "", new { @class = "form-control clear", @placeholder = "Adhaar", @autocomplete = "name", @ng_model = "Adhaar" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+
+                                                <div class="form-group">
+                                                    <label>Images  Upload</label>
+                                                    <input type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" onchange="angular.element(this).scope().show(this)" ng-model="fileInput" multiple class="form-control clear dropify validate" />
+
+                                                </div>
+                                                <div>
+
+                                                    <strong>Instructions to Upload Files</strong>
+                                                    <ul>
+                                                        <li> 1) Upload Multiple Images in selected Album. </li>
+                                                        <li> 2) Use Standard photo Format <br />(Width: 640px Height: 480px).</li>
+                                                        <li> 3) Album Image Size is not more than 1 Mb</li>
+                                                        <li> 4) Maximum five Images upload at a time</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

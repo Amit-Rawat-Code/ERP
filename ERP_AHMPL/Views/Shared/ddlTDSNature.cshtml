@@ -1,0 +1,4 @@
+﻿<select id="ddlTDSNature" class="select2 form-control" ng-model="TDSNatureModel" ng-init="BindTDSNature();" ng-change="BindTDSPercentage();" ng-disabled = "TDSdisability">
+    <option value="">Select</option>
+    <option ng-repeat="nature in TDSNatureList" value="{{nature.Code}}">{{nature.Name}}</option>
+</select>

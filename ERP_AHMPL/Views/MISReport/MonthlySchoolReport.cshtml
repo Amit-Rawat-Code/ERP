@@ -1,0 +1,699 @@
+﻿
+@{
+    ViewBag.Title = "Monthly School Report";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/MonthlySchoolReportController.js?Ver=@ViewBag.Version"></script>
+<style>
+    .select-btn {
+        background-color: #fff !important;
+        color: #000 !important;
+        border: none !important;
+        width: 100%;
+        text-align: left;
+        height: 28px !important;
+        padding: 0px 15px !important;
+    }
+    .select-btn-sub {
+        background-color: #fff !important;
+        float: right;
+        border: none !important;
+        top: 0px;
+        width: 20px;
+        height: 28px;
+        right: 0px;
+        color: #212121 !important;
+        padding: 0px 0px;
+        position: absolute;
+        font-size: 11px;
+    }
+   /* .select-btn-sub {
+        background-color: #fff !important;
+        float: right;
+        border: none !important;
+        top: 0px;
+        width: 20px;
+        height: 28px;
+        right: 0px;
+        color: #212121 !important;
+        padding: 0px 0px;
+        position: absolute;
+        font-size: 11px;
+    }*/
+    .table-head-center thead tr th, td {
+        text-align: center;
+    }
+    .table-head-center tbody tr th, td {
+        text-align: center;
+    }
+</style>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Monthly School Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>MIS</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Monthly School Report</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                    <div class="section-toggle">
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Select School<span class="vd_red">*</span></label>
+                                            <select id="ddlSchoolName" class="select2 form-control validate" ng-init="GetSchools();" ng-model="SchName">
+                                                <option value="">Select School</option>
+                                                <option ng-repeat="sl in SchoolList" value="{{sl.RelationshipId}}">{{sl.BranchName}}-{{sl.BranchAddress}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">As on Month / Year</label>
+                                            @*<div class="input-box">
+                <div class='input-group date' id='txtMonthYear' ng-model="MonthYear">
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar">
+                        </span>
+                    </span>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#txtMonthYear').datetimepicker({
+                            viewMode: 'years',
+                            format: 'DD/MM/YYYY'
+                        });
+                    });
+                </script>
+            </div>*@
+                                            @Html.Partial("txtFromDate")
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Staff Strength</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlStaffStrength", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "StaffStrength" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Class Wise Student Strength</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlCwStudentStrength", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "CwStudentStrength" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Quarter Wise Outstanding Fees</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlQwOutstandingFee", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "QwOutstandingFee" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Details of Student Withdrawals and not Reporting Since Last Report</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlStudentWithdrawl", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "StudentWithdrawl" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Leave Details of Teaching Staff</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlLDTeachingStaff", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "LDTeachingStaff" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Leave Details of Non Teaching Staff</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlLDNonTeachingStaff", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "LDNonTeachingStaff" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Teaching and Non Teaching Staff's Left Details</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlTeacherNontLeftDetails", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "TeacherNontLeftDetails" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Requirement Of New Staff</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlRequirementOfNewStaff", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "RequirementOfNewStaff" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Details of New Admissions</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlDetailsOfNewAdmissions", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "DetailsOfNewAdmissions" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Appointment of New Staff</label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlAppointmentNewStaff", new List<SelectListItem>{
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Yes", Value="true"},
+                                                    new SelectListItem{Text="No", Value="false"}
+                                                },
+                                                    new { @class = "select2 form-control", @ng_model = "AppointmentNewStaff" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionSearch")
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                                <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                    <div class="arrow-2">
+                                        <i class="fa fa-angle-down"></i>
+                                    </div>
+                                    <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    <div class="input-box datatable-responsive table-responsive advance-btn-table">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                            <div class="collapse" id="CollapseSearchTableList">
+                                                <div class="">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                                        @Html.Partial("_printingTool1")
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="{{DocSize}} {{DocOrientation}}">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" id="ExportDiv">
+                                                                <div id="SetPageMargin">
+                                                                    <div class="me-col-12" ng-init="GetReportHeaderUsingCategory('General Report')">
+                                                                        <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                                                                    </div>
+                                                                    <div class="me-col-12 dt-print-view">
+                                                                        <h1>@ViewBag.Title</h1>
+                                                                    </div>
+                                                                    <div id="FilterTitle">
+                                                                        <span class="filter" ng-model="FilterMsg"
+                                                                              ng-bind-html="trustAsHtml(FilterMsg)"></span>
+                                                                    </div>
+                                                                    <table id="example" class="table compact nowrap  dataTable table-head-center">
+                                                                        <caption style="caption-side: center">
+                                                                            <div id="FilterTitle">
+                                                                            </div>
+                                                                        </caption>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <td>&nbsp;</td>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                                                                                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgbt-xs-15 pt-20" ng-model="StffStr" ng-hide="StffStr" ng-init="StffStr=true">
+                                                                                            <label class="control-label">Staff Strength</label>
+                                                                                            <table id="TBL1StffStr" class="table compact table-hover table-striped table-bordered nowrap table-responsive" role="grid" style="width:100%">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="2">Particular</th>
+                                                                                                        <th colspan="{{StaffTeachingHeaderList.length}}">Teaching(On Roll)</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th colspan="2"></th>
+                                                                                                        <td ng-repeat="STHL in StaffTeachingHeaderList">{{STHL.HeaderText}}</td>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="STRL in StaffTeachingReportList">
+                                                                                                        <th colspan="2">Total Actual Strength</th>
+                                                                                                        <td ng-repeat="STHL in StaffTeachingHeaderList">{{STRL[STHL.HeaderValue]}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="2"></th>
+                                                                                                        <th colspan="{{StaffHeaderList.length}}">Other(On Roll)</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th colspan="2"></th>
+                                                                                                        <td ng-repeat="Shl in StaffHeaderList" style="font-weight:{{StaffHeaderList.length-1==$index||$index==0?600:400}}">
+                                                                                                            {{Shl.HeaderText}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="Srl in StaffReportList">
+                                                                                                        <th colspan="2"></th>
+                                                                                                        <th ng-repeat="Shl in StaffHeaderList" style="font-weight:{{StaffHeaderList.length-1==$index||$index==0?600:400}}">{{Srl[Shl.HeaderValue]}}</th>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgbt-xs-15 pt-20" ng-model="StStr" ng-hide="StStr" ng-init="StStr=true">
+                                                                                            <table id="example2" class="table compact table-hover table-striped table-bordered nowrap" role="grid" style="width:100%">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="{{HeaderDataList.length}}" class="text-center">Total Strength of the Students on the Last day of the Month.</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td ng-repeat="hdl in HeaderDataList"
+                                                                                                            style="font-weight:{{HeaderDataList.length-1==$index||$index==0?600:400}}">
+                                                                                                            {{hdl.HeaderText}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="dl in DataList">
+                                                                                                        <td ng-repeat="hdl in HeaderDataList" style="font-weight:{{HeaderDataList.length-1==$index||$index==0?600:400}}">
+                                                                                                            {{dl[hdl.HeaderValue]}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-model="LeaveDetailTeacher" ng-hide="LeaveDetailTeacher" ng-init="LeaveDetailTeacher=true">
+                                                                                            <table id="TBLLDT" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="12">Leave Details of Teaching Staff</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th>Name</th>
+                                                                                                        <th>Designation</th>
+                                                                                                        <th>Approved Leave of Month <br /><b>{{FromDate | date : "MMMM"}}</b></th>
+                                                                                                        <th>Absent of Month <br /><b>{{FromDate | date : "MMMM"}}</b><br />(Un-approved)</th>
+                                                                                                        <th>Total Leave Of Month <br /><b>{{FromDate | date : "MMMM"}}</b></th>
+                                                                                                        <th>Total Approved Leaves From <br /><b>Apr {{FromDate | date : "yyyy"}} To {{FromDate | date : "MMM"}} {{FromDate | date : "yyyy"}}</b></th>
+                                                                                                        <th>Total Absent From <br /><b>Apr {{FromDate | date : "yyyy"}} To {{FromDate | date : "MMM"}} {{FromDate | date : "yyyy"}}</b><br />(Un-approved)</th>
+                                                                                                        <th>Total Leave From <br /><b>Apr {{FromDate | date : "yyyy"}} To {{FromDate | date : "MMM"}} {{FromDate | date : "yyyy"}}</b></th>
+                                                                                                        <th>Summer Break Leave From <br /><b>Apr {{FromDate | date : "yyyy"}} To {{FromDate | date : "MMM"}} {{FromDate | date : "yyyy"}}</b></th>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="LDTL1 in LeaveDetailTeacherList">
+                                                                                                        <td>{{LDTL1.Name}}</td>
+                                                                                                        <td>{{LDTL1.Designation}}</td>
+                                                                                                        <td>{{LDTL1.LeaveOnMonth}}</td>
+                                                                                                        <td>{{LDTL1.AbsentOnMonth}}</td>
+                                                                                                        <td>{{LDTL1.TotalLeaveOnMonth}}</td>
+                                                                                                        <td>{{LDTL1.TotalLeaveTaken}}</td>
+                                                                                                        <td>{{LDTL1.TotalAbsent}}</td>
+                                                                                                        <td>{{LDTL1.TotalLeave}}</td>
+                                                                                                        <td>{{LDTL1.SummerBreakLeave}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-model="LeaveDetailNonTeacher" ng-hide="LeaveDetailNonTeacher" ng-init="LeaveDetailNonTeacher=true">
+                                                                                            <table id="TBLLDNT" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="12">Leave Details of Non Teaching Staff</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th>Name</th>
+                                                                                                        <th>Designation</th>
+                                                                                                        <th>Approved Leave of Month <br /><b>{{FromDate | date : "MMMM"}}</b></th>
+                                                                                                        <th>Absent of Month <br /><b>{{FromDate | date : "MMMM"}}</b><br />(Un-approved)</th>
+                                                                                                        <th>Total Leave Of Month <br /><b>{{FromDate | date : "MMMM"}}</b></th>
+                                                                                                        <th>Total Approved Leaves From <br /><b>Apr {{FromDate | date : "yyyy"}} To {{FromDate | date : "MMM"}} {{FromDate | date : "yyyy"}}</b></th>
+                                                                                                        <th>Total Absent From <br /><b>Apr {{FromDate | date : "yyyy"}} To {{FromDate | date : "MMM"}} {{FromDate | date : "yyyy"}}</b><br />(Un-approved)</th>
+                                                                                                        <th>Total Leave From <br /><b>Apr {{FromDate | date : "yyyy"}} To {{FromDate | date : "MMM"}} {{FromDate | date : "yyyy"}}</b></th>
+                                                                                                        <th>Summer Break Leave From <br /><b>Apr {{FromDate | date : "yyyy"}} To {{FromDate | date : "MMM"}} {{FromDate | date : "yyyy"}}</b></th>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="LDTL2 in LeaveDetailNonTeacherList">
+                                                                                                        <td>{{LDTL2.Name}}</td>
+                                                                                                        <td>{{LDTL2.Designation}}</td>
+                                                                                                        <td>{{LDTL2.LeaveOnMonth}}</td>
+                                                                                                        <td>{{LDTL2.AbsentOnMonth}}</td>
+                                                                                                        <td>{{LDTL2.TotalLeaveOnMonth}}</td>
+                                                                                                        <td>{{LDTL2.TotalLeaveTaken}}</td>
+                                                                                                        <td>{{LDTL2.TotalAbsent}}</td>
+                                                                                                        <td>{{LDTL2.TotalLeave}}</td>
+                                                                                                        <td>{{LDTL2.SummerBreakLeave}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-model="OutstandingFee" ng-hide="OutstandingFee" ng-init="OutstandingFee=true">
+                                                                                            <label class="control-label">Outstanding Fee as on Last day of Month.</label>
+                                                                                            <table id="TBLOutFee" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center" ng-model="TBLOutFee" ng-hide="TBLOutFee" ng-init="TBLOutFee=true">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="{{HeaderDataListOutFee.length}}" class="text-center">Outstanding Fee For Active Students</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td ng-repeat="hdOutFee in HeaderDataListOutFee"
+                                                                                                            style="font-weight:{{HeaderDataListOutFee.length-1==$index?600:400}}">
+                                                                                                            {{hdOutFee.HeaderText}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="dlOutFee in DataListOutFee">
+                                                                                                        <td ng-repeat="hdOutFee in HeaderDataListOutFee" style="font-weight:{{HeaderDataListOutFee.length-1==$index?600:400}}">
+                                                                                                            {{dlOutFee[hdOutFee.HeaderValue]}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr ng-model="TotOut1" ng-hide="TotOut1" ng-init="TotOut1=true">
+                                                                                                        <td colspan="{{HeaderDataListOutFee.length-1}}" style="font-weight:700;text-align:right">Total Outstanding : </td>
+                                                                                                        <td style="font-weight:700">{{TotalOutstandingAmt}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <table id="TBLOutFee1" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center" ng-model="TBLOutFee1" ng-hide="TBLOutFee1" ng-init="TBLOutFee1=true">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="{{HeaderDataListOutFee.length}}" class="text-center">Outstanding Fee For In Active Students</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td ng-repeat="hdOutFee in HeaderDataListOutFee"
+                                                                                                            style="font-weight:{{HeaderDataListOutFee.length-1==$index?600:400}}">
+                                                                                                            {{hdOutFee.HeaderText}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="dlOutFee1 in DataListOutFee1">
+                                                                                                        <td ng-repeat="hdOutFee in HeaderDataListOutFee" style="font-weight:{{HeaderDataListOutFee.length-1==$index?600:400}}">
+                                                                                                            {{dlOutFee1[hdOutFee.HeaderValue]}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr ng-model="TotOut2" ng-hide="TotOut2" ng-init="TotOut2=true">
+                                                                                                        <td colspan="{{HeaderDataListOutFee.length-1}}" style="font-weight:700;text-align:right">Total Outstanding : </td>
+                                                                                                        <td style="font-weight:700">{{TotalOutstandingAmt}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-model="DetailsOfNewAdmissionsLayout" ng-hide="DetailsOfNewAdmissionsLayout" ng-init="DetailsOfNewAdmissionsLayout=true">
+                                                                                            <table id="TBLDNL" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="12">Details of New Admission</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th><b>Name</b></th>
+                                                                                                        <th><b>Class</b></th>
+                                                                                                        <th><b>Date of Admission</b></th>
+                                                                                                        <th><b>Previous School / Board</b></th>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="DONA in DetailsOfNewAdmissionsList1">
+                                                                                                        <th>{{DONA.Name}}</th>
+                                                                                                        <td>{{DONA.ClassName}}</td>
+                                                                                                        <td>{{DONA.DateOfAdmission}}</td>
+                                                                                                        <td>{{DONA.PreviousSchool}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                                <tfoot style="visibility:visible">
+                                                                                                    <tr>
+                                                                                                        <td colspan="4"><b>Total No. of Admission : {{DetailsOfNewAdmissionsList1[0].TotalEmployee}}</b></td>
+                                                                                                    </tr>
+                                                                                                </tfoot>
+
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-model="RequirementOfNewStaffLayout" ng-hide="RequirementOfNewStaffLayout" ng-init="RequirementOfNewStaffLayout=true">
+                                                                                            <table id="TBLRNS" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="12">Requirement of New Staff / Vacancy to be filled</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th><b>Name of the Post</b></th>
+                                                                                                        <th><b>Salary</b></th>
+                                                                                                        <th><b>Subjects</b></th>
+                                                                                                        <th><b>Date(Informed to HR)</b></th>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="RNSL in RequirementOfNewStaffList">
+                                                                                                        <th>{{RNSL.DesignationName}}</th>
+                                                                                                        <td>{{RNSL.SalaryRange}}</td>
+                                                                                                        <td>{{RNSL.SubjectName}}</td>
+                                                                                                        <td>{{RNSL.DateInfToHR}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-model="ThNthLeftLayout" ng-hide="ThNthLeftLayout" ng-init="ThNthLeftLayout=true">
+                                                                                            <table id="TBLTHL" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="12">Teachers Left during this period</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th><b>Name</b></th>
+                                                                                                        <th><b>Designation</b></th>
+                                                                                                        <th><b>Qualification</b></th>
+                                                                                                        <th><b>Class</b></th>
+                                                                                                        <th><b>Subject</b></th>
+                                                                                                        <th><b>DOJ</b></th>
+                                                                                                        <th><b>Contact No.</b></th>
+                                                                                                        <th><b>Reason For Leaving</b></th>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="TH in ThNthLeftList | filter:{Staff : 'T'}">
+                                                                                                        <th>{{TH.Name}}</th>
+                                                                                                        <td>{{TH.Designation}}</td>
+                                                                                                        <td>{{TH.Qualification}}</td>
+                                                                                                        <td>{{TH.ClassName}}</td>
+                                                                                                        <td>{{TH.SubjectName}}</td>
+                                                                                                        <td>{{TH.JoiningDate}}</td>
+                                                                                                        <td>{{TH.ContactNo}}</td>
+                                                                                                        <td>{{TH.ResignationRemark}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <label class="control-label">Non Teaching Staff Left during this period</label>
+                                                                                            <table id="TBLNTHL" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th><b>Name</b></th>
+                                                                                                        <th><b>Designation</b></th>
+                                                                                                        <th><b>Qualification</b></th>
+                                                                                                        <th><b>Class</b></th>
+                                                                                                        <th><b>Subject</b></th>
+                                                                                                        <th><b>DOJ</b></th>
+                                                                                                        <th><b>Contact No.</b></th>
+                                                                                                        <th><b>Reason For Leaving</b></th>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="NTH in ThNthLeftList | filter:{Staff : 'N'}">
+                                                                                                        <th>{{NTH.Name}}</th>
+                                                                                                        <td>{{NTH.Designation}}</td>
+                                                                                                        <td>{{NTH.Qualification}}</td>
+                                                                                                        <td>{{NTH.ClassName}}</td>
+                                                                                                        <td>{{NTH.SubjectName}}</td>
+                                                                                                        <td>{{NTH.JoiningDate}}</td>
+                                                                                                        <td>{{NTH.ContactNo}}</td>
+                                                                                                        <td>{{NTH.ResignationRemark}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                                <tfoot>
+                                                                                                    <tr style="visibility:visible">
+                                                                                                        <td colspan="3"><b>Cummulative No of Teachers left till date :  {{CountThNthStaff[0].CountStaff}}</b></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td colspan="3"><b>Cummulative No of Non Teaching left till date :  {{CountThNthStaff[1].CountStaff}}</b></td>
+                                                                                                    </tr>
+                                                                                                </tfoot>
+
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-model="StudentWithdrawalsLayout" ng-hide="StudentWithdrawalsLayout" ng-init="StudentWithdrawalsLayout=true">
+                                                                                            <table id="TBLSW" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="12">Details of Student Wthdrawals / not reporting since last Report</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th><b>Name of the Student</b></th>
+                                                                                                        <th><b>Class</b></th>
+                                                                                                        <th><b>Year of Admission</b></th>
+                                                                                                        <th><b>Contact Number</b></th>
+                                                                                                        <th><b>Reason for Withdrawal</b></th>
+                                                                                                        <th><b>TC Taken</b></th>
+                                                                                                        <th><b>Fee Status</b></th>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="SW in StudentWithdrawalList">
+                                                                                                        <th>{{SW.Name}}</th>
+                                                                                                        <td>{{SW.ClassName}}</td>
+                                                                                                        <td>{{SW.YearAdmission}}</td>
+                                                                                                        <td>{{SW.MobileNo}}</td>
+                                                                                                        <td>{{SW.ReasonOfLeaving}}</td>
+                                                                                                        <td>{{SW.TcTaken}}</td>
+                                                                                                        <td>{{SW.FeeStatus}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                                <tfoot>
+                                                                                                    <tr>
+                                                                                                        <td colspan="7">Total Withdrawals till date : {{StudentWithdrawalList.length}}</td>
+                                                                                                    </tr>
+                                                                                                </tfoot>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-model="ApptNewStaffLayout" ng-hide="ApptNewStaffLayout" ng-init="ApptNewStaffLayout=true">
+                                                                                            <table id="TBLANS" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th colspan="12">Appointment of New Teaching Staff</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th><b>Name</b></th>
+                                                                                                        <th><b>Designation</b></th>
+                                                                                                        <th><b>Qualification</b></th>
+                                                                                                        <th><b>Class</b></th>
+                                                                                                        <th><b>Subject</b></th>
+                                                                                                        <th><b>DOJ</b></th>
+                                                                                                        <th><b>Contact No.</b></th>
+                                                                                                        <th><b>Reason For Leaving</b></th>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="ANS in ApptNewStaffList | filter:{Staff : 'T'}">
+                                                                                                        <th>{{ANS.Name}}</th>
+                                                                                                        <td>{{ANS.Designation}}</td>
+                                                                                                        <td>{{ANS.Qualification}}</td>
+                                                                                                        <td>{{ANS.ClassName}}</td>
+                                                                                                        <td>{{ANS.SubjectName}}</td>
+                                                                                                        <td>{{ANS.JoiningDate}}</td>
+                                                                                                        <td>{{ANS.ContactNo}}</td>
+                                                                                                        <td>{{ANS.ResignationRemark}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <label class="control-label">Appointment of New Non - Teaching Staff</label>
+                                                                                            <table id="TBLNANS" class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th><b>Name</b></th>
+                                                                                                        <th><b>Designation</b></th>
+                                                                                                        <th><b>Qualification</b></th>
+                                                                                                        <th><b>Class</b></th>
+                                                                                                        <th><b>Subject</b></th>
+                                                                                                        <th><b>DOJ</b></th>
+                                                                                                        <th><b>Contact No.</b></th>
+                                                                                                        <th><b>Reason For Leaving</b></th>
+                                                                                                    </tr>
+                                                                                                    <tr ng-repeat="NANS in NonApptNewStaffList | filter:{Staff : 'N'}">
+                                                                                                        <th>{{NANS.Name}}</th>
+                                                                                                        <td>{{NANS.Designation}}</td>
+                                                                                                        <td>{{NANS.Qualification}}</td>
+                                                                                                        <td>{{NANS.ClassName}}</td>
+                                                                                                        <td>{{NANS.SubjectName}}</td>
+                                                                                                        <td>{{NANS.JoiningDate}}</td>
+                                                                                                        <td>{{NANS.ContactNo}}</td>
+                                                                                                        <td>{{NANS.ResignationRemark}}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                                <tfoot>
+                                                                                                    <tr style="visibility:visible">
+                                                                                                        <td colspan="3"><b>Cummulative No of Teachers left till date :  {{CountApptNewStaff[0].CountStaff}}</b></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td colspan="3"><b>Cummulative No of Non Teaching left till date :  {{CountApptNewStaff[1].CountStaff}}</b></td>
+                                                                                                    </tr>
+                                                                                                </tfoot>
+
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

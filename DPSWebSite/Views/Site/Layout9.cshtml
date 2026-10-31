@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "ImageContentPage";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div ng-init="GetAboutUs();" ng-cloak>
+    <section class="page-section why-choose-allen-kids">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="master-hdr">
+                        <h3 class="section-title">{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'IC'})[0].BodyContentHeading}}</h3>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="atallenkids">
+                        <div class="discription-section">
+                            <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCC'})[0].BodyContent)">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="photo-section" style="text-align: -webkit-center;">
+                        <img src="" height="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'IC'})[0].ImageHeight}}" style="width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'IC'})[0].ImageWidth}};object-fit:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'IC'})[0].ImageObjectFit}};border-radius:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'IC'})[0].ImageBorderRadius}};border-width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'IC'})[0].ImageBorder}};border-style: solid;border-color:#6b6c6d;" ng-src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'IC'})[0].ImgPath}}" alt="display-photo" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'IC'})[0].ImgPath)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

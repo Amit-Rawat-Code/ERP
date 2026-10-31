@@ -1,0 +1,5 @@
+﻿
+<select id="ddlAgainstFrom" class="select2 form-control validate" ng-model="AgainstFromCode" ng-init="BindAgainstFrom();">
+    <option value="">Select</option>
+    <option ng-repeat="againstfrom in AgainstFromList" value="{{againstfrom.Form_Code}}">{{againstfrom.Form_Desc}}</option>
+</select>

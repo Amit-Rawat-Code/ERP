@@ -1,0 +1,1378 @@
+﻿
+@{
+    ViewBag.Title = "Admin DashBoard";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<script src="~/Scripts/myjslib/adminDashBoardController.js?Ver=@ViewBag.Version"></script>
+
+
+<style>
+    #calendar {
+        max-width: 100%;
+    }
+</style>
+<style>
+    .fixed-event-tooltip {
+        margin: 0px 0px 0px 0px !important;
+    }
+</style>
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">DashBoard</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Admin</span></li>
+                <li class="active"><span>DashBoard</span></li>
+            </ol>
+        </div>
+    </div>
+
+
+
+    <div class="br-pagebody">
+
+        <div class="row">
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view shadow-base  pa-0">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body  pa-0">
+                            <div class="profile-box">
+                                <div class="profile-cover-pic">
+                                    <div class="profile-image-overlay profile_bg"></div>
+                                </div>
+                                <div class="profile-info text-center">
+                                    <div class="profile-img-wrap img-circle">
+                                        <img class="inline-block mb-10 img-circle" src='../Content/Photos/no-image.png'
+                                             ng-src={{PhotoPath}} alt="User Image not found!" />
+                                    </div>
+                                    <h5 class="block stu-pr-name ">
+                                        <label ng-bind="AccessorName"></label>
+                                    </h5>
+
+                                    <h3 class="mail-id-box">
+                                        <i class="fa fa-envelope-o"></i>&nbsp;&nbsp;
+                                        <label ng-bind="Email"></label>
+                                    </h3>
+                                </div>
+                                <div class="move-in-box text-center">
+                                    <a class="pro-btn pro1" ng-show="{{viewStatus}}" href="@Url.Action("ViewProfile", "ViewProfile")">View  Profile</a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <a class="pro-btn pro2" href="">
+                                        <i class="fa fa-phone"></i>&nbsp;&nbsp;+91&nbsp;
+                                        <label ng-bind="ContactNo"></label>
+                                    </a>
+                                </div>
+                                <div class="bottom-list-box table-card">
+                                    <ul class="in-line-list row-table">
+                                        <li class="col-sm-4 card-block-big br text-center">
+
+                                            <h5><label ng-bind="Department"></label></h5>
+                                            <span>department</span>
+
+                                        </li>
+                                        <li class="col-sm-4 card-block-big br text-center">
+
+                                            <h5><label ng-bind="Designation"></label></h5>
+                                            <span>Designation</span>
+
+                                        </li>
+                                        <li class="col-sm-4 card-block-big br text-center">
+
+                                            <h5><label ng-bind="DateofJoining"></label></h5>
+                                            <span>Joining Date</span>
+
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                @*<div class="closing text-center">
+                                        <a href="#">See More Details <i class="fa fa-angle-double-right"></i></a>
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-bb me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading  panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Circular</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh" ng-click="BindCircular()"> <i class="mdi mdi-autorenew"></i> </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Circular_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg pa-0">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="select-box-list3" ng-model="hi">
+                                    <ul id="topscroll1">
+                                        <li class="news-item" ng-repeat="xx in record" up-scroll-done1>
+                                            <div class="list-count-box2">
+                                                <div class="new-text-box wobble animated2 infinite">
+                                                    <img Style="display:{{xx.Icon}}" src="~/Content/img/new.png" />
+                                                </div>
+                                                <div class="list-title-head2">
+                                                    <label ng-bind="xx.Headline"></label>
+                                                </div>
+                                                <div class="list-title-date2">
+                                                    Event on : <label ng-bind="xx.CircularDate"></label>
+                                                    <a href='/Circular/AllCircular?NId={{xx.TransId}}'>
+                                                        Read More
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="closing text-center">
+                                    <a href="@Url.Action("AllCircular", "Circular")">
+                                        See All Circular List
+                                        <i class="fa fa-angle-double-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-gb me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Notice</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh " ng-click="BindNotice()"> <i class="mdi mdi-autorenew"></i> </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Notice_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg pa-0">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="select-box-list3" ng-model="hi">
+                                    <ul id="topscroll2">
+                                        <li class="news-item" ng-repeat="x in records" up-scroll-done2>
+                                            <div class="list-count-box2">
+                                                <div class="new-text-box wobble animated2 ">
+                                                    <sup><img Style="display:{{x.Icon}}" src="~/Content/img/new.png" /></sup>
+                                                </div>
+                                                <div class="list-title-head2">
+                                                    <label ng-bind="x.Headline"></label>
+                                                </div>
+                                                <div class="list-title-date2">
+                                                    Event on : <label ng-bind="x.NoticeDate"></label>
+                                                    <a href='/Notice/AllNotice?NId={{x.TransId}}'>
+                                                        Read More
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="closing text-center">
+                                    <a href="@Url.Action("AllNotice", "Notice")">See All Notice List <i class="fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="col-md-4 col-sm-6 col-xs-12 no-padding">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh vd_status-widget mul_bg-bb">
+                            <div class="refresh-container">
+                                <div class="preloader">
+                                    <div class="circles-1">
+                                        <div class="circles-1-center"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-wrapper widget  collapse in">
+                                <div class="vd_panel-menu">
+
+                                    <a href="#" class="pull-left inline-block smaller-font entypo-icon menu refresh "> <i class="mdi mdi-autorenew"></i> </a>
+
+                                </div>
+                                <a class="panel-body" href="#">
+                                    <div class="clearfix">
+                                        <span class="menu-icon">
+                                            <i class="icofont-group-students"></i>
+                                        </span>
+                                        <span class="menu-value" ng-init="GetStudentCount()">
+                                            <label ng-bind="TotalStudent"></label>
+                                        </span>
+                                    </div>
+                                    <div class="menu-text clearfix">
+                                        Total Student
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh vd_status-widget mul_bg-gb">
+                            <div class="refresh-container">
+                                <div class="preloader">
+                                    <div class="circles-1">
+                                        <div class="circles-1-center"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-wrapper widget  collapse in">
+                                <div class="vd_panel-menu">
+
+                                    <a href="#" class="pull-left inline-block smaller-font entypo-icon menu refresh "><i class="mdi mdi-autorenew"></i> </a>
+
+                                </div>
+                                <a class="panel-body" href="#">
+                                    <div class="clearfix">
+                                        <span class="menu-icon">
+                                            <i class="icofont-group-students"></i>
+                                        </span>
+                                        <span class="menu-value" ng-init="StudentAttendanceCount()">
+                                            <label ng-bind="stdtotal" ng-model="stdtotal"></label>
+                                        </span>
+                                    </div>
+                                    <div class="menu-text clearfix">
+                                        Present Student
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh vd_status-widget mul_bg-yb">
+                            <div class="refresh-container">
+                                <div class="preloader">
+                                    <div class="circles-1">
+                                        <div class="circles-1-center"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-wrapper widget  collapse in">
+                                <div class="vd_panel-menu">
+                                    <a href="#" class="pull-left inline-block smaller-font entypo-icon menu refresh "> <i class="mdi mdi-autorenew"></i> </a>
+                                </div>
+                                <a class="panel-body" href="#">
+                                    <div class="clearfix">
+                                        <span class="menu-icon">
+                                            <i class="icofont-users-alt-5"></i>
+                                        </span>
+                                        <span class="menu-value" ng-init="GetEmployeeCount()">
+                                            <label ng-bind="TotalEmployee"></label>
+                                        </span>
+                                    </div>
+                                    <div class="menu-text clearfix">
+                                        Total Employee
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh vd_status-widget mul_bg-ob">
+                            <div class="refresh-container">
+                                <div class="preloader">
+                                    <div class="circles-1">
+                                        <div class="circles-1-center"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-wrapper widget  collapse in">
+                                <div class="vd_panel-menu">
+
+                                    <a href="#" class="pull-left inline-block smaller-font entypo-icon menu refresh "> <i class="mdi mdi-autorenew"></i> </a>
+
+                                </div>
+                                <a class="panel-body" href="#">
+                                    <div class="clearfix">
+                                        <span class="menu-icon">
+                                            <i class="icofont-users-alt-5"></i>
+                                        </span>
+                                        <span class="menu-value" ng-init="EmployeeAttendanceCount()">
+                                            <label ng-bind="emptotal" ng-model="emptotal"></label>
+                                        </span>
+                                    </div>
+                                    <div class="menu-text clearfix">
+                                        Present Employee
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="col-md-4 col-sm-6 col-xs-12 " ng-if="IsAdmin">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-yb me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Employee Attendance Graph</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh "> <i class="mdi mdi-autorenew"></i> </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Emp_Attendance_Graph_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg pa-0">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+                                <div ng-model="TotalEmployee">
+                                    <div id="chart2"></div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="closing text-center">
+                                    <a href="#">See All Month Wise Attendance <i class="fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 " ng-if="IsStaff">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-yb me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Employee Attendance Graph</h6>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block refresh "> <i class="mdi mdi-autorenew"></i> </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Emp_Attendance_Graph_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg min-h-f pa-0">
+
+                            <div id="YearlyEmployeeAttendanceBox" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-10">
+                                <div class="innner-attendance-box">
+                                    <div id="EmployeeAttendanceBar"></div>
+                                </div>
+                            </div>
+                            <div id="MonthlyEmployeeAttendanceBox" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div id='MonthlyEmployeeAttendanceCalendar' class="calender-box fc-single-month t-bg"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="closing text-center">
+                                    <a href="@Url.Action("EmployeeAttendanceMonthlyChart", "Attendance")">See All Month Wise Attendance <i class="fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 ">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-ob me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Class Student Attendance Graph</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh"> <i class="mdi mdi-autorenew"></i> </a>
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Stu_Attendance_Graph_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg min-h-f pa-0">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                <div ng-model="TotalStudent">
+                                    <div id="chart3"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                            <div class="closing text-center">
+                                <a href="@Url.Action("StudentDateWiseCumulativeReport", "Report")">See All Student Attendance <i class="fa fa-angle-double-right"></i></a>
+                                @*<a href="#">See All Month Wise Attendance <i class="fa fa-angle-double-right"></i></a>*@
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 col-sm-6 col-xs-12 ">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-bb me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Event Calendar</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh"> <i class="mdi mdi-autorenew"></i> </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Event_Calendar_1" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg pa-0">
+
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                <div id='calendar' class="calender-box fc-single-month t-bg">
+
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="closing text-center">
+                                    <a href="@Url.Action("Activity", "EventCalender")">See All Events List <i class="fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-20" ng-show="LoginType=='4'">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tabs widget">
+                            <div class="shadow-base full-tabs">
+                                <ul class="nav nav-tabs widget for-table-behavior sec-d-2 mul_bg-gb">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#today-timetable">
+                                            <span class="menu-icon"><i class="mdi mdi-calendar-check"></i></span>
+                                            Today Time Table
+                                            <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#tomorrow-timetable">
+                                            <span class="menu-icon"><i class="mdi mdi-calendar-plus"></i></span>
+                                            Tomorrow Time Table
+                                            <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="today-timetable" class="tab-pane active">
+                                        <div class="content-list content-image menu-action-right h-f-379">
+                                            <div class="autohide-scroll-tab-dashboard h-f-379">
+                                                <ul class="list-wrapper pd-lr-15">
+                                                    <li ng-repeat="todayTimeTable in TodayTimeTableList">
+                                                        <div class="period-box" ng-if="todayTimeTable.PeriodType=='StudyPeriod'">
+                                                            <div class="period-d">
+                                                                <i class="icofont-interface"></i>
+                                                                <span><label ng-bind="todayTimeTable.PeriodCount"></label></span>
+                                                            </div>
+                                                            <div class="clock-d">
+                                                                <i class="icofont-wall-clock"></i>
+                                                                <span>
+                                                                    <label ng-bind="todayTimeTable.FromTime"></label> - <label ng-bind="todayTimeTable.ToTime"></label>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="period-box lunch-time" ng-if="todayTimeTable.PeriodType=='LunchPeriod'">
+                                                            <div class="period-d">
+                                                                <i class="icofont-lunch"></i>
+                                                            </div>
+                                                            <div class="clock-d">
+                                                                <span><label ng-bind="todayTimeTable.FromTime"></label> - <label ng-bind="todayTimeTable.ToTime"></label></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="period-box lunch-time" ng-if="todayTimeTable.PeriodType=='AttendencePeriod'">
+                                                            <div class="period-d">
+                                                                <i class="icofont-law-document"></i>
+                                                            </div>
+                                                            <div class="clock-d">
+                                                                <span><label ng-bind="todayTimeTable.FromTime"></label> - <label ng-bind="todayTimeTable.ToTime"></label></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="main-p-detail">
+                                                            <div class="period-subject" ng-if="todayTimeTable.SubjectName==''"><i class="icofont-notebook"></i>Free Period</div>
+                                                            <div class="period-subject" ng-if="todayTimeTable.SubjectName!=''">
+                                                                <i class="icofont-notebook"></i>
+                                                                <label ng-bind="todayTimeTable.SubjectName"></label>
+                                                            </div>
+                                                            <div class="period-class" ng-if="todayTimeTable.SubjectName!=''">
+                                                                <i class="icofont-black-board"></i>
+                                                                <label ng-bind="todayTimeTable.Class"></label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div id="tomorrow-timetable" class="tab-pane sidebar-widget">
+                                        <div class="content-list content-image menu-action-right h-f-379">
+                                            <div class="autohide-scroll-tab-dashboard h-f-379">
+                                                <ul class="list-wrapper pd-lr-15">
+                                                    <li ng-repeat="tomorrowTimeTable in TomorrowTimeTableList" ng-model="periodcount"
+                                                        ng-init="periodcount=0">
+                                                        <div class="period-box" ng-if="tomorrowTimeTable.PeriodType=='StudyPeriod'">
+                                                            <div class="period-d">
+                                                                <i class="icofont-interface"></i>
+                                                                <span><label ng-bind="tomorrowTimeTable.PeriodCount"></label></span>
+                                                            </div>
+                                                            <div class="clock-d">
+                                                                <i class="icofont-wall-clock"></i>
+                                                                <span><label ng-bind="tomorrowTimeTable.FromTime"></label> - <label ng-bind="tomorrowTimeTable.ToTime"></label></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="period-box lunch-time" ng-if="tomorrowTimeTable.PeriodType=='LunchPeriod'">
+                                                            <div class="period-d">
+                                                                <i class="icofont-lunch"></i>
+                                                            </div>
+                                                            <div class="clock-d">
+                                                                <span><label ng-bind="tomorrowTimeTable.FromTime"></label> - <label ng-bind="tomorrowTimeTable.ToTime"></label></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="period-box lunch-time" ng-if="tomorrowTimeTable.PeriodType=='AttendencePeriod'">
+                                                            <div class="period-d">
+                                                                <i class="icofont-law-document"></i>
+                                                            </div>
+                                                            <div class="clock-d">
+                                                                <span><label ng-bind="tomorrowTimeTable.FromTime"></label> - <label ng-bind="tomorrowTimeTable.ToTime"></label></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="main-p-detail">
+                                                            <div class="period-subject" ng-if="todayTimeTable.SubjectName==''"><i class="icofont-notebook"></i>Free Period</div>
+                                                            <div class="period-subject" ng-if="todayTimeTable.SubjectName!=''">
+                                                                <i class="icofont-notebook"></i>
+                                                                <label ng-bind="tomorrowTimeTable.SubjectName"></label>
+                                                            </div>
+                                                            <div class="period-class" ng-if="todayTimeTable.SubjectName!=''">
+                                                                <i class="icofont-black-board"></i>
+                                                                <label ng-bind="tomorrowTimeTable.Class"></label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 ">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-yb me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Staff Birthday</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh "> <i class="mdi mdi-autorenew"></i> </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Event_Calendar_11" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg pa-0">
+
+
+                            <div class="tabs widget ">
+                                <div class="full-tabs tab-box-rotate">
+                                    <ul class="nav nav-tabs widget for-table-behavior mul_bg-by EmployeeBirthday">
+                                        <li class="active">
+                                            <a data-toggle="tab" href="#today-employee-birthday-tab">
+                                                <span class="menu-icon"><i class="mdi mdi-cake-variant"></i></span>
+                                                <span class="menu-icon-title">Today Birthday</span>
+                                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#week-employee-birthday-tab">
+                                                <span class="menu-icon"><i class="mdi mdi-cake"></i></span>
+                                                <span class="menu-icon-title">This Week</span>
+                                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#month-employee-birthday-tab">
+                                                <span class="menu-icon"><i class="mdi mdi-cake-layered"></i></span>
+                                                <span class="menu-icon-title">This Month</span>
+                                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+
+                                        <div id="today-employee-birthday-tab" class="tab-pane active">
+                                            <div class="dhamaka-box birthday-box">
+                                                <div class="today-box-cel-banner">
+                                                </div>
+                                                <div class="birthday-member-box ">
+                                                    <div id="{{TodayEmployeeBirthdayList.length>2?'birthdaysliderstart2':'#'}}" class="birthdayslider ">
+                                                        <div class="MS-content member-in-{{TodayEmployeeBirthdayList.length==0?1:(TodayEmployeeBirthdayList.length>3?3:TodayEmployeeBirthdayList.length)}}"
+                                                              @*ng-init="GetTodayEmployeeBirthday();"*@
+                                                             >
+
+                                                            <div class="item text-center" ng-if="TodayEmployeeBirthdayList.length==0?true:false">
+                                                                <div class="view-cin-box">
+                                                                    <img alt="No Image found!" src="~/Content/Photos/no-birthday-today.png">
+                                                                </div>
+                                                                <div class="menu-text">
+                                                                    <lable>No Birthday Today </lable>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="item text-center" ng-repeat="birthDay in TodayEmployeeBirthdayList" repeat-employee-birthday-done>
+
+                                                                <div class="view-cin-box">
+                                                                    <img alt="No Image found!" class="resize" orientable src="../Content/Photos/no-image.png" ng-src={{birthDay.EmployeePhoto==null?'../Content/Photos/no-image.png':(birthDay.EmployeePhoto==''?'../Content/Photos/no-image.png':birthDay.EmployeePhoto)}}>
+
+                                                                </div>
+                                                                <div class="menu-text">
+                                                                    <lable ng-bind="birthDay.Name"></lable>
+                                                                </div>
+                                                                <div class="menu-text2">
+                                                                    <label ng-bind="birthDay.Designation"></label>&nbsp;
+                                                                </div>
+                                                                <div class="menu-text3">
+                                                                    ( <label ng-bind="birthDay.Department"></label> )
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="MS-controls">
+                                                            <button class="MS-left"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></button>
+                                                            <button class="MS-right"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="week-employee-birthday-tab" class="tab-pane sidebar-widget">
+                                            <div class="dhamaka-box birthday-box">
+                                                <div class="today-box-cel-banner {{WeekEmployeeBirthdayList.length>2?'birthdaysbghide':''}}">
+                                                </div>
+                                                <div class="{{WeekEmployeeBirthdayList.length>2?'autohide-scroll-tab-dashboard h-f-350':''}}">
+                                                    <div class="birthday-member-box {{WeekEmployeeBirthdayList.length>2?'birthday-member-scroll-box':''}}">
+                                                        <div class="birthdayslider">
+                                                            <div class="MS-content member-in-me{{WeekEmployeeBirthdayList.length==0?1:(WeekEmployeeBirthdayList.length>3?3:WeekEmployeeBirthdayList.length)}}" 
+                                                                 @*ng-init="GetWeekEmployeeBirthday();"*@
+                                                                 >
+
+                                                                <div class="item text-center" ng-if="WeekEmployeeBirthdayList.length==0?true:false">
+                                                                    <div class="view-cin-box">
+                                                                        <img alt="No Image found!" src="~/Content/Photos/default-user.png">
+                                                                    </div>
+                                                                    <div class="menu-text">
+                                                                        <lable>No Birthday This Week</lable>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item text-center" ng-repeat="birthDay in WeekEmployeeBirthdayList" repeat-employee-birthday-week-done>
+                                                                    <div class="view-cin-box">
+                                                                        <img alt="No Image found!" src="../Content/Photos/no-image.png" ng-src={{birthDay.EmployeePhoto==null?'../Content/Photos/no-image.png':(birthDay.EmployeePhoto==''?'../Content/Photos/no-image.png':birthDay.EmployeePhoto)}}>
+                                                                    </div>
+                                                                    <div class="menu-text">
+                                                                        <lable ng-bind="birthDay.Name"></lable>
+                                                                    </div>
+                                                                    <div class="menu-text2">
+                                                                        <label ng-bind="birthDay.Designation"></label>
+                                                                    </div>
+                                                                    <div class="menu-text3">
+                                                                        ( <label ng-bind="birthDay.Department"></label> )
+                                                                    </div>
+
+                                                                    <div class="menu-text2">
+                                                                        <lable ng-bind="birthDay.DateofBirth"></lable>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="month-employee-birthday-tab" class="tab-pane">
+                                            <div class="dhamaka-box birthday-box">
+                                                <div class="today-box-cel-banner {{MonthEmployeeBirthdayList.length>2?'birthdaysbghide':''}}">
+                                                </div>
+                                                <div class="{{MonthEmployeeBirthdayList.length>2?'autohide-scroll-tab-dashboard h-f-350':''}}">
+                                                    <div class="birthday-member-box {{MonthEmployeeBirthdayList.length>2?'birthday-member-scroll-box':''}}">
+                                                        <div class="birthdayslider">
+                                                            <div class="MS-content member-in-me{{MonthEmployeeBirthdayList.length==0?1:(MonthEmployeeBirthdayList.length>3?3:MonthEmployeeBirthdayList.length)}}" 
+                                                                 @*ng-init="GetMonthEmployeeBirthday();"*@
+                                                                 >
+
+                                                                <div class="item text-center" ng-if="MonthEmployeeBirthdayList.length==0?true:false">
+                                                                    <div class="view-cin-box">
+                                                                        <img alt="No Image found!" src="~/Content/Photos/default-user.png">
+                                                                    </div>
+                                                                    <div class="menu-text">
+                                                                        <lable>No Birthday This Week</lable>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item text-center" ng-repeat="birthDay in MonthEmployeeBirthdayList" repeat-employee-birthday-week-done>
+                                                                    <div class="view-cin-box">
+                                                                        <img alt="No Image found!" src="../Content/Photos/no-image.png" ng-src={{birthDay.EmployeePhoto==null?'../Content/Photos/no-image.png':(birthDay.EmployeePhoto==''?'../Content/Photos/no-image.png':birthDay.EmployeePhoto)}}>
+                                                                    </div>
+                                                                    <div class="menu-text">
+                                                                        <lable ng-bind="birthDay.Name"></lable>
+                                                                    </div>
+                                                                    <div class="menu-text2">
+                                                                        <label ng-bind="birthDay.Designation"></label>
+                                                                    </div>
+                                                                    <div class="menu-text3">
+                                                                        ( <label ng-bind="birthDay.Department"></label> )
+                                                                    </div>
+
+                                                                    <div class="menu-text2">
+                                                                        <lable ng-bind="birthDay.DateofBirth"></lable>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 ">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh mul_bg-bo me-panel">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading panel-head-me">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Student Birthday</h6>
+                        </div>
+                        <div class="pull-right">
+
+                            <a href="#" class="pull-left inline-block refresh "> <i class="mdi mdi-autorenew"></i> </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="Event_Calendar_12" class="panel-wrapper wrapper2 collapse in">
+                        <div class="panel-body t-bg pa-0">
+
+                            <div class="tabs widget ">
+                                <div class="full-tabs tab-box-rotate">
+                                    <ul class="nav nav-tabs widget for-table-behavior  mul_bg-ob StudentBirthday">
+                                        <li class="active">
+                                            <a data-toggle="tab" href="#today-student-birthday-tab">
+                                                <span class="menu-icon"><i class="mdi mdi-cake-variant"></i></span>
+                                                <span class="menu-icon-title">Today Birthday</span>
+                                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#week-student-birthday-tab">
+                                                <span class="menu-icon"><i class="mdi mdi-cake"></i></span>
+                                                <span class="menu-icon-title">
+                                                    This Week
+                                                </span>
+                                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#month-student-birthday-tab">
+                                                <span class="menu-icon"><i class="mdi mdi-cake-layered"></i></span>
+                                                <span class="menu-icon-title">
+                                                    This Month
+                                                </span>
+                                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="today-student-birthday-tab" class="tab-pane active">
+                                            <div class="dhamaka-box birthday-box">
+                                                <div class="today-box-cel-banner">
+                                                </div>
+                                                <div class="birthday-member-box ">
+                                                    <div id="{{TodayStudentBirthdayList.length>2?'birthdaysliderstart':'#'}}" class="birthdayslider ">
+                                                        <div class="MS-content member-in-{{TodayStudentBirthdayList.length==0?1:(TodayStudentBirthdayList.length>3?3:TodayStudentBirthdayList.length)}}" 
+                                                             @*ng-init="GetTodayStudentBirthday();"*@
+                                                             >
+
+                                                            <div class="item text-center" ng-if="TodayStudentBirthdayList.length==0?true:false">
+                                                                <div class="view-cin-box">
+                                                                    <img alt="No Image found!" src="~/Content/Photos/no-birthday-today.png">
+                                                                </div>
+                                                                <div class="menu-text">
+                                                                    <lable>No Birthday Today </lable>
+                                                                </div>
+                                                            </div>
+                                                            <div class="item text-center" ng-repeat="birthDay in TodayStudentBirthdayList" repeat-student-birthday-done>
+                                                                <div class="view-cin-box">
+                                                                    <img alt="No Image found!" src="../Content/Photos/no-image.png" ng-src={{birthDay.StudentPhoto==null?'../Content/Photos/no-image.png':(birthDay.StudentPhoto==''?'../Content/Photos/no-image.png':birthDay.StudentPhoto)}}>
+                                                                </div>
+                                                                <div class="menu-text">
+                                                                    <lable ng-bind="birthDay.Name"></lable>
+                                                                </div>
+                                                                <div class="menu-text2">
+                                                                    Class &nbsp; <lable ng-bind="birthDay.Class"></lable>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="MS-controls">
+                                                            <button class="MS-left"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></button>
+                                                            <button class="MS-right"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="week-student-birthday-tab" class="tab-pane sidebar-widget">
+                                            <div class="dhamaka-box birthday-box">
+                                                <div class="today-box-cel-banner {{WeekStudentBirthdayList.length>2?'birthdaysbghide':''}}">
+                                                </div>
+                                                <div class="{{WeekStudentBirthdayList.length>2?'autohide-scroll-tab-dashboard h-f-350':''}}">
+                                                    <div class="birthday-member-box {{WeekStudentBirthdayList.length>2?'birthday-member-scroll-box':''}}">
+                                                        <div class="birthdayslider">
+                                                            <div class="MS-content member-in-me{{WeekStudentBirthdayList.length==0?1:(WeekStudentBirthdayList.length>3?3:WeekStudentBirthdayList.length)}}" 
+                                                                 @*ng-init="GetWeekStudentBirthday();"*@
+                                                                 >
+
+                                                                <div class="item text-center" ng-if="WeekStudentBirthdayList.length==0?true:false">
+                                                                    <div class="view-cin-box">
+                                                                        <img alt="No Image found!" src="~/Content/Photos/default-user.png">
+                                                                    </div>
+                                                                    <div class="menu-text">
+                                                                        <lable>No Birthday This Week</lable>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item text-center" ng-repeat="birthDay in WeekStudentBirthdayList" repeat-student-birthday-week-done>
+                                                                    <div class="view-cin-box">
+                                                                        <img alt="No Image found!" src="../Content/Photos/no-image.png" ng-src={{birthDay.StudentPhoto==null?'../Content/Photos/no-image.png':(birthDay.StudentPhoto==''?'../Content/Photos/no-image.png':birthDay.StudentPhoto)}}>
+                                                                    </div>
+                                                                    <div class="menu-text">
+                                                                        <lable ng-bind="birthDay.Name"></lable>
+                                                                    </div>
+                                                                    <div class="menu-text2">
+                                                                        Class &nbsp; <lable ng-bind="birthDay.Class"></lable>
+                                                                    </div>
+                                                                    <div class="menu-text3">
+                                                                        <lable ng-bind="birthDay.DateofBirth"></lable>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="month-student-birthday-tab" class="tab-pane">
+                                            <div class="dhamaka-box birthday-box">
+                                                <div class="today-box-cel-banner {{MonthStudentBirthdayList.length>2?'birthdaysbghide':''}}">
+                                                </div>
+                                                <div class="{{MonthStudentBirthdayList.length>2?'autohide-scroll-tab-dashboard h-f-350':''}}">
+                                                    <div class="birthday-member-box {{MonthStudentBirthdayList.length>2?'birthday-member-scroll-box':''}}">
+                                                        <div class="birthdayslider">
+                                                            <div class="MS-content member-in-me{{MonthStudentBirthdayList.length==0?1:(MonthStudentBirthdayList.length>3?3:MonthStudentBirthdayList.length)}}" 
+                                                                 @*ng-init="GetMonthStudentBirthday();"*@
+                                                                 >
+
+                                                                <div class="item text-center" ng-if="MonthStudentBirthdayList.length==0?true:false">
+                                                                    <div class="view-cin-box">
+                                                                        <img alt="No Image found!" src="~/Content/Photos/default-user.png">
+                                                                    </div>
+                                                                    <div class="menu-text">
+                                                                        <lable>No Birthday This Month</lable>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item text-center" ng-repeat="birthDay in MonthStudentBirthdayList" repeat-student-birthday-month-done>
+                                                                    <div class="view-cin-box">
+                                                                        <img alt="No Image found!" src="../Content/Photos/no-image.png" ng-src={{birthDay.StudentPhoto==null?'../Content/Photos/no-image.png':(birthDay.StudentPhoto==''?'../Content/Photos/no-image.png':birthDay.StudentPhoto)}}>
+                                                                    </div>
+                                                                    <div class="menu-text">
+                                                                        <lable ng-bind="birthDay.Name"></lable>
+                                                                    </div>
+                                                                    <div class="menu-text2">
+                                                                        Class &nbsp; <lable ng-bind="birthDay.Class"></lable>
+                                                                    </div>
+                                                                    <div class="menu-text3">
+                                                                        <lable ng-bind="birthDay.DateofBirth"></lable>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 " ng-if="LoginType==1 || LoginType==2">
+
+                <div class="col-md-12 no-padding">
+                    <div class="vd_status-widget mul_bg-yb widget shadow-base">
+                        <div class="vd_panel-menu">
+                            <div data-action="refresh" data-original-title="Refresh" 
+                                 @*ng-click="GetTodayFeeCollection()"*@ 
+                                 data-rel="tooltip" class="menu entypo-icon smaller-font"><i class="icon-cycle"></i></div>
+                        </div>
+                        <!-- vd_panel-menu -->
+
+                        <a class="panel-body panel-body-me5910" href="#">
+                            <div class="clearfix">
+                                <span class="menu-icon"> 
+                                    <i class="icofont-rupee-plus"></i>
+                                </span>
+                                <span class="menu-value">
+                                    {{TodayNetAmount}}/-
+                                </span>
+                            </div>
+                            <div class="menu-text clearfix">
+                                Today Fee Collection
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                @*<div class="col-md-12">
+                    <div class="vd_status-widget mul_bg-ob widget shadow-base">
+                        <div class="vd_panel-menu">
+                            <div data-action="refresh" data-original-title="Refresh" data-rel="tooltip" class="menu entypo-icon smaller-font"><i class="icon-cycle"></i></div>
+                        </div>
+                      
+                        <a class="panel-body" href="#">
+                            <div class="clearfix">
+                                <span class="menu-icon">
+                                    <i class="icofont-rupee-true"></i>
+                                </span>
+                                <span class="menu-value">
+                                    {{TotalNetAmount}}/-
+                                </span>
+                            </div>
+                            <div class="menu-text clearfix">
+                                Total Fee Collection AS On Date: {{Todaydate}}
+                            </div>
+                        </a>
+                    </div>
+                </div>*@
+
+                <div class="col-md-12  no-padding">
+                    <div class="vd_status-widget mul_bg-ob widget shadow-base">
+                        <div class="vd_panel-menu">
+                            <div data-action="refresh" data-original-title="Refresh" 
+                                 @*ng-click="GetPendingFeeCollection()"*@ 
+                                 data-rel="tooltip" class="menu entypo-icon smaller-font"><i class="icon-cycle"></i></div>
+                        </div>
+                        <!-- vd_panel-menu -->
+
+                        <a class="panel-body panel-body-me5910" href="#">
+                            <div class="clearfix">
+                                <span class="menu-icon">
+                                    <i class="icofont-rupee-false"></i>
+                                </span>
+                                <span class="menu-value">
+                                    {{BalanceFee}}/-
+                                </span>
+                            </div>
+                            <div class="menu-text clearfix">
+                                Pending Fee AS On Date: {{Todaydate}}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="vd_status-widget mul_bg-bb widget shadow-base">
+                        <div class="vd_panel-menu">
+                            <div data-action="refresh" data-original-title="Refresh" 
+                                 @*ng-click="GetTotalBalance()"*@ 
+                                 data-rel="tooltip" class="menu entypo-icon smaller-font"><i class="icon-cycle"></i></div>
+                        </div>
+                        <!-- vd_panel-menu -->
+
+                        <a class="panel-body" href="#" >
+                            <div class="clearfix">
+                                <span class="menu-icon">
+                                    <i class="icofont-envelope"></i>
+                                </span>
+                                <span class="menu-value">
+                                    {{SMSTotal}}
+                                </span>
+                            </div>
+                            <div class="menu-text clearfix">
+                                Total SMS
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="vd_status-widget mul_bg-gb widget shadow-base">
+                        <div class="vd_panel-menu">
+                            <div data-action="refresh" data-original-title="Refresh" data-rel="tooltip" class="menu entypo-icon smaller-font"><i class="icon-cycle"></i></div>
+                        </div>
+                        <!-- vd_panel-menu -->
+
+                        <a class="panel-body" href="#">
+                            <div class="clearfix">
+                                <span class="menu-icon">
+                                    <i class="icofont-envelope-open"></i>
+                                </span>
+                                <span class="menu-value">
+                                    {{SMSTotal-SMSBalance}}
+                                </span>
+                            </div>
+                            <div class="menu-text clearfix">
+                                Consumed SMS
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="vd_status-widget mul_bg-yb widget shadow-base">
+                        <div class="vd_panel-menu">
+                            <div data-action="refresh" data-original-title="Refresh" 
+                                 @*ng-click="GetSMSBalance()"*@ 
+                                 data-rel="tooltip" 
+                                 class="menu entypo-icon smaller-font"><i class="icon-cycle"></i></div>
+                        </div>
+                        <!-- vd_panel-menu -->
+
+                        <a class="panel-body" href="#" >
+                            <div class="clearfix">
+                                <span class="menu-icon">
+                                    <i class="icofont-files-stack"></i>
+                                </span>
+                                <span class="menu-value">
+                                    {{SMSBalance}}
+                                </span>
+                            </div>
+                            <div class="menu-text clearfix">
+                                Balance SMS
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        if ($("#EmployeeAttendanceBar").length)
+            Highcharts.chart('EmployeeAttendanceBar', {
+                chart: {
+                    backgroundColor: 'transparent',
+
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: {
+                        overflow: 'justify',
+                        style: {
+                            //"color": "#000",
+                            "text-overflow": 'ellipsis',
+                            "line-height": "1.5em",
+                            "height": "4.5em",
+                            "white-space": "nowrap",
+                            "word-wrap": "break-word",
+                            "hyphens": "auto",
+                            "fontSize": "9px",
+                        },
+                        //y: 0,
+                        //x: 0,
+                        rotation: 270,
+                    },
+                },
+                yAxis: {
+                    title: {
+                        text: null,
+                    },
+                    labels: {
+                        enabled: false,
+                    },
+                },
+                tooltip: {
+                    enabled: true
+                },
+                //colors: ['#6c3e9d', '#fb8d34', '#ecb403', '#24CBE5', '#64E572', '#FF9655', '#f1c40f', '#6AF9C4'],
+                legend: {
+                    enabled: true,
+                    align: 'left',
+                    verticalAlign: 'top',
+                    x: 0,
+                    y: -20,
+                },
+                plotOptions: {
+                    series: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    //alert('Category: ' + this.category + ', value: ' + this.y);
+                                    $('#YearlyEmployeeAttendanceBox').fadeOut(0);
+                                    $('#MonthlyEmployeeAttendanceBox').fadeIn(500);
+                                }
+                            }
+                        },
+                        dataLabels: {
+                            enabled: true,
+                            color: '#333',
+                            shadow: false,
+                            borderRadius: 2,
+                            y: 10,
+                            x: 0,
+                            shape: 'callout',
+                            style: { "fontSize": "10px", "textShadow": "0px" }
+                            //backgroundColor: 'red',
+                            //color: 'white'
+                        }
+
+                    }
+                },
+                series: [{
+                    type: 'column',
+                    //colorByPoint: true,
+                    name: 'Present',
+                    data: [null, null, null, null, null, null, null, null, null, null, null, null],
+                    showInLegend: true,
+                    enabled: true,
+                    color: '#43cea2',
+                },
+                {
+                    name: 'Absent',
+                    type: 'column',
+                    //colorByPoint: true,
+                    data: [null, null, null, null, null, null, null, null, null, null, null, null],
+                    showInLegend: true,
+                    color: "#f96",
+                    enabled: true,
+                },
+                {
+                    name: 'Leave',
+                    type: 'column',
+                    //colorByPoint: true,
+                    data: [null, null, null, null, null, null, null, null, null, null, null, null],
+                    showInLegend: true,
+                    color: "#258ab2",
+                    enabled: true,
+                }
+                ]
+            });
+    });
+</script>

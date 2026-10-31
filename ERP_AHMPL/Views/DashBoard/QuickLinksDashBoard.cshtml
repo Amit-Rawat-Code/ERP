@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Quick Links";
+    Layout = "~/Views/Common/_CommonModuleMaster.cshtml";
+}
+
+<!DOCTYPE html>
+<style>
+    /*.spinner
+    {
+        position:absolute;
+        top:45%;
+        left:50%;
+    }*/
+</style>
+<div class="tab-main-box">
+
+    <ul class="nav nav-tabs profile-tab iframe-wrapper-tab" role="tablist">
+        <li id="tabmenuhomedashboard" class="nav-item active">
+
+            <a class="nav-link active pad-r-30" id="ancorquicklinksdashboard"
+               onclick="Showtab('#quicklinksdashboard')" data-toggle="tab" href="#homedashboard"
+               aria-expanded="false" role="tab">Quick Links</a>
+            <i id="btnrefreshquicklinksdashboard" class="pe-7s-refresh-2 close-box" title="Reload Page"
+               onclick="ReloadBox('#quicklinksdashboard');" disabled="disabled"></i>
+        </li>
+
+    </ul>
+</div>
+<div class="spinner spinner-table-box">
+    <div class="spinner-cell">
+        @*<i class="fa {{ModuleIcon}}" style="font-size:100px"></i>*@
+        <img src="~/Content/plugins/assets/img/modules/{{ModuleTextName}}.png" />
+        <h4 ng-model="ModuleTextName">{{ModuleTextName}}</h4>
+    </div>
+</div>
+<div class="iframe-wrapper tab-content">
+    <iframe id="quicklinksdashboard" class="iframedesign" src="../DashBoard/AdminQuickLinksDashBoard" rameborder="0"
+            marginheight="1" role="tabpanel" marginwidth="1" seamless="seamless" scrolling="no" allowtransparency="true"></iframe>
+</div>

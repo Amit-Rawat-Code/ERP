@@ -1,0 +1,6 @@
+﻿<select id="ddlGroupId" class="select2 form-control validate" ng-model="UserTypeId" ng-init="GetUserTypes();" >
+    <option value="" selected>Select</option>
+    <option ng-repeat="LUT in ListedUserTypes" value="{{LUT.UserTypeId}}">
+        {{LUT.UserTypeName}}
+    </option>
+</select>

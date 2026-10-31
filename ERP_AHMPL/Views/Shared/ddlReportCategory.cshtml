@@ -1,0 +1,6 @@
+﻿<select id="ddlReportCategory" class="select2 form-control validate" ng-model="ReportCategoryName" ng-init="GetReportCategory()" 
+        ng-change="ReportCategory_Change();">
+    <option value="">Select Category</option>
+    <option ng-repeat="category in ReportCategoryList" value="{{category.ReportCategoryName}}">{{category.ReportCategoryName}}</option>
+</select>
+

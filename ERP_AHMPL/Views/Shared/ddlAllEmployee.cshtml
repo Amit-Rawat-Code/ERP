@@ -1,0 +1,21 @@
+﻿@*<select id="ddlAllEmployee" class="select2 form-control validate" ng-model="EmployeeCode" ng-init="GetAllEmployee();">
+    <option value="">Select Employee</option>
+    <option ng-repeat="employee in EmployeeList" value="{{employee.EmployeeCode}}"
+            ng-disabled="!employee.IsActive">
+        {{employee.FullName}}
+    </option>
+</select>*@
+
+<select id="ddlAllEmployee" class="select2 form-control validate" ng-model="EmployeeCode" ng-init="GetAllEmployee();">
+    <option value="">Select Employee</option>
+    <option value="101">
+        Ramesh
+    </option>
+    <option value="102">
+        Vinay
+    </option>
+    <option value="103">
+        Swheta
+    </option>
+</select>
+

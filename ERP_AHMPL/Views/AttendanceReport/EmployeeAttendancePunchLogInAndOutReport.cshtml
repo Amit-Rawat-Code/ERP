@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Punch Log Employee Attendance";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<style>
+    .input-box-icon{
+        float: left;
+        margin-right: 7px;
+        margin-top: -2px;
+    }
+</style>
+<script src="~/scripts/myjslib/EmployeeAttendancePunchLogInAndOutReportController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark"> @ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Attendance</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Employee Punch Log Report</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                    <div class="collapse in">
+                                        <form id="user-form">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-0">
+                                                <div class="row">
+                                                    <div class="col-md-3 col-sm-3 col-xs-12 mgbt-xs-15 mgtp-xs-15">
+                                                        <div class="input-box input-box-icon">
+                                                            <input type="radio" value="1" ng-model="type" ng-init="type='1'" ng-change="rdShowBranches();" />
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label">From Punch Log Table (Real Time)<span class="vd_red">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3 col-xs-12 mgbt-xs-15 mgtp-xs-15">
+                                                        <div class="input-box input-box-icon">
+                                                            <input type="radio" value="2" ng-model="type" ng-change="rdShowBranches();" />
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label">From Employee Attendance Table (After Process)<span class="vd_red">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <div class="row">
+                                                            <div class="col-md-8 co l-sm-8 col-xs-12 mgbt-xs-15">
+                                                                <label class="control-label">Date</label>
+                                                                <div class="input-box">
+                                                                    <input class="form-control validate" id="txtFromDate" name="txtFromDate" ng-model="FromDates" type="date" />
+                                                                    <div class="text-box-msg-r">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-sm-4 col-xs-12 btn3-nM3-3 mgbt-xs-15">
+                                                                @Html.Partial("ActionSearch")
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    @Html.Partial("GeneralReportGrid")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#ddlEmployee').removeClass('validate');
+    $('#ddlDepartment').removeClass('validate');
+    $('#ddlDesignation').removeClass('validate');
+</script>
+

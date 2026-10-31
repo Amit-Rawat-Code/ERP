@@ -1,0 +1,41 @@
+
+@{
+    ViewBag.Title = "testimonials";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div ng-init="GetAboutUs();" ng-cloak>
+    <section class="page-section testimonial-page">
+        <div class="container">
+            <div class="col-sm-12">
+                <div class="">
+                    <div class="play-group-icon-title">
+                        <div class="icon">
+                            <img src="" style="margin: 20px 0px;" ng-src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCC'})[0].BodyContentHeadingImgPath}}" alt="pay-icon" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeadingImgPath)">
+                        </div>
+                        <h3 class="section-title-color text-center">{{trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCC'})[0].BodyContentHeading)}}</h3>
+                        <div class="section-title-bottom-line">
+                            <a href="" tabindex="0"></a>
+                        </div>
+
+                    </div>
+                    <img src="" style="margin: 20px 0px;width: 100%;" ng-src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath}}" alt="display-photo" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath)">
+                </div>
+            </div>
+
+            @*<div class="discription-section">
+                    <p class="discription">
+                        <strong>A few of our families would like to share their experiences with you! Check out our testimonials below!</strong>
+                    </p>
+                </div>*@
+            <div class="col-sm-12">
+                <div class="testimonail-box" ng-repeat="PageData in ImageContentPageData">
+                    <p class="discription" ng-bind-html="trustAsHtml(PageData.BodyContent)">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+

@@ -1,0 +1,127 @@
+﻿    <style>
+        .input-icons {
+            color: #01090c;
+            font-size: 15px;
+            line-height: 35px;
+            position: absolute;
+            top: 1px;
+            background: #d6d6d6;
+            text-align: center;
+            width: 31px;
+            left: unset !important;
+            right: 1px;
+            height: 28px;
+            border-left: 1px solid #484848;
+        }
+
+        .down-arrow {
+            border: solid black;
+            border-width: 0 2px 2px 0px;
+            display: inline-block;
+            padding: 2px;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            margin: 0px 0px 4px 0px;
+        }
+
+        div.scrollmenu {
+            /*width:300px;*/
+            overflow: auto;
+            max-height: 300px;
+            /*z-index: 99999;*/
+        }
+
+        table thead tr th {
+            /* Important */
+            position: sticky;
+            top: 0;
+        }
+
+        element.style {
+        }
+
+        #StuListOnOff {
+            display: none;
+        }
+
+        div.scrollmenu {
+            /* width: 300px; */
+            overflow: auto;
+            max-height: 300px;
+            /* z-index: 99999; */
+        }
+
+        .DropdownInInput {
+            position: absolute;
+            z-index: 30;
+            width: 100%;
+            left: 0px;
+            background: #fff;
+                box-shadow: 2px 2px 5px #d6d6d6;
+        }
+    </style>
+
+<div class="input-box chk-validate" >
+    <div class="toggle-ddl" id="openCheckList" ng-init="ToogleDDL('openCheckList','openCheckList')">
+        @*btn-validate*@
+        <button class='btn btn-primary select-btn'
+                data-ng-click='openCheckList=!openCheckList' ng-bind="GetCount(BookListIssued,'Select Books')">
+        </button>
+        @*btn-validate*@
+        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                data-ng-click='openCheckList=!openCheckList'>
+            <span class='fa fa-chevron-down'></span>
+        </button>
+        <div ng-show="openCheckList" class="ddlMultiple" ng-cloak>
+            @*<div ng-click="ddlCheckAll('BookListIssued')">
+                Check All
+                <span class="btn-counts-right">Total Count: {{BookListIssued.length}}</span>
+            </div>
+            <div ng-click="ddlUnCheckAll('BookListIssued')">Uncheck All</div>*@
+            <div><span class="btn-counts-right">Total Count: {{BookListIssued.length}}</span></div>
+            <hr style="margin:0px !important" />
+            <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card header-fixed">
+                <thead>
+                    <tr>
+                        <th width="10px"></th>
+                        <th width="10%">SrNo</th>
+                        <th width="20%">Book Name</th>
+                        <th width="20%">Accession Id</th>
+                        <th width="20%">Issue No.</th>
+                        <th width="20%">Issue Date</th>
+                        <th width="10%">Return Date</th>
+                        <th width="10%">Late Period</th>
+                        <th width="20%">Late Fine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Book in BookListIssued">
+                        <td>
+                            <div class="">
+                                <input ng-model="Book.chk" type="checkbox" value="{{Book.BookCode}}" ng-click="AddBookList();" />
+                                <label for=""></label>
+                            </div>
+                        </td>
+                        <td>{{$index+1}}</td>
+                        <td>{{Book.BookName}}</td>
+                        <td>{{Book.AccessionNo}}</td>
+                        <td>{{Book.IssueNo}}</td>
+                        <td>{{Book.IssueDate}}</td>
+                        <td>{{Book.ReturnDate}}</td>
+                        <td>{{Book.LateDay}}</td>
+                        <td>{{Book.FineAmt}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            @*<div ng-repeat="sl in SchoolList">
+            <input type="hidden" ng-bind="sl.Srno=($index+1)" />
+            <input type="checkbox" ng-model="sl.chk" ng-value="sl.RelationshipId" />
+            {{sl.BranchName}}-{{sl.BranchAddress}}
+        </div>*@
+        </div>
+    </div>
+</div>
+
+
+
+

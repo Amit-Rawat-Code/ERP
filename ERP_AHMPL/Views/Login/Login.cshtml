@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Login";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div class="login-page">
+    <div class="login-header">
+        <div class="container">
+            <div class="logo-app-download-link">
+                <div class="logo pull-left">
+                    <a class="brand-name" href="#">
+                        <img src="../Content/login/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="app-download-link pull-right">
+                    <h3 class="download-heading">Download Mobile App</h3>
+                    <a class="doanload-link" hef="#"><img src="../Content/login/ios-down-icon.png" alt="ios-down-icon"></a>
+                    <a class="doanload-link" hef="#"><img src="../Content/login/google-play-icon.png" alt="ios-down-icon"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login-form" ng-init="GetUrl();">
+        <div class="container">
+            <div class="contact-panel">
+                <div class="contact-panel-top" GetUrl>
+                    <img src="../Content/login/login-form-top.png" alt="login-top">
+                    <p class="school-code">
+                        <b>School Code : </b><span ng-bind="SchoolCode"></span>
+                    </p>
+                </div>
+                <div class="contact-panel-top1">
+
+                    <div class="signin-msg-box mb-5">
+                        <div id="msgbox" style="display:none;" class="box-v-r">
+                            <label id="lblmsg"></label>
+                        </div>
+                        @*<div id="msgbox" class="box-v-r">
+            <label id="lblmsg" style="font-size: 11px;">Server is under maintenance till 07:00 pm, Sorry for inconvenience.</label>
+        </div>*@
+                    </div>
+
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" id="exampleInputEmail1" ng-model="UserName" aria-describedby="emailHelp" placeholder="UserName">
+                            <i class="icon-user front-icon-input"></i>
+
+                        </div>
+                        <div class="form-group password-f">
+                            <input type="password" class="form-control" ng-model="Password" id="exampleInputPassword1" placeholder="Password">
+                            <i class="icon-lock front-icon-input"></i>
+                            <i class="icon-eye-close Back-icon-input"></i>
+                        </div>
+                        <div class="forget-password">
+
+                            <a class="link-forget-password" herf="#">Forget Password ?</a>
+                        </div>
+                        <button id="submit" type="submit" class="btn btn-primary login-btn" ng-click="Login();">Submit</button>
+
+
+                    </div>
+
+                </div>
+        </div>
+
+    </div>
+    <div class="login-footer">
+        <div class="container">
+            <div class="contact-number ">
+                <div class="contact-icon">
+                    <img src="../Content/login/contact-phone-icon.png">
+                </div>
+
+                <div class="contact-details">
+                    <p class="head">Call For Technical Support</p>
+                    <p class="number">+91-8881015424</p>
+                </div>
+            </div>
+            <div class="Copy-right">
+                <p>© COPYRIGHT 2021 BY <strong>Archie School Solutions Private Limited</strong></p>
+                <p>ALL RIGHTS RESERVED.</p>
+            </div>
+            <div class="contact-page-website">
+                <p class="may-i">May I Help You </p>
+                <div class="down-arrow">
+                    <img src="../Content/login/contact-arrow.png" alt="con-arrow">
+                </div>
+                <div class="contact-page-button">
+                    <button class="contact-button">
+                        Contact Us
+                    </button>
+                </div>
+                <div class="website-link">
+                    <a href="#">www.superhouseerp.com</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*/******** login password eye close and open **************/*@
+<script>
+    $(".icon-eye-close").click(function () {
+
+        $(this).toggleClass("icon-eye-close icon-eye-open");
+        const passInput = $("#exampleInputPassword1");
+        if (passInput.attr("type") === "password") {
+            passInput.attr("type", "text");
+        } else {
+            passInput.attr("type", "password");
+        }
+
+    });
+</script>
+
+@*/******** login password eye close and open **************/*@
+
+<script>
+
+
+    document.onkeydown = function () {
+        if (window.event.keyCode == '13') {
+            $("#submit").click();
+            //submitForm();
+        }
+    }
+   
+
+</script>

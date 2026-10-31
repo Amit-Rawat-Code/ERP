@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "contactus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="website-main-content">
+
+        <section class="page-banner-breadcrumbs contact-us">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <span class="page-name">AllenKids Swaroopnagar</span><span class="seprator">&gt;</span><span class="page-name">Contact us</span>
+                    <h3 class="title-of-page">
+                        Contact us
+                    </h3>
+                </div>
+            </div>
+        </section>
+        <section class="page-section why-choose-allen-kids admission-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="play-group-icon-title">
+                            <div class="icon"><img src="../../content/images/playgroup-1/playgroup-1-icon.png" alt="pay-icon"></div>
+                            <h3 class="play-title">Get in Touch</h3>
+                        </div>
+                        <div class="discription-section" ng-repeat="PageData in ContactUsPageData">
+                            <ul class="stm-contact-details__items_box">
+
+                                <li class="stm-contact-details__item stm-contact-details__item_type_tel"><i class="icon-phone"></i> Call Free: {{PageData.BodyContentMobileNoText}}</li>
+                                @*<li class="stm-contact-details__item stm-contact-details__item_type_skype"><i class="icon-skype"></i> <a href="skype:allenkids?chat">allenkids</a></li>*@
+                                <li class="stm-contact-details__item stm-contact-details__item_type_email"><i class="icon-envelope"></i> <a href="{{PageData.BodyContentEmailText}}">{{PageData.BodyContentEmailText}}</a></li>
+                                @*<li class="stm-contact-details__item stm-contact-details__item_type_url"><i class="icon-map-marker"></i> <a href="http://allenkids.in/">http://allenkids.in/</a></li>*@
+                            <li class="stm-contact-details__item stm-contact-details__item_type_schedule"><i class="icon-time"></i> {{PageData.BodyContentTimingText}}</li>
+                            <li class="stm-contact-details__item stm-contact-details__item_type_address"><i class="icon-location-arrow"></i> {{PageData.BodyContentAddressText}}</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="play-group-icon-title">
+                            <h3 class="play-title">
+                                Contact-form
+                            </h3>
+                        </div>
+                        <div class="contact-form">
+                            <form>
+                                <div class="form">
+                                    <div class="form-group">
+                                        <label for="email">Enquiry For Session:</label>
+                                        <select id="ddlSession" autocomplete='address-level2' class="form-control"
+                                                ng-model="ddlSession" ng-init="GetSession()">
+                                            <option value="">Select Session</option>
+                                            <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Your Name:</label>
+                                        <input type="text" class="form-control" id="Name" name="Name" ng-model="Name" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Your Email:</label>
+                                        <input type="email" class="form-control" ng-model="Email" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pwd">Subject:</label>
+                                        <input type="text" class="form-control" ng-model="Subject" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Your Message (optional):</label>
+                                        <textarea class="form-control" ng-model="Message" required></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-default" ng-click="SaveRecord()" name="saveButton" ng-model="Save" ng-init="Save='Save'">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="discription-section">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+

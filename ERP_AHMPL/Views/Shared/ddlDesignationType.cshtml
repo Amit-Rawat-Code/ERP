@@ -1,0 +1,12 @@
+﻿@*<select id="ddlDesignationType" autocomplete='designation-type' class="select2 form-control validate" ng-init="FillDesignationTypeList()"
+        ng-model="DesignationType"
+        ng-options="designationtype.DesignationType as designationtype.DesignationType for designationtype in DesignationTypeList">
+    <option value="">Select Designation Type</option>
+</select>*@
+
+<select id="ddlDesignationType" class="select2 form-control validate" ng-model="DesignationType"
+        ng-init="GetDesignationType();">
+    <option value="">Select Designation Type</option>
+    <option ng-repeat="dtl in DesignationTypeList" value="{{dtl.Name}}">{{dtl.Name}}</option>
+</select>
+

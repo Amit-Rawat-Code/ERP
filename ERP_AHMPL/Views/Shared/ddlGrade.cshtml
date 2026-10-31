@@ -1,0 +1,6 @@
+﻿<select id="ddlGrade" class="select2 form-control validate" ng-model="GradeCode" ng-init="GetGrades()">
+        @*ng-init="FillDDLGradeList();">*@
+    <option value="">Select Grade</option>
+    <option ng-repeat="grade in GradeList" value="{{grade.Code}}" ng-disabled="!grade.IsActive">{{grade["GradeName"]}}</option>
+</select>
+

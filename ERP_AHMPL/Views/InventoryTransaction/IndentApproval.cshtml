@@ -1,0 +1,400 @@
+﻿
+@{
+    ViewBag.Title = "Indent Approval";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+
+}
+
+<style>
+    legend {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: inherit;
+        display: table;
+        max-width: initial;
+        padding: 0;
+        white-space: normal;
+        width: auto;
+        padding: 0 10px !important;
+    }
+    .input-z-in{
+        width: 100% !important;
+        font-size: 12px;
+        text-transform: capitalize;
+        position: absolute;
+        z-index: 99;
+        overflow: auto;
+        height: 170px;
+    }
+</style>
+
+<script src="~/scripts/myjslib/InventoryIndentApprovalController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Indent Approval Entry</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><a href="#"><span>Procurement</span></a></li>
+                <li><a href="#"><span>Transaction</span></a></li>
+                <li class="active"><span>Indent Approval Entry</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Approval No.<span class="vd_red">*</span></label>
+                                            <div class="input-box" ng-init="getVoucherNo()">
+                                                @Html.TextBox("txtApprovalNo", "", new { @class = "form-control clear validate", @ng_disabled = "true", @ng_model = "ApprovalNo" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Approval Date</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtApprovalDate", "", new { @class = "form-control clear validate", @type = "date", @ng_disabled = "inactive", @ng_model = "ApprovalDate" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Indenter<span class="vd_red">*</span></label>
+                                            <div class="input-box" style="position:relative;">
+                                                <div id="Indenter" ng-init="createElement(attr,0,'Indenter')"></div>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">DepartMent</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtDepartMent", "", new { @class = "form-control clear ", @ng_disabled = "true", @ng_model = "DepartMent" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgtp-22">
+                                            <button type="button" value="Select" class="btn2 btn-common btn-3 btn-3d pe-7s-search"
+                                                    ng-model="Select" ng-click="BindIndentDetail(EmployeeCode);" ng-disabled="disableSelect" ng-init="disableSelect=false">
+                                                <span class="triangle-box" title="Select"></span>
+                                                <span>Select </span>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 " id="Indent">
+                                            <fieldset class="fieldset">
+                                                <legend class="legend">Indent Details</legend>
+                                                <div class="datatable-responsive table-responsive advance-btn-table">
+                                                    <table class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="srno">S. No.</th>
+                                                                <th>Indent No.</th>
+                                                                <th>Indent Date</th>
+                                                                <th>Ref. No.</th>
+                                                                <th>Ref. Date</th>
+                                                                <th>Item</th>
+                                                                @*<th ng-if="ItemMakeIsAllowed=='1'">Make</th>
+                            <th ng-if="ProdCodeIsAllowed=='1'">Prod.Code</th>
+                            <th ng-if="SizeIsAllowed=='1'">Size</th>
+                            <th ng-if="ColorIsAllowed=='1'">Color</th>
+                            <th ng-if="ModelCodeIsAllowed=='1'">Model</th>
+                            <th ng-if="ApplicationCodeIsAllowed=='1'">Application</th>
+                            <th ng-if="BatchNoIsAllowed=='1'">Batch No.</th>
+                            <th ng-if="MfgDateIsAllowed=='1'">Mfg.Date</th>
+                            <th ng-if="ExpDateIsAllowed=='1'">Expiry Date</th>
+                            <th ng-if="PackingIsAllowed=='1'">Packing</th>
+                            <th ng-if="PackingIsAllowed=='1'">Packs</th>*@
+                                                                <th>Unit</th>
+                                                                <th>Stock Qty.</th>
+                                                                <th>Indent Qty.</th>
+                                                                <th>Pending Qty.</th>
+                                                                <th>Select</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="obj in IndentDetList" repeat-done>
+                                                                <td>
+                                                                    <label id="txtSrno" ng-model="IndentDetList[$index].SrNo" value="IndentDetList[$index].SerialNo=$index+1" ng-bind="IndentDetList[$index].SrNo=$index+1"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIndentNo" ng-bind="IndentDetList[$index].IndentNo"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIndentDate" ng-bind="IndentDetList[$index].IndentDate"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIRefNo" ng-bind="IndentDetList[$index].RefNo"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblRefDate" ng-bind="IndentDetList[$index].RefDate"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblItemName" ng-bind="IndentDetList[$index].ItemName"></label>
+                                                                </td>
+                                                                @*<td ng-if="ItemMakeIsAllowed=='1'">
+                                <label id="lblItemMake" ng-bind="IndentDetList[$index].ItemMakeName"></label>
+                            </td>
+                            <td ng-if="ProdCodeIsAllowed=='1'">
+                                <label id="lblProductName" ng-bind="IndentDetList[$index].Product"></label>
+                            </td>
+                            <td ng-if="SizeIsAllowed=='1'">
+                                <label id="lblSizeName" ng-bind="IndentDetList[$index].SizeName"></label>
+                            </td>
+                            <td ng-if="ColorIsAllowed=='1'">
+                                <label id="lblColorName" ng-bind="IndentDetList[$index].ColorName"></label>
+                            </td>
+                            <td ng-if="ModelCodeIsAllowed=='1'">
+                                <label id="lblModelName" ng-bind="IndentDetList[$index].ModelName"></label>
+                            </td>
+                            <td ng-if="ApplicationCodeIsAllowed=='1'">
+                                <label id="lblApplicationName" ng-bind="IndentDetList[$index].ApplicationName"></label>
+                            </td>
+                            <td ng-if="BatchNoIsAllowed=='1'">
+                                <label id="lblBatchNo" ng-bind="IndentDetList[$index].BatchNo"></label>
+                            </td>
+                            <td ng-if="MfgDateIsAllowed=='1'">
+                                <label id="lblMfgDate" ng-bind="IndentDetList[$index].MfgDate"></label>
+                            </td>
+                            <td ng-if="ExpDateIsAllowed=='1'">
+                                <label id="lblExpDate" ng-bind="IndentDetList[$index].ExpDate"></label>
+                            </td>
+                            <td ng-if="PackingIsAllowed=='1'">
+                                <label id="lblPackingName" ng-bind="IndentDetList[$index].PackingName"></label>
+                            </td>
+                            <td ng-if="PackingIsAllowed=='1'">
+                                <label id="lblPacks" ng-bind="IndentDetList[$index].Packs"></label>
+                            </td>*@
+                                                                <td>
+                                                                    <label id="lblUnitName" ng-bind="IndentDetList[$index].UnitName"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblStockQty" ng-bind="IndentDetList[$index].StockQty"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblIndentQty" ng-bind="IndentDetList[$index].IndentQty"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblPendingQty" ng-bind="IndentDetList[$index].PendingQty"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="checkbox" ng-model="IndentDetList[$index].chk" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr ng-if="IndentDetList.length==0">
+                                                                <td colspan="13" class="text-center">
+                                                                    No Record(s) found.
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                                </fieldset>
+                                                <div class="col-md-8 col-sm-12 col-xs-12 mgtp-22 pt-25">
+                                                    <button type="button" value="Ok" class="btn2 btn-common btn-3 btn-3d pe-7s-search"
+                                                            ng-model="Ok" ng-click="BindIndentDetailInApproval();">
+                                                        <span class="triangle-box" title="Ok"></span>
+                                                        <span>Ok</span>
+                                                    </button>
+                                                </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 " id="IndentApproval">
+                                             
+                                                 <div class="datatable-responsive table-responsive advance-btn-table" ng-if="IndentApprovalDetList.length>0">
+                                                     <fieldset class="fieldset">
+                                                         <legend class="legend">Material Details</legend>
+                                                         <table class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                             <thead>
+                                                                 <tr>
+                                                                     <th class="srno">S. No.</th>
+                                                                     <th>Indent No.</th>
+                                                                     <th>Indent Date</th>
+                                                                     <th>Ref. No.</th>
+                                                                     <th>Ref. Date</th>
+                                                                     <th>Item</th>
+                                                                     @*<th ng-if="ItemMakeIsAllowed=='1'">Make</th>
+                                                                        <th ng-if="ProdCodeIsAllowed=='1'">Prod.Code</th>
+                                                                        <th ng-if="SizeIsAllowed=='1'">Size</th>
+                                                                        <th ng-if="ColorIsAllowed=='1'">Color</th>
+                                                                        <th ng-if="ModelCodeIsAllowed=='1'">Model</th>
+                                                                        <th ng-if="ApplicationCodeIsAllowed=='1'">Application</th>
+                                                                        <th ng-if="BatchNoIsAllowed=='1'">Batch No.</th>
+                                                                        <th ng-if="MfgDateIsAllowed=='1'">Mfg.Date</th>
+                                                                        <th ng-if="ExpDateIsAllowed=='1'">Expiry Date</th>
+                                                                        <th ng-if="PackingIsAllowed=='1'">Packing</th>
+                                                                        <th ng-if="PackingIsAllowed=='1'">Packs</th>*@
+                                                                      <th>Unit</th>
+                                                                     <th>Stock Qty.</th>
+                                                                     @*<th>OnOrder Qty.</th>*@
+                                                                     <th>Indent Qty.</th>
+                                                                     <th>Approve Qty.</th>
+                                                                     @*<th>P.O.Req.</th>*@
+
+                                                                     <th ng-if="SupplierYN=='Y'">Supplier</th>
+                                                                     <th ng-if="SupplierYN=='Y'">Rate</th>
+                                                                     <th>Indent Remarks</th>
+                                                                     <th>Approval Remarks</th>
+                                                                     <th>Indent Clouser</th>
+                                                                 </tr>
+                                                             </thead>
+                                                             <tbody>
+                                                                 <tr ng-repeat="obj in IndentApprovalDetList" repeat-done>
+                                                                     <td>
+                                                                         <label id="txtSrno" ng-model="IndentApprovalDetList[$index].SrNo" value="IndentApprovalDetList[$index].SerialNo=$index+1" ng-bind="IndentApprovalDetList[$index].SrNo=$index+1"></label>
+                                                                     </td>
+                                                                     <td>
+                                                                         <label id="lblIndentAppNo" ng-bind="IndentApprovalDetList[$index].IndentNo"></label>
+                                                                     </td>
+                                                                     <td>
+                                                                         <label id="lblIndentAppDate" ng-bind="IndentApprovalDetList[$index].IndentDate"></label>
+                                                                     </td>
+                                                                     <td>
+                                                                         <label id="lblIRefNoApp" ng-bind="IndentApprovalDetList[$index].RefNo"></label>
+                                                                     </td>
+                                                                     <td>
+                                                                         <label id="lblRefDateApp" ng-bind="IndentApprovalDetList[$index].RefDate"></label>
+                                                                     </td>
+                                                                     <td>
+                                                                         <label id="lblItemName" ng-bind="IndentApprovalDetList[$index].ItemName"></label>
+                                                                     </td>
+                                                                     @*<td ng-if="ItemMakeIsAllowed=='1'">
+                                                                        <label id="lblItemMake" ng-bind="IndentApprovalDetList[$index].ItemMakeNameA"></label>
+                                                                    </td>
+                                                                    <td ng-if="ProdCodeIsAllowed=='1'">
+                                                                        <label id="lblProductName" ng-bind="IndentApprovalDetList[$index].Product"></label>
+                                                                    </td>
+                                                                    <td ng-if="SizeIsAllowed=='1'">
+                                                                        <label id="lblSizeName" ng-bind="IndentApprovalDetList[$index].SizeNameA"></label>
+                                                                    </td>
+                                                                    <td ng-if="ColorIsAllowed=='1'">
+                                                                        <label id="lblColorName" ng-bind="IndentApprovalDetList[$index].ColorNameA"></label>
+                                                                    </td>
+                                                                    <td ng-if="ModelCodeIsAllowed=='1'">
+                                                                        <label id="lblModelName" ng-bind="IndentApprovalDetList[$index].ModelNameA"></label>
+                                                                    </td>
+                                                                    <td ng-if="ApplicationCodeIsAllowed=='1'">
+                                                                        <label id="lblApplicationName" ng-bind="IndentApprovalDetList[$index].ApplicationNameA"></label>
+                                                                    </td>
+                                                                    <td ng-if="BatchNoIsAllowed=='1'">
+                                                                        <label id="lblBatchNo" ng-bind="IndentApprovalDetList[$index].BatchNo"></label>
+                                                                    </td>
+                                                                    <td ng-if="MfgDateIsAllowed=='1'">
+                                                                        <label id="lblMfgDate" ng-bind="IndentApprovalDetList[$index].MfgDate"></label>
+                                                                    </td>
+                                                                    <td ng-if="ExpDateIsAllowed=='1'">
+                                                                        <label id="lblExpDate" ng-bind="IndentApprovalDetList[$index].ExpDate"></label>
+                                                                    </td>
+                                                                    <td ng-if="PackingIsAllowed=='1'">
+                                                                        <label id="lblPackingName" ng-bind="IndentApprovalDetList[$index].PackingNameA"></label>
+                                                                    </td>
+                                                                    <td ng-if="PackingIsAllowed=='1'">
+                                                                        <label id="lblPacks" ng-bind="IndentApprovalDetList[$index].Packs"></label>
+                                                                    </td>*@
+                                                                     <td>
+                                                                         <label id="lblUnitNameA" ng-bind="IndentApprovalDetList[$index].UnitName"></label>
+                                                                     </td>
+                                                                     <td>
+                                                                         <label id="lblStockQtyA" ng-bind="IndentApprovalDetList[$index].StockQty"></label>
+                                                                     </td>
+                                                                     @*<td>
+                                                                            <label id="lblOnOrderQtyA" ng-bind="IndentApprovalDetList[$index].OnOrderQty"></label>
+                                                                        </td>*@
+                                                                     <td>
+                                                                         <label id="lblIndentQtyA" ng-bind="IndentApprovalDetList[$index].IndentQty"></label>
+                                                                     </td>
+                                                                     <td>
+                                                                         <input type="text" class="form-control clear" id="IndentApprovalDetList{{$index}}" ng-model="IndentApprovalDetList[$index].ApproveQty" ng-blur="IsMaxValidate(IndentApprovalDetList[$index].IndentQty,IndentApprovalDetList[$index].ApproveQty,$index)" validate-number-and-decimal-only two-decimal-place />
+                                                                     </td>
+                                                                     @*<td>
+                        <select name="ddlPOReq" ng-model="IndentApprovalDetList[$index].POReq" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                    </td>*@
+                                                                     <td ng-if="SupplierYN=='Y'">
+                                                                         <select id="ddlSupplierCode" class="select2 form-control" ng-model="IndentApprovalDetList[$index].SupplierCode" ng-init="BindSupplier();">
+                                                                             <option value="">Select</option>
+                                                                             <option ng-repeat="x in SupplierList" value="{{x.SupplierCode}}">{{x.Name}}</option>
+                                                                         </select>
+
+                                                                         <input type="text" class="form-control clear " ng-model="IndentApprovalDetList[$index].SupplierNameA" id="Supplier{{$index}}" ng-init="createElement(attr1,1,'Supplier0')" />
+                                                                     </td>
+                                                                     <td ng-if="SupplierYN=='Y'">
+                                                                         <input type="text" class="form-control clear " ng-model="IndentApprovalDetList[$index].Rate" validate-number-and-decimal-only two-decimal-place />
+                                                                     </td>
+                                                                     <td>
+                                                                         <input type="text" class="form-control clear " ng-disabled="true" ng-model="IndentApprovalDetList[$index].IRemark" />
+                                                                     </td>
+                                                                     <td>
+                                                                         <input type="text" class="form-control clear " ng-model="IndentApprovalDetList[$index].ARemark" />
+                                                                     </td>
+                                                                     <td>
+                                                                         <input type="checkbox" ng-model="IndentApprovalDetList[$index].IndentCloser" ng-checked="IndentApprovalDetList[$index].IndentCloser" />
+                                                                     </td>
+                                                                 </tr>
+                                                                 <tr ng-if="IndentApprovalDetList.length==0">
+                                                                     <td colspan="13" class="text-center">
+                                                                         No Record(s) found.
+                                                                     </td>
+                                                                 </tr>
+                                                             </tbody>
+                                                         </table>
+                                                         <div class="text-box-msg-r">
+                                                         </div>
+                                                     </fieldset>
+                                            </div>
+                                                 
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

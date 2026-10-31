@@ -1,0 +1,7 @@
+﻿
+<select id="ddlMaterialInwardEntryType" class="select2 form-control validate" ng-model="MaterialInwardEntryTypeCode" ng-init="BindMaterialInwardEntryType();" 
+        ng-change="getMaterialInwardEntryVoucherNo(MaterialInwardEntryTypeCode);ddlMaterialInwardEntryType_change();">
+    <option value="">Select</option>
+    <option ng-repeat="mietl in MaterialInwardEntryTypeList" 
+            value="{{mietl.VoucherType}}">{{mietl.Description}}</option>
+</select>

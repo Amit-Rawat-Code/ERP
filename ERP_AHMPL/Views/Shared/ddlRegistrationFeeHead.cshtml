@@ -1,0 +1,5 @@
+﻿<select id="ddlRegistrationFeeHead" autocomplete='address-level2' class="select2 form-control validate"
+        ng-model="RegistrationFeeHeadCode" ng-init="GetRegistrationFeeHead()">
+    <option value="">Select Registration Fee Head</option>
+    <option ng-repeat="RFHL in RegistrationFeeHeadList" value="{{RFHL.Code}}">{{RFHL.RegistrationFeeHead}}</option>
+</select>

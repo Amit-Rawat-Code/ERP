@@ -1,0 +1,228 @@
+﻿
+@{
+    ViewBag.Title = "Registration Fee Posting";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/RegistrationFeePostingController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Registration Fee Posting</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Registration</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Registration Fee Posting</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Posting Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtPostingDate", "", new
+                                                {
+                                                    @class = "form-control clear validate",
+                                                    @type = "date",
+                                                    @placeholder = "",
+                                                    @ng_model = "VDate"
+                                                })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Status<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlStatus", new List<SelectListItem>
+                                                    {
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Posted", Value="1"},
+                                                    new SelectListItem{Text="Not Posted", Value="0"},
+                                                    new SelectListItem{Text="Both", Value="2"}
+                                                    },
+                                                    new { @class = "select2 form-control validate", @ng_model = "Status", @ng_change = "ddlStatus_Change()" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <style>
+                                            /* .table-scroll thead,
+                                            .table-scroll thead th,
+                                            .table-scroll tfoot td {
+                                                position: -webkit-sticky;
+                                                position: sticky;
+                                                bottom: 0;
+                                                background: #484848;
+                                                color: #fff !important;
+                                                z-index: 4;
+                                                padding: 7px 6px !important;
+                                                font-weight: 400 !important;
+                                            }*/
+                                            .table-scroll thead,
+                                            .table-scroll thead th {
+                                                position: -webkit-sticky;
+                                                position: sticky;
+                                                top: 0;
+                                                background: #fff;
+                                                color: #000 !important;
+                                                z-index: 4;
+                                                padding: 4px 6px !important;
+                                                font-weight: 400 !important;
+                                            }
+
+                                            .table-scroll tfoot td {
+                                                position: -webkit-sticky;
+                                                position: sticky;
+                                                bottom: 0;
+                                                background: #fff;
+                                                color: #000 !important;
+                                                z-index: 4;
+                                                padding: 4px 6px !important;
+                                                font-weight: 400 !important;
+                                            }
+                                        </style>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            <h3 style="text-decoration: underline;">Please Select Students:</h3>
+                                            <div id="divExample2" class="table-scroll">
+                                                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Reg. No.</th>
+                                                            <th>Date</th>
+                                                            <th>Student Name</th>
+                                                            <th>Father Name</th>
+                                                            <th>Contact No.</th>
+                                                            <th>PayMode</th>
+                                                            <th class="text-right">Amount</th>
+                                                            <th class="text-right">Discount</th>
+                                                            <th class="text-right">Net Amount</th>
+                                                            <th ng-hide="Status=='1'">
+                                                                <input type="checkbox" ng-model="ChkAll" ng-init="ChkAll=false"
+                                                                       ng-change="CheckUnCheckAll(ChkAll)" />
+                                                            </th>
+                                                            <th ng-show="Status=='1' || Status=='2'">Posted Voucher</th>
+                                                            <th ng-show="Status=='1' || Status=='2'">Posted Voucher Type</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="sl in StudentsList">
+                                                            <td>{{$index+1}}.</td>
+                                                            <td>{{sl.RegNo}}</td>
+                                                            <td>{{sl.VDate}}</td>
+                                                            <td>{{sl.StudentName}}</td>
+                                                            <td>{{sl.FatherName}}</td>
+                                                            <td>{{sl.ContactNo}}</td>
+                                                            <td>{{sl.PayMode}}</td>
+                                                            <td class="text-right">{{sl.Amount}}</td>
+                                                            <td class="text-right">{{sl.Discount}}</td>
+                                                            <td class="text-right">{{sl.NetAmount}}</td>
+                                                            <td ng-hide="Status=='1'"><input type="checkbox" ng-model="sl.Chk" ng-init="sl.Chk=false" ng-change="CheckUnCheck()" ng-if="sl.Flag==0" /></td>
+                                                            <td ng-show="Status=='1' || Status=='2'">{{sl.RefPVNo}}</td>
+                                                            <td ng-show="Status=='1' || Status=='2'">{{sl.RefVType}}</td>
+                                                        </tr>
+                                                        <tr ng-if="StudentsList.length==0">
+                                                            <td colspan="13" class="text-center">
+                                                                No Record(s) found.
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td class="text-right" style="font-weight:bold !important">Total</td>
+                                                            <td class="text-right" style="font-weight:bold !important"> {{Sumoflist('StudentsList','Amount')}}</td>
+                                                            <td class="text-right" style="font-weight:bold !important">{{Sumoflist('StudentsList','Discount')}}</td>
+                                                            <td class="text-right" style="font-weight:bold !important">{{Sumoflist('StudentsList','NetAmount')}}</td>
+                                                            <td ng-hide="Status=='1'" style="font-weight:bold !important" ng-bind="Sumoflist('StudentsList','NetAmount',{'Chk':true})"></td>
+                                                            <td ng-show="Status=='1' || Status=='2'"></td>
+                                                            <td ng-show="Status=='1' || Status=='2'"></td>
+                                                        </tr>
+                                                    </tfoot>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Voucher Type<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.DropDownList("ddlVoucherType", new List<SelectListItem>
+                                                    {
+                                                    new SelectListItem{Text="Select", Value=""},
+                                                    new SelectListItem{Text="Cash Receipt", Value="CR"},
+                                                    new SelectListItem{Text="Bank Receipt", Value="BR"}
+                                                    },
+                                                    new { @class = "select2 form-control validate", @ng_model = "VType", @ng_change = "ddlVoucherType_Change()" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="VType=='BR'">
+                                            <label class="control-label">Bank<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlBankLedger")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionSave")
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<script>
+    $('#ddlBankAC').removeClass('.validate');
+</script>
+
+
+
+
+

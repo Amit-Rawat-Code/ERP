@@ -1,0 +1,27 @@
+@{
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/authorization.js?Ver=@ViewBag.Version"></script>
+<link href="~/Content/plugins/assets/fonts/feather-icon/feather-icon.css" rel="stylesheet" />
+<button id="btnSave" type="button" value="Save" class="btn-me btn-primary hvr-float-shadow" name="saveButton" ng-model="Save"
+        ng-init="Save='Save'" ng-click="CheckSavePermission();SaveRecord()" ng-disabled="disableAdd" ng-show="visibleAdd">
+
+    <span id="btnSavetxt" class="action-txt" ng-bind="Save">Save</span>
+    <i data-feather="edit"></i>
+</button>
+
+<script src="~/Content/plugins/assets/fonts/feather-icon/icons/feather-icon/feather.min.js"></script>
+<script src="~/Content/plugins/assets/fonts/feather-icon/icons/feather-icon/feather-icon.js"></script>
+<script src="~/Content/plugins/assets/fonts/feather-icon/icons/feather-icon/feather-icon-clipart.js"></script>
+
+
+
+
+
+
+
+
+
+
+

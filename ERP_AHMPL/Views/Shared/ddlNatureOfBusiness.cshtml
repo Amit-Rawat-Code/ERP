@@ -1,0 +1,4 @@
+﻿<select id="ddlNatureOfBusiness" class="select2 form-control validate" ng-model="NatureOfBusinessModel" ng-init="BindNatureOfBusiness();">
+    <option value="">Select</option>
+    <option ng-repeat="natureofbusinesslist in NatureOfBusinessList" value="{{natureofbusinesslist.NatureBusinessCode}}">{{natureofbusinesslist.NatureBusiness}}</option>
+</select>

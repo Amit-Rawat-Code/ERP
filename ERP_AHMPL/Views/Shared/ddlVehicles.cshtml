@@ -1,0 +1,6 @@
+﻿<select id="ddlVehicles" class="select2 form-control validate" ng-init="GetVehicles();" ng-model="Transvehicle.VehicleId"  ng-change="GetVehicleWiseRoutes(Transvehicle.VehicleId)">
+    <option value="">Select Vehicle</option>
+    <option ng-repeat="Vehicle in Vehicles" value="{{Vehicle.VehicleId}}">{{Vehicle.VEHINUMBER}}</option>
+</select>
+
+

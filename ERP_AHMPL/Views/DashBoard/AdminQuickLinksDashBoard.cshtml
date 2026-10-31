@@ -1,0 +1,928 @@
+﻿
+@{
+    ViewBag.Title = "Admin DashBoard";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeModuleMaster.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<script src="~/Scripts/myjslib/AdminQuickLinksDashBoardController.js?Ver=@ViewBag.Version"></script>
+
+
+<div class="autohide-scroll autoheightset" ng-cloak>
+
+
+    <div class="br-pagebody quick-link-body">
+        <div class="row" @*ng-init="GetQuickLinks();"*@>
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6" ng-repeat="dl in DashBoardList">
+                <div class="shadow-base quick-card">
+                    <div class="bg-soft-primary">
+                        <div class="table-rows-box">
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>{{dl.ModuleName}}</h5>
+
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="" ng-click="GetMenu(dl.ModuleId,dl.ModuleName,dl.ModuleIcon,1);">GOTO MENU</a>
+                                </div>
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="{{dl.ModuleIcon}}"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-card-body">
+                        <div class="col-sm-12">
+                            <div class="quick-link-box">
+                                <ul class="quick-link-list-box">
+                                    <li class="quick-link-list" ng-repeat="ql in DashBoardLinks|filter:{ModuleId:dl.ModuleId}:true">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" ng-click="GetMenu(dl.ModuleId,dl.ModuleName,dl.ModuleIcon,1);
+                                           ModuleIcon=dl.ModuleIcon;ModuleTextName=dl.ModuleName;showModuleIcon();
+                                           SelectIframoutiframe(ql.SubMenuUrl,ql.SubMenuName);">{{ql.SubMenuName}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="shadow-base quick-card">
+                    <div class="bg-soft-primary">
+                        <div class="table-rows-box">
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Student</h5>
+
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard </a>
+                                </div>
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-group-students"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-card-body">
+                        <div class="col-sm-12">
+                            <div class="quick-link-box">
+                                <ul class="quick-link-list-box">
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Registration</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Details</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Certificates</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">TC Form</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="shadow-base quick-card">
+                    <div class="bg-soft-primary">
+                        <div class="table-rows-box">
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Offline Admission</h5>
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/Admission.png")" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-card-body">
+
+                        <div class="col-sm-4 no-padding">
+                            <div class="avatar-md profile-user-wid mb-4">
+                                <div class="quick-icon-box">
+                                    <i class="icofont-university"></i>
+                                </div>
+                            </div>
+                            <div class="quick-btn-box">
+                                <a class="quick-btn" href="/">View Dashboard </a>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="quick-link-box">
+                                <ul class="quick-link-list-box">
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Registration</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Details</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Certificates</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">TC Form</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="shadow-base quick-card">
+                    <div class="bg-soft-primary">
+                        <div class="table-rows-box">
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Online Admission</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/Admission.png")" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-card-body">
+
+                        <div class="col-sm-4 no-padding">
+                            <div class="avatar-md profile-user-wid mb-4">
+                                <div class="quick-icon-box">
+                                    <i class="icofont-school-bag"></i>
+                                </div>
+                            </div>
+                            <div class="quick-btn-box">
+                                <a class="quick-btn" href="/">View Dashboard </a>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="quick-link-box">
+                                <ul class="quick-link-list-box">
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Registration</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Details</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Certificates</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">TC Form</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="shadow-base quick-card">
+                    <div class="bg-soft-primary">
+                        <div class="table-rows-box">
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Student</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/student.png")" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-card-body">
+
+                        <div class="col-sm-4 no-padding">
+                            <div class="avatar-md profile-user-wid mb-4">
+                                <div class="quick-icon-box">
+                                    <i class="icofont-group-students"></i>
+                                </div>
+                            </div>
+                            <div class="quick-btn-box">
+                                <a class="quick-btn" href="/">View Dashboard </a>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="quick-link-box">
+                                <ul class="quick-link-list-box">
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Registration</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Details</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Certificates</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">TC Form</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="shadow-base quick-card">
+                    <div class="bg-soft-primary">
+                        <div class="table-rows-box">
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Employee</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/employee.png")" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-card-body">
+
+                        <div class="col-sm-4 no-padding">
+                            <div class="avatar-md profile-user-wid mb-4">
+                                <div class="quick-icon-box">
+                                    <i class="icofont-users-alt-5"></i>
+                                </div>
+                            </div>
+                            <div class="quick-btn-box">
+                                <a class="quick-btn" href="/">View Dashboard </a>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="quick-link-box">
+                                <ul class="quick-link-list-box">
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Registration</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Details</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Certificates</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">TC Form</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="shadow-base quick-card">
+                    <div class="bg-soft-primary">
+                        <div class="table-rows-box">
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Communication </h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-card-body">
+
+                        <div class="col-sm-4 no-padding">
+                            <div class="avatar-md profile-user-wid mb-4">
+                                <div class="quick-icon-box">
+                                    <i class="icofont-speech-comments"></i>
+                                </div>
+                            </div>
+                            <div class="quick-btn-box">
+                                <a class="quick-btn" href="/">View Dashboard  </a>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="quick-link-box">
+                                <ul class="quick-link-list-box">
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Registration</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Student Details</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">Certificates</a>
+                                    </li>
+                                    <li class="quick-link-list">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                        <a href="" target="_blank">TC Form</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Attendance</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="mdi mdi-account-edit"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Test</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-id-card"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Visitor</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-id-card"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Fee</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="mdi mdi-cash-100"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Timetable</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-meeting-add"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Accountancy</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-wallet"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Transport</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/transport.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-school-bus"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Examination</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-users-alt-5"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Library</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-users-alt-5"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>Utility</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-users-alt-5"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="shadow-base quick-card">
+                        <div class="bg-soft-primary">
+
+                            <div class="rows-cell-box quick-module-name">
+                                <h5>System Define</h5>
+
+                            </div>
+                            <div class="rows-cell-box align-self-end">
+                                <img src="@Url.Content("~/Content/plugins/assets/img/modules/communication.png")" alt="" />
+                            </div>
+                        </div>
+                        <div class="quick-card-body">
+
+                              <div class="col-sm-4 no-padding">
+                                <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="quick-icon-box">
+                                        <i class="icofont-users-alt-5"></i>
+                                    </div>
+                                </div>
+                                <div class="quick-btn-box">
+                                    <a class="quick-btn" href="/">View Dashboard  </a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="quick-link-box">
+                                    <ul class="quick-link-list-box">
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Registration</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Student Details</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">Certificates</a>
+                                        </li>
+                                        <li class="quick-link-list">
+                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                            <a href="" target="_blank">TC Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+

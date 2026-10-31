@@ -1,0 +1,4 @@
+﻿<select id="ddlMonthList" class="select2 form-control validate" ng-init="GetMonths();" ng-model="Month">
+    <option value="">Select Month</option>
+    <option ng-repeat="x in MonthList" value="{{x.Code}}" >{{x.MonthName}}</option>
+</select>

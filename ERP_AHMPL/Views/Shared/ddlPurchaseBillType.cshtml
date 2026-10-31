@@ -1,0 +1,6 @@
+﻿
+<select id="ddlPurchaseBillType" class="select2 form-control validate" ng-disabled="purchasebilltypedisable" ng-model="PurchaseBillTypeCode" ng-init="BindPurchaseBillType();" 
+        ng-change="getVoucherNo(PurchaseBillTypeCode);bindpurchasefromInvoiceMaster(PurchaseBillTypeCode);ddlPurchaseBillType_change();">
+    <option value="">Select</option>
+    <option ng-repeat="purchasebilltype in PurchaseBillTypeList" value="{{purchasebilltype.VoucherType}}">{{purchasebilltype.Description}}</option>
+</select>

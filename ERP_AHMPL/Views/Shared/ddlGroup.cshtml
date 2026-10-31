@@ -1,0 +1,6 @@
+﻿<select id="ddlGroupId" class="select2 form-control validate" ng-model="GroupId" ng-init="GetGroup();" ng-change="GetSocietyCode(GroupId)">
+    <option value="" selected>Select</option>
+    <option ng-repeat="GId in GroupList" value="{{GId.GroupId}}">
+        {{GId.GroupName}}
+    </option>
+</select>

@@ -1,0 +1,6 @@
+﻿@*Used In forms:*@
+@*Student Registration Submission*@
+<select id="ddlNationality" class="select2 form-control " ng-init="GetNationality();" ng-model="Nationality">
+    <option value="">Select Nationality</option>
+    <option ng-repeat="Nationality in NationalityList" value="{{Nationality.NationalityName}}">{{Nationality.NationalityName}}</option>
+</select>

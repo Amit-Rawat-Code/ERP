@@ -1,0 +1,5 @@
+﻿<select id="ddlMotherNationality" autocomplete='country-name' class="select2 form-control" ng-init="GetNationalities('M');" ng-model="studentDetails.MotherNationalityId" ng-options="option.NationalityName for option in MotherNationalities track by option.id">
+    <option value="">Select Nationality</option>
+    <option ng-repeat="nationality in MotherNationalities" value="{{nationality.NationalityId}}" ng-disabled="!nationality.IsActive">{{nationality.NationalityName}}</option>
+</select>
+

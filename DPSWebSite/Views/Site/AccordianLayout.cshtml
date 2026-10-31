@@ -1,0 +1,250 @@
+﻿
+@{
+    ViewBag.Title = "Accordian";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<link href="~/content/css/flexslider.css" rel="stylesheet" />
+<style>
+    .arrowleft1 {
+        position: absolute;
+        top: -124px;
+        left: 0px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .arrowright1 {
+        position: absolute;
+        top: -124px;
+        right: 0px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    table.cbse_table {
+        border: 1px solid #2d8a43;
+        border-collapse: collapse;
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+    }
+
+        table.cbse_table td {
+            border: 1px solid #2d8a43;
+            border-collapse: collapse;
+            padding: 5px 0px;
+        }
+
+    .responsibility_inner p {
+        font-size: 14px;
+        text-align: justify;
+        letter-spacing: 0.5px;
+        line-height: 22px;
+    }
+
+    .cbse_center_table {
+        margin: 0 auto;
+        width: 500px;
+    }
+
+    .responsibility_inner {
+        padding-top: 27px;
+    }
+
+    .para_space1 {
+        padding: 11px 0px 0px 0px;
+    }
+
+    .primary_section {
+        margin: 10px auto;
+        width: 327px;
+        float: none;
+        height: 219px;
+        text-align: center;
+        border: 2px solid #0f4829;
+    }
+
+    .tab {
+        width: 100%;
+        float: left;
+    }
+
+        .tab ul li a {
+            display: block;
+            color: #fff;
+        }
+
+        .tab ul li {
+            display: inline-block;
+            background: #19552d;
+            padding: 10px;
+            width: 49%;
+            color: #fff;
+            text-align: center;
+            margin:5px;
+        }
+
+    .social_inner p {
+        font-size: 14px;
+    }
+
+    .slider_1 {
+        width: 529px;
+        float: left;
+        padding-bottom: 20px;
+    }
+
+    .slider_2 {
+        width: 529px;
+        float: left;
+        padding-bottom: 20px;
+    }
+
+    #rakhi .slides li img {
+        border: 2px solid #0f4829;
+    }
+
+    .arrow1021 {
+        top: -150px;
+    }
+
+    .automatic-sliding {
+        width: 50vmin;
+        position: relative;
+        transform: translate(-40%,0%);
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+    }
+    div #slide {
+        overflow: hidden;
+    }
+
+        div #slide figure img {
+            width: 20%;
+            float: left;
+        }
+
+        div #slide figure {
+            position: relative;
+            width: 500%;
+            margin: 0;
+            left: 0;
+            text-align: left;
+            font-size: 0;
+            animation: 20s sliding ease infinite;
+        }
+    .indicator {
+        width: 100%;
+        max-width: 900px;
+        height: 8px;
+        background: #e41b17;
+        position: relative;
+        bottom: 0;
+        animation: indicating 5s ease infinite;
+    }
+
+    @@keyframes sliding{
+            0%{left: 0%; }
+            20%{left: -100%;}
+            40%{left: -200%;}
+            60%{left: -300%;}
+            80%{left: -400%;}
+            100%{left: 0%;}
+        }
+
+@@keyframes indicating{
+            from{
+                left: -100%;
+            }
+            to{
+                left: 0;
+            }
+}
+
+    ul.linkname {
+        width: 100%;
+        text-align: center;
+    }
+
+    ul.class_toppers2 {
+        width: 100%;
+        text-align: center;
+    }
+
+        ul.class_toppers2 li {
+            display: inline-block;
+            padding: 0 10px 10px;
+            width: 24%;
+        }
+
+    @@media only screen and (max-width:767px) {
+        ul .class_toppers2 li {
+            width: 49%;
+        }
+</style>
+
+<div ng-init="GetAboutUs();" ng-cloak>
+    <section class="page-section testimonial-page">
+        <div class="col-sm-12">
+            <div class="">
+                <div class="play-group-icon-title">
+                    <div class="icon">
+                        <img src="" style="margin: 20px 0px;" ng-src="{{(AccordianContentPageData|filter:{LayoutPartAbbreviationName:'BCC'})[0].BodyContentHeadingImgPath}}" alt="pay-icon" ng-if="HideShow((AccordianContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeadingImgPath)">
+                    </div>
+                    <h3 class="section-title-color text-center">{{AccName}}</h3>
+                    <div class="section-title-bottom-line">
+                        <a href="" tabindex="0"></a>
+                    </div>
+                </div>
+                <img src="" style="margin: 20px 0px;width: 100%;" ng-src="{{(AccordianContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath}}" alt="display-photo" ng-if="HideShow((AccordianContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath)">
+            </div>
+        </div>
+        <div class="container">
+            <div class="panel-group" id="accordion" style="float:left; width:100%;">                
+                <div ng-repeat="ICP in AccordianDetailList" class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading{{ICP.SequenceNo}}">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ICP.SequenceNo}}" class="collapsed">
+                                {{ICP.AccordianContentHeading}}
+                                <span> </span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{ICP.SequenceNo}}" class="{{ICP.SequenceNo==1?'panel-collapse collapse':'panel-collapse collapse'}}">
+                        <div class="panel-body" ng-init="GetImageList(ICP.InitialPath,ICP.ImgPath,ICP.IsBanner,ICP.IsSlider,ICP.SequenceNo);GetPageLinkList(ICP.LinkSequence,ICP.PageLink,ICP.LinkName,ICP.SequenceNo);">
+                            <div ng-repeat="ImgL in ImageUrlLinkList|filter:{IsBanner:true,SNo:ICP.SequenceNo}" ng-if="ICP.IsMultipleImg==false">
+                                <div class="photo-section" style="text-align: -webkit-center;">
+                                    <img src="{{ImgL.ImgPath}}" >
+                                </div>
+                            </div>
+                            <div class="img_width_size" ng-if="ICP.IsBanner==true && ICP.IsMultipleImg==true" >
+                                <ul class="class_toppers2">
+                                    <li ng-repeat="ImgL in ImageUrlLinkList|filter:{IsBanner:true,SNo:ICP.SequenceNo}"><img src="{{ImgL.ImgPath}}"></li>
+                                </ul>
+                            </div>
+                            <section class="automatic-sliding" ng-if="ICP.IsSlider==true">
+                                <div id="slide">
+                                    <figure>
+                                        <img ng-repeat="ImgL in ImageUrlLinkList|filter:{IsSlider:true,SNo:ICP.SequenceNo}" src="{{ImgL.ImgPath}}" alt="Image">
+                                    </figure>
+                                    <div class="indicator"></div>
+                                </div>
+                            </section>
+                            <p class="discription" ng-bind-html="trustAsHtml(ICP.AccordianContent)">
+                            </p>
+                            <div class="tab" ng-if="ICP.IsPageLink==true">
+                                <ul class="linkname">
+                                    @*<li class="full_tab"><a href="activity_calendar.html">ACTIVITY CALENDAR 2019-2020</a></li>*@
+                                    <li ng-repeat="PL in PLSettingList|filter:{SPNo:ICP.SequenceNo}"><a href="{{PL.PageLink}}">{{PL.LinkName}}</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "Staff Attendance Summary";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/StaffAttendanceSummaryReportController.js?Ver=@ViewBag.Version"></script>
+<style>
+    .table-head-center thead tr th, td {
+        text-align: center;
+    }
+    .table-head-center tfoot td {
+        background: #484848;
+        color: #fff !important;
+        font-weight: 600;
+    }
+    .table-head-center .table > thead > tr > th {
+        font-weight: 400 !important;
+        background: #484848 !important;
+        color: #fff !important;
+        border-collapse: collapse;
+        border: 0px;
+        border-right: 1px solid #fff;
+    }
+</style>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Staff Attendance Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>MIS</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Staff Attendance Report</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                    <div class="section-toggle">                                     
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Select School<span class="vd_red"></span></label>
+                                            <div class="input-box chk-validate" ng-init="GetSchools();">
+                                                <div class="toggle-ddl" id="openSchool" ng-init="ToogleDDL('openSchool','openSchool')">
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary select-btn'
+                                                            data-ng-click='openSchool=!openSchool' ng-bind="GetCount(SchoolList,'Select School')">
+                                                        Select Months
+                                                    </button>
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                            data-ng-click='openSchool=!openSchool'>
+                                                        <span class='fa fa-chevron-down'></span>
+                                                    </button>
+                                                    <div ng-show="openSchool" class="ddlMultiple" ng-cloak>
+                                                        <div ng-click="ddlCheckAll('SchoolList')">
+                                                            Check All
+                                                            <span class="btn-counts-right">Total Count: {{SchoolList.length}}</span>
+                                                        </div>
+                                                        <div ng-click="ddlUnCheckAll('SchoolList')">Uncheck All</div>
+                                                        <hr style="margin:0px !important" />
+                                                        <div ng-repeat="sl in SchoolList">
+                                                            <input type="hidden" ng-bind="sl.Srno=($index+1)" />
+                                                            <input type="checkbox" ng-model="sl.chk" ng-value="sl.RelationshipId" />
+                                                            {{sl.BranchName}}-{{sl.BranchAddress}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">From Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("txtFromDate")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">To Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("txtToDate")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionSearch")
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                        <div class="input-box datatable-responsive table-responsive advance-btn-table">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                <div class="collapse" id="CollapseSearchTableList">
+                                                    <div class="">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                                            @Html.Partial("_printingTool1")
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="{{DocSize}} {{DocOrientation}}">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" id="ExportDiv">
+                                                                    <div id="SetPageMargin">
+                                                                        <div class="me-col-12" ng-init="GetReportHeaderUsingCategory('General Report')">
+                                                                            <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                                                                        </div>
+                                                                        <div class="me-col-12 dt-print-view">
+                                                                            <h1>@ViewBag.Title</h1>
+                                                                        </div>
+                                                                        <div id="FilterTitle">
+                                                                            <span class="filter" ng-model="FilterMsg"
+                                                                                  ng-bind-html="trustAsHtml(FilterMsg)"></span>
+                                                                        </div>
+                                                                        <table class="table compact table-hover table-striped table-bordered nowrap  dataTable table-head-center">
+                                                                            <caption style="caption-side:center"
+                                                                                     ng-if="RepeatHeader==1?true:(index==0?true:false)">
+
+                                                                            </caption>
+                                                                            <caption style="caption-side: right">
+                                                                                <div>
+                                                                                    <p class="text-message text-center" ng-model="TextMessage"
+                                                                                       ng-bind-html="trustAsHtml(TextMessage)"></p>
+                                                                                </div>
+                                                                            </caption>
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th rowspan="3">School</th>
+                                                                                    <th colspan="3">Strength</th>
+                                                                                    <th colspan="3">Attendance In Nos.<br />(As On TO {{SToDate}})</th>
+                                                                                    <th colspan="3">Today Attendance In Percentage<br />(As On TO {{SToDate}})</th>
+                                                                                    <th colspan="3">Present %<br />({{SFromDate}} TO {{SToDate}})</th>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th>Teaching</th>
+                                                                                    <th>Non Teaching</th>
+                                                                                    <th>Total</th>
+                                                                                    <th>Teaching</th>
+                                                                                    <th>Non Teaching</th>
+                                                                                    <th>Total</th>
+                                                                                    <th>Teaching</th>
+                                                                                    <th>Non Teaching</th>
+                                                                                    <th>Total</th>
+                                                                                    <th>Teaching</th>
+                                                                                    <th>Non Teaching</th>
+                                                                                    <th>Total</th>
+                                                                                </tr>                                                                          
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr ng-repeat="x in StaffAttendanceList">
+                                                                                    <td>{{x.BranchName}}</td>
+                                                                                    <td>{{x.TeachingStrength}}</td>
+                                                                                    <td>{{x.NonTeachingStrength}}</td>
+                                                                                    <td>{{x.TotalStrength}}</td>
+                                                                                    <td>{{x.TeachingAttendanceInNos}}</td>
+                                                                                    <td>{{x.NonTeachingAttendanceInNos}}</td>
+                                                                                    <td>{{x.TotalAttendanceInNos}}</td>
+                                                                                    <td>{{x.TeachingTodayAttendanceInPercentage}}</td>
+                                                                                    <td>{{x.NonTeachingTodayAttendanceInPercentage}}</td>
+                                                                                    <td>{{x.TotalTodayAttendanceInPercentage}}</td>
+                                                                                    <td>{{x.TeachingPresentPercentage}}</td>
+                                                                                    <td>{{x.NonTeachingPresentPercentage}}</td>
+                                                                                    <td>{{x.TotalPercentage}}</td>
+                                                                                </tr>
+                                                                            </tbody>                                                                           
+                                                                        </table>
+                                                                        <div id="UpdatePanel">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-box-msg-r">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<script>
+    $('#ddlSession').removeClass('validate');
+</script>
+

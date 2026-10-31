@@ -1,0 +1,5 @@
+﻿<select id="ddlCategoryLib" class="select2 form-control clear" ng-model="CategoryName"
+        ng-init="GetCategoryLibList();">
+    <option value="">Select Category</option>
+    <option ng-repeat="x in CategoryLibList" value="{{x.Code}}">{{x.Name}}</option>
+</select>

@@ -1,0 +1,6 @@
+﻿<select id="ddlConcessionCategory" class="select2 form-control validate" ng-model="ConcessionCategory"
+        ng-init="LoadConcessionCategory();">
+    <option value="">Select Gender</option>
+    <option ng-repeat="ccl in ConcessionCategoryList" value="{{ccl.Id}}">{{ccl.Name}}</option>
+</select>
+

@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "User Role Report";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/UserRoleReportController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">User Role Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>User</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>User Role Report</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">School(s)<span class="vd_red"></span></label>
+                                            <div class="input-box chk-validate">
+                                                <div class="toggle-ddl" id="openAssociatedBranches"
+                                                     ng-init="ToogleDDL('openAssociatedBranches','openAssociatedBranches')">
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary select-btn'
+                                                            data-ng-click='openAssociatedBranches=!openAssociatedBranches'
+                                                            ng-bind="GetCount(AssociatedBranches,'Select Branch')">
+                                                        Select Branch
+                                                    </button>
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                            data-ng-click='openAssociatedBranches=!openAssociatedBranches'>
+                                                        <span class='fa fa-chevron-down'></span>
+                                                    </button>
+                                                    <div ng-show="openAssociatedBranches" class="ddlMultiple" ng-cloak>
+                                                        <div ng-click="ddlCheckAll('AssociatedBranches');ddlAssociatedBranchesCheckAll_click();">
+                                                            Check All
+                                                            <span class="btn-counts-right">Total Count: {{AssociatedBranches.length}}</span>
+                                                        </div>
+                                                        <div ng-click="ddlUnCheckAll('AssociatedBranches');ddlAssociatedBranchesUnCheckAll_click();">Uncheck All</div>
+                                                        <hr style="margin:0px !important" />
+                                                        <div ng-repeat="il in AssociatedBranches">
+                                                            <input type="checkbox" ng-model="il.chk" ng-value="il.RelationshipId"
+                                                                   ng-change="ddlAssociatedBranches_Change(il.Code);" />
+                                                            {{il.BranchName}}-{{il.BranchAddress}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionSearch")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

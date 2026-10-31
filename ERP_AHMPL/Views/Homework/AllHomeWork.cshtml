@@ -1,0 +1,362 @@
+﻿
+@{
+    ViewBag.Title = "All HomeWork";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/AllHomeWorkController.js?Ver=@ViewBag.Version"></script>
+
+
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">All HomeWork</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>DashBoard</span></li>
+                <li class="active"><span>All HomeWork</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    @*<div class="refresh-container">
+                            <div class="preloader">
+                                <div class="circles-1">
+                                    <div class="circles-1-center"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                    <div class="circles-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-heading bg-white">
+                            <div class="pull-left">
+                            </div>
+                            <div class="pull-right">
+                                <a class="pull-left inline-block mr-15" data-toggle="collapse" href="#HomeWork_1" aria-expanded="true">
+                                    <i class="mdi mdi-chevron-down"></i>
+                                    <i class="mdi mdi-chevron-up"></i>
+                                </a>
+                                <a href="#" class="pull-left inline-block refresh mr-15"> <i class="mdi mdi-replay"></i> </a>
+                                <a href="#" class="pull-left inline-block full-screen mr-15"> <i class="mdi mdi-fullscreen"></i> </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>*@
+                    <div id="HomeWork_1" class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <form id="uploadHomework" enctype="multipart/form-data" name="uploadHomework">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding " id="MainMoveBoxMobile">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 no-padding " id="SelectMsgBoxMobile">
+                                        <div class="all-msg-box-list bg-w" Id="dvVedioApprove">
+                                            <div class="conversation-header-count">
+                                                <div class="search-member-title">
+                                                    <h6 class="tx-list">Homework Video</h6>
+                                                </div>
+                                            </div>
+                                            <div class="msg-list-body">
+                                                <div>
+                                                    <div class="br-msg-box-list-item bg-w" all-circular-list>
+                                                        <div class="tx-list2" style="width:300px; height:250px; ">
+                                                            <iframe id="player" width="300px" height="250px" src="" ng-src="{{Url(VedioPath)}}" ng-if="VedioPath"></iframe>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="all-msg-box-list bg-w">
+                                            <div class="conversation-header-count">
+                                                <div class="search-member-title">
+                                                    <h6 class="tx-list">Homework List <span class="tx-roboto pull-right"><label ng-bind="HomeWorkListCount"></label></span></h6>
+                                                </div>
+                                            </div>
+                                            <div class="msg-list-body">
+                                                <div class="circular-list-scroll">
+                                                    <div class="br-msg-box-list-item bg-w {{ActiveHomeWorkId==x.TransId?'active':''}}" ng-repeat="x in AllHomeWork" ng-model="abcd" ng-click="reply_click(x.TransId)" id="{{x.TransId}}">
+                                                        <div class="tx-list2">
+                                                            {{x.TopicName}} - [{{x.SubjectName}}]
+                                                        </div>
+                                                        <div class="tx-list2-date-w-attach-file">
+                                                            <div class="date-format">{{x.SubmissionDate}}</div>
+
+                                                            <div class="attach-file-show-y" ><i class="mdi mdi-attachment" style="display:{{x.Attach}};"></i></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input type='hidden' value='@Request.QueryString["NId"]' id='HdnTransId' />
+                                    </div>
+                                    <style>
+                                        .slimScrollDiv {
+                                            overflow: unset !important;
+                                        }
+                                    </style>
+                                    <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12 query-show-box-m" id="MsgBoxMobile">
+                                        <div class="query-show-box bg-w">
+                                            <div class="query-show-bind" id="lblHomework" ng-repeat="x in SelectHomeWork" body-details-done>
+                                                <div class="query-show-header">
+                                                    <div class="tx-list2">
+                                                        <div class="SelectThreadName pull-left" id="QHeaderHight">
+                                                            [{{x.SubjectName}}] - {{x.TopicName}}
+                                                        </div>
+                                                        <div class="CreatedThreadTime">
+                                                            {{x.SubmissionDate}}
+                                                        </div>
+                                                    </div>
+                                                    <div ng-click="RemoveMsgBox()" id="MoveToThread" data-toggle="tooltip" data-placement="left" title="Back To Homework List"><i class="mdi mdi-more"></i></div>
+                                                    <a href="{{x.BackUrl}}" class="go-back" data-toggle="tooltip" data-placement="left"
+                                                       title="Back To Dashboard"><span><i class="icofont-home"></i></span></a>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                    <div class="query-show-body">
+                                                        <div class="body-details-scorll">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding mgbt-xs-20">
+                                                                <div class="msg-show-full-detail" ng-bind-html="trustAsHtml(x.HomeworkDetails)">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="x.Attachment !='none'">
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding mgbt-xs-5">
+                                                                        <label class="control-label">Download Assign HomeWork</label>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment}};">
+
+                                                                            <a href="{{x.Attachment}}" class="input-group-addon"
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download  ng-init="GetAttachmentName(x);">
+                                                                                {{filename}}
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment2">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment2}};">
+
+                                                                            <a href="{{x.Attachment2}}" class="input-group-addon "
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment2}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download ng-init="GetAttachmentName(x);">
+                                                                                {{filename2}}
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment3">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment3}};">
+
+                                                                            <a href="{{x.Attachment3}}" class="input-group-addon"
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment3}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download ng-init="GetAttachmentName(x);">
+                                                                                {{filename3}}
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment4">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment4}};">
+
+                                                                            <a href="{{x.Attachment4}}" class="input-group-addon"
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment4}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download ng-init="GetAttachmentName(x);">
+                                                                                {{filename4}}
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment5">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment5}};">
+
+                                                                            <a href="{{x.Attachment5}}" class="input-group-addon"
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment5}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download ng-init="GetAttachmentName(x);">
+                                                                                {{filename5}}
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment6">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment6}};">
+
+                                                                            <a href="{{x.Attachment6}}" class="input-group-addon"
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment6}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download ng-init="GetAttachmentName(x);">
+                                                                                {{filename6}}
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment7">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment7}};">
+
+                                                                            <a href="{{x.Attachment7}}" class="input-group-addon"
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment7}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download ng-init="GetAttachmentName(x);">
+                                                                                {{filename7}}
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment8">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment8}};">
+
+                                                                            <a href="{{x.Attachment8}}" class="input-group-addon"
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment8}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download ng-init="GetAttachmentName(x);">
+                                                                                {{filename8}}
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment9">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment9}};">
+
+                                                                            <a href="{{x.Attachment9}}" class="input-group-addon"
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment9}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download ng-init="GetAttachmentName(x);">
+                                                                                {{filename9}}
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 no-padding" ng-if="x.Attachment10">
+                                                                        <div class="attachment-download-box-s" style="display:{{x.Attachment10}};">
+
+                                                                            <a href="{{x.Attachment10}}" class="input-group-addon"
+                                                                               title="click here for download file." download>
+                                                                                <i class="icofont-download"></i>
+                                                                            </a>
+                                                                            <a href="{{x.Attachment10}}" class="form-control input-padding2"
+                                                                               title="click here for download file." download ng-init="GetAttachmentName(x);">
+                                                                                {{filename10}}
+                                                                            </a>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div ng-show="IsReSubmittion==1?true : x.IsHomeworkSubmitted ==true && x.IsSubmissionRequired=='1' " class="col-lg-12 col-md-12 col-sm-12 col-xs-12  mgtp-24 mgbt-xs-15 SubmitHomeWorkMsgBox">{{IsReSubmittion==1?'Your Last uploaded Homework not proper , please upload all attachment again' :x.IsHomeworkSubmitted==true && x.IsSubmissionRequired=='1'?'Welldone, Your homework has been  submitted.':''}} </div>
+
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding mgtp-24" ng-hide="IsReSubmittion==1?false:x.IsHomeworkSubmitted==1?true:false" ng-if="x.IsSubmissionRequired=='1'">
+                                                                    <div class="col-md-12 col-sm-12 col-xs-12 no-padding mgbt-xs-15">
+                                                                        <label class="control-label">
+                                                                            Submit Your HomeWork <br />
+                                                                            <span class="vd_red" style="font-size: 10px;">
+                                                                                Upload pdf, image, video(mp4) or audio(mp3) files.
+                                                                            </span>
+                                                                        </label>
+
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                                                            <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                                <label class="control-label" style="display:initial;">Attachment <span style="float:right; font-size:10px;" title="Upload Only [.jpg|.jpeg|.png|.bmp|.pdf] Files & File Size Limit is 10 MB(In Total)">Instruction</span></label>
+                                                                                <div class="input-box input-box-me max-h-114">
+                                                                                    <div class="multi-attachment-input-box-popup">
+                                                                                        <div class="attachment-input-box-s ng-scope" ng-repeat="attachment in Attachments">
+                                                                                            <div class="input-group-addon ng-scope" ng-if="attachment.Name!='preview'"><i class="icofont-upload-alt"></i></div>
+                                                                                            <input type="file" ng-click="SetIndex($index)" id=file{{$index}} upload-files>
+                                                                                            <label for=file{{$index}} class="form-control-attachment input-padding" ng-model="attachment.FileName">{{attachment.name==undefined?'Upload Image':attachment.name}}</label>
+
+                                                                                            <div class="input-group-btn input-group-btn-d">
+                                                                                                <input type="submit" class="btn-dec ng-scope" value="-" ng-click="RemoveRow($index)" ng-if="Attachments.length>0 &amp;&amp; Attachments.length!=1">
+                                                                                                <input type="submit" class="btn-add ng-scope" value="+" ng-click="AddRow()" ng-if="$index==Attachments.length-1">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="text-box-msg-r">
+                                                                                        <input type="hidden" id="pdfAttachment" autocomplete="off">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    <input id="btnSubmit" type="button" class="btn  btn-primary" ng-click="SubmittedHomework()" value="Save">
+                                                                </div>
+                                                             
+                                                                    
+
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 TeacherRemarkBox" ng-show="x.Remark.length>0">
+                                                                        <span class="titlebox">Teacher's Remark:</span>
+                                                                        {{x.Remark}}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <style>
+                                                input[type="file"] {
+                                                    z-index: -1;
+                                                    position: absolute;
+                                                    opacity: 0;
+                                                }
+
+                                                input:focus + label {
+                                                    outline: 0px solid;
+                                                }
+                                            </style>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

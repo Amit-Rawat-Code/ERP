@@ -1,0 +1,87 @@
+﻿@*<script src="~/Content/lib/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="~/scripts/dataTables.bootstrap.min.js"></script>
+
+<style>
+    .modal-body {
+        overflow-y: auto;
+    }
+</style>*@
+@*<section class="widget">
+        <div class="body">
+            <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel2">@ViewBag.Title</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div id="UpdatePanel">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="simplemodal-close">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+
+@*<div id="myModal" class="modal fade d-none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h5 class="modal-title" id="myModalLabel2">@ViewBag.Title</h5>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="simplemodal-close">Close</button>
+                @*<button type="button" class="btn btn-danger">Save changes</button>*@
+@*</div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+    <div class="collapse" id="CollapseSearchTableList">
+        <div class="table-heading-box">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                <div class="table-header-box">
+                    <div class="pull-left">
+                        <h6 class="panel-title txt-dark">@ViewBag.TitleList</h6>
+                    </div>
+                    <div class="pull-right float-right">
+                        <a href="#" class="pull-left inline-block RefreshSearchTable mr-15"><i class="mdi mdi-replay"></i></a>
+                        <a href="#" class="pull-left inline-block full-screen2 mr-15"><i class="mdi mdi-fullscreen"></i></a>
+                        <a class="pull-left inline-block close-panel2" href="#collapseinputbox" data-effect="fadeOut" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseinputbox">
+                            <i class="mdi mdi-close"></i>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                <div class="datatable-responsive table-responsive">
+                    <div id="UpdatePanel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+           
+
+
+
+
+
+
+
+
+

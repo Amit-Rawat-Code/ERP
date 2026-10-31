@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="myApp" ng-controller="myController">
+<head runat="server">
+    <title>Home - Our Beginners</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Fondamento:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../content/css/font-awesome.css">
+    <!------only for home page slider-->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
+    <!------only for home page slider-->
+    <!-----------------home-classes-carousels---------->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css'>
+    <!-----------------Home-classes-carousels---------->
+    <!----------------GALLERY PLUGIN------------------>
+    <link rel='stylesheet' href='../../content/css/gallery/lightgallery.css'>
+    <!----------------GALLERY PLUGIN------------------>
+    <link rel="stylesheet" href="../../content/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../../content/css/responsive.css" type="text/css">
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body ng-init="GetTab();" ng-cloak>
+    <form id="form1" runat="server">
+        <div>
+            <!--header section-->
+            <header>
+
+                <nav class="navbar  navbar-fixed-top">
+                    <div class="header-top">
+                        <div class="container">
+                            <ul class="contact_details__box">
+                                <li class="top-bar__contact top-bar__contact_phone"><a href="tel:+91-7800661660"><i class="icon-phone"></i>+91-7897403730</a></li>
+                                <li class="top-bar__contact top-bar__contact_email"><a href="mailto:contact@ourbeginners.com"><i class="icon-envelope"></i>contact@ourbeginners.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="header-bottom">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="/Site/Home">
+                                    <img src="../../content/images/homepage/logo_kids.png" alt="Allenkids-logo" />
+                                </a>
+                            </div>
+                            <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+                                <ul id="nav" class="nav navbar-nav navbar-left">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li ng-repeat="Tab in Tabs" ng-model="SelectTabs" menurepeat-done>
+                                                <a ng:href="{{Tab.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : Tab.LayoutPageName}}" target='_self'
+                                                   @*target="{{Tab.LayoutPageName=='javascript:void(0)' ? '_self' : '_blank'}}"*@ onclick="return anchor(event)">
+                                                    <span class="right-nav-text">
+                                                        <span ng-bind-html="trustAsHtml(Tab.TabName)"></span>
+                                                        <i class="fa fa-angle-down" aria-hidden="true" ng-hide="Menus[$index].length==0"></i>
+                                                    </span>
+                                                </a>
+
+                                                <ul id="Tab{{Tab.TabId}}" class="sub-menu  list-unstyled" ng-init="GetMenu(Tab.TabId,$index)"
+                                                    ng-hide="Menus[$index].length==0">
+                                                    <li ng-repeat="menu in Menus[$index]" ng-model="SelectMenu">
+                                                        <a ng:href="{{menu.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : menu.LayoutPageName}}" target='_self'
+                                                           @*target="{{menu.LayoutPageName=='javascript:void(0)' ? '_self' : '_blank'}}"*@
+                                                           data-toggle={{SubMenus[menu.MenuId].length==0?'none':'collapse'}} data-target="#Menu{{menu.MenuId}}" title="{{menu.MenuName}}" onclick="return anchor(event)">
+                                                            <span ng-bind-html="trustAsHtml(menu.MenuName)"></span>
+                                                            <i class="fa fa-angle-right" aria-hidden="true" ng-hide="SubMenus[menu.MenuId].length==0"></i>
+                                                        </a>
+                                                        <ul id="Menu{{menu.MenuId}}" class="collapse collapse-level-2"
+                                                            ng-init="GetSubMenu(menu.MenuId,$index)" ng-hide="SubMenus[menu.MenuId].length==0">
+                                                            <li ng-repeat="submenu in SubMenus[menu.MenuId]" ng-model="SelectSubMenu">
+                                                                <a ng:href="{{submenu.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : submenu.LayoutPageName}}" target='_self'
+                                                                   @*target="{{submenu.LayoutPageName=='javascript:void(0)' ? '_self' : '_blank'}}"*@
+                                                                   data-path="{{submenu.PageName}}" title="{{submenu.SubMenuName}}" ng-click="GetDetailBySubMenuId(submenu.SubMenuId)" onclick="return anchor(event)">
+                                                                    <span ng-bind-html="trustAsHtml(submenu.SubMenuName)"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <span class="expend" ng-if="SubMenus[menu.MenuId].length>0"></span>
+                                                    </li>
+                                                </ul>
+                                                <span class="expend" ng-if="Menus[$index].length>0"></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Beyond Curriculum <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/Site/extraCoCurricularActivities">Extra & Co- Curricular Activities</a></li>
+                                            <li><a href="/Site/SportsAndPerformingArts">Sports and Performing arts</a></li>
+                                            <li><a href="/Site/events">Events</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="/Site/gallery">Gallery</a></li>
+                                    <li><a href="/Site/contactus">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+
+
+
+
+                @*<nav class="navbar  navbar-fixed-top">
+                        <div class="header-top">
+                            <div class="container">
+                                <ul class="contact_details__box">
+                                    <li class="top-bar__contact top-bar__contact_phone"><a href="tel:+91-7800661660"><i class="icon-phone"></i>+91-7897403730</a></li>
+                                    <li class="top-bar__contact top-bar__contact_email"><a href="mailto:contact@ourbeginners.com"><i class="icon-envelope"></i>contact@ourbeginners.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="header-bottom">
+                            <div class="container">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="/Site/Home">
+                                        <img src="../../content/images/homepage/logo_kids.png" alt="Allenkids-logo" />
+
+                                    </a>
+                                </div>
+                                <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+                                    <ul class="nav navbar-nav navbar-left">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+
+                                                <li><a href="/Site/home">Home</a></li>
+                                                <li><a href="/Site/AboutUs">About Us</a></li>
+                                                <li><a href="/Site/legacy">Legacy</a></li>
+                                                <li><a href="/Site/WhyChooseAllenKids">Why Choose Our Beginners?</a></li>
+                                                <li><a href="/Site/ourapproach">Our Approach</a></li>
+                                                <li><a href="/Site/mission">Mission & Vision</a></li>
+                                                <li><a href="/Site/fromchairmansdesk">From Chairman’s Desk</a></li>
+                                                <li><a href="/Site/fromheadmistressdesk">From Headmistress' Desk</a></li>
+                                                <li><a href="/Site/testimonials">Our Happy Parents</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Programs <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/Site/playgroup1">Playgroup 1 : (2 yrs to 3 yrs)</a></li>
+                                                <li><a href="/Site/playgroup2">Playgroup 2 ( 3 yrs to 4 yrs)</a></li>
+                                                <li><a href="/Site/nursery">NurseryNursery(4 yrs to 5 yrs)</a></li>
+                                                <li><a href="/Site/Preparatory">Preparatory: (Age group 5-6 years)</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="active"><a href="/Site/admissions">Admissions<span class="badge">new</span></a></li>
+
+
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Beyond Curriculum <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/Site/extraCoCurricularActivities">Extra & Co- Curricular Activities</a></li>
+                                                <li><a href="/Site/SportsAndPerformingArts">Sports and Performing arts</a></li>
+                                                <li><a href="/Site/events">Events</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/Site/gallery">Gallery</a></li>
+                                        <li><a href="/Site/contactus">Contact Us</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>*@
+
+
+
+
+            </header>
+            <!--header section-->
+            @RenderBody()
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <!-- <div class="col-sm-3">
+                            <div class="footer-part">
+                                <img src="../../content/images/homepage/footer/logo_kids.png" alt="footer-logo" />
+                                <p>A great foundation at this particular age can lay a rock solid foundation for later life.</p>
+                            </div>
+                        </div> -->
+                        <!-- <div class="col-sm-3">
+                            <div class="footer-part">
+                                <h3 class="footer-part-title">Quick Links</h3>
+                                <ul id="menu-footer-custom-menu" class="menu">
+                                    <li id="menu-item-5225" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5225"><a href="https://allenkidsswaroopnagar.in/why-allenkids/">Why Allenkids</a></li>
+                                    <li id="menu-item-3272" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3272"><a href="#">Events</a></li>
+                                    <li id="menu-item-5223" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5223"><a href="https://allenkidsswaroopnagar.in/our-approach/">Our Approach</a></li>
+                                    <li id="menu-item-5224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5224"><a href="https://allenkidsswaroopnagar.in/legacy/">Legacy</a></li>
+                                    <li id="menu-item-5226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5226"><a href="https://allenkidsswaroopnagar.in/admissions/">Admissions</a></li>
+                                    <li id="menu-item-5228" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5228"><a href="https://allenkidsswaroopnagar.in/nursery/">Nursery</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="footer-part">
+                                <h3 class="footer-part-title">Gallery</h3>
+                                <div class="gallery">
+                                    <div class="gallery-item">
+                                        <img src="../../content/images/homepage/footer/gallery/act-dance.PNG" alt="gallery-photo">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="../../content/images/homepage/footer/gallery/Annual-day.PNG" alt="gallery-photo">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="../../content/images/homepage/footer/gallery/Dance-performance.PNG" alt="gallery-photo">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="../../content/images/homepage/footer/gallery/dance.PNG" alt="gallery-photo">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="../../content/images/homepage/footer/gallery/kids.PNG" alt="gallery-photo">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="../../content/images/homepage/footer/gallery/Performance.PNG" alt="gallery-photo">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div> -->
+                        <!--<div class="col-sm-12">
+                            <div class="footer-part">
+                                <h3 class="footer-part-title">Group Schools</h3>
+                                <div class="contact-deatil">
+                                    <ul id="menu-group-schools" class="menu">
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://allenhousekhalasiline.com/" target="_blank">Allenhouse Public School, Khalasi Line, Kanpur</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://allenhouserooma.com/" target="_blank">Allenhouse Public School, Rooma, Kanpur</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://allenhouseghaziabad.com/" target="_blank">Allenhouse Public School, Vasundhra, Ghaziabad</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://allenhouselucknow.com/#" target="_blank">Allenhouse Public School, Vrindavan, Lucknow</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://allenhousepanki.com/" target="_blank">Allenhouse Public School, Panki, Kanpur</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://allenhousejhansi.com/" target="_blank">Allenhouse Public School, Jhansi</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://allenkids.in/" target="_blank">Allen Kids, Naveen Nagar, Kakadeo, Kanpur</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://allenkidsswaroopnagar.in/" target="_blank">Allen Kids, Swaroop Nagar, Kanpur</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://allenkidsbareilly.in/" target="_blank">Allen Kids, Bareilly</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://www.allenhouse.ac.in/" target="_blank">Allenhouse Institute of Technology, Rooma, Kanpur</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://dpskalyanpur.com/" target="_blank">Delhi Public School, Kalyanpur, Kanpur</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://dpseldeco.com/" target="_blank">Delhi Public School, Eldeco, Lucknow</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://dpsindiranagar.com/" target="_blank">Delhi Public School, Indira Nagar, Lucknow</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://dpsjankipuram.com/" target="_blank">Delhi Public School, Jankipuram, Lucknow</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://dpsgomtinagar.com/" target="_blank">Delhi Public School, Gomti Nagar, Lucknow</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://dpsbareilly.com/#" target="_blank">Delhi Public School, Bareilly</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://dpssaharanpur.com/" target="_blank">Delhi Public School, Saharanpur</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80">
+                                            <a href="http://dpsunnao.com/" target="_blank">Delhi Public School, Akrampur, Unnao</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="col-sm-12">
+                            <div class="footer-part">
+                                <h3 class="footer-part-title">Contact us</h3>
+                                <div class="contact-deatil">
+                                    <ul class="list list_unstyle list_contact-details">
+
+                                        <li class="list__item list__item_address"><i class="icon-map-marker"></i> 117/L1/145, P Block, Navin Nagar, Kakadeo, Kanpur, Uttar Pradesh 208025</li>
+                                        <li class="list__item list__item_telephone"><i class="icon-phone"></i>+91-7897403730</li>
+                                        <li class="list__item list__item_email"><a href="mailto:contact@ourbeginners.com"><i class="icon-envelope-alt"></i>contact@ourbeginners.com</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </footer>
+            <div class="copyright">Copyright © Ourbeginner</div>
+            <nav class="social">
+                <ul>
+
+                    @*<li class="twitter"><a href="https://twitter.com/allen_college" target="_blank">Twitter <i class="icon-twitter"></i></a></li>*@
+                    <li class="facebook"><a href="https://www.facebook.com/AllenKids123" target="_blank">Facebook <i class="icon-facebook"></i></a></li>
+                    <li class="instagram"><a href="https://www.instagram.com/allenhousecollege/" target="_blank">Instagram <i class="icon-instagram"></i></a></li>
+                    <li class="linkedin"><a href="https://www.linkedin.com/company/superhouse-education/about/?viewAsMember=true" target="_blank">LinkedIn <i class="icon-linkedin"></i></a></li>
+                    <li class="youtube"><a href="https://www.youtube.com/channel/UCrMkOicvzFcoHcK-02sK3vw" target="_blank">Youtube <i class="icon-youtube-play"></i></a></li>
+                </ul>
+            </nav>
+
+
+
+
+
+
+
+
+
+
+            <!---jquery and bootstrap js-->
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+            <script src="../../content/js/bootstrap.min.js"></script>
+            <!---jquery and bootstrap js-->
+            <!--home page banner slider + custom js -->
+            <script src='https://kenwheeler.github.io/slick/slick/slick.js'></script>
+            <!--home page banner slider + custom js -->
+            <!-----------------classes-carousels---------->
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js'></script>
+            <!-----------------classes-carousels---------->
+            <!-----------------Homepage-Bulletin-carousels---------->
+            <script src='../../content/js/jquery.bootstrap.newsbox.js'></script>
+            <!-----------------Homepage-Bulletin-carousels---------->
+            <!-----------------Homepage-Youtube-player---------->
+            <script async src="https://www.youtube.com/iframe_api"></script>
+            <!-----------------Homepage-Youtube-player---------->
+            <!----------------GALLERY PLUGIN------------------>
+            <script src='../../content/js/picturefill.min.js'></script>
+            <script src='../../content/js/jquery.mousewheel.min.js'></script>
+            <script src='../../content/js/lightgallery-all.min.js'></script>
+
+            <script src="js/custom4.js"></script>
+            <!----------------GALLERY PLUGIN------------------>
+            <script src="../../content/js/custom.js"></script>
+            <script src="../../content/js/custom1.js"></script>
+            <script src="../../content/js/custom2.js"></script>
+            <script src="../../content/js/custom3.js"></script>
+            <script src="../../content/js/custom4.js"></script>
+
+        </div>
+    </form>
+</body>
+</html>

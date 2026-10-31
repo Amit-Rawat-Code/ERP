@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "LayoutMaster";
+    ViewBag.TitleList = "Layout Master";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/LayoutMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="app-content  my-3">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Create Layout</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Unit Manager</span></li>
+                        <li class="active"><span>Create Layout</span></li>
+                    </ol>
+                </div>
+
+            </div>
+            <div class="br-pagebody">
+                <div class="">
+                    <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Layout Name</label>
+                                        @Html.TextBox("LayoutName", "", new { @class = "form-control clear validate", @ng_model = "LayoutName" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Layout Page Name</label>
+                                        @Html.TextBox("LayoutPageName", "", new { @class = "form-control clear validate", @ng_model = "LayoutPageName", @placeholder = "" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        @Html.Partial("ddlApproved")
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Active</label>
+                                        @Html.Partial("ddlActive")
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Layouts Demo Image</label>
+                                        <img class="img-fix" id="imgfileInput" src="~/Content/noimage.png" ng-model="imgfileInput" ng-src="{{imgfileInput}}" alt="" width="150" height="150" ng-click="OpenFileUpload()">
+                                        <input name="fileInput" onchange="angular.element(document).scope().fuImageChange(this)" upload-files type="file" accept="image/jpg,image/png,image/jpeg,image/svg" id="fileInput" ng-model="fileInput" multiple />
+                                    </div>
+                                </div>                                
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                    @Html.Partial("ActionView")
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    @Html.Partial("SearchAngularJs")
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+</div>

@@ -1,0 +1,313 @@
+﻿@{
+    ViewBag.Title = "Ledger Request DashBoard";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<script src="~/Scripts/myjslib/LedgerRequestDashBoardController.js?Ver=@ViewBag.Version"></script>
+<style>
+    .checkbox, .radio {
+        padding-top: 7px;
+        padding-bottom: 0px;
+        min-height: 27px;
+        margin-top: 0;
+        margin-bottom: 0px;
+    }
+
+    .pull-left.section-title {
+        font-size: 17px;
+        padding: 5px 0px;
+        color: #212121;
+    }
+
+    .filter.pull-right.dashboard-filter table {
+        margin: 0;
+    }
+
+    .section-title-filter {
+        padding: 10px 0px;
+        display: table;
+    }
+
+    .card h4 {
+        font-size: 20px;
+        margin-bottom: 0px;
+        font-weight: 400;
+        color: #fff;
+    }
+
+    .card {
+        border: 1px solid #484848;
+        text-align: center;
+        padding: 20px;
+        border-radius: 0px;
+        transition: all ease-in .5s;
+        margin-bottom: 20px;
+        color: #fff;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 1px 11px 0 rgb(136, 136, 136);
+        box-shadow: 0 1px 11px 0 rgb(136, 136, 136);
+    }
+
+    .dataTables_scrollBody {
+        overflow: scroll !important;
+        height: 400px;
+    }
+
+    .card-box-count .card a {
+        display: inline-block;
+        border-radius: 50%;
+        background: #ffff;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        margin-top: 10px;
+        font-size: 20px;
+        -webkit-box-shadow: 0 1px 11px 0 rgb(136 136 136);
+        box-shadow: 0 1px 11px 0 rgb(136 136 136);
+        text-decoration: underline;
+    }
+
+    .card-box-count .card p {
+        display: inline-block;
+        border-radius: 50%;
+        background: #ffff;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        margin-top: 10px;
+        font-size: 20px;
+        -webkit-box-shadow: 0 1px 11px 0 rgb(136 136 136);
+        box-shadow: 0 1px 11px 0 rgb(136 136 136);
+        color: #000;
+    }
+</style>
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+
+            <h5 class="txt-dark">Ledger Request DashBoard</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Finance</span></li>
+                <li><span>DashBoard</span></li>
+                <li class="active"><span>Ledger Request DashBoard</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="br-pagebody">
+        <div class="panel-wrapper ">
+            <div class="panel-body">
+
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                        <label class="control-label">Action<span class="vd_red">*</span></label>
+                        <div class="input-box">
+                            @Html.DropDownList("ddlAction", new List<SelectListItem>{
+                                 new SelectListItem{Text="Select", Value=""},
+                                 new SelectListItem{Text="Create", Value="C"},
+                                 new SelectListItem{Text="Delete", Value="D"}
+                             },
+                                 new { @class = "select2 form-control validate", @ng_model = "Action", @ng_init = "Action='C'", @ng_change = "ddlAction_Change()" })
+                            <div class="text-box-msg-r">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                        <label class="control-label">Ledger Request From School(s)<span class="vd_red">*</span></label>
+                        <div class="input-box chk-validate validate" ng-init="GetSchools();">
+                            <div class="toggle-ddl" id="openSchool" ng-init="ToogleDDL('openSchool','openSchool')">
+                                @*btn-validate*@
+                                <button class='btn btn-primary select-btn'
+                                        data-ng-click='openSchool=!openSchool' ng-bind="GetCount(SchoolList,'Select School')">
+                                    Select Months
+                                </button>
+                                @*btn-validate*@
+                                <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                        data-ng-click='openSchool=!openSchool'>
+                                    <span class='fa fa-chevron-down'></span>
+                                </button>
+                                <div ng-show="openSchool" class="ddlMultiple" ng-cloak>
+                                    <div ng-click="ddlCheckAll('SchoolList')">
+                                        Check All
+                                        <span class="btn-counts-right">Total Count: {{SchoolList.length}}</span>
+                                    </div>
+                                    <div ng-click="ddlUnCheckAll('SchoolList')">Uncheck All</div>
+                                    <hr style="margin:0px !important" />
+                                    <div ng-repeat="sl in SchoolList">
+                                        <input type="hidden" ng-bind="sl.Srno=($index+1)" />
+                                        <input type="checkbox" ng-model="sl.chk" ng-value="sl.RelationshipId" />
+                                        {{sl.BranchName}}-{{sl.BranchAddress}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                        <label class="control-label"><span class="vd_red"></span></label>
+                        <div class="input-box">
+                            @Html.Partial("ActionSearch")
+                            <div class="text-box-msg-r">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section-title-filter">
+                    <div class="pull-left section-title">
+
+                        <label> List of Ledger Request  </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example1" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:10px !important">S.No.</th>
+                                    <th>Date of Request</th>
+                                    <th>School Name</th>
+                                    <th>Ledger Group</th>
+                                    <th>Nature</th>
+                                    <th>Ledger Name</th>
+                                    <th>Address</th>
+                                    <th>Request Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="efl in LedgerRequestList" ng-repeat-done>
+                                    <td ng-bind="$index+1" style="width:10px !important"></td>
+                                    <td>{{efl.Date}}</td>
+                                    <td class="text-wrap">{{efl.BranchName}}</td>
+                                    <td>{{efl.LedgerGroup}}</td>
+                                    <td>{{efl.Nature}}</td>
+                                    <td>{{efl.LedgerName}}</td>
+                                    <td>{{efl.Address}}</td>
+                                    <td>{{efl.State}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-default" ng-if="Action=='C'" ng-click="btn_Click(efl)">
+                                            Create Ledger
+                                        </button>
+                                        <input type="checkbox" ng-model="efl.chk" ng-if="Action=='D'" />
+                                    </td>
+                                </tr>
+                                <tr ng-if="LedgerRequestList.length==0"><td colspan="8" class="text-center">No, Open Enquiries Found.</td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td style="width:10px !important"><input type="text" class="form-control" placeholder="S.No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Date of Request" /></td>
+                                    <td><input type="text" class="form-control" placeholder="School Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ledger Group" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Nature" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Ledger Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Address" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Req. State" /></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    @Html.Partial("ActionDelete")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ModalSchools -->
+<!--<div class="modal fade" id="ModalSchools" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                        <label class="control-label">Date<span class="vd_red"></span></label>
+                        <div class="input-box">
+                            <label class="form-control">{{LedgerObj.Date}}</label>
+                            <div class="text-box-msg-r">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                        <label class="control-label">Group<span class="vd_red"></span></label>
+                        <div class="input-box">
+                            <label class="form-control">{{LedgerObj.LedgerGroup}}</label>
+                            <div class="text-box-msg-r">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                        <label class="control-label">Nature<span class="vd_red"></span></label>
+                        <div class="input-box">
+                            <label class="form-control">{{LedgerObj.Nature}}</label>
+                            <div class="text-box-msg-r">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                        <label class="control-label">Ledger Name<span class="vd_red"></span></label>
+                        <div class="input-box">
+                            <label class="form-control">{{LedgerObj.LedgerName}}</label>
+                            <div class="text-box-msg-r">
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                        <label class="control-label">Address<span class="vd_red"></span></label>
+                        <div class="input-box">
+                            <label class="form-control">{{LedgerObj.Address}}</label>
+                            <div class="text-box-msg-r">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example6" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>SR.No.</th>
+                                    <th><input type="checkbox" ng-model="chkAll" ng-change="check_Allchk()" />Select School</th>
+                                    <th>School Name</th>
+                                    <th>Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="sl in SchoolListForSelect">
+                                    <td ng-bind="$index+1"></td>
+                                    <td><input type="checkbox" ng-model="sl.chk"  ng-change="check_chkAll()" /></td>
+                                    <td>{{sl.BranchName}}</td>
+                                    <td>{{sl.BranchAddress}}</td>
+                                </tr>
+                                <tr ng-if="SchoolList.length==0"><td colspan="5" class="text-center">No, School(s) Found</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-if="Action=='C'" ng-click="btnCreateLedger_Click(efl.SubCode)">
+                    Create Ledger
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+

@@ -1,0 +1,34 @@
+﻿<div class="">
+    <div class="input-box">
+        <div class="checkbox checkbox-primary check-box">
+            <input type="checkbox" ng-model="chkAllMonth" ng-bind="chkAllMonth=(selectedMonthCount==MonthList.length?true:false)" ng-init="GetMonths();" ng-change="AllMonth()">
+            <label>Select All</label>
+        </div>
+        <div class="text-box-msg-r2" style="font-size: 10px;font-weight: 500;">
+            Total Selection: <label ng-model="selectedMonthCount" ng-bind="selectedMonthCount=(MonthList | filter:{'IsActive' : 'true'}).length"></label>
+        </div>
+        <div class="input-box" style="width:100%; background:#206596; position:relative; float:left; color:#fff;">
+            <div class="checkbox checkbox-primary check-box-head">
+                Month
+            </div>
+        </div>
+    </div>
+</div>
+<div class="" style="position:relative;">
+    <div class="slimScrollDiv-height3" id="slimScrollDiv-height2">
+        <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+            <tbody>
+                <tr ng-repeat="XL in MonthList">
+                    <td class="srno">
+                        <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                            <input type="checkbox" ng-model="XL.IsActive" ng-change="chkChange(XL)" />
+                            <label for=""> </label>
+                        </div>
+                    </td>
+                    <td style="float: left;display:none ">{{XL.MonthYear}}</td>
+                    <td> {{XL.Month}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

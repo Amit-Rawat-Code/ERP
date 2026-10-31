@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewBag.Title = "Route Master";
+    ViewBag.TitleList = "Vehicle Route Master";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/RouteMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Transport</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Route Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("RouteName", "", new { @class = "form-control clear", @placeholder = "Route Name", @autocomplete = "name", @ng_model = "RouteName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Distance Covered (K.M.)<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("RouteDistance", "", new { @class = "form-control clear", @placeholder = "Route Distance", @autocomplete = "name", @ng_model = "RouteDistance" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlIsActive", new List<SelectListItem>  
+                                                        {
+                                                            new SelectListItem{Text="Select", Value=""},
+                                                            new SelectListItem{Text="Yes", Value="true"},
+                                                            new SelectListItem{Text="No", Value="false"}
+                                                        },
+                                                        new { @class = "select2 form-control validate", @ng_model = "IsActive", @ng_init = "IsActive='true'" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-15 ">
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <label class="control-label"> Stoppages Details: <span class="vd_red"></span></label>
+                                            </div>
+
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                <hr style="margin: 5px 0px 10px;">
+                                            </div>
+
+                                            <div class="col-md-2 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Stoppage<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlRouteStoppages" class="select2 form-control validate" ng-model="ddlRouteStoppages" ng-init="GetStoppage()">
+                                                        <!--ng-change="GetTripDistanceFare(TranRoute.RouteId,RouteStoppage.StoppageId,TransDirection.RouteDirectionId);"-->
+                                                        <option value="">Select Stoppage</option>
+                                                        <option ng-repeat="RStoppage in RStoppages" value="{{RStoppage.code}}">{{RStoppage.Stoppage}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Distance From School(K.M.) <span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("DistanceFromSchool", "", new { @class = "form-control clear", @placeholder = "Distance in Kilometers", @autocomplete = "name", @ng_model = "DistanceFromSchool" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Round Trip Amount</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("RoundTripAmount", "", new { @class = "form-control clear", @placeholder = "Round Trip Amount", @autocomplete = "name", @ng_model = "RoundTripAmount" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Up/Down Trip Amt</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("Up_DownTripAmount", "", new { @class = "form-control clear", @placeholder = "Up Down Trip Amount", @autocomplete = "name", @ng_model = "Up_DownTripAmount" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Arrival Time<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("ArrivalTime", "", new { @class = "form-control clear", @placeholder = "Arrival Time", @autocomplete = "name", @ng_model = "ArrivalTime" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">&nbsp;</label>
+                                                <div class="input-box">
+                                                    <input id="btnadd" type="button" value="Add" class="btn-me btn-primary" ng-click="AddStopage()" name="btnaddbutton">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgbt-xs-15" ng-show="listofstopages.length>0">
+
+                                                <table id="example2" class="table compact table-hover table-striped table-bordered mgbt-xs-0" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Stoppage</th>
+                                                            <th>Distance From School (In Km.)</th>
+                                                            <th>Round Trip Amount</th>
+                                                            <th>Up/Down Trip Amoun</th>
+                                                            <th>Arrival Time(In Min.)</th>
+                                                            <th>Action</th>
+                                                            
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="sml in listofstopages">
+                                                            <td ng-bind="sml.Srno=($index+1)"></td>
+                                                            <td value="{{sml.StoppageId}}">
+                                                                {{sml.Stoppage}}
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control" ng-model="sml.Distance" />
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control" ng-model="sml.RoundTripAmount" />
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control" ng-model="sml.UpDownTripAmount" />
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control" ng-model="sml.Arrival" />
+                                                            </td>
+                                                            <td><input id="btnremove" type="button" value="Remove" class="btn btn-danger" ng-click="RemoveStopage(sml.Srno)"></td>
+                                                            
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

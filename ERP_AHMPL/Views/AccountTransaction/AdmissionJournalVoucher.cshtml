@@ -1,0 +1,265 @@
+﻿@{
+    ViewBag.Title = "Admission Journal Voucher";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<div id="hdngetstu"></div>
+<script src="~/Scripts/myjslib/AdmissionJournalVoucherController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" id="hdnVoucherId" />
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Admission Journal Voucher</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Accountancy</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Admission Journal Voucher</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Voucher Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlVouchers")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Prepratory No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtPVNo", "", new { @class = "form-control clear validate", MaxLength = "6", @placeholder = "", @ng_model = "PVNo", @ng_disabled = "!enableMe" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Voucher No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtCVNo", "", new { @class = "form-control clear validate", MaxLength = "6", @placeholder = "", @ng_model = "CVNo", @ng_disabled = "!enableMe" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Prepratory Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("txtPVDate")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Voucher Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("txtCVDate")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+
+                                            <div class="input-box">
+                                                <div class="checkbox checkbox-primary check-box">
+                                                    <input type="checkbox" id="chkConfirm" ng-disabled="VConfirm==true?true:false" ng-checked="VConfirm==true?true:false" class="form-control clear validate" placeholder="" ng-model="VConfirm" />
+                                                    <label for="chkVConfirm">Confirm Voucher</label>
+                                                </div>
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1 ">
+                                            <div class="datatable-responsive table-responsive advance-btn-table">
+                                                <table cellpadding="0" cellspacing="0" class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="width-80" style="text-align:center;">Dr./Cr.</th>
+                                                            <th>Ledger</th>
+                                                            <th class="width-150" style="text-align:right;">Dr.</th>
+                                                            <th class="width-150" style="text-align:right;">Cr.</th>
+                                                            <th class="width-150">Narration</th>
+                                                            <th class="width-150">Actions</th>
+                                                            <th class="width-150">Curr. Balance</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody ng-repeat="VD in VoucherData" ng-if="VoucherData.length>0">
+                                                        <tr>
+                                                            <td style="text-align:center;">
+                                                                @Html.DropDownList("ddlDrCr", new List<SelectListItem>{
+                                                            new SelectListItem{Text="Dr", Value="D"},
+                                                            new SelectListItem{Text="Cr", Value="C"}
+                                                            },
+                                                            new { @style = "text-align:center;", @class = "select2 form-control", @ng_change = "ResetCrDr(VoucherData[$index].DrCr,VoucherData[$index].CrAmount,VoucherData[$index].DrAmount,$index)", @ng_model = "VoucherData[$index].DrCr" })
+                                                            </td>
+                                                            <td style="padding-left:15px !important;">
+                                                                <select id="ddlACCode{{$index}}" class="select2 form-control newvalidate" ng-model="VoucherData[$index].SubCode" ng-init="BindJVGeneralLedgers();" ng-change="BindRuningBalance(VoucherData[$index].SubCode,$index)">
+                                                                    <option value="">Select</option>
+                                                                    <option ng-repeat="JVGeneralLedger in JVGeneralLedgersList" value="{{JVGeneralLedger.SubCode}}">{{JVGeneralLedger.LedgerName}}</option>
+                                                                </select>
+
+                                                            </td>
+                                                            <td >
+                                                                <input style="text-align:right;" type="text" id="txtDrAmt{{$index}}" ng-disabled="VoucherData[$index].DrCr=='D'?false:true" class="form-control {{VoucherData[$index].DrCr=='D'?'newvalidate':''}} clear" placeholder="" ng-model="VoucherData[$index].DrAmount" ng-change="DrSum()" validate-number-and-decimal-only two-decimal-place/>
+
+                                                            </td>
+                                                            <td >
+                                                                <input style="text-align:right;" type="text" id="txtCrAmt{{$index}}" ng-disabled="VoucherData[$index].DrCr=='C'?false:true" class="form-control {{VoucherData[$index].DrCr=='C'?'newvalidate':''}} clear" placeholder="" ng-model="VoucherData[$index].CrAmount" ng-change="CrSum()" validate-number-and-decimal-only two-decimal-place/>
+
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" id="txtENarr{{$index}}" class="form-control clear" placeholder="" ng-model="VoucherData[$index].ENarr" />
+                                                            </td>
+                                                            <td><input class="add-btn" type="button" id="btnRemoveRow" value="-" ng-click="RemoveRow($index)" /></td>
+                                                            <td><span ng-bind="VoucherData[$index].RuningBalance"></span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DropDownList("ddlDrCr", new List<SelectListItem>{
+                                                                new SelectListItem{Text="Dr", Value="D"},
+                                                                new SelectListItem{Text="Cr", Value="C"}
+                                                                },
+                                                                new { @style = "text-align:center;", @class = "select2 form-control", @ng_change = "ResetCrDr(VoucherDataobj.DrCr,VoucherDataobj.CrAmount,VoucherDataobj.DrAmount,-1)", @ng_model = "VoucherDataobj.DrCr", @ng_init = "VoucherDataobj.DrCr='D'" })
+                                                            </td>
+
+                                                            <td>
+                                                                <select id="ddlACCode" class="select2 form-control newvalidate" ng-model="VoucherDataobj.SubCode" ng-init="BindJVGeneralLedgers();" ng-change="BindRuningBalance(VoucherDataobj.SubCode,-1)">
+                                                                    <option value="">Select</option>
+                                                                    <option ng-repeat="JVGeneralLedger in JVGeneralLedgersList" value="{{JVGeneralLedger.SubCode}}">{{JVGeneralLedger.LedgerName}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input style="text-align:right;" type="text" id="txtDrAmt"  
+                                                                       ng-disabled="VoucherDataobj.DrCr=='D'?false:true" class="form-control {{VoucherDataobj.DrCr=='D'?'newvalidate':''}} clear" placeholder="" ng-model="VoucherDataobj.DrAmount" ng-change="DrSum()" validate-number-and-decimal-only two-decimal-place/>
+                                                            </td>
+                                                            <td >
+                                                                <input style="text-align:right;" type="text" id="txtCrAmt"  
+                                                                      ng-disabled="VoucherDataobj.DrCr=='C'?false:true" class="form-control {{VoucherDataobj.DrCr=='C'?'newvalidate':''}} clear" placeholder="" ng-model="VoucherDataobj.CrAmount" ng-change="CrSum()" validate-number-and-decimal-only two-decimal-place/>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" id="txtENarr" class="form-control clear" placeholder="" ng-model="VoucherDataobj.ENarr" />
+                                                            </td>
+
+                                                            <td>
+                                                                <input type="button" id="btnAddRow" value="+" class="add-btn" ng-click="AddRow()" />
+                                                            </td>
+                                                            <td><span ng-bind="VoucherDataobj.RuningBalance"></span>  </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <div class="datatable-responsive table-responsive advance-btn-table cashpayment1">
+                                                <table cellpadding="0" cellspacing="0" class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="width-80" style="text-align:center; border:none;"></th>
+                                                            <th style="border:none; width:134px;"></th>
+                                                            <th style="padding:2px 5px 2px 0 !important; border:none; width:132px;"><span style="float:left; line-height: 19px;">Total:</span><p style="text-align:right; line-height: 19px;"><span ng-bind="TotalDrAmt"></span></p></th>
+                                                            <th style="padding:2px 5px 2px 0 !important; border:none; width:97px;"><p style="text-align:right; line-height: 19px;"><span ng-bind="TotalCrAmt"></span></p></th>
+                                                            <th class="width-150" style="border:none"></th>
+                                                            <th class="width-150" style="border:none"></th>
+                                                        </tr>
+                                                    </thead>
+
+
+
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Cheque Date<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("txtChequeDate")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Cheque No.<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtChequeNo", "", new { @class = "form-control clear", MaxLength = "10", @placeholder = "", @ng_model = "ChequeNo" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Transaction Mode<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlTransMode")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Voucher Narration<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlVoucherNarration")
+                                                @Html.TextBox("txtVNarr", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "VNarration" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1 ">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                        <div style="display:none;">
+                                            @Html.Partial("VoucherLayout")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

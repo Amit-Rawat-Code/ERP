@@ -1,0 +1,321 @@
+﻿
+@{
+    ViewBag.Title = "Student Fee Adjustment";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/StudentFeeAdjustmentController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Student Fee Adjustment</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fee</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Student Fee Adjustment</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-init="GetInstallments();">
+                                                <label class="control-label">Select Installment<span class="vd_red"></span></label>
+                                                <div class="input-box chk-validate">
+                                                    <div class="toggle-ddl" id="openInstallment"
+                                                         ng-init="ToogleDDL('openInstallment','openInstallment')">
+                                                        @*btn-validate*@
+                                                        <button class='btn btn-primary select-btn'
+                                                                data-ng-click='openInstallment=!openInstallment'
+                                                                ng-bind="GetCount(InstallmentList,'Select Installment')">
+                                                            Select Installment
+                                                        </button>
+                                                        @*btn-validate*@
+                                                        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                                data-ng-click='openInstallment=!openInstallment'>
+                                                            <span class='fa fa-chevron-down'></span>
+                                                        </button>
+                                                        <div ng-show="openInstallment" class="ddlMultiple" ng-cloak style="width: 400px; height: 220px">
+                                                            <div ng-click="ddlCheckAll('InstallmentList');GetStudentForFeeAdjustment();">
+                                                                Check All
+                                                                <span class="btn-counts-right">Total Count: {{InstallmentList.length}}</span>
+                                                            </div>
+                                                            <div ng-click="ddlUnCheckAll('InstallmentList');GetStudentForFeeAdjustment();">Uncheck All</div>
+                                                            <hr style="margin:0px !important" />
+                                                            <table class="table compact table-hover table-striped table-bordered
+                                                                   nowrap dataTable t-mgtb-n">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Srno.</th>
+                                                                        <th>Installment</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- ngRepeat: XL in ClassList -->
+                                                                    <tr ng-repeat="il in InstallmentList|filter:{DisplayOrder:'!0'}" class="ng-scope">
+                                                                        <td ng-model="il.Srno" ng-init="il.Srno=($index+1)">
+                                                                            {{il.Srno}}
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="checkbox" ng-model="il.chk" ng-value="il.Code"
+                                                                                   ng-change="GetStudentForFeeAdjustment();" ng-disabled="il.disabled"
+                                                                                   ng-if="il.FeeStatus!='Paid' " id="{{il.Code}}" />
+                                                                            <label for="{{il.Code}}">{{il.InstallmentName}}</label>
+                                                                        </td>
+                                                                    </tr><!-- end ngRepeat: XL in ClassList -->
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Class<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlClass")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Section<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlSection")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Stream<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlStream")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Status<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlIsActive", new List<SelectListItem>{
+                                                     new SelectListItem{Text="Select", Value=""},
+                                                     new SelectListItem{Text="Active", Value="1"},
+                                                     new SelectListItem{Text="Inactive", Value="0"}
+                                                 },
+                                                     new { @class = "select2 form-control validate", @ng_model = "IsActive", @ng_init = "IsActive='1'", ng_change = "ddlChange_IsActive();IsFeeStructureNotApplicable = IsActive == '0' ? true : false" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Type of Admission<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlTypeofAdmission", new List<SelectListItem>{ new SelectListItem{Text="Select Admission Type", Value=""},
+                                                   new SelectListItem{Text="OLD", Value="Old"},new SelectListItem{Text="NEW", Value="New"}}, new
+                                                   { @class = "select2 form-control", @ng_model = "TypeofAdmission",
+                                                       @ng_init = "TypeofAdmission='Old'", @ng_change= "ddlChange_TypeofAdmission()"
+                                                   })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Fee Adjustment Date</label>
+                                                <div class="input-box">
+                                                    @Html.Partial("txtToDate")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="collapse" id="CollapseSearchTableList">
+                                                    <div class="table-heading-box">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                            <div class="table-header-box">
+                                                                <div class="pull-left">
+                                                                    <h6 class="panel-title txt-dark">@ViewBag.TitleList &nbsp;<i id="chkShow" class="fa fa-plus-square" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Sort by Column"></i> </h6>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                            <div class="add-columns-box ">
+                                                                <div id="anchor" style="display:none">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                            <div class="datatable-responsive table-responsive advance-btn-table">
+                                                                <div id="UpdatePanel">
+                                                                    <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>
+                                                                                    <input type="checkbox" ng-model="chkAll" ng-init="chkAll=true"
+                                                                                           ng-change="CheckUnCheck(chkAll,'StudentList','chk',{'TypeofAdmission':TypeofAdmission, 'IsActive': IsActive})" />
+                                                                                </th>
+                                                                                <th>S.No.</th>
+                                                                                <th>Admission No.</th>
+                                                                                <th>Class</th>
+                                                                                <th>Student Name</th>
+                                                                                <th>Father Name</th>
+                                                                                <th>Installment</th>
+                                                                                <th>FeeHead</th>
+
+                                                                                <th>Due</th>
+
+                                                                                <th>Fee Structure<br />(Old)</th>
+                                                                                <th>Concession <br />(Old)</th>
+                                                                                <th>Applied <br />Fee Structure <br />(Old)</th>
+
+                                                                                <th>Fee Structure<br />(New)</th>
+                                                                                <th>Concession <br />(New)</th>
+                                                                                <th>Apply <br />Fee Structure <br />(New)</th>
+                                                                                <th>Adjustment <br />(If Any)</th>
+
+
+
+                                                                                <th>Last <br />Fee Group<br /> (Applied)</th>
+                                                                                <th>New <br />Fee Group<br /> (Apply)</th>
+
+
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr ng-repeat="sl in StudentList|filter:{'TypeofAdmission':TypeofAdmission, 'IsActive': IsActive}">
+                                                                                <td>
+                                                                                    <input type="checkbox" ng-model="sl.chk" ng-init="sl.chk=true"
+                                                                                           ng-change="CheckUnCheckALL('StudentList','chk','chkAll',{'TypeofAdmission':TypeofAdmission, 'IsActive': IsActive})" ng-if="sl.NewFeeStructureGroupCode!=sl.LastFeeStructureGroupCode" />
+                                                                                </td>
+                                                                                <td ng-style="{color:(sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode)?'red':''}">{{$index+1}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.AdmissionNo}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.ClassName}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.StudentName}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.FatherName}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.Installment}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.FeeHeadName}}</td>
+
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.DueAmount==0?'No':'Yes'}}</td>
+
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.ActualAmount}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.ConcessionAmount}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.ActualAmount-sl.ConcessionAmount}}</td>
+
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.RevAmount}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.RevisedConcession}}</td>
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.RevAmount-sl.RevisedConcession}}</td>
+
+
+                                                                                <td style="color:{{sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}}">{{sl.DueAmount==0?0:sl.NetAdjustment}}</td>
+
+                                                                                @*<td>{{sl.DueAmount}}</td>*@
+                                                                                @*<td>{{sl.PaidAmount}}</td>*@
+                                                                                @*<td>{{sl.Adjustment}}</td>*@
+                                                                                @*<td>{{sl.RevisedConcession}}</td>*@
+                                                                                @*<td>{{sl.ConAdjustment}}</td>*@
+                                                                                @*<td>{{sl.NetAdjustment}}</td>*@
+                                                                                @*<td>{{sl.OldFeeStructureGroupName}}</td>*@
+                                                                                <td ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.LastFeeStructureGroupName}}</td>
+                                                                                <td ng-init="BindDataTable($last)" ng-style="{color:sl.NewFeeStructureGroupCode==sl.LastFeeStructureGroupCode?'red':''}">{{sl.NewFeeStructureGroupName}}</td>
+
+
+
+                                                                                @* <td><input type="button" class="btn btn-primary" ng-click="ViewFeeStructure();" value="View" /></td>*@
+                                                                            </tr>
+                                                                            <tr ng-if="(StudentList|filter:{'TypeofAdmission':TypeofAdmission, 'IsActive': IsActive}).length==0">
+                                                                                <td colspan="17" class="text-center">No Record(s) found.</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                            <div class="text-box-msg-r" style="right: auto;top: auto;" ng-if="viewspan">
+                                                                <span>Already, New Fee Structure applied.</span>
+                                                            </div>
+                                                        </div>*@
+                                                    </div>
+                                                    
+                                                </div>
+                                               
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#chkShow').click(function () {
+            if ($(this).attr('class') == 'fa fa-plus-square') {
+                $(this).attr('class', 'fa fa-minus-square')
+                $("#anchor").slideDown(400, "swing");
+            }
+            else {
+                $("#anchor").slideUp(400, "swing");
+                $(this).attr('class', 'fa fa-plus-square')
+            }
+        });
+
+        var div = $(document).find('.input-btn');
+        div.attr('class', 'col-sm-12');
+    });
+
+</script>
+
+
+
+

@@ -1,0 +1,4 @@
+﻿<select id="ddlTransporters" class="select2 form-control" ng-model="TransporterModel" ng-init="BindTransporters();">
+    <option value="">Select</option>
+    <option ng-repeat="transporters in TransportersList" value="{{transporters.SubCode}}">{{transporters.Name}}</option>
+</select>

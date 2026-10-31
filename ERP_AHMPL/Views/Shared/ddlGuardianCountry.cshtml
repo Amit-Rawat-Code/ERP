@@ -1,0 +1,7 @@
+﻿<select id="ddlGuardianCountry" autocomplete='country-name' class="select2 form-control validate"  ng-init="GetCountries('G')"  
+        ng-model="studentDetails.GuardianCountryId"
+        ng-change="GetStates(studentDetails.GuardianCountryId,'G')"
+        ng-options="country.CountryId as country.CountryName for country in GuardianCountries">
+    <option value="">Select Country</option>
+    @*<option ng-repeat="country in GuardianCountries" value="{{country.CountryId}}">{{country.CountryName}}</option>*@
+</select>

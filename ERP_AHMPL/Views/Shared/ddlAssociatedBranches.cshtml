@@ -1,0 +1,7 @@
+﻿
+<select id="ddlAssociatedBranches" class="select2 form-control validate" ng-model="RelationshipId">
+    <option value=""  selected>Select School</option>
+    <option ng-repeat="ab in AssociatedBranches" value="{{ab.SchoolId}}">
+        {{ab.BranchName}} - {{ab.BranchAddress}}
+    </option>
+</select>

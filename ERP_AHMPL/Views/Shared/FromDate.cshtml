@@ -1,0 +1,9 @@
+﻿@Html.TextBox("txtFromDate","",new {@class="form-control validate",@type="date",@ng_model="FromDate",
+    @min = "{{startDate}}",
+    @max = "{{endDate}}",
+    @ng_init= "SetMaxMinDate()"
+})
+
+
+
+   

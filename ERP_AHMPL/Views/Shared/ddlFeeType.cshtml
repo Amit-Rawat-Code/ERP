@@ -1,0 +1,7 @@
+﻿<select id="ddlFeeType" class="select2 form-control validate" ng-model="FeeTypeId" ng-init="GetFeeType();" 
+        ng-change="GetClassFeesStructure();">
+        <option value="">Select FeeType</option>
+        <option ng-repeat="FeeType in FeeTypes" value="{{FeeType.FeeTypeId}}">{{FeeType.FeeType}}</option>
+</select>
+
+

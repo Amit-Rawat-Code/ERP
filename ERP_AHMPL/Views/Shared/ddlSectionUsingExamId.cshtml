@@ -1,0 +1,7 @@
+﻿<select id="ddlSectionUsingExamId" class="select2 form-control validate" ng-model="studentDetails.SectionId"
+        ng-init="disableSection=false"
+        ng-disabled="disableSection"
+        ng-change="GetStudents(studentDetails.ClassId,studentDetails.SectionId);ddlSection_change();">
+    <option value="">Select Section</option>
+    <option ng-repeat="section in Sections" value="{{section.SectionId}}" ng-disabled="!section.IsActive">{{section.SectionName}}</option>
+</select>

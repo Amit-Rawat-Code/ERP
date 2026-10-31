@@ -1,0 +1,288 @@
+﻿
+@{
+    ViewBag.Title = "Resource Master";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/ResourceMasterController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Resource Master</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Time Table </span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Resource Master</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Resource Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlResourceType" class="select2 form-control validate" ng-model="ResourceTypeCode"
+                                                        ng-init="GetResourceType();">
+                                                    <option value="">Select Resource Type</option>
+                                                    <option ng-repeat="Resource in ResourceType" value="{{Resource.Id}}">{{Resource.Name}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Resource Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtResourceName", "", new { @class = "form-control clear validate", @placeholder = "", @ng_model = "ResourceName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Resource Sort Name<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtResourceShortName", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "ResourceShortName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Display Order<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtDisplayOrder", "", new { @class = "form-control clear numbersOnly", @placeholder = "", @ng_model = "DisplayOrder", @maxlength = "3" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">No. of Period in a Day<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtDayPeriod", "", new { @class = "form-control clear", @placeholder = "", @ng_maxlength = "7", @ng_model = "DayPeriod" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Week Days<span class="vd_red">*</span></label>
+                                            <div class="table-responsive">
+                                                <table id="example2" class="table table-striped table-bordered compact" style="width:100%" ng-init="GetWeeks();">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>All</th>
+                                                            <th class="text-center">Monday</th>
+                                                            <th class="text-center">Tuesday</th>
+                                                            <th class="text-center">Wednesday</th>
+                                                            <th class="text-center">Thursday</th>
+                                                            <th class="text-center">Friday</th>
+                                                            <th class="text-center">Saturday</th>
+                                                            <th class="text-center">Sunday</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in WeekDays">                                                            
+                                                            <td class="table-check-box">
+                                                                @*   <div class="checkbox checkbox-primary check-box table-check">
+                                                                *@
+
+                                                                @Html.CheckBox("chkWS", false, new
+                                                           {
+                                                               @class = "form-control",
+                                                               @ng_model = "obj.chkWS",
+                                                               @ng_change = "fnChkWS(obj)",
+                                                                @ng_disabled = "obj.chkL=='0'"
+                                                           })
+                                                                <label for=""></label>
+                                                                @*
+            </div>*@
+
+                                                            </td>
+                                                            <td class="table-check-box">
+                                                                @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                *@
+                                                                @Html.CheckBox("chkMonday", false, new
+                                                           {
+                                                               @class = "form-control validate",
+                                                               @ng_model = "obj.Monday",
+                                                               @ng_checked = "obj.Monday",
+                                                               @ng_disabled = "obj.chkL=='0'",
+                                                               @ng_change = "checkAll(obj)",
+                                                               @value = "obj.chkL"
+                                                           })
+                                                                <label for=""></label>
+                                                                @*
+            </div>*@
+
+                                                            </td>
+                                                            <td class="table-check-box">
+                                                                @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                *@
+                                                                @Html.CheckBox("chkTuesday", false, new
+                                                           {
+                                                               @class = "form-control validate",
+                                                               @ng_model = "obj.Tuesday",
+                                                               @ng_checked = "obj.Tuesday",
+                                                               @ng_disabled = "obj.chkL=='0'",
+                                                               @ng_change = "checkAll(obj)",
+                                                               @value = "obj.chkL"
+                                                           })
+                                                                <label for=""></label>
+                                                                @*
+            </div>*@
+                                                            </td>
+                                                            <td class="table-check-box">
+                                                                @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                *@
+                                                                @Html.CheckBox("chkWednesday", false, new
+                                                           {
+                                                               @class = "form-control validate",
+                                                               @ng_model = "obj.Wednesday",
+                                                               @ng_checked = "obj.Wednesday",
+                                                               @ng_disabled = "obj.chkL=='0'",
+                                                               @ng_change = "checkAll(obj)",
+                                                               @value = "obj.chkL"
+
+                                                           })
+                                                                <label for=""></label>
+                                                                @*
+            </div>*@
+
+                                                            </td>
+                                                            <td class="table-check-box">
+                                                                @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                *@
+                                                                @Html.CheckBox("chkThursday", false, new
+                                                           {
+                                                               @class = "form-control validate",
+                                                               @ng_model = "obj.Thursday",
+                                                               @ng_checked = "obj.Thursday",
+                                                               @ng_disabled = "obj.chkL=='0'",
+                                                               @ng_change = "checkAll(obj)",
+                                                               @value = "obj.chkL"
+                                                           })
+                                                                <label for=""></label>
+                                                                @*
+            </div>*@
+
+                                                            </td>
+                                                            <td class="table-check-box">
+                                                                @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                *@
+                                                                @Html.CheckBox("chkFriday", false, new
+                                                           {
+                                                               @class = "form-control validate",
+                                                               @ng_model = "obj.Friday",
+                                                               @ng_checked = "obj.Friday",
+                                                               @ng_disabled = "obj.chkL=='0'",
+                                                               @ng_change = "checkAll(obj)",
+                                                               @value = "obj.chkL"
+                                                           })
+                                                                <label for=""></label>
+                                                                @*
+            </div>*@
+
+                                                            </td>
+                                                            <td class="table-check-box">
+                                                                @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                *@
+                                                                @Html.CheckBox("chkSaturday", false, new
+                                                           {
+                                                               @class = "form-control validate",
+                                                               @ng_model = "obj.Saturday",
+                                                               @ng_checked = "obj.Saturday",
+                                                               @ng_disabled = "obj.chkL=='0'",
+                                                               @ng_change = "checkAll(obj)",
+                                                               @value = "obj.chkL"
+                                                           })
+                                                                <label for=""></label>
+                                                                @*
+            </div>*@
+
+                                                            </td>
+                                                            <td class="table-check-box">
+                                                                @*<div class="checkbox checkbox-primary check-box table-check">
+                                                                *@
+                                                                @Html.CheckBox("chkSunday", false, new
+                                                           {
+                                                               @class = "form-control validate",
+                                                               @ng_model = "obj.Sunday",
+                                                               @ng_checked = "obj.Sunday",
+                                                               @ng_disabled = "obj.chkL=='0'",
+                                                               @ng_change = "checkAll(obj)",
+                                                               @value = "obj.chkL"
+                                                           })
+                                                                <label for=""></label>
+                                                                @*
+            </div>*@
+
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Is Teacher Required<span class="vd_red"></span></label>
+
+                                            @Html.CheckBox("IsTeachReq", false, new
+                                       {
+                                           @class = "form-control",
+                                           @style = "height:18px;width:18px",
+                                           @ng_model = "IsTeachReq",
+                                            @ng_disabled = "obj.Type=='0'"
+                                       })
+                                            <label for=""></label>
+
+                                        </div>
+                                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                                                <div class="input-box">
+                                                                    @Html.Partial("ddlActive")
+                                                                    <div class="text-box-msg-r">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                                @Html.Partial("ActionView")
+                                                            </div>
+</form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

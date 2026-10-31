@@ -1,0 +1,19 @@
+@{
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/authorization.js?Ver=@ViewBag.Version"></script>
+<button id="btnSave" type="button" value="Save" class="btn2 btn-common btn-3 btn-3d pe-7s-check" name="saveButton"
+        ng-model="Save" ng-init="Save='Save';isShow=true" ng-click="CheckSavePermission();SaveRecord()"
+        ng-disabled="disableAdd" ng-if="isShow">
+    <span class="triangle-box" title="Save"></span>
+    <span id="btnSavetxt" ng-bind="Save">Save</span>
+</button>
+
+
+
+
+
+
+
+

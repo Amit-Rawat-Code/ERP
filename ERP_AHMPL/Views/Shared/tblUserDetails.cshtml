@@ -1,0 +1,25 @@
+﻿<div class="datatable-responsive table-responsive advance-btn-table">
+    <table id="tblUserDetails" class="table compact table-hover table-striped table-bordered nowrap"
+           style="width:100%" ng-if="UserDetails.length>0">
+        <thead>
+            <tr>
+                <th>User Id/User Name</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact No.</th>
+                <th>Roles</th>
+                @*<th>Photo</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in UserDetails">
+                <td>{{user.UserName}}</td>
+                <td>{{user.ProfileName}}</td>
+                <td>{{user.EmailId}}</td>
+                <td>{{user.MobileNo}}</td>
+                <td>{{user.Role}}</td>
+                @*<td class="T-PPC"><img src="../Content/Photos/default-user.png" ng-src={{employee.EmployeePhotoPath}} /></td>*@
+            </tr>
+        </tbody>
+    </table>
+</div>

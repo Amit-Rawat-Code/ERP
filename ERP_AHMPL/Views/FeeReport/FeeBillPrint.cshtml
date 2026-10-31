@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "Fee Bill Report";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<style>
+    table.table-bordered.dataTable tbody td {
+        border-bottom-width: 0;
+        font-size: 12px;
+    }
+</style>
+<script src="~/scripts/myjslib/FeePrintController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Fee Bill Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Fees</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Fee Bill Report</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+                                    <div class="section-toggle">
+
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Select Session<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSession")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+
+                                            <label class="control-label">Select Class<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @*@Html.Partial("ddlClass")*@
+                                                <select id="ddlClass" class="select2 form-control validate" ng-model="ClassCode"
+                                                        ng-init="GetClasses();" ng-change="ddlClass_Change(ClassCode);GetValue(ClassCode);" ng-disabled="disabledDDLClass">
+                                                    <option value="">Select Class</option>
+                                                    <option ng-repeat="cl in ClassList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassName}}</option>
+                                                </select>
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Select Section</label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSectionUsingId", new { @ng_change = "GetSectionText()" })
+
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Installment<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlInstallmentMul")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgtp-24 mgbt-xs-15">
+                                            @Html.Partial("ActionSearch")
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41" ng-hide="DList.length==0">
+                                            <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                                <div class="arrow-2">
+                                                    <i class="fa fa-angle-down"></i>
+                                                </div>
+                                                <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                            </div>
+
+                                            <div class="col-xs-12">
+                                                <h3 style="text-decoration:underline">Student Detail</h3>
+                                                <div class="table-responsive">
+                                                    <table id="tblDList" class="table table-striped table-bordered compact" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S.No.</th>
+                                                                <th>Student Name</th>
+                                                                <th>Admission No.</th>
+                                                                <th>Father's Name</th>
+                                                                <th>Mobile No.</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="dl in DList" scroll-div="tblDList">
+                                                                <td ng-model="dl.SNo">
+                                                                    <div class="checkbox checkbox-success text-center">
+                                                                        <input type="checkbox" ng-model="dl.chkBx" class="toggle-vis"
+                                                                               ng-disabled="dl.disabled" />
+                                                                        <label for="">{{dl.SNo}}</label>
+                                                                    </div>
+                                                                </td>
+                                                                <td>{{dl.Student}}</td>
+                                                                <td>{{dl.AdmissionNo}}</td>
+                                                                <td>{{dl.FatherName}}</td>
+                                                                <td>{{dl.MobileNo}}</td>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgtp-24 mgbt-xs-15" ng-hide="DList.length==0">
+                                            <button id="btnPrint" type="button" value="Print" class="btn2 btn-common btn-3 btn-3d pe-7s-print"
+                                                    name="printButton" ng-model="Print" ng-click="PrintPreview()">
+                                                <span class="triangle-box" title="Print"></span>
+                                                <span>Print </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.Partial("StudentFeeBooklet")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#ddlSection').removeClass('validate');
+</script>

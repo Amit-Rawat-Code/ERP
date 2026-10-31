@@ -1,0 +1,5 @@
+﻿<select id="ddlDesignation" class="select2 form-control validate" ng-model="DesignationCode" ng-init="GetDesignations();">
+        <option value="">Select Designation</option>
+        <option ng-repeat="dl in DesignationList" value="{{dl.Code}}"  ng-disabled="!dl.IsActive">{{dl.DesignationName}}</option>
+    </select>
+

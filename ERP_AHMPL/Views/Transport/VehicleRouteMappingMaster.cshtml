@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "Vehicle Route Mapping";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Vehicle Route Mapping Master";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/VehicleRouteMappingMasterController.js"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Transport</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vehicle Number<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlVehicleNumber" autocomplete='address-level2' class="select2 form-control validate"
+                                                            ng-model="ddlVehicleNumber" ng-init="SelectVehicleNumber()">
+                                                        <option value="">Select Vehicle Number</option>
+                                                        <option ng-repeat="VN in VehicleNumber" ng-value="{{VN.Code}}">{{VN.VehicleNumber}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Route Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlRouteName" autocomplete='address-level2' class="select2 form-control validate"
+                                                            ng-model="ddlRouteName" ng-init="SelectRouteName()" ng-change="GetStoppageName()">
+                                                        <option value="">Select Route Name</option>
+                                                        <option ng-repeat="RN in RouteName" value="{{RN.RouteId}}">{{RN.RouteName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Driver Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlDriverName" autocomplete='address-level2' class="select2 form-control validate"
+                                                            ng-model="DrvrName" ng-init="SelectDriverName()" ng-change="SelectDriversContact();">
+                                                        <option value="">Select Driver Name</option>
+                                                        <option ng-repeat="DRN in DriversName" value="{{DRN.DriverCode}}">{{DRN.DriverName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Driver Contact<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlDriverContact" autocomplete='address-level2' class="select2 form-control validate"
+                                                            ng-model="DriverContact">
+                                                        <option value="">Select Driver Contact</option>
+                                                        <option ng-repeat="DRC in DriversContact" value="{{DRC.DriverCode}}">{{DRC.Contact}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mgbt-xs-15" ng-show="StoppageNames.length>0">
+
+                                                <table id="example2" class="table compact table-hover table-striped table-bordered mgbt-xs-0" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Stoppage</th>
+                                                            <th class="text-right">
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" ng-model="chkSelectAll"
+                                                                           ng-change="CheckAll(chkSelectAll)" data-column="1" checked="">
+                                                                    <label class="">Selection</label>
+                                                                </div>
+                                                            </th>
+                                                           <th>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" data-column="2"
+                                                                           ng-model="chkMon" ng-change="CheckUnCheckAll('IsMon',chkMon)">
+                                                                    <label class="">Mon</label>
+                                                                </div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" data-column="2"
+                                                                           ng-model="chkTue" ng-change="CheckUnCheckAll('IsTue',chkTue)">
+                                                                    <label class="">Tue</label>
+                                                                </div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" data-column="2"
+                                                                           ng-model="chkWed" ng-change="CheckUnCheckAll('IsWed',chkWed)">
+                                                                    <label class="">Wed</label>
+                                                                </div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" data-column="2"
+                                                                           ng-model="chkThu" ng-change="CheckUnCheckAll('IsThu',chkThu)">
+                                                                    <label class="">Thu</label>
+                                                                </div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" data-column="2"
+                                                                           ng-model="chkFri" ng-change="CheckUnCheckAll('IsFri',chkFri)">
+                                                                    <label class="">Fri</label>
+                                                                </div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" data-column="2"
+                                                                           ng-model="chkSat" ng-change="CheckUnCheckAll('IsSat',chkSat)">
+                                                                    <label class="">Sat</label>
+                                                                </div>
+                                                            </th>
+                                                        </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="sml in StoppageNames" ng-chnage="ddlRouteName_Change()">
+                                                            <td ng-bind="sml.Srno=($index+1)"></td>
+                                                            <td>{{sml.StoppageName}}</td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" ng-model="sml.Chk"
+                                                                           ng-change="onChange(sml.Chk,sml)">
+                                                                    <label class=""></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" ng-model="sml.IsMon"
+                                                                           ng-change="chkChange()">
+                                                                    <label class=""></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" ng-model="sml.IsTue"
+                                                                           ng-change="chkChange()">
+                                                                    <label class=""></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" ng-model="sml.IsWed"
+                                                                           ng-change="chkChange()">
+                                                                    <label class=""></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" ng-model="sml.IsThu"
+                                                                           ng-change="chkChange()">
+                                                                    <label class=""></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" ng-model="sml.IsFri"
+                                                                           ng-change="chkChange()">
+                                                                    <label class=""></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="checkbox checkbox-success text-center">
+                                                                    <input type="checkbox" class="toggle-vis" ng-model="sml.IsSat"
+                                                                           ng-change="chkChange()">
+                                                                    <label class=""></label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

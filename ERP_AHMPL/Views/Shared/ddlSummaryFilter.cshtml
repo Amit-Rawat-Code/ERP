@@ -1,0 +1,5 @@
+﻿@Html.DropDownList("ddlSummaryFilter", new List<SelectListItem>{
+    new SelectListItem{Text="Report with Summary", Value="1"},
+    new SelectListItem{Text="Report without Summary", Value="2"},
+    new SelectListItem{Text="Only Summary", Value="3"}
+}, new { @class = "select2 form-control", @ng_model = "SummaryFilter", @ng_init = "SummaryFilter='1'" })

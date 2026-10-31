@@ -1,0 +1,5 @@
+﻿<select id="ddlMainGroup" class="select2 form-control validate" ng-model="MainGroupModel" ng-init="BindMainGroup();">
+    <option value="">Select</option>
+    <option ng-repeat="maingroup in MainGroupList" value="{{maingroup.Code}}">{{maingroup.Name}}</option>
+</select>
+

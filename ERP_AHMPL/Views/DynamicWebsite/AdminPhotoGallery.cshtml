@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "AdminPhotoGallery";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<script src="~/Scripts/myjslib/AdminPhotoGalleryController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+
+
+<div class="app-content  my-3 ">
+    <div class="side-app">
+
+        <div class="br-pageheader">
+            <!-- Title -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                <h5 class="txt-dark">Create Album</h5>
+            </div>
+            <!-- Breadcrumb -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                <ol class="breadcrumb">
+                    <li><span>Album</span></li>                    
+                    <li class="active"><span>Create Album</span></li>
+                </ol>
+            </div>
+
+        </div>
+
+        <div class="br-pagebody">
+            <div class="">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <div class="row">
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="">
+                                                <label>Select Unit Type</label>
+                                                @Html.Partial("ddlPermUnitType")
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <div class="">
+                                                <label>Select Unit</label>
+                                                @Html.Partial("ddlPermUnit")
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="content-title">Album Type</label>
+                                            <div class="input-box">
+                                                <select id="ddlGalleryType" class="form-control clear " ng-model="GalleryId" ng-readonly="true">
+                                                    <option value="">Select Gallery</option>
+                                                    <option value="1">PhotoGallery</option>
+                                                    <option value="2">VideoGallery</option>
+                                                    <option value="3">MediaGallery</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="content-title">Show On</label>
+                                            <div class="input-box">
+                                                <select id="ddlShowOn" class="form-control clear" ng-model="ShownOn" ng-readonly="true">
+                                                    <option value="">Website </option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="content-title">Event Title<span class="red-i">*</span></label>
+                                            <div class="input-box">
+                                                <input id="txttitle" class="form-control clear validate" ng-model="Title" />
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="content-title">Event Description<span class="red-i">*</span></label>
+                                            <div class="input-box">
+                                                <input id="txtDescription" class="form-control clear validate" ng-model="Description" />
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="content-title">Event Date<span class="red-i">*</span></label>
+                                            <div class="input-box ">
+                                                <input type="date" id="txtEventDate" class="form-control clear validate" ng-model="EventDate" />
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+
+                                            <label class="content-title">Is Active<span class="red-i">*</span></label>
+                                            <div class="input-box">
+
+                                                <select id="ddlIsActive" ng-model="IsActive" class="form-control clear validate">
+                                                    <option value="">Select</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="content-title">Upload Album Icon <span class="red-i">*</span></label>
+                                            <div class="input-box file-i">
+                                                <img id="AlbumIcon" style="display: none;" src="" alt="" />
+                                                <input type="file" onchange="angular.element(this).scope().show(this, '#AlbumIcon')" ng-model="AlbumIcon" class="form-control dropify" id="file" />
+                                                <div class="text-box-msg-r">
+                                                    <input type="hidden" id="AlbumIcon" />
+                                                </div>
+                                            </div>
+                                            <div class=" photo-ins">
+
+                                                <strong>Instructions to Upload Files</strong>
+                                                <ol>
+                                                    <li>Upload Multiple images in Album Cover. </li>
+                                                    <li>Use Standard photo Format (Width: 640px Height: 480px).</li>
+                                                    <li>Album Cover Image Size is not more than 1 Mb</li>
+
+                                                </ol>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15" ng-show="showhide">
+                                                <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr. No</th>
+                                                            <th>Unit Type Name</th>
+                                                            <th>Unit Name</th>
+                                                            <th>Gallery Type</th>
+                                                            <th>Title</th>
+                                                            <th>Description</th>
+                                                            <th>Event Date</th>
+                                                            <th>IsActive</th>
+                                                            <th>AlbumIcon</th>                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in SearchPhotoAlbumList">
+                                                            <td ng-bind="obj.TransId={{$index+1}}"></td>
+                                                            <td>{{obj.UnitType}}</td>
+                                                            <td>{{obj.UnitName}}</td>
+                                                            <td>{{obj.GalleryType}}</td>
+                                                            <td>{{obj.Title}}</td>
+                                                            <td>{{obj.Description}}</td>
+                                                            <td>{{obj.EventDate}}</td>
+                                                            <td>{{obj.IsActive}}</td>
+                                                            <td>{{obj.AlbumIcon}}</td>                                                        
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </div>
+                                    </div>
+                            </div>
+
+
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

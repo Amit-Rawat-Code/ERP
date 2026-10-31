@@ -1,0 +1,5 @@
+﻿<select id="ddlPublisherLib" class="select2 form-control clear validate" ng-model="PublisherName" 
+        ng-init="GetPublisherLibList();">
+    <option value="">Select</option>
+    <option ng-repeat="x in PublisherLibList" value="{{x.Code}}">{{x.Name}}</option>
+</select>

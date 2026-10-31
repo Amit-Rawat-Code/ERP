@@ -1,0 +1,4 @@
+﻿<select id="ddlVocherCategory" class="select2 form-control validate" ng-init="GetCategory();" ng-model="VoucherCategoryId">
+    <option value="">Select Category</option>
+    <option ng-repeat="Category in Categories" value="{{Category.VoucherCategoryId}}">{{Category.NatureCode}}</option>
+</select>

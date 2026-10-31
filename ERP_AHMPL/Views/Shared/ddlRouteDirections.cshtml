@@ -1,0 +1,9 @@
+﻿<select id="ddlRouteDirection" class="select2 form-control validate" ng-init="GetRouteDirections();" ng-model="TransDirection.RouteDirectionId"
+  ng-change="GetTripDistanceFare(TranRoute.RouteId,RouteStoppage.StoppageId,TransDirection.RouteDirectionId);" >
+    <option value="">Select Trip Mode</option>
+    <option ng-repeat="Direction in RoutesDirections" value="{{Direction.RouteDirectionId}}">{{Direction.RouteDirection}}</option>
+</select>
+
+
+
+

@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "Binding Issue Entry";
+    ViewBag.TitleList = "Binding Issue Entry List";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/BindingIssueEntryLibController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Binding Issue Entry</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Library</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Binding Issue Entry</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Issue Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlVoucherType" class="select2 form-control validate" ng-model="VoucherM" ng-init="GetVoucherType('BNDIS');" ng-disabled="true">
+                                                    <option value="">Select</option>
+                                                    <option ng-repeat="x in VoucherTypeList" value="{{x.VCode}}">{{x.VoucherType}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Issue Date</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtVDate", "", new { @class = "form-control clear", @type = "date", @ng_disabled = "true", @ng_model = "VDate" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Issue No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtIssueNo", "", new { @class = "form-control clear validate", @ng_disabled = "true", @placeholder = "", @ng_model = "PVNo" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Binder Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("TblBinderListLibNew")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Address</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAddress", "", new { @class = "form-control clear", @ng_disabled = "true", @ng_model = "AddressM" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            @*<input type="button" id="btnBindingType" value="+" class="add-btn" ng-click="AddBD()" />*@
+                                            <div class="datatable-responsive table-responsive advance-btn-table" ng-init="BindingTypeList()">
+                                                <table class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="srno">Sr.No.</th>
+                                                            <th>Binding Type</th>
+                                                            <th>Per Unit Rate</th>
+                                                            <th>Total Qty.</th>
+                                                            <th>Total Amt.</th>
+                                                            @*<th class="srno">Add/Remove</th>*@
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="btl in BindingList">
+                                                            <td class="col-1" ng-init="btl.SrNo=$index+1"><label>{{$index+1}}</label></td>
+                                                            <td class="col-2">
+                                                                <label>{{btl.BindingType}}</label>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="btl.Rate" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="btl.TotalQty" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="btl.TotalAmt" ng-readonly="true" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <input type="button" id="btnBindingIssueEntry" value="+" class="add-btn" ng-click="AddBD()" />
+                                            <div class="datatable-responsive table-responsive advance-btn-table" ng-init="AddBD()">
+                                                <table ng-if="BD.length>0" class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="srno">Sr.No.</th>
+                                                            <th>Accession No</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Publisher</th>
+                                                            <th>Edition</th>
+                                                            <th>Publisher Year</th>
+                                                            <th>Binding Type</th>
+                                                            <th>Rate</th>
+                                                            <th class="srno">Add/Remove</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody ng-init="GetAccessionNo()">
+                                                        <tr ng-repeat="obj in BD">
+                                                            <td ng-init="BD[$index].SrNo=$index+1">
+                                                                {{$index+1}}
+                                                                <input type="hidden" ng-model="BD[$index].SrNo" />
+                                                            </td>
+                                                            <td class="col-2">
+                                                                <select class="select2 form-control" ng-model="obj.AccessionNo" 
+                                                                        ng-change="GetAccessionNoDetails(obj.AccessionNo,$index);">
+                                                                    <option value="">Select</option>
+                                                                    <option ng-repeat="x in AccessionNoList" value="{{x.AccessionID}}">{{x.AccessionID}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="obj.BookName" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="obj.Author" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="obj.Publisher" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="obj.Edition" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="obj.PublisherYear" ng-readonly="true" />
+                                                            </td>
+                                                            <td class="col-2">
+                                                                <select class="select2 form-control" ng-model="obj.BindingTypeCode" ng-change="BindingTypeDetails(obj.BindingTypeCode,$index)">
+                                                                    <option value="">Select</option>
+                                                                    <option ng-repeat="x in BindingList" value="{{x.BindingTypeCode}}">{{x.BindingTypeRate}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BD[$index].Rate" ng-change="GetRateAndQty()" />
+                                                            </td>
+                                                            <td class="srno">
+                                                                <input type="button" id="btnUPCourses" value="↑" ng-click="UpBE($index)" />
+                                                                <input type="button" id="btnDownCourses" value="↓" ng-click="DownBE($index)" />
+                                                                <input type="button" id="btnRemoveCourses" value="-" ng-click="RemoveBE($index)" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

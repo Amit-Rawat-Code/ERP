@@ -1,0 +1,52 @@
+﻿
+<div class="datatable-responsive table-responsive" ng-cloak>
+    <table id="tblEmployeeAttendanceList" class="table compact  table-hover table-striped table-bordered mgbt-xs-0" ng-model="EmpAttendanceList">
+        <thead>
+            <tr>
+                <th><input type="checkbox" ng-model="ChkAll" ng-change="CheckALL()" />&nbsp;Select All</th>
+                <th class="sr-no-w text-center">Sr. No.</th>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Father Name</th>
+                <th>Job Type</th>
+                <th>Designation</th>
+                <th>Department</th>
+                <th>Status</th>
+                <th>Log In</th>
+                <th>Log Out</th>
+                <th>Is On Duty</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="Attendance in EmployeeAttendanceLists" ng-class="{'bg-success':Attendance.Status==1 }" repeat-done>
+                <td><input type="checkbox" ng-model="Attendance.Chk" ng-disabled='Attendance.IsAttendanceLock==true' /></td>
+                <td class="text-center">
+                    {{$index+1}}
+                    <input type="hidden" id="Employeecode" value="{{Attendance.EmployeeCode}}" />
+                </td>
+                <td>{{Attendance.EmployeeId}}</td>
+                <td>{{Attendance.EmpName}}</td>
+                <td>{{Attendance.FatherName}}</td>
+                <td>{{Attendance.JobType}}</td>
+                <td>{{Attendance.DesignationName}}</td>
+                <td>{{Attendance.DepartmentName}}</td>
+                <td class="table-in-input-box">
+                    <select ng-disabled='Attendance.IsAttendanceLock==true' id="ddlAbbreviation" class="select2 form-control clear" ng-model="Attendance.AbbreviationCode"
+                            style="width: 100px;">
+                        <option value="">Select Status</option>
+                        <option ng-repeat="S in AbbreviationList" value="{{S.Code}}">{{S.Abbreviation}}</option>
+                    </select>
+                </td>
+                <td><input type="time" ng-model="Attendance.LogIn" ng-disabled='Attendance.IsAttendanceLock==true' value="{{Attendance.LogIn}}" /></td>
+                <td><input type="time" ng-model="Attendance.LogOut" ng-disabled='Attendance.IsAttendanceLock==true' value="{{Attendance.LogOut}}" /></td>
+                <td><input type="checkbox" ng-model="Attendance.ChkIsOnDuty" ng-disabled='Attendance.IsOnDuty==true' /></td>
+            </tr>
+            <tr ng-if="EmployeeAttendanceLists.length==0">
+                <td colspan="7" class="text-center">
+                    Sorry, No Records found.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+

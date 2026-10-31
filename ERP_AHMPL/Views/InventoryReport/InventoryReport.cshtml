@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "InventoryReport";
+    ViewBag.TitleList = "Sort By Column";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/InventoryReportController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Transport</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in">
+                                    <form id="user-form">
+                                        <div class="section-toggle col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Item Group Wise</label>
+                                                <div class="input-box">
+                                                    <select id="ddlSession" autocomplete='address-level2' class="select2 form-control"
+                                                            ng-model="ItemGroupCode" ng-init="GetGroupName()" ng-change="GetCategoryName(ItemGroupCode);">
+                                                        <option value="">Select Group</option>
+                                                        <option ng-repeat="gn in GroupNameList" value="{{gn.Code}}">{{gn.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Item Category Wise</label>
+                                                <div class="input-box">
+                                                    <select id="ddlSession" autocomplete='address-level2' class="select2 form-control"
+                                                            ng-model="ItemCategoryCode" ng-init="GetCategoryName()" ng-change="GetItemName(ItemCategoryCode)">
+                                                        <option value="">Select Category</option>
+                                                        <option ng-repeat="cl in ItemCategoryList" value="{{cl.Code}}">{{cl.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Item Wise</label>
+                                                <div class="input-box">
+                                                    <select id="ddlSession" autocomplete='address-level2' class="select2 form-control"
+                                                            ng-model="ItemNameCode" ng-init="GetItemName()">
+                                                        <option value="">Select Item</option>
+                                                        <option ng-repeat="inl in ItemNameList" value="{{inl.Code}}">{{inl.ItemName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Model Wise</label>
+                                                <div class="input-box">
+                                                    <select id="ddlSession" autocomplete='address-level2' class="select2 form-control"
+                                                            ng-model="ItemModelCode" ng-init="GetModelName()" ng-change="ddlSession_Change(SessionId)">
+                                                        <option value="">Select Model</option>
+                                                        <option ng-repeat="mn in ModelNameList" value="{{mn.Code}}">{{mn.ModelName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" style="padding-top:34px;">
+                                                <button type="button" value="Search" class="btn2 btn-common btn-3 btn-3d pe-7s-search text-right"
+                                                        ng-model="Search" ng-click="SearchRecord()">
+                                                    <span class="triangle-box" title="Search"></span>
+                                                    <span>Search </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    @Html.Partial("GeneralReportGrid")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+﻿<select id="ddlSubjectTopics" class="select2 form-control" ng-model="SubjectTopic.TopicId">
+    <option value="">Select Topic</option>
+
+    <option ng-repeat="Topic in Topics" value="{{Topic.TopicId}}">{{Topic.TopicName}}</option>﻿
+
+</select>

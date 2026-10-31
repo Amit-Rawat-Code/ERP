@@ -1,0 +1,212 @@
+﻿
+@{
+    ViewBag.Title = "UserPermission";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/UserPermissionController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">User Authentication</h5>
+        </div>
+        <!-- Breadcrumb -->
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Administrator</span></li>
+                <li class="active"><span>User Authentication</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Member Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                               <select ng-model="member" ng-change="SetUser()" class="select2 form-control validate ng-pristine ng-valid ng-empty red-validation ng-touched"> 
+                                                   <option value="">Select</option>
+                                                   <option value="1">Student</option>    
+                                                   <option value="2">Staff</option>
+                                                
+                                               </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Status<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select ng-model="IsActive" ng-change="SetUser()" class="select2 form-control validate ng-pristine ng-valid ng-empty red-validation ng-touched"> 
+                                                   
+                                                    <option value="">Select</option>
+                                                     <option value="2">All</option>
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Deactive</option> 
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Search<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <input ng-model="Search" ng-keyup="findSearch()"  class="select2 form-control validate ng-pristine ng-valid ng-empty red-validation ng-touched"/>
+                                                
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="dvpanel2" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding " style="display:none">
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="datatable-responsive table-responsive">
+                                            <table class="table compact  table-bordered nowrap " style="width:100%" ng-model="SetUser">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Photo</th>
+                                                        <th><label  ng-model="Id">{{Id}}</label></th>
+                                                        <th><label ng-model="UName">{{UName}}</label></th> 
+                                                        <th><label ng-model="FName">{{FName}}</label></th>
+                                                        <th><label ng-model="GEN">{{GEN}}</label></th>
+                                                        <th><label ng-model="DoB">{{DoB}}</label></th>
+                                                        <th><label ng-model="ClassDep">{{ClassDep}}</label></th>
+                                                        <th><label ng-model="Contact">{{Contact}}</label></th>
+                                                        <th><label ng-model="mail">{{mail}}</label></th>
+                                                        <th> Status </th> 
+                                                        <th class="text-center">
+                                                          
+                                                            <div class="onoffswitch"  style="width:115px;">
+                                                                <input type="checkbox" name="onoffswitch" ng-init="forcheck"  class="onoffswitch-checkbox" id="myonoffswiktch"   ng-model="all" ng-change="CopyStatusAll()" checked>
+                                                                <label class="onoffswitch-label" for="myonoffswiktch">
+                                                                    <span class="onoffswitch-inner"></span>
+                                                                    <span class="onoffswitch-switch"></span>
+                                                                </label>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="x in UserDetails" ;>
+                                                        <td> 
+                                                            <input type="hidden" ng-model="Status[$index].UserCode" ng-init="Status[$index].UserCode=x.UserCode" value="{{x.UserCode}}" />
+                                                            {{x.RowNumber}}
+                                                        </td>
+                                                        <td class="tab-img-box">
+                                                            <div class="cardcontainer">
+                                                                <img class="galleryImg" ng-model="Photo" ng-init="Photo=x.Photo" src="{{x.Photo}}" />
+                                                            </div>
+                                                        </td>
+                                                        <td>{{x.UserId}}</td> 
+                                                        <td>{{x.UserName}}</td> 
+                                                        <td>{{x.FatherName}}</td> 
+                                                        <td>{{x.Gender}}</td> 
+                                                        <td>{{x.DateofBirth}}</td> 
+                                                        <td>{{x.ClassDep}}</td> 
+                                                        <td>{{x.Email}}</td> 
+                                                        <td>{{x.MobileNo}}</td> 
+                                                        <td  ><div style='background-color: {{x.color}};width:10px;height:10px'></div>{{x.IsActive}}</td>  
+                                                        <td class="text-center"> 
+                                                            <div class="onoffswitch" style="width:115px;">
+                                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"  id="{{x.RowNumber}}" ng-init="Status[$index].IsActive=(x.IsActive=='Active User'?true:false)"  ng-model="Status[$index].IsActive" ng-change="ChangeStatus(Status[$index].IsActive,Status[$index].UserCode)">
+                                                                <label class="onoffswitch-label" for="{{x.RowNumber}}">
+                                                                    <span class="onoffswitch-inner"></span>
+                                                                    <span class="onoffswitch-switch"></span>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+<style>
+
+    .onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "Active";
+    padding-left: 10px;
+    /*background-color: #34A7C1; color: #FFFFFF;*/
+    background-color: #2E8B57; color: #FFFFFF; 
+}
+.onoffswitch-inner:after {
+    content: "Deactive";
+    padding-right: 10px;
+    background-color: 	#DC143C; color: #FFFFFF;
+     /*background-color: #EEEEEE; color: #999999;*/
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    /*right: 56px;*/
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+</style>

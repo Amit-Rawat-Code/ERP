@@ -1,0 +1,66 @@
+﻿<style>
+    table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding:5px;
+    text-align: center;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+
+<table id="tblSubjectClassGroup" class="table compact table-hover table-striped table-bordered "  ng-model="SubjectClassGroup" >
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Subject Group</th>
+                <th>Subject Paper</th>
+                <th>Subject Staus</th>
+                <th width="70px">Is Exam</th>
+                <th>Teacher</th>
+                <th>Weekly Period</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="id in SubjectClassGroupMasters" repeat-done>
+                <td >{{$index+1}}
+                    <input type="hidden" id="SubjectGroupId" value="{{id.SubjectGroupId}}" />
+                    <input type="hidden" id="SubjectId" value="{{id.SubjectId}}" />
+                </td>
+                <td>{{id.SubjectGroupName}}
+                </td>
+                <td>{{id.SubjectName}}</td>
+                <td class="table-pad-0 ">
+                    <select id="ddlSubjectOptional" class="select2 form-control table-select-box" ng-model="selectdval" 
+                            ng-init="selectdval=(id.IsSubjectOptional==null?'0':id.IsSubjectOptional)">
+                        <option value="0">Not Defined</option>
+                        <option value="1">Required</option>
+                        <option value="2">Optional</option>
+                    </select>
+                </td>
+                <td class="table-check-box" >
+                    <div class="checkbox checkbox-primary check-box table-check">
+                        <input type="checkbox" ng-if="selectdval=='1'?true:(selectdval=='2'?true:false)" class="clear" ng-model="id.Selected" ng-value="{{id.IsSubjectExam}}" ng-checked="{{id.IsSubjectExam}}" />
+                        <label for=""></label>
+
+                    </div>
+               </td>
+                <td class="table-pad-0 for-table-select-box">
+                    <div ng-if="selectdval=='1'?true:(selectdval=='2'?true:false)">
+                        @Html.Partial("ddlTeacher")
+                    </div>
+                </td>
+                <td class="table-pad-0 ">
+                    <div ng-if="selectdval=='1'?true:(selectdval=='2'?true:false)">
+                        @Html.TextBox("txtWeeklyPeriod", "", new { @class = "form-control table-text-box validate", @placeholder = "Weekly Period", @ng_model = "WeeklyPeriod", @ng_init = "WeeklyPeriod=id.WeeklyPeriod" })
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+

@@ -1,0 +1,6 @@
+﻿
+<select id="ddlSupplier" class="select2 form-control" ng-model="$parent.SupplierCode" ng-init="BindSupplier();disabledSupplier=false" 
+        ng-change="getSuplierDetail(SupplierCode);ddlSupplier_change();" ng-disabled="$parent.disabledSupplier">
+    <option value="">Select</option>
+    <option ng-repeat="supplier in SupplierList|filter:{'Code':supcode}" value="{{supplier.Code}}">{{supplier.Name}}</option>
+</select>

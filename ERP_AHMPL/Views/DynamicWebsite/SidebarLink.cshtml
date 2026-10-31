@@ -1,0 +1,160 @@
+@{
+    ViewBag.Title = "Sidebar Link";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/SidebarLinkController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfIconpath" id="Iconpath" name="Iconpath" value="" />
+<div class="app-content  my-3 ">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark"> @ViewBag.Title</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Unit Manager</span></li>
+                        <li class="breadcrumb-item">Unit Detail Master</li>
+                        <li class="active"><span>@ViewBag.Title</span></li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="br-pagebody">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                            <div class="refresh-container">
+                                <div class="preloader">
+                                    <div class="circles-1">
+                                        <div class="circles-1-center"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                        <div class="circles-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-wrapper ">
+                                <div class="panel-body">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="collapse in">
+                                            <form id="user-form">
+                                                <div class="section-toggle">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <div class="form-group">
+                                                                <label>Select Unit Type</label>
+                                                                @Html.Partial("ddlPermUnitType")
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <div class="form-group">
+                                                                <label>Select Unit</label>
+                                                                @Html.Partial("ddlPermUnit")
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <div class="form-group">
+                                                                <label>Select Alignment</label>
+                                                                <select id="ddlGalleryType" class="form-control clear validate" ng-model="Alignment">
+                                                                    <option value="">Select Alignment</option>
+                                                                    <option value="L">Left</option>
+                                                                    <option value="R">Right</option>
+                                                                    @*
+                                                                    <option value="C">Center</option>*@
+                                                                    @*
+                                                                    <option ng-repeat="x in rec" value="{{x.TransId}}|{{x.Title}}">{{x.Title}}</option>*@
+                                                                    @*
+                                                                    <option ng-repeat="x in rec" value="{{x.TransId}}">{{x.Title}}</option>*@
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <div class="form-group">
+                                                                <label>Caption Name</label>
+                                                                @Html.TextBox("txtCaptionName", "", new { @class = "form-control clear validate textOnly", @placeholder = "", @ng_model = "CaptionName" })
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                                            <div class="form-group">
+                                                                <label>Caption Icon</label>
+                                                                <input type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" onchange="angular.element(this).scope().show(this)" ng-model="fileInput" multiple class="form-control clear validate" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <div class="form-group">
+                                                                <label>Link on Caption</label>
+                                                                @Html.TextBox("txtCaptionLink", "", new { @class = "form-control clear validate textOnly", @placeholder = "", @ng_model = "CaptionLink" })
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                                            <div class="form-group">
+                                                                <label>Status</label>
+                                                                @Html.Partial("ddlApproved")
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                                            <div class="form-group">
+                                                                <label>Active</label>
+                                                                @Html.Partial("ddlActive")
+                                                            </div>
+                                                        </div>
+                                                        @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <div class="form-group">
+                                                                <label>Images  Upload</label>
+                                                                <input type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" onchange="angular.element(this).scope().show(this)" ng-model="fileInput" multiple class="form-control clear validate" />
+                                                            </div>
+                                                            <div>
+                                                                <strong>Instructions to Upload Files</strong>
+                                                                <ul>
+                                                                    <li> 1) Upload Multiple Images in selected Album. </li>
+                                                                    <li> 2) Use Standard photo Format <br />(Width: 640px Height: 480px).</li>
+                                                                    <li> 3) Album Image Size is not more than 1 Mb</li>
+                                                                    <li> 4) Maximum five Images upload at a time</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>*@
+
+
+
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 footer-listad">
+                                                        @Html.Partial("ActionView")
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41">
+                                                <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                                    <div class="arrow-2">
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </div>
+                                                    <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                                </div>
+                                                @Html.Partial("GeneralReportGrid")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,4 @@
+﻿<select id="ddlAlmera" class="select2 form-control clear validate" ng-model="AlmeraCode" ng-init="GetAlmeraList();">
+    <option value="">Select</option>
+    <option ng-repeat="x in Almeralist" value="{{x.Code}}">{{x.Name}}</option>
+</select>

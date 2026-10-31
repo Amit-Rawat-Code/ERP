@@ -1,0 +1,196 @@
+﻿
+<div id="ExportDiv" style="width:100%; float:left; display:none;">
+    <style>
+        table.fee-receipt-table {
+            width: 100%;
+        }
+
+        table.fee-receipt-table-row {
+            width: 100%;
+            font-family: Arial;
+        }
+
+            table.fee-receipt-table-row td, table.fee-receipt-table-row th {
+                padding:2px 5px;
+            }
+
+            table.fee-receipt-table-row.table-boder {
+                text-align: left;
+                border-collapse: collapse;
+            }
+
+                table.fee-receipt-table-row.table-boder th, table.fee-receipt-table-row.table-boder td {
+                    border: 1px solid #000;
+                }
+
+            table.fee-receipt-table-row th {
+                color: #000;
+                font-weight: bold;
+            }
+    </style>
+    <table class="fee-receipt-table">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row">
+                        <tbody>
+                            <tr>
+                                <td style="text-transform: uppercase; text-align: center; width: 33%; vertical-align: top;">
+                                    <img style="display: inline-block; height: 76px;" src="{{Logo}}" alt="" />
+                                </td>
+                                <td style="text-align: center; vertical-align:top;">
+                                    <h1 style="font-size:30px; line-height:33px;" ng-if="SchoolName"> {{SchoolName}}</h1>
+                                    <p style="font-family:Arial; font-size:18px; padding:0; margin:0 0 5px 0;">{{SchoolAddress}}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <table class="fee-receipt-table">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row" style="border-top:solid 1px #000; border-bottom:solid 1px #000;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; font-family:Arial;font-size:15px; font-weight:bold;">
+                                    Receipt for Prospectus Cum Registration for session {{AcademicSession}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row" style="border-bottom:solid 1px #000;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left; width:50%;">
+                                    <strong>Receipt No : </strong>
+                                </td>
+                                <td>
+                                    <span>{{PVNo}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <strong>Registration No : </strong>
+                                </td>
+                                <td>
+                                    <span>{{RegNo}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <strong>Date : </strong>
+                                </td>
+                                <td>
+                                    <span>{{Date | date:'dd-MMM-yyyy'}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row" style="border-bottom:solid 1px #000;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left; width:50%;">
+                                    <strong>Student Name : </strong>
+                                </td>
+                                <td>
+                                    <span>{{StudentFirstName}} {{StudentMiddleName}} {{StudentLastName}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <strong>Father Name : </strong>
+                                </td>
+                                <td>
+                                    <span>{{FatherName}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <strong>Class : </strong>
+                                </td>
+                                <td>
+                                    <span>{{ClassName}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong> Fee Detail : </strong>
+                    <table class="fee-receipt-table-row table-boder" >
+                        <thead>
+                            <tr>
+                                <th>
+                                    Particular
+                                </th>
+                                <th>
+                                    AMOUNT
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Prospectus Charge
+                                </td>
+                                <td>
+                                    {{NetAmount}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row ">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;" ng-if="AmountInWords!=null && AmountInWords!='' && AmountInWords.trim()!='INVALID INPUT'">
+                                    <strong> Amount(In Words) :</strong> {{AmountInWords}} Only.
+                                </td>
+                                <td style="text-align:right;">
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="fee-receipt-table-row ">
+                        <tbody>
+                            <tr>
+                                <td style="text-transform: uppercase; text-align: left; padding-top:10px;">
+                                    <div>
+                                        <strong>Note:</strong><span>The Registration Fee is Non-Refundable.</span>
+                                        <span style="float: right;">Cashier</span>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

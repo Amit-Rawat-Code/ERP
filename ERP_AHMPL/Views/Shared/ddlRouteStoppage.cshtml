@@ -1,0 +1,5 @@
+﻿<select id="ddlRouteStoppages" class="select2 form-control validate" ng-model="RouteStoppage.StoppageId" ng-change="GetTripDistanceFare(TranRoute.RouteId,RouteStoppage.StoppageId,TransDirection.RouteDirectionId);" >
+    <option value="">Select Stoppage</option>
+    <option ng-repeat="RStoppage in RStoppages" value="{{RStoppage.StoppageId}}">{{RStoppage.StoppageName}}</option>
+</select>
+

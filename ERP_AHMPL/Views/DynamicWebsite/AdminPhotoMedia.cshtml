@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "AdminPhotoMedia";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<script src="~/scripts/myjslib/AdminPhotoMediaController.js?Ver=@ViewBag.Version"></script>
+<script src="//cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
+<script src="~/Content/ckfinder/ckfinder.js"></script>
+<script type="text/javascript">
+    $(function () {
+        CKEDITOR.replace("EnglishEditor", { customConfig: "/Content/ckeditor/config.js" });
+
+    })
+</script>
+<input type="hidden" ng-model="hdnVideoTransId" id="hdnVideoTransId" />
+<!-- Section: inner-header -->
+<div class="app-content  my-3 ">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Upload Photos</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Album</span></li>
+                        <li class="active"><span>Upload Album Media</span></li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="br-pagebody">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="collapse in" id="collapseinputbox">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Unit Type</label><span class="red-i">*</span>
+                                                        @Html.Partial("ddlPermUnitType")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Unit</label><span class="red-i">*</span>
+                                                        @Html.Partial("ddlPermUnit")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Media Album Name</label><span class="red-i">*</span>
+                                                        <select id="ddlGalleryType" class="form-control clear validate" ng-change="SetAlbumn()" ng-model="MediaAlbumId" ng-init="AlbumName();">
+                                                            <option value="">Select</option>
+                                                            @*<option ng-repeat="x in rec" value="{{x.TransId}}|{{x.Title}}">{{x.Title}}</option>*@
+                                                            <option ng-repeat="x in rec" value="{{x.TransId}}">{{x.Title}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="input-box">
+                                                        <label class="content-title">Title</label>
+                                                        <input type="text" id="Title" ng-model="Title" class="form-control clear" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="content-title">Venue</label>
+                                                    <div class="input-box">
+                                                        <input id="txtVenue" class="form-control clear" ng-model="Venue" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="content-title">Event Update Date</label>
+                                                    <div class="input-box ">
+                                                        <input type="date" id="EventDate" class="form-control clear" ng-model="EventDate" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="content-title">Event Description<span class="red-i">*</span></label>
+                                                    <div class="input-box">
+                                                        <input id="txtDescription" class="form-control clear validate" ng-model="Description" />
+
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                        
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="content-title">Upload Image File<span class="red-i">*</span></label>
+                                                    <div class="input-box file-i">
+                                                        <img id="AlbumIcon" style="display: none;" src="" alt="" />
+                                                        <input type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" onchange="angular.element(this).scope().show(this)" ng-model="fileInput" multiple class="form-control clear validate" />
+                                                        <div class="text-box-msg-r">
+                                                            <input type="hidden" id="AlbumIcon" />
+                                                        </div>
+                                                    </div>
+                                                    <div class=" photo-ins">
+
+                                                        <strong>Instructions to Upload Files</strong>
+                                                        <ol>
+                                                            <li>Upload Multiple Images in Album Cover. </li>
+                                                            <li>Use Standard photo Format (Width: 1900px Height: 1080px).</li>
+                                                            <li>Album Cover Image Size is not more than 5 Mb</li>
+
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <div id="product-tab">
+                                                        <div class="resp-tabs-container">
+                                                            <div class="resp-tab-content" aria-labelledby="tab_item-0">
+                                                                <b>Description</b>
+                                                                <div class="col-information">
+                                                                    @Html.TextBox("EnglishEditor", "", new { @id = "EnglishEditor", @class = "form-control clear", @ng_model = "EnglishEditor" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 footer-listad">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

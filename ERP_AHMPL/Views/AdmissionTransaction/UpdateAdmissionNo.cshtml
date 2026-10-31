@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "UpdateAdmissionNo";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/UpdateAdmissionNoController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Update Admission No</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Admission</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Update Admission No</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label"> Class And Section <span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlClassWithSection")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="datatable-responsive table-responsive table-scroll" ng-cloak ng-hide="tableData">
+                                                    <table ng-show="StudentAdmissionNoLists.length>0" cellpadding="0" cellspacing="0" class="table compact table-hover table-striped table-bordered mgbt-xs-5">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S.No.</th>
+                                                                <th>Student Name</th>
+                                                                <th>Father's Name</th>
+                                                                <th>Current Admission No.</th>
+                                                                <th>Edit Admission No.</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="Student in StudentAdmissionNoLists">
+                                                                <td ng-bind="Student.Srno=($index+1)"></td>
+                                                                <td>{{Student.StudentName}}</td>
+                                                                <td>
+                                                                    {{Student.FatherName}}
+                                                                </td>
+                                                                <td><input type="text" class="form-control" ng-disabled="Student.chk==false" ng-model="Student.AdmissionNo" /></td>
+                                                                <td>
+                                                                    <input type="checkbox" ng-model="Student.chk" ng-init="Student.chk=false" />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1" ng-hide="buttonUpdate">
+                                                <button id="btnUpdate" type="button" value="Update" class="btn-me btn-primary hvr-float-shadow" name="saveButton" ng-model="Update"
+                                                        ng-init="Update='Update'" ng-click="SaveRecord()">
+                                                    <span id="btnUpdatetxt" class="action-txt" ng-bind="Update">Update</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+

@@ -1,0 +1,5 @@
+﻿<select id="ddlSubjectGrpLib" class="select2 form-control clear validate" ng-model="SubjectGrpName" ng-init="GetSubjectGroupLibList();"
+       ng-change="GetSubjectLibList(SubjectGrpName);">
+    <option value="">Select</option>
+    <option ng-repeat="x in SubjectGrpLibList" value="{{x.Code}}">{{x.Name}}</option>
+</select>

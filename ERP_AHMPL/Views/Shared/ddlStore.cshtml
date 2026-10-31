@@ -1,0 +1,4 @@
+﻿<select id="ddlStore" class="select2 form-control validate" ng-model="GodownCode" ng-init="BindStore();">
+    <option value="">Select</option>
+    <option ng-repeat="store in StoreList" value="{{store.Code}}">{{store.Name}}</option>
+</select>

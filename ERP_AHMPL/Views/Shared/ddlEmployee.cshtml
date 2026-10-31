@@ -1,0 +1,5 @@
+﻿<select id="ddlEmployee" class="select2 form-control validate" ng-model="EmployeeCode" ng-init="GetEmployees();" ng-change="GetEmployeeDetails()">
+    <option value="">Select Employee</option>
+    <option ng-repeat="Employee in EmployeesList" value="{{Employee.EmployeeCode}}" ng-disabled="!Employee.IsActive">
+    {{Employee.FullName}}-{{Employee.EmployeeId}}</option>
+</select>

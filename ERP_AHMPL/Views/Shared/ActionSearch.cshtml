@@ -1,0 +1,21 @@
+@{
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script src="~/Scripts/myjslib/authorization.js?Ver=@ViewBag.Version"></script>
+<link href="~/Content/plugins/assets/fonts/feather-icon/feather-icon.css" rel="stylesheet" />
+<button id="btnSearch" type="button" value="Search" class="btn-me btn-success  hvr-float-shadow" name="searchButton" data-toggle="collapse" data-target="#CollapseSearchTableList" aria-expanded="false" aria-controls="CollapseSearchTableList"
+        ng-model="Search" ng-click="CheckSearchPermission();SearchRecord()" ng-disabled="disableSearch" ng-show="visibleSearch">
+    <span class="action-txt">Search</span>
+
+    <i data-feather="search"></i>
+</button>
+
+
+
+
+
+
+
+
+
+

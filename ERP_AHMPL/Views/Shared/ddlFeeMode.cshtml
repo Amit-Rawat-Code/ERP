@@ -1,0 +1,9 @@
+﻿@Html.DropDownList("ddlFeeMode", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Cash", Value="Cash"},
+    new SelectListItem{Text="Cheque", Value="Cheque"},
+    new SelectListItem{Text="Card", Value="Card"},
+    new SelectListItem{Text="DD", Value="DD"},
+    new SelectListItem{Text="RTGS/NEFT", Value="NEFT"}
+},
+    new { @class = "select2 form-control validate", @ng_model = "FeeMode", @ng_init = "FeeMode='Cash'" })

@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "HOBioMetricRegistrationMaster";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script src="~/Scripts/myjslib/HOBioMetricRegistrationMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<style>
+    .fee-deposit-box-profile .profile-header {
+        padding: 10px;
+        position: relative;
+        height: 71px;
+        box-shadow: 0px 5px 12px 0px #a7a7a7, 0px 0px 0px 0px rgb(141 142 143);
+    }
+
+        .fee-deposit-box-profile .profile-header .profile-pic {
+            margin: 0 auto;
+            float: none;
+            position: absolute;
+        }
+
+    .fee-deposit-box-profile .profile-header {
+        padding: 10px;
+        background: url(../Content/img/fee-deposit-profile.png);
+        background-position: center center;
+    }
+
+    .fee-deposit-box-profile .profile-data {
+        background: #f2ece0;
+        padding-top: 60px;
+    }
+
+    .fee-deposit-box-profile .profile-header .profile-pic {
+        box-shadow: 0px 5px 12px 0px #999a9b, 0px 0px 0px 0px rgb(139 140 141);
+        border: 5px solid #ffffff;
+    }
+
+    .profile-box-fee-deposit span.icon i {
+        color: #484848;
+    }
+
+    lable.feild-title {
+        position: absolute;
+        left: 35px;
+        top: 0px;
+        font-weight: 500;
+        color: #ffffff;
+        font-size: 12px;
+        height: 29px;
+        line-height: 30px;
+        padding-left: 15px;
+        width: 114px;
+        border-radius: 0px 20px 20px 0px;
+        background-position: center center;
+        background: #484848;
+    }
+
+    .input-icons {
+        color: #01090c;
+        font-size: 15px;
+        line-height: 35px;
+        position: absolute;
+        top: 1px;
+        background: #d6d6d6;
+        text-align: center;
+        width: 31px;
+        left: unset !important;
+        right: 1px;
+        height: 28px;
+        border-left: 1px solid #484848;
+    }
+</style>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Employee Biometric Registration</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Employee Biometric Registration</span></li>
+                <li><span>Employee Biometric Registration</span></li>
+                <li class="active"><span>Employee Biometric Registration</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                        <label class="control-label">Employee Allocation<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <select ng-change="EmpAllocationOnChange();" class="form-control clear validate" id="Class" name="EmpAllocation" ng-model="EmpAllocation">
+                                                                <option value="">--Select--</option>
+                                                                <option ng-repeat="N in namesList" value="{{N.Value}}">{{N.Name}}</option>
+                                                                @*<option value="School">School</option>
+                                                                <option value="H.O.">H.O.</option>*@
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                        <label class="control-label">School Name<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlBranchName" ng-disabled="BranchName" class="form-control clear" ng-model="RelationshipId" ng-change="GetAllEmployeeByBranchCode();GetAllBranchBiometricMachine();">
+                                                                <option value="">--Select--</option>
+                                                                <option ng-repeat="N in AllBranchNameList" value="{{N.RelationshipId}}">{{N.Name}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                        <label class="control-label">Employee Name<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <select id="ddlHOEmployee" class="form-control clear validate" ng-model="HOEmployee" ng-change="GetEmployeeDetailByEmployeeCode();">
+                                                                <option value="">--Select--</option>
+                                                                <option ng-repeat="x in HOEmployeeList" value="{{x.EmployeeCode}}">{{x.EmpName}}</option>
+                                                            </select>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                        <div class="fee-deposit-box-profile">
+                                                            <div class="profile-header">
+                                                                <div class="profile-pic">
+                                                                    <img src="../Content/Photos/user-profile-Icon.png" ng-src="{{EmployeePhotoPath}}" alt="profile-pic">
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-data">
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-notepad"></i></span>
+                                                                    <lable class="feild-title">Employee Name</lable>
+                                                                    <p class="input-feild-data">{{EmployeeName}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-man-in-glasses"></i></span>
+                                                                    <lable class="feild-title">Father Name</lable>
+                                                                    <p class="input-feild-data">{{FatherName}}</p>
+                                                                </div>
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-smart-phone"></i></span>
+                                                                    <lable class="feild-title">Mobile No.</lable>
+                                                                    <p class="input-feild-data">{{Contact}}</p>
+                                                                </div>
+
+                                                                <div class="profile-box-fee-deposit">
+                                                                    <span class="icon"><i class="icofont-home"></i></span>
+                                                                    <lable class="feild-title">Address</lable>
+                                                                    <p class="input-feild-data">{{Address}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <label class="control-label">Machine Details<span class="vd_red"></span></label>
+                                                <div class="table-responsive">
+                                                    <table class="table compact table-hover table-striped table-bordered
+                                                                   nowrap dataTable t-mgtb-n">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th class="text-right">Machine Serial No.</th>
+                                                                <th class="text-right">Branch Name</th>
+                                                                <th class="text-right">Employee Machine Id</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="BML in BioMatricMachineList" class="ng-scope">
+                                                                <td><input type="checkbox" ng-model="BML.Chk" /></td>
+                                                                <td class="text-right">{{BML.MachineSerialNumber}}</td>
+                                                                <td class="text-right">{{BML.BranchName}}</td>
+                                                                <td class="text-right"><input type="text" ng-model="BML.MaxMachineId" ng-disabled="BML.RecordsGet" /></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#ddlConcessionhead").removeClass('validate');
+    $("#ddlSection").addClass('validate');
+</script>

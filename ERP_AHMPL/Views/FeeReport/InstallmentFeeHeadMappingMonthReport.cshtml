@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewBag.Title = "Installment Fee Head Mapping Report";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/InstallmentFeeHeadMappingMonthReportController.js?Ver=@ViewBag.Version"></script>
+<style>
+    div#LedgerRequestList_info {
+        float: left;
+        width: 100%;
+    }
+    div.dt-buttons {
+        height: 25px;
+        float: left;
+        position: relative;
+        width: 76%;
+        text-align: center;
+    }
+    div#LedgerRequestList_length {
+        float: left;
+    }
+    #ReportHeader{
+        display:none;
+    }
+</style>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Installment Fee Head Mapping Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Enquiry</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Installment Fee Head Mapping Report</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Report Category<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.DropDownList("ddlReportCategory", new List<SelectListItem>{
+                                                        new SelectListItem{Text="Select", Value=""},
+                                                        new SelectListItem{Text="Class Wise", Value="2"},
+                                                        new SelectListItem{Text="Section Wise", Value="1"}
+                                                    },
+                                                        new { @class = "select2 form-control validate", @ng_model = "ReportCategory" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Academic Session<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlSession")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="ReportCategory=='1'">
+                                                <label class="control-label">Class<span class="vd_red">*</span></label>
+                                                @Html.Partial("ddlClassSectionMul")
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="ReportCategory=='2'">
+                                                <label class="control-label">Class<span class="vd_red">*</span></label>
+                                                @Html.Partial("ddlClassMul")
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Installment Name<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlInstallment")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Stream<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlStream")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Fee Structure Group<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlFeeStructureGroup" class="select2 form-control clear validate" ng-model="FeeStructureGroupCode" ng-init="GetFeeStructureGroup();"
+                                                            ng-change="GetFeestructureWiseMonths();">
+                                                        <option value="">Select </option>
+                                                        <option ng-repeat="x in GetFeeStructureGroupList" value="{{x.Code}}">{{x.FeeStructureGroupName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlActive")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                <button id="btnShow" type="button" value="Search" class="btn-me btn-success  hvr-float-shadow" name="searchButton"
+                                                        ng-model="Search" ng-click="Search()">
+                                                    <span class="action-txt">Search</span>
+
+                                                    <i data-feather="search"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" id="TabAddHeight" TabAddHeight="41">
+                                            <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                                <div class="arrow-2">
+                                                    <i class="fa fa-angle-down"></i>
+                                                </div>
+                                                <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                            </div>
+
+                                            <div class="table-responsive">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                                                        <div class="me-col-12" ng-init="GetReportHeaderUsingCategory('General Report')">
+                                                            <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                                                        </div>
+                                                        <table id="LedgerRequestList" class="table table-bordered compact" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>S.No.</th>
+                                                                    <th>Class</th>
+                                                                    <th>Section</th>
+                                                                    <th>Stream</th>
+                                                                    <th>Installment</th>
+                                                                    <th>Month</th>
+                                                                    <th>Fee Head</th>
+                                                                    <th>Frequency</th>
+                                                                    <th>Amount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="fs in FeeStructure" marge-cell-rowspan scroll-div-with-print="LedgerRequestList">
+                                                                    <td>{{fs.Srno}}</td>
+                                                                    <td>{{fs.ClassName}}</td>
+                                                                    <td>{{fs.SectionName}}</td>
+                                                                    <td>{{fs.StreamName}}</td>
+                                                                    <td>{{fs.InstallmentName}}</td>
+                                                                    <td>{{fs.Month}}</td>
+                                                                    <td>{{fs.FeeHeadName}}</td>
+                                                                    <td>{{fs.FrequencyName}}</td>
+                                                                    <td>{{fs.NetAmt}}</td>
+
+                                                                </tr>
+                                                                <tr ng-if="FeeStructure.length==0">
+                                                                    <td colspan="8" class="text-center">No Record(s) found.</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<script>
+    $('#ddlClassSectionMul').addClass('validate');
+    $('#ddlInstallment,#ddlStream,#ddlStream,#ddlFeeStructureGroup,#ddlIsActive').removeClass('validate');
+</script>
+
+
+
+

@@ -1,0 +1,404 @@
+﻿ 
+@{
+    ViewBag.Title = "General Ledger Master";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/GeneralLedgerMasterRelationshipWiseController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" value="" ng-model="hfId" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">General Ledger Master</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Accountancy</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>General Ledger Master</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                        <div class="panel-group accordion-struct" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading activestate" role="tab" id="heading_1"> <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_1" aria-expanded="true">General Details</a> </div>
+                                                <div id="collapse_1" class="panel-collapse collapse in" role="tabpanel">
+                                                    <div class="panel-body pa-15">
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Ledger Name<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtLedgerName", "", new { @class = "form-control clear validate", @placeholder = "", @ng_model = "LedgerName" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Alias Name<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtAliasName", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "AliasName" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Ledger Code<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtLedgerCode", "", new { @class = "form-control clear validate", @placeholder = "", @disabled = "disabled", @ng_init = "LedgerCodePicker()",  @ng_model = "LedgerCode" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Ledger Group<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlLedgerGroup")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Nature<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlAcNatureRelationshipwise")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Opening Balance<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                <div class="input-date">
+                                                                    @Html.TextBox("txtOpeningBalance", "", new { @class = "form-control clear ", @placeholder = "", @ng_model = "OpeningBalance" })
+                                                                </div>
+                                                                <div class="input-time">
+                                                                    @Html.Partial("ddlDrCr")
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Address<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                <div class="input-3333">
+                                                                    @Html.TextBox("txtAddress1", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Address1" })
+                                                                </div>
+                                                                <div class="input-3333">
+
+                                                                    @Html.TextBox("txtAddress2", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Address2" })
+                                                                </div>
+                                                                <div class="input-3333">
+                                                                    @Html.TextBox("txtAddress3", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Address3" })
+                                                                </div>
+                                                             
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Country<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlCountry")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">State<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlState")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">City<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlCity")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Pincode<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtPincode", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Pincode" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Email-Id<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtEMailId", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "EMailId" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Phone No<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtPhoneNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "PhoneNo" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Mobile No<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtMobileNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "MobileNo" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Chqeue Print Name<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtChqeuePrintName", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "ChqeuePrintName" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">GSTN<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("GSTN", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "GSTN" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Is Active<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlActive")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Stop Payment<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlPaymentActive")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="heading_2"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_2" aria-expanded="false">TDS Details </a> </div>
+                                                <div id="collapse_2" class="panel-collapse collapse" role="tabpanel">
+                                                    <div class="panel-body pa-15">
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">TDS(Y/N)<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlTDSActive")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">PAN<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtPAN", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "PAN", @ng_disabled = "TDSdisability" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">TDS A/C<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlTDSLedger")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Deductee Type<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlTDSDeductee")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Deductee Status<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtDeducteeStatus", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "DeducteeStatus", @ng_disabled = "true" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Nature<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlTDSNature")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">TDS %<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtTDSPercentage", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "TDSPercentage", @ng_disabled = "TDSdisability" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Section<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlTDSSection")
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="heading_3"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_3" aria-expanded="false">Excise Details</a> </div>
+                                                <div id="collapse_3" class="panel-collapse collapse" role="tabpanel">
+                                                    <div class="panel-body pa-15">
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Excise Reg No.<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtExciseRegNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "ExciseRegNo" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Range<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtRange", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Range" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Division<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtDivision", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Division" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Commisionrate<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtCommisionrate", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "Commisionrate" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="heading_4"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_4" aria-expanded="false">Bank Details</a> </div>
+                                                <div id="collapse_4" class="panel-collapse collapse" role="tabpanel">
+                                                    <div class="panel-body pa-15">
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Bank Name<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtBankName", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "BankName" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Branch Name<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtBranchName", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "BranchName" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Account No.<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtAccountNo", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "AccountNo" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">IFSC Code<span class="vd_red"></span></label>
+                                                            <div class="input-box">
+                                                                @Html.TextBox("txtIFSCCode", "", new { @class = "form-control clear", @placeholder = "", @ng_model = "IFSCCode" })
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                  
+                                        
+                                   </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                        @Html.Partial("ActionView")
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+<script>
+    $('#ddlCountry').removeClass('validate');
+    $('#ddlState').removeClass('validate');
+    $('#ddlCity').removeClass('validate');
+    $('#ddlIsActive').removeClass('validate');
+    $('#ddlPIsActive').removeClass('validate');
+    $('#ddlTDSActive').removeClass('validate');
+    $('#ddlPaymentActive').removeClass('validate');
+    $('#ddlTDSActive').removeClass('validate');
+    $('#ddlTDSLedger').removeClass('validate');
+    $('#ddlTDSDeductee').removeClass('validate');
+    $('#ddlTDSNature').removeClass('validate');
+    $('#ddlTDSSection').removeClass('validate');
+    $('#ddlDrCr').removeClass('validate');
+</script>
+
+
+
+

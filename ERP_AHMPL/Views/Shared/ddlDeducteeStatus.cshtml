@@ -1,0 +1,6 @@
+﻿@Html.DropDownList("ddlDeducteeStatus", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Company", Value="C"},
+    new SelectListItem{Text="Non-Company", Value="N"}
+},
+    new { @class = "select2 form-control validate", @ng_model = "DeducteeStatus" })

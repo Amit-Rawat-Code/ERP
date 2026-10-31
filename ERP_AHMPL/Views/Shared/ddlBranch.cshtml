@@ -1,0 +1,5 @@
+﻿<select ng-disabled="isBranchDisabled" id="ddlBranch" class="select2 form-control" ng-init="GetBranchSides();isBranchDisabled=false" ng-change="ddl_ChangeBranch()" ng-model="BranchCode">
+    <option value="">Select Branch</option>
+    <option ng-repeat="branch in BranchList" value="{{branch.Code}}" ng-disabled="!branch.IsActive">{{branch.BranchName}}</option>
+</select>
+

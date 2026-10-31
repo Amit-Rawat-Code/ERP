@@ -1,0 +1,53 @@
+﻿@*<select id="ddlReceipts" class="select2 form-control validate" ng-model="ReceiptNoTransID"
+        ng-change="ddlReceipts_Change();">
+    <option value="">Select ReceiptNo</option>
+    <option ng-repeat="receipt in Receipts" value="{{receipt.TransID}}">{{receipt.ReceiptNo}}</option>
+</select>*@
+
+<div class="input-box chk-validate">
+    <div class="toggle-ddl" id="openReceipts"
+         ng-init="ToogleDDL('openReceipts','openReceipts')">
+        @*btn-validate*@
+        <button class='btn btn-primary select-btn'
+                data-ng-click='openReceipts=!openReceipts'
+                ng-bind="GetCount(Receipts,'Show Cancelled Receipts')">
+            Show Cancelled Receipts
+        </button>
+        @*btn-validate*@
+        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                data-ng-click='openReceipts=!openReceipts'>
+            <span class='fa fa-chevron-down'></span>
+        </button>
+        <div ng-show="openReceipts" class="ddlMultiple" ng-cloak>
+            <div>
+                <span class="btn-counts-right">Total Count: {{Receipts.length}}</span>
+            </div>
+            <hr style="margin:0px !important" />
+            <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Receipt No.</th>
+                        <th>Installment</th>
+                        <th>Fee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="XL in Receipts" class="ng-scope">
+                        <td>
+                            <input type="checkbox" ng-model="XL.chk" ng-value="XL.TransID"
+                                   ng-change="ddlReceipts_Change(XL);" ng-disabled="XL.disabled" />
+                        </td>
+                        <td>{{XL.ReceiptNo}}</td>
+                        <td>{{XL.Installment}}</td>
+                        <td>{{XL.FeeAmt}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+

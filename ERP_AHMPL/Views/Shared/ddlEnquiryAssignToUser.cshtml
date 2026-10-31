@@ -1,0 +1,4 @@
+﻿<select id="ddlEnquiryAssignToUser" class="select2 form-control" ng-model="EnquiryAssignToUser" ng-init="GetLavelWiseUser();" >
+    <option value="">Select</option>
+    <option ng-repeat="x in LavelwiseUserList" value="{{x.UserId}}">{{x.ProfileName}}</option>
+</select>

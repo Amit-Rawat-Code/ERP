@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Monthly Enquiry Statistics";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/MonthlyEnquiryStatisticsReportController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Monthly Enquiry Statistics</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Enquiry</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>Monthly Enquiry Statistics</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Session<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlSession" autocomplete='address-level2' class="select2 form-control validate"
+                                                        ng-model="SessionId" ng-init="GetSessions()" ng-change="ddlSession_Change(SessionId)">
+                                                    <option value="">Select Session</option>
+                                                    <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Month<span class="vd_red"></span></label>
+                                            <div class="input-box chk-validate">
+                                                <div class="toggle-ddl" id="openMonth" ng-init="ToogleDDL('openMonth','openMonth')">
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary select-btn'
+                                                            data-ng-click='openMonth=!openMonth' ng-bind="GetCount(SessionYears,'Select Month')">
+                                                        Select Months
+                                                    </button>
+                                                    @*btn-validate*@
+                                                    <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                            data-ng-click='openMonth=!openMonth'>
+                                                        <span class='fa fa-chevron-down'></span>
+                                                    </button>
+                                                    <div ng-show="openMonth" class="ddlMultiple" ng-cloak>
+                                                        <div ng-click="ddlCheckAll('SessionYears')">
+                                                            Check All
+                                                            <span class="btn-counts-right">Total Count: {{SessionYears.length}}</span>
+                                                        </div>
+                                                        <div ng-click="ddlUnCheckAll('SessionYears')">Uncheck All</div>
+                                                        <hr style="margin:0px !important" />
+                                                        <div ng-repeat="sl in SessionYears">
+                                                            <input type="hidden" ng-bind="sl.Srno=($index+1)"/>
+                                                            <input type="checkbox" ng-model="sl.chk" ng-value="sl.Year+'-'+sl.Month" 
+                                                                   ng-change="ddlMonth_Change(sl);" />
+                                                            {{sl.Month}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionSearch")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box">
+                            <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                <div class="arrow-2">
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                                <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                            </div>
+                            @Html.Partial("GeneralReportGrid")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+

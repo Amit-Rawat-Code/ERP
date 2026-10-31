@@ -1,0 +1,4 @@
+﻿<select id="ddlSecurityLedger" class="select2 form-control" ng-model="SecurityLedgerModel" ng-init="BindSecurityLedger();">
+    <option value="">Select</option>
+    <option ng-repeat="securityledger in SecurityLedgerList" value="{{securityledger.Code}}">{{securityledger.Name}}</option>
+</select>

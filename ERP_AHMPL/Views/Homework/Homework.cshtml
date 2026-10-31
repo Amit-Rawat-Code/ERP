@@ -1,0 +1,368 @@
+﻿
+@{
+    ViewBag.Title = "Home Work";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Content/html2canvas.js"></script>
+<style>
+    .attachment-input-box-s {
+        position: relative;
+        margin-bottom: 2px;
+    }
+
+    .multi-attachment-input-box-popup {
+        max-height: 114px;
+        overflow-y: auto;
+    }
+
+    .attachment-input-box-s .input-group-addon {
+        width: 32px !important;
+        position: absolute;
+        height: auto;
+        font-size: 20px;
+        padding: 5px 0px;
+        vertical-align: middle;
+    }
+
+    input[type="file"] {
+        z-index: -1;
+        position: absolute;
+        opacity: 0;
+    }
+
+    .input-padding {
+        padding: 4px 80px 4px 50px;
+        line-height: 26px;
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: 1px solid #000;
+    }
+
+    .input-group-btn-d {
+        position: absolute !important;
+        top: 0px;
+        right: 0px;
+        width: 80px;
+    }
+
+    input[type=file] {
+        display: block;
+    }
+
+    .input-box {
+        position: relative;
+    }
+
+    .btn-add {
+        padding: 4px 12px;
+        background: #768896;
+        color: #fff;
+        float: right;
+        margin: 1px;
+        cursor: pointer;
+        font-size: 18px;
+        width: 35px;
+        border: none !important;
+        border-radius: 0px;
+        outline: none !important;
+    }
+
+        .btn-add:hover, .btn-add:focus {
+            background: #90cc8a;
+        }
+
+    .very-small-font {
+        font-size: 8px;
+    }
+
+    .small-font {
+        font-size: 10px;
+    }
+
+    .big-font {
+        font-size: 14px;
+    }
+
+    .modal-body {
+        overflow-y: auto;
+    }
+
+    #anchor {
+        display: none;
+    }
+
+    .lbl-padding-25 {
+        padding-right: 25px;
+    }
+
+    .dataTables_filter {
+        float: right;
+    }
+
+    .row-1 {
+        margin: -10px 0px 0px 0px;
+        text-align: center;
+    }
+</style>
+
+<script src="~/Content/editorbootstrap/tinymce.min.js"></script>
+<script src="~/Content/editorbootstrap/tinymce.init.js"></script>
+<script src="../Scripts/myjslib/HomeworkController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Communication</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                            <div class="input-box">
+                                                <div class="radio radio-primary radio-box">
+                                                    <input type="radio" ng-model="IsAllSubject" value="1" ng-init="IsAllSubject='1';disableSub=false" class="select2 form-control validate" ng-change="disableSubject();" ng-disabled="disableSub">
+                                                    <label for="ClassWise">AllSubject </label>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+
+                                                <div class="radio radio-primary radio-box">
+                                                    <input type="radio" ng-model="IsAllSubject" value="0" class="select2 form-control validate" ng-init="disableSub=false" ng-change="disableSubject();" ng-disabled="disableSub">
+                                                    <label for="ClassWise">Individual Subject </label>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label id="dvclass" class="control-label">Class & Section<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <div class="input-half-date">
+                                                        <select id="ddlClass" class="form-control clear validate" ng-model="BindClass" ng-init="BindEmpClass();" ng-change="BindEmpSection(BindClass);">
+                                                            <option value="">Select Class</option>
+                                                            <option ng-repeat="x in classRec" value="{{x.ClassCode}}">{{x.ClassName}}</option>
+                                                        </select>
+                                                        @*@Html.Partial("ddlClass")*@
+
+                                                    </div>
+                                                    <div class="input-half-date">
+                                                        <select id="ddlSection" class="form-control clear validate" ng-model="BindSection" ng-change="ddlSection_change(BindClass,BindSection);">
+                                                            <option value="">Select Section</option>
+                                                            <option ng-repeat="x in SecRec" value="{{x.SectionCode}}">{{x.SectionName}}</option>
+                                                        </select>
+                                                        @*@Html.Partial("ddlSection")*@
+                                                    </div>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                @*id="dvsub"*@
+                                                <label class="control-label">Subject<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlSubject" class="form-control clear validate" ng-model="BindSubject" ng-disabled="IndividualSubject" ng-init="IndividualSubject=true" ng-change="ddlSubject_change(BindClass,BindSection,BindSubject)">
+                                                        <option value="">Select Subject</option>
+                                                        <option ng-repeat="x in SubjectList" value="{{x.Code}}">{{x.SubjectName}}</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">HomeWork Date<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <input id="txtHomeWorkDate" ng-model="HomeWorkDate" type="datetime-local" class='form-control validate' placeholder="dd-mm-yyyy" autocomplete="off">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Show Date<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <input id="txtHomeWorkShowDate" ng-model="ShowDate" type="datetime-local" class='form-control validate ' placeholder="dd-mm-yyyy" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">End Date<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <input type="datetime-local" id="txtHomeWorkHideDate" ng-model="EndDate" class='form-control validate ' placeholder="dd-mm-yyyy" ng-click="checkShowdate()" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Paste here video Path</label>
+                                                <div class="input-box">
+                                                    <input type="text" placeholder="" ng-model="VideoUrl" autocomplete="off" class="form-control" id="txtVedioPath">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Video End Date</label>
+                                                <div class="input-box">
+                                                    <input type="datetime-local" id="txtVedioHideDate" ng-model="VideoEndDate" class='form-control ' placeholder="dd-mm-yyyy" ng-click="checkShowdate()" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label"> Active<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlActive")
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Topic Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <input type="text" placeholder="" ng-model="Topic" autocomplete="off" class="form-control validate" id="txtTopicName">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Submission Required<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddSubmission" class='pointer form-control validate' ng-model="IsSubmissionRequired">
+                                                        <option value="">Select</option>
+                                                        <option value="1">Online Submission</option>
+                                                        <option value="2">Offline Submission</option>
+                                                        <option value="0" selected>No</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label" style="display:initial;">Attachment <span style="float:right; font-size:10px;" title="Upload Only [.jpg|.jpeg|.png|.bmp|.pdf] Files & File Size Limit is 10 MB(In Total)">Instruction</span></label>
+                                                <div class="input-box input-box-me max-h-114" ng-init="AddRow()">
+                                                    <div class="multi-attachment-input-box-popup">
+                                                        <div class="attachment-input-box-s ng-scope" ng-repeat="attachment in Attachments">
+                                                            <div class="input-group-addon ng-scope" ng-if="attachment.Name!='preview'"><i class="icofont-upload-alt"></i></div>
+                                                            <input type="file" ng-click="SetIndex($index)" id=file{{$index}} upload-files multiple>
+                                                            <label for=file{{$index}} class="form-control-attachment input-padding" ng-model="attachment.FileName">{{attachment.name==undefined?'Upload Image':attachment.name}}</label>
+                                                            <div class="input-group-btn input-group-btn-d">
+                                                                <input type="submit" class="btn-dec ng-scope" value="-" ng-click="RemoveRow($index)" ng-if="Attachments.length>0 &amp;&amp; Attachments.length!=1">
+                                                                <input type="submit" class="btn-add ng-scope" value="+" ng-click="AddRow()" ng-if="$index==Attachments.length-1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-box-msg-r">
+                                                        <input type="hidden" id="pdfAttachment" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 slimScrollDiv-height mgbt-xs-15" id="ClassStudentListHeight">
+                                                <div id="example1" class="streamline message-nicescroll-bar">
+                                                    <div id="selectid" style="display:none">
+                                                        <div class="checkbox checkbox-primary check-box">
+                                                            <input id="select_all" type="checkbox" />
+                                                            <label for="">Select All</label>
+                                                        </div>
+                                                    </div>
+                                                    <table class="table compact table-hover table-striped table-bordered nowrap mgbt-xs-0 tb-b-n">
+                                                        <tbody>
+                                                            <tr ng-repeat="x in records">
+                                                                <td class="check-box-w w-50-p">
+                                                                    <div class="checkbox checkbox-primary table-check-wt text-center">
+                                                                        {{x.length}}
+                                                                        <input id="{{x.StudentCode}}" ng-change="change(this)" type="checkbox" ng-model="x.chk" ng-checked="x.chk" />
+                                                                        <label for=""></label>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="w-50-p T-PPC"> <img ng-src="{{x.StudentPhoto}}" src="../Content/Photos/default-user.png" /></td>
+                                                                <td>{{x.StudentName}}</td>
+                                                                <td>{{x.StudentId}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                @*<div id="dvsetstu"></div>
+                                                    <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div><div id="dvsetstu"></div>
+                                                <div id="getstuid"></div>*@
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Any Detail<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <div class="dropify-loader"></div>
+                                                <input id="TextEditor" type="text" ng-model="HomeWorkDetails" name="" class="form-control">
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            <link href="~/Content/plugins/assets/fonts/feather-icon/feather-icon.css" rel="stylesheet" />
+
+                                            <button id="btnSearch" type="button" value="Search" class="btn-me btn-success  hvr-float-shadow" name="searchButton" data-toggle="collapse"
+                                                    data-target="#CollapseSearchTableList" aria-expanded="false" aria-controls="CollapseSearchTableList" ng-model="Search"
+                                                    ng-click="CheckSearchPermission();SearchRecord()" ng-disabled="disableSearch" @*ng-show="visibleSearch"*@ >
+                                                View HomeWork List
+                                                <i data-feather="printer"></i>
+                                            </button>
+                                            <button id="btnSave" type="button" value="Save" class="btn-me btn-primary hvr-float-shadow" name="saveButton" ng-model="Save"
+                                                    ng-init="Save='Save'" ng-click="CheckSavePermission();SaveRecord()" ng-disabled="disableAdd">
+                                                <span id="btnSavetxt" ng-bind="Save">Save</span>
+                                                <i data-feather="edit"></i>
+                                            </button>
+                                            <button id="btnDelete" type="button" value="Delete" class="btn-me btn-danger hvr-float-shadow" name="deleteButton" ng-model="Delete" ng-click="CheckDeletePermission();DeleteRecord()" ng-disabled="disableDelete" disabled>
+                                                <span class="action-txt">Delete</span>
+                                                <i data-feather="trash-2"></i>
+                                            </button>
+                                            <script src="~/Content/plugins/assets/fonts/feather-icon/icons/feather-icon/feather.min.js"></script>
+                                            <script src="~/Content/plugins/assets/fonts/feather-icon/icons/feather-icon/feather-icon.js"></script>
+                                            <script src="~/Content/plugins/assets/fonts/feather-icon/icons/feather-icon/feather-icon-clipart.js"></script>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

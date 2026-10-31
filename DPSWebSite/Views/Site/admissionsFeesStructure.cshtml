@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "admissionsFeesStructure";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="website-main-content" ng-init="GetAdmissions();" ng-cloak>
+
+    <section class="page-banner-breadcrumbs admissions">
+        <div class="container">
+            <div class="breadcrumbs">
+                <span class="page-name">AllenKids Swaroopnagar</span><span class="seprator">></span><span class="page-name">Admissions</span>
+
+            </div>
+        </div>
+    </section>
+    <section class="admission-banner"></section>
+    <section class="page-section why-choose-allen-kids admission-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    
+                    <div class="discription-section" ng-bind-html="trustAsHtml((AdmissionPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContent)">
+
+                    </div>
+                    
+                    
+                </div>
+               
+            </div>
+         
+        </div>
+    </section>
+</div>
+

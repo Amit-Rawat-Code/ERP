@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "DocsAndInfo";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/DocsAndInformationController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hdnPhotoTransId" id="hdnPhotoTransId" />
+<!-- Section: inner-header -->
+<div class="app-content  my-3 ">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Documents And Information</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Mandatory Public Disclosure</span></li>
+                        <li class="active"><span>Documents And Information</span></li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="br-pagebody">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="collapse in" id="collapseinputbox">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Unit Type</label>
+                                                        @Html.Partial("ddlPermUnitType")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Unit</label>
+                                                        @Html.Partial("ddlPermUnit")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Tab</label>
+                                                        @Html.Partial("ddlTab")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Menu</label>
+                                                        @Html.Partial("ddlMenu")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Select Sub Menu</label>
+                                                        @Html.Partial("ddlSubMenu")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Discription</label>
+                                                        @*<input type="file" accept="image/mp4,image/avi" id="fileInput" onchange="angular.element(this).scope().show(this)" ng-model="fileInput" multiple class="form-control clear validate" />*@
+                                                        <input type="text" id="Description" ng-model="Description" multiple class="form-control clear validate" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                                    <div class="">
+                                                        <label>URL Type</label>
+                                                        @Html.DropDownList("ddlURLType", new List<SelectListItem>{
+                                                            new SelectListItem{Text="Select URL Type", Value=""},
+                                                            new SelectListItem{Text="URL", Value="U"},
+                                                            new SelectListItem{Text="Attachment", Value="A"},
+                                                            new SelectListItem{Text="Text", Value="T"}
+                                                        },
+                                                            new { @class = "select2 form-control", @ng_model = "URLType", @ng_change = "SetURLType()" })
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12" ng-model="URLDiv" ng-hide="URLDiv" ng-init="URLDiv=true">
+                                                    <div class="">
+                                                        <div class="">
+                                                            <label>URL</label>
+                                                            @Html.TextBox("txtURL", "", new { @class = "form-control clear", @ng_model = "URL", @placeholder = "" })
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-model="fileInputDiv" ng-hide="fileInputDiv" ng-init="fileInputDiv=true">
+                                                    <div class="form-group">
+                                                        <label class="content-title">Upload Pdf File<span class="red-i">*</span></label>
+                                                        <input type="file" accept="pdf" id="fileInput" onchange="angular.element(this).scope().showPdf(this)" ng-model="fileInput" class="form-control clear dropify" />
+                                                    </div>
+
+                                                    <div>
+                                                        <strong>Instructions to Upload Files</strong>
+                                                        <ul>
+                                                            <li> 1) Upload pdf File in selected Album.</li>
+                                                            <li> 2) Use Only pdf File <br /></li>
+                                                            <li> 3) Album pdf Size is not more than 5 Mb</li>
+                                                            @*<li> 4) Maximum five Videos upload at a time</li>*@
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12" ng-model="RemarksDiv" ng-hide="RemarksDiv" ng-init="RemarksDiv=true">
+                                                    <div class="">
+                                                        <div class="">
+                                                            <label>
+                                                                Text Value
+                                                            </label>
+                                                            @Html.TextBox("txtRemarks", "", new { @class = "form-control clear", @ng_model = "Remarks", @placeholder = "" })
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <div class="form-group">
+                                                        <label>Active<span class="red-i">*</span></label>
+                                                        @Html.Partial("ddlActive")
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <iframe id="vid_frame" src="" frameborder="0" width="250" height="200"></iframe>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 footer-listad">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

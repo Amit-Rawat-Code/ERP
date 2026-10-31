@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Course Subject Mapping With Teacher";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/CollegeCourseSubjectMappingWithTeacherController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Course Subject Mapping With Teacher</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>TimeTable</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Course Subject Mapping With Teacher</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 pull-right">
+                                                <label class="control-label">Course<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlCollegeCourse" class="select2 form-control" ng-model="CourseCode"
+                                                            ng-init="GetCollegeCourse();" ng-change="GetCollegeBranch(CourseCode)">
+                                                        <option value="">Select Course</option>
+                                                        <option ng-repeat="cl in CollegeCourseList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.CollegeCourseName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 pull-right">
+                                                <label class="control-label">Branch<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlSelectedForBranch" class="select2 form-control" ng-model="BranchCode" ng-change=";GetSemester(CourseCode)">
+                                                        <option value="">Select Branch</option>
+                                                        <option ng-repeat="sb in CollegeBranchList" value="{{sb.Code}}">{{sb.CollegeBranchName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 pull-right">
+                                                <label class="control-label">Semester<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlSemester" class="select2 form-control" ng-model="SemesterCode" ng-change="BlanckDetails()">
+                                                        <option value="">Select </option>
+                                                        <option ng-repeat="sl in SemesterList" value="{{sl.Code}}">{{sl.Semester}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlActive")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                                <div class="table-responsive">
+
+                                                    <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S.No.</th>
+                                                                <th>Subject Group</th>
+                                                                <th>Subject Paper</th>
+                                                                <th>Weekly Period</th>
+                                                                <th>Teacher</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody ng-init="GetEmployee()">
+                                                            <tr ng-repeat="obj in ClassSubjectTeacherList">
+                                                                <td ng-bind="obj.Srno=($index+1)"></td>
+                                                                <td>{{obj.SubjectGroupName}}</td>
+                                                                <td>{{obj.SubjectName}}</td>
+                                                                <td>{{obj.NoOfPeriodInWeek}}</td>
+                                                                <td>
+                                                                    <select id="ddlEmployeeName" class="select2 form-control clear" ng-model="obj.EmployeeCode">
+                                                                        <option value="">Select </option>
+                                                                        <option ng-repeat="x in TeacherList" value="{{x.EmployeeCode}}">
+                                                                            {{x.EmployeeName}}{{' - '+x.EmployeeId}}
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <input class="btn btn-square btn-primary btn-xs" type="button" value="+" ng-click="AddRow(obj,$index)" />
+                                                                    <input class="btn btn-square btn-secondary btn-xs" type="button" value="-" ng-click="RemoveRow(obj.Srno)"
+                                                                           ng-if="ClassSubjectTeacherList.length>1 && obj.IsDuplicate==true" />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionView")
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+
+

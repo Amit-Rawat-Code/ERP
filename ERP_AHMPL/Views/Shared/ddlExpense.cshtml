@@ -1,0 +1,4 @@
+﻿<select id="ddlExpense" class="select2 form-control validate" ng-model="ExpenseName" ng-init="BindExpenses();" ng-change="GetExCode(ExpenseName);">
+    <option value="">Select</option>
+    <option ng-repeat="expense in ExpensesList" value="{{expense.SubCode}}">{{expense.Name}}</option>
+</select>

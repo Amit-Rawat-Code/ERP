@@ -1,0 +1,7 @@
+﻿@Html.DropDownList("ddlIsApproved", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Pending", Value="1"},
+    new SelectListItem{Text="Approved", Value="2"},
+    new SelectListItem{Text="Rejected", Value="3"}
+},
+    new { @class = "select2 form-control validate", @ng_model = "IsApproved", @ng_change = "ShowRemarks()" })

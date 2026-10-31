@@ -1,0 +1,65 @@
+﻿
+<div class="datatable-responsive table-responsive">
+    <table id="tblStudentAttendanceList" class="table compact table-hover table-striped table-bordered mgbt-xs-5"
+           ng-model="StuAttendanceList" ng-init="StudentAttendanceList()">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>
+                    <select ng-init="GetStatus(Attendance);" ng-change="ddlGbl_AbbreviationCode_Change();" id="ddlGbl_AbbreviationCode" 
+                            class="select2 form-control clear" ng-model="Gbl_AbbreviationCode">
+                        <option value="">Select All Student Abbreviation</option>
+                        <option ng-repeat="S in AbbreviationList" value="{{S.Code}}" ng-disabled="!S.IsActive">{{S.Abbreviation}}</option>
+                    </select>
+                </th>
+                <th>
+                    <select ng-change="ddlGbl_Mode_Change();" id="ddlGbl_Status"
+                            class="select2 form-control clear" ng-model="Gbl_Mode">
+                        <option value="">Select All Student Mode</option>
+                        <option value="Online">Online</option>
+                        <option value="Offline">Offline</option>
+                    </select>
+                </th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class="sr-no-w text-center">Sr. No.</th>
+                <th>Student </th>
+                <th>Father </th>
+                @*<th>Section</th>*@
+                <th>Abbreviation</th>
+                <th>Mode</th>
+                <th>Mark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="Attendance in StudentAttendanceLists" repeat-done>
+                <td class="text-center">
+                    {{$index+1}}
+                    <input type="hidden" id="Studentcode" value="{{Attendance.StudentCode}}" />
+                </td>
+                <td>{{Attendance.Name}}</td>
+                <td>{{Attendance.FatherName}}</td>
+                @*<td>{{Attendance.Section}}</td>*@
+                <td class="table-in-input-box" ng-model="Attendance.chk" ng-init="Attendance.chk=Attendance.IsAttenDone">
+                    <select ng-change="ddlAbbreviationCode_Change(Attendance);" id="ddlAbbreviation" class="select2 form-control clear" ng-model="Attendance.AbbreviationCode"
+                            style="width: 100px;" ng-disabled="Attendance.IsAttenDone">
+                        <option value="">Select Abbreviation</option>
+                        <option ng-repeat="S in AbbreviationList" value="{{S.Code}}" ng-disabled="!S.IsActive">{{S.Abbreviation}}</option>
+                    </select>
+                </td>
+                <td class="table-in-input-box">
+                    <input type="radio" ng-disabled="(AbbreviationList|filter:{Code:Attendance.AbbreviationCode})[0].Abbreviation!='P'||Attendance.Abbreviationindex==0||Attendance.IsAttenDone==true" value="Online" ng-model="Attendance.Mode" />&nbsp;Online &nbsp;
+                    <input type="radio" ng-disabled="(AbbreviationList|filter:{Code:Attendance.AbbreviationCode})[0].Abbreviation!='P'||Attendance.Abbreviationindex==0||Attendance.IsAttenDone==true" value="Offline" ng-model="Attendance.Mode" />&nbsp;Offline
+                </td>
+                <td>
+                    <p>Mark in period: <span>{{Attendance.PeriodName}}</span></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "Change Student Batch";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeModuleMaster.cshtml";
+}
+@*<script src="~/scripts/textextenderui-bootstrap-tpls-0.12.0.js"></script>*@
+<script src="~/Scripts/myjslib/ChangeStudentBatchController.js?Ver=@ViewBag.Version"></script>
+<script type="text/ng-template" id="popupAddCarForm.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Modal Title</h3>
+    </div>
+    <div class="modal-body">
+            <h2>Modal Body</h2>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-complete" type="submit" >Open other</button>
+        <button class="btn btn-default" type="submit" ng-click="cancel()" >Cancel</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="autocomplete.html">
+    <angucomplete-alt id="ex2"
+      placeholder="Search persons"
+      pause="100"
+      selected-object="selectedPerson"
+      local-data="itemsData"
+      description-field ="email"
+      search-fields="name"
+      title-field="name"
+      minlength="1"
+      input-class="form-control form-control-small"
+      match-class="highlight"
+      input-changed="inputChanged"
+      />
+</script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Change Student Batch</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Global</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Change Student Batch</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper " >
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Student Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <div class="form-group">
+                                                        <div class="btn-group" uib-dropdown keyboard-nav="true" auto-close="outsideClick" style="width:100%">
+                                                            <input id="txtStudent" type="text" class="form-control validate" placeholder="Student Name" 
+                                                                   ng-model="textFilter" autocomplete="off" 
+                                                                   uib-dropdown-toggle />
+                                                            <div uib-dropdown-menu role="menu" class="dropdown">
+                                                                <table class="list-unstyled option-list table table-in-input-box compact table-bordered text-wraping-n dataTable t-mgtb-n " border="1">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Name</th>
+                                                                            <th>Reg No</th>
+                                                                            <th>Batch</th>
+                                                                            <th>Time Slot</th>
+                                                                            <th>Class</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tr ng-repeat="ABS in AlottedBatchStudents | filter:textFilter" ng-click="SetStudentRecord(ABS);">
+                                                                        <td>{{ABS.StudentName}}</td>
+                                                                        <td>{{ABS.RegNo}}</td>
+                                                                        <td>{{ABS.BatchName}}</td>
+                                                                        <td>{{ABS.TimeSlot}}</td>
+                                                                        <td>{{ABS.ClassName}}</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Current Class</label>
+                                                <div class="input-box">
+                                                    <input class="form-control clear textOnly ng-pristine ng-valid ng-empty ng-touched" id="txtCurrentClass"  ng-disabled="true" ng-model="StudentClass" placeholder="" type="text" value="">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Current Batch Name</label>
+                                                <div class="input-box">
+                                                    <input class="form-control clear textOnly ng-pristine ng-valid ng-empty ng-touched" id="txtShowBatchName" name="ShowBatchName" ng-disabled="true" ng-model="ActiveBatchName" placeholder="" type="text" value="">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Current Time Slot</label>
+                                                <div class="input-box">
+                                                    <input class="form-control clear textOnly ng-pristine ng-valid ng-empty ng-touched" id="txtShowTimeSlot" name="ShowTimeSlot" ng-disabled="true" ng-model="ActiveTimeSlot" placeholder="" type="text" value="">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Transfer To Batch<span class="vd_red">*</span></label>
+                                                <div class="input-box" ng-init="GetBatches();">
+                                                    <select id="ddlTransferToBatch" class="select2 form-control validate" ng-model="TransferToBatch" ng-change="ToBeTransfer()">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="ABL in ActiveBatchesList" value="{{ABL.Code}}">{{ABL.BatchName}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Show Time Slot</label>
+                                                <div class="input-box">
+                                                    <input class="form-control clear textOnly ng-pristine ng-valid ng-empty ng-touched" id="txtShowTimeSlot" ng-disabled="true" name="ShowTimeSlot" ng-model="TransTimeSlot" placeholder="" type="text" value="">
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionView")
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Partial("SearchAngularJs")
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+</div>
+

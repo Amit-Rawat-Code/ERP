@@ -1,0 +1,218 @@
+﻿@{
+    ViewBag.Title = "Student Master Detail Update";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/StudentDetailUpdateController.js?Ver=@ViewBag.Version"></script>
+
+<div id="hdngetstu"></div>
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Student Master Detail Update</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Student </span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Student Master Detail Update</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                    <div class="section-toggle">
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Class</label>
+                                            <div class="input-box">
+                                                <select id="ddlClass" class="select2 form-control validate" ng-init="GetAllClass();" ng-model="ClassCode" ng-change="GetSection(ClassCode);">
+                                                    <option value="">Select Class</option>
+                                                    <option ng-repeat="cl in ClassList" value="{{cl.Code}}"> {{cl.ClassName}} </option>
+                                                </select>
+                                                <div class="text-box-msg-r"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Fields List For Updation</label>
+                                            <div class="input-box">
+                                                <div class="input-box chk-validate">
+                                                    <div class="toggle-ddl" id="fields" ng-init="GetFieldsForUpdation();ToogleDDL('fields','fields')">
+                                                        <button class='btn btn-primary select-btn' data-ng-click='fields=!fields' ng-bind="GetCount(FieldsNameList,'Select Fields')">Select Fields</button>
+                                                        <button class='btn btn-primary dropdown-toggle select-btn-sub' data-ng-click='fields=!fields'> <span class='fa fa-chevron-down'></span> </button>
+                                                        <div ng-show="fields" class="ddlMultiple" ng-cloak>
+                                                            <div ng-click="ddlCheckAll('FieldsNameList');ddlCheckAll();">Check All <span class="btn-counts-right">Total Count: {{FieldsNameList.length}}</span></div>
+                                                            <div ng-click="ddlUnCheckAll('FieldsNameList');ddlUnCheckAll();">Uncheck All</div>
+                                                            <hr style="margin:0px !important" />
+                                                            <div ng-repeat="f1 in FieldsNameList" ng-model="FieldCode">
+                                                                <input type="checkbox" ng-model="f1.chk" value="Sr_No" /> {{f1.FieldName}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">&nbsp;</label>
+                                            <div class="input-box">
+                                                <button id="btnGo" type="button" value="Go" class="btn-me btn-primary hvr-float-shadow" ng-model="Go" ng-click="GetStudentList();"> Go
+                                                    <span id="btnGotxt" class="action-txt" ng-bind="Go">GO</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <div class="datatable-responsive table-responsive table-scroll" ng-cloak >
+                                                <table ng-show="StudentList.length>0" cellpadding="0" cellspacing="0" class="table compact table-hover table-striped table-bordered mgbt-xs-5" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.No.</th>
+                                                            <th>Select</th>
+                                                            <th>Admission No.</th>
+                                                            <th>Student Name</th>
+                                                            <th>Father's Name</th>
+                                                            <th>Class Name</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'AadharCardNo'}">AAdhar Card No.</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Caste'}">Caste</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Category'}">Category</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Email'}">E-Mail ID</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Gender'}">Gender</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'MobileNo_Father'}">Mobile No.(Father)</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'MobileNo_Mother'}">Mobile No.(Mother)</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'MobileNo_Student'}">Mobile No.(Student)</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Nationality'}">Nationality</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Religion'}">Religion</th>
+                                                            
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Section'}">Section</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'DOB'}">Date of Birth</th>
+                                                            
+                                                            @*<th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldType:'txt'}">{{f1.Fieldname}}</th>
+                                                            <th ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldType:'ddl'}">{{f1.Fieldname}}</th>*@
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>                                                        
+                                                        <tr ng-repeat="sl in StudentList">
+                                                            <td ng-bind="sl.SrNo=($index+1)"></td>
+                                                            <td><input type="checkbox" ng-model="sl.chk" ng-init="sl.chk=false" /></td>
+                                                            <td>{{sl.AdmissionNo}}</td>
+                                                            <td>{{sl.StudentName}}</td>
+                                                            <td>{{sl.FatherName}}</td>
+                                                            <td>{{sl.ClassName}}</td>
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'AadharCardNo'}">
+                                                                <input id="txtAadharCardNo" type="text" class="form-control clear numbersOnly" ng-model="sl.AadharCardNo" ng-disabled="sl.chk==false" maxlength="12" autocomplete="off" />
+                                                            </td>
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Caste'}">
+                                                                <select id="ddlCaste" class="select2 form-control" ng-model="sl.Caste" ng-disabled="sl.chk==false">
+                                                                    <option value="">Select Caste</option>
+                                                                    <option value="101">Hindu</option>
+                                                                    <option value="102">Muslim</option>
+                                                                    <option value="103">Sikh</option>
+                                                                    <option value="104">Other</option>
+                                                                </select>
+                                                            </td>
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Category'}">
+                                                                <select id="ddlCategory" class="select2 form-control" ng-init="GetCategories()" ng-model="sl.CategoryName" ng-disabled="sl.chk==false">
+                                                                    <option value="">Select Category</option>
+                                                                    <option ng-repeat="category in Categories" value="{{category.CategoryName}}">{{category.CategoryName}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'DOB'}">
+                                                                <input id="txtDOB" type="date" class="form-control clear" ng-model="sl.DOB" ng-disabled="sl.chk==false" />
+                                                            </td>
+
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Email'}">
+                                                                <input id="txtEmail" type="text" class="form-control clear" ng-model="sl.Email" ng-disabled="sl.chk==false" autocomplete="off" />
+                                                            </td>
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Gender'}">
+                                                                <select id="ddlGender" class="select2 form-control validate" ng-model="sl.Gender" ng-init="GetGender();" ng-disabled="sl.chk==false">
+                                                                    <option value="">Select Gender</option>
+                                                                    <option ng-repeat="gender in GenderList" value="{{gender.Gender}}">{{gender.Gender}}</option>
+                                                                </select>
+                                                            </td>
+
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'MobileNo_Father'}">
+                                                                <input id="txtmobileno" type="text" class="form-control clear numbersOnly" ng-model="sl.F_MobileNo" ng-disabled="sl.chk==false" maxlength="10" autocomplete="off" />
+                                                            </td>
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'MobileNo_Mother'}">
+                                                                <input id="txtmobileno" type="text" class="form-control clear numbersOnly" ng-model="sl.M_MobileNo" ng-disabled="sl.chk==false" maxlength="10" autocomplete="off" />
+                                                            </td>
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'MobileNo_Student'}">
+                                                                <input id="txtmobileno" type="text" class="form-control clear numbersOnly" ng-model="sl.S_MobileNo" ng-disabled="sl.chk==false" maxlength="10" autocomplete="off" />
+                                                            </td>
+                                                            
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Nationality'}">
+                                                                <select id="ddlNationality" class="select2 form-control " ng-init="GetNationality();" ng-model="sl.Nationality" ng-disabled="sl.chk==false">
+                                                                    <option value="">Select Nationality</option>
+                                                                    <option ng-repeat="Nationality in NationalityList" value="{{Nationality.NationalityName}}">{{Nationality.NationalityName}}</option>
+                                                                </select>
+                                                            </td>
+
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Religion'}">
+                                                                <select id="ddlReligion" class="select2 form-control" ng-init="GetReligions();" ng-model="sl.Religion" ng-disabled="sl.chk==false">
+                                                                    <option value="">Select Religion</option>
+                                                                    <option ng-repeat="religion in Religions" value="{{religion.Religion}}">{{religion.Religion}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td ng-repeat="f1 in FieldsNameList | filter: {chk: true,FieldName:'Section'}">
+                                                                <select id="ddlSection" class="select2 form-control" ng-model="sl.SectionCode" ng-disabled="sl.chk==false">
+                                                                    <option value="">Select Section</option>
+                                                                    <option ng-repeat="section in Sections" value="{{section.Code}}">{{section.SectionName}}</option>
+                                                                </select>
+                                                            </td>
+                                                            @*<td ng-repeat="f1 in FieldsNameList |filter: {chk: true,FieldType:'txt'}" ng-model="f1.keys" >
+            <input type="text" class="form-control"/>
+        </td>
+
+        <td ng-repeat="f1 in FieldsNameList |filter: {chk: true,FieldType:'ddl'}">
+            <select class="select2 form-control" ng-model="f1.keys" ng-click="GetddlValue(f1.keys);">
+                <option value="">Select {{f1.Fieldname}}</option>
+                <option ng-repeat="l1 in ddlList" value="{{l1.DisplayName}}">{{l1.DisplayName}}</option>
+            </select>
+        </td>*@
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1" @*ng-hide="buttonUpdate"*@>
+                                <button id="btnUpdate" type="button" value="Update" class="btn-me btn-primary hvr-float-shadow" name="saveButton" ng-model="Update"
+                                        ng-init="Update='Update'" ng-click="SaveRecord()">
+                                    <span id="btnUpdatetxt" class="action-txt" ng-bind="Update">Update</span>
+                                </button>
+                             </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

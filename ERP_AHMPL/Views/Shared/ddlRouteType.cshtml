@@ -1,0 +1,8 @@
+﻿
+<select id="ddlRouteType" class="select2 form-control validate" ng-init="GetRouteTypes();" ng-model="RouteTypes.RouteTypeId">
+    <option value="">Select Route Type</option>
+    <option ng-repeat="RoutesType in RoutesTypes" value="{{RoutesType.RouteTypeId}}">{{RoutesType.RouteType}}</option>
+</select>
+
+
+

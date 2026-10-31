@@ -1,0 +1,270 @@
+﻿
+<!DOCTYPE html>
+
+<html ng-app="myApp" ng-controller="myController">
+<head>
+    <title>Home - AllenHouse</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css2?family=Fondamento:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    @*<link rel="stylesheet" href="~/content/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/content/css/font-awesome.css">*@
+
+    @*<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>*@
+
+
+  
+    <script src="~/Scripts/angular.js"></script>
+   
+    <link rel="stylesheet" href="~/Content/css/style1.css" type="text/css">
+
+    <link rel="stylesheet" href="~/content/css/responsive.css" type="text/css">
+    <script src="~/Scripts/angular.js"></script>
+    <script src='~/content/js/ui-bootstrap-tpls.js'></script>
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/angular-filter.min.js"></script>
+
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/service.js"></script>
+
+    <script src="~/Script/controller.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js"></script>
+    <script src="~/Script/LayoutController.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div ng-init="GetUrl();" ng-cloak>
+        <header>
+            <nav class="navbar  navbar-fixed-top">
+                <div class="header-top">
+                    <div class="container" ng-repeat="ContactData in ContactUsPageData">
+                        <ul class="contact_details__box left">
+                            <li><label>Follow Us</label></li>
+                            <li class="top-bar__contact top-bar__contact_phone"><a href="{{ContactData.FacebookLink}}"><i class="icon-facebook"></i></a></li>
+                            <li class="top-bar__contact top-bar__contact_email"><a href="https://twitter.com/allen_college"><i class="icon-twitter"></i></a></li>
+                            <li class="top-bar__contact top-bar__contact_instagram"><a href="{{ContactData.InstagramLink}}" target="_blank"><i class="icon-instagram"></i></a></li>
+                            <li class="top-bar__contact top-bar__contact_linkedin"><a href="{{ContactData.LinkedInLink}}" target="_blank"><i class="icon-linkedin"></i></a></li>
+                            <li class="top-bar__contact top-bar__contact_youtube"><a href="{{ContactData.YoutubeLink}}" target="_blank"><i class="icon-youtube-play"></i></a></li>
+                        </ul>
+                        <ul class="contact_details__box pull-right">
+                            <li class="top-bar__contact top-bar__contact_phone"><a href="#" title="{{ContactData.BodyContentMobileNoText}}">e-Care Login</a></li>
+                            <li class="top-bar__contact top-bar__contact_email"><a href="#" title="{{ContactData.BodyContentEmailText}}">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-bottom">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="home">
+                                <img src="~/Content/images/homepage/logo_kids.png" alt="Allenkids-logo" />
+
+                            </a>
+                        </div>
+
+                        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+
+                            <ul class="nav navbar-nav navbar-left">
+                                <li class="dropdown" ng-repeat="Tab in Tabs" ng-model="SelectTabs" menurepeat-done>
+                                    <a style="color:#{{ThemeData.TopHeaderSecondLineTextColour}}" target='_self' href="{{Tab.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : Tab.LayoutPageName}}" class="dropdown-toggle" data-toggle="{{Menus[$index].length==0?'none':'dropdown'}}">
+                                        <img src="{{Tab.TabImagePath}}" />
+                                        <span ng-bind-html="trustAsHtml(Tab.TabName)">
+                                            {{Tab.TabName}}
+                                        </span>
+                                        <span class="caret" ng-if="Menus[$index].length>0"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" id="Tab{{Tab.TabId}}" ng-init="GetMenu(Tab.TabId,$index)" ng-hide="Menus[$index].length==0">
+                                        <li ng-repeat="menu in Menus[$index]" ng-model="SelectTabs" menurepeat-done>
+                                            <a style="color:#{{ThemeData.TopHeaderSecondLineTextColour}}" href="{{menu.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : menu.LayoutPageName}}" target='_self' data-toggle={{SubMenus[menu.MenuId].length==0?'none':'collapse'}} data-target="#Menu{{menu.MenuId}}" title="{{menu.MenuName}}" onclick="return anchor(event)">
+                                                <span ng-bind-html="trustAsHtml(menu.MenuName)">{{menu.MenuName}}</span>
+                                                <i class="fa fa-angle-right" aria-hidden="true" ng-hide="SubMenus[menu.MenuId].length==0"></i>
+                                            </a>
+                                            <ul class="dropdown-menu" id="Menu{{menu.MenuId}}" ng-init="GetSubMenu(menu.MenuId,$index)" ng-hide="SubMenus[menu.MenuId].length==0">
+                                                <li ng-repeat="submenu in SubMenus[menu.MenuId]" ng-model="SelectSubMenu">
+                                                    <a ng:href="{{submenu.LayoutPageName=='javascript:void(0)' ? 'javascript:void(0);' : submenu.LayoutPageName}}" target='_self' data-path="{{submenu.PageName}}" title="{{submenu.SubMenuName}}" ng-click="GetDetailBySubMenuId(submenu.SubMenuId)" onclick="return anchor(event)">
+                                                        <span ng-bind-html="trustAsHtml(submenu.SubMenuName)"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        @RenderBody()
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="footer-part">
+                            <h3 class="footer-part-title">Contact us</h3>
+                            <div class="contact-deatil" ng-repeat="ContactData in ContactUsPageData">
+                                <ul class="list list_unstyle list_contact-details">
+
+                                    <li class="list__item list__item_address"><i class="icon-map-marker"></i>{{ContactData.BodyContentAddressText}}</li>
+                                    <li class="list__item list__item_telephone"><i class="icon-phone"></i>{{ContactData.BodyContentMobileNoText}}</li>
+                                    <li class="list__item list__item_email"><a href="mailto:contact@allenkidsswaroopnagar.in"><i class="icon-envelope-alt"></i>{{ContactData.BodyContentEmailText}}</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <div class="copyright" ng-repeat="ContactData in ContactUsPageData">Copyright © Allenkids</>
+            <div class="copyright">
+                © Copyright 2020 All rights reserved by <span class="pvt">Allen House Public School,  Lucknow</span><br>
+                Designed & Maintained by: Franciscan
+            </div>
+            <script src="~/Content/js/jquery.min.js"></script>
+            <script src="~/Content/js/bootstrap.min.js"></script>
+
+
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js'></script>
+
+            <script src='~/Content/js/jquery.bootstrap.newsbox.js'></script>
+            @*<script src='https://kenwheeler.github.io/slick/slick/slick.js'></script>
+            <script src='https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js'></script>
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js'></script>
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.14/js/lightgallery-all.min.js'></script>
+
+            <script src='~/content/js/jquery.min.js'></script>
+
+
+            <script src="~/content/js/bootstrap.min.js"></script>
+            <!---jquery and bootstrap js-->
+            <!--home page banner slider + custom js -->
+            <script src='~/content/js/slick.js'></script>
+            home page banner slider + custom js
+            ---------------classes-carousels--------
+            <script src='~/content/js/owl.carousel.min.js'></script>
+            ---------------classes-carousels--------
+            ---------------Homepage-Bulletin-carousels--------
+            <script src='~/content/js/jquery.bootstrap.newsbox.js'></script>
+            <!-----------------Homepage-Bulletin-carousels---------->
+            <!-----------------Homepage-Youtube-player---------->
+            <!--<script async src="https://www.youtube.com/iframe_api"></script>-->
+            <!-----------------Homepage-Youtube-player---------->
+            <!----------------GALLERY PLUGIN------------------>
+            <script src='~/content/js/picturefill.min.js'></script>
+            <script src='~/content/js/jquery.mousewheel.min.js'></script>
+            <script src="~/content/js/lightgallery-all.min.js"></script>
+
+            <!----------------GALLERY PLUGIN------------------>
+
+            <script src="~/content/js/custom.js"></script>
+            @*<script src="~/Content/js/custom.js"></script>
+            <script src="~/content/js/custom1.js"></script>
+            <script src="~/content/js/custom2.js"></script>
+            <script src="~/content/js/custom3.js"></script>
+            <script src="~/content/js/custom4.js"></script>
+            <script src="~/content/js/custom5.js"></script>*@
+            <script>
+                window.onload = function () {
+                    $(function () {
+                        $(".Modern-Slider").slick({
+                            autoplay: true,
+                            autoplaySpeed: 10000,
+                            speed: 600,
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            pauseOnHover: false,
+                            dots: true,
+                            pauseOnDotsHover: true,
+                            cssEase: 'linear',
+                            // fade:true,
+                            draggable: false,
+                            prevArrow: '<a class="PrevArrow"></a>',
+                            nextArrow: '<a class="NextArrow"></a>',
+                        });
+                        $(".demo1").bootstrapNews({
+                            newsPerPage: 3,
+                            autoplay: true,
+                            pauseOnHover: true,
+                            direction: 'up',
+                            newsTickerInterval: 4000,
+                            onToDo: function () {
+                                //console.log(this);
+                            }
+                        });
+                        $("#event-carousel-1").owlCarousel({
+                            items: 5,
+                            itemsDesktop: [1199, 3],
+                            itemsDesktopSmall: [980, 2],
+                            itemsMobile: [600, 1],
+                            navigation: true,
+                            navigationText: ["", ""],
+                            pagination: true,
+                            autoPlay: true
+                        });
+                        $("#news-slider").owlCarousel({
+                            items: 3,
+                            itemsDesktop: [1199, 3],
+                            itemsDesktopSmall: [980, 2],
+                            itemsMobile: [600, 1],
+                            navigation: true,
+                            navigationText: ["", ""],
+                            pagination: true,
+                            autoPlay: true
+                        });
+                        $("#news-slider1").owlCarousel({
+                            items: 1,
+                            itemsDesktop: [1199, 1],
+                            itemsDesktopSmall: [980, 1],
+                            itemsMobile: [600, 1],
+                            navigation: true,
+                            navigationText: ["", ""],
+                            pagination: true,
+                            autoPlay: true
+                        });
+                        $("#music-dance").owlCarousel({
+                            items: 5,
+                            itemsDesktop: [1199, 3],
+                            itemsDesktopSmall: [980, 2],
+                            itemsMobile: [600, 1],
+                            navigation: true,
+                            navigationText: ["", ""],
+                            pagination: true,
+                            autoPlay: true
+                        });
+
+                        $("#news-slider2").owlCarousel({
+                            items: 3,
+                            itemsDesktop: [1199, 3],
+                            itemsDesktopSmall: [980, 2],
+                            itemsMobile: [600, 1],
+                            navigation: true,
+                            navigationText: ["", ""],
+                            pagination: true,
+                            autoPlay: true
+                        });
+
+
+                    
+
+                    });
+                };
+            </script>
+        </div>
+        </div>
+</body>
+</html>

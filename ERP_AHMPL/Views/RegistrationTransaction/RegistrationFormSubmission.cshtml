@@ -1,0 +1,556 @@
+﻿
+@{
+    ViewBag.Title = "Registration Form Submission";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/RegistrationFormSubmissionController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Registration Form Submission</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Global</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Registration Form Submission</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 mgbt-xs-15">
+
+
+
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Session<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.Partial("ddlSession")
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 search-feild">
+                                                        <label class="control-label"><span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBox("txtSearch", "", new { @class = "form-control", @placeholder = "Search Reg No./Student Name/Mob.No.", @ng_model = "SearchBox", @ng_disabled = "Searchdisabled" })
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+
+                                                            <button class="Srch-btn" ng-click="SearchStudentsDetail()" ng-disabled="Searchdisabled">Search</button>
+                                                        </div>
+                                                        <label class="text text-danger" ng-click="ClearItems()"><i class="fa fa-times" aria-hidden="true"></i> Clear</label>
+
+
+                                                        <div ng-if="items.length>0" class="searchbox" style=" width: calc(100% - 30px);">
+                                                            <table class="table compact table-hover table-striped table-bordered nowrap  dataTable" style="margin: 0px !important;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Reg. No.</th>
+                                                                        <th>Student Name</th>
+                                                                        <th>Class</th>
+                                                                        <th>DOB</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="item in items">
+                                                                        <td>{{item.RegNo}}</td>
+                                                                        <td>{{item.StudentName}}</td>
+                                                                        <td>{{item.RegClassName}}</td>
+                                                                        <td>{{item.DateOfBirth}}</td>
+                                                                        <td>
+                                                                            <button class="btn btn-dark" ng-click="SearchStudentDetail(item.RegFormSaleTransID);"> Get Details</button>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+
+
+
+
+                                                        @*<ul>
+            <li role="presentation" style="border:solid;" ng-repeat="item in items" class="">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="main-title">Reg. No. :- {{item.RegNo}}| Student Name :- {{item.StudentName}}</div>
+
+                            <div class="sub-title">Class :- {{item.RegClassName}}| DOB :- {{item.DateOfBirth}}</div>
+                        </td>
+                        <td class="text-right" style="vertical-align: middle;width: 130px;">
+                            <a class="btn btn-link " ng-click="SearchStudentDetail(item.RegFormSaleTransID);"> Get Details</a>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </li>
+        </ul>*@
+
+
+
+
+
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 mgbt-xs-15">
+                                               
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Date of Submission<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <input id="txtDateofSubmission" type="date" class="form-control clear validate" placeholder=""
+                                                                   ng-model="Date" max="{{endDate}}" min="{{startDate}}" />
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">First Name<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly validate" id="txtFirstName" name="txtFirstName" ng-model="StudentFirstName" placeholder="" type="text" value="">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Middle Name<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly " id="txtMiddleName" name="txtMiddleName" ng-model="StudentMiddleName" placeholder="" type="text" value="">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Last Name<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly" id="txtLastName" name="txtLastName" ng-model="StudentLastName" placeholder="" type="text" value="">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Date of birth<span class="vd_red">*</span></label>
+                                                        <div class="input-box">
+                                                            <input id="txtDateofEnquiry" type="date" class="form-control clear validate" placeholder=""
+                                                                   ng-model="DateOfBirth" ng-change="Calculate()" />
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Date of Birth(Day)<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly" id="txtDay" name="txtDay" ng-model="Days" placeholder="" type="text" value="" ng-disabled="true">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Date of Birth(Month)<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly" id="txtMonth" name="txtMonth" ng-model="Month" placeholder="" type="text" value="" ng-disabled="true">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Date of Birth(Year)<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly" id="txtYear" name="txtYear" ng-model="Year" placeholder="" type="text" value="" ng-disabled="true">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+
+
+                                                        <label class="control-label">Date of Birth in Words<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly " id="txtDateOfBirthInWords" name="txtDateOfBirthInWords" ng-model="DateOfBirthInWords" placeholder="" type="text" value="" ng-disabled="true">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+
+
+
+                                                        <label class="control-label">Age As on 31-03-21(Year)<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly " id="txtAgeAsOnYear" name="txtAgeAsOnYear" ng-model="AgeAsOnYear" placeholder="" type="text" value="" ng-disabled="true">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Age As on 31-03-21(Month)<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly " id="txtAgeAsOnMonth" name="txtAgeAsOnMonth" ng-model="AgeAsOnMonth" placeholder="" type="text" value="" ng-disabled="true">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Class<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <label ng-bind="RegClassName" class="form-control clear textOnly" ng-disabled="true" style="line-height: 17px !important;"></label>
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+
+
+                                                        <label class="control-label">Name of the school currently Studying<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly " id="txtCurrentlyStudyingSchool" name="txtCurrentlyStudyingSchool" ng-model="CurrentlyStudyingSchool" placeholder="" type="text" value="">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Board<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.Partial("ddlBoards")
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Class in which currently studying<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            @Html.Partial("ddlClass")
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                        <label class="control-label">Medium of instruction<span class="vd_red"></span></label>
+                                                        <div class="input-box">
+                                                            <input class="form-control clear textOnly " id="txtMediumOfInstruction" name="txtMediumOfInstruction" ng-model="MediumOfInstruction" placeholder="" type="text" value="">
+                                                            <div class="text-box-msg-r">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="profile-pic-upload-sec">
+                                                    <a class="doanload-link" hef="#">
+                                                        <img src="../Content/profilePic/profile-pic.png" ng-src="{{StudentPhoto}}"
+                                                             alt="ios-down-icon"
+                                                             class="profile-pic-reg-form-submission" ng-model="StudentPhoto">
+                                                    </a>
+                                                    <a class="image-wrapper pic-edit-btn" href="#">
+                                                        <label class="edit glyphicon glyphicon-pencil" for="changeCover" title="Change cover"></label>
+                                                        <input type="file" id="fuStudentPhoto" data-max-file-size-preview="1M"
+                                                               onchange="angular.element(this).scope().SelectFile(this, 'StudentPhoto')"
+                                                               accept="image/*" />
+
+                                                    </a>
+                                                    
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <h6 class="control-label">Marks obtained in the last examination<span class="vd_red"></span></h6>
+                                                <div class="input-box datatable-responsive table-responsive advance-btn-table">
+                                                    <table class="table compact table-hover table-striped table-bordered nowrap  dataTable table-layout-fixed">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr.No.</th>
+                                                                <th>Subject</th>
+                                                                <th>% Marks</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="sl in SubjectList">
+                                                                <td ng-bind="sl.Srno=($index+1)"></td>
+                                                                <td>
+                                                                    <input class="form-control" ng-model="sl.Subject" />
+                                                                </td>
+                                                                <td>
+                                                                    <input class="form-control" ng-model="sl.Marks" allow-only-numbers />
+                                                                </td>
+                                                                <td>
+                                                                    <input class="btn btn-square btn-primary btn-xs" type="button" value="+"
+                                                                           ng-click="AddRow()" ng-if="SubjectList.length==1 || SubjectList.length==sl.Srno" />
+                                                                    <input class="btn btn-square btn-secondary btn-xs" type="button" value="-"
+                                                                           ng-click="RemoveRow(sl.Srno)" ng-if="SubjectList.length>1"
+                                                                            />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right inline-label-input">
+                                                    <label class="control-label">Overall Percentage<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input class="form-control clear textOnly " id="txtOverallPercentage" name="txtOverallPercentage" ng-model="OverallPercentage" placeholder="" type="text" value="">
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Nationality<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlNationality")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Mother Tongue<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlMotherTongue")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Father's Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <input id="txtFatherName" type="text" class="form-control clear validate" placeholder=""
+                                                           ng-model="FatherName" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Mother's Name<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <input id="txtMotherName" type="text" class="form-control clear" placeholder=""
+                                                           ng-model="MotherName" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <div class="phone-number-choice">
+                                                    <label class="control-label">Father Mobile No.<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtFatherContact", "", new { @class = "form-control clear validate", @placeholder = "", @ng_model = "$parent.FatherContact", @maxlength = "10", @validate_mobile_no = "" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-box type-choice">
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" id="PrimaryNo_2" ng-model="PrimaryNo" value="2">
+                                                            <label for="PrimaryNo_1"> <i class="icon-mobile-phone"></i> </label>
+                                                        </div>
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" id="WhatsAppNo_2" ng-model="WhatsAppNo" value="2">
+                                                            <label for="WhatsAppNo_1"><i class="fa fa-whatsapp" aria-hidden="true"></i></label>
+                                                        </div>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <div class="phone-number-choice">
+                                                    <label class="control-label">Mother Mobile No.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtMotherContact", "",
+                                                       new { @class = "form-control clear {{PrimaryNo=='3' || WhatsAppNo=='3'?'validate':''}}", @placeholder = "", @ng_model = "$parent.MotherContact", @maxlength = "10", @validate_mobile_no = "" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-box type-choice">
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" id="PrimaryNo_3" ng-model="PrimaryNo" value="3">
+                                                            <label for="PrimaryNo_1"> <i class="icon-mobile-phone"></i> </label>
+                                                        </div>
+                                                        <div class="radio radio-primary radio-box">
+                                                            <input type="radio" id="WhatsAppNo_3" ng-model="WhatsAppNo" value="3">
+                                                            <label for="WhatsAppNo_1"><i class="fa fa-whatsapp" aria-hidden="true"></i></label>
+                                                        </div>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Email(Father's)<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtFatherEmail", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "$parent.FatherEmail", @validate_email_id = "" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Email(Mother's)<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtMotherEmail", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "$parent.MotherEmail", @validate_email_id = "" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">
+                                                        Academic Qualification(Father's)<span class="vd_red"></span>
+                                                    </label>
+                                                    <div class="input-box">
+                                                        <input id="txtAcademicQualification" type="text" class="form-control clear" placeholder=""
+                                                               ng-model="FatherAcademicQualification" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">
+                                                        Academic Qualification(Mother's)<span class="vd_red"></span>
+                                                    </label>
+                                                    <div class="input-box">
+                                                        <input id="txtAcademicQualification" type="text" class="form-control clear" placeholder=""
+                                                               ng-model="MotherAcademicQualification" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Occupation(Father's)<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input id="txtOccupation" type="text" class="form-control clear" placeholder=""
+                                                               ng-model="FatherOccupation" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Occupation(Mother's)<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input id="txtOccupation" type="text" class="form-control clear" placeholder=""
+                                                               ng-model="MotherOccupation" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Nature of Job(Father's)<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input id="txtNatureOfJob" type="text" class="form-control clear" placeholder=""
+                                                               ng-model="FatherNatureOfJob" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Nature of Job(Mother's)<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input id="txtNatureOfJob" type="text" class="form-control clear" placeholder=""
+                                                               ng-model="MotherNatureOfJob" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Residential Address.<span class="vd_red"></span></label>
+                                                    <div class="input-box">
+                                                        <input id="txtResidentialAddress" type="text" class="form-control clear" placeholder=""
+                                                               ng-model="ResidentialAddress" />
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @*<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+            <label class="control-label">Mode of communication<span class="vd_red">*</span></label>
+            <div class="input-box">
+                @Html.Partial("ddlModeOfCommunication")
+                <div class="text-box-msg-r">
+                </div>
+            </div>
+        </div>*@
+
+                                                <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                    @Html.Partial("ActionView")
+                                                </div>
+</form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<script>
+    $('#ddlClass').removeClass('validate');
+    $('#ddlCityArea').removeClass('validate');
+    $('#ddlGender').removeClass('validate');
+    $('#ddlCollegeBranch').removeClass('validate');
+</script>

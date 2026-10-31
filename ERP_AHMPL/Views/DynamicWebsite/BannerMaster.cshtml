@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "BannerMaster";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script src="~/Scripts/myjslib/BannerMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="ImageId" id="ImageId" name="ImageId" value="" />
+<div class="app-content  my-3 my-md-5" ng-init="GetRecommedSize();">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+                    <h5 class="txt-dark">Create Banner</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Unit Manager</span></li>
+                        <li class="breadcrumb-item">Unit Detail Master</li>
+                        <li class="breadcrumb-item active" aria-current="page">Create Banner</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="br-pagebody">
+                <div class="">
+                    <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Image Title</label>
+                                        @Html.TextBox("BannerTitle", "", new { @class = "form-control clear", @ng_model = "BannerTitle", @placeholder = "Banner Title" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Image Name</label>
+                                        @Html.TextBox("BannerImageName", "", new { @class = "form-control clear validate", @ng_model = "BannerImageName", @placeholder = "Banner Image Name" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Image Type</label>
+                                        @Html.DropDownList("BannerType", new List<SelectListItem>{
+                                            new SelectListItem{Text="Select", Value=""},
+                                            new SelectListItem{Text="Slider", Value="Slider"},
+                                            new SelectListItem{Text="Banner", Value="Banner"}
+                                        },
+                                            new { @class = "select2 form-control validate", @ng_model = "BannerType", @ng_change = "HidePageSliderCategoryddl();" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-hide="CategoryCode" ng-init="CategoryCode=true">
+                                    <div class="form-group">
+                                        <label>Page Slider Category</label>
+                                        <select id="ddlPageBannerCategoryCode" class="select2 form-control validate" ng-model="PageBannerCategoryCode" ng-init="GetPageCategoryCode();BindUnit();">
+                                            <option value="">Select</option>
+                                            <option ng-repeat="PageCategoryCode in PageCategoryCodeList" value="{{PageCategoryCode.Code}}">{{PageCategoryCode.CategoryName}}</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-hide="CategoryCode">
+                                    <label class="content-title">Venue</label>
+                                    <div class="input-box">
+                                        <input id="txtVenue" class="form-control clear" ng-model="Venue" />
+                                        <div class="text-box-msg-r">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-hide="CategoryCode">
+                                    <label class="content-title">Event Date</label>
+                                    <div class="input-box ">
+                                        <input type="date" id="EventDate" class="form-control clear" ng-model="EventDate" />
+                                        <div class="text-box-msg-r">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Image Alternate Text</label>
+                                        @Html.TextBox("BanneraltText", "", new { @class = "form-control clear validate", @ng_model = "BanneraltText", @placeholder = "Alternate Image Name" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label>Banner Description 1</label>
+                                        @Html.TextBox("BannerDescription1", "", new { @class = "form-control clear", @ng_model = "BannerDescription1", @placeholder = "Banner Description" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label>Banner Description 2</label>
+                                        @Html.TextBox("BannerDescription2", "", new { @class = "form-control clear", @ng_model = "BannerDescription2", @placeholder = "Banner Description" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label><b>Image Height</b></label>
+                                        <input class="form-control" type="text" maxlength="5" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="ImageHeight" ng-model="ImageHeight" placeholder="Image Height" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label><b>Image object-fit Property</b></label>
+                                        @Html.DropDownList("ImageObjectFit", new List<SelectListItem>{
+                                                                   new SelectListItem{Text="Select", Value=""},
+                                                                   new SelectListItem{Text="fill", Value="fill"},
+                                                                   new SelectListItem{Text="contain", Value="contain"},
+                                                                   new SelectListItem{Text="cover", Value="cover"},
+                                                                   new SelectListItem{Text="none", Value="none"},
+                                                                   new SelectListItem{Text="scale-down", Value="scale-down"}
+                                                               },
+                                                                   new { @class = "select2 form-control validate", @ng_model = "ImageObjectFit" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Slogan</label>
+                                        @Html.TextBox("Slogan", "", new { @class = "form-control clear", @ng_model = "Slogan", @placeholder = "Slogan" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group">
+                                        <label>Slider Url</label>
+                                        @Html.TextBox("Slider Url", "", new { @class = "form-control clear", @ng_model = "SliderUrl", @placeholder = "Slider Url Link" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label><b>Banner/Slider Image</b></label>
+                                        <img class="img-fix" id="imgfileInput" src="~/Content/noimage.png" ng-model="imgfileInput" ng-src="{{imgfileInput}}" alt="" width="150" height="150" ng-click="OpenFileUploadBanner()">
+                                        <input onchange="angular.element(document).scope().fuBannerImageChange(this)" type="file" accept="image/jpg,image/png,image/jpeg" id="fileInput" ng-model="fileInput" multiple class="validate" width="150" />
+                                    </div>
+                                    <div class="details" ng-repeat="ImageSizee in  RecommedSizeImageData">
+                                        <b>Recommended Size:</b>&nbsp;
+                                        <span style="color:red">{{ImageSizee.ContentImageDataDefaultSize}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div class="form-group-div">
+                                        <label><b>Slogan Image Size(width:420px-height:350px)</b></label>
+                                        <img class="img-fix" id="imgSloganImage" src="~/Content/noimage.png" ng-model="imgSloganImage" ng-src="{{imgSloganImage}}" alt="" ng-click="OpenFileUpload()">
+                                        <input type="file" id="SloganfileInput" placeholder="Upload images"
+                                               name="pic" accept="image/*" style="display:none"
+                                               onchange="angular.element(document).scope().fuSloganImageChange(this)">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    @Html.Partial("ActionView")
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    @Html.Partial("SearchAngularJs")
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "CollegeDefineCourseTeacher";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/CollegeDefineCourseTeacherController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Define Course Teacher</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>TimeTable</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Define Course Teacher</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                                <div class="table-responsive">
+                                                    <table id="example2" class="table table-striped table-bordered compact" style="width:100%" ng-init="AddRow()">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S.No.</th>
+                                                                <th>Course</th>
+                                                                <th>Branch</th>
+                                                                <th>Semester</th>
+                                                                <th>Course Teacher</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="obj in DefineCourseTeacherList">
+                                                                <td ng-bind="obj.Srno=($index+1)"></td>
+                                                                <td>
+                                                                    <select id="ddlCourse" class="select2 form-control validate"
+                                                                            ng-model="obj.CourseCode"
+                                                                            ng-init="GetCollegeCourse();" ng-change="GetCollegeBranch(obj.CourseCode)">
+                                                                        <option value="">Select</option>
+                                                                        <option ng-repeat="cl in CollegeCourseList" value="{{cl.Code}}">
+                                                                            {{cl.CollegeCourseName}}
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id="ddlBranch" class="select2 form-control validate"
+                                                                            ng-model="obj.BranchCode"
+                                                                            ng-init="GetCollegeCourse();" ng-change="ddlCourse_Change(obj)">
+                                                                        <option value="">Select</option>
+                                                                        <option ng-repeat="cl in CollegeBranchList" value="{{cl.Code}}">
+                                                                            {{cl.CollegeBranchName}}
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id="ddlSemester" class="select2 form-control validate"
+                                                                            ng-model="obj.SemesterCode" ng-init="GetSemesterList(obj)">
+                                                                        <option value="">Select </option>
+                                                                        <option ng-repeat="sl in obj.SemesterList" value="{{sl.Code}}"
+                                                                                ng-init="">
+                                                                            {{sl.Semester}}
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id="ddlEmployeeName" class="select2 form-control clear validate" ng-init="GetEmployee()" ng-model="obj.EmployeeCode">
+                                                                        <option value="">Select </option>
+                                                                        <option ng-repeat="x in TeacherList" value="{{x.EmployeeCode}}">{{x.EmployeeName}}</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <input class="btn btn-square btn-primary btn-xs" type="button" value="+" ng-click="AddRow()" ng-if="DefineCourseTeacherList.length==1 || DefineCourseTeacherList.length==obj.Srno" />
+                                                                    <input class="btn btn-square btn-secondary btn-xs" type="button" value="-" ng-click="RemoveRow(obj.Srno)" ng-if="DefineCourseTeacherList.length>1" />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                @Html.Partial("ActionView")
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+
+
+
+
+
+

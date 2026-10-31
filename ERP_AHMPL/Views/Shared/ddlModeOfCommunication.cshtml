@@ -1,0 +1,7 @@
+﻿@Html.DropDownList("ddlModeOfEnquiry", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Offline", Value="Offline"},
+    new SelectListItem{Text="Online", Value="Online"}
+},
+    new { @class = "select2 form-control validate", @ng_model = "ModeOfEnquiry", @ng_init = "ModeOfEnquiry='Offline'" })
+

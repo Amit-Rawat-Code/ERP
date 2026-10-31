@@ -1,0 +1,227 @@
+﻿
+@{
+    ViewBag.Title = "Employee Leave Application";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/EmployeeLeaveApplicationController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Employee Leave Application</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Employee</span></li>
+                <li><span>Attendance</span></li>
+                <li class="active"><span>Employee Leave Application</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-padding box-r-to-l">
+                                            <div class="col-md-12 col-sm-12 col-xs-12  mgbt-xs-15">
+                                                <div class="table-design1 ">
+                                                    <h3>Leave Balance Status</h3>
+                                                    <h7>{AL - Alloted Leaves, EL- Eligible Leaves, LT - Leaves Taken, B - Balance Leaves }</h7>
+                                                        @Html.Partial("TableLeaveDetails")
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-padding ">
+
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Department<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlDepartment")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Designation<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlDesignation")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Application Date<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtApplicationDate", "", new { @class = "form-control clear validate", @type = "Date", @ng_model = "VoucherDate", @placeholder = "Application Date" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+            <label class="control-label">In Absence Responsible Employee<span class="vd_red">*</span></label>
+            <div class="input-box">
+                <select id="ddlResponsibleEmployee" class="select2 form-control validate" ng-model="ResEmployeeValue" ng-init="GetEmployees();">
+                    <option value="">Select Employee</option>
+                    <option ng-repeat="el in EmployeesList|filter:{EmployeeCode:'!' +EmployeeValue}" value="{{el.EmployeeCode}}">{{el.FullName}}</option>
+                </select>
+                <div class="text-box-msg-r">
+                </div>
+            </div>
+        </div>*@
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave For<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select class="form-control validate clear" id="ddlLeaveFor" ng-model="LeaveFor">
+                                                        <option value="">---Select Leave For---</option>
+                                                        <option value="F">Full</option>
+                                                        <option value="HDF">First Half</option>
+                                                        <option value="HDS">Second Half</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+            <label class="control-label">Remarks<span class="vd_red">*</span></label>
+            <div class="input-box">
+                @Html.TextBox("txtRemarks", "", new { @class = "form-control clear validate", @ng_model = "Remarks", @placeholder = "" })
+                <div class="text-box-msg-r">
+                </div>
+            </div>
+        </div>*@
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave From<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtFromDate", "", new
+                                               {
+                                                   @class = "form-control",
+                                                   @type = "date",
+                                                   @ng_model = "FromDate"
+                                               })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave To<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtToDate", "", new
+                                               {
+                                                   @class = "form-control",
+                                                   @type = "date",
+                                                   @ng_model = "ToDate",
+                                                   @ng_change = "GetAllLeavesDates();"
+                                               })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Leave Reason<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtLeaveReason", "", new { @class = "form-control clear validate", @ng_model = "LeaveReason", @placeholder = "Reason" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15" ng-hide="AllDatesDiv" , ng-init="AllDatesDiv=true">
+                                                <div class="datatable-responsive table-responsive advance-btn-table no-padding">
+                                                    <table id="tblLeaveTypeDetail" class="table compact compact2 table-hover  table-bordered nowrap mgbt-xs-0 height-175 text-center " ng-model="LeaveTypeDetail">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="">Leave Date</span></th>
+                                                                <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="">Leave Type</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="dates in AllLeavesDates">
+                                                                <td>
+                                                                    {{dates.DateData}}
+                                                                </td>
+                                                                <td>
+                                                                    <select id="ddlLeaveType" class="select2 form-control validate" ng-model="dates.AbbrTypeIdEmployee" ng-init="GetLeaveTypeFirst();"
+                                                                            ng-change="FillCountLeaveAccordingLeaveType(AllLeavesDates);ddlLeaveType_Change()">
+                                                                        <option value="">Select LeaveType</option>
+                                                                        <option ng-repeat="leaveType in LeaveTypes" value="{{leaveType.AbbrTypeId}}">{{leaveType.AbbrType}}</option>﻿
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">On Leave Contact No.<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtOnLeaveContactNo", "", new { @class = "form-control clear validate numbersOnly", @ng_model = "OnLeaveContactNo", @placeholder = "", @onblur = "validatePhoneNo('#txtOnLeaveContactNo')", @maxlength = "10" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">On Leave Address<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtOnLeaveAddress", "", new { @class = "form-control clear validate", @ng_model = "OnLeaveAddress", @placeholder = "" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Communication Preferred Mode<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select class="form-control validate clear" id="ddlMode" ng-model="CommunicationPrefferedMode">
+                                                        <option value="">Select Preferred Mode</option>
+                                                        <option value="Mobile">Mobile</option>
+                                                        <option value="Email">Email</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn-mgbt-5 btn1-nM3-1">
+
+                                            @Html.Partial("ActionView")
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+
+</div>

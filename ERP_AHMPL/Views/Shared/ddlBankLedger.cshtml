@@ -1,0 +1,4 @@
+﻿<select id="ddlBankAC" class="select2 form-control validate" ng-model="BankACModel"   ng-change="BindRuningBalance(BankACModel)">
+    <option value="">Select</option>
+    <option ng-repeat="bankac in BankACList" value="{{bankac.SubCode}}">{{bankac.Name}}</option>
+</select>

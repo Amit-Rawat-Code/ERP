@@ -1,0 +1,5 @@
+﻿
+<select id="ddlSInvoiceType" class="select2 form-control validate" ng-model="SInvoiceTypeCode" ng-init="BindSInvoiceType();" ng-change="getInvoiceTypeDetails(SInvoiceTypeCode)">
+    <option value="">Select</option>
+    <option ng-repeat="sinvoicetype in SInvoiceTypeList" value="{{sinvoicetype.Code}}">{{sinvoicetype.Name}}</option>
+</select>

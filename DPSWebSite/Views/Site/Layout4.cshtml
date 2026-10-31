@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "ImageContentPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="website-main-content" ng-init="GetAboutUs();" ng-cloak>
+    @*<div ng-repeat="PageData in ImageContentPageData">*@
+    <section class="page-banner-breadcrumbs">
+        <div class="container">
+            <div class="breadcrumbs">
+                <span class="page-name">AllenKids Swaroopnagar</span><span class="seprator">></span><span class="page-name">{{ImageContentPageData[0].UnitTitle}}</span>
+                <h3 class="title-of-page">
+                    {{ImageContentPageData[0].UnitTitle}}
+                </h3>
+            </div>
+        </div>
+    </section>
+    <section class="legacy-section-photo-discription From-Chairman-desk">
+        <div class="container">
+            <div class="col-sm-6">
+                <div class="photo-section">
+                    <img style="width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImageWidth}};object-fit:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImageObjectFit}};border-radius:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImageBorderRadius}};border-width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImageBorder}};border-style: solid;border-color:#6b6c6d;" height="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImageHeight}}" src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath}}" alt="display-photo" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].ImgPath)">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="discription-section">
+                    <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].BodyContent)">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section why-choose-allen-kids our-approach">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBL'})[0].BodyContent)">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+

@@ -1,0 +1,818 @@
+﻿
+@{
+    ViewBag.Title = "CollegeEnquiryDashBoradLevel3";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/CollegeEnquiryDashboardLavel3Controller.js?Ver=@ViewBag.Version"></script>
+@*<style>
+        .very-small-font {
+            font-size: 8px;
+        }
+
+        .small-font {
+            font-size: 10px;
+        }
+
+        .big-font {
+            font-size: 14px;
+        }
+
+        .modal-body {
+            overflow-y: auto;
+        }
+
+        #anchor {
+            display: none;
+        }
+
+        .lbl-padding-25 {
+            padding-right: 25px;
+        }
+
+        .dataTables_filter {
+            float: right;
+        }
+
+        .row-1 {
+            margin: -10px 0px 0px 0px;
+            text-align: center;
+        }
+    </style>*@
+<style>
+
+
+    .checkbox, .radio {
+        padding-top: 7px;
+        padding-bottom: 0px;
+        min-height: 27px;
+        margin-top: 0;
+        margin-bottom: 0px;
+    }
+
+    .pull-left.section-title {
+        font-size: 17px;
+        padding: 5px 0px;
+        color: #212121;
+    }
+
+    .filter.pull-right.dashboard-filter table {
+        margin: 0;
+    }
+
+    .section-title-filter {
+        padding: 10px 0px;
+        display: table;
+    }
+
+    .card h4 {
+        font-size: 20px;
+        margin-bottom: 0px;
+        font-weight: 400;
+        color: #fff;
+    }
+
+    .card {
+        border: 1px solid #484848;
+        text-align: center;
+        padding: 20px;
+        border-radius: 0px;
+        transition: all ease-in .5s;
+        margin-bottom: 20px;
+        color: #fff;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 1px 11px 0 rgb(136, 136, 136);
+        box-shadow: 0 1px 11px 0 rgb(136, 136, 136);
+    }
+
+    /*    .card p {
+            padding: 20px 0px 0px;
+            font-size: 20px;
+            color: #fff;
+        }*/
+    .dataTables_scrollBody {
+        overflow: scroll !important;
+        height: 400px;
+    }
+
+    .card-box-count .card a {
+        display: inline-block;
+        border-radius: 50%;
+        background: #ffff;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        margin-top: 10px;
+        font-size: 20px;
+        -webkit-box-shadow: 0 1px 11px 0 rgb(136 136 136);
+        box-shadow: 0 1px 11px 0 rgb(136 136 136);
+        text-decoration: underline;
+    }
+
+    .card-box-count .card p {
+        display: inline-block;
+        border-radius: 50%;
+        background: #ffff;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        margin-top: 10px;
+        font-size: 20px;
+        -webkit-box-shadow: 0 1px 11px 0 rgb(136 136 136);
+        box-shadow: 0 1px 11px 0 rgb(136 136 136);
+        color: #000;
+    }
+</style>
+
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+
+            <h5 class="txt-dark">Level 3</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>DashBoard</span></li>
+                <li class="active"><span>Level-3 DashBoard</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="br-pagebody">
+        <div class="panel-wrapper ">
+            <div class="panel-body">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section-title-filter">
+                    <div class="pull-left section-title">
+
+                        <label> List of Open Enquiries  </label>
+                    </div>
+                    @*<div class=" filter pull-right dashboard-filter" style="">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered compact ">
+                                    <tr>
+                                        <td>
+                                            Filter
+                                        </td>
+                                        <td>
+                                            <select id="ddlEnquiryType" autocomplete='address-level2' class="select2 form-control"
+                                                    ng-model="EnquiryTypeCode" ng-init="GetEnquiryType('Both')" ng-change="DashBoardfilter()">
+                                                <option value="">Select Enquiry Type</option>
+                                                <option ng-repeat="etl in EnquiryTypeList" ng-value="etl.Code">{{etl.EnquiryType}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            @Html.Partial("ddlEnquirySource")
+                                        </td>
+                                        <td>
+                                            <select id="ddlEnquirySession" autocomplete='address-level2' class="select2 form-control"
+                                                    ng-model="SessionIdForEnquiry" ng-init="GetSession()" ng-change="DashBoardfilter();">
+                                                <option value="">Select Session</option>
+                                                <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>*@
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example1" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Session</th>
+                                    <th>Date of Enquiry </th>
+                                    <th>Enquiry No.</th>
+                                    <th>Student Name</th>
+                                    <th>Mobile No.</th>
+                                    <th>Course</th>
+                                    <th>Enquiry By</th>
+                                    <th>Visitor Name</th>
+                                    <th>Enquiry Type</th>
+                                    <th>Enquiry Source</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="efl in EnquiryFormList" enquiry-form-list>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}" ng-bind="$index+1"></td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.SessionName}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}"><span style="display:none">{{efl.VD_YYYYMMDD}}</span>{{efl.VDate}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.PVNo}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.StudentName}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.Mobile}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.EnquiredCourse}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.EnquiryBy}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.VisitorName}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.EnquiryType}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.EnquirySource}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">{{efl.StatusName}}</td>
+                                    <td class="{{efl.StatusName=='Adm'?'green-bg':efl.color==0?'red-bg':''}}">
+                                        <button type="button" class="btn btn-default" ng-click="Redirect(efl.TransId)" ng-if="efl.StatusName!='Adm'">
+                                            View
+                                            <span class="transfer" ng-if="efl.Transfered">T</span>
+                                        </button>
+                                        @*<input type="button" class="btn btn-default" value="View" ng-click="Redirect(efl.TransId)" ng-if="efl.StatusName!='Adm'" ></input>*@
+                                    </td>
+                                </tr>
+                                <tr ng-if="EnquiryFormList.length==0"><td colspan="13" class="text-center">No, Open Enquiries Found.</td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="S.No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Session" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Date of Enquiry" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Student Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Mobile No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Class" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry By" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Visitor Name" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Source" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section-title-filter">
+                    <div class="pull-left section-title">
+
+                        <label> Follow Up List  </label>
+                    </div>
+                    @*<div class=" filter pull-right dashboard-filter">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered compact ">
+                                    <tr>
+                                        <td>
+                                            Filter
+                                        </td>
+                                        <td>
+                                            <select id="ddlEnquiryType2" autocomplete='address-level2' class="select2 form-control"
+                                                    ng-model="EnquiryTypeCode2" ng-init="GetEnquiryType('Both')" ng-change="DashBoardfilter()">
+                                                <option value="">Select Enquiry Type</option>
+                                                <option ng-repeat="etl in EnquiryTypeList" ng-value="etl.Code">{{etl.EnquiryType}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+
+                                            @Html.DropDownList("ddlFollowupCategory2", new List<SelectListItem>{
+                                                new SelectListItem{Text="Select Category", Value=""},
+                                                new SelectListItem{Text="A", Value="A"},
+                                                new SelectListItem{Text="B", Value="B"},
+                                                new SelectListItem{Text="C", Value="C"},
+                                                new SelectListItem{Text="X", Value="X"}
+                                                },
+                                            new { @class = "select2 form-control", @ng_model = "FollowupCategory", @ng_change = "DashBoardfilter()" })
+
+                                        </td>
+                                        <td>
+                                            <select id="ddlEnquirySession2" autocomplete='address-level2' class="select2 form-control"
+                                                    ng-model="SessionIdForFollowup" ng-init="GetSession()" ng-change="DashBoardfilter();">
+                                                <option value="">Select Session</option>
+                                                <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                            </select>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>*@
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>SR.No.</th>
+                                    <th>Session</th>
+                                    <th>Date of Enquiry</th>
+                                    <th>Enquiry No.</th>
+                                    <th>Student</th>
+                                    <th>Course</th>
+                                    <th>Mobile</th>
+                                    <th>Enquiry Type</th>
+                                    <th>Enquiry Source</th>
+                                    <th>Follow UP Count</th>
+                                    <th>Last Date Of Follow UP</th>
+                                    <th>Last Remark</th>
+                                    <th>Next Follow UP Date</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in EnquiryDashBoardFollowUpList" enquiry-follow-ups-list>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}" ng-bind="$index+1"></td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.SessionName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.VD_YYYYMMDD}}</span>{{data.VDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.PVNo}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.StudentName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquiredCourse}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.Mobile}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquiryType}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquirySource}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.FollowUpCount}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.LFD_YYYYMMDD}}</span>{{data.LastFollowUpDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.LastRemark}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.NFD_YYYYMMDD}}</span>{{data.NextFollowupDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.StatusName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.FollowupCategory}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><input type="button" class="btn btn-default" value="View" ng-click="Redirect(data.TransId)" ng-if="data.StatusName!='Adm'" /></td>
+                                </tr>
+
+                                <tr ng-if="EnquiryDashBoardFollowUpList.length==0"><td colspan="16" class="text-center">No, Follow Up List Found</td></tr>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="SR.No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Session" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Date of Enquiry" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Student" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Class" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Mobile" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Source" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Follow UP Count" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Date Of Follow UP" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Remark" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Next Follow UP Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Category" /></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                    <div class="row card-box-count">
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="card">
+                                <h4><b>Total Open Enquiry Count</b></h4>
+                                <p>
+                                    {{DashBoardStatus[0].TodayEnquiryCount}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="card">
+                                <h4><b>Total Enquiry Followups</b></h4>
+                                <p>
+                                    {{DashBoardStatus[0].TotalFollowUps}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="card">
+                                <h4><b>Today Due Followups</b></h4>
+                                <a href="" data-toggle="modal" data-target="#TodayDueFollowups">
+                                    {{DashBoardStatus[0].TodayDueFollowUps}}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="card">
+                                <h4><b>Total Due Followups</b></h4>
+                                <a href="" data-toggle="modal" data-target="#TotalDueFollowupList">
+                                    {{DashBoardStatus[0].TotalDueFollowUps}}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="card">
+                                <h4><b>Total Closed Enquiry</b></h4>
+                                <a href="" data-toggle="modal" data-target="#TotalClosedEnquiry">
+                                    {{DashBoardStatus[0].TotalClosedEnqirys}}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="card">
+                                <h4><b>Total Transfered Enquiry</b></h4>
+                                <a href="" data-toggle="modal" data-target="#TotalTransferedEnquiry">
+                                    {{DashBoardStatus[0].TotalTransferedEnquiry}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <div class="pull-left section-title">
+
+                                <label>Categorywise Pending Followups </label>
+                            </div>
+
+
+                        </div>
+                        <div class="col-sm-12 col-sm-12 col-xs-12">
+
+                            <table class="table table-striped table-bordered compact" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No.</th>
+                                        <th>Category</th>
+                                        <th>Description</th>
+                                        <th>Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="cdf in CategorywiseDueFollowups">
+                                        <td ng-bind="$index+1"></td>
+                                        <td>{{cdf.Name}}</td>
+                                        <td>{{cdf.Description}}</td>
+                                        <td>{{cdf.Count}}</td>
+                                    </tr>
+                                    <tr ng-if="CategorywiseDueFollowups.length==0"><td colspan="4" class="text-center">No, Category Wise Follow Up List Found</td></tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-bottom:15px;">
+
+                            <input type="button" value="New Enquiry" ng-click="NewEnquiry()" class="pull-right btn-me btn-primary hvr-float-shadow" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal TodayDueFollowups -->
+<div class="modal fade" id="TodayDueFollowups" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example3" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>SR.No.</th>
+                                    <th>Action</th>
+                                    <th>Session</th>
+                                    <th>Date of Enquiry</th>
+                                    <th>Enquiry No.</th>
+                                    <th>Next Follow UP Date</th>
+                                    <th>Student</th>
+                                    <th>Course</th>
+                                    <th>Mobile</th>
+                                    <th>Enquiry Type</th>
+                                    <th>Enquiry Source</th>
+                                    <th>Follow UP Count</th>
+                                    <th>Last Date Of Follow UP</th>
+                                    <th>Last Remark</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                enquiryTodayFollowUpsList
+                                <tr ng-repeat="data in TodayDueFollowupList" enquiry-today-follow-ups-list>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}" ng-bind="$index+1"></td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><input type="button" class="btn btn-default" value="View" ng-click="Redirect(data.TransId)" ng-if="data.StatusName!='Adm'" /></td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.SessionName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.VD_YYYYMMDD}}</span>{{data.VDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.PVNo}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.NFD_YYYYMMDD}}</span>{{data.NextFollowupDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.StudentName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquiredCourse}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.Mobile}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquiryType}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquirySource}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.FollowUpCount}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.LFD_YYYYMMDD}}</span>{{data.LastFollowUpDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.LastRemark}}</td>
+
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.StatusName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.FollowupCategory}}</td>
+
+                                </tr>
+
+                                <tr ng-if="TodayDueFollowupList.length==0"><td colspan="15" class="text-center">No, Follow Up List Found</td></tr>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="SR.No." /></td>
+                                    <td></td>
+                                    <td><input type="text" class="form-control" placeholder="Session" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Date of Enquiry" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Next Follow UP Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Student" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Class" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Mobile" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Source" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Follow UP Count" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Date Of Follow UP" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Remark" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Category" /></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal TotalDueFollowupList -->
+<div class="modal fade" id="TotalDueFollowupList" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example4" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>SR.No.</th>
+                                    <th>Action</th>
+                                    <th>Session</th>
+                                    <th>Date of Enquiry</th>
+                                    <th>Enquiry No.</th>
+                                    <th>Next Follow UP Date</th>
+                                    <th>Student</th>
+                                    <th>Course</th>
+                                    <th>Mobile</th>
+                                    <th>Enquiry Type</th>
+                                    <th>Enquiry Source</th>
+                                    <th>Follow UP Count</th>
+                                    <th>Last Date Of Follow UP</th>
+                                    <th>Last Remark</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in TotalDueFollowupList" enquiry-total-follow-ups-list>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}" ng-bind="$index+1"></td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><input type="button" class="btn btn-default" value="View" ng-click="Redirect(data.TransId)" ng-if="data.StatusName!='Adm'" /></td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.SessionName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.VD_YYYYMMDD}}</span>{{data.VDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.PVNo}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.NFD_YYYYMMDD}}</span>{{data.NextFollowupDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.StudentName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquiredCourse}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.Mobile}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquiryType}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquirySource}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.FollowUpCount}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.LFD_YYYYMMDD}}</span>{{data.LastFollowUpDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.LastRemark}}</td>
+
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.StatusName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.FollowupCategory}}</td>
+
+                                </tr>
+
+                                <tr ng-if="TotalDueFollowupList.length==0"><td colspan="15" class="text-center">No, Follow Up List Found</td></tr>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="SR.No." /></td>
+                                    <td></td>
+                                    <td><input type="text" class="form-control" placeholder="Session" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Date of Enquiry" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Next Follow UP Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Student" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Class" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Mobile" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Source" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Follow UP Count" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Date Of Follow UP" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Remark" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Category" /></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal TotalClosedEnquiry -->
+<div class="modal fade" id="TotalClosedEnquiry" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example5" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>SR.No.</th>
+                                    <th>Action</th>
+                                    <th>Session</th>
+                                    <th>Date of Enquiry</th>
+                                    <th>Enquiry No.</th>
+                                    <th>Next Follow UP Date</th>
+                                    <th>Student</th>
+                                    <th>Course</th>
+                                    <th>Mobile</th>
+                                    <th>Enquiry Type</th>
+                                    <th>Enquiry Source</th>
+                                    <th>Follow UP Count</th>
+                                    <th>Last Date Of Follow UP</th>
+                                    <th>Last Remark</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in ClosedEnquiryList" enquiry-closed-follow-ups-list>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}" ng-bind="$index+1"></td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><input type="button" class="btn btn-default" value="View" ng-click="Redirect(data.TransId)" ng-if="data.StatusName!='Adm'" /></td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.SessionName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.VD_YYYYMMDD}}</span>{{data.VDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.PVNo}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.NFD_YYYYMMDD}}</span>{{data.NextFollowupDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.StudentName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquiredCourse}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.Mobile}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquiryType}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.EnquirySource}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.FollowUpCount}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}"><span style="display:none">{{data.LFD_YYYYMMDD}}</span>{{data.LastFollowUpDate}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.LastRemark}}</td>
+
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.StatusName}}</td>
+                                    <td class="{{data.StatusName=='Adm'?'green-bg':data.color==0?'red-bg':IsToday(data.NextFollowupDate)?'yellow-bg':''}}">{{data.FollowupCategory}}</td>
+
+                                </tr>
+
+                                <tr ng-if="ClosedEnquiryList.length==0"><td colspan="15" class="text-center">No, Closed Enquiry Found</td></tr>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="SR.No." /></td>
+                                    <td></td>
+                                    <td><input type="text" class="form-control" placeholder="Session" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Date of Enquiry" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Next Follow UP Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Student" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Class" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Mobile" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Source" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Follow UP Count" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Date Of Follow UP" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Remark" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Category" /></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal TotalTransferedEnquiry -->
+<div class="modal fade" id="TotalTransferedEnquiry" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example6" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>SR.No.</th>
+                                    <th>Action</th>
+                                    <th>Session</th>
+                                    <th>Date of Enquiry</th>
+                                    <th>Enquiry No.</th>
+                                    <th>Next Follow UP Date</th>
+                                    <th>Student</th>
+                                    <th>Course</th>
+                                    <th>Mobile</th>
+                                    <th>Enquiry Type</th>
+                                    <th>Enquiry Source</th>
+                                    <th>Follow UP Count</th>
+                                    <th>Last Date Of Follow UP</th>
+                                    <th>Remark</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in TransferedEnquiryList" enquiry-transfer-list>
+                                    <td ng-bind="$index+1"></td>
+                                    <td><input type="button" class="btn btn-default" value="View" ng-click="Redirect(data.TransId)" /></td>
+                                    <td>{{data.SessionName}}</td>
+                                    <td><span style="display:none">{{data.VD_YYYYMMDD}}</span>{{data.VDate}}</td>
+                                    <td>{{data.PVNo}}</td>
+                                    <td><span style="display:none">{{data.NFD_YYYYMMDD}}</span>{{data.NextFollowupDate}}</td>
+                                    <td>{{data.StudentName}}</td>
+                                    <td>{{data.EnquiredCourse}}</td>
+                                    <td>{{data.Mobile}}</td>
+                                    <td>{{data.EnquiryType}}</td>
+                                    <td>{{data.EnquirySource}}</td>
+                                    <td>{{data.FollowUpCount}}</td>
+                                    <td><span style="display:none">{{data.LFD_YYYYMMDD}}</span>{{data.LastFollowUpDate}}</td>
+                                    <td>{{data.Remark}}</td>
+                                    <td>{{data.StatusName}}</td>
+                                    <td>{{data.FollowupCategory}}</td>
+
+                                </tr>
+
+                                <tr ng-if="TransferedEnquiryList.length==0"><td colspan="15" class="text-center">No, Transfered Enquiry Found</td></tr>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="SR.No." /></td>
+                                    <td></td>
+                                    <td><input type="text" class="form-control" placeholder="Session" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Date of Enquiry" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Next Follow UP Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Student" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Class" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Mobile" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Enquiry Source" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Follow UP Count" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Date Of Follow UP" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Last Remark" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Category" /></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

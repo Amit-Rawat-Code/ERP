@@ -1,0 +1,4 @@
+﻿<select id="ddlACCode" class="select2 form-control validate" ng-model="NatureModel" ng-init="BindNatureRelationshipwise();">
+    <option value="">Select</option>
+    <option ng-repeat="nature in NatureList" value="{{nature.ACtype}}">{{nature.ACtype}}</option>
+</select>

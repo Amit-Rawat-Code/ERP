@@ -1,0 +1,5 @@
+﻿<select id="ddlRack" class="select2 form-control clear validate" ng-model="RackCode" ng-init="GetRackLibList();">
+    <option value="">Select</option>
+    <option ng-repeat="x in RacklibList" value="{{x.Code}}">{{x.Name}}</option>
+</select>
+

@@ -1,0 +1,7 @@
+﻿<select id="ddlCityArea" class="select2 form-control" ng-model="CityAreaCode">
+    <option value="">Select City Area</option>
+    <option ng-repeat="ca in CityAreaList" value="{{ca.Code}}" ng-disabled="!ca.IsActive">{{ca.CityAreaName}}</option>
+</select>
+
+
+

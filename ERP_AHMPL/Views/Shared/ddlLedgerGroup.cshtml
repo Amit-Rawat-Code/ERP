@@ -1,0 +1,4 @@
+﻿<select id="ddlLedgerGroup" class="select2 form-control" ng-model="LedgerGroupModel" ng-change="SetLedgerGroupNature(LedgerGroupModel)" ng-init="BindLedgerGroup();">
+    <option value="">Select</option>
+    <option ng-repeat="ledgergrp in LedgerGroupList" value="{{ledgergrp.GroupCode}}">{{ledgergrp.GroupName}}</option>
+</select>

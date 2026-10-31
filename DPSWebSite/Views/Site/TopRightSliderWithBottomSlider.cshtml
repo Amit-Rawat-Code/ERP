@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "TopRightSliderWithBottomSlider";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="website-main-content" ng-init="GetAboutUs();CenterContentWithSlider();RightSliderWithBottomSlider();" ng-cloak>
+    <section class="page-banner-breadcrumbs our-approach">
+        <div class="container">
+            <div class="breadcrumbs">
+                <span class="page-name">AllenKids Swaroopnagar</span><span class="seprator">&gt;</span><span class="page-name">{{ImageContentPageData[0].UnitTitle}}</span>
+                <h3 class="title-of-page">
+                    {{ImageContentPageData[0].UnitTitle}}
+                </h3>
+            </div>
+        </div>
+    </section>
+    <section class="page-section why-choose-allen-kids sports-and-performing-arts music-dance">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContent)">
+
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div id="sports-and-performing-carousel-1">
+                        <div class="post-slide" ng-repeat="SliderData in ContentWithSlider" ng-top-right-slider-gallery>
+                            <div class="post-img">
+                                <img src="{{SliderData.BannerImage}}" alt="{{SliderData.BannerAltText}}">
+                                <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="sports-and-performing-carousel-2">
+                        <div class="post-slide" ng-repeat="BottomSliderData in BottomSliderWithRightSlider" ng-top-right-slider-gallery>
+                            <div class="post-img">
+                                <img src="{{BottomSliderData.BannerImage}}" alt="{{BottomSliderData.BannerAltText}}">
+                                <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

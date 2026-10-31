@@ -1,0 +1,155 @@
+﻿                                                                        
+@{
+    ViewBag.Title = "Homework Details";
+    ViewBag.TitleList = "Homework List";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="../Scripts/myjslib/VerifyHomeworkDetailsController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="hdnEmployeeCode">
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Homework Report</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 ">
+            <ol class="breadcrumb">
+                <li><span>Communication</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>>Verify Homework</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in">
+                                    <form id="user-form">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                            @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" id="dvclass">
+                                                <label class="control-label">From Date</label>
+                                                <div class="input-box">
+                                                    <input class="form-control" id="txtFromDate" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="FromDate" type="date" value="" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" id="dvclass">
+                                                <label class="control-label">To Date</label>
+                                                <div class="input-box">
+                                                    <input class="form-control" id="txtToDate" max="{{endDate}}" min="{{startDate}}" name="txtToDate" ng-model="ToDate" type="date" value="" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" id="dvclass">
+                                                <label class="control-label">Class<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlClass" class="form-control clear validate" ng-model="BindClass" ng-init="BindEmpClass();" ng-change="BindEmpSection();">
+                                                        <option value="">Select Class</option>
+                                                        <option ng-repeat="x in classRec" value="{{x.ClassCode}}">{{x.ClassName}}</option>
+                                                    </select>
+                                                    @*@Html.Partial("ddlClass")*@
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Section<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlSection" class="form-control clear validate" ng-model="BindSection">
+                                                        <option value="">Select Section</option>
+                                                        <option ng-repeat="x in SecRec" value="{{x.SectionCode}}">{{x.SectionName}}</option>
+                                                    </select>
+                                                    @*@Html.Partial("ddlSection")*@
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Homework Topic<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlHomeworkTopic" class="form-control clear validate" ng-model="BindTopic" ng-change="GetHomeWork()">
+                                                        <option value="">Select Topics</option>
+                                                        <option ng-repeat="ht in HWTopic" value="{{ht.TopicName}}">{{ht.TopicName}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                <div class="datatable-responsive table-responsive advance-btn-table">
+                                                    <table id="tblHomeworkDetails" ng-hide="tblhideHomeworkDetails" class="table compact table-hover table-striped table-bordered nowrap dataTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S.No.</th>
+                                                                <th>StudentName</th>
+                                                                <th>Submittion Date</th>
+                                                                @*<th>Watch Vedio</th>*@
+                                                                <th>STATUS </th>
+                                                                <th>Notification</th>
+                                                            </tr>
+
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="x in AllHomeWork">
+                                                                <td>{{$index+1}}</td>
+                                                                <td>{{x.StudentName}}</td>
+                                                                <td>{{x.SubmissionDate}}</td>
+                                                                @*<td>{{x.VedioWatch}}</td>*@
+                                                                <td><a id="IsSubmit" ng-if="x.IsSubmitted != 'Submitted'" ng-click="SubmittedHomework(x.TransId,x.PVNo,x.IsSubmitted,x.StudentCode);" ng-init="disabled(x)" >{{x.IsSubmitted}}</a><span ng-if="x.IsSubmitted == 'Submitted'">{{x.IsSubmitted}}</span></td>
+                                                                <td><a ng-click="SendNotification(x.TransId,x.VoucherNo,x.SendNotification,x.StudentCode)">SendNotification</a></td>
+                                                            </tr>
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<style>
+    .disabled {
+        cursor: not-allowed;
+    }
+</style>

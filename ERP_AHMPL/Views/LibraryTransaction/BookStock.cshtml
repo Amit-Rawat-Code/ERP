@@ -1,0 +1,312 @@
+﻿
+@{
+    ViewBag.Title = "Book Stock";
+    ViewBag.TitleList = "Book Stock";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/Scripts/myjslib/BookStockLibController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="hfIssueId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Book Stock</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><a href="#"><span>Library</span></a></li>
+                <li><a href="#"><span>Transaction</span></a></li>
+                <li class="active"><span>Book Stock</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="form-panel">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <h5 class="form-panel-heading"><span class="vd_red"></span></h5>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Type<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlVoucherType" class="select2 form-control validate" ng-model="VoucherM" ng-init="GetVoucherType('BKLOC');" ng-disabled="true">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in VoucherTypeList" value="{{x.VCode}}">{{x.VoucherType}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">V Date</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtVDate", "", new
+                                                    {
+                                                        @class = "form-control clear validate",
+                                                        @type = "date"@*, @ng_disabled = "true"*@,
+@ng_model = "VDate"
+})
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">V No.<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtVNo", "", new { @class = "form-control clear validate", @ng_disabled = "true", @placeholder = "", @ng_model = "PVNo", @ng_init = "GetVoucherNoLibList(6)" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-panel">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <h5 class="form-panel-heading">Bill Detail<span class="vd_red"></span></h5>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Bill No.</label>
+                                                <div class="input-box">
+                                                    @Html.Partial("TblBillLibNew")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Bill Date</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtBillDate", "", new { @class = "form-control clear", @ng_disabled = "true", @type = "date", @ng_model = "BillDateM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vender Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <input type="hidden" ng-model="hfVenderCode" id="VenderCode" name="VenderCode" value="" />
+                                                    @Html.TextBox("txtVenderName", "", new { @class = "form-control clear ", @ng_disabled = "true", @ng_model = "VednerNameM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">&nbsp;</label>
+                                                <div class="input-box">
+                                                    <button type="button" value="show" class="btn2 btn-common btn-3 btn-3d pe-7s-search"
+                                                            ng-model="ShowM" ng-click="FetchRecord()">
+                                                        <span class="triangle-box" title="Show"></span>
+                                                        <span>Show </span>
+                                                    </button>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-panel">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <h5 class="form-panel-heading">Assign Location<span class="vd_red"></span></h5>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Almirah Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlAlmera" class="select2 form-control clear {{validate1 == 'S'?'validate':''}}" ng-model="AlmeraCode" ng-init="GetAlmeraList();" ng-change="GetRackLibListByAlmera(AlmeraCode);" ng-disabled="disable">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in Almeralist" value="{{x.Code}}">{{x.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Rack Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlRack" class="select2 form-control clear {{validate1 == 'S'?'validate':''}}" ng-model="RackCode" ng-disabled="disable"
+                                                            ng-change="GetBinList(RackCode);">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in RacklibList" value="{{x.Code}}">{{x.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Bin Name<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlBin" class="select2 form-control {{validate1 == 'S'?'validate':''}}" ng-model="BinNameM" ng-disabled="disable">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="x in BinList" value="{{x.Code}}">{{x.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">From SrNo.</label>
+                                                <div class="input-box">
+                                                    <select id="ddlBin" class="select2 form-control {{validate1 == 'S'?'validate':''}}" ng-model="FromM" ng-disabled="disable">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="f in SrNoList" value="{{f.no}}">{{f.no}}</option>
+                                                    </select>
+                                                    @*@Html.TextBox("txtFrom", "", new { @class = "form-control clear", @ng_model = "FromM" })*@
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">To SrNo.</label>
+                                                <div class="input-box">
+                                                    <select id="ddlTo" class="select2 form-control {{validate1 == 'S'?'validate':''}}" ng-model="ToM" ng-disabled="disable">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="s in SrNoList" value="{{s.no}}">{{s.no}}</option>
+                                                    </select>
+                                                    @*@Html.TextBox("txtTo", "", new { @class = "form-control clear", @ng_model = "ToM" })*@
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">&nbsp;</label>
+                                                <div class="input-box">
+                                                    <button type="button" value="GenrateAccession" class="btn2 btn-common btn-3 btn-3d pe-7s-search"
+                                                            ng-model="GenerateAccessionM" ng-click="GenerateAccession()" ng-disabled="disable">
+                                                        <span class="triangle-box" title="Generate Accession"></span>
+                                                        <span>Assign Location </span>
+                                                    </button>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Accession From<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtAccessionFrom", "", new { @class = "form-control clear {{validate1 == 'S'?'validate':''}}", @ng_disabled = "disable", @ng_model = "AccessionFromM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Accession To<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtAccessionTo", "", new { @class = "form-control clear {{validate1 == 'S'?'validate':''}}", @ng_disabled = "disable", @ng_model = "AccessionToM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Prefix</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("txtPrefix", "", new { @class = "form-control clear", @ng_disabled = "disable", @ng_model = "PrefixM" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>*@                                        
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 ">
+
+                                            <div class="datatable-responsive table-responsive advance-btn-table" ng-init="AddBS()">
+                                                <table ng-if="BS.length>0" class="table table-in-input-box compact table-bordered nowrap dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="srno">Sr.No.</th>
+                                                            <th>Book Name</th>
+                                                            <th>Accession No</th>
+                                                            <th>Almera</th>
+                                                            <th>Rack</th>
+                                                            <th>Bin</th>
+                                                            <th>ISBN</th>
+                                                            <th>DDC</th>
+                                                            <th>BARID</th>
+                                                            <th>Author</th>
+                                                            <th>Publisher</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in BS track by $index">
+                                                            <td ng-init="BS[$index].SrNo=$index+1">
+                                                                {{$index+1}}
+                                                                <input type="hidden" ng-model="BS[$index].SrNo" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].BookName" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].AccessionID" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Almera" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Rack" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Bin" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].ISBN" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].DDC" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].BARID" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Author" ng-readonly="true" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control clear" ng-model="BS[$index].Publisher" ng-readonly="true" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+

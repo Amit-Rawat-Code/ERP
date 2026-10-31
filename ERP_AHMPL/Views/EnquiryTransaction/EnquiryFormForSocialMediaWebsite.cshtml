@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "Enquiry Form For Social Media Website";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/EnquiryFormForSocialMediaWebsiteController.js?Ver=@ViewBag.Version"></script>
+
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Enquiry Form For Social Media/Website</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Global</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Enquiry Form For Social Media/Website</span></li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-4 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Session</label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSession")
+                                                <div class="text-box-msg-r"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">I Am<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlIAm")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student First Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("studenFirstName", "", new { @class = "form-control clear validate textOnly", @placeholder = "", @ng_model = "StudentFirstName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student Middle Name</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("studenMiddleName", "", new { @class = "form-control clear  textOnly", @placeholder = "", @ng_model = "StudentMiddleName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student Last Name</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("studenLastName", "", new { @class = "form-control clear textOnly", @placeholder = "", @ng_model = "StudentLastName" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Email</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("Email", "", new { @class = "form-control clear emailOnly", @placeholder = "", @ng_model = "Email", @onblur = "validateEmail(this)" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Mobile<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("Mobile", "", new { @class = "form-control clear validate numberOnly", @placeholder = "", @ng_model = "Mobile", @maxlength = "10", @allow_only_numbers = "" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="LoginAs=='School'">
+                                            <label class="control-label">Class<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlClass")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="LoginAs=='College'">
+                                            <label class="control-label">Course<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlCollegeCourse")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-if="LoginAs=='College'">
+                                            <label class="control-label">Branch<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlCollegeBranch")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Enquiry Source</label>
+                                            <div class="input-box">
+                                                <select id="ddlEnquirySource" autocomplete='address-level2' class="select2 form-control"
+                                                        ng-model="EnquirySourceCode" ng-init="GetEnquirySourceCode()" ng-change="DashBoardfilter()">
+                                                    <option value="">Select Enquiry Source</option>
+                                                    <option ng-repeat="esl in EnquirySourceList" ng-value="esl.Code">{{esl.EnquirySource}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Country<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlCountry")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">State<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlState")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">City<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlCity")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+
+            <label class="control-label">City Area Name<span class="vd_red"></span></label>
+
+            <div class="input-box">
+                @Html.Partial("ddlCityArea")
+                <div class="text-box-msg-r">
+                </div>
+            </div>
+        </div>*@
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Remark<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("Remark", "", new { @class = "form-control clear numberOnly", @placeholder = "", @ng_model = "Remark" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+
+                                            @Html.Partial("ActionSubmitClear")
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<script>
+    $('#ddlCollegeBranch').removeClass('validate');
+</script>
+

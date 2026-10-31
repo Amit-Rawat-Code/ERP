@@ -1,0 +1,34 @@
+﻿@*<select id="ddlClass" class="select2 form-control validate" ng-model="ClassCode"
+            ng-init="GetClasses();" ng-change="ddlClass_Change($parent.ClassCode);" ng-disabled="disabledDDLClass">
+        <option value="">Select Class</option>
+        <option ng-repeat="cl in ClassList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassName}}</option>
+    </select>*@
+<div class="input-box chk-validate">
+    <div class="toggle-ddl" id="openClass"
+         ng-init="GetClasses();ToogleDDL('openClass','openClass')">
+        @*btn-validate*@
+        <button class='btn btn-primary select-btn'
+                data-ng-click='openClass=!openClass'
+                ng-bind="GetCount(ClassList,'Select Class')">
+            Select Class
+        </button>
+        @*btn-validate*@
+        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                data-ng-click='openClass=!openClass'>
+            <span class='fa fa-chevron-down'></span>
+        </button>
+        <div ng-show="openClass" class="ddlMultiple" ng-cloak>
+            <div ng-click="ddlCheckAll('ClassList');ddlClassCheckAll_click();">
+                Check All
+                <span class="btn-counts-right">Total Count: {{ClassList.length}}</span>
+            </div>
+            <div ng-click="ddlUnCheckAll('ClassList');ddlClassUnCheckAll_click();">Uncheck All</div>
+            <hr style="margin:0px !important" />
+            <div ng-repeat="il in ClassList">
+                <input type="checkbox" ng-model="il.chk" ng-value="il.Code"
+                       ng-change="ddlClass_Change(il.Code);" ng-disabled="il.disabled" ng-show="il.IsActive" />
+                {{il.ClassName}}
+            </div>
+        </div>
+    </div>
+</div>

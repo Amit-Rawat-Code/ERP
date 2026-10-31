@@ -1,0 +1,6 @@
+﻿<select id="ddlGroupId" class="select2 form-control validate" ng-model="UserLevel" ng-init="GetUserLevel();">
+    <option value="" >Select Level</option>
+    <option ng-repeat="GId in UserLevelList" value="{{GId.LevelId}}">
+        {{GId.LevelName}}
+    </option>
+</select>

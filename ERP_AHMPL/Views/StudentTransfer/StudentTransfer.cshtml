@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = "Student Transfer";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/StudentTransferController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Student Transfer</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><span>Utility</span></li>
+                <li><span>Transfer</span></li>
+                <li class="active"><span>Student Transfer</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody" ng-cloak>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <label class="control-label">To Session<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlSession" class="form-control clear validate" ng-model="ToSessionId" ng-init="GetSession()" ng-change="GetAllotedFinancialYear();">
+                                                    <option value="">Select To Session</option>
+                                                    <option ng-repeat="sl in SessionList|filter:{SessionId:'!'+WorkingSessionId}" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <label class="control-label">To FY<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlAllotedFinancialYear" autocomplete='address-level2' class="select2 form-control validate" ng-model="ToFYId">
+                                                    <option value="">Select Financial Year</option>
+                                                    <option ng-repeat="sl in AllotedFinancialYearList" value="{{sl.FinancialYearId}}">{{sl.FinancialYearName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15 ">
+                                            <label class="control-label">From Class<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlClass")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">From Section<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlSection")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-hide="StudentTransferList">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <div class="datatable-responsive table-responsive table-scroll" ng-cloak>
+                                                    <table ng-show="StudentTableList.length>0" cellpadding="0" cellspacing="0" class="table compact table-hover table-striped table-bordered mgbt-xs-5">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="sr-no-w text-center">Sr. No.</th>
+                                                                <th class="text-center">Student</th>
+                                                                @*<th class="text-center">Student Id</th>*@
+                                                                <th class="text-center">Adm. No.</th>
+                                                                <th class="text-center">Acdemic Session <br />Name</th>
+                                                                <th class="text-center">Father</th>
+                                                                <th class="text-center">Adm. Type</th>
+                                                                <th class="text-center">To <br />Class/Section</th>
+                                                                <th class="text-center">To Stream </th>
+                                                                <th class="text-center">Active</th>
+                                                                <th class="text-center">Status</th>
+                                                                <th class="text-right">Student <br />OutStanding</th>
+                                                                <th class="text-center">Last <br />Promotion <br />Status</th>
+                                                                <th class="text-center">Promotion <br />Status</th>
+                                                                <th class="text-center">
+                                                                    <div class="checkbox checkbox-primary table-check-wt">
+                                                                        <input type="checkbox" class="clear" ng-model="chkAll"
+                                                                               ng-init="chkAll=true" ng-change="chkRowAll()" />
+                                                                        <label></label>
+                                                                    </div>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="Student in StudentTableList" repeat-done>
+                                                                <td class="text-center" ng-bind="Student.Srno=($index+1)"></td>
+                                                                <td class="text-center">
+                                                                    {{Student.StudentName}}
+                                                                </td>
+                                                                @*<td class="text-center">{{Student.StudentID}}</td>*@
+                                                                <td class="text-center">{{Student.AdmissionNo}}</td>
+                                                                <td class="text-center">{{Student.AcdemicSessionName}}</td>
+                                                                <td class="text-center">{{Student.FatherName}}</td>
+                                                                <td class="text-center">{{Student.TypeofAdmission}}</td>
+                                                                <td class="text-center">
+                                                                    <select id="ddlClassSection" style="width:150px;" class="select2 form-control" ng-model="Student.ToSectionCode" ng-disabled="Student.SectionEnrollInNewSession">
+                                                                        <option value="">Select</option>
+                                                                        <option ng-repeat="cl in AllClassSectionList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassSectionName}}</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <select id="ddlStream" style="width:100px;" class="select2 form-control" ng-model="Student.ToStreamCode" ng-disabled="Student.StreamEnrollInNewSession">
+                                                                        <option value="">Select Stream</option>
+                                                                        <option ng-repeat="sl in StreamList" value="{{sl.Code}}" ng-disabled="!sl.IsActive">{{sl.StreamName}}</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td class="text-center">{{Student.IsActive}}</td>
+                                                                <td>
+                                                                    @Html.DropDownList("ddlPromotionStatus",
+                                                                   new List<SelectListItem>{
+                                                                       new SelectListItem{Text="Select Status", Value=""},
+                                                                       new SelectListItem{Text="Passed", Value="P"},
+                                                                       new SelectListItem{Text="Failed", Value="F"},
+                                                                       new SelectListItem{Text="Left", Value="L"},
+                                                                       new SelectListItem{Text="New", Value="N"}
+                                                                   },
+                                                                   new
+                                                                   {
+                                                                       @class = "select2 form-control {{Student.chkAllow==true?'validate':''}}",
+                                                                       @ng_model = "Student.PromotionStatus",
+                                                                       @ng_disabled = "Student.PromotionStatusEnrollInNewSession",
+                                                                       @ng_change = "getBackClassSectionName(Student);",
+                                                                       @style = "width:100px;"
+                                                                   })
+                                                                </td>
+                                                                <td class="text-right">{{Student.OutStanding}}</td>
+                                                                <td class="text-center">{{Student.LastPromotionStatus}}</td>
+                                                                <td class="text-center">{{Student.ProStatus}}</td>
+                                                                <td class="text-center">
+                                                                    <div class="checkbox-primary table-check-wt">
+                                                                        <input type="checkbox" class="clear" id="chkAllow" ng-model="Student.chkAllow"
+                                                                               ng-checked="Student.chkAllow" ng-init="Student.chkAllow=true"
+                                                                               ng-change="chkUncheck()" />
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr ng-if="StudentTableList.length==0" style="text-align:center">
+                                                                <td colspan="12">No Record(s) found.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <button id="btnImport" type="button" value="Import" class="btn2 btn-common btn-3 btn-3d pe-7s-check" name="ImportButton"
+                                                        ng-model="Import" ng-init="Import='Import';" ng-click="TransferRecord();"
+                                                        ng-disabled="disabledImport">
+                                                    <span class="triangle-box" title="Import"></span>
+                                                    <span id="btnTransfertxt" ng-bind="Import">Import</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+<script>
+    $('#ddlSection').removeClass('validate');
+</script>

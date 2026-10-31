@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "ThemeMaster";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/jscolor.js")"></script>
+<script src="~/Scripts/myjslib/ThemeMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+
+<div class="app-content  my-3 my-md-5">
+    <div class="side-app">
+        <div class="autohide-scroll autoheightset">
+            <div class="br-pageheader">
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+                    <h5 class="txt-dark">Create Theme</h5>
+                </div>
+                <!-- Breadcrumb -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+                    <ol class="breadcrumb">
+                        <li><span>Unit Manager</span></li>
+                        <li class="breadcrumb-item">Unit Detail Master</li>
+                        <li class="breadcrumb-item active" aria-current="page">Create Theme</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="br-pagebody">
+                <div class="">
+                    <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh theme-changer-page">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Top Header First Line Colour</b></label>
+                                        <input id="cp-component" ng-model="TopHeaderFirstLineColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Top Header First Line Text Colour</b></label>
+                                        <input id="cp-component" ng-model="TopHeaderFirstLineTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Top Header First Line Icon Colour</b></label>
+                                        <input id="cp-component" ng-model="TopHeaderFirstLineIconColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Top Header Second Line Colour</b></label>
+                                        <input id="cp-component" ng-model="TopHeaderSecondLineColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Top Header Second Line Text Colour</b></label>
+                                        <input id="cp-component" ng-model="TopHeaderSecondLineTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Top Header Second Line Icon Colour</b></label>
+                                        <input id="cp-component" ng-model="TopHeaderSecondLineIconColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Banner Bottom Line Text Colour</b></label>
+                                        <input id="cp-component" ng-model="BannerBottomLineTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Why Choose Heading Text Colour</b></label>
+                                        <input id="cp-component" ng-model="WhyChooseHeadingTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Our Programs Heading Text Colour</b></label>
+                                        <input id="cp-component" ng-model="OurProgramsHeadingTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Our Programs Slider Heading Text Colour</b></label>
+                                        <input id="cp-component" ng-model="OurProgramsSliderHeadingTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Classes Heading Text Colour</b></label>
+                                        <input id="cp-component" ng-model="ClassesHeadingTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Classes Image Heading Text Colour</b></label>
+                                        <input id="cp-component" ng-model="ClassesImageHeadingTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Events Heading Text Colour</b></label>
+                                        <input id="cp-component" ng-model="EventsHeadingTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Events Slider Heading Text Colour</b></label>
+                                        <input id="cp-component" ng-model="EventsSliderHeadingTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Winning Laurels Heading Text Colour</b></label>
+                                        <input id="cp-component" type="text" ng-model="WinningLaurelsHeadingTextColour" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Bulletin Heading Text Colour</b></label>
+                                        <input id="cp-component" type="text" ng-model="BulletinHeadingTextColour" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Our Happy Parents Text Colour</b></label>
+                                        <input id="cp-component" type="text" ng-model="OurHappyParentsHeadingTextColour" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Our Group Institutions Heading Text Colour</b></label>
+                                        <input id="cp-component" type="text" ng-model="OurGroupInstitutionsHeadingTextColour" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Facebook feeds Heading Text Colour</b></label>
+                                        <input id="cp-component" type="text" ng-model="FacebookfeedssHeadingTextColour" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>YouTube Heading Text Colour</b></label>
+                                        <input id="cp-component" type="text" ng-model="YouTubeHeadingTextColour" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Contact Us Heading Text Colour</b></label>
+                                        <input id="cp-component" ng-model="ContactUsHeadingTextColour" type="text" class="jscolor form-control" ng-click="ColorPicker()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                    <div id="cp-component" class="input-group">
+                                        <label><b>Visitor's Count</b></label>
+                                        <input id="VisitorCount" ng-model="VisitorCount" type="text" class=" form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    @Html.Partial("ActionView")
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                    @Html.Partial("SearchAngularJs")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,13 @@
+﻿@*<select id="ddlCaste" class="select2 form-control" ng-model="CasteCode">
+    <option value="">Select Caste</option>
+    <option ng-repeat="caste in Caste" value="{{caste.Code}}" ng-disabled="!caste.IsActive">{{caste.CasteName}}</option>
+</select>*@
+<select id="ddlCaste" class="select2 form-control" ng-model="Caste">
+    <option value="">Select Caste</option>
+    <option value="101">Hindu</option>
+    <option value="102">Muslim</option>
+    <option value="103">Sikh</option>
+    <option value="104">Other</option>
+</select>
+
+

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "PhotoGalleryContent";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<section class="page-section why-choose-allen-kids Event">
+    <div class="container" ng-init="GetImageData()">
+        <div class="row" ng-repeat="data in ImageContent">
+            <div class="col-sm-12">
+                <div class="play-group-icon-title">
+                    <h3 class="section-title">
+                        {{data.Title}}
+                    </h3>
+                    <div class="section-title-bottom-line">
+                        <a href="" tabindex="0"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="discription-section">
+                <ul class="pgBack">
+                    <li class="eventDates">
+                        <b>Event Date:</b>
+                        <span id="lblEventDate">{{data.EventDate}}</span>
+                    </li>
+                    <li class="updatedOnD">
+                        <b>Updated On:</b>
+                        <span id="lblCreatedDate">{{data.EventDate}}</span>
+                    </li>
+                    <li class="totalImages">
+                        <b>
+                            <span id="lblhead">Total Photo(s):</span>
+                        </b>
+                        <span id="lblTotal">{{data.CountA}}</span>
+                    </li>
+                    <li class="changeAlbums chAl">
+                        <span id="chkalbum"><a href="{{BackUrl}}" class="" ng-model="BackUrl" ng-click="BacktoMainpage()"><span>Change Album </span></a></span>
+                    </li>
+                </ul>
+                <div class="fullDescription">
+                    <span class="DescriptionH">Description:</span><span>{{data.Description}}</span>
+                </div>
+            </div>
+
+            <div class="only-gallery-page">
+                <div class="gallery">
+                    <!-- partial:index.partial.html -->
+                    <div class="cont">
+
+
+                        <div class="demo-gallery">
+                            <ul id="lightgallery">
+                                <li ng-repeat="data in ImageData" data-src="data.MediafilePath" data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>"
+                                    data-pinterest-text="Pin it" data-tweet-text="share on twitter ">
+                                    <a href="">
+                                        <img class="img-responsive" src="" ng-src="{{data.MediaFilePath}}">
+                                        <div class="demo-gallery-poster">
+                                            <img src="~/content/images/gallery/search-icon.png">
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

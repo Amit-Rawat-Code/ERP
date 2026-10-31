@@ -1,0 +1,480 @@
+﻿<script src="~/Content/html2canvas.js"></script>
+<div class="a4-box" ng-repeat="rh in ReportHeaderlist" id="{{rh.StudentCode}}" ng-cloak>
+    <div ng-if="rh.actionid==2">
+        <table class="table-TC no-p-rc table-TC-r1" ng-init="">
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="table-TC exam-table-f1 table-TC-r1">
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td class="col-w-a"><span class="e-txt">क्रमांक</span></td>
+                                    <td class="b-d-bro w-150"><span class="b-txt">{{rh.Rollno}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-center" style="text-align:center!important;" ng-init="GetReportHeaderUsingCategory('Exam ReportCard')">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 b-d-input">
+                                            <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                                            <span class="e-txt">सत्र &nbsp;{{rh.SessionName}} </span>
+                                            <br />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="table-TC exam-table-f1 table-TC-r1">
+                            <tbody>
+
+                                <tr>
+                                    <td class="col-w-a"><span class="e-txt">छात्र का नाम &nbsp;{{rh.StdName}} </span></td>
+                                    <td class="col-w-a-e"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                    <td class="col-w-a"><span class="e-txt">कक्षा &nbsp; {{rh.CMName}} {{rh.SectionName}}</span></td>
+                                    <td class="col-w-a-e"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                    <td class="col-w-a-e w-150"></td>
+                                    <td class="col-w-a"><span class="e-txt">प्रवेश लिपि सं० &nbsp; {{rh.AdmissionFormNo}}</span></td>
+                                    <td class="col-w-a"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="table-TC exam-table-f2 table-TC-b-a text-center">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" class="text-center vertical-align-middle">विषय  </th>
+                                    <th colspan="5" class="text-center vertical-align-middle">षट्रमासिक  परीक्षा  के प्राप्तांक </th>
+                                    <th colspan="5" class="text-center vertical-align-middle">वार्षिक परीक्षा  के प्राप्तांक </th>
+                                    <th colspan="2" class="text-center vertical-align-middle">
+                                        षट्रमासिक व वार्षिक
+                                        <br /> परीक्षाओं के योग
+                                    </th>
+                                    <th rowspan="2" class="text-center vertical-align-middle">परिणाम तथा <br /> स्थिति</th>
+                                    <th rowspan="2" class="text-center vertical-align-middle">अन्य <br /> विवरण</th>
+
+                                </tr>
+                                <tr>
+                                    <th><div class="ex-txt-r">प्रथम</div></th>
+                                    <th><div class="ex-txt-r">मासिक</div></th>
+                                    <th><div class="ex-txt-r">प्रयोग</div></th>
+                                    <th><div class="ex-txt-r">स० योग</div></th>
+                                    <th><div class="ex-txt-r">पूर्णाक</div></th>
+                                    <th><div class="ex-txt-r">प्रथम</div></th>
+                                    <th><div class="ex-txt-r">मासिक</div> </th>
+                                    <th><div class="ex-txt-r">प्रयोग</div></th>
+                                    <th><div class="ex-txt-r">स० योग</div></th>
+                                    <th><div class="ex-txt-r">पूर्णाक</div></th>
+                                    <th><div class="ex-txt-r">योग</div></th>
+                                    <th><div class="ex-txt-r">पूर्णाकों <br /> का योग </div></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr ng-repeat="SD in ScholasticDetail|filter:{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode}">
+                                    <td class="t-l"><div class="ex-txt-n-ms">{{SD.SubjectName}}</div></td>
+                                    <td><div class="ex-txt-n">{{SD.HYMarks}}</div></td>
+                                    <td><div class="ex-txt-n">{{SD.PeriodicTest}}</div></td>
+                                    <td><div class="ex-txt-n"></div></td>
+                                    <td><div class="ex-txt-n-ms">{{SD.Total}}</div></td>
+                                    <td><div class="ex-txt-n">{{SD.TotalMarks}}</div></td>
+                                    <td><div class="ex-txt-n" ng-bind="(ScholasticDetail1|filter:{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno})[0].YMarksY"></div></td>
+                                    <td class="ex-txt-n" ng-bind="(ScholasticDetail1|filter:{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno})[0].PeriodicTestY"></td>
+                                    <td><div class="ex-txt-n"></div></td>
+                                    <td><div class="ex-txt-n-ms" ng-model="TotalY" ng-bind="(ScholasticDetail1|filter:{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno})[0].TotalY"></div></td>
+                                    <td><div class="ex-txt-n" ng-model="TotalMarksY" ng-bind="(ScholasticDetail1|filter:{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno})[0].TotalMarks"> </div></td>
+                                    <td><div class="ex-txt-n" ng-model="FinalHYMarksTotal" ng-bind="((ScholasticDetail1|filter:{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno})[0].TotalY+SD.Total)"> </div></td>
+                                    <td><div class="ex-txt-n" ng-model="FinalHYTotal" ng-bind="((ScholasticDetail1|filter:{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno})[0].TotalMarks+SD.TotalMarks)"></div></td>
+                                    <td rowspan="13" ng-model="dis" ng-show="dis" ng-if="dis=(SD.Srno>1)?false:true">
+                                        <div class="ex-txt-n">षट्रमासिक</div>
+                                        <div><br /><br /></div>
+                                        <div class="ex-txt-n"> वार्षिक </div>
+                                        <div><br /><br /></div>
+                                        <div class="ex-txt-n">परिणाम</div>
+                                        <div ng-model="ResultM">
+                                            <br />
+                                            {{(Sumoflist('ScholasticDetail','TotalMarks',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0)--Sumoflist('ScholasticDetail1','TotalMarks',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0))>0?(((Sumoflist('ScholasticDetail1','TotalY',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)--Sumoflist('ScholasticDetail','Total',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0))/(Sumoflist('ScholasticDetail','TotalMarks',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0)--Sumoflist('ScholasticDetail1','TotalMarks',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0))*100)>=33?'Pass':'Promoted'):''}}
+
+                                        </div>
+                                    </td>
+                                    <td rowspan="13" ng-model="dis" ng-show="dis" ng-if="dis=(SD.Srno>1)?false:true"><div class="ex-txt-n">कार्य</div></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="t-l"><div class="ex-txt-n-ms text-center vertical-align-middle" >योग </div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','HYMarks',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','PeriodicTest',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','Total',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','TotalMarks',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{((Sumoflist('ScholasticDetail1','YMarksY',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)<=0?'':Sumoflist('ScholasticDetail1','YMarksY',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{((Sumoflist('ScholasticDetail1','PeriodicTestY',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)<=0?'':Sumoflist('ScholasticDetail1','PeriodicTestY',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    <td><div class="ex-txt-n-ms">{{((Sumoflist('ScholasticDetail1','TotalY',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)<=0?'':Sumoflist('ScholasticDetail1','TotalY',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{((Sumoflist('ScholasticDetail1','TotalMarks',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)<=0?'':Sumoflist('ScholasticDetail1','TotalMarks',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail1','TotalY',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0)--Sumoflist('ScholasticDetail','Total',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','TotalMarks',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0)--Sumoflist('ScholasticDetail1','TotalMarks',{StudentCodeY:rh.StudentCode,ExamCodeY:rh.ExamCode2,Srno:SD.Srno},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <table class="table-TC table-TC-r1">
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+
+                                        <div class="h-txt">ह० कक्षाध्यापक </div>
+                                    </td>
+                                    <td>
+
+                                        <div class="h-txt">ह० जाँचकर्ता </div>
+                                    </td>
+                                    <td class="col-w-a ">
+
+                                        <div class="h-txt">ह० प्रधानाचार्य </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="ex-txt-n">दिनांक </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="ex-txt-n">संस्था का आगामी सत्र 1 अप्रैल से  प्रारम्भ होगा </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-if="rh.actionid==3">
+        <table class="table-TC no-p-rc table-TC-r1">
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="table-TC exam-table-f1 table-TC-r1">
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td class="col-w-a"><span class="e-txt">क्रमांक</span></td>
+                                    <td class="b-d-bro w-150"><span class="b-txt">{{rh.Rollno}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-center" style="text-align:center!important;" ng-init="GetReportHeaderUsingCategory('Exam ReportCard')">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 b-d-input">
+                                            <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                                            <span class="e-txt">सत्र &nbsp;{{rh.SessionName}} </span>
+                                            <br />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="table-TC exam-table-f1 table-TC-r1">
+                            <tbody>
+                                <tr>
+                                    <td class="col-w-a"><span class="e-txt">छात्र का नाम &nbsp; {{rh.StdName}} </span></td>
+                                    <td class="col-w-a-e"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                    <td class="col-w-a"><span class="e-txt">पिता का नाम &nbsp; {{rh.Father}}</span></td>
+                                    <td class="col-w-a-e"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-w-a"><span class="e-txt">कक्षा व खण्ड &nbsp; {{rh.CMName}} {{rh.SectionName}}</span></td>
+                                    <td class="col-w-a-e"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                    <td class="col-w-a"><span class="e-txt">छात्र लिपि संख्या &nbsp; {{rh.AdmissionFormNo}} </span></td>
+                                    <td class="col-w-a"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="table-TC exam-table-f2 table-TC-b-a text-center">
+                            <thead>
+                                <tr>
+                                    <th class="text-center vertical-align-middle">विषय  </th>
+                                    <th class="text-center">पूर्णाक </th>
+                                    <th class="text-center">लिखित (70)</th>
+                                    <th class="text-center">प्रोजेक्ट (30)</th>
+                                    <th class="text-center">योग</th>
+                                    <th class="text-center">ग्रेड</th>
+                                    <th class="text-center">परीक्षाफल</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="SD in ScholasticDetail|filter:{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2}">
+                                    <td class="t-l"><div class="ex-txt-n-ms">{{SD.SubjectName}}</div></td>
+                                    <td><div class="ex-txt-n">100</div></td>
+                                    <td><div class="ex-txt-n">{{SD.col1}}</div></td>
+                                    <td><div class="ex-txt-n">{{SD.col2}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{SD.Total}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{SD.Grade}}</div></td>
+                                    <td rowspan="12" ng-model="dis1" ng-show="dis1" ng-if="dis1=(SD.Srno>1)?false:true">
+                                        <div class="ex-txt-n-ms text-center vertical-align-middle" ><br />{{SD.ResultStatus}} <br /> {{SD.GraceMark}}</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="t-l"><div class="ex-txt-n-ms"> </div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','col1',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','col2',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','Total',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <table class="table-TC table-TC-r1">
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+
+                                        <div class="h-txt">ह० कक्षाध्यापक </div>
+                                    </td>
+                                    <td>
+
+                                        <div class="h-txt">ह० जाँचकर्ता </div>
+                                    </td>
+                                    <td class="col-w-a ">
+
+                                        <div class="h-txt">ह० प्रधानाचार्य </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="ex-txt-n">दिनांक </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><div class="ex-txt-n">संस्था का आगामी सत्र 1 अप्रैल से  प्रारम्भ होगा </div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-if="rh.actionid==4">
+        <table class="table-TC no-p-rc table-TC-r1">
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="table-TC exam-table-f1 table-TC-r1">
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td class="col-w-a"><span class="e-txt">क्रमांक</span></td>
+                                    <td class="b-d-bro w-150"><span class="b-txt">{{rh.Rollno}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-center" style="text-align:center!important;" ng-init="GetReportHeaderUsingCategory('Exam ReportCard')">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 b-d-input">
+                                            <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                                            <span class="e-txt">सत्र &nbsp;{{rh.SessionName}} </span>
+                                            <br />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="table-TC exam-table-f1 table-TC-r1">
+                            <tbody>
+                                <tr>
+                                    <td class="col-w-a"><span class="e-txt">छात्र का नाम &nbsp; {{rh.StdName}} </span></td>
+                                    <td class="col-w-a-e"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                    <td class="col-w-a"><span class="e-txt">पिता का नाम &nbsp; {{rh.Father}}</span></td>
+                                    <td class="col-w-a-e"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-w-a"><span class="e-txt">कक्षा व खण्ड &nbsp; {{rh.CMName}} {{rh.SectionName}}</span></td>
+                                    <td class="col-w-a-e"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                    <td class="col-w-a"><span class="e-txt">छात्र लिपि संख्या &nbsp; {{rh.AdmissionFormNo}} </span></td>
+                                    <td class="col-w-a"><span class="ex-txt ex-txt-n-ms"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="table-TC exam-table-f2 table-TC-b-a text-center">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" class="text-center vertical-align-middle">विषय  </th>
+                                    <th colspan="5" class="text-center">अर्द्धवार्षिक परीक्षा | </th>
+                                    <th colspan="5" class="text-center">वार्षिक परीक्षा ||</th>
+                                    <th colspan="2" class="text-center">
+                                        | व || का योग
+                                    </th>
+                                    <th rowspan="2" class="text-center vertical-align-middle">परिणाम तथा <br /> स्थिति</th>
+
+
+                                </tr>
+                                <tr>
+                                    <th><div class="ex-txt-r">प्रथम</div></th>
+
+                                    <th><div class="ex-txt-r">मासिक</div></th>
+                                    <th><div class="ex-txt-r">प्रयोग</div></th>
+                                    <th><div class="ex-txt-r">योग</div></th>
+                                    <th><div class="ex-txt-r">पूर्णाक</div></th>
+                                    <th><div class="ex-txt-r">प्रथम</div></th>
+
+                                    <th><div class="ex-txt-r">मासिक</div> </th>
+                                    <th><div class="ex-txt-r">प्रयोग</div></th>
+                                    <th><div class="ex-txt-r">योग</div></th>
+                                    <th><div class="ex-txt-r">पूर्णाक</div></th>
+                                    <th><div class="ex-txt-r">प्राप्तांकों <br />का योग </div></th>
+                                    <th><div class="ex-txt-r">पूर्णाकों <br /> का योग </div></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="SD in ScholasticDetail|filter:{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode}">
+                                    <td class="t-l"><div class="ex-txt-n-ms">{{SD.SubjectName}}</div></td>
+                                    <td><div class="ex-txt-n">{{SD.WMarks}}</div></td>
+                                    <td><div class="ex-txt-n">{{SD.Periodictest}}</div></td>
+                                    <td><div class="ex-txt-n">{{SD.PMarks}}</div></td>
+
+                                    <td><div class="ex-txt-n-ms">{{SD.TotalMarks}}</div></td>
+                                    <td><div class="ex-txt-n">{{SD.ObtainMark}}</div></td>
+                                    <td><div class="ex-txt-n" ng-bind="(ScholasticDetail|filter:{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2,Srno:SD.Srno})[0].WMarks"></div></td>
+                                    <td><div class="ex-txt-n" ng-bind="(ScholasticDetail|filter:{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2,Srno:SD.Srno})[0].Periodictest"></div></td>
+                                    <td><div class="ex-txt-n" ng-bind="(ScholasticDetail|filter:{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2,Srno:SD.Srno})[0].PMarks"></div></td>
+                                    <td><div class="ex-txt-n-ms" ng-bind="(ScholasticDetail|filter:{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2,Srno:SD.Srno})[0].TotalMarks"></div></td>
+                                    <td><div class="ex-txt-n" ng-bind="(ScholasticDetail|filter:{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2,Srno:SD.Srno})[0].ObtainMark"></div></td>
+                                    <td><div class="ex-txt-n">{{SD.GrMarks}}</div></td>
+                                    <td><div class="ex-txt-n">{{SD.GrTotal}}</div></td>
+                                    <td rowspan="12" ng-model="dis" ng-show="dis" ng-if="dis=(SD.Srno>1)?false:true">
+                                        <div class="ex-txt-n">षट्रमासिक</div>
+                                        <div class="ex-txt-n">वार्षिक</div>
+                                        <div class="ex-txt-n">परिणाम</div>
+                                        <br />	{{SD.GRResult}}
+                                        <br />{{SD.GraceMark}}
+                                        @*<div class="ex-txt-n">कक्षा में स्थान </div>*@
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="t-l"><div class="ex-txt-n-ms text-center">योग </div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','TotalMarks',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','ObtainMark',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                  
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','TotalMarks',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','ObtainMark',{StudentCode:rh.StudentCode,ExamCode:rh.ExamCode2},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{(Sumoflist('ScholasticDetail','TotalMarks',{StudentCode:rh.StudentCode},0))| number:0}}</div></td>
+                                    <td><div class="ex-txt-n-ms">{{Sumoflist('ScholasticDetail','ObtainMark',{StudentCode:rh.StudentCode},0)}}</div></td>
+                                    <td><div class="ex-txt-n-ms"></div></td>
+
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <table class="table-TC table-TC-r1">
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+
+                                        <div class="h-txt">ह० कक्षाध्यापक </div>
+                                    </td>
+                                    <td>
+
+                                        <div class="h-txt">ह० जाँचकर्ता </div>
+                                    </td>
+                                    <td class="col-w-a ">
+
+                                        <div class="h-txt">ह० प्रधानाचार्य </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="ex-txt-n">दिनांक </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><div class="ex-txt-n">संस्था का आगामी सत्र 1 अप्रैल से  प्रारम्भ होगा </div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="page-b-before-a">&nbsp;</p>
+</div>
+

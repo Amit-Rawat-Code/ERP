@@ -1,0 +1,6 @@
+﻿<select id="ddlSMSSubject" class="select2 form-control validate" ng-model="SMSSubjectCode"
+        ng-init="LoadSMSSubject();" ng-change="ddlMSSubject_Change();">
+    <option value="">Select SMS Subject</option>
+    <option ng-repeat="sms_subject in SMSSubjectList" value="{{sms_subject.Code}}" ng-disabled="!sms_subject.IsActive">{{sms_subject.SMSSubjectName}}</option>
+</select>
+

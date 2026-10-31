@@ -1,0 +1,247 @@
+﻿
+@{
+    ViewBag.Title = "Student Registartion/Updation";
+    ViewBag.TitleList = "Student Master List";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+<script src="~/Scripts/myjslib/studentIdSettingController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="Id" name="Id" ng-model="hdId" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Student ID Setting</h5>
+        </div>
+        <!-- Breadcrumb -->
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Utility</span></li>
+                <li><span>Setting</span></li>
+                <li class="active"><span>Student ID Setting</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh wizard-content">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h6 class="panel-title txt-dark"> Student Id : <small>
+                            <label id="lblStudentId" class="control-label" for="prefix" 
+                                   style="text-transform:none" ng-model="StudentId" ng-bind="StudentId"></label></small></h6>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div id="wizard" class="form-wizard wizard">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                        <ul class="wizard-navigation nav-justified steps">
+                                            <li id="li1">
+                                                <a href="#tab1" data-toggle="tab" id="a1">
+                                                    <span class="number">1</span>
+                                                    <span class="title">Counter</span>
+                                                </a>
+                                            </li>
+                                            <li id="li2">
+                                                <a href="#tab2" data-toggle="tab" id="a2">
+                                                    <span class="number">2</span>
+                                                    <span class="title">Prefix</span>
+                                                </a>
+                                            </li>
+                                            <li id="li3">
+                                                <a href="#tab3" data-toggle="tab" id="a3">
+                                                    <span class="number">3</span>
+                                                    <span class="title">Sufix</span>
+                                                </a>
+                                            </li>
+                                            <li id="li4">
+                                                <a href="#tab4" data-toggle="tab" id="a4">
+                                                    <span class="number">4</span>
+                                                    <span class="title">Thank you!</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div id="bar" class="progress progress-xs mgtp-xs-20">
+                                            <div class="progress-bar progress-bar-striped active"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="tab1">
+                                                <form class="form-horizontal mt-sm" action='#' method="POST">
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="name">Setting Type<span class="required">*</span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.DropDownList("ddlSettingType", new List<SelectListItem>{
+                                           new SelectListItem { Text="Automatic", Value="Automatic" },
+                                           new SelectListItem { Text="Manual", Value="Manual" }
+                                       }, new { @class = "select2 form-control", @ng_model= "SettingType" })
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="name">Counter Start From<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtCounterStartFrom", "", new { @class = "form-control numbersOnly", @placeholder = "Counter Start From", @autocomplete = "name", @ng_model = "CounterStartFrom" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="name">Counter Length<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.DropDownList("ddlCounterLength",
+                                           new List<SelectListItem>{
+                                           new SelectListItem { Text="0", Value="0" },
+                                           new SelectListItem { Text="1", Value="1" },
+                                           new SelectListItem { Text="2", Value="2" },
+                                           new SelectListItem { Text="3", Value="3" },
+                                           new SelectListItem { Text="4", Value="4" },
+                                           new SelectListItem { Text="5", Value="5" },
+                                           new SelectListItem { Text="6", Value="6" }
+                                       }, new { @class = "select2 form-control", @ng_model = "CounterLength" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="prefix">Increment No.<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtCounterIncrementNo", "", new { @class = "form-control numbersOnly", @placeholder = "Increment No.", autocomplete = "name", @ng_model = "CounterIncrementNo" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="prefix">Separator<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtCounterSeprator", "", new { @class = "form-control", @placeholder = "Seprator", @autocomplete = "name", @ng_model = "CounterSeprator" })
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane" id="tab2">
+                                                <form class="form-horizontal mt-sm">
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="name">Prefix<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtPrefix", "", new { @class = "form-control prefix", @placeholder = "Prefix", @autocomplete = "name", @ng_model = "Prefix" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="prefix">Increment No.<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtPrefixIncrementNo", "", new { @class = "form-control numbersOnly prefix", @placeholder = "Increment No.", autocomplete = "name", @ng_model = "PrefixIncrementNo" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="prefix">Seprator<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtPrefixSeprator", "", new { @class = "form-control", @placeholder = "Seprator", @autocomplete = "name", @ng_model = "PrefixSeprator" })
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane" id="tab3">
+                                                <form class="form-horizontal mt-sm" action='#' method="POST">
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="name">Sufix<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtSufix", "", new { @class = "form-control sufix", @placeholder = "Sufix", @autocomplete = "name", @ng_model = "Sufix" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="prefix">Increment No.<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtSufixIncrementNo", "", new { @class = "form-control numbersOnly sufix", @placeholder = "Increment No.", autocomplete = "name", @ng_model = "SufixIncrementNo" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="prefix">Seprator<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtSufixSeprator", "", new { @class = "form-control", @placeholder = "Seprator", @autocomplete = "name", @ng_model = "SufixSeprator" })
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+
+                                            <div class="tab-pane" id="tab4">
+                                                <form class="form-horizontal mt-sm" action='#' method="POST">
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="name">Max Prefix<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtMaxPrefix", "", new { @class = "form-control", @placeholder = "Max Prefix", @autocomplete = "name", @ng_keyup = "GetSudentId()", @ng_model = "MaxPrefix" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="prefix">Max Counter<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtMaxCounter", "", new { @class = "form-control", @placeholder = "Max Counter", @autocomplete = "name", @ng_keyup = "GetSudentId()", @maxlength = "6", @ng_model = "MaxCounter" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="prefix">Max Sufix<span class="required"></span></label>
+                                                            <div class="col-sm-4">
+                                                                @Html.TextBox("txtMaxSufix", "", new { @class = "form-control", @placeholder = "Max Sufix", @autocomplete = "name", @ng_keyup = "GetSudentId()", @ng_model = "MaxSufix" })
+                                                            </div>
+                                                        </div>
+
+                                                        <p class="mb-lg">Thank you! Your submission has been received.</p>
+
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <div class="description ml mr mt-n-md">
+                                                <ul class="pager wizard">
+                                                    <li class="previous">
+                                                        <button id="btnprev" class="btn btn-primary pull-left" style="display:none"><i class="fa fa-caret-left"></i> Previous</button>
+                                                    </li>
+                                                    <li class="next">
+                                                        <button class="btn btn-primary pull-right">Next <i class="fa fa-caret-right"></i></button>
+                                                    </li>
+                                                    <li class="finish" style="display: none">
+                                                        <button class="btn btn-success pull-right" style="display: none">Finish <i class="fa fa-check"></i></button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .input-visible-isphysicallydisabled-show {
+        display: block !important;
+    }
+
+    .input-visible-isnotphysicallydisabled-hide {
+        display: none !important;
+    }
+</style>
+
+
+

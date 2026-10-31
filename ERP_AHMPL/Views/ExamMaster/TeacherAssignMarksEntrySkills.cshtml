@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Teacher Assign Marks Entry For Scholastic";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+<script src="~/Scripts/myjslib/TeacherAssignMarkEntrySkillMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Teacher Assign Marks Entry For Scholastic</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Exam</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>Teacher Assign Marks Entry For Scholastic</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Teacher</label>
+                                            <div class="input-box">
+                                                <select id="ddlEmployeeName" class="select2 form-control clear validate" ng-init="GetEmployee();" ng-model="EmployeeCode">
+                                                    <option value="">Select Teacher</option>
+                                                    <option ng-repeat="x in TeacherList" value="{{x.EmployeeCode}}">{{x.EmployeeName}}{{' - '+x.EmployeeId}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+            <label class="control-label">Class</label>
+            <div class="input-box">
+                <select id="ddlClass" class="select2 form-control clear validate" ng-model="class" ng-init="GetAllClass();" ng-change="GetAllExams();GetAllSubject();">
+                    <option value="">Select Class</option>
+                    <option ng-repeat="classes in ClassList" value="{{classes.Code}}">{{classes.ClassName}}</option>
+                </select>
+            </div>
+        </div>*@
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <label>Class@*<span class="vd_red">*</span>*@</label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlMultiClass")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Subject</label>
+                                            <div class="input-box">
+                                                <select id="ddlSubject" class="select2 form-control clear validate" ng-model="subject">
+                                                    <option value="">Select Subject</option>
+                                                    <option ng-repeat="sub in SubjectList" value="{{sub.SubjectCode}}">{{sub.SubjectName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Skills Group</label>
+                                            <div class="input-box">
+                                                <select id="ddlskillgroup" class="select2 form-control clear validate" ng-model="SkillGroup">
+                                                    <option value="">Select Group</option>
+                                                    <option ng-repeat="grp in SkillGroupList" value="{{grp.GroupCode}}" ng-model="SkillGroupCode">{{grp.SkillGroupName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Skills</label>
+                                            <div class="input-box">
+                                                <div class="input-box chk-validate">
+                                                    <div class="toggle-ddl" id="sc_skill" ng-init="GetAllSkillName();ToogleDDL('sc_skill','sc_skill')">
+                                                        <button class='btn btn-primary select-btn' data-ng-click='sc_skill=!sc_skill' ng-bind="GetCount(SkillNameList,'Select Skills')">Select Skills</button>
+                                                        <button class='btn btn-primary dropdown-toggle select-btn-sub' data-ng-click='sc_skill=!sc_skill'> <span class='fa fa-chevron-down'></span> </button>
+                                                        <div ng-show="sc_skill" class="ddlMultiple" ng-cloak>
+                                                            <div ng-click="ddlCheckAll('SkillNameList');">Check All <span class="btn-counts-right">Total Count: {{SkillNameList.length}}</span>                                                                                </div>
+                                                            <div ng-click="ddlUnCheckAll('SkillNameList');">Uncheck All</div>
+                                                            <hr style="margin:0px !important" />
+                                                            <div ng-repeat="sk in SkillNameList">
+                                                                <input type="checkbox" @*ng-model="obj.SkillCode""*@ ng-model="sk.chk" @*ng-value="sk.SkillNameCode" ng-disabled="sk.disabled" ng-show="sk.IsActive"*@ /> {{sk.SkillName}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-6 col-xs-12 ">
+                                            @Html.Partial("ActionView")
+                                        </div>
+
+                                    </div>
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Row -->
+        </div>
+    </div>
+</div>
+
+

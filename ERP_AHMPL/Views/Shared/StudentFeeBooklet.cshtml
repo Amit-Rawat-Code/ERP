@@ -1,0 +1,1068 @@
+﻿<div id="ExportDiv" style="width:100%; float:left; display:none;" ng-cloak>
+    <style>
+        .installment {
+            width: 100%;
+            float: left;
+            border: solid 1px #000;
+            padding: 5px !important;
+        }
+
+        .installment li {
+            margin-bottom: 5px;
+            font-weight: normal !important;
+        }
+
+        p {
+            line-height: inherit !important;
+        }
+    </style>
+    <div ng-repeat="fh in  FeeBookletH">
+        <div style="width:100%;position:relative;min-height:100%;height:100%">
+            <table class="aminsons-from">
+                <tbody>
+                    <tr>
+                        <td>
+                            <img style="display:inline-block; height:120px; margin-bottom:10px;" src="{{Logo}}" alt="">
+                            <h1 ng-if="SchoolName">{{SchoolName}} {{SchoolAddress}}</h1>
+                            @*<strong ng-hide="true">(A Unit of {{SocietyName}})</strong>*@
+                            <span style="font-size:20px">Website:<a href="" ng-href="{{SchoolLiveWebSiteUrl}}" target="_blank">{{SchoolLiveWebSiteUrl}}</a></span>
+                            <span style="font-size:20px">Email: {{SchoolEmailId}}</span>
+                            <span style="font-size:20px">Contact No.: {{SchoolContactNo}}</span>
+                            <p style="padding: 20px 0 125px 0; ">Session: {{SelectedSession}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table class="table-adm table-adm-row" style="margin-top:20px;">
+                <tbody>
+                    <tr>
+                        <td class="col-w-a"><span class="e-txt" style="font-family: Arial; font-weight:normal;">NAME OF STUDENT :</span></td>
+                        <td class="b-d-bro" style="width:47%;"><span class="b-txt ">{{fh.Student}}</span></td>
+                        <td class="col-w-a"><span class="b-txt " style="font-family: Arial; font-weight:normal;">SCHOLAR ID :</span></td>
+                        <td class="b-d-bro" style="width:47%;"><span class="b-txt ">{{fh.AdmissionNo}}</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table-adm table-adm-row" style="margin-top:30px;">
+                <tbody>
+                    <tr>
+                        <td class="col-w-a" style="font-family: Arial; font-weight:normal;"><span class="e-txt">NAME OF THE PARENT :</span></td>
+                        <td class="b-d-bro" style="width: 35%;"><span class="b-txt ">{{fh.FatherName}}</span></td>
+                        <td class="col-w-a"><span class="b-txt" style="font-family: Arial; font-weight:normal;">CLASS</span></td>
+                        <td class="b-d-bro" style="width: 35%;"><span class="b-txt ">{{SelectedClassCode}}</span></td>
+                        <td class="col-w-a"><span class="b-txt " style="font-family: Arial; font-weight:normal;">SECTION :</span></td>
+                        <td class="b-d-bro" style="width: 35%;"><span class="b-txt ">{{SelectedSectionCode}}</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="border: solid 1px #000; width: 100%; position: absolute; bottom: 0px; text-align: center; vertical-align: middle;">
+                <p style="padding: 0 5px 0; font-size: 15px; line-height:21px;">
+                    Fee Deposited through {{BankFeePayMode}} in {{fh.BankName}} {{fh.BankAddress}}
+                    <br />For Online Fee Payment,
+                    through Our School Website {{SchoolLiveWebSiteUrl}} or AllenCare App.
+                </p>
+                <p style="padding:0 5px 7px; font-size: 15px; line-height: 19px;">In School, Fee Payment is accepted through Cheque/Draft/Swipe Machine/QR Code/UPI only.</p>
+            </div>
+        </div>
+        <table ng-repeat="fd in  FeeBookletD | filter : {StudentCode:fh.StudentCode}" class="repeat-section1">
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="table-adm table-adm1">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:left;">
+                                                        <strong style="margin-left: 3px;"> Last Fee Deposit Date: {{fd.LastDate}} </strong>
+                                                    </td>
+                                                    <td style="text-align:right;">
+                                                        <strong style="margin-right: 3px;"> Parent's Copy </strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table style="width:100%;margin-bottom:10px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="font-family:Arial; font-size:12px; font-weight:normal; padding-left:10px;">
+                                                        <strong>Adm No</strong> : <span style="font-size: 14px">{{fd.AdmissionNo}}</span>
+                                                    </td>
+                                                    <td style="font-size:12px; font-family:Arial; font-weight:normal; text-align:right; padding-right:10px;">
+                                                        <strong>Due Date</strong> : <span>{{fd.DueOn}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;padding:0px">
+                                                        <div class="CollegeName">
+                                                            {{SchoolName}}
+                                                            <div class="CollegeName1">{{SchoolAddress}}</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                @*
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <div class="CollegeName1"><strong>PAN : </strong></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>*@
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <strong style="font-size:18px;">Session</strong> : <span>{{fd.SessionName}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:right;">
+                                                        <strong>Date</strong> : <span>-------------------------------------------</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Fee Detail</strong> : <span>{{fd.InstallmentName}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span>Class : {{SelectedClassCode}}  Sec : {{SelectedSectionCode}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Scholar's Name</strong> : <span>{{fd.Student}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Father's Name</strong> : <span>{{fd.FatherName}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Remark</strong> : <span></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                            <thead style="background:#000; color:#fff;">
+                                                <tr>
+                                                    <th>Particulars</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="fAmt in  FeeBookletAmt | filter : {StudentCode:fd.StudentCode,InstallmentCode:fd.Code}">
+                                                    <td>
+                                                        <span>{{fAmt.FeeHeadName}}</span>
+                                                    </td>
+                                                    <td style="text-align:right; border-left:solid 1px #000">
+                                                        {{fAmt.PayableAmt}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Total
+                                                    </td>
+                                                    <td style="text-align:right; border-left:solid 1px #000">
+                                                        @*{{fd.PayableAmt}}*@
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Cheque/DD/Transaction No. :
+                                                    </td>
+                                                    <td style="vertical-align:bottom">
+                                                        -------------------------
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row ">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center; padding-top:85px;">
+                                                        @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                        <div>Depositor Sign</div>
+                                                    </td>
+                                                    <td style="text-align:center; padding-top:85px;">
+                                                        @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                        <div>Cashier Sign</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="background:#000; color:#fff;">
+                                                        <strong style="font-size:14px;">Fee Deposit Details:</strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="min-height: 70px; padding: 5px;">
+                                            Fee Deposited through {{BankFeePayMode}} in {{fh.BankName}} {{fh.BankAddress}}
+                                            <br />For Online Fee Payment,
+                                            through Our School Website {{SchoolLiveWebSiteUrl}}
+                                            or
+                                            AllenCare App.
+                                        </p>
+                                        <p style="padding: 5px;">In School, Fee Payment is accepted through Cheque/Draft/Swipe Machine/QR Code/UPI only.</p>
+                                        @*<table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width:100px;">
+                                                        <strong style="font-size:13px;"> Bank Name :</strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{fh.BankName}}</span>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong style="font-size:13px;"> Account No :</strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{fh.AccountNo}}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong style="font-size:13px;">IFSC Code :</strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{fh.IfscCode}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+
+
+
+
+                    <td>
+
+                        <table class="table-adm table-adm1">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:left;">
+                                                        <strong style="margin-left: 3px;"> Last Fee Deposit Date: {{fd.LastDate}} </strong>
+                                                    </td>
+                                                    <td style="text-align:right;">
+                                                        <strong style="margin-right: 3px;"> School's Copy </strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table style="width:100%;margin-bottom:10px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="font-family:Arial; font-size:12px; font-weight:normal; padding-left:10px;">
+                                                        <strong>Adm No</strong> : <span style="font-size: 14px">{{fd.AdmissionNo}}</span>
+                                                    </td>
+                                                    <td style="text-align: right; font-size: 12px; font-family: Arial; font-weight: normal; padding-right:10px;">
+                                                        <strong>Due Date</strong> : <span>{{fd.DueOn}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;padding:0px">
+                                                        <div class="CollegeName">
+                                                            {{SchoolName}}
+                                                            <div class="CollegeName1">{{SchoolAddress}}</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                @*
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <div class="CollegeName1"><strong>PAN :</strong></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>*@
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <strong style="font-size:18px;">Session</strong> : <span>{{fd.SessionName}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:right;">
+                                                        <strong>Date</strong> : <span style="margin-top:5px;">-------------------------------------------</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Fee Detail</strong> : <span>{{fd.InstallmentName}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span>Class : {{SelectedClassCode}}  Sec : {{SelectedSectionCode}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Scholar's Name</strong> : <span>{{fd.Student}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Father's Name</strong> : <span>{{fd.FatherName}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Remark</strong> : <span></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000; width:100%;">
+                                            <thead style="background:#000; color:#fff;">
+                                                <tr>
+                                                    <th>Particulars</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="fAmt in  FeeBookletAmt | filter : {StudentCode:fd.StudentCode,InstallmentCode:fd.Code}">
+                                                    <td>
+                                                        <span>{{fAmt.FeeHeadName}}</span>
+                                                    </td>
+                                                    <td style="text-align:right; border-left:solid 1px #000">
+                                                        {{fAmt.PayableAmt}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Total
+                                                    </td>
+                                                    <td style="text-align:right; border-left:solid 1px #000">
+                                                        @*{{fd.PayableAmt}}*@
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Cheque/DD/Transaction No. :
+                                                    </td>
+                                                    <td style="vertical-align:bottom">
+                                                        -------------------------
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center; padding-top:85px;">
+                                                        @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                        <div>Depositor Sign</div>
+                                                    </td>
+                                                    <td style="text-align:center; padding-top:85px;">
+                                                        @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                        <div>Cashier Sign</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="background:#000; color:#fff;">
+                                                        <strong style="font-size:14px;">Fee Deposit Details:</strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="min-height: 70px; padding: 5px;">
+                                            Fee Deposited through {{BankFeePayMode}} in {{fh.BankName}} {{fh.BankAddress}}
+                                            <br />For Online Fee Payment,
+                                            through Our School Website {{SchoolLiveWebSiteUrl}}
+                                            or
+                                            AllenCare App.
+                                        </p>
+                                        <p style="padding: 5px;">In School, Fee Payment is accepted through Cheque/Draft/Swipe Machine/QR Code/UPI only.</p>
+                                        @*<table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width:100px;">
+                                                        <strong style="font-size:13px;">Bank Name :</strong>
+                                                    </td>
+                                                    <td>
+                                                        {{fh.BankName}}
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong style="font-size:13px;">Account No :</strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{fh.AccountNo}}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong style="font-size:13px;">IFSC Code :</strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{fh.IfscCode}}</span>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </td>
+
+                    <td>
+
+                        <table class="table-adm table-adm1">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:left;margin-left: 3px;">
+                                                        <strong style="margin-left: 3px;"> Last Fee Deposit Date: {{fd.LastDate}} </strong>
+                                                    </td>
+                                                    <td style="text-align:right;margin-right: 3px;">
+                                                        <strong style="margin-right: 3px;"> Bank's Copy </strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table style="width:100%; margin-bottom:10px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="font-family:Arial; font-size:12px; font-weight:normal; padding-left:10px;">
+                                                        <strong>Adm No</strong> : <span style="font-size: 14px">{{fd.AdmissionNo}}</span>
+                                                    </td>
+                                                    <td style="font-size:12px; font-family:Arial; font-weight:normal; text-align:right; padding-right:10px;">
+                                                        <strong>Due Date</strong> : <span>{{fd.DueOn}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;padding:0px">
+                                                        <div class="CollegeName">
+                                                            {{SchoolName}}
+                                                            <div class="CollegeName1">{{SchoolAddress}}</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                @*
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <div class="CollegeName1"><strong>PAN :</strong></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>*@
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <strong style="font-size:18px;">Session</strong> : <span>{{fd.SessionName}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:right;">
+                                                        <strong>Date</strong> : <span style="margin-top:5px;">-------------------------------------------</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Fee Detail</strong> : <span>{{fd.InstallmentName}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span>Class : {{SelectedClassCode}}   Sec : {{SelectedSectionCode}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Scholar's Name</strong> : <span>{{fd.Student}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Father's Name</strong> : <span>{{fd.FatherName}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Remark</strong> : <span></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000; width:100%;">
+                                            <thead style="background:#000; color:#fff;">
+                                                <tr>
+                                                    <th>Particulars</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="fAmt in  FeeBookletAmt | filter : {StudentCode:fd.StudentCode,InstallmentCode:fd.Code}">
+                                                    <td>
+                                                        <span>{{fAmt.FeeHeadName}}</span>
+                                                    </td>
+                                                    <td style="text-align:right; border-left:solid 1px #000">
+                                                        {{fAmt.PayableAmt}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Total
+                                                    </td>
+                                                    <td style="text-align:right; border-left:solid 1px #000">
+                                                        @*{{fd.PayableAmt}}*@
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <!--<tr>
+                                <td>
+                                    <table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Total
+                                                </td>
+                                                <td style="text-align:right; border-left:solid 1px #000;">-->
+                                @*{{fd.PayableAmt}}*@
+                                <!--</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>-->
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Cheque/DD/Transasction No. :
+                                                    </td>
+                                                    <td style="vertical-align:bottom">
+                                                        -------------------------
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row ">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center; padding-top:85px;">
+                                                        @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                        <div>Depositor Sign</div>
+                                                    </td>
+                                                    <td style="text-align:center; padding-top:85px;">
+                                                        @*<img src="https://www.pikpng.com/pngl/b/416-4169510_signature-sticker-signature-png-for-picsart-edit-clipart.png" alt="sign" style="height:50px;object-fit:contain;">*@
+                                                        <div>Cashier Sign</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table-adm table-adm-row">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="background:#000; color:#fff;">
+                                                        <strong style="font-size:14px;">Fee Deposit Details:</strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="min-height: 70px; padding: 5px;">
+                                            Fee Deposited through {{BankFeePayMode}} in {{fh.BankName}} {{fh.BankAddress}}
+                                            <br />For Online Fee Payment,
+                                            through Our School Website {{SchoolLiveWebSiteUrl}}
+                                            or
+                                            AllenCare App.
+                                        </p>
+                                        <p style="padding: 5px;">In School, Fee Payment is accepted through Cheque/Draft/Swipe Machine/QR Code/UPI only.</p>
+                                        @*<table class="table-adm table-adm-row bodered-class" style="border:solid 1px #000;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width:100px;">
+                                                        <strong style="font-size:13px;"> Bank Name : </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{fh.BankName}}</span>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong style="font-size:13px;">Account No :</strong>
+                                                    </td>
+                                                    <td><span>{{fh.AccountNo}}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong style="font-size:13px;">IFSC Code : </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{fh.IfscCode}}</span>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="repeat-section1">
+            <tbody>
+                <tr>
+                    <td>
+                        <table style="width:100%;">
+                            <tbody>
+                                <tr>
+                                    <td style="border: 1px solid #000; padding: 35px 10px 0px;">
+
+                                        <table class="repeat-section2" style="min-height:600px;">
+                                            <tbody class="regarding-payment">
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <h3> RULES REGARDING PAYMENT OF FEES :</h3>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td class="payment-left" style="width:50%; padding-right:15px;">
+
+                                                        <p>
+                                                            <span>1.</span>  Parents are requested to deposit the fee in Cheque/ Draft / Swipe Machine / QR Code / UPI / Online (through school's website {{SchoolLiveWebSiteUrl}}) / AllenCare APP only. Please pay the fee on or before the prescribed dates to avoid any payment of fine or re-admission formalities.
+                                                        </p>
+
+                                                        <h3>Cheque to be drawn in favour of '{{ChqInfavourof}}'.</h3>
+                                                        <p>Kindly mention the following details on the reverse of the cheque.</p>
+
+                                                        <table class="table-adm table-adm-row" style=" margin-bottom: 15px;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="col-w-a">
+                                                                        <span class="e-txt" style="font-family: Arial; font-weight:bold;">Scholar ID.</span>
+                                                                    </td>
+                                                                    <td class="b-d-bro"><span class="b-txt ">{{fh.AdmissionNo}}</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-w-a">
+                                                                        <span class="e-txt" style="font-family: Arial; font-weight:bold;">Student Name</span>
+                                                                    </td>
+                                                                    <td class="b-d-bro"><span class="b-txt ">{{fh.Student}}</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-w-a">
+                                                                        <span class="e-txt" style="font-family: Arial; font-weight:bold;">Class</span>
+                                                                    </td>
+                                                                    <td class="b-d-bro"><span class="b-txt ">{{SelectedClassCode}} {{SelectedSectionCode}}</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-w-a">
+                                                                        <span class="e-txt" style="font-family: Arial; font-weight:bold;">Mob.No.of the Parent</span>
+                                                                    </td>
+                                                                    <td class="b-d-bro"><span class="b-txt ">{{fh.MobileNo}}</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                        <p>
+                                                            <span>2.</span> Quarterly fee is due on the first day of each quarter
+                                                            and must be paid in full up to the prescribed dates given
+                                                            below. all the defaulters, after the prescribed date
+                                                            will be required to pay fine @@Rs.100/- for the first fifteen days, and there after Rs.50/- per week or part
+                                                            thereof for late payment of fee.
+                                                        </p>
+
+                                                        <p>
+                                                            After the end of the prescribed date of each quarter, the bank will accept the
+                                                            fees only if the fee book bears the school stamp and is signed by the
+                                                            accountant clearly mentioning the total fee due along with the fine.
+                                                        </p>
+                                                    </td>
+                                                    <td class="payment-right" style="width:50%; padding-left:15px;">
+                                                        <p><span>3.</span> Prescribed date of payment</p>
+                                                        <ol class="FeeBookletID">
+                                                            <li ng-repeat="fd in  FeeBookletD | filter : {StudentCode:fh.StudentCode}"><span class="left-me">{{fd.DueOn}}</span>   <span class="right-me">upto {{fd.LastDate}}</span> </li>
+
+                                                        </ol>
+                                                        <ul class="installment">
+                                                            <li><strong>Installment 1 -</strong>[Apr. 2022 - Jun. 2022]</li>
+                                                            <li><strong>Installment 2 -</strong>[July 2022 - Sep. 2022]</li>
+                                                            <li><strong>Installment 3 -</strong>[Oct. 2022 - Dec. 2022]</li>
+                                                            <li><strong>Installment 4 -</strong>[Jan. 2023 - Mar. 2023]</li>
+                                                        </ul>
+
+                                                        <p>
+                                                            <span>4.</span> Students whose fee is three months in arrears will have their names
+                                                            struck off the roll at the end of the relevant quarter and will not be allowed to
+                                                            sit in the class and will be re-admitted on payment of arrears with the fine
+                                                            plus admission fee as re-admission fee, provided the seat is vacant.
+                                                        </p>
+                                                        <p>
+                                                            <span>5.</span> Student with outstanding fees will not be permitted
+                                                            to appear for the examinations.
+                                                        </p>
+                                                        <p>
+                                                            <span>6.</span> Parents must give one month notice in writing if they wish to
+                                                            withdraw their Wards, or in lieu of notice, one Qtr. fee must be paid.
+                                                        </p>
+                                                        <p>
+                                                            <span>7.</span> No reduction or remission of fee may be claimed on account of holidays
+                                                            or absence through illness or any other reason.
+                                                        </p>
+                                                        <p><span>8.</span> If a Bill Book is lost a charge of Rs.100/- will be made to replace it.</p>
+                                                        <p>
+                                                            <span>9.</span> The Bank is not responsible for the correctness of your payment to the
+                                                            school. If in doubt regarding the amount to be deposited, kindly contact the
+                                                            school accounts office.
+                                                        </p>
+                                                        <p>
+                                                            <span>10.</span> An amount of Rs.500/ will have to be paid apart from the fine, in case a
+                                                            cheque bounces.
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+</div>

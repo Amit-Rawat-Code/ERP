@@ -1,0 +1,6 @@
+﻿@Html.DropDownList("ddlMaritalStatus", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Married", Value="Married"},
+    new SelectListItem{Text="Single", Value="Single"}
+},
+    new { @class = "select2 form-control", @ng_model = "MaritalStatus" })

@@ -1,0 +1,405 @@
+﻿@{
+    ViewBag.Title = "AdminBankReconciliation";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/AdminBankReconciliationController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="ExcelDatahfId" id="Id" name="Id" value="" />
+<input type="hidden" ng-model="LedgerDatahfId" id="Ids" name="Ids" value="" />
+<input type="hidden" ng-model="ExcelSrno" id="ExcelSrno" name="ExcelSrno" value="" />
+<input type="hidden" ng-model="LedgerSrno" id="LedgerSrno" name="LedgerSrno" value="" />
+<input type="hidden" ng-model="AdminSetteledDate" id="AdminSetteledDate" name="AdminSetteledDate" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n">
+            <h5 class="txt-dark">Bank Reconciliation</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Finance</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Bank Reconcilication</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <input id="rbManual" type="radio" value="1" ng-model="type" ng-init="type='1'" ng-change="rdShowDiv();" />
+                                                <label for="rbManual">Manual</label>
+                                                <input id="rbAutomatic" type="radio" value="2" ng-model="type" ng-change="rdShowDiv();" style="margin-left: 90px" />
+                                                <label for="rbAutomatic">Automatic</label>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15" ng-hide="showExcelBank">
+                                                <label class="control-label">Select Name Of Bank For Excel Format<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlExcelBank" class="select2 form-control validate" ng-init="GeBanksForExcel();" ng-model="ExcelBank" ng-change="GetExcelFormatNo();">
+                                                        <option value="">Select Excel Bank</option>
+                                                        <option ng-repeat="bank in ExcelBankList" value="{{bank.SubCode}}">{{bank.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15" ng-hide="showExcelBank">
+                                                <label class="control-label">Select Excel Format No<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlBank" class="select2 form-control validate" ng-model="ExcelFormatNo" ng-change="SearchExcelRecords();">
+                                                        <option value="">Select Format</option>
+                                                        <option ng-repeat="format in AllExcelFormat" value="{{format.ExcelFormatNo}}">{{format.ExcelFormatNo}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Select Bank Ledger<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <select ng-change="BindBankRuningBalance();" ng-disabled="disableBank" id="ddlBank" class="select2 form-control validate" ng-init="GeBanks();" ng-model="Bank">
+                                                        <option value="">Select Bank</option>
+                                                        <option ng-repeat="bank in GetBank" value="{{bank.SubCode}}">{{bank.Name}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">From Date<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <input ng-disabled="disableFromDate" id="txtFromDate" type="date" class="form-control clear"
+                                                           ng-model="FromDate" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">To Date<span class="vd_red"></span></label>
+                                                <div class="input-box">
+                                                    <input ng-disabled="disableToDate" id="txtToDate" type="date" class="form-control clear"
+                                                           ng-model="ToDate" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-6 col-xs-12">
+                                                <label class="control-label account-book-balance">Account Book Balance : <span><a class="vd_red" style="font-size: 12px; text-decoration:underline" href="" ng-click="LedgerWiseDetails()" target="_blank" data-toggle="modal" data-target="#clearedPopupDialogBox">{{CashRuningBalance}}</a></span></label>
+                                                ||<label class="control-label account-book-balance">Account Cleared Balance : <span><a style="font-size: 12px; color: green; text-decoration:underline" href="" ng-click="LedgerWiseDetails('Cleared')" target="_blank" data-toggle="modal" data-target="#clearedPopupDialogBox"> {{ClearedAmount}} </a></span></label>
+                                                ||<label class="control-label account-book-balance">Account InProcess Balance : <span><a style="font-size: 12px; color: orange; text-decoration:underline" href="" ng-click="LedgerWiseDetails('InProcess')" target="_blank" data-toggle="modal" data-target="#clearedPopupDialogBox">{{InProcessAmount}}</a></span></label>
+                                            </div>
+                                            @*<div class="col-md-6 col-sm-6 col-xs-12 mgbt-xs-15">
+                            <label class="control-label">Automatic<span class="vd_red">*</span></label>
+                            <div class="input-box">
+
+                                <div class="text-box-msg-r">
+                                </div>
+                            </div>
+                        </div>*@
+                                            @*<div class="row">*@
+
+                                            @*<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mgbt-xs-15">
+                            <input id="btnSearchExcelRecords" ng-hide="searchExcelDataButton" type="button" value="Search Excel Records" class="btn-me btn-success" name="SearchExcelData"
+                                   ng-model="SearchExcelData" ng-click="SearchExcelRecords();" />
+                        </div>*@
+                                        </div>
+                                        <div class="row" ng-hide="excelDataTableHide">
+                                            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                                <div class="table-responsive">
+                                                    <h3 style="text-decoration:underline">Entries from uploaded excels which are not reconcile:</h3>
+                                                    <div style="height:400px">
+                                                        <table id="example2" class="table table-striped table-bordered compact fixTableHead" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>S.No.</th>
+                                                                    <th>Bank Name</th>
+                                                                    <th>Mode Of Payments</th>
+                                                                    <th>Date Of Excel Upload</th>
+                                                                    <th>Settled Date</th>
+                                                                    <th>CRTD Date</th>
+                                                                    <th>Branch Code</th>
+                                                                    <th>Company Code</th>
+                                                                    <th>Transaction No</th>
+                                                                    <th>Scholar No</th>
+                                                                    <th>Student Name</th>
+                                                                    <th>Class/Section</th>
+                                                                    <th>Remarks</th>
+                                                                    <th>Email Id</th>
+                                                                    <th>Mobile No</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Total Amount</th>
+                                                                    <th>Commission Amount</th>
+                                                                    <th>Status</th>
+                                                                    <th>Clearance Date</th>
+                                                                    <th>Authorise Date</th>
+                                                                    <th>Aggregator</th>
+                                                                    <th>Merchant Transaction Id</th>
+                                                                    <th>Settled Amount</th>
+                                                                    <th>Unique No</th>
+                                                                    <th>Company Reference</th>
+                                                                    <th>SolId</th>
+                                                                    <th>Section</th>
+                                                                    <th>Quarter</th>
+                                                                    <th>Late Fees</th>
+                                                                    <th>Fee Amount</th>
+                                                                    <th>Cheque Date</th>
+                                                                    <th>Drawn On Bank</th>
+                                                                    <th>Drawn On Branch</th>
+                                                                    <th>Clearance Flag</th>
+                                                                    <th>Time Coll</th>
+                                                                    <th>Value Date</th>
+                                                                    <th>Post Date</th>
+                                                                    <th>Remitter Branch</th>
+                                                                    <th>Particulars</th>
+                                                                    <th>Debit</th>
+                                                                    <th>Credit</th>
+                                                                    <th>Balance</th>
+                                                                    <th>Description</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="obj in ExcelDataList">
+                                                                    <td>
+                                                                        <input ng-change="CheckLedgerMatchRecordsWithTransactionNo(obj);" id="{{obj.TransID}}" ng-click="ExcelOneCheckBoxChecked($index, ExcelDataList)" type="checkbox" ng-model="obj.checked" class="toggle-vis" />
+                                                                    </td>
+                                                                    <td ng-bind="obj.Srno=($index+1)"></td>
+                                                                    <td>{{obj.BankName}}</td>
+                                                                    <td>{{obj.TransactionMode}}</td>
+                                                                    <td>{{obj.DateOfExcelUpload}}</td>
+                                                                    <td>{{obj.SettledDate}}</td>
+                                                                    <td>{{obj.CRTDDate}}</td>
+                                                                    <td>{{obj.BranchCode}}</td>
+                                                                    <td>{{obj.CompanyCode}}</td>
+                                                                    <td>{{obj.TransactionNo}}</td>
+                                                                    <td>{{obj.ScholarNo}}</td>
+                                                                    <td>{{obj.StudentName}}</td>
+                                                                    <td>{{obj.ClassSection}}</td>
+                                                                    <td>{{obj.Remarks}}</td>
+                                                                    <td>{{obj.Emailid}}</td>
+                                                                    <td>{{obj.MobileNo}}</td>
+                                                                    <td>{{obj.Amount}}</td>
+                                                                    <td>{{obj.TotalAmount}}</td>
+                                                                    <td>{{obj.CommissionAmount}}</td>
+                                                                    <td>{{obj.Status}}</td>
+                                                                    <td>{{obj.ClearanceDate}}</td>
+                                                                    <td>{{obj.AuthoriseDate}}</td>
+                                                                    <td>{{obj.Aggregator}}</td>
+                                                                    <td>{{obj.MerchantTransactionId}}</td>
+                                                                    <td>{{obj.SettledAmount}}</td>
+                                                                    <td>{{obj.UniqueNo}}</td>
+                                                                    <td>{{obj.CompanyReference}}</td>
+                                                                    <td>{{obj.SolId}}</td>
+                                                                    <td>{{obj.Section}}</td>
+                                                                    <td>{{obj.Quarter}}</td>
+                                                                    <td>{{obj.LateFees}}</td>
+                                                                    <td>{{obj.FeeAmount}}</td>
+                                                                    <td>{{obj.ChequeDate}}</td>
+                                                                    <td>{{obj.DrwnOnBank}}</td>
+                                                                    <td>{{obj.DrwnOnBranch}}</td>
+                                                                    <td>{{obj.ClearanceFlag}}</td>
+                                                                    <td>{{obj.TimeColl}}</td>
+                                                                    <td>{{obj.ValueDate}}</td>
+                                                                    <td>{{obj.PostDate}}</td>
+                                                                    <td>{{obj.RemitterBranch}}</td>
+                                                                    <td>{{obj.Particulars}}</td>
+                                                                    <td>{{obj.DR}}</td>
+                                                                    <td>{{obj.CR}}</td>
+                                                                    <td>{{obj.Balance}}</td>
+                                                                    <td>{{obj.Description}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                <input id="btnFeeDeposit" type="button" value="Fees Deposit" class="btn-me btn-success" name="FeeDeposit"
+                                                       ng-model="FeeDeposit" ng-click="OpenFeesDepositForm();" ng-disabled="disFeeDeposit" />
+                                                <input id="btnBankRecepits" type="button" value="Bank Receipt" class="btn-me btn-success" name="BankRecepits"
+                                                       ng-model="BankRecepits" ng-click="OpenBankRecepitVoucher();" ng-disabled="disBankRecepits" />
+                                                <input id="btnReference" type="button" value="Show Not Reconcile Entries" class="btn-me btn-success" name="Reference"
+                                                       ng-model="Reference" ng-click="LedgerMasterRecords();" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row" ng-hide="ledgerDataListtable">
+                                            
+                                            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mgbt-xs-15">
+                                                <div class="table-responsive">
+                                                    <h3 style="text-decoration:underline">Entries from ledger which are not reconcile:</h3>
+                                                    <div style="height:400px">
+                                                        <table id="example2" class="table table-striped table-bordered compact fixTableHead" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>S.No.</th>
+                                                                    <th>Voucher Date</th>
+                                                                    <th>Voucher Type</th>
+                                                                    <th>Voucher No.</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Admission No.</th>
+                                                                    <th>Cheque No.</th>
+                                                                    <th>Ledger Name</th>
+                                                                    <th>Cheque Date</th>
+                                                                    <th>Narration</th>
+                                                                    <th ng-hide="thDatehide">Clearing Date</th>
+                                                                    <th ng-hide="thTransactionNo">Transaction No.</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="obj1 in LedgerDataList" class="{{obj1.color=='green' ? 'MatchChequeNo' : ''}}">
+                                                                    <td>
+                                                                        <input ng-click="LedgerOneCheckBoxChecked($index, LedgerDataList);" type="checkbox"
+                                                                               ng-model="obj1.checked" class="toggle-vis" />
+                                                                    </td>
+                                                                    <td ng-bind="obj1.Srno=($index+1)"></td>
+                                                                    <td>{{obj1.PVDate}}</td>
+                                                                    <td>{{obj1.V_Type}}</td>
+                                                                    <td>{{obj1.PVNo}}</td>
+                                                                    <td style="{{Row[$index].Amount}}" ng-init="Row[$index].Amount=''">{{obj1.Amount}}</td>
+                                                                    <td style="{{Row[$index].AdmissionNo}}" ng-init="Row[$index].AdmissionNo=''">{{obj1.AdmissionNo}}</td>
+                                                                    <td style="{{Row[$index].Chq_No}}" ng-init="Row[$index].Chq_No=''">{{obj1.Chq_No}}</td>
+                                                                    <td>{{obj1.Name}}</td>
+                                                                    <td>{{obj1.Chq_Date}}</td>
+                                                                    <td>{{obj1.EntryNarr}}</td>
+                                                                    <td ng-hide="hidetxtDate">
+                                                                        <input id="txtDate" type="date" class="form-control clear"
+                                                                               ng-model="obj1.transactionDate" />
+                                                                    </td>
+                                                                    <td ng-hide="hidetxtTransactionNo">
+                                                                        <input id="txtTransactionNo" type="text" class="form-control clear"
+                                                                               ng-model="obj1.TransactionNo" maxlength="80" />
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-hide="ledgerSetteledButtion">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                <input id="btnSettled" type="button" value="Settled" class="btn-me btn-success" name="Settled"
+                                                       ng-model="Settled" ng-click="SaveRecord();" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                <h3 style="text-decoration:underline">Note:</h3>
+                                <ol style="margin-left:12px;color:black;font-weight:500">
+                                    <li>
+                                        <span style="background-color: #6ad56a; width: 15px; height: 15px; display: inline-block; border: 1px solid black; margin-bottom: 1px;">&nbsp;</span>
+                                        <span style="font-weight:500;color:black">Green color rows in "Entries from ledger which are not reconcile" grid appears on the basis of columns Admission No. , Transaction No. , Settled Amount.</span>
+                                    </li>
+                                    @*<li>
+                                        <span style="background-color: #fff; width: 15px; height: 15px; display: inline-block; border: 1px solid black;">&nbsp;</span>
+                                        <span style="font-weight:500;color:black"> White color represents, New records.</span>
+                                    </li>*@
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+
+<!-- Modal Cleared ModalPopup -->
+<div class="modal fade" id="clearedPopupDialogBox" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                    <div class="table-responsive" style=" width: 100%; overflow-y: hidden;">
+                        <table id="example3" class="table table-striped table-bordered compact" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Date</th>
+                                    <th>Voucher Type</th>
+                                    <th>Number</th>
+                                    <th>Status</th>
+                                    <th>Particulars</th>
+                                    <th>Dr</th>
+                                    <th>Cr</th>
+                                    <th>Balance</th>
+                                    <th>DR/CR</th>
+                                </tr>
+                            </thead>
+                            <tbody>                             
+                                <tr ng-repeat="lst in LedgerWiseDetailsList" scroll-div-footer="example3">
+                                    <td ng-bind="$index+1"></td>
+                                    <td>{{lst.Date}}</td>
+                                    <td>{{lst.V_Type}}</td>
+                                    <td>{{lst.CvNo}}</td>
+                                    <td>{{lst.Status}}</td>
+                                    <td ng-bind-html="trustAsHtml(lst.Name)"></td>
+                                    <td>{{lst.DebitAmt}}</td>
+                                    <td>{{lst.CreditAmt}}</td>
+                                    <td>{{lst.Balance}}</td>
+                                    <td>{{lst.DRCR}}</td>
+                                </tr>                                
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="SR.No." /></td>
+                                    <td><input type="text" class="form-control" placeholder="Date" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Voucher Type" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Number" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Status" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Particulars" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Dr" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Cr" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Balance" /></td>
+                                    <td><input type="text" class="form-control" placeholder="DR/CR" /></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

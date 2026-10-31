@@ -1,0 +1,57 @@
+﻿
+@*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+    <div class="collapse in" id="collapseinputbox">*@
+        <div class="table-heading-box">
+          
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                <div class="datatable-responsive table-responsive">
+                    <table id="tblEmployeeLeaveList" class="table compact table-hover table-striped table-bordered mgbt-xs-5" ng-model="LeaveList"  ng-init="EmployeeLeaveList()">
+                        <thead>
+                            <tr>
+                                <th class="edit-w text-center">View</th>
+                                <th class="sr-no-w text-center">Sr.No.</th>
+                                <th>Employee Name</th>
+                                <th>Applied Date</th>
+                                <th>Leave From</th>
+                                <th>Leave To</th>
+                                <th>Leave Reason</th>
+                                @*<th>On Leave Responsible Employee</th>*@
+                                <th>Leave Type</th>
+                                <th>First Approval Authority Name</th>
+                                <th>First Authority Approval Status</th>
+                                <th>Second Approval Authority Name</th>
+                                <th>Second Authority Approval Status</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="EmployeeLeave in EmployeeLeaveLists" repeat-done>
+                                <td class="text-center">
+                                    <a class="btn-action btn-outline-secondary" data-toggle="tooltip" data-placement="top" data-original-title="Edit" title="" ng-href="../AttendanceTransaction/EmployeeLeaveApproval?EmpAttendanceId={{EmployeeLeave.TransId}}"><i class="fa fa-eye"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    {{$index+1}}
+                                    @*<input type="hidden" id="Employeecode" value="{{EmployeeLeave.EmployeeCode}}" />*@
+                                </td>
+                                <td>{{EmployeeLeave.EmpName}}</td>
+                                <td>{{EmployeeLeave.VoucherDate|date:'dd-MM-yyyy'}}</td>
+                                <td>{{EmployeeLeave.LeaveFrom|date:'dd-MM-yyyy'}}</td>
+                                <td>{{EmployeeLeave.LeaveTo|date:'dd-MM-yyyy'}}</td>
+                                <td>{{EmployeeLeave.LeaveReason}}</td>
+                                @*<td>{{EmployeeLeave.ResEmpName}}</td>*@
+                                <td>{{EmployeeLeave.LeaveFor}}</td>
+                                <td>{{EmployeeLeave.FirstLevelEmpName}}</td>
+                                <td>{{EmployeeLeave.FirstApprovalStatus}}</td>
+                                <td>{{EmployeeLeave.SecondLevelEmpName}}</td>
+                                <td>{{EmployeeLeave.SecondApprovalStatus}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    @*</div>
+</div>*@
+
+
+

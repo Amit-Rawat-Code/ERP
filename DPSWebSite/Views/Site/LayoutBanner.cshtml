@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "LayoutBanner";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<style>
+    a:focus, a:hover {
+        color: #fff;
+        text-decoration: none;
+        background-color: #60bec4;
+    }
+</style>
+
+<section class="page-banner-breadcrumbs">
+    @*<div class="website-main-content">*@
+    <div class="container">        
+        <div class="master-hdr">
+            <h3 class="section-title">{{BannerDataList[0].Title}}</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="achiSlideImg">
+                    <img src="{{BannerDataList[0].MediaFilePath}}" alt="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="ach1234">
+                    <div class="hedachi1">
+                        <b>Title : </b>
+                        {{BannerDataList[0].Title}}
+
+                    </div>
+                    <div class="achiTxt">
+                        <div class="achi-dt2 achVenue">
+                            <b>Venue:</b>
+                        <span id="lbleventVenue" class="EventVenue"> {{BannerDataList[0].Venue}}</span>
+                    </div>
+                        <div class="redate DateEach">
+
+                            <span><b>Event Date : </b>{{BannerDataList[0].EventFromDate!='Not Defined'?BannerDataList[0].EventFromDate+' To '+BannerDataList[0].EventToDate:'Not Specified'}}</span>
+                        </div>
+                    </div>
+                    <div class="det_achiv">
+                        <b>Description </b>
+                        <div class="pre">{{BannerDataList[0].Discription2}}</div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a class="viewAll px-2 py-1" href="" ng-href="{{BackUrl}}" ng-model="BackUrl" ng-click="BacktoBannerLayoutPage()">
+                            <span style="cursor:pointer">&lt;&lt; Back </span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    @*</div>*@
+    <br />
+</section>
+

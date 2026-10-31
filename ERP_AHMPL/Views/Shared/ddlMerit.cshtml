@@ -1,0 +1,5 @@
+﻿<select id="ddlMerit" class="select2 form-control validate" ng-model="MeritCode" ng-init="GetMerites();" >
+    <option value="">Select Merit List</option>
+    <option ng-repeat="ml in MeritList" value="{{ml.Id}}">{{ml.Name}}</option>
+</select>
+

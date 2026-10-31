@@ -1,0 +1,29 @@
+﻿<div class="input-box chk-validate" ng-init="GetInstallments();">
+    <div class="toggle-ddl" id="openInstallmentList"
+         ng-init="ToogleDDL('openInstallmentList','openInstallmentList')">
+        @*btn-validate*@
+        <button class='btn btn-primary select-btn'
+                data-ng-click='openInstallmentList=!openInstallmentList'
+                ng-bind="GetCount(InstallmentList,'Select InstallmentList')">
+            Select Class
+        </button>
+        @*btn-validate*@
+        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                data-ng-click='openInstallmentList=!openInstallmentList'>
+            <span class='fa fa-chevron-down'></span>
+        </button>
+        <div ng-show="openInstallmentList" class="ddlMultiple" ng-cloak >
+            <div ng-click="ddlCheckAll('InstallmentList')">
+                Check All
+                <span class="btn-counts-right">Total Count: {{InstallmentList.length}}</span>
+            </div>
+            <div ng-click="ddlUnCheckAll('InstallmentList')">Uncheck All</div>
+            <hr style="margin:0px !important" />
+            <div ng-repeat="il in InstallmentList">
+                <input type="checkbox" ng-model="il.chk" value="{{il.Code}}" ng-disabled="!il.IsActive" />
+                {{il.InstallmentName}}
+                @*   <br />{{sm.TransId}}*@
+            </div>
+        </div>
+    </div>
+</div>

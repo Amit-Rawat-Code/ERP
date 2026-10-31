@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Vehicle Master";
+    ViewBag.TitleList = "Vehicle Master";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/VehicleMasterController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark"> @ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Transport</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                    
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vehicle Type<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlVehicleType" class="select2 form-control validate" ng-model="VehicleType" ng-init="SelectVehicleType()">
+                                                        <option value="">Select Vehicle Type</option>
+                                                        <option ng-repeat="vehicleType in VehicleTypeList" value="{{vehicleType.VehicleTypeCode}}">{{vehicleType.VehicleType}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vehicle Unique ID<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("Enter Id", "", new { @class = "form-control clear", @placeholder = "Enter ID", @autocomplete = "name", @ng_model = "UniqueId" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vehicle Number<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("Vehicle Number", "", new { @class = "form-control clear", @placeholder = "Vehicle Number", @autocomplete = "name", @ng_model = "VehicleNumber" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vehicle Owner type<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <select id="ddlVehicleOwner" class="select2 form-control validate" ng-model="VehicleOwner" ng-init="SelectVehicleOwnerType()">
+                                                        <option value="">Select Vehicle Owner</option>
+                                                        <option ng-repeat="vehicleOwn in VehicleOwnerTypeList" value="{{vehicleOwn.VehicleOwnerCode}}">{{vehicleOwn.VehicleOwner}}</option>
+                                                    </select>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 co l-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Vehical Reg. On</label>
+                                                <div class="input-box">
+                                                    <input class="form-control validate" id="txtFromDate" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="VehicleRegDate" type="date" value="" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Owner Name</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("Owner Name", "", new { @class = "form-control clear", @placeholder = "Owner Number", @ng_model = "OwnerName" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Contact Number</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("Enter Number", "", new { @class = "form-control clear", @placeholder = "Contact Number", @ng_model = "ContactNumber" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Address</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("Enter Address", "", new { @class = "form-control clear", @placeholder = "Owner Addres", @ng_model = "OwnerAddres" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Chasis Number<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("ChasisNumber", "", new { @class = "form-control clear", @placeholder = "Chasis Number", @ng_model = "VehicleChasisNumber" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 co l-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Fitness Expires On</label>
+                                                <div class="input-box">
+                                                    <input class="form-control validate" id="txtFromDate" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="FitnessExpiryDate" type="date" value="" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 co l-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Permit Expires On</label>
+                                                <div class="input-box">
+                                                    <input class="form-control validate" id="txtFromDate" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="PermitExpiryDate" type="date" value="" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 co l-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Insurance Expires On</label>
+                                                <div class="input-box">
+                                                    <input class="form-control validate" id="txtFromDate" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="InsuranceExpiryDate" type="date" value="" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 co l-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Pollution Expires On</label>
+                                                <div class="input-box">
+                                                    <input class="form-control validate" id="txtFromDate" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="PollutionExpiryDate" type="date" value="" />
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Capacity</label>
+                                                <div class="input-box">
+                                                    @Html.TextBox("Capacity", "", new { @class = "form-control clear", @placeholder = "Vehicle Capacity", @ng_model = "VehicleCapacity" })
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Is Active<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    @Html.Partial("ddlActive")
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+
+                                </div>
+                                @Html.Partial("SearchAngularJs")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

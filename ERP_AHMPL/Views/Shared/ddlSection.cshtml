@@ -1,0 +1,6 @@
+﻿<select id="ddlSection" class="select2 form-control" ng-model="$parent.SectionCode" ng-init="disableSection=false" 
+        ng-disabled="disableSection" ng-change="ddlSection_change($parent.SectionCode);" >
+    <option value="">Select Section</option>
+    <option ng-repeat="section in Sections" value="{{section.Code}}" ng-disabled="!section.IsActive">{{section.SectionName}}</option>
+</select>
+

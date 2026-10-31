@@ -1,0 +1,213 @@
+﻿
+@{
+    ViewBag.Title = "Book Issue Entry";
+    ViewBag.TitleList = "Book Issue Entry List";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+<script src="~/Scripts/myjslib/BookIssueEntryLibController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" ng-model="hfId" id="Id" name="Id" value="" />
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Book Issue Entry</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Library</span></li>
+                <li><span>Transaction</span></li>
+                <li class="active"><span>Book Issue Entry</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Issue Type<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlVoucherType" class="select2 form-control validate" ng-model="VoucherM" ng-init="GetVoucherType('BKISS');" ng-disabled="true">
+                                                    <option value="">Select</option>
+                                                    <option ng-repeat="x in VoucherTypeList" value="{{x.VCode}}">{{x.VoucherType}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Issue No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtIssueNo", "", new { @class = "form-control clear validate", @ng_disabled = "true", @placeholder = "", @ng_model = "PVNo" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Issue Date</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtVDate", "", new { @class = "form-control clear", @type = "date", @ng_disabled = "false", @ng_model = "VDate", @ng_change = "AddDay()" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Issued for No. of Days<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <input class="form-control clear validate" id="txtIssuedDay" name="txtIssuedDay" ng-change="AddDay()" ng-model="IssuedDay" type="text" value="">
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Return Date</label>
+                                            <div class="input-box">
+                                                <input class="form-control clear" id="txtReturnDate" name="txtReturnDate" ng-blur="CalculateDay()" ng-disabled="true" ng-model="ReturnDate" type="date" value="">
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Member Type<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                <div class="radio radio-primary radio-box">
+                                                    @Html.RadioButton("IsMemberType", "Student", new { @ng_model = "MemberTypeM", @ng_change = "MemberType()" })
+                                                    <label for="IsMemberType">Student</label>
+                                                </div>
+                                                <div class="radio radio-primary radio-box">
+                                                    @Html.RadioButton("IsMemberType", "Employee", new { @ng_model = "MemberTypeM", @ng_change = "MemberType()" })
+                                                    <label for="IsMemberType">Employee</label>
+                                                </div>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="StudentPanel">
+                                            <label class="control-label">Student <span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("TblStudentListLibNew")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="StudentPanel">
+                                            <label class="control-label">Admission No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtStudentID", "", new { @class = "form-control clear {{MemberTypeM == 'Student'?'validate':''}}", @ng_disabled = "true", @ng_model = "StudentIDM", @ng_hide = "true", @ng_change = "BindStudentRecord()" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAdmissionNo", "", new { @class = "form-control clear {{MemberTypeM == 'Student'?'validate':''}}", @ng_disabled = "true", @ng_model = "AdmissionNoM", @ng_change = "BindStudentRecord()" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="StudentPanel">
+                                            <label class="control-label">Class Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtClassName", "", new { @class = "form-control clear {{MemberTypeM == 'Student'?'validate':''}}", @ng_disabled = "true", @ng_model = "ClassNameM" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-6 col-xs-12 mgbt-xs-15" ng-show="EmployeePanel">
+                                            <label class="control-label">Employee Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("TblEmployeeListLibNew")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" @*ng-show="EmployeePanel"*@>
+                                            @*<label class="control-label">Employee ID<span class="vd_red">*</span></label>*@
+                                            <label class="control-label">Accession No.<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtEmployeeID", "", new { @class = "form-control clear {{MemberTypeM == 'Employee'?'validate':''}}", @ng_disabled = "disableDate", @ng_hide = "true", @ng_model = "EmployeeIDM" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAccessionNo", "", new { @class = "form-control clear validate", @ng_disabled = "disableDate", @ng_model = "AccessionM", @ng_blur = "AccessionNo()" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Book Name</label>
+                                            <div class="input-box">
+                                                <input type="hidden" ng-model="hfBookcode" id="BookCode" name="BookCode" value="" />
+                                                @Html.TextBox("txtBookName", "", new { @class = "form-control clear", @ng_disabled = "true", @ng_model = "BookNameM" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Bar ID</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtBarID", "", new { @class = "form-control clear", @ng_disabled = "true", @ng_model = "BarIDM" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Author</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAuthor", "", new { @class = "form-control clear", @ng_disabled = "true", @ng_model = "AuthorM" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Publisher</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtPublisher", "", new { @class = "form-control clear", @ng_disabled = "true", @ng_model = "PublisherM" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Remark</label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtRemark", "", new { @class = "form-control clear", @ng_disabled = "disableDate", @ng_model = "RemarkM" })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                            @Html.Partial("ActionView")
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("SearchAngularJs")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>

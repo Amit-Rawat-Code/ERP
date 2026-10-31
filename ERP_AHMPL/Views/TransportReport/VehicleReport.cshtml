@@ -1,0 +1,302 @@
+﻿
+@{
+    ViewBag.Title = "Vehicle Report";
+    ViewBag.TitleList = "Sort By Column";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/VehicleReportController.js?Ver=@ViewBag.Version"></script>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Transport</span></li>
+                <li><span>Report</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in">
+                                    <form id="user-form">
+                                        <div class="section-toggle col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                            <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label">Category<span class="vd_red">*</span></label>
+                                                <div class="input-box validate">
+                                                    <div class="radio radio-primary radio-box select2-active validate">
+                                                        <input type="radio" ng-model="Category" value="1" ng-init="Category='1'">
+                                                        <label for="ClassWise" class="validate">VehicleWise</label>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                                <div class="input-box validate">
+                                                    <div class="radio radio-primary radio-box">
+                                                        <input type="radio" ng-model="Category" value="2">
+                                                        <label for="ClassWise" class="validate">StudentWise</label>
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" style="padding-top:16px;" ;" ng-if="Category==1">
+                                                <div class="input-box">
+                                                    <div ng-model="VehicleNameList" ng-init="SelectVehicleName()">
+                                                        <label class="control-label">Vehicle Name<span class="vd_red">*</span></label>
+                                                        <div class="input-box chk-validate">
+
+                                                            <div class="toggle-ddl" id="openVehicleName" ng-init="ToogleDDL('openVehicleName','openVehicleName')" n>
+                                                                @*btn-validate*@
+                                                                <button class='btn btn-primary select-btn' data-ng-click='openVehicleName=!openVehicleName' ng-bind="GetCount(VehicleNameList,'Select Vehicle')">
+                                                                    Select Vehicle
+                                                                </button>
+                                                                @*btn-validate*@
+                                                                <button class='btn btn-primary dropdown-toggle select-btn-sub' data-ng-click='openVehicleName=!openVehicleName'>
+                                                                    <span class='fa fa-chevron-down'></span>
+                                                                </button>
+                                                                <div ng-show="openVehicleName" class="ddlMultiple" ng-cloak style="width: 400px; height: 220px">
+                                                                    <div ng-click="ddlCheckAll('VehicleNameList')">
+                                                                        Check All
+                                                                        <span class="btn-counts-right">
+                                                                            Total Count:
+                                                                            <label ng-model="selectedRouteCount" ng-bind="selectedRouteCount=(VehicleNameList | filter:{'chk' : 'true'}).length"></label>
+                                                                        </span>
+                                                                        @*{{RouteName.length}}</span>*@
+                                                                    </div>
+                                                                    <div ng-click="ddlUnCheckAll('VehicleNameList')">Uncheck All</div>
+                                                                    <hr style="margin:0px !important" />
+                                                                    <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th width="5%">Check</th>
+                                                                                <th width="30%">Vehicle Name</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @*ngRepeat: XL in ClassList*@
+                                                                            <tr ng-repeat="VNL in VehicleNameList" ng-model="ddlVehicleName">
+
+                                                                                <td><input type="checkbox" ng-model="VNL.chk" value="{{VNL.VehicleCode}}" id="{{VNL.VehicleCode}}" /></td>
+                                                                                <td>{{VNL.VehicleNumber}}</td>
+                                                                                @*<input type="checkbox" ng-model="VNL.chk" ng-value="RN.VehicleCode" id="{{VNL.VehicleCode}}" ng-change="GetStoppageName()"/>
+                                                <label for="{{VNL.VehicleCode}}">{{VNL.VehicleNumber}}</label>*@
+
+                                                                            </tr>
+                                                                            <!--<tr ng-repeat="RN in RouteName" ng-if="RouteName.length>0" ng-model="ddlRouteName">
+                                        <td class="srno">
+                                            <div class="checkbox checkbox-primary check-box chech-box-mp-n">
+                                                <input type="checkbox" ng-model="RN.IsActive" ng-value="RN.Code"-->
+                                                                            @*ng-disabled="RN.disabled"*@
+                                                                            <!--id="{{RN.Code}}" ng-change="GetStoppageName()"/>
+                                                    <label for=""> </label>
+                                                </div>
+                                            </td>
+                                            <td style="float: left;display:none ">{{RN.RouteCode}}</td>
+                                            <td> {{RN.RouteName}}</td>
+                                        </tr>-->
+                                                                              <!-- end ngRepeat: XL in ClassList -->
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" style="padding-top:16px;" ng-if="Category==2">
+                                                <div class="input-box">
+                                                    <div ng-model="Students" ng-init="GetNewAdmissionStudents();">
+                                                        <label class="control-label">Student's Name<span class="vd_red"></span></label>
+                                                        <div class="input-box chk-validate">
+                                                            <div class="toggle-ddl" id="openStudents"
+                                                                 ng-init="ToogleDDL('openStudents','openStudents')">
+                                                                @*btn-validate*@
+                                                                <button class='btn btn-primary select-btn' data-ng-click='openStudents=!openStudents;StudentDataDisable();'
+                                                                        ng-bind="GetCount(Students,'Show Student Name')">
+                                                                    Show Student Name
+                                                                </button>
+                                                                @*btn-validate*@
+                                                                <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                                        data-ng-click='openStudents=!openStudents'>
+                                                                    <span class='fa fa-chevron-down'></span>
+                                                                </button>
+                                                                <div ng-show="openStudents" class="ddlMultiple select2 form-control" ng-cloak style="height: 250px">
+                                                                    <div ng-click="ddlCheckAll('Students')">
+                                                                        Check All
+                                                                        <span class="btn-counts-right">Total Count: {{Students.length}}</span>
+                                                                    </div>
+                                                                    <div ng-click="ddlUnCheckAll('Students')">Uncheck All</div>
+
+                                                                    <hr style="margin:0px !important" />
+                                                                    <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card header-fixed">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                @*<th width="5%">Sr. No.</th>*@
+                                                                                <th width="5%">Check</th>
+                                                                                <th width="30%">Student Name</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr ng-repeat="student in Students" class="FeeStuListOnOff">
+                                                                                @*<td>{{$index+1}}</td>*@
+                                                                                <td>
+                                                                                    <input type="checkbox" ng-model="student.chk" value="student.StudentCode"
+                                                                                           id="{{student.StudentCode}}" class="select2 validate" />
+                                                                                </td>
+                                                                                <td>{{student.StudentName}}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15" style="padding-top:34px;">
+                                                <button type="button" value="Search" class="btn2 btn-common btn-3 btn-3d pe-7s-search text-right"
+                                                        ng-model="Search" ng-click="SearchRecord()">
+                                                    <span class="triangle-box" title="Search"></span>
+                                                    <span>Search </span>
+                                                </button>
+                                            </div>
+                                        </div>    
+                                    </form>
+                                </div>
+
+                            
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" ng-if="Category==1">
+                                    <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                        <div class="arrow-2">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                        <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                    </div>
+                                    <div class="collapse" id="CollapseSearchTableList">
+                                        <div class="table-heading-box">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                                @Html.Partial("_printingTool1")
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="overflow-x:auto;">
+                                                <div class="{{DocSize}} {{DocOrientation}}">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" id="ExportDiv">
+
+                                                        <div id="SetPageMargin">
+                                                            <div class="me-col-12" ng-init="GetReportHeaderUsingCategory('General Report')">
+                                                                <div id="ReportHeader" ng-bind-html="ReportHeader" ng-hide="true"></div>
+                                                                <div id="UpdatePanel1">
+                                                                    <div class="me-col-12 dt-print-view" ng-if="vehicleDetail.length>0">
+                                                                        <h1>@ViewBag.Title</h1>
+                                                                        <table id="example2" class="table compact table-hover table-striped table-bordered mgbt-xs-0" style="width:100%" ng-repeat="vd in vehicleDetail">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Vehicle Number</th>
+                                                                                    <th>Vehicl UID</th>
+                                                                                    <th>Driver Name</th>
+                                                                                    <th>Vehicle Capacity</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr style="font-weight:500" ng-if="vd.VehicleNumber.length>0">
+                                                                                    <td>{{vd.VehicleNumber}}</td>
+                                                                                    <td>{{vd.VehicleUID}}</td>
+                                                                                    <td>{{vd.DriverName}}</td>
+                                                                                    <td>{{vd.VehicleCapacity}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td colspan="4">
+                                                                                        <table id="example2" class="table compact table-hover table-striped table-bordered mgbt-xs-0" style="width:100%">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>S.No.</th>
+                                                                                                    <th>StudentName</th>
+                                                                                                    <th>FatherName</th>
+                                                                                                    <th>Mobile</th>
+                                                                                                    <th>AdmissionNo</th>
+                                                                                                    <th>ClassName</th>
+                                                                                                    <th>Address</th>
+                                                                                                    <th>RouteName</th>
+                                                                                                    <th>Stoppage</th>
+                                                                                                    <th>Action</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <tr ng-repeat="std in vd.StudentDetails">
+                                                                                                    <td ng-bind="vd.Srno=($index+1)"></td>
+                                                                                                    <td>{{std.StudentName}}</td>
+                                                                                                    <td>{{std.FatherName}}</td>
+                                                                                                    <td>{{std.Mobile}}</td>
+                                                                                                    <td>{{std.AdmissionNo}}</td>
+                                                                                                    <td>{{std.ClassName}}</td>
+                                                                                                    <td>{{std.Address}}</td>
+                                                                                                    <td>{{std.RouteName}}</td>
+                                                                                                    <td>{{std.Stoppage}}</td>
+                                                                                                    <td>{{std.IsActive}}</td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding report-box" ng-if="Category==2">
+                                <div class="arrow-container animated fadeInDown filter-toggle " ng-click="FilterToggle()">
+                                    <div class="arrow-2">
+                                        <i class="fa fa-angle-down"></i>
+                                    </div>
+                                    <div class="arrow-1 animated hinge infinite zoomIn"></div>
+                                </div>
+                                @Html.Partial("GeneralReportGrid")
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

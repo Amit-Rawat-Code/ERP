@@ -1,0 +1,9 @@
+﻿@Html.DropDownList("ddlURLType", new List<SelectListItem>{
+    new SelectListItem{Text="Select URL Type", Value=""},
+    new SelectListItem{Text="Target Unit ID", Value="T"},
+    new SelectListItem{Text="URL", Value="U"},
+    new SelectListItem{Text="Attachment", Value="A"}
+},
+    new { @class = "select2 form-control", @ng_model = "URLType", @ng_change = "SetURLType()" })
+
+

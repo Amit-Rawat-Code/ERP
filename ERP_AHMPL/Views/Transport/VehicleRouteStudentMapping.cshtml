@@ -1,0 +1,672 @@
+﻿
+@{
+    ViewBag.Title = "Vehicle Route Student Mapping";
+    ViewBag.TitleList = "Vehicle Route Student Mapping";
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+<script src="~/scripts/myjslib/StudentVehicleRouteMappingController.js?Ver=@ViewBag.Version"></script>
+<style>
+    .fee-deposit-box-profile .profile-header {
+        padding: 10px;
+        position: relative;
+        height: 67px;
+        background-size: cover;
+    }
+
+        .fee-deposit-box-profile .profile-header .profile-pic {
+            margin: 0 auto;
+            float: none;
+            position: absolute;
+        }
+
+    .fee-deposit-box-profile .profile-header {
+        padding: 10px;
+        background: url(../Content/img/fee-deposit-profile.png);
+        background-position: center center;
+    }
+
+    .fee-deposit-box-profile .profile-data {
+        background: #fff;
+        padding-top: 60px;
+    }
+
+    .fee-deposit-box-profile .profile-header .profile-pic {
+        box-shadow: 0px 5px 12px 0px #999a9b, 0px 0px 0px 0px rgb(139 140 141);
+        border: 5px solid #ffffff;
+    }
+
+    .profile-box-fee-deposit span.icon i {
+        color: #484848;
+    }
+
+    lable.feild-title {
+        position: absolute;
+        left: 35px;
+        top: 0px;
+        font-weight: 500;
+        color: #ffffff;
+        font-size: 12px;
+        height: 29px;
+        line-height: 30px;
+        padding-left: 15px;
+        width: 114px;
+        border-radius: 0px 20px 20px 0px;
+        background-position: center center;
+        background: #484848;
+    }
+</style>
+<style>
+    .input-icons {
+        color: #01090c;
+        font-size: 15px;
+        line-height: 35px;
+        position: absolute;
+        top: 1px;
+        background: #d6d6d6;
+        text-align: center;
+        width: 31px;
+        left: unset !important;
+        right: 1px;
+        height: 28px;
+        border-left: 1px solid #484848;
+    }
+
+    .down-arrow {
+        border: solid black;
+        border-width: 0 2px 2px 0px;
+        display: inline-block;
+        padding: 2px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        margin: 0px 0px 4px 0px;
+    }
+
+    div.scrollmenu {
+        /*width:300px;*/
+        overflow: auto;
+        max-height: 300px;
+        /*z-index: 99999;*/
+    }
+
+    table thead tr th {
+        /* Important */
+        position: sticky;
+        top: 0;
+    }
+</style>
+<div class="autohide-scroll autoheightset">
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">@ViewBag.Title</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Transport</span></li>
+                <li><span>Master</span></li>
+                <li class="active"><span>@ViewBag.Title</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container">
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+
+                                            
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <label class="control-label">Select Student With Respective Stoppages : -<span class="vd_red"></span></label>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                <hr style="margin: 5px 0px 10px;color: #a5a3a1!important">
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <div class="row">
+
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                            <div class="fee-deposit-box-profile">
+                                                                <div class="profile-header">
+                                                                    <div class="profile-pic">
+                                                                        <img src="../Content/Photos/user-profile-Icon.png" ng-src="{{StudentPhoto}}" alt="profile-pic">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="profile-data">
+                                                                    <div class="profile-box-fee-deposit">
+                                                                        <span class="icon"><i class="icofont-notepad"></i></span>
+                                                                        <lable class="feild-title">Academic Session</lable>
+                                                                        <p class="input-feild-data">{{SessionName}}</p>
+                                                                    </div>
+                                                                    <div class="profile-box-fee-deposit">
+                                                                        <span class="icon"><i class="icofont-notepad"></i></span>
+                                                                        <lable class="feild-title">Student Name</lable>
+                                                                        <p class="input-feild-data">{{AdmStudentName}}</p>
+                                                                    </div>
+                                                                    <div class="profile-box-fee-deposit">
+                                                                        <span class="icon"><i class="icofont-notepad"></i></span>
+                                                                        <lable class="feild-title">Admission No.</lable>
+                                                                        <p class="input-feild-data">{{RegNo}}</p>
+                                                                    </div>
+                                                                    <div class="profile-box-fee-deposit">
+                                                                        <span class="icon"><i class="icofont-brand-microsoft"></i></span>
+                                                                        <lable class="feild-title">Class</lable>
+                                                                        <p class="input-feild-data">{{ClassName}}</p>
+                                                                    </div>
+                                                                    <div class="profile-box-fee-deposit">
+                                                                        <span class="icon"><i class="icofont-man-in-glasses"></i></span>
+                                                                        <lable class="feild-title">Father Name</lable>
+                                                                        <p class="input-feild-data">{{ParentName}}</p>
+                                                                    </div>
+
+                                                                    <div class="profile-box-fee-deposit">
+                                                                        <span class="icon"><i class="icofont-smart-phone"></i></span>
+                                                                        <lable class="feild-title">Mobile No.</lable>
+                                                                        <p class="input-feild-data">{{Contact}}</p>
+                                                                    </div>
+
+                                                                    <div class="profile-box-fee-deposit">
+                                                                        <span class="icon"><i class="icofont-home"></i></span>
+                                                                        <lable class="feild-title">Address</lable>
+                                                                        <p class="input-feild-data">{{Address}}</p>
+                                                                    </div>
+                                                                    @*<div class="profile-box-fee-deposit">
+                                                                        <span class="icon"><i class="icofont-user-alt-7"></i></span>
+                                                                        <lable class="feild-title">From Merit List</lable>
+                                                                        <p class="input-feild-data">{{IsFromMerit}}</p>
+                                                                    </div>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                    <div class="row">
+
+                                                        @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                            <label class="control-label">Session<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                @Html.Partial("ddlSession")
+                                                                <select id="ddlSession" autocomplete='address-level2' class="select2 form-control validate"
+                                                                        ng-model="SessionId" ng-init="GetSession()" ng-change="ddlSession_Change(SessionId)" ng-options="Ssn.SessionName for Ssn in SessionList">
+                                                                    <option value="">Select Session</option>
+                                                                    <option ng-repeat="sl in SessionList" value="{{sl.SessionId}}">{{sl.SessionName}}</option>
+                                                                </select>
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                            <label class="control-label">Fee Structure Group<span class="vd_red">*</span></label>
+                                                            <div class="input-box">
+                                                                <select id="ddlFeeStructureGroup" class="select2 form-control clear validate" ng-model="FeeStructureGroup" ng-init="GetFeeStructureGroup();">
+                                                                    <option value="">Select </option>
+                                                                    <option ng-repeat="x in GetFeeStructureGroupList" value="{{x.Code}}">{{x.FeeStructureGroupName}}</option>
+                                                                </select>
+                                                                <div class="text-box-msg-r">
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
+                                                        <div>
+                                                            <fieldset style="border: 1px solid #a5a3a1; margin: 0 2px; padding: 0.3em 0.62em 0.75em; ">
+                                                                <legend>Student Detail:</legend>
+
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                                        <label class="control-label">Individual<span class="vd_red">*</span></label>
+                                                                        <div class="input-box">
+                                                                            <input type="radio" value="1" ng-model="type" ng-init="type='1'" />
+                                                                            <div class="text-box-msg-r">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                                        <label class="control-label">Multiple<span class="vd_red">*</span></label>
+                                                                        <div class="input-box">
+                                                                            <input type="radio" value="2" ng-model="type" />
+                                                                            <div class="text-box-msg-r">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                                    <label class="control-label">Class</label>
+                                                                    <div class="input-box">
+                                                                        @Html.Partial("ddlClass")
+                                                                        <div class="text-box-msg-r">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                    <label class="control-label" ng-hide="type==2">Student</label>
+                                                                    <div class="input-box">
+                                                                        
+                                                                        
+
+                                                                        <input type="text" id="txtStudent" class="form-control clear FeeStuListOnOff"
+                                                                               ng-model="SearchText" ng-click="SearchStudents()"
+                                                                               ng-blur="HideStudentList();txtStudent_blur();" autocomplete="off" @*ng-disabled="disabledSearch || Save=='Edit'"*@
+                                                                               ng-init="disabledSearch=true;GetNewAdmissionStudents();" placeholder="{{hideloader?'Please Wait...':'Select Student'}}" ng-hide="type==2" />
+
+
+                                                                        <div class="input-icons FeeStuListOnOff" ng-model="hideloader" ng-show="hideloader" ng-cloak>
+                                                                            <i class="fa fa-circle-o-notch fa-spin icon FeeStuListOnOff"></i>
+                                                                        </div>
+                                                                        <div class="input-icons FeeStuListOnOff" ng-click="Save=='Edit'?'':SearchStudents();" ng-hide="type==2" ng-cloak>
+                                                                            <i class="down-arrow FeeStuListOnOff" ng-hide="type==2"></i>
+                                                                        </div>
+                                                                        <div ng-model="StudentData" id="FeeStuListOnOff" class="InputInTabBox FeeStuListOnOff scrollmenu" width="javascript:$('#txtStudent').width()" @*onclick="event2();"*@>
+                                                                            {{StudentData}}
+                                                                            <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card header-fixed" ng-hide="type==2">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th width="10px">Sr. No.</th>
+                                                                                        <th width="30%">Student Name</th>
+                                                                                        <th width="20%">Father Name</th>
+                                                                                        <th width="20%">Class</th>
+                                                                                        <th width="20%">Admission No.</th>
+                                                                                        <th width="10%">Mobile No.</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr ng-repeat="student in Students|filter:SearchText" ng-click="FillStudentDetail(student);" class="FeeStuListOnOff">
+                                                                                        <td>{{$index+1}}</td>
+                                                                                        <td>{{student.StudentName}}</td>
+                                                                                        <td>{{student.FatherName}}</td>
+                                                                                        <td>{{student.ClassName}}</td>
+                                                                                        <td>{{student.AdmissionNo}}</td>
+                                                                                        <td>{{student.Mobile}}</td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div ng-hide="type==1">
+                                                                            <label class="control-label">Student's Detail<span class="vd_red"></span></label>
+                                                                            <div class="input-box chk-validate">
+                                                                                <div class="toggle-ddl" id="openStudents"
+                                                                                     ng-init="ToogleDDL('openStudents','openStudents')">
+                                                                                    @*btn-validate*@
+                                                                                    <button class='btn btn-primary select-btn'
+                                                                                            data-ng-click='openStudents=!openStudents'
+                                                                                            ng-bind="GetCount(Students,'Show Student Details')">
+                                                                                        Show Student Details
+                                                                                    </button>
+                                                                                    @*btn-validate*@
+                                                                                    <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                                                            data-ng-click='openStudents=!openStudents'>
+                                                                                        <span class='fa fa-chevron-down'></span>
+                                                                                    </button>
+                                                                                    <div ng-show="openStudents" class="ddlMultiple" ng-cloak style="height: 250px">
+                                                                                        <div ng-click="ddlCheckAll('Students')">
+                                                                                            Check All
+                                                                                            <span class="btn-counts-right">Total Count: {{Students.length}}</span>
+                                                                                        </div>
+                                                                                        <div ng-click="ddlUnCheckAll('Students')">Uncheck All</div>
+
+                                                                                        <hr style="margin:0px !important" />
+                                                                                        <table id="myDropdown" class="table compact table-hover table-striped table-bordered nowrap fee-card header-fixed" ng-hide="type==1">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th width="10px">Sr. No.</th>
+                                                                                                    <th width="10px">Check</th>
+                                                                                                    <th width="30%">Student Name</th>
+                                                                                                    <th width="20%">Father Name</th>
+                                                                                                    <th width="20%">Class</th>
+                                                                                                    <th width="20%">Admission No.</th>
+                                                                                                    <th width="10%">Mobile No.</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <tr ng-repeat="student in Students|filter:SearchText" ng-click="FillStudentDetail(student);" class="FeeStuListOnOff">
+                                                                                                    <td>{{$index+1}}</td>
+                                                                                                    <td>
+                                                                                                        <input type="checkbox" ng-model="student.chk" ng-value="student.StudentCode"
+                                                                                                               ng-disabled="student.disabled" id="{{student.StudentCode}}" />
+                                                                                                    </td>
+                                                                                                    <td>{{student.StudentName}}</td>
+                                                                                                    <td>{{student.FatherName}}</td>
+                                                                                                    <td>{{student.ClassName}}</td>
+                                                                                                    <td>{{student.AdmissionNo}}</td>
+                                                                                                    <td>{{student.Mobile}}</td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                                    <div class="text-box-msg-r">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                                <label class="control-label">Section</label>
+                                                                                <div class="input-box">
+                                                                                    @Html.Partial("ddlSection")
+                                                                                    <div class="text-box-msg-r">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!--<div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                                <label class="control-label">Applied Concession Head's<span class="vd_red"></span></label>
+                                                                                <div class="input-box chk-validate">
+                                                                                    <div class="toggle-ddl" id="openConcessionHead"
+                                                                                         ng-init="ToogleDDL('openConcessionHead','openConcessionHead')">-->
+                                                                                           @*btn-validate*@
+                                                                                           <!--<button class='btn btn-primary select-btn'
+                                                                                    data-ng-click='openConcessionHead=!openConcessionHead'
+                                                                                    ng-bind="GetCount(ConcessionheadList,'Show Concession Head')">
+                                                                                Show Concession Head
+                                                                            </button>-->
+                                                                            @*btn-validate*@
+                                                                            <!--<button class='btn btn-primary dropdown-toggle select-btn-sub'
+                                                                                data-ng-click='openConcessionHead=!openConcessionHead'>
+                                                                            <span class='fa fa-chevron-down'></span>
+                                                                                </button>
+                                                                                <div ng-show="openConcessionHead" class="ddlMultiple" ng-cloak>
+                                                                                    <div>
+                                                                                        <span class="btn-counts-right">Total Count: {{ConcessionheadList.length}}</span>
+                                                                                    </div>
+                                                                                    <hr style="margin:0px !important" />
+                                                                                    <table class="table compact table-hover table-striped table-bordered nowrap dataTable t-mgtb-n">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Concession Head</th>
+                                                                                                <th>Installment</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>-->
+                                                                                    <!-- ngRepeat: XL in ClassList -->
+                                                                                    <!--<tr ng-repeat="XL in ConcessionheadList" class="ng-scope">
+                                                                                            <td>{{XL.ConcessionHeadName}}</td>
+                                                                                            <td>{{XL.InstallmentName}}</td>
+                                                                                        </tr>-->
+                                                                                    <!-- end ngRepeat: XL in ClassList -->
+                                                                                    <!--</tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>-->
+                                                                            <div class="col-lg-8 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15 ">
+                                                                                <label class="control-label">Remark</label>
+                                                                                <div class="input-box">
+                                                                                    @Html.TextBox("txtRemark", "", new { @class = "form-control clear", @placeholder = "", @type = "text", @ng_model = "Remark" })
+                                                                                    <div class="text-box-msg-r">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                                <label class="control-label">Active</label>
+                                                                                <div class="input-box">
+                                                                                    @Html.Partial("ddlActive")
+                                                                                    <div class="text-box-msg-r">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                            <div>
+                                                                <fieldset style="border: 1px solid #a5a3a1; margin: 0 2px; padding: 0.3em 0.62em 0.75em; ">
+                                                                    <legend>Route Detail:</legend>
+
+                                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                        <label class="control-label">Stoppage Name<span class="vd_red">*</span></label>
+                                                                        <div class="input-box">
+                                                                            <select id="ddlStopages" class="select2 form-control validate" ng-init="GetStoppages();" ng-model="ddlStoppage" ng-change="SelectRouteName()">
+                                                                                <option value="">Select Stoppage</option>
+                                                                                <option ng-repeat="Stoppage in Stoppages" value="{{Stoppage.StopPageId}}">{{Stoppage.Stoppage}}</option>
+                                                                            </select>
+
+                                                                            <div class="text-box-msg-r">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                        <label class="control-label">Route Name<span class="vd_red">*</span></label>
+                                                                        <div class="input-box">
+                                                                            <select id="ddlRouteName" class="select2 form-control validate"
+                                                                                    ng-model="ddlRouteName" ng-change="GetFareDetails();GetConsessionDetails();SelectVehicleNumber();">
+                                                                                <option value="">Select Route Name</option>
+                                                                                <option ng-repeat="RN in VehicleRouteName" value="{{RN.RouteId}}">{{RN.RouteName}}</option>
+                                                                            </select>
+                                                                            <div class="text-box-msg-r">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                        <label class="control-label">Vehicle Name<span class="vd_red">*</span></label>
+                                                                        <div class="input-box">
+                                                                            <select id="ddlVehicleNumber" class="select2 form-control validate" ng-model="ddlVehicleNumber" ng-change="GetVehicleCapacity();">
+                                                                                <option value="">Select Vehicle Name</option>
+                                                                                <option ng-repeat="VN in VehicleNumberList" ng-value="{{VN.VehicleCode}}">{{VN.VehicleNumber}}</option>
+                                                                            </select>
+                                                                            <div class="text-box-msg-r">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                        <label class="control-label">Vehicle Capacity<span class="vd_red">*</span></label>
+                                                                        <div class="input-box">
+
+                                                                            <select id="ddlVehicleCapacity" class="select2 form-control validate" ng-model="ddlVehicleCapacity" >
+                                                                                <option value="">Select Vehicle Capacity</option>
+                                                                                <option ng-repeat="Cl in CapacitiesList" ng-value="{{Cl.Code}}">{{Cl.VehicleCapacity}}</option>
+                                                                            </select>
+                                                                            <div class="text-box-msg-r">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                        <label class="control-label">Trip Mode<span class="vd_red">*</span></label>
+                                                                        <div class="input-box">
+                                                                            <select id="ddlTripMode" class="select2 form-control validate" ng-model="TripMode" ng-init="">
+                                                                                <option value="">Select Trip Mode</option>
+                                                                                <option value="Up Trip">Up Trip</option>
+                                                                                <option value="Down Trip">Down Trip</option>
+                                                                                <option value="2">Round Trip</option>
+                                                                            </select>
+                                                                            <div class="text-box-msg-r">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 co l-sm-6 col-xs-12 mgbt-xs-15">
+                                                                        <label class="control-label">Applied From Date</label>
+                                                                        <div class="input-box">
+                                                                            <input class="form-control validate" id="txtAppliedDate" max="{{endDate}}" min="{{startDate}}" name="txtAppliedDate" ng-init="SetMaxMinDate()" ng-model="ApplicableDate" type="date" value="" />
+                                                                            <div class="text-box-msg-r">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </div>
+
+                                                            @*<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+            <label class="control-label">Fare<span class="vd_red">*</span></label>
+            <div class="input-box">
+                <select id="ddlFare" class="select2 form-control validate" ng-model="ddlFare" ng-init="">
+                    <option value="">Select Fare</option>
+                    <option ng-repeat="Fare in FareDtlAmt" value="{{Fare.FareCode}}">{{Fare.FareAmount}}</option>
+                </select>
+                <div class="text-box-msg-r">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+            <label class="control-label">Shift<span class="vd_red">*</span></label>
+            <div class="input-box">
+                <select id="ddlShift" class="select2 form-control validate" ng-model="ShiftName" ng-init="GetShiftDetails()">
+                    <option value="">Select Shift</option>
+                    <option ng-repeat="Shift in ShiftDetail" value="{{Shift.code}}">{{Shift.ShiftDtl}}</option>
+                </select>
+                <div class="text-box-msg-r">
+                </div>
+            </div>
+        </div>*@
+                                                            <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                                <label class="control-label">&nbsp;</label>
+                                                                <div class="input-box">
+                                                                    <input id="btnadd" type="button" value="Add" class="btn-me btn-primary" ng-click="AddStopage(student);" name="btnaddbutton">
+                                                                    <div class="text-box-msg-r">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                </div>
+                                                @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                    <label class="control-label">Receive Date<span class="vd_red">*</span></label>
+                                                    <div class="input-box">
+                                                        @Html.TextBox("txtFeeDepositDate", "", new { @class = "form-control clear", @placeholder = "", @type = "Date", @ng_model = "FeeDepositDate", @ng_init = "FeeDepositDate=GetTodayDate()" })
+                                                        <div class="text-box-msg-r">
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+
+                                            </div>
+                                            <!--<div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Class Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlClass" class="select2 form-control validate" ng-model="$parent.ClassCode"
+                                                        ng-init="GetClasses();" ng-change="ddlClass_Change($parent.ClassCode);" ng-disabled="disabledDDLClass">
+                                                    <option value="">Select Class</option>
+                                                    <option ng-repeat="cl in ClassList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassName}}</option>
+                                                </select>
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Section Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlSection" class="select2 form-control" ng-model="$parent.SectionCode" ng-init="disableSection=false"
+                                                        ng-disabled="disableSection" ng-change="ddlSection_change($parent.SectionCode);">
+                                                    <option value="">Select Section</option>
+                                                    <option ng-repeat="section in Sections" value="{{section.Code}}" ng-disabled="!section.IsActive">{{section.SectionName}}</option>
+                                                </select>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Student Name<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                <select id="ddlStudentClassSection" class="select2 form-control validate" ng-model="StudentId" ng-init="GetStudentsClassOrSectionWise()">
+                                                    <option value="">Select Student</option>
+                                                    <option ng-repeat="Student in Students" value="{{Student.StudentCode}}">{{Student.StudentName}}</option>
+                                                </select>
+
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                            <div class="col-md-12 col-sm-6 col-xs-12 mgbt-xs-15">
+                                                <label class="control-label"> List of Stoppages to be attach<span class="vd_red">*</span></label>
+                                                <div class="input-box">
+                                                    <div id="VUpdatePanel" class="box-in-table-mb-0">
+                                                    </div>
+                                                    <div class="text-box-msg-r">
+                                                    </div>
+                                                    </div>
+                                                        <table id="example2" class="table table-striped table-bordered compact" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>S.No.</th>
+                                                                    <th>Stoppage</th>
+                                                                    <th>Route Name</th>
+                                                                    <th>Vehicle Name</th>
+                                                                    <th>Vehicle Capacity</th>
+                                                                    <th>Section</th>
+                                                                    <th>Class</th>
+                                                                    <th>Student</th>
+                                                                    <th>Admission No.</th>
+                                                                    <th>Father</th>
+                                                                    <th>Applicable From</th>
+                                                                    <th>Trip Mode</th>
+                                                                    <th>Fare</th>
+                                                                    <th>Concession Head</th>
+                                                                    <th>Concession Amount</th>
+                                                                    <th>Net Fare</th>
+                                                                    <th>Status</th>
+                                                                    <th>DeactivationStatus</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="v in VtableList">
+                                                                    <td ng-bind="sml.Srno=($index+1)"></td>
+                                                                    <td>{{v.StoppageName}}</td>
+                                                                    <td>{{v.RouteName}}</td>
+                                                                    <td>{{v.VehicleName}}</td>
+                                                                    <td>{{v.VehicleCapacity}}</td>
+                                                                    <td>{{v.SectionName}}</td>
+                                                                    <td>{{v.Class}}</td>
+                                                                    <td>{{v.StudentName}}</td>
+                                                                    <td>{{v.AdmissionNo}}</td>
+                                                                    <td>{{v.Father}}</td>
+                                                                    <td>{{v.ApplicableDate}}</td>
+                                                                    <td>{{v.TripMode}}</td>
+                                                                    <td>{{v.FareAmount}}</td>
+                                                                    <td><select class="form-control" id="ddlConcessionHead" ng-model="v.ConcessionHeadCode" ng-change="GetConsessionAmount(v.ConcessionHeadCode,v);">
+                                                                        <option value="">--Select--</option>
+                                                                        <option ng-repeat="Cl in ConcessionheadList" value="{{Cl.Code}}">{{Cl.ConcessionHeadName}}</option>
+                                                                        </select></td>
+                                                                    <td>{{v.discAmount}}</td>
+                                                                    <td>{{v.NetAmount}}</td>
+                                                                    <td><select id="ddlStatus" class="select2 form-control" ng-model="v.ddlStatus"><option value="">Select Section</option><option value="Active">Active</option><option value="InActive">InActive</option></select></td>
+                                                                    <td><input class="form-control" id="txtFromDate" max="{{endDate}}" min="{{startDate}}" name="txtFromDate" ng-init="SetMaxMinDate()" ng-model="v.DeactivationDate" type="date" value="" ng-if="v.ddlStatus=='InActive'" /></td>
+                                                                    <td><input id="btnremove" type="button" value="Remove" class="btn btn-danger" ng-click="RemoveStopage(v.StudentCode)"></td>
+                                                                   </tr>
+                                                            </tbody>
+                                                            </table>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 btn1-nM3-1">
+                                                            @Html.Partial("ActionView")
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                @Html.Partial("SearchAngularJs")
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>

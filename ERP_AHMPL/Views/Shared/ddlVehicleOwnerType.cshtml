@@ -1,0 +1,7 @@
+﻿<select id="ddlVehicleOwnerType" class="select2 form-control validate" ng-init="GetVehicleOwners();" ng-model="VehicleOwners.VechileOwnerId">
+    <option value="">Select Vehicle Owner</option>
+    <option ng-repeat="VechilesOwner in VechilesOwners" value="{{VechilesOwner.VechileOwnerId}}">{{VechilesOwner.VechileOwner}}</option>
+</select>
+
+
+

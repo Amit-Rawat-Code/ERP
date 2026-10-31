@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+}
+
+
+<button type="button" value="Search" class="btn2 btn-common btn-3 btn-3d pe-7s-search"
+        ng-model="Search" ng-click="SearchRecord()">
+    <span class="triangle-box" title="Search"></span>
+    <span>Search </span>
+</button>
+
+<button id="btnPrint" type="button" value="Print" class="btn2 btn-common btn-3 btn-3d pe-7s-print"
+        name="printButton" ng-model="Print"  ng-click="PrintPreview()">
+    <span class="triangle-box" title="Print"></span>
+    <span>Print </span>
+</button>
+
+<button id="btnClear" type="button" value="Clear" class="btn2 btn-common btn-3 btn-3d pe-7s-refresh-2"
+        name="clearButton" ng-model="Clear" ng-disabled="disableClear" ng-click="ClearControl()">
+    <span class="triangle-box" title="Clear"></span>
+    <span>Clear </span>
+</button>

@@ -1,0 +1,565 @@
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (max-width: 1199px) {
+    section.page-section.why-choose-allenkids.our-program .col-sm-7 {
+        max-width: 1170px;
+        padding: 40px 15px;
+        width: 100%;
+        margin: 0 auto;
+        float: none;
+    }
+    section.page-section.why-choose-allenkids.our-program .col-sm-5 {
+        display: none;
+    }
+    section.page-section.why-choose-allenkids.our-program .col-sm-7 .col-sm-6 {
+        margin-bottom: 20px;
+    }
+    section.legacy-section-photo-discription .discription-section {
+        padding: 20px 20px 0px 0px;
+    } 
+       section.page-banner-breadcrumbs h3.title-of-page {
+
+        font-size: 40px;
+    }
+    ul#menu-group-schools li {
+        width: 50%;
+        
+    }
+
+  }
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1199px) {
+
+
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-left, .navbar-right {
+        float: none !important;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-nav {
+        float: none !important;
+        margin-top: 7.5px;
+    }
+
+        .navbar-nav > li {
+            float: none;
+        }
+
+            .navbar-nav > li > a {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+    .collapse.in {
+        display: block !important;
+    }
+    .header-bottom .navbar-header button.navbar-toggle {
+        margin: 25px 0px;
+    }
+    /****************only nav set*********************/
+    div#navbar ul.nav > li > a {
+        line-height: 40px;
+        padding: 0px 15px;
+        border-bottom: 1px solid #ccc;
+        margin: 0px;
+    }
+
+        div#navbar ul.nav > li > a span.badge {
+            float: right;
+            top: 8px;
+        }
+
+        div#navbar ul.nav > li > a span, div#navbar ul.nav > li > a div {
+            display: inline-block !important;
+        }
+
+    div#navbar ul.nav > li {
+        margin-top: 0px;
+    }
+
+        div#navbar ul.nav > li > a span.icon {
+            width: 38px !important;
+            text-align: center;
+        }
+
+        div#navbar ul.nav > li > a span img {
+            height: 20px;
+        }
+
+    div#navbar {
+        overflow: scroll;
+    }
+    ul.nav.navbar-nav.navbar-right ul.dropdown-menu {
+        
+        width: 100%;
+        padding: 0px 0px 0px 48px px;
+    }
+    ul.nav.navbar-nav.navbar-right ul.dropdown-menu {
+        top: 44px;
+        width: 100%;
+        padding: 0px 0px 0px 48px;
+        background: #edefce;
+    }
+        ul.nav.navbar-nav.navbar-right ul.dropdown-menu ul.dropdown-menu {
+            background: #c4c79e;
+            left: 0px;
+        }
+
+    /****************only nav set*********************/
+
+}
+
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (max-width: 992px) {
+        div#navbar ul.nav > li > a {
+            padding: 0px 5px;
+        }
+
+        section.page-section.our-core-values .col-sm-3 {
+            width: 50%;
+            float: left;
+        }
+
+        .Modern-Slider .item .img-fill .info div {
+            background: #00000087;
+            padding: 20px;
+            width: 80%;
+        }
+
+        footer .col-sm-3 {
+            width: 50%;
+        }
+
+        h3.play-title {
+            font-size: 25px;
+            line-height: 65px;
+        }
+
+        ul#lightgallery > li {
+            flex-basis: 33.33%;
+        }
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (max-width: 767px) {
+        a.navbar-brand {
+            height: 60px;
+            padding: 5px 15px;
+        }
+
+        .header-bottom .navbar-header button.navbar-toggle {
+            background: #014828;
+            margin: 13px 15px;
+        }
+
+        div#navbar {
+            margin: 0px;
+            overflow: hidden;
+        }
+
+        .website-main-content {
+            padding-top: 100PX;
+        }
+
+        div#navbar ul.nav > li > a {
+            line-height: 40px;
+            padding: 0px 15px;
+            border-bottom: 1px solid #ccc;
+            margin: 0px;
+        }
+
+        .navbar-nav .open .dropdown-menu {
+            background-color: #fdfcee;
+            padding-left: 30px;
+        }
+
+        .navbar-nav {
+            margin: 3.5px -15px;
+            padding: 0px 10px;
+        }
+
+        .Modern-Slider .item h3 {
+            font-size: 32px;
+        }
+
+        .Modern-Slider .item .img-fill .info div {
+            background: #00000087;
+            padding: 20px;
+            width: 70%;
+        }
+
+        section.page-section.our-core-values .stm-action-box__figure_box {
+            text-align: center;
+            margin: 20px auto 0px;
+        }
+
+        div#navbar ul.nav > li > a span.badge {
+            float: right;
+            top: 8px;
+        }
+
+        ul.nav.navbar-nav.navbar-right > li:last-child > a {
+            border: 0 !important;
+        }
+
+        ul.dropdown-menu > li:last-child > a {
+            border: 0px;
+        }
+
+        .stm-action-box__figure_box figcaption.stm-action-box__figcaption_box {
+            min-height: 275px;
+        }
+
+        section.page-section h3.section-title {
+            margin-bottom: 0px;
+            font-size: 18px;
+        }
+
+        .why-choose-main-image {
+            padding: 0px 0px 0px 0px;
+        }
+
+        section.page-section.why-choose-allenkids h3.section-title {
+            text-align: center;
+        }
+
+        section.page-section.why-choose-allenkids p.discription {
+            text-align: center;
+        }
+
+        .facebook-feed iframe {
+            text-align: center;
+            display: table;
+            margin: 30px auto;
+        }
+
+        section.page-section.event-section .event-section-title-btn h1 {
+            font-size: 35px;
+        }
+
+        section.page-section.facebook-feeds-youtube-contact-form .youtube-feed {
+            padding: 20px 0px;
+        }
+
+        section.page-banner-breadcrumbs {
+            min-height: auto;
+        }
+
+            section.page-banner-breadcrumbs h3.title-of-page {
+                margin: 15px 0px;
+                font-size: 30px;
+                line-height: 50px;
+            }
+
+        section.legacy-section-photo-discription .container-fluid .col-sm-6 {
+            padding: 0px 15px;
+        }
+
+        section.legacy-section-photo-discription .photo-section {
+            width: 100%;
+        }
+
+        section.legacy-section-photo-discription .discription-section {
+            max-width: none;
+        }
+
+        footer .col-sm-3 {
+            width: 100%;
+        }
+
+        h3.section-title-color {
+            font-size: 25px;
+        }
+
+        section.why-choose-allen-kids.Playgroup-1 .photo-section {
+            padding: 20px 0px;
+        }
+
+        .play-group-icon-title h3.play-title {
+            width: calc(100% - 75px);
+            font-size: 18px;
+            line-height: 75px;
+        }
+
+        .play-group-icon-title .icon {
+            WIDTH: 75PX;
+        }
+
+        section.page-section.why-choose-allen-kids.admission-page .discription-section {
+            display: table;
+            width: 100%;
+        }
+
+        section.page-section.why-choose-allen-kids.sports-and-performing-arts .col-sm-6 .discription-section {
+            padding: 20px;
+        }
+
+        section.page-section.why-choose-allen-kids.Event .photo-section img {
+            margin: 10px 0px;
+        }
+
+        section.page-section.why-choose-allen-kids.Playgroup-1 .photo-section img {
+            height: auto;
+        }
+
+        ul#menu-group-schools li {
+            width: 100%;
+        }
+
+        section.page-section.why-choose-allenkids.home-sec .why-choose-main-image {
+            margin: 40px auto 0px;
+        }
+
+        .header-bottom a.navbar-brand {
+            position: static;
+            transform: translate(0px, 0px);
+            padding: 0px 15px;
+        }
+
+        .header-bottom:after {
+            display: none;
+        }
+
+        ul.nav.navbar-nav.navbar-left {
+            border-top: 1px solid #ccc;
+        }
+
+        .vid-main-wrapper {
+            width: 100%;
+            min-width: auto;
+        }
+
+        iframe#vid_frame {
+            width: 100%;
+            height: 362px;
+            position: static;
+        }
+
+        .vid-container {
+            width: 100%;
+            float: none;
+            height: auto;
+        }
+
+        .vid-list-container {
+            width: 100%;
+            float: none;
+        }
+
+        section.page-section.Event-Calendar-allenkid {
+            display: none;
+        }
+
+        .navbar-brand > img {
+            height: 57px;
+        }
+
+        .navbar-header {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .header-bottom {
+            padding: 0px;
+        }
+
+        div#navbar ul.nav > li > a span, div#navbar ul.nav > li > a div {
+            display: inline-block !important;
+        }
+
+        div#navbar ul.nav > li {
+            margin-top: 0px;
+        }
+
+            div#navbar ul.nav > li > a span.icon {
+                width: 38px !important;
+                text-align: center;
+            }
+
+            div#navbar ul.nav > li > a span img {
+                height: 20px;
+            }
+
+        div#navbar {
+            overflow: scroll;
+        }
+
+        .section-title-bottom-line {
+            margin: 0 auto 0px;
+        }
+
+        .bullet-in-section {
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        section.page-section.news .col-sm-6 .col-sm-12 div img {
+            object-fit: contain !important;
+            height: 300px;
+        }
+
+        section.page-section {
+            padding: 20px 0px;
+        }
+
+        section.fixed-link-section {
+            padding: 15px 0px;
+        }
+
+        .fixed-link-container-left {
+            position: static;
+            transform: unset;
+            transform-origin: unset;
+            text-align: center;
+        }
+
+            .fixed-link-container-left .fixed-link-inner-container a {
+                border-radius: 32px;
+                margin: 5px;
+                font-size: 12px;
+            }
+
+        .fixed-link-container-right {
+            position: static;
+            transform: unset;
+            transform-origin: unset;
+            text-align: center;
+        }
+
+            .fixed-link-container-right .fixed-link-inner-container a {
+                border-radius: 32px;
+                margin: 5px;
+                font-size: 12px;
+            }
+        .header-bottom .navbar-header button.navbar-toggle {
+            margin: 13px 15px;
+        }
+        iframe#facebook_frame {
+            display: table;
+            margin: 0 auto;
+            width: auto !important;
+        }
+    }
+
+    /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 480px) {
+        .header-top {
+            display: none;
+        }
+
+        .website-main-content {
+            padding-top: 62px;
+        }
+
+        .Modern-Slider .item h3 {
+            font-size: 16px;
+            line-height: 33px;
+            font-weight: bold;
+        }
+
+        section.page-section.our-core-values .col-sm-3 {
+            width: 100%;
+        }
+
+        section.page-section.why-choose-allenkids .col-sm-6.col-xs-6 {
+            width: 100%;
+        }
+
+        .why-choose-main-image {
+            padding: 20px 0px;
+        }
+
+        section.page-section.event-section .event-section-title-btn h1 {
+            font-size: 25px;
+        }
+
+        .play-group-icon-title h3.play-title {
+            width: calc(100% - 75px);
+            font-size: 15px;
+            line-height: 75px;
+        }
+
+        ul#lightgallery > li {
+            flex-basis: 50%;
+        }
+
+        ul.stm-contact-details__items_box {
+            list-style-type: none;
+            padding: 0px;
+        }
+
+        section.why-choose-allen-kids {
+            padding: 20px 0px;
+        }
+
+        .fullsize-video-bg {
+            height: 20vh;
+        }
+
+        ul#menu-group-schools li a {
+            font-size: 12px;
+        }
+
+        .fullsize-video-bg h1 {
+            font-size: 2em;
+        }
+
+            .fullsize-video-bg h1 + p {
+                font-size: .8em;
+            }
+
+        .header-bottom {
+            background: #fff;
+            padding: 0px 0px 0px 0px;
+        }
+
+        #section-1.event-style .content-slider .slider .banner .banner-inner-wrapper h1 {
+            font-size: 2em;
+        }
+        .Modern-Slider .item .img-fill img {
+            height: 210px;
+        }
+
+        .Modern-Slider .item .img-fill img {
+            height: 210px;
+        }
+
+        section.Home-banner {
+            min-height: 210px;
+        }
+
+        .Modern-Slider .item .img-fill .info {
+            line-height: 210px;
+        }
+        .Modern-Slider .item .img-fill {
+            height: 210px;
+        }
+    }

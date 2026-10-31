@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "PhotoCollectionPage";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<style>
+    .headingI {
+        float: left;
+        color: #2a4678;
+        font-weight: 600;
+        padding: 0px 0 0px 0;
+        text-transform: uppercase;
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
+    }
+    .demo-gallery {
+        text-align:center;
+    }
+    .newGallery {
+        width: 100%;
+        float: left;
+        margin-top: 10px;
+    }
+
+    .pgBack {
+        width: 100%;
+        float: left;
+        text-align: center;
+        border: 1px solid #858585;
+        margin: 0px 0% 7px 0%;
+    }
+
+        .pgBack li {
+            display: inline-block;
+            float: none;
+            text-align: center;
+            font-size: 15px;
+            padding: 8px 10px 8px 10px;
+            margin: 0px 3.5%;
+            vertical-align: middle;
+        }
+
+    .eventDates b, .updatedOnD b, .totalImages b {
+        color: #2a4678;
+        font-weight: 600;
+    }
+
+    .pgBack .eventDates span {
+        font-weight: 400;
+        color: #363636;
+    }
+
+    .fullDescription {
+        line-height: 26px;
+        padding: 9px 0px 0 0px;
+        width: 100%;
+        float: left;
+        text-align: justify;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+        .fullDescription .DescriptionH {
+            color: #2a4678;
+            font-weight: 600;
+        }
+
+    span#ctl00_ContentPlaceHolder1_lblDescription {
+        color: #363636;
+    }
+
+    .pgBack li a {
+        color: #363636;
+        font-weight: 600;
+    }
+</style>
+
+<section class="page-section allenhose-story">
+    <div class="container" ng-init="GetImageData()">        
+        <div class="master-hdr">
+            <h3 class="section-title">{{ImageContent[0].Title}}</h3>
+        </div>
+        <div class="col-sm-12">
+            @*<div class="headingI">
+                <span>SALAD DECORATION ACTIVITY BY PRE PRIMARY</span>
+            </div>*@
+            <div class="inner_img">
+                <div class="newGallery">
+                    <ul class="pgBack">
+                        <li class="eventDates">
+                            <b>Event Date:</b>
+                            <span>{{ImageContent[0].EventDate}}</span>
+                        </li>
+                        <li class="updatedOnD">
+                            <b>Updated On:</b>
+                            <span>{{ImageContent[0].EventDate}}</span>
+                        </li>
+                        <li class="totalImages">
+                            <b>
+                                <span>Total Photo(s):</span>
+                            </b>
+                            <span>{{ImageContent[0].CountA}}</span>
+                        </li>
+                        <li class="changeAlbums chAl">
+                            <span><a style="cursor:pointer" ng-href="{{BackUrl}}" ng-model="BackUrl" ng-click="BacktoPhotoGallery()"><span>&lt;&lt; Change Album </span></a></span>
+                        </li>
+                    </ul>
+                    <div class="fullDescription">
+                        <span class="DescriptionH">Description: </span>
+                        <span>{{ImageContent[0].Description}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="allenhose-story-discription">
+                <div class="demo-gallery">
+                    <ul id="lightgallery">
+                        <li ng-repeat="data in ImageData" data-src="" unveil abc="{{data.MediaFilePath}}" gallery-load>
+
+                            <a href="">
+                                <img class="img-responsive" src="{{data.MediaFilePath}}">
+                                <div class="demo-gallery-poster">
+                                    <img src="~/content/images/gallery/search-icon.png" />
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

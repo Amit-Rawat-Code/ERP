@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeAttendanceDateWise";
+    ViewBag.TitleList = "Sort By Column";
+    ViewBag.Version = System.Configuration.ConfigurationManager.AppSettings["version"];
+    Layout = "~/Views/Common/_IframeMaster.cshtml";
+}
+
+
+<style>
+    .contact-page-button {
+        text-transform: uppercase;
+        outline: 0;
+        border: 0;
+        padding:9px 0;
+        color: #FFFFFF !important;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+        width: auto;
+        background: #73beec;
+        border-radius: 4px;
+        background-image: linear-gradient(to left, transparent, transparent 50%, #4CAF50 50%, #4CAF50);
+        background-position: 100% 0;
+        background-size: 200% 100%;
+        transition: all .25s ease-in;
+        float: left;
+        width: 100%;
+        height: auto;
+        margin-top: 17px;
+        text-align:center;
+    }
+
+    .contact-page-button:hover,
+    .contact-page-button:active,
+    .contact-page-button:focus {
+        background-position: 0 0;
+    }
+    .common-btn {
+        border-radius: 0;
+        background: #40b976;
+        color: #fff;
+        font-size: 13px;
+        padding: 5px 17px;
+        border: none;
+    }
+
+        .common-btn:hover {
+            background: #808080;
+        }
+</style>
+
+<script src="~/Scripts/myjslib/EmployeeAttendanceDateWiseController.js?Ver=@ViewBag.Version"></script>
+<input type="hidden" id="hfId" name="Id" value="" />
+<input type="hidden" id="hfVoucherNo" name="VoucherNo" value="" />
+<div class="autohide-scroll autoheightset" ng-cloak>
+    <div class="br-pageheader">
+        <!-- Title -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 root-t-p-n ">
+            <h5 class="txt-dark">Employee Attendance Date Wise</h5>
+        </div>
+        <!-- Breadcrumb -->
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm">
+            <ol class="breadcrumb">
+                <li><span>Attendance</span></li>
+                <li><span>Employee</span></li>
+                <li class="active"><span>Employee Attendance Date Wise</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="br-pagebody">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view shadow-base panel-refresh panel-Search-refresh">
+                    <div class="refresh-container"> 
+
+
+                        <div class="preloader">
+                            <div class="circles-1">
+                                <div class="circles-1-center"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                                <div class="circles-1"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel-wrapper ">
+                        <div class="panel-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding ">
+                                <div class="collapse in" id="collapseinputbox">
+                                    <form id="user-form">
+                                        <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Attendance Date<span class="vd_red">*</span></label>
+                                            <div class="input-box">
+                                                @Html.TextBox("txtAttendanceDate", "", new
+                                                {
+                                                    @class = "form-control clear validate",
+                                                    @type = "Date",
+                                                    @ng_model = "AttendanceDate",
+                                                    @placeholder = "",
+                                                    @ng_change = "EmployeeAttendanceList(AttendanceDate);InsertedAttendace();"
+                                           })
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            <label class="control-label">Departments<span class="vd_red"></span></label>
+                                            <div class="input-box">
+                                                @Html.Partial("ddlDepartment")
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12 col-xs-12 mgbt-xs-15">                                            
+                                            <div class="input-box">
+                                               <input class="form-control contact-page-button" type="button" value="Get Biometric Attendance" ng-model="btnGetBiometricAttendance" 
+                                                      ng-click="EmployeeAttendanceListBioMetric(AttendanceDate);"/>
+                                                <div class="text-box-msg-r">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">
+                                            <center><b>{ P - Present, A - Absent, HD - Half Day, L - Leave, LWP - Leave WithOut Pay, WFH - Work From Home, OTP - One Time Punch }</b></center>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15 " ng-init="EmployeeAttendanceList(AttendanceDate);InsertedAttendace();">
+                                            @Html.Partial("TableEmployeeAttendanceList")
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 mgbt-xs-15">
+                                            @Html.Partial("ActionView")
+                                        <button ng-click="CheckSavePermission();UpdateAndLockRecord();" ng-disabled="disableAdd" ng-show="visibleAdd" id="btnUpdateAndLock" type="button" value="Update & Lock" class="btn-me btn-primary common-btn" name="lockButton" ng-model="UpdateAndLock">
+
+                                                <span id="btnUpdateLocktxt" class="action-txt" ng-bind="Update & Lock">Update & Lock</span>
+                                                
+                                         </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @Html.Partial("Search")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+
+</div>  
+<script>
+    $('#txtAttendanceDate').attr('max', moment(new Date()).format('YYYY-MM-DD'))
+    $('#ddlDepartment').removeClass('validate');
+</script>

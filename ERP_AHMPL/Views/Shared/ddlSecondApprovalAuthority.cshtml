@@ -1,0 +1,4 @@
+﻿<select id="ddlEmployee" class="select2 form-control validate" ng-model="$parent.SeconedAuthEmployeeCode" ng-change="GetSeconedAuthDetail($parent.SeconedAuthEmployeeCode)">
+    <option value="">Select Employee</option>
+    <option ng-repeat="Employee in FirstEmployeesList" value="{{Employee.EmployeeCode}}" ng-disabled="!Employee.IsActive">{{Employee.FirstName}} {{Employee.MiddleName}} {{Employee.LastName}}</option>
+</select>

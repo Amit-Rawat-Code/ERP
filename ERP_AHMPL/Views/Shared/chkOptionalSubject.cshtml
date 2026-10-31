@@ -1,0 +1,15 @@
+﻿<div id="chkOptionalSubject">
+    <div class="checkbox checkbox-primary check-box" ng-repeat="optionalsubject in OptionalSubjectList">
+            <input type="checkbox" class="clear" 
+                   ng-model="Subject.OptionalSubject[optionalsubject.SubjectId]" 
+                   ng-value="optionalsubject.SubjectId" 
+                   ng-checked="optionalsubject.IsAlloted" ng-change="SetOptionalSubject();" 
+                   ng-init="Subject.OptionalSubject[optionalsubject.SubjectId]=optionalsubject.IsAlloted"
+                   ng-disabled="!optionalsubject.IsActive" />
+            <label for="" ng-bind="optionalsubject.SubjectName"></label>
+    </div>
+ </div>
+
+
+
+   

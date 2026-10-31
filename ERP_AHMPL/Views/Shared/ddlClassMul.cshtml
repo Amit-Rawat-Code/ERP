@@ -1,0 +1,113 @@
+﻿@*<select id="ddlClass" class="select2 form-control validate" ng-model="$parent.ClassCode"
+            ng-init="GetClassList();" multiple  ng-disabled="disabledDDLClass">
+        <option value="">Select Class</option>
+        <option ng-repeat="cl in ClassList" value="{{cl.Code}}" ng-disabled="!cl.IsActive">{{cl.ClassName}}
+        <input type="checkbox" value="{{cl.Code}}" />
+        </option>
+    </select>*@
+
+<!--<style>
+
+
+
+    .dropdown-check-list {
+        display: inline-block;
+    }
+
+        .dropdown-check-list .anchor {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            padding: 5px 50px 5px 10px;
+            border: 1px solid #ccc;
+        }
+
+            .dropdown-check-list .anchor:after {
+                position: absolute;
+                content: "";
+                border-left: 2px solid black;
+                border-top: 2px solid black;
+                padding: 5px;
+                right: 10px;
+                top: 20%;
+                -moz-transform: rotate(-135deg);
+                -ms-transform: rotate(-135deg);
+                -o-transform: rotate(-135deg);
+                -webkit-transform: rotate(-135deg);
+                transform: rotate(-135deg);
+            }
+
+            .dropdown-check-list .anchor:active:after {
+                right: 8px;
+                top: 21%;
+            }
+
+        .dropdown-check-list ul.items {
+            padding: 2px;
+            display: none;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+            .dropdown-check-list ul.items li {
+                list-style: none;
+            }
+
+        .dropdown-check-list.visible .anchor {
+            color: #0094ff;
+        }
+
+        .dropdown-check-list.visible .items {
+            display: block;
+        }
+</style>
+<script>
+
+
+    var checkList = document.getElementById('list1');
+    checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+        if (checkList.classList.contains('visible'))
+            checkList.classList.remove('visible');
+        else
+            checkList.classList.add('visible');
+    }
+</script>
+<div id="list1" class="dropdown-check-list"  ng-init="GetClasses();" tabindex="100" >
+    <span class="anchor">Select Class</span>
+    <ul class="items" ng-repeat="cl in ClassList"   >
+        <li><input type="checkbox" id="list1" value="{{cl.Code}}" ng-model="cl.Chk"/>{{cl.ClassName}} </li>
+    </ul>
+</div>-->
+
+<div id="ddlClassMul" class="input-box chk-validate " ng-init="GetClasses();">
+    <div class="toggle-ddl" id="openClassList"
+         ng-init="ToogleDDL('openClassList','openClassList')">
+        @*btn-validate*@
+        <button class='btn btn-primary select-btn'
+                data-ng-click='openClassList=!openClassList'
+                ng-bind="GetCount(ClassList,'Select Class')">
+            Select Class
+        </button>
+        @*btn-validate*@
+        <button class='btn btn-primary dropdown-toggle select-btn-sub'
+                data-ng-click='openClassList=!openClassList'>
+            <span class='fa fa-chevron-down'></span>
+        </button>
+        <div ng-show="openClassList" class="ddlMultiple" ng-cloak>
+            <div ng-click="ddlCheckAll('ClassList')">
+                Check All
+                <span class="btn-counts-right">Total Count: {{ClassList.length}}</span>
+            </div>
+            <div ng-click="ddlUnCheckAll('ClassList')">Uncheck All</div>
+            <hr style="margin:0px !important" />
+            <div ng-repeat="cl in ClassList">
+                <input type="checkbox" ng-model="cl.chk" ng-value="cl.Code" ng-disabled="!cl.IsActive"
+                       ng-change="ddlClass_Change(cl);" />
+                {{cl.ClassName}}
+                @*   <br />{{cl.TransId}}*@
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,61 @@
+﻿    @*<div class="datatable-responsive table-responsive advance-btn-table">*@
+        <table id="tblNavMenu" class="table table-hover table-striped  nowrap table-fixed fixed-height-d1 mgbt-xs-0"
+               ng-model="vnarrmodel" style="width:100%" ng-init="BindVNarrAllowed(NarrationId)">
+            <thead>
+                @*<tr>
+                    <th class="srno">S.No.</th>
+                    <th>Voucher</th>
+                    <th class="text-center w-50-p">
+                        <div class="checkbox checkbox-primary table-check-wt">
+                            <input type="checkbox" class="clear" ng-model="chkAll" />
+                            <label></label>
+                        </div>
+                    </th>
+                </tr>*@
+                <tr>
+                    <th class="col-2" style="line-height:25px;">S.No.</th>
+                    <th class="col-8" style="line-height:25px;">Voucher</th>
+                    <th class="text-center col-2">
+                        <div class="checkbox checkbox-primary table-check-wt">
+                            <input type="checkbox" class="clear" ng-model="chkAll" />
+                            <label></label>
+                        </div>
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @*<tr ng-repeat="vnarr in VNarrList" repeat-done>
+                    <td class="srno">
+                        {{$index+1}}
+                        <input type="hidden" id="hfvoucherId" value="{{vnarr.VoucherId}}" />
+                    </td>
+                    <td>{{vnarr.Description}}</td>
+                    <td class="text-center">
+                        <div class="checkbox checkbox-primary table-check-wt">
+                            <input type="checkbox" class="clear" id="chkAllow" ng-model="chkAllow[$index]" ng-checked="chkAllow[$index]"
+                                   ng-change="chkRowAll($index)" ng-init="chkAllow[$index]=vnarr.IsAllow" />
+                            <label></label>
+                        </div>
+                    </td>
+
+                </tr>*@
+                <tr ng-repeat="vnarr in VNarrList" repeat-done>
+                    <td class="col-2">
+                        {{$index+1}}
+                        <input type="hidden" id="hfvoucherId" value="{{vnarr.VoucherId}}" />
+                    </td>
+                    <td class="col-8">{{vnarr.Description}}</td>
+                    <td class="text-center col-2">
+                        <div class="checkbox checkbox-primary table-check-wt">
+                            <input type="checkbox" class="clear" id="chkAllow" ng-model="chkAllow[$index]" ng-checked="chkAllow[$index]"
+                                   ng-change="chkRowAll($index)" ng-init="chkAllow[$index]=vnarr.IsAllow" />
+                            <label></label>
+                        </div>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    @*</div>*@

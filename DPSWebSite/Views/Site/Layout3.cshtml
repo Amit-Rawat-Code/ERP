@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "ImageContentPage";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div  ng-init="GetAboutUs();" ng-cloak>
+    @*<div ng-repeat="PageData in ImageContentPageData">*@
+    @*<section class="page-banner-breadcrumbs">
+        <div class="container">
+            <div class="breadcrumbs">
+                <span class="page-name">DPS</span><span class="seprator">></span><span class="page-name">{{ImageContentPageData[0].UnitTitle}}</span>
+                <h3 class="title-of-page">
+                    {{ImageContentPageData[0].UnitTitle}}
+                </h3>
+            </div>
+        </div>
+    </section>*@
+
+    <section class="page-section why-choose-allen-kids">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="section-title">{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContentHeading}}</h3>                                                  
+                </div>
+                <div class="col-sm-6">
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCL'})[0].BodyContent)">
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="photo-section">
+                        <img src="" height="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageHeight}}" style="width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageWidth}};object-fit:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageObjectFit}};border-radius:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageBorderRadius}};border-width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImageBorder}};border-style: solid;border-color:#6b6c6d;" ng-src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImgPath}}" alt="display-photo" ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCR'})[0].ImgPath)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section why-choose-allen-kids">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="atallenkids">
+                        <div class="discription-section">
+                            <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBL'})[0].BodyContent)">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <div class="discription-section">
+                        <p class="discription" ng-bind-html="trustAsHtml((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].BodyContent)">
+                        </p>
+                        <div class="photo-section">
+                            <img style="width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImageWidth}};object-fit:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImageObjectFit}};border-radius:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImageBorderRadius}};border-width:{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImageBorder}};border-style: solid;border-color:#6b6c6d;" height="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImageHeight}}" src="{{(ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImgPath}}" alt="display-photo"
+                                 ng-if="HideShow((ImageContentPageData|filter:{LayoutPartAbbreviationName:'BCBR'})[0].ImgPath)">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+

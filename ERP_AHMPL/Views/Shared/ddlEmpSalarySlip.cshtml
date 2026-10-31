@@ -1,0 +1,191 @@
+﻿
+<table class="print-full-height" ng-init="GetSalarySlipUsingEmployee()"    ng-cloak>
+    <tbody>
+        <tr ng-repeat="slip in SalarySliplist">
+            <td class="s-page">
+                <table style="width:100%"  >
+                    <tbody>
+                        <tr>
+                            <td  class="text-center"  ng-init="GetReportHeaderUsingCategory('Exam ReportCard')">
+                               
+                                    <div id="ReportHeader" ng-bind-html="ReportHeader"></div>
+                                     
+                                    <h6 class="slip-heading" >SALARY FOR THE MONTH - {{slip.MonthNames}}</h6>
+                                   
+                               
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="QPR-table w-bb">
+                    <thead>
+                        <tr>
+                            <th class="h-title-box2">
+                                <span class="h-title">Name  </span>
+                            </th>
+                            <th class="QPR-dot-box">:</th>
+                            <th class="with-bb">{{slip.Name}}</th>
+                            <th class="h-title-box2">
+                                <span class="h-title">Employee ID</span>
+                            </th>
+                            <th class="QPR-dot-box">:</th>
+                            <th class="with-bb">{{slip.EmployeeId}}</th>
+                        </tr>
+                        <tr>
+                            <th class="h-title-box2">
+                                <span class="h-title">Designation </span>
+                            </th>
+                            <th class="QPR-dot-box">:</th>
+                            <th class="with-bb">{{slip.DesignationName}}</th>
+                            <th class="h-title-box2">
+                                <span class="h-title">EPF No.  </span>
+                            </th>
+                            <th class="QPR-dot-box">:</th>
+                            <th class="with-bb">{{slip.PFCode}}</th>
+                        </tr>
+                        <tr>
+                            <th class="h-title-box2">
+                                <span class="h-title">Father's Name </span>
+                            </th>
+                            <th class="QPR-dot-box">:</th>
+                            <th class="with-bb">{{slip.FatherName}}</th>
+                            <th class="h-title-box2">
+                                <span class="h-title">Total No of Days  </span>
+                            </th>
+                            <th class="QPR-dot-box">:</th>
+                            <th class="with-bb">{{slip.TotalDays}}</th>
+                        </tr>
+                        <tr>
+                            <th class="h-title-box2">
+                                <span class="h-title">Date of Birth</span>
+                            </th>
+                            <th class="QPR-dot-box">:</th>
+                            <th class="with-bb">{{slip.DateofBirth}}</th>
+                            <th class="h-title-box2">
+                                <span class="h-title">Payable Days</span>
+                            </th>
+                            <th class="QPR-dot-box">:</th>
+                            <th class="with-bb">{{slip.TotalPayableDay}}</th>
+                        </tr>
+                        <tr>
+                            <th class="h-title-box2">
+                                <span class="h-title">Date of Joining</span>
+                            </th>
+                            <th class="QPR-dot-box">:</th>
+                            <th class="with-bb">{{slip.JoiningDate}}</th>
+                            <th class="h-title-box2">
+                                <span class="h-title"></span>
+                            </th>
+                            <th class="QPR-dot-box"></th>
+                            <th class="with-bb"></th>
+                        </tr>
+                    </thead>
+                </table>
+                <table class="QPR-table-2">
+                    <thead>
+                        <tr>
+                            <td class="text-left w25">Earnings</td>
+                            <td class="w166">Monthly Amount</td>
+                            <td class="w166">For The Month</td>
+                            <td class="text-left w25">Deduction</td>
+                            <td class="w166">Amount</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><sapn>Basic </sapn></td>
+                            <td class="text-center min-w">{{slip.Basic}}</td>
+                            <td class="text-center min-w"></td>
+                            <td><sapn>EPF</sapn></td>
+                            <td class="text-center min-w"><sapn>{{slip.GPF}}</sapn></td>
+                        </tr>
+                        <tr>
+                            <td><sapn>House Rent Allowance</sapn></td>
+                            <td class="text-center min-w">{{slip.HRA}}</td>
+                            <td class="text-center min-w"></td>
+                            <td><sapn>ESI</sapn></td>
+                            <td class="text-center min-w"><sapn></sapn>{{slip.ESI}}</td>
+                        </tr>
+                        <tr>
+                            <td><sapn>City Compensatory Allowance</sapn></td>
+                            <td class="text-center min-w">{{slip.CCA}}</td>
+                            <td class="text-center min-w"></td>
+                            <td><sapn>Loans</sapn></td>
+                            <td class="text-center min-w"><sapn>{{slip.Loan}}</sapn></td>
+                        </tr>
+                        <tr>
+                            <td><sapn>Conveyance</sapn></td>
+                            <td class="text-center min-w">{{slip.Conv}}</td>
+                            <td class="text-center min-w"></td>
+                            <td><sapn>Advance</sapn></td>
+                            <td class="text-center min-w"><sapn>{{slip.Advance}}</sapn></td>
+                        </tr>
+                        <tr>
+                            <td><sapn>Telephone</sapn></td>
+                            <td class="text-center min-w">{{slip.Telephone}}</td>
+                            <td class="text-center min-w"></td>
+                            <td><sapn>Others</sapn></td>
+                            <td class="text-center min-w"><sapn>{{slip.OtherDed}}</sapn></td>
+                        </tr>
+
+                        <tr>
+                            <td><sapn>PLC</sapn></td>
+                            <td class="text-center min-w">{{slip.PLC}}</td>
+                            <td class="text-center min-w"></td>
+                            <td><sapn>Income Tax</sapn></td>
+                            <td class="text-center min-w"><sapn>{{slip.ITax}}</sapn></td>
+                        </tr>
+                        @*<tr>
+                            <td><sapn></sapn></td>
+                            <td class="text-center min-w"></td>
+                            <td class="text-center min-w"></td>
+                            <td><sapn></sapn></td>
+                            <td class="text-center min-w"><sapn></sapn></td>
+                        </tr>*@
+                        <tr>
+                            <td><sapn>Dearness Allowance</sapn></td>
+                            <td class="text-center min-w">{{slip.DA}}</td>
+                            <td class="text-center min-w"></td>
+                            <td><sapn></sapn></td>
+                            <td class="text-center min-w"><sapn></sapn></td>
+                        </tr>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><sapn>Total</sapn></td>
+                            <td class="text-center min-w">{{slip.EarrningTotal}}</td>
+                            <td class="text-center min-w"></td>
+                            <td><sapn>Total</sapn></td>
+                            <td class="text-center min-w"><sapn>{{slip.DeductionTotal}}</sapn></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <table class="QPR-D-Signed2">
+                    <tbody>
+
+                        <tr>
+                            <td colspan="4" class="QPR-D-1S" ><span class="Net-P-Box">Net Payable : {{slip.NettSal}} </span></td>
+                           
+                            <td class="text-right"><span class="Branch-Name-Box">For {{Name}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span>Date : {{slip.cdate}} </span></td>
+                            <td colspan="3"></td>
+                            <td rowspan="2" class="text-right" style="vertical-align:bottom;"><span class="AS-Box">Authorized Signatory</span></td>
+                        </tr>
+                        <tr>
+                            <td><span>Place</span></td>
+                            <td></td>
+                            <td><span>Print By</span></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,11 @@
+﻿@Html.DropDownList("ddlWeekDay", new List<SelectListItem>{
+    new SelectListItem{Text="Select", Value=""},
+    new SelectListItem{Text="Monday", Value="Monday"},
+    new SelectListItem{Text="Tuesday", Value="Tuesday"},
+    new SelectListItem{Text="Wednesday", Value="Wednesday"},
+    new SelectListItem{Text="Thursday", Value="Thursday"},
+    new SelectListItem{Text="Friday", Value="Friday"},
+    new SelectListItem{Text="Saturday", Value="Saturday"},
+    new SelectListItem{Text="Sunday", Value="Sunday"}
+},
+    new { @class = "select2 form-control", @ng_model = "WeekDay", @ng_change="ddlWeekDay_change()" })
